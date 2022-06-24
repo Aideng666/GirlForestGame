@@ -23,8 +23,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float swordAttackRange;
     GameObject targetEnemy;
     Vector2 aimDirection;
-    int enemyLayer;
+    //[SerializeField] LayerMask enemyLayer;
     bool isAttacking;
+    List<Enemy> visibleEnemies = new List<Enemy>();
 
     EffectBlessing currentSwordEffect = null;
     EffectBlessing currentBowEffect = null;
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         speed = defaultSpeed;
 
-        enemyLayer = LayerMask.NameToLayer("Enemy");
+        //enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
     // Update is called once per frame
@@ -72,10 +73,11 @@ public class PlayerController : MonoBehaviour
                 if (Vector3.Distance(targetEnemy.transform.position, transform.position) > swordAttackRange)
                 {
                     MoveTowardsTargetEnemy(0.5f);
-
-                    StartCoroutine(CompleteAttackMovement(0.5f));
                 }
-                CombatManager.Instance.Attack();
+                else
+                {
+                    CombatManager.Instance.Attack();
+                }
             }
 
             if (InputManager.Instance.Dash() && CanDash())
@@ -195,27 +197,75 @@ public class PlayerController : MonoBehaviour
 
     void SelectTargetEnemy()
     {
-        RaycastHit info;
+        Collider[] collidersDetected = new Collider[0];
+        Collider[] collidersDetected2 = new Collider[0];
+        Collider[] collidersDetected3 = new Collider[0];
 
-        if (Physics.SphereCast(transform.position, 3f, new Vector3(aimDirection.x, 0, aimDirection.y), out info, 10))
+        if (aimDirection.magnitude > 0)
         {
-            targetEnemy = info.collider.gameObject;
+            collidersDetected = Physics.OverlapSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 1), 1f);
+            collidersDetected2 = Physics.OverlapSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 3), 2f);
+            collidersDetected3 = Physics.OverlapSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 5), 3f);
+        }
+        else if (moveDir.magnitude > 0)
+        {
+            collidersDetected = Physics.OverlapSphere(transform.position + (moveDir.normalized * 1), 1f);
+            collidersDetected2 = Physics.OverlapSphere(transform.position + (moveDir.normalized * 3), 2f);
+            collidersDetected3 = Physics.OverlapSphere(transform.position + (moveDir.normalized * 5), 3f);
         }
         else
         {
-            if (targetEnemy == null)
+            targetEnemy = null;
+        }
+
+        visibleEnemies = new List<Enemy>();
+
+        if (collidersDetected.Length > 0)
+        {
+            for (int i = 0; i < collidersDetected.Length; i++)
             {
-                targetEnemy = FindObjectOfType<Enemy>().gameObject;
-            }
-            //Get the list of enemies to loop through here
-            foreach (Enemy enemy in FindObjectsOfType<Enemy>())
-            {
-                if (Vector3.Distance(enemy.transform.position, transform.position + new Vector3(aimDirection.x, 0, aimDirection.y) * 10)
-                  < Vector3.Distance(targetEnemy.transform.position, transform.position + new Vector3(aimDirection.x, 0, aimDirection.y) * 10))
+                if (collidersDetected[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
                 {
-                    targetEnemy = enemy.gameObject;
+                    visibleEnemies.Add(enemy);
                 }
             }
+        }
+        if (collidersDetected2.Length > 0)
+        {
+            for (int i = 0; i < collidersDetected2.Length; i++)
+            {
+                if (collidersDetected2[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                    visibleEnemies.Add(enemy);
+                }
+            }
+        }
+        if (collidersDetected3.Length > 0)
+        {
+            for (int i = 0; i < collidersDetected3.Length; i++)
+            {
+                if (collidersDetected3[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                    visibleEnemies.Add(enemy);
+                }
+            }
+        }
+
+        if (visibleEnemies.Count > 0)
+        {
+            targetEnemy = visibleEnemies[0].gameObject;
+
+            for (int i = 0; i < visibleEnemies.Count; i++)
+            {
+                if (Vector3.Distance(visibleEnemies[i].transform.position, transform.position) < Vector3.Distance(targetEnemy.transform.position, transform.position))
+                {
+                    targetEnemy = visibleEnemies[i].gameObject;
+                }
+            }
+        }
+        else
+        {
+            targetEnemy = null;
         }
     }
 
@@ -223,22 +273,32 @@ public class PlayerController : MonoBehaviour
     {
         isAttacking = true;
 
+        StartCoroutine(CompleteAttackMovement(duration));
+
         transform.DOLookAt(targetEnemy.transform.position, 0.2f);
-        transform.DOMove(targetEnemy.transform.position + ((transform.position - targetEnemy.transform.position).normalized) * 4, duration);
+        transform.DOMove(targetEnemy.transform.position + ((transform.position - targetEnemy.transform.position).normalized) * 2/*Change to enemy size offset*/, duration);
     }
 
     IEnumerator CompleteAttackMovement(float duration)
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration * 0.25f);
+
+        CombatManager.Instance.Attack();
+
+        yield return new WaitForSeconds(duration * 0.75f);
 
         isAttacking = false;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(transform.position, new Vector3(aimDirection.x, 0, aimDirection.y) * 5);
+        Gizmos.color = Color.red;
 
-        Gizmos.DrawSphere(transform.position + new Vector3(aimDirection.x, 0, aimDirection.y) * 10, 0.25f);
+        Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 5), 3f);
+        Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 3), 2f);
+        Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 1), 1f);
+
+        Gizmos.color = Color.green;
 
         if (targetEnemy != null)
         {
