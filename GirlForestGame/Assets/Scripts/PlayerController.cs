@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     //Combat
     [SerializeField] float swordAttackRange;
     GameObject targetEnemy;
-    Vector2 aimDirection;
+    Vector3 aimDirection;
     //[SerializeField] LayerMask enemyLayer;
     bool isAttacking;
     List<Enemy> visibleEnemies = new List<Enemy>();
@@ -70,7 +70,11 @@ public class PlayerController : MonoBehaviour
 
             if (InputManager.Instance.SwordAttack())
             {
-                if (Vector3.Distance(targetEnemy.transform.position, transform.position) > swordAttackRange)
+                if (targetEnemy == null)
+                {
+                    CombatManager.Instance.Attack();
+                }
+                else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > swordAttackRange)
                 {
                     MoveTowardsTargetEnemy(0.5f);
                 }
@@ -90,7 +94,11 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         Vector2 direction = InputManager.Instance.Move();
-        aimDirection = InputManager.Instance.Aim();
+        Vector2 aimDir = InputManager.Instance.Aim();
+
+        aimDirection = new Vector3(aimDir.x, 0, aimDir.y);
+
+        aimDirection = Quaternion.AngleAxis(45, Vector3.up) * aimDirection;
 
         Vector3 mousePos;
         Vector3 mouseAimDirection = Vector3.zero;
@@ -108,9 +116,9 @@ public class PlayerController : MonoBehaviour
         }
 
         float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
-        moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        moveDir = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-        float aimAngle = Mathf.Atan2(aimDirection.x, aimDirection.y) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
+        float aimAngle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
         float mouseAimAngle = Mathf.Atan2(mouseAimDirection.x, mouseAimDirection.z) * Mathf.Rad2Deg;
 
         if (controlWithMouse)
@@ -203,9 +211,9 @@ public class PlayerController : MonoBehaviour
 
         if (aimDirection.magnitude > 0)
         {
-            collidersDetected = Physics.OverlapSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 1), 1f);
-            collidersDetected2 = Physics.OverlapSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 3), 2f);
-            collidersDetected3 = Physics.OverlapSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 5), 3f);
+            collidersDetected = Physics.OverlapSphere(transform.position + (aimDirection.normalized * 1), 1f);
+            collidersDetected2 = Physics.OverlapSphere(transform.position + (aimDirection.normalized * 3), 2f);
+            collidersDetected3 = Physics.OverlapSphere(transform.position + (aimDirection.normalized * 5), 3f);
         }
         else if (moveDir.magnitude > 0)
         {
@@ -292,11 +300,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        //Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 5), 3f);
-        Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 3), 2f);
-        Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 1), 1f);
+        //Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 5), 3f);
+        //Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 3), 2f);
+        //Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 1), 1f);
 
         Gizmos.color = Color.green;
 
