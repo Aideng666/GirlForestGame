@@ -25,11 +25,13 @@ public class PlayerController : MonoBehaviour
     Vector3 aimDirection;
     //[SerializeField] LayerMask enemyLayer;
     bool isAttacking;
+    bool canAttack = true;
     List<Enemy> visibleEnemies = new List<Enemy>();
+    int currentAttackNum = 1;
 
     EffectBlessing currentSwordEffect = null;
     EffectBlessing currentBowEffect = null;
-    StyleBlessing currentSwordStyle = null;
+    StyleBlessing currentSwordStyle = new StyleBlessing();
     StyleBlessing currentBowStyle = null;
     public EffectBlessing SwordEffect { get { return currentSwordEffect; } set { currentSwordEffect = value; } }
     public EffectBlessing BowEffect { get { return currentBowEffect; } set { currentBowEffect = value; } }
@@ -72,7 +74,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (targetEnemy == null)
                 {
-                    CombatManager.Instance.Attack();
+                    SwordAttack();
                 }
                 else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > swordAttackRange)
                 {
@@ -80,7 +82,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    CombatManager.Instance.Attack();
+                    SwordAttack();
                 }
             }
 
@@ -146,7 +148,17 @@ public class PlayerController : MonoBehaviour
 
         controller.Move(moveDir * speed * Time.deltaTime);
 
-        transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+    }
+
+    void SwordAttack()
+    {
+        if (canAttack)
+        {
+            SwordStyle.Attack(currentAttackNum);
+
+            canAttack = false;
+        }
     }
 
     IEnumerator Dash()
@@ -291,20 +303,28 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(duration * 0.25f);
 
-        CombatManager.Instance.Attack();
+        SwordAttack();
 
         yield return new WaitForSeconds(duration * 0.75f);
 
         isAttacking = false;
     }
 
+    public void SetCurrentAttackNum(int num)
+    {
+        currentAttackNum = num;
+    }
+
+    public void SetCanAttack(bool value)
+    {
+        canAttack = value;
+    }
+
     private void OnDrawGizmos()
     {
-        //Gizmos.color = Color.red;
+        Gizmos.color = Color.red;
 
-        //Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 5), 3f);
-        //Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 3), 2f);
-        //Gizmos.DrawWireSphere(transform.position + (new Vector3(aimDirection.x, 0, aimDirection.y).normalized * 1), 1f);
+        //Gizmos.DrawSphere(transform.position + (transform.forward * 2), 2);
 
         Gizmos.color = Color.green;
 

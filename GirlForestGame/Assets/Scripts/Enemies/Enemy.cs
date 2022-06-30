@@ -19,14 +19,18 @@ public class Enemy : MonoBehaviour
     float timeToNextAttack = 0;
     float moveDelay = 1.5f;
     float attackPreparationTime = 1.5f;
+    float yHeight;
     bool donePreparing;
 
     Vector3 moveDirection;
+    Vector3 playerDirection;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         player = PlayerController.Instance;
+
+        yHeight = transform.position.y;
     }
 
     // Update is called once per frame
@@ -38,13 +42,15 @@ public class Enemy : MonoBehaviour
 
                 if (Vector3.Distance(transform.position, player.transform.position) < attackRange && CanAttack())
                 {
-                    print("Preparing Attack");
-
                     donePreparing = false;
 
-                    Vector3 playerdirection = (player.transform.position - transform.position).normalized;
+                    playerDirection = (player.transform.position - transform.position).normalized;
 
-                    float targetAngle = Mathf.Atan2(playerdirection.x, playerdirection.z) * Mathf.Rad2Deg;
+                    playerDirection.y = 0;
+
+                    playerDirection = playerDirection.normalized;
+
+                    float targetAngle = Mathf.Atan2(playerDirection.x, playerDirection.z) * Mathf.Rad2Deg;
 
                     transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
 
@@ -55,17 +61,18 @@ public class Enemy : MonoBehaviour
                     currentState = EnemyStates.Preparing;
                 }
 
-                print("Moving");
-
                 if (CanMove())
                 {
                     if (Vector3.Distance(transform.position, player.transform.position) > attackRange)
                     {
-                        print("Moving Towards Player");
-
                         moveDirection = (player.transform.position - transform.position).normalized;
 
+                        moveDirection.y = 0;
+
+                        moveDirection = moveDirection.normalized;
+
                         moveDirection = Quaternion.AngleAxis(Random.Range(-60, 60), Vector3.up) * moveDirection;
+
 
                         float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
 
@@ -75,9 +82,11 @@ public class Enemy : MonoBehaviour
                     }
                     else if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
                     {
-                        print("Moving Away From Player");
-
                         moveDirection = (transform.position - player.transform.position).normalized;
+
+                        moveDirection.y = 0;
+
+                        moveDirection = moveDirection.normalized;
 
                         moveDirection = Quaternion.AngleAxis(Random.Range(-60, 60), Vector3.up) * moveDirection;
 
@@ -93,8 +102,6 @@ public class Enemy : MonoBehaviour
 
             case EnemyStates.Preparing:
 
-                print("In Preparing State");
-
                 if (donePreparing)
                 {
                     currentState = EnemyStates.Attacking;
@@ -104,14 +111,21 @@ public class Enemy : MonoBehaviour
 
             case EnemyStates.Attacking:
 
-                print("Attacking Now");
-
-                transform.DOBlendableMoveBy((player.transform.position - transform.position).normalized * attackRange, 0.5f);
+                transform.DOBlendableMoveBy(playerDirection * attackRange, 0.5f);
 
                 currentState = EnemyStates.Moving;
 
                 break;
         }
+    }
+
+    public void ApplyKnockback(Vector3 direction, float power)
+    {
+        direction.y = 0;
+
+        direction = direction.normalized;
+
+        transform.DOBlendableMoveBy(direction * power, 0.5f);
     }
 
     protected bool CanMove()
