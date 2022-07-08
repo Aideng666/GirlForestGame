@@ -9,25 +9,34 @@ public class PlayerController : MonoBehaviour
     //Movement
     [SerializeField] bool controlWithMouse;
     [SerializeField] float defaultSpeed;
-    [SerializeField] float dashTimespan;
-    [SerializeField] float dashCooldown = 2;
+    //[SerializeField] float dashTimespan;
+    //[SerializeField] float dashCooldown = 2;
     CharacterController controller;
-    TrailRenderer dashTrail;
-    float timeToNextDash = 0;
-    bool isDashing;
+    Rigidbody body;
+    //TrailRenderer dashTrail;
+    //float timeToNextDash = 0;
+    //bool isDashing;
     float speed;
     Vector3 moveDir;
-    Vector3 dashDirection;
+    //Vector3 dashDirection;
 
     //Combat
+    [SerializeField] Material livingFormMaterial;
+    [SerializeField] Material spiritFormMaterial;
     [SerializeField] float swordAttackRange;
     GameObject targetEnemy;
     Vector3 aimDirection;
     //[SerializeField] LayerMask enemyLayer;
     bool isAttacking;
+    bool isKnockbackApplied;
     bool canAttack = true;
     List<Enemy> visibleEnemies = new List<Enemy>();
     int currentAttackNum = 1;
+    Forms currentForm = Forms.Living;
+    LayerMask livingLayer;
+    LayerMask spiritLayer;
+
+    public Forms Form { get { return currentForm; } set { currentForm = value; } }
 
     EffectBlessing currentSwordEffect = null;
     EffectBlessing currentBowEffect = null;
@@ -49,11 +58,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        dashTrail = GetComponentInChildren<TrailRenderer>();
+        body = GetComponent<Rigidbody>();
+        //dashTrail = GetComponentInChildren<TrailRenderer>();
 
-        dashTrail.emitting = false;
+        //dashTrail.emitting = false;
 
         speed = defaultSpeed;
+
+        livingLayer = LayerMask.NameToLayer("Living");
+        spiritLayer = LayerMask.NameToLayer("Spirit");
 
         //enemyLayer = LayerMask.NameToLayer("Enemy");
     }
@@ -61,7 +74,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDashing)
+        //if (!isDashing)
+        //{
+        if (!isKnockbackApplied)
         {
             if (!isAttacking)
             {
@@ -72,35 +87,54 @@ public class PlayerController : MonoBehaviour
 
             if (InputManager.Instance.SwordAttack())
             {
-                if (targetEnemy == null)
+                if (canAttack)
                 {
-                    SwordAttack();
-                }
-                else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > swordAttackRange)
-                {
-                    MoveTowardsTargetEnemy(0.5f);
-                }
-                else
-                {
-                    SwordAttack();
+                    if (targetEnemy == null)
+                    {
+                        StartCoroutine(MoveTowardsAttack(0.5f));
+                    }
+                    else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > swordAttackRange )
+                    {
+                        StartCoroutine(MoveTowardsTargetEnemy(0.5f));
+                    }
+                    else
+                    {
+                        SwordAttack();
+                        //StartCoroutine(MoveTowardsAttack(0.5f));
+                    }
                 }
             }
 
-            if (InputManager.Instance.Dash() && CanDash())
+            if (InputManager.Instance.ChangeForm())
             {
-                StartCoroutine(Dash());
+                if (currentForm == Forms.Living)
+                {
+                    currentForm = Forms.Spirit;
+                    GetComponentInChildren<SkinnedMeshRenderer>().material = spiritFormMaterial;
+                    gameObject.layer = spiritLayer;
+                }
+                else
+                {
+                    currentForm = Forms.Living;
+                    GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
+                    gameObject.layer = livingLayer;
+                }
             }
+
+            //if (InputManager.Instance.Dash() && CanDash())
+            //{
+            //    StartCoroutine(Dash());
+            //}
+            //}
         }
+
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
 
     void Move()
     {
         Vector2 direction = InputManager.Instance.Move();
         Vector2 aimDir = InputManager.Instance.Aim();
-
-        aimDirection = new Vector3(aimDir.x, 0, aimDir.y);
-
-        aimDirection = Quaternion.AngleAxis(45, Vector3.up) * aimDirection;
 
         Vector3 mousePos;
         Vector3 mouseAimDirection = Vector3.zero;
@@ -120,35 +154,73 @@ public class PlayerController : MonoBehaviour
         float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
         moveDir = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-        float aimAngle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
+        float aimAngle = Mathf.Atan2(aimDir.x, aimDir.y) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
         float mouseAimAngle = Mathf.Atan2(mouseAimDirection.x, mouseAimDirection.z) * Mathf.Rad2Deg;
+        aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
 
         if (controlWithMouse)
         {
-            transform.rotation = Quaternion.Euler(0, mouseAimAngle, 0);
+            aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, mouseAimAngle, 0f) * Vector3.forward;
+            transform.rotation = Quaternion.Euler(0, mouseAimAngle + 45, 0);
         }
-        else if (aimDirection.magnitude <= 0.1f)
+        else if (aimDir.magnitude <= 0.1f)
         {
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            aimDirection = moveDir;
+            transform.rotation = Quaternion.Euler(0f, targetAngle + 45, 0f);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, aimAngle, 0);
+            aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
+            transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
         }
 
-        if (moveDir != Vector3.zero)
-        {
-            dashDirection = moveDir;
-        }
+        //if (moveDir != Vector3.zero)
+        //{
+        //    dashDirection = moveDir;
+        //}
 
         if (direction.magnitude <= 0.1f)
         {
             moveDir = new Vector3(0, 0, 0);
+
+            body.velocity = new Vector3(0, 0, 0);
         }
 
-        controller.Move(moveDir * speed * Time.deltaTime);
+        body.velocity = speed * moveDir;
+    }
 
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+    public void ApplyKnockback(Vector3 direction, float power)
+    {
+        isKnockbackApplied = true;
+
+        body.velocity = direction * power;
+
+        StartCoroutine(DeactivateKnockback());
+    }
+
+    IEnumerator DeactivateKnockback()
+    {
+        Vector3 startVel = body.velocity;
+        float elaspedTime = 0;
+
+        while(elaspedTime <= 0.5f)
+        {
+            body.velocity = Vector3.Lerp(startVel, Vector3.zero, elaspedTime / 0.5f);
+
+            Vector3 direction = -body.velocity;
+
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+            elaspedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        isKnockbackApplied = false;
+
+        yield return null;
     }
 
     void SwordAttack()
@@ -161,59 +233,59 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator Dash()
-    {
-        isDashing = true;
+    //IEnumerator Dash()
+    //{
+    //    isDashing = true;
 
-        foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
-        {
-            mesh.enabled = false;
-        }
+    //    foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
+    //    {
+    //        mesh.enabled = false;
+    //    }
 
-        //gameObject.layer = invincibleLayer;
+    //    //gameObject.layer = invincibleLayer;
 
-        ParticleManager.Instance.SpawnParticle(ParticleTypes.DashStart, transform.position);
+    //    ParticleManager.Instance.SpawnParticle(ParticleTypes.DashStart, transform.position);
 
-        dashTrail.emitting = true;
+    //    dashTrail.emitting = true;
 
-        float timeElasped = 0;
+    //    float timeElasped = 0;
 
-        while (timeElasped < dashTimespan)
-        {
-            controller.Move(dashDirection * defaultSpeed * 5 * Time.deltaTime);
+    //    while (timeElasped < dashTimespan)
+    //    {
+    //        controller.Move(dashDirection * defaultSpeed * 5 * Time.deltaTime);
 
-            timeElasped += Time.deltaTime;
+    //        timeElasped += Time.deltaTime;
 
-            yield return null;
-        }
+    //        yield return null;
+    //    }
 
-        dashTrail.emitting = false;
+    //    dashTrail.emitting = false;
 
-        foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
-        {
-            mesh.enabled = true;
-        }
+    //    foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
+    //    {
+    //        mesh.enabled = true;
+    //    }
 
-        //gameObject.layer = playerLayer;
+    //    //gameObject.layer = playerLayer;
 
-        isDashing = false;
+    //    isDashing = false;
 
-        ParticleManager.Instance.SpawnParticle(ParticleTypes.DashEnd, transform.position);
+    //    ParticleManager.Instance.SpawnParticle(ParticleTypes.DashEnd, transform.position);
 
-        yield return null;
-    }
+    //    yield return null;
+    //}
 
-    bool CanDash()
-    {
-        if (timeToNextDash <= Time.time)
-        {
-            timeToNextDash = Time.time + dashCooldown;
+    //bool CanDash()
+    //{
+    //    if (timeToNextDash <= Time.time)
+    //    {
+    //        timeToNextDash = Time.time + dashCooldown;
 
-            return true;
-        }
+    //        return true;
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
     void SelectTargetEnemy()
     {
@@ -289,14 +361,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void MoveTowardsTargetEnemy(float duration)
+    IEnumerator MoveTowardsTargetEnemy(float duration)
+    {
+        float elaspedTime = 0;
+        isAttacking = true;
+
+        StartCoroutine(CompleteAttackMovement(duration));
+
+        Vector3 endVelo = Vector3.zero;
+        Vector3 startVelo = speed * (targetEnemy.transform.position - transform.position).normalized;
+
+        float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+        while (elaspedTime < duration)
+        {
+            body.velocity = Vector3.Lerp(startVelo, endVelo, elaspedTime / duration);
+
+            elaspedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return null;
+    }
+
+    IEnumerator MoveTowardsAttack(float duration)
     {
         isAttacking = true;
 
         StartCoroutine(CompleteAttackMovement(duration));
 
-        transform.DOLookAt(targetEnemy.transform.position, 0.2f);
-        transform.DOMove(targetEnemy.transform.position + ((transform.position - targetEnemy.transform.position).normalized) * 2/*Change to enemy size offset*/, duration);
+        float elaspedTime = 0;
+        Vector3 endVelo = Vector3.zero;
+        Vector3 startVelo = speed * aimDirection;
+
+        while (elaspedTime < duration)
+        {
+            body.velocity = Vector3.Lerp(startVelo, endVelo, elaspedTime / duration);
+
+            elaspedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return null;
     }
 
     IEnumerator CompleteAttackMovement(float duration)
@@ -334,3 +444,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+
+public enum Forms
+{
+    Living,
+    Spirit
+}
+

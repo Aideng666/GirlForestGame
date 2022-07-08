@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     InputAction swordAttackAction;
     InputAction bowAttackAction;
     InputAction completeRoomAction;
+    InputAction changeFormAction;
 
     public static InputManager Instance { get; set; }
     private void Awake()
@@ -30,6 +31,7 @@ public class InputManager : MonoBehaviour
         swordAttackAction = playerInput.actions["SwordAttack"];
         bowAttackAction = playerInput.actions["BowAttack"];
         completeRoomAction = playerInput.actions["CompleteRoom"];
+        changeFormAction = playerInput.actions["ChangeForm"];
     }
 
     public bool Dash()
@@ -65,5 +67,10 @@ public class InputManager : MonoBehaviour
     public bool CompleteRoom()
     {
         return completeRoomAction.triggered;
+    }
+
+    public bool ChangeForm()
+    {
+        return changeFormAction.triggered;
     }
 }

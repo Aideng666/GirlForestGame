@@ -51,7 +51,7 @@ public class StyleBlessing : Blessing
                 {
                     for (int i = 0; i < enemyColliders.Length; i++)
                     {
-                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == PlayerController.Instance.Form)
                         {
                             enemiesHit.Add(enemy);
                         }
@@ -60,7 +60,7 @@ public class StyleBlessing : Blessing
 
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
-                    enemiesHit[i].ApplyKnockback(PlayerController.Instance.transform.forward, 2);
+                    enemiesHit[i].ApplyKnockback(PlayerController.Instance.transform.forward, 5);
                 }
 
                 break;
@@ -73,7 +73,7 @@ public class StyleBlessing : Blessing
                 {
                     for (int i = 0; i < enemyColliders.Length; i++)
                     {
-                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == PlayerController.Instance.Form)
                         {
                             enemiesHit.Add(enemy);
                         }
@@ -82,7 +82,7 @@ public class StyleBlessing : Blessing
 
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
-                    enemiesHit[i].ApplyKnockback(PlayerController.Instance.transform.forward, 2);
+                    enemiesHit[i].ApplyKnockback(PlayerController.Instance.transform.forward, 10);
                 }
 
                 break;
