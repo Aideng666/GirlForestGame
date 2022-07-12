@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f1c7428ef955e4c9dde356bb009d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  form: 0
   health: 0
   damage: 0
   moveSpeed: 3
@@ -351,6 +352,7 @@ MonoBehaviour:
   attackRange: 10
   attackPreparationTime: 1.5
   spiritProjectilePrefab: {fileID: 0}
+  livingProjectilePrefab: {fileID: 0}
   projectileMoveSpeed: 0
   projectileMaxSize: 0
 --- !u!54 &607410455
@@ -849,7 +851,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095701768}
-  m_Material: {fileID: 13400000, guid: f7c3577a3108ff84c9084acf20c34ef6, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
@@ -934,7 +936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 740397203802280360, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
       propertyPath: projectileMoveSpeed
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 740397203802280360, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
       propertyPath: spiritProjectilePrefab
@@ -1143,4 +1145,5 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
     m_RemovedComponents:
     - {fileID: 2453708176110309224, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+    - {fileID: 5982676203613863552, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}

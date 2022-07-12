@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6636760196860391136
+--- !u!1 &2118178303142400490
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3339129695796908819}
-  - component: {fileID: 6407971705484358147}
-  - component: {fileID: 3291969267955614838}
-  - component: {fileID: 4514025648596353428}
-  - component: {fileID: 7893677416200457466}
-  - component: {fileID: 740397203802280360}
+  - component: {fileID: 3194747621524394142}
+  - component: {fileID: 3195853686169588472}
+  - component: {fileID: 5111819594935713808}
+  - component: {fileID: 8641178757551701885}
+  - component: {fileID: 3587473835292505705}
+  - component: {fileID: 3507039012435581797}
   m_Layer: 7
-  m_Name: MagicProjectileEnemy
+  m_Name: Living Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3339129695796908819
+--- !u!4 &3194747621524394142
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636760196860391136}
+  m_GameObject: {fileID: 2118178303142400490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,21 +36,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6407971705484358147
+--- !u!33 &3195853686169588472
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636760196860391136}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3291969267955614838
+  m_GameObject: {fileID: 2118178303142400490}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5111819594935713808
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636760196860391136}
+  m_GameObject: {fileID: 2118178303142400490}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6f6b65f9fbf6dfa43ba106fa24398157, type: 2}
+  - {fileID: 2100000, guid: ad03a9de278960f4dbabb117a1ad410f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,56 +86,44 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4514025648596353428
-BoxCollider:
+--- !u!135 &8641178757551701885
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636760196860391136}
+  m_GameObject: {fileID: 2118178303142400490}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7893677416200457466
+--- !u!54 &3587473835292505705
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636760196860391136}
+  m_GameObject: {fileID: 2118178303142400490}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
---- !u!114 &740397203802280360
+  m_Constraints: 4
+  m_CollisionDetection: 1
+--- !u!114 &3507039012435581797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636760196860391136}
+  m_GameObject: {fileID: 2118178303142400490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5f1c7428ef955e4c9dde356bb009d29, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ad54ca3b390b184382a05620cc1ab8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  form: 0
-  health: 0
-  damage: 0
-  moveSpeed: 3
-  moveDelay: 1.5
-  attackDelay: 4
-  attackRange: 8
-  attackPreparationTime: 1.5
-  spiritProjectilePrefab: {fileID: 5440034325214111859, guid: a775424fa6ff5204e908270819370cac, type: 3}
-  livingProjectilePrefab: {fileID: 2118178303142400490, guid: f5aeee4e606afdb43b1f324e19d0a7ca, type: 3}
-  projectileMoveSpeed: 15
-  projectileMaxSize: 1

@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
-public class SpiritProjectile : MonoBehaviour
+public class LivingProjectile : MonoBehaviour
 {
     bool isActive;
 
@@ -25,20 +24,11 @@ public class SpiritProjectile : MonoBehaviour
         {
             player.ApplyKnockback((player.transform.position - transform.position).normalized, 20);
 
+            print("Hit: " + collision.gameObject.name);
+
             Destroy(gameObject);
         }
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.TryGetComponent<PlayerController>(out PlayerController player) && isActive && player.Form == Forms.Spirit)
-    //    {
-    //        player.ApplyKnockback((player.transform.position - transform.position).normalized, 20);
-
-    //        Destroy(gameObject);
-    //    }
-    //}
-
     public void SetActive(bool active)
     {
         isActive = active;

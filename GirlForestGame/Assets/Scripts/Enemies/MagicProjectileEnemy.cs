@@ -6,10 +6,12 @@ using DG.Tweening;
 public class MagicProjectileEnemy : Enemy
 {
     [SerializeField] GameObject spiritProjectilePrefab;
+    [SerializeField] GameObject livingProjectilePrefab;
     [SerializeField] float projectileMoveSpeed;
     [SerializeField] float projectileMaxSize;
 
     GameObject spawnedProjectile;
+    int selectedProjectile; // 0 = Living | 1 = Spirit
     bool projectileSpawned;
 
     protected override void Start()
@@ -30,6 +32,10 @@ public class MagicProjectileEnemy : Enemy
                         donePreparing = false;
 
                         StartCoroutine(AttackPreparationDelay());
+
+                        selectedProjectile = Random.Range(0, 2);
+
+                        print(selectedProjectile);
 
                         currentState = EnemyStates.Preparing;
                     }
@@ -70,11 +76,20 @@ public class MagicProjectileEnemy : Enemy
                     }
                     else if (!projectileSpawned)
                     {
-                        spawnedProjectile = Instantiate(spiritProjectilePrefab, transform.position + transform.forward, Quaternion.identity);
-                        spawnedProjectile.transform.localScale = Vector3.zero;
+                        if (selectedProjectile == 1)
+                        {
+                            spawnedProjectile = Instantiate(spiritProjectilePrefab, transform.position + transform.forward, Quaternion.identity);
+                            spawnedProjectile.transform.localScale = Vector3.zero;
 
-                        spawnedProjectile.transform.DOScale(projectileMaxSize, attackPreparationTime);
+                            spawnedProjectile.transform.DOScale(projectileMaxSize, attackPreparationTime);
+                        }
+                        else
+                        {
+                            spawnedProjectile = Instantiate(livingProjectilePrefab, transform.position + transform.forward + Vector3.down, Quaternion.identity);
 
+                            //spawnedProjectile.transform.DOScale(projectileMaxSize, attackPreparationTime);
+                            spawnedProjectile.transform.DOMoveY(transform.position.y, attackPreparationTime);
+                        }
                         projectileSpawned = true;
                     }
                     else
@@ -89,7 +104,14 @@ public class MagicProjectileEnemy : Enemy
 
                         transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
 
-                        spawnedProjectile.transform.position = transform.position + transform.forward;
+                        if (selectedProjectile == 1)
+                        {
+                            spawnedProjectile.transform.position = transform.position + transform.forward;
+                        }
+                        else
+                        {
+                            spawnedProjectile.transform.position = new Vector3(transform.position.x + transform.forward.x, spawnedProjectile.transform.position.y, transform.position.z + transform.forward.z);
+                        }
                     }
 
                     break;
@@ -98,9 +120,19 @@ public class MagicProjectileEnemy : Enemy
 
                     spawnedProjectile.GetComponent<Rigidbody>().velocity = playerDirection * projectileMoveSpeed;
 
-                    spawnedProjectile.GetComponent<SpiritProjectile>().SetActive(true);
+                    if (selectedProjectile == 1)
+                    {
+                        spawnedProjectile.GetComponent<SpiritProjectile>().SetActive(true);
 
-                    spawnedProjectile.transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.25f);
+                        spawnedProjectile.transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.25f);
+                    }
+                    else
+                    {
+                        spawnedProjectile.GetComponent<LivingProjectile>().SetActive(true);
+
+                        spawnedProjectile.transform.DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f), 0.25f);
+                    }
+
                     transform.DOPunchScale(new Vector3(0, 0, -0.5f), 0.25f);
 
                     projectileSpawned = false;
