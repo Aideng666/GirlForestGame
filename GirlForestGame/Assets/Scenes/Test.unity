@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 2091182027}
   - component: {fileID: 2091182029}
   - component: {fileID: 2091182028}
+  - component: {fileID: 2091182030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -296,14 +297,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091182023}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 30, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &2091182027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +377,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: fd6394e1-facf-4fcc-900e-8d40de8f822f
     m_ActionName: Player /ChangeForm[/DualShock4GamepadHID/buttonNorth,/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fbdba31e-c5f7-49af-a88a-e1db1cb69fb5
+    m_ActionName: Player /MapScroll[/DualShock4GamepadHID/leftStick/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 'Player '
@@ -393,3 +398,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbb8a748bb706d49a33aa4bf64cf67b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2091182030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091182023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bff31a4c1abbf4386f22c934503292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 20

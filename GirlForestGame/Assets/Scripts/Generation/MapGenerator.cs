@@ -8,7 +8,6 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int endNodeDistance = 4;
     [SerializeField] int initialNodeSpread = 5;
 
-    List<MapNode> nodes = new List<MapNode>();
     List<GameObject> visualNodes = new List<GameObject>();
 
     public static MapGenerator Instance { get; set; }
@@ -22,8 +21,6 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         CreateNodeMap();
-
-        SpawnVisualNodes();
     }
 
     // Update is called once per frame
@@ -43,26 +40,30 @@ public class MapGenerator : MonoBehaviour
         }
 
         visualNodes = new List<GameObject>();
-        nodes = new List<MapNode>();
 
         CreateNodeMap();
-
-        SpawnVisualNodes();
     }
 
     void CreateNodeMap()
     {
-        nodes.Add(new MapNode(null, NodeTypes.Default));
+        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        visualNodes[0].GetComponent<MapNode>().SetNode(null, NodeTypes.Default);
 
-        nodes.Add(new MapNode(nodes[0], NodeTypes.Default, 0));
-        nodes.Add(new MapNode(nodes[0], NodeTypes.Default, 1));
+
+        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        visualNodes[1].GetComponent<MapNode>().SetNode(visualNodes[0].GetComponent<MapNode>(), NodeTypes.Default, 0);
+        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        visualNodes[2].GetComponent<MapNode>().SetNode(visualNodes[0].GetComponent<MapNode>(), NodeTypes.Default, 1);
+
+        visualNodes[1].transform.position = visualNodes[0].transform.position + new Vector3(-initialNodeSpread / visualNodes[1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+        visualNodes[2].transform.position = visualNodes[0].transform.position + new Vector3(initialNodeSpread / visualNodes[2].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
 
         //Loops through the nodes in order to create children properly and not too many, stops looping before the end node gets created
         for (int i = 1; i < endNodeDistance - 1; i++)
         {
-            for (int j = 0; j < nodes.Count; j++)
+            for (int j = 0; j < visualNodes.Count; j++)
             {
-                if (nodes[j].GetDistanceFromStart() == i)
+                if (visualNodes[j].GetComponent<MapNode>().GetDistanceFromStart() == i)
                 {
                     int childrenCount = Random.Range(1, 4);
 
@@ -70,20 +71,29 @@ public class MapGenerator : MonoBehaviour
                     {
                         case 1:
 
-                            nodes.Add(new MapNode(nodes[j], NodeTypes.Default, 0));
+                            visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+                            visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 0);
+                            visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(-initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
 
                             break;
 
                         case 2:
 
-                            nodes.Add(new MapNode(nodes[j], NodeTypes.Default, 1));
+                            visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+                            visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 1);
+                            visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
 
                             break;
 
                         case 3:
 
-                            nodes.Add(new MapNode(nodes[j], NodeTypes.Default, 0));
-                            nodes.Add(new MapNode(nodes[j], NodeTypes.Default, 1));
+                            visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+                            visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 0);
+                            visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(-initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+
+                            visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+                            visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 1);
+                            visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
 
                             break;
                     }
@@ -91,37 +101,17 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        nodes.Add(new MapNode(null, NodeTypes.End));
-
-        for (int i = 0; i < nodes.Count; i++)
-        {
-            if (nodes[i].GetDistanceFromStart() == endNodeDistance - 1)
-            {
-                nodes[i].SetLeftChild(nodes[nodes.Count - 1]);
-                nodes[i].SetRightChild(nodes[nodes.Count - 1]);
-            }
-        }
-
-        print(nodes.Count);
-    }
-
-    void SpawnVisualNodes()
-    {
-        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-
-        for (int j = 1; j < nodes.Count - 1; j++)
-        {
-            if (nodes[j].GetDirectionFromParent() == 0)
-            {
-                visualNodes.Add(Instantiate(visualNodePrefab, visualNodes[nodes.IndexOf(nodes[j].GetParentNode())].transform.position + new Vector3(-initialNodeSpread / nodes[j].GetDistanceFromStart(), 0, 10), Quaternion.identity));
-            }
-            else if (nodes[j].GetDirectionFromParent() == 1)
-            {
-                visualNodes.Add(Instantiate(visualNodePrefab, visualNodes[nodes.IndexOf(nodes[j].GetParentNode())].transform.position + new Vector3(initialNodeSpread / nodes[j].GetDistanceFromStart(), 0, 10), Quaternion.identity));
-            }
-        }
-
         visualNodes.Add(Instantiate(visualNodePrefab, new Vector3(0, 0, endNodeDistance * 10), Quaternion.identity));
+        visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.End);
+
+        for (int i = 0; i < visualNodes.Count; i++)
+        {
+            if (visualNodes[i].GetComponent<MapNode>().GetDistanceFromStart() == endNodeDistance - 1)
+            {
+                visualNodes[i].GetComponent<MapNode>().SetLeftChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
+                visualNodes[i].GetComponent<MapNode>().SetRightChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
+            }
+        }
     }
 
     public int GetEndNodeDistance()
@@ -133,15 +123,15 @@ public class MapGenerator : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
 
-        for (int i = 0; i < nodes.Count; i++)
+        for (int i = 0; i < visualNodes.Count; i++)
         {
-            if (nodes[i].GetLeftChild() != null)
+            if (visualNodes[i].GetComponent<MapNode>().GetLeftChild() != null)
             {
-                Gizmos.DrawLine(visualNodes[i].transform.position, visualNodes[nodes.IndexOf(nodes[i].GetLeftChild())].transform.position);
+                Gizmos.DrawLine(visualNodes[i].transform.position, visualNodes[visualNodes.IndexOf(visualNodes[i].GetComponent<MapNode>().GetLeftChild().gameObject)].transform.position);
             }
-            if (nodes[i].GetRightChild() != null)
+            if (visualNodes[i].GetComponent<MapNode>().GetRightChild() != null)
             {
-                Gizmos.DrawLine(visualNodes[i].transform.position, visualNodes[nodes.IndexOf(nodes[i].GetRightChild())].transform.position);
+                Gizmos.DrawLine(visualNodes[i].transform.position, visualNodes[visualNodes.IndexOf(visualNodes[i].GetComponent<MapNode>().GetRightChild().gameObject)].transform.position);
             }
         }
     }

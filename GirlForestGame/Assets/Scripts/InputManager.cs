@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour
     InputAction bowAttackAction;
     InputAction completeRoomAction;
     InputAction changeFormAction;
+    InputAction mapScrollAction;
 
     public static InputManager Instance { get; set; }
     private void Awake()
@@ -32,6 +33,7 @@ public class InputManager : MonoBehaviour
         bowAttackAction = playerInput.actions["BowAttack"];
         completeRoomAction = playerInput.actions["CompleteRoom"];
         changeFormAction = playerInput.actions["ChangeForm"];
+        mapScrollAction = playerInput.actions["MapScroll"];
     }
 
     public bool Dash()
@@ -72,5 +74,10 @@ public class InputManager : MonoBehaviour
     public bool ChangeForm()
     {
         return changeFormAction.triggered;
+    }
+
+    public float MapScroll()
+    {
+        return mapScrollAction.ReadValue<float>();
     }
 }
