@@ -9,10 +9,17 @@ public class DungeonGenerator : MonoBehaviour
 
     List<Room> rooms = new List<Room>();
 
+    public static DungeonGenerator Instance { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        InitDungeon();
+        //InitDungeon();
     }
 
     // Update is called once per frame
@@ -26,8 +33,10 @@ public class DungeonGenerator : MonoBehaviour
         //}
     }
 
-    void InitDungeon()
+    public void InitDungeon()
     {
+        PlayerController.Instance.transform.position = Vector3.zero;
+
         SpawnRoom(Vector3.zero);
 
         for (int i = 0; i < totalRooms - 1; i++)

@@ -2,7 +2,7 @@
     "name": "Player Controls",
     "maps": [
         {
-            "name": "Player ",
+            "name": "Player",
             "id": "13f9f6a4-77a7-4c39-b17d-40311736704a",
             "actions": [
                 {
@@ -76,15 +76,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "MapScroll",
-                    "type": "Value",
-                    "id": "fbdba31e-c5f7-49af-a88a-e1db1cb69fb5",
-                    "expectedControlType": "Stick",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -274,15 +265,111 @@
                     "action": "ChangeForm",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "NodeMap",
+            "id": "a7244945-9e2b-476d-959a-04e84b70fe22",
+            "actions": [
+                {
+                    "name": "MapScroll",
+                    "type": "Value",
+                    "id": "c0131d99-1d91-4ba1-8e2a-43a541612b6e",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
+                    "name": "RegenerateMap",
+                    "type": "Button",
+                    "id": "4d974a7b-981a-43d5-a169-7ce00a7ddabd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectNode",
+                    "type": "Button",
+                    "id": "49f43157-66c2-44a7-a987-3a7e5d326ac9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "7b28cd78-846b-4f85-90f4-c7ca28b5f9cc",
+                    "id": "ddb6f8df-e034-49a6-a372-5823fd59019d",
                     "path": "<Gamepad>/leftStick/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "MapScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fe038b2-a48f-4536-b7cf-0efbf71d873d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RegenerateMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af32d81c-c679-4145-b322-77f8dd771148",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RegenerateMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db6dd318-f7d4-46b1-b1cc-81c8ab7ca7fc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectNode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Global",
+            "id": "f6be9861-1bca-4418-95b0-7a3e0414c372",
+            "actions": [
+                {
+                    "name": "SwapActionMap",
+                    "type": "Button",
+                    "id": "0b54e25c-97e1-4ded-9776-bc4b2df03470",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "82c3a74c-9723-4a19-9d14-dcfda52d8b7d",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwapActionMap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &114203931
+--- !u!1 &461365556
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,44 +131,96 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 114203932}
-  - component: {fileID: 114203933}
+  - component: {fileID: 461365560}
+  - component: {fileID: 461365559}
+  - component: {fileID: 461365558}
+  - component: {fileID: 461365557}
   m_Layer: 0
-  m_Name: Generator
-  m_TagString: Untagged
+  m_Name: NodeMapCam
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &114203932
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114203931}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0285933, y: -56.00276, z: 28.480751}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114203933
+--- !u!114 &461365557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114203931}
+  m_GameObject: {fileID: 461365556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d773b32ae5226408112fe265dcb023, type: 3}
+  m_Script: {fileID: 11500000, guid: a4bff31a4c1abbf4386f22c934503292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalRooms: 15
-  roomPrefab: {fileID: 8193354202845057383, guid: d15669d5f35c0f84a98955be829464a1, type: 3}
+  moveSpeed: 20
+--- !u!81 &461365558
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461365556}
+  m_Enabled: 1
+--- !u!20 &461365559
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461365556}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &461365560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461365556}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -70, z: 12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &543537886
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +233,9 @@ GameObject:
   - component: {fileID: 543537887}
   - component: {fileID: 543537889}
   - component: {fileID: 543537890}
+  - component: {fileID: 543537892}
   - component: {fileID: 543537891}
+  - component: {fileID: 543537893}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -214,7 +268,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &543537889
 MonoBehaviour:
@@ -271,11 +325,27 @@ MonoBehaviour:
     m_ActionName: Player /CompleteRoom[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 81ea2b8f-6502-4b09-80fe-ac49a2abc668
-    m_ActionName: Player /Camera Movement[/Mouse/delta,/DualShock4GamepadHID/rightStick]
+    m_ActionId: fd6394e1-facf-4fcc-900e-8d40de8f822f
+    m_ActionName: Player /ChangeForm[/DualShock4GamepadHID/buttonNorth,/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c0131d99-1d91-4ba1-8e2a-43a541612b6e
+    m_ActionName: NodeMap/MapScroll[/DualShock4GamepadHID/leftStick/y]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4d974a7b-981a-43d5-a169-7ce00a7ddabd
+    m_ActionName: NodeMap/RegenerateMap[/Keyboard/space,/DualShock4GamepadHID/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0b54e25c-97e1-4ded-9776-bc4b2df03470
+    m_ActionName: Global/SwapActionMap[/DualShock4GamepadHID/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 49f43157-66c2-44a7-a987-3a7e5d326ac9
+    m_ActionName: NodeMap/SelectNode[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 'Player '
+  m_DefaultActionMap: 13f9f6a4-77a7-4c39-b17d-40311736704a
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &543537890
@@ -303,9 +373,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 543537886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f581c15e08f3647b410464eb62b8f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9755fb8a304b8f847a0ef1a5a1f8889b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualNodePrefab: {fileID: 6933593831192278680, guid: 38771b6056505a04ca23cdddb0aa4574, type: 3}
+  endNodeDistance: 5
+  initialNodeSpread: 10
+  blessingNodeChance: 0.25
+  shopNodeChance: 0.25
+--- !u!114 &543537892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543537886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e2eef9c21b9364439532daec43705ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dungeonCam: {fileID: 963194227}
+  mapCam: {fileID: 461365559}
+--- !u!114 &543537893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543537886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d773b32ae5226408112fe265dcb023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalRooms: 15
+  roomPrefab: {fileID: 8193354202845057383, guid: d15669d5f35c0f84a98955be829464a1, type: 3}
 --- !u!1 &607410442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3964161196478328800, guid: 9ba1b73828694d644a7ebeba1c908a99, type: 3}
@@ -539,7 +642,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Dungeon Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -875,7 +978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3964161196478328804, guid: 9ba1b73828694d644a7ebeba1c908a99, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3964161196478328804, guid: 9ba1b73828694d644a7ebeba1c908a99, type: 3}
       propertyPath: m_LocalPosition.x
@@ -944,7 +1047,7 @@ PrefabInstance:
       objectReference: {fileID: 5440034325214111859, guid: a775424fa6ff5204e908270819370cac, type: 3}
     - target: {fileID: 3339129695796908819, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3339129695796908819, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -989,6 +1092,10 @@ PrefabInstance:
     - target: {fileID: 6636760196860391136, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
       propertyPath: m_Name
       value: MagicProjectileEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6636760196860391136, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7893677416200457466, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
       propertyPath: m_UseGravity
@@ -1097,7 +1204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863567, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863567, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_LocalPosition.x

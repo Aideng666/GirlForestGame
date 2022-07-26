@@ -11,6 +11,10 @@ public class MapNode : MonoBehaviour
 
     int distanceFromStart;
     int directionFromParent;
+    bool isSelectable;
+    bool selected;
+
+    public bool Selectable { get { return isSelectable; } set { isSelectable = value; } }
 
     NodeTypes nodeType;
 
@@ -25,20 +29,29 @@ public class MapNode : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100))
+        if (isSelectable)
         {
-            if (hit.collider.gameObject == this.gameObject)
-            {
-                SetSelected(true);
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit hit;
 
-                return;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                if (hit.collider.gameObject == this.gameObject)
+                {
+                    SetSelected(true);
+                }
+                else
+                {
+                    SetSelected(false);
+                }
             }
         }
 
-        SetSelected(false);
+        if (selected && InputManager.Instance.SelectNode())
+        {
+            print("Gi");
+            NodeMapManager.Instance.SetActiveNode(this);
+        }
     }
 
     public void SetNode(MapNode parent, NodeTypes type, int direction = 2 /*0 = left child | 1 = right child*/)
@@ -71,17 +84,39 @@ public class MapNode : MonoBehaviour
             }
         }
     }
+
+    public void SetType(NodeTypes type)
+    {
+        nodeType = type;
+
+        if (type == NodeTypes.Shop)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.yellow;
+        }
+        else if( type == NodeTypes.Blessing)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+
+    }
+
+    public NodeTypes GetNodeType()
+    {
+        return nodeType;
+    }
     
     public void SetSelected(bool isSelected)
     {
         if (isSelected)
         {
             transform.localScale = defaultSize * 2;
+            selected = true;
 
             return;
         }
 
         transform.localScale = defaultSize;
+        selected = false;
     }
 
     public void SetLeftChild(MapNode child)

@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 {
     PlayerInput playerInput;
 
+    //Gameplay Controls
     InputAction dashAction;
     InputAction moveAction;
     InputAction aimAction;
@@ -15,7 +16,12 @@ public class InputManager : MonoBehaviour
     InputAction bowAttackAction;
     InputAction completeRoomAction;
     InputAction changeFormAction;
+
+    //Map Controls
     InputAction mapScrollAction;
+    InputAction regenMapAction;
+    InputAction swapActionMapAction;
+    InputAction selectNodeAction;
 
     public static InputManager Instance { get; set; }
     private void Awake()
@@ -24,6 +30,11 @@ public class InputManager : MonoBehaviour
 
         //controls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
+
+
+        playerInput.actions.FindActionMap("Player").Disable();
+        playerInput.actions.FindActionMap("NodeMap").Enable();
+        playerInput.actions.FindActionMap("Global").Enable();
 
         dashAction = playerInput.actions["Dash"];
         moveAction = playerInput.actions["Move"];
@@ -34,50 +45,143 @@ public class InputManager : MonoBehaviour
         completeRoomAction = playerInput.actions["CompleteRoom"];
         changeFormAction = playerInput.actions["ChangeForm"];
         mapScrollAction = playerInput.actions["MapScroll"];
+        regenMapAction = playerInput.actions["RegenerateMap"];
+        swapActionMapAction = playerInput.actions["SwapActionMap"];
+        selectNodeAction = playerInput.actions["SelectNode"];
+    }
+
+    public void SwapActionMap(string mapName)
+    {
+        if (mapName == "Player")
+        {
+            playerInput.actions.FindActionMap("Player").Enable();
+            playerInput.actions.FindActionMap("NodeMap").Disable();
+        }
+        else if (mapName == "NodeMap")
+        {
+            playerInput.actions.FindActionMap("Player").Disable();
+            playerInput.actions.FindActionMap("NodeMap").Enable();
+        }
     }
 
     public bool Dash()
     {
-        return dashAction.triggered;
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return dashAction.triggered;
+        }
+
+
+        return false;
     }
 
     public bool SwordAttack()
     {
-        return swordAttackAction.triggered;
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return swordAttackAction.triggered;
+        }
+
+        return false;
     }
 
     public bool BowAttack()
     {
-        return bowAttackAction.triggered;
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return bowAttackAction.triggered;
+        }
+
+        return false;
     }
 
     public Vector2 Move()
     {
-        return moveAction.ReadValue<Vector2>();
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return moveAction.ReadValue<Vector2>();
+        }
+
+        return Vector2.zero;
     }
 
     public Vector2 Aim()
     {
-        return aimAction.ReadValue<Vector2>();
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return aimAction.ReadValue<Vector2>();
+        }
+
+        return Vector2.zero;
     }
 
     public Vector2 MouseAim()
     {
-        return mouseAimAction.ReadValue<Vector2>();
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return mouseAimAction.ReadValue<Vector2>();
+        }
+
+        return Vector2.zero;
     }
 
     public bool CompleteRoom()
     {
-        return completeRoomAction.triggered;
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return completeRoomAction.triggered;
+        }
+
+        return false;
     }
 
     public bool ChangeForm()
     {
-        return changeFormAction.triggered;
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return changeFormAction.triggered;
+        }
+
+        return false;
     }
 
     public float MapScroll()
     {
-        return mapScrollAction.ReadValue<float>();
+        if (playerInput.actions.FindActionMap("NodeMap").enabled)
+        {
+            return mapScrollAction.ReadValue<float>();
+        }
+
+        return 0;
+    }
+
+    public bool RegenMap()
+    {
+        if (playerInput.actions.FindActionMap("NodeMap").enabled)
+        {
+            return regenMapAction.triggered;
+        }
+
+        return false;
+    }
+
+    public bool SwapMapButton()
+    {
+        if (playerInput.actions.FindActionMap("NodeMap").enabled)
+        {
+            return swapActionMapAction.triggered;
+        }
+
+        return false;
+    }
+
+    public bool SelectNode()
+    {
+        if (playerInput.actions.FindActionMap("NodeMap").enabled)
+        {
+            return selectNodeAction.triggered;
+        }
+
+        return false;
     }
 }

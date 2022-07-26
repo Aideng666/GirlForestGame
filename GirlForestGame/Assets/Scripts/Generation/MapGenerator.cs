@@ -8,7 +8,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int endNodeDistance = 4;
     [SerializeField] int initialNodeSpread = 5;
 
+    [SerializeField] float blessingNodeChance = 0.2f;
+    [SerializeField] float shopNodeChance = 0.2f;
+
     List<GameObject> visualNodes = new List<GameObject>();
+
+    public List<GameObject> Nodes { get { return visualNodes; } }
 
     public static MapGenerator Instance { get; set; }
 
@@ -26,10 +31,10 @@ public class MapGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputManager.Instance.Dash())
-        {
-            Regenerate();
-        }
+        //if (InputManager.Instance.Dash())
+        //{
+        //    Regenerate();
+        //}
     }
 
     void Regenerate()
@@ -46,7 +51,7 @@ public class MapGenerator : MonoBehaviour
 
     void CreateNodeMap()
     {
-        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero + (Vector3.down * 100), Quaternion.identity));
         visualNodes[0].GetComponent<MapNode>().SetNode(null, NodeTypes.Default);
 
 
@@ -101,7 +106,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        visualNodes.Add(Instantiate(visualNodePrefab, new Vector3(0, 0, endNodeDistance * 10), Quaternion.identity));
+        visualNodes.Add(Instantiate(visualNodePrefab, new Vector3(0, 0, endNodeDistance * 10) + (Vector3.down * 100), Quaternion.identity));
         visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.End);
 
         for (int i = 0; i < visualNodes.Count; i++)
@@ -110,6 +115,44 @@ public class MapGenerator : MonoBehaviour
             {
                 visualNodes[i].GetComponent<MapNode>().SetLeftChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
                 visualNodes[i].GetComponent<MapNode>().SetRightChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
+            }
+        }
+
+        FillNodes();
+    }
+
+    void FillNodes()
+    {
+        int numberOfFillableNodes = visualNodes.Count - 2;
+
+        int numBlessingNodes = (int)(numberOfFillableNodes * blessingNodeChance);
+        int numShopNodes = (int)(numberOfFillableNodes * shopNodeChance);
+
+        for (int i = 0; i < numBlessingNodes; i++)
+        {
+            int nodeIndex = Random.Range(1, visualNodes.Count - 2);
+
+            if (visualNodes[nodeIndex].GetComponent<MapNode>().GetNodeType() == NodeTypes.Default)
+            {
+                visualNodes[nodeIndex].GetComponent<MapNode>().SetType(NodeTypes.Blessing);
+            }
+            else
+            {
+                i--;
+            }
+        }
+
+        for (int i = 0; i < numShopNodes; i++)
+        {
+            int nodeIndex = Random.Range(1, visualNodes.Count - 2);
+
+            if (visualNodes[nodeIndex].GetComponent<MapNode>().GetNodeType() == NodeTypes.Default)
+            {
+                visualNodes[nodeIndex].GetComponent<MapNode>().SetType(NodeTypes.Shop);
+            }
+            else
+            {
+                i--;
             }
         }
     }
