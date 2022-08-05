@@ -4,16 +4,77 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    RoomObject[] possibleRooms;
+    [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>();
 
+    RoomObject[] possibleRooms;
     RoomObject selectedRoom;
+
+    RoomTypes currentType = RoomTypes.Fight;
+
+    Vector2 distanceFromStart;
 
     bool northExitUsed;
     bool eastExitUsed;
     bool southExitUsed;
     bool westExitUsed;
 
-    Vector2 distanceFromStart;
+    Door[] doors = new Door[4];
+
+    bool isCurrentRoom;
+    bool roomCompleted;
+    bool roomLocked;
+    bool combatStarted;
+
+    private void Update()
+    {
+        if (roomCompleted && isCurrentRoom)
+        {
+            if (!doors[0].GetOpen() && northExitUsed)
+            {
+                doors[0].OpenDoor();
+            }
+
+            if (!doors[1].GetOpen() && eastExitUsed)
+            {
+                doors[1].OpenDoor();
+            }
+
+            if (!doors[2].GetOpen() && southExitUsed)
+            {
+                doors[2].OpenDoor();
+            }
+
+            if (!doors[3].GetOpen() && westExitUsed)
+            {
+                doors[3].OpenDoor();
+            }
+        }
+        else if (!roomCompleted && isCurrentRoom)
+        {
+            if (!roomLocked)
+            {
+                StartCoroutine(RoomLockDelay());
+            }
+
+            if (combatStarted)
+            {
+                if (GetComponentsInChildren<Enemy>().Length <= 0)
+                {
+                    print("Room Complete");
+
+                    roomCompleted = true;
+                }
+            }
+
+        }
+        else if (!isCurrentRoom)
+        {
+            foreach (Door door in doors)
+            {
+                door.OpenDoor();
+            }
+        }
+    }
 
     public void ChooseRoom()
     {
@@ -24,6 +85,68 @@ public class Room : MonoBehaviour
         selectedRoom = possibleRooms[randomIndex];
 
         Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
+
+        foreach(Door door in GetComponentsInChildren<Door>())
+        {
+            switch(door.GetDirection())
+            {
+                case Directions.North:
+
+                    doors[0] = door;
+
+                    break;
+
+                case Directions.East:
+
+                    doors[1] = door;
+
+                    break;
+
+                case Directions.South:
+
+                    doors[2] = door;
+
+                    break;
+
+                case Directions.West:
+
+                    doors[3] = door;
+
+                    break;
+            }
+        }
+    }
+
+    void BeginCombat()
+    {
+        int numEnemies = Random.Range(3, 6);
+
+        for (int i = 0; i < numEnemies; i++)
+        {
+            float xPos = Random.Range(transform.position.x + selectedRoom.GetOffset(Directions.West).x, transform.position.x + selectedRoom.GetOffset(Directions.East).x);
+            float zPos = Random.Range(transform.position.z + selectedRoom.GetOffset(Directions.South).z, transform.position.z + selectedRoom.GetOffset(Directions.North).z);
+
+            //int enemyChoice = Random.Range(0, enemyPrefabs.Count);
+            int enemyChoice = 1;
+
+            Instantiate(enemyPrefabs[enemyChoice], new Vector3(xPos, enemyPrefabs[enemyChoice].transform.position.y, zPos), Quaternion.identity, transform);
+        }
+
+        combatStarted = true;
+    }
+
+    IEnumerator RoomLockDelay()
+    {
+        roomLocked = true;
+
+        yield return new WaitForSeconds(1);
+
+        foreach (Door door in doors)
+        {
+            door.CloseDoor();
+        }
+
+        BeginCombat();
     }
 
     public RoomObject GetSelectedRoom()
@@ -69,6 +192,16 @@ public class Room : MonoBehaviour
     public void SetWestExitUsed()
     {
         westExitUsed = true;
+    }
+
+    public void SetCurrentRoom(bool isCurrent)
+    {
+        isCurrentRoom = isCurrent;
+    }
+
+    public void SetRoomCompleted(bool iscomplete)
+    {
+        roomCompleted = iscomplete;
     }
 
     public bool GetExitUsed(Directions exit)
@@ -135,6 +268,11 @@ public class Room : MonoBehaviour
         }
     }
 
+    public Door[] GetDoors()
+    {
+        return doors;
+    }
+
     public Vector2 GetDistanceFromStart()
     {
         return distanceFromStart;
@@ -144,4 +282,29 @@ public class Room : MonoBehaviour
     {
         distanceFromStart = dist;
     }
+
+    public void SetRoomType(RoomTypes type)
+    {
+        currentType = type;
+
+        if (type == RoomTypes.Start)
+        {
+            GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
+
+            roomCompleted = true;
+            isCurrentRoom = true;
+        }
+        else if (type == RoomTypes.End)
+        {
+            GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+        }
+    }
+}
+
+
+public enum RoomTypes
+{
+    Start,
+    Fight,
+    End
 }

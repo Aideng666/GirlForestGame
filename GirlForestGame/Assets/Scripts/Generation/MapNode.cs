@@ -49,7 +49,6 @@ public class MapNode : MonoBehaviour
 
         if (selected && InputManager.Instance.SelectNode())
         {
-            print("Gi");
             NodeMapManager.Instance.SetActiveNode(this);
         }
     }

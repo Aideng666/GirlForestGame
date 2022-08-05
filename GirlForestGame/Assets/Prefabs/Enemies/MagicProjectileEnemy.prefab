@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   form: 0
-  health: 0
+  health: 20
   damage: 0
   moveSpeed: 3
   moveDelay: 1.5

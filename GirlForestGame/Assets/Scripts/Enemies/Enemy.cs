@@ -124,10 +124,22 @@ public class Enemy : MonoBehaviour
 
         //        break;
         //}
+
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
     public void ApplyKnockback(Vector3 direction, float power)
     {
+        if (currentState == EnemyStates.Preparing)
+        {
+            CancelPrep();
+        }
+
+        transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.1f);
+
         direction.y = 0;
 
         direction = direction.normalized;
@@ -137,6 +149,21 @@ public class Enemy : MonoBehaviour
         body.velocity = direction * power;
 
         StartCoroutine(DeactivateKnockback());
+    }
+
+    public void TakeDamage(int value)
+    {
+        health -= value;
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    protected virtual void CancelPrep()
+    {
+
     }
 
     IEnumerator DeactivateKnockback()

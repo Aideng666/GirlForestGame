@@ -443,6 +443,22 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawWireSphere(targetEnemy.transform.position, 2);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Room"))
+        {
+            collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(true);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Room"))
+        {
+            collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(false);
+        }
+    }
 }
 
 public enum Forms

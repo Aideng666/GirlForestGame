@@ -162,7 +162,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461365556}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &461365559
 Camera:
   m_ObjectHideFlags: 0
@@ -345,7 +345,7 @@ MonoBehaviour:
     m_ActionName: NodeMap/SelectNode[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 13f9f6a4-77a7-4c39-b17d-40311736704a
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &543537890
@@ -409,6 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalRooms: 15
   roomPrefab: {fileID: 8193354202845057383, guid: d15669d5f35c0f84a98955be829464a1, type: 3}
+  doorPrefab: {fileID: 0}
 --- !u!1 &607410442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3964161196478328800, guid: 9ba1b73828694d644a7ebeba1c908a99, type: 3}
@@ -679,11 +680,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -1.75
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1180,7 +1181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultSpeed
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: swordAttackRange

@@ -6,6 +6,7 @@ public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] int totalRooms = 15;
     [SerializeField] GameObject roomPrefab;
+    [SerializeField] GameObject doorPrefab;
 
     List<Room> rooms = new List<Room>();
 
@@ -39,10 +40,24 @@ public class DungeonGenerator : MonoBehaviour
 
         SpawnRoom(Vector3.zero);
 
+        rooms[0].SetRoomType(RoomTypes.Start);
+
         for (int i = 0; i < totalRooms - 1; i++)
         {
             ChooseNewRoomLocation();
         }
+
+        Room currentEndRoom = rooms[0];
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            if (rooms[i].GetDistanceFromStart().magnitude > currentEndRoom.GetDistanceFromStart().magnitude)
+            {
+                currentEndRoom = rooms[i];
+            }
+        }
+
+        currentEndRoom.SetRoomType(RoomTypes.End);
     }
 
     void Regenerate()
@@ -100,7 +115,7 @@ public class DungeonGenerator : MonoBehaviour
 
         rooms.Add(room.GetComponent<Room>());
 
-        CheckUsedExits();
+        UpdateUsedExits();
     }
 
     bool CanSpawnRoom(Room room)
@@ -250,7 +265,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    void CheckUsedExits()
+    void UpdateUsedExits()
     {
         for (int i = 0; i < rooms.Count; i++)
         {

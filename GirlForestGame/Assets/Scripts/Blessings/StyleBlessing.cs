@@ -61,6 +61,7 @@ public class StyleBlessing : Blessing
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(PlayerController.Instance.transform.forward, 5);
+                    enemiesHit[i].TakeDamage(5);
                 }
 
                 break;
@@ -83,6 +84,7 @@ public class StyleBlessing : Blessing
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(PlayerController.Instance.transform.forward, 10);
+                    enemiesHit[i].TakeDamage(10);
                 }
 
                 break;

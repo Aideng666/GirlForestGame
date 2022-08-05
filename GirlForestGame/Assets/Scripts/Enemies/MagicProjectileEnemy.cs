@@ -21,6 +21,8 @@ public class MagicProjectileEnemy : Enemy
 
     protected override void Update()
     {
+        base.Update();
+
         if (!isKnockbackApplied)
         {
             switch (currentState)
@@ -35,26 +37,38 @@ public class MagicProjectileEnemy : Enemy
 
                         selectedProjectile = Random.Range(0, 2);
 
-                        print(selectedProjectile);
-
                         currentState = EnemyStates.Preparing;
                     }
 
                     if (CanMove())
                     {
-                        if (Vector3.Distance(transform.position, player.transform.position) > attackRange)
+                        float playerDistance = Vector3.Distance(transform.position, player.transform.position);
+                        float anglePercentage;
+
+                        if (playerDistance > attackRange)
                         {
+                            if (playerDistance <= 20)
+                            {
+                                anglePercentage = Mathf.InverseLerp(attackRange, 20, playerDistance);
+                            }
+                            else
+                            {
+                                anglePercentage = 1;
+                            }
+
                             moveDirection = (player.transform.position - transform.position).normalized;
                             moveDirection.y = 0;
                             moveDirection = moveDirection.normalized;
-                            moveDirection = Quaternion.AngleAxis(Random.Range(-60, 60), Vector3.up) * moveDirection;
+                            moveDirection = Quaternion.AngleAxis(Random.Range(-Mathf.Lerp(90, 0.01f, anglePercentage), Mathf.Lerp(90, 0.01f, anglePercentage)), Vector3.up) * moveDirection;
                         }
-                        else if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
+                        else if (playerDistance <= attackRange)
                         {
+                            anglePercentage = Mathf.InverseLerp(0, attackRange, playerDistance);
+
                             moveDirection = (transform.position - player.transform.position).normalized;
                             moveDirection.y = 0;
                             moveDirection = moveDirection.normalized;
-                            moveDirection = Quaternion.AngleAxis(Random.Range(-60, 60), Vector3.up) * moveDirection;
+                            moveDirection = Quaternion.AngleAxis(Random.Range(-Mathf.Lerp(90, 0.01f, anglePercentage), Mathf.Lerp(90, 0.01f, anglePercentage)), Vector3.up) * moveDirection;
                         }
 
                         float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
@@ -142,5 +156,16 @@ public class MagicProjectileEnemy : Enemy
                     break;
             }
         }
+    }
+
+    protected override void CancelPrep()
+    {
+        print("Cancelling Attack Preparation");
+
+        Destroy(spawnedProjectile);
+
+        projectileSpawned = false;
+
+        currentState = EnemyStates.Moving;
     }
 }
