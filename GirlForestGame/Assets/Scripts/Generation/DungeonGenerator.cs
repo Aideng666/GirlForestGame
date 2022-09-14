@@ -6,7 +6,7 @@ public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] int totalRooms = 15;
     [SerializeField] GameObject roomPrefab;
-    [SerializeField] GameObject doorPrefab;
+    //[SerializeField] GameObject doorPrefab;
 
     List<Room> rooms = new List<Room>();
 
@@ -36,6 +36,13 @@ public class DungeonGenerator : MonoBehaviour
 
     public void InitDungeon()
     {
+        rooms = new List<Room>();
+
+        foreach (Room room in FindObjectsOfType<Room>())
+        {
+            Destroy(room.gameObject);
+        }
+
         PlayerController.Instance.transform.position = Vector3.zero;
 
         SpawnRoom(Vector3.zero);
@@ -60,17 +67,17 @@ public class DungeonGenerator : MonoBehaviour
         currentEndRoom.SetRoomType(RoomTypes.End);
     }
 
-    void Regenerate()
-    {
-        rooms = new List<Room>();
+    //void Regenerate()
+    //{
+    //    rooms = new List<Room>();
 
-        foreach (Room room in FindObjectsOfType<Room>())
-        {
-            Destroy(room.gameObject);
-        }
+    //    foreach (Room room in FindObjectsOfType<Room>())
+    //    {
+    //        Destroy(room.gameObject);
+    //    }
 
-        InitDungeon();
-    }
+    //    InitDungeon();
+    //}
 
     void SpawnRoom(Vector3 pos, Directions directionOfOrigin = Directions.None, Vector2 distanceFromStart = default(Vector2))
     {

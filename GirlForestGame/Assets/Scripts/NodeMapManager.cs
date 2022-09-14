@@ -36,6 +36,8 @@ public class NodeMapManager : MonoBehaviour
             UpdateMap();
         }
 
+        print(currentLevel);
+
         //if (InputManager.Instance.BowAttack())
         //{
         //    SetNextLevel();
@@ -60,7 +62,7 @@ public class NodeMapManager : MonoBehaviour
         //}
     }
 
-    void SwapCameras()
+    void ToggleNodeMap()
     {
         mapCam.enabled = !mapCam.enabled;
         dungeonCam.enabled = !dungeonCam.enabled;
@@ -83,11 +85,17 @@ public class NodeMapManager : MonoBehaviour
         mapUpdated = true;
     }
 
-    public static void SetNextLevel()
+    public void SetNextLevel()
     {
         currentLevel++;
 
         mapUpdated = false;
+
+        ToggleNodeMap();
+
+        mapActive = true;
+
+        InputManager.Instance.SwapActionMap("NodeMap");
     }
 
     public void SetActiveNode(MapNode node)
@@ -99,6 +107,6 @@ public class NodeMapManager : MonoBehaviour
         InputManager.Instance.SwapActionMap("Player");
         mapActive = false;
 
-        SwapCameras();
+        ToggleNodeMap();
     }
 }

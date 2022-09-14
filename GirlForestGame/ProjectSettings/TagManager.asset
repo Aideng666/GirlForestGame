@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MapNode
   - Room
+  - Exit
   layers:
   - Default
   - TransparentFX

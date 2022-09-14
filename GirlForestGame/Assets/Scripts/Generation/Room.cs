@@ -5,6 +5,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>();
+    [SerializeField] GameObject exitPrefab;
 
     RoomObject[] possibleRooms;
     RoomObject selectedRoom;
@@ -123,8 +124,8 @@ public class Room : MonoBehaviour
 
         for (int i = 0; i < numEnemies; i++)
         {
-            float xPos = Random.Range(transform.position.x + selectedRoom.GetOffset(Directions.West).x, transform.position.x + selectedRoom.GetOffset(Directions.East).x);
-            float zPos = Random.Range(transform.position.z + selectedRoom.GetOffset(Directions.South).z, transform.position.z + selectedRoom.GetOffset(Directions.North).z);
+            float xPos = Random.Range(transform.position.x + (selectedRoom.GetOffset(Directions.West).x / 2), transform.position.x + (selectedRoom.GetOffset(Directions.East).x / 2));
+            float zPos = Random.Range(transform.position.z + (selectedRoom.GetOffset(Directions.South).z / 2), transform.position.z + (selectedRoom.GetOffset(Directions.North).z / 2));
 
             //int enemyChoice = Random.Range(0, enemyPrefabs.Count);
             int enemyChoice = 1;
@@ -297,6 +298,8 @@ public class Room : MonoBehaviour
         else if (type == RoomTypes.End)
         {
             GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+
+            Instantiate(exitPrefab, transform.position, Quaternion.identity, transform);
         }
     }
 }

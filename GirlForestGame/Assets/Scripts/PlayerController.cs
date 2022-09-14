@@ -450,6 +450,11 @@ public class PlayerController : MonoBehaviour
         {
             collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(true);
         }
+
+        if (collision.gameObject.CompareTag("Exit"))
+        {
+            NodeMapManager.Instance.SetNextLevel();
+        }
     }
 
     private void OnCollisionExit(Collision collision)

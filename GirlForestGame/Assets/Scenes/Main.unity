@@ -409,7 +409,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalRooms: 15
   roomPrefab: {fileID: 8193354202845057383, guid: d15669d5f35c0f84a98955be829464a1, type: 3}
-  doorPrefab: {fileID: 0}
 --- !u!1 &607410442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3964161196478328800, guid: 9ba1b73828694d644a7ebeba1c908a99, type: 3}
@@ -684,7 +683,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
