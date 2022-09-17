@@ -7,10 +7,15 @@ public class RoomObject : ScriptableObject
 {
     public GameObject model;
 
+    public RoomExitTypes exitType;
+
     public Vector3 northExitOffset;
     public Vector3 eastExitOffset;
     public Vector3 southExitOffset;
     public Vector3 westExitOffset;
+
+    // 0, 1, 2, 3 represent if the model for this room contains a North, East, South, or West exit respectively
+    public bool[] existingExits = new bool[4]; 
 
     public Vector3 GetOffset(Directions direction)
     {
@@ -46,3 +51,14 @@ public class RoomObject : ScriptableObject
         return selectedOffset;
     }
 }
+
+//This enum dictates the layout of the exits for each room model
+public enum RoomExitTypes
+{
+    OneExit,
+    TwoExitAdjacent,
+    TwoExitOpposite,
+    ThreeExit,
+    FourExit
+}
+

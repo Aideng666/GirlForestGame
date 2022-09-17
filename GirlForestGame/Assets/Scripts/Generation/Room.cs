@@ -309,5 +309,6 @@ public enum RoomTypes
 {
     Start,
     Fight,
-    End
+    End,
+    Totem
 }

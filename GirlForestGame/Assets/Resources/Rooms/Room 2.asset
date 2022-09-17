@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Room 2
   m_EditorClassIdentifier: 
   model: {fileID: 2557519964947571201, guid: d0daa7a17ddcea14c9cfc04e4ca9f00a, type: 3}
+  exitType: 4
   northExitOffset: {x: 0, y: 0, z: 23}
   eastExitOffset: {x: 12, y: 0, z: 3}
   southExitOffset: {x: 0, y: 0, z: -23}
   westExitOffset: {x: -12, y: 0, z: -3}
+  existingExits: 01010101

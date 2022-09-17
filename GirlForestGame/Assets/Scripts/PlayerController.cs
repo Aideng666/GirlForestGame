@@ -152,26 +152,26 @@ public class PlayerController : MonoBehaviour
         }
 
         float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
-        moveDir = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        moveDir = /*Quaternion.AngleAxis(45, Vector3.up) * */Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
         float aimAngle = Mathf.Atan2(aimDir.x, aimDir.y) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
         float mouseAimAngle = Mathf.Atan2(mouseAimDirection.x, mouseAimDirection.z) * Mathf.Rad2Deg;
-        aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
+        aimDirection = /*Quaternion.AngleAxis(45, Vector3.up) **/ Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
 
         if (controlWithMouse)
         {
-            aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, mouseAimAngle, 0f) * Vector3.forward;
-            transform.rotation = Quaternion.Euler(0, mouseAimAngle + 45, 0);
+            aimDirection = /*Quaternion.AngleAxis(45, Vector3.up) **/ Quaternion.Euler(0f, mouseAimAngle, 0f) * Vector3.forward;
+            transform.rotation = Quaternion.Euler(0, mouseAimAngle/* + 45*/, 0);
         }
         else if (aimDir.magnitude <= 0.1f)
         {
             aimDirection = moveDir;
-            transform.rotation = Quaternion.Euler(0f, targetAngle + 45, 0f);
+            transform.rotation = Quaternion.Euler(0f, targetAngle/* + 45*/, 0f);
         }
         else
         {
-            aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
-            transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
+            aimDirection = /*Quaternion.AngleAxis(45, Vector3.up) * */Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
+            transform.rotation = Quaternion.Euler(0f, aimAngle/* + 45*/, 0f);
         }
 
         //if (moveDir != Vector3.zero)
