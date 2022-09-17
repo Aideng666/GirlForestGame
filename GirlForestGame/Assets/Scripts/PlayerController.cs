@@ -455,10 +455,24 @@ public class PlayerController : MonoBehaviour
         {
             print("Changing Rooms");
 
-            DungeonGenerator.Instance.SetCurrentRoom(DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]);
+            UIManager.Instance.GetFadePanel().BeginRoomTransition();
 
-            transform.position = DungeonGenerator.Instance.GetCurrentRoom().GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())].transform.parent.transform.position;
+            StartCoroutine(EnterNewRoom(
+                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
+                DungeonGenerator.Instance.GetCurrentRoom().GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
+                .transform.parent.transform.position));
         }
+    }
+
+    IEnumerator EnterNewRoom(NewRoom room, Vector3 updatedPlayerPos)
+    {
+        yield return new WaitForSeconds(UIManager.Instance.GetFadePanel().GetTransitionTime() / 2);
+
+        DungeonGenerator.Instance.SetCurrentRoom(room);
+
+        transform.position = updatedPlayerPos;
+
+        yield return null;
     }
 }
 
