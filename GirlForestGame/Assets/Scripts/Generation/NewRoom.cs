@@ -14,7 +14,7 @@ public class NewRoom : MonoBehaviour
 
     RoomTypes currentType = RoomTypes.Fight;
 
-    bool isCurrentRoom; //Is the player currently in this room
+    //bool isCurrentRoom; //Is the player currently in this room
     bool roomCompleted; //Has the player defeated all the enemies within this room
 
     int distanceFromStartRoom = 0;
@@ -24,30 +24,29 @@ public class NewRoom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //TEMP
+        roomCompleted = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isCurrentRoom)
+        if (roomCompleted)
         {
-            if (roomCompleted)
+            //Opens all doors that have connected rooms
+            for (int i = 0; i < connectedRooms.Length; i++)
             {
-                for (int i = 0; i < connectedRooms.Length; i++)
+                if (connectedRooms[i])
                 {
-                    if (connectedRooms[i])
-                    {
-                        doors[i].SetActive(false);
-                    }
+                    doors[i].SetActive(false);
                 }
             }
         }
     }
 
     //Selects one of the possible room models at random
-    public void ChooseRoom()
-    {
+    //public void ChooseRoom()
+    //{
         //possibleRooms = TypeHandler.GetAllInstances<RoomObject>("Rooms");
 
         //int randomIndex = Random.Range(0, possibleRooms.Length);
@@ -55,7 +54,7 @@ public class NewRoom : MonoBehaviour
         //selectedRoom = possibleRooms[randomIndex];
 
         //Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
-    }
+    //}
 
     public void CreateExit(int direction)
     {
@@ -76,6 +75,11 @@ public class NewRoom : MonoBehaviour
         return connectedRooms;
     }
 
+    public GameObject[] GetDoors()
+    {
+        return doors;
+    }
+
     public void SetRoomType(RoomTypes type)
     {
         currentType = type;
@@ -83,7 +87,10 @@ public class NewRoom : MonoBehaviour
         if (type == RoomTypes.Start)
         {
             roomCompleted = true;
-            isCurrentRoom = true;
+        }
+        if (type == RoomTypes.End)
+        {
+            GetComponent<MeshRenderer>().material = entranceMaterial;
         }
     }
 }
@@ -93,5 +100,7 @@ public enum RoomTypes
     Start,
     Fight,
     End,
-    Totem
+    Totem,
+    Shop,
+    Marking
 }

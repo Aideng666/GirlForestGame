@@ -10,6 +10,8 @@ public class DungeonGenerator : MonoBehaviour
 
     List<NewRoom> rooms = new List<NewRoom>();
 
+    NewRoom currentRoom;
+
     public static DungeonGenerator Instance { get; set; }
 
     private void Awake()
@@ -28,17 +30,17 @@ public class DungeonGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Regenerate();
-
-        //    //ChooseNewRoomLocation();
-        //}
-
-        //if(InputManager.Instance.CompleteRoom())
-        //{
-        //    ChooseNewRoomLocation();
-        //}
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            if (rooms[i] != currentRoom)
+            {
+                rooms[i].gameObject.SetActive(false);
+            }
+            if (rooms[i] == currentRoom)
+            {
+                rooms[i].gameObject.SetActive(true);
+            }
+        }
     }
 
     public void InitDungeon()
@@ -57,6 +59,7 @@ public class DungeonGenerator : MonoBehaviour
         //rooms.Add(Instantiate(roomPrefab, Vector3.zero, Quaternion.identity).GetComponent<NewRoom>());
 
         rooms[0].SetRoomType(RoomTypes.Start);
+        currentRoom = rooms[0];
 
         for (int i = 0; i < totalRooms - 1; i++)
         {
@@ -400,5 +403,15 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         return reversedDir;
+    }
+
+    public void SetCurrentRoom(NewRoom room)
+    {
+        currentRoom = room;
+    }
+
+    public NewRoom GetCurrentRoom()
+    {
+        return currentRoom;
     }
 }
