@@ -446,23 +446,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Room"))
-        {
-            collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(true);
-        }
+        //if (collision.gameObject.CompareTag("Room"))
+        //{
+        //    collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(true);
+        //}
 
-        if (collision.gameObject.CompareTag("Exit"))
-        {
-            NodeMapManager.Instance.SetNextLevel();
-        }
+        //if (collision.gameObject.CompareTag("Exit"))
+        //{
+        //    NodeMapManager.Instance.SetNextLevel();
+        //}
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Room"))
-        {
-            collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(false);
-        }
+        //if (collision.gameObject.CompareTag("Room"))
+        //{
+        //    collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(false);
+        //}
     }
 }
 

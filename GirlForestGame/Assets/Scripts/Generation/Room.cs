@@ -303,12 +303,3 @@ public class Room : MonoBehaviour
         }
     }
 }
-
-
-public enum RoomTypes
-{
-    Start,
-    Fight,
-    End,
-    Totem
-}

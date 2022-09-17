@@ -5,8 +5,8 @@ using UnityEngine;
 public enum Directions
 {
     North,
-    East,
     South,
+    East,
     West,
     None
 }
