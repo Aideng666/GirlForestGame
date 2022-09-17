@@ -446,22 +446,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Room"))
-        {
-            collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(true);
-        }
+        //if (collision.gameObject.CompareTag("Room"))
+        //{
+        //    collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(true);
+        //}
 
         if (collision.gameObject.CompareTag("Exit"))
         {
-            NodeMapManager.Instance.SetNextLevel();
-        }
-    }
+            print("Changing Rooms");
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Room"))
-        {
-            collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(false);
+            DungeonGenerator.Instance.SetCurrentRoom(DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]);
+
+            transform.position = DungeonGenerator.Instance.GetCurrentRoom().GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())].transform.parent.transform.position;
         }
     }
 }

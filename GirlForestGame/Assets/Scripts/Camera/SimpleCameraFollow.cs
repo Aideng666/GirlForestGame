@@ -37,6 +37,6 @@ public class SimpleCameraFollow : MonoBehaviour
         //    transform.position += Vector3.back * cameraSpeed * Time.deltaTime;
         //}
 
-        transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
+        //transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
     }
 }
