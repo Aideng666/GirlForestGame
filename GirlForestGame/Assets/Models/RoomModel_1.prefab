@@ -13616,3 +13616,4 @@ MonoBehaviour:
   - {fileID: 11771101155889052}
   - {fileID: 11771101198026122}
   - {fileID: 11771102298012226}
+  isBigRoom: 0

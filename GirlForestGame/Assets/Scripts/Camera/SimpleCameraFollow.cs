@@ -38,5 +38,16 @@ public class SimpleCameraFollow : MonoBehaviour
         //}
 
         //transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
+
+
+        //follows the player if the room is bigger than the screen size
+        if (!DungeonGenerator.Instance.GetCurrentRoom().GetSpawnedModel().isBigRoom)
+        {
+            transform.position = new Vector3(0, cameraHeight, zDistanceFromPlayer);
+
+            return;
+        }
+
+        transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
     }
 }

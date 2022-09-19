@@ -9082,6 +9082,7 @@ MonoBehaviour:
   - {fileID: 6276273033829211401}
   - {fileID: 6276273033586267935}
   - {fileID: 6276273034702989527}
+  isBigRoom: 0
 --- !u!1 &6134193915884674592
 GameObject:
   m_ObjectHideFlags: 0

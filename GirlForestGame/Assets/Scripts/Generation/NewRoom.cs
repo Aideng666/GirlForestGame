@@ -10,7 +10,6 @@ public class NewRoom : MonoBehaviour
     NewRoom[] connectedRooms = new NewRoom[4]; //0,1,2,3 = North, South, East, West respectively
 
     RoomObject[] possibleRooms; // List of all of the possible room models for the room to pick
-    RoomObject selectedRoom; // The randomly selected model out of the possible choices
     RoomModel spawnedModel; // the selected model for the room that was spawned, used to access the doors
 
     RoomTypes currentType = RoomTypes.Fight;
@@ -52,9 +51,7 @@ public class NewRoom : MonoBehaviour
 
         int randomIndex = Random.Range(0, possibleRooms.Length);
 
-        selectedRoom = possibleRooms[randomIndex];
-
-        Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
+        Instantiate(possibleRooms[randomIndex].model, transform.position, Quaternion.identity, transform);
 
         spawnedModel = GetComponentInChildren<RoomModel>();
     }
@@ -85,6 +82,11 @@ public class NewRoom : MonoBehaviour
     public GameObject[] GetDoors()
     {
         return spawnedModel.doors;
+    }
+
+    public RoomModel GetSpawnedModel()
+    {
+        return spawnedModel;
     }
 
     public void SetRoomType(RoomTypes type)
