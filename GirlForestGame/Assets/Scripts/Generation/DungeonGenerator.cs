@@ -97,6 +97,8 @@ public class DungeonGenerator : MonoBehaviour
     {
         var room = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
 
+        room.GetComponent<NewRoom>().ChooseRoom();
+
         //If it is not the very first room, it will set the distance of the new room and create the neccessary exits for the connected rooms
         if (originRoom != null)
         {

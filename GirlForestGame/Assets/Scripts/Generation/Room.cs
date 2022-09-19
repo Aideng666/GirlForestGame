@@ -124,13 +124,13 @@ public class Room : MonoBehaviour
 
         for (int i = 0; i < numEnemies; i++)
         {
-            float xPos = Random.Range(transform.position.x + (selectedRoom.GetOffset(Directions.West).x / 2), transform.position.x + (selectedRoom.GetOffset(Directions.East).x / 2));
-            float zPos = Random.Range(transform.position.z + (selectedRoom.GetOffset(Directions.South).z / 2), transform.position.z + (selectedRoom.GetOffset(Directions.North).z / 2));
+            //float xPos = Random.Range(transform.position.x + (selectedRoom.GetOffset(Directions.West).x / 2), transform.position.x + (selectedRoom.GetOffset(Directions.East).x / 2));
+            //float zPos = Random.Range(transform.position.z + (selectedRoom.GetOffset(Directions.South).z / 2), transform.position.z + (selectedRoom.GetOffset(Directions.North).z / 2));
 
             //int enemyChoice = Random.Range(0, enemyPrefabs.Count);
             int enemyChoice = 1;
 
-            Instantiate(enemyPrefabs[enemyChoice], new Vector3(xPos, enemyPrefabs[enemyChoice].transform.position.y, zPos), Quaternion.identity, transform);
+            //Instantiate(enemyPrefabs[enemyChoice], new Vector3(xPos, enemyPrefabs[enemyChoice].transform.position.y, zPos), Quaternion.identity, transform);
         }
 
         combatStarted = true;

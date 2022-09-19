@@ -5,12 +5,13 @@ using UnityEngine;
 public class NewRoom : MonoBehaviour
 {
     [SerializeField] Material entranceMaterial; //temp material to emphasize which spots in the room have exits
-    [SerializeField] GameObject[] doors = new GameObject[4]; //0,1,2,3 = North, South, East, West respectively
+    //[SerializeField] GameObject[] doors = new GameObject[4]; //0,1,2,3 = North, South, East, West respectively
 
     NewRoom[] connectedRooms = new NewRoom[4]; //0,1,2,3 = North, South, East, West respectively
 
-    //RoomObject[] possibleRooms; // List of all of the possible room models for the room to pick
-    //RoomObject selectedRoom; // The randomly selected model out of the possible choices
+    RoomObject[] possibleRooms; // List of all of the possible room models for the room to pick
+    RoomObject selectedRoom; // The randomly selected model out of the possible choices
+    RoomModel spawnedModel; // the selected model for the room that was spawned, used to access the doors
 
     RoomTypes currentType = RoomTypes.Fight;
 
@@ -38,27 +39,33 @@ public class NewRoom : MonoBehaviour
             {
                 if (connectedRooms[i])
                 {
-                    doors[i].SetActive(false);
+                    spawnedModel.GetComponent<RoomModel>().doors[i].SetActive(false);
                 }
             }
         }
     }
 
     //Selects one of the possible room models at random
-    //public void ChooseRoom()
-    //{
-        //possibleRooms = TypeHandler.GetAllInstances<RoomObject>("Rooms");
+    public void ChooseRoom()
+    {
+        possibleRooms = TypeHandler.GetAllInstances<RoomObject>("Rooms");
 
-        //int randomIndex = Random.Range(0, possibleRooms.Length);
+        int randomIndex = Random.Range(0, possibleRooms.Length);
 
-        //selectedRoom = possibleRooms[randomIndex];
+        selectedRoom = possibleRooms[randomIndex];
 
-        //Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
-    //}
+        Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
+
+        spawnedModel = GetComponentInChildren<RoomModel>();
+    }
 
     public void CreateExit(int direction)
     {
-        doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
+        print($"Model: {spawnedModel.name}");
+        print($"Direction: {direction}");
+        print($"Parent: {spawnedModel.doors[direction].transform.parent}");
+
+        spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
     }
 
     //Creates a new room that attaches to the current room on one of its sides
@@ -77,7 +84,7 @@ public class NewRoom : MonoBehaviour
 
     public GameObject[] GetDoors()
     {
-        return doors;
+        return spawnedModel.doors;
     }
 
     public void SetRoomType(RoomTypes type)
@@ -90,7 +97,7 @@ public class NewRoom : MonoBehaviour
         }
         if (type == RoomTypes.End)
         {
-            GetComponent<MeshRenderer>().material = entranceMaterial;
+            GetComponentInChildren<MeshRenderer>().material = entranceMaterial;
         }
     }
 }

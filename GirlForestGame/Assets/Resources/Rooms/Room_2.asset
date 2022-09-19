@@ -10,11 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45fca93215b5fb4fb04d9cbe18a2878, type: 3}
-  m_Name: Room_N
+  m_Name: Room_2
   m_EditorClassIdentifier: 
-  model: {fileID: 1962526285066941268, guid: 4c739cecad7407149884119d0e6bdad9, type: 3}
-  northExitOffset: {x: 0, y: 0, z: 0}
-  eastExitOffset: {x: 0, y: 0, z: 0}
-  southExitOffset: {x: 0, y: 0, z: 0}
-  westExitOffset: {x: 0, y: 0, z: 0}
-  existingExits: 01000000
+  model: {fileID: 3949410913006336559, guid: f4936e12258599348b91420064734671, type: 3}
