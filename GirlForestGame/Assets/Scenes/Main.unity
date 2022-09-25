@@ -371,7 +371,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543537886}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9755fb8a304b8f847a0ef1a5a1f8889b, type: 3}
   m_Name: 
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543537886}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e2eef9c21b9364439532daec43705ff, type: 3}
   m_Name: 
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d773b32ae5226408112fe265dcb023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalRooms: 15
+  totalRooms: 10
   roomPrefab: {fileID: 2541303958802026500, guid: 417432f070b95164b87032e4159359af, type: 3}
 --- !u!1 &607410442 stripped
 GameObject:
@@ -1209,6 +1209,7 @@ MonoBehaviour:
   followOffset: 1
   zDistanceFromPlayer: -1
   cameraHeight: 1
+  boundry: 15
 --- !u!1 &2095701768 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5982676203613863563, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}

@@ -7,6 +7,7 @@ public class SimpleCameraFollow : MonoBehaviour
     [SerializeField] float followOffset;
     [SerializeField] float zDistanceFromPlayer = 7;
     [SerializeField] float cameraHeight = 15;
+    [SerializeField] float boundry;
 
     PlayerController player;
     //float cameraSpeed = 20;
@@ -44,10 +45,27 @@ public class SimpleCameraFollow : MonoBehaviour
         if (!DungeonGenerator.Instance.GetCurrentRoom().GetSpawnedModel().isBigRoom)
         {
             transform.position = new Vector3(0, cameraHeight, zDistanceFromPlayer);
-
-            return;
+        }
+        else
+        {
+            transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
         }
 
-        transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
+        if (transform.position.x <= -boundry)
+        {
+            transform.position = new Vector3(-boundry, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x >= boundry)
+        {
+            transform.position = new Vector3(boundry, transform.position.y, transform.position.z);
+        }
+        if (transform.position.z <= -boundry)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -boundry);
+        }
+        if (transform.position.z >= boundry)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, boundry);
+        }
     }
 }

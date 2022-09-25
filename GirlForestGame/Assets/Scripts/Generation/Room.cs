@@ -4,284 +4,110 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>();
-    [SerializeField] GameObject exitPrefab;
+    [SerializeField] Material entranceMaterial; //temp material to emphasize which spots in the room have exits
+    //[SerializeField] GameObject[] doors = new GameObject[4]; //0,1,2,3 = North, South, East, West respectively
 
-    RoomObject[] possibleRooms;
-    RoomObject selectedRoom;
+    Room[] connectedRooms = new Room[4]; //0,1,2,3 = North, South, East, West respectively
+    Room originRoom; //The room that this room was originally attached to
+
+    RoomObject[] possibleRooms; // List of all of the possible room models for the room to pick
+    RoomModel spawnedModel; // the selected model for the room that was spawned, used to access the doors
 
     RoomTypes currentType = RoomTypes.Fight;
 
-    Vector2 distanceFromStart;
+    //bool isCurrentRoom; //Is the player currently in this room
+    bool roomCompleted; //Has the player defeated all the enemies within this room
 
-    bool northExitUsed;
-    bool eastExitUsed;
-    bool southExitUsed;
-    bool westExitUsed;
+    int distanceFromStartRoom = 0;
 
-    Door[] doors = new Door[4];
+    public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
 
-    bool isCurrentRoom;
-    bool roomCompleted;
-    bool roomLocked;
-    bool combatStarted;
-
-    private void Update()
+    // Start is called before the first frame update
+    void Start()
     {
-        if (roomCompleted && isCurrentRoom)
+        //TEMP
+        roomCompleted = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (roomCompleted)
         {
-            if (!doors[0].GetOpen() && northExitUsed)
+            //Opens all doors that have connected rooms
+            for (int i = 0; i < connectedRooms.Length; i++)
             {
-                doors[0].OpenDoor();
-            }
-
-            if (!doors[1].GetOpen() && eastExitUsed)
-            {
-                doors[1].OpenDoor();
-            }
-
-            if (!doors[2].GetOpen() && southExitUsed)
-            {
-                doors[2].OpenDoor();
-            }
-
-            if (!doors[3].GetOpen() && westExitUsed)
-            {
-                doors[3].OpenDoor();
-            }
-        }
-        else if (!roomCompleted && isCurrentRoom)
-        {
-            if (!roomLocked)
-            {
-                StartCoroutine(RoomLockDelay());
-            }
-
-            if (combatStarted)
-            {
-                if (GetComponentsInChildren<Enemy>().Length <= 0)
+                if (connectedRooms[i] != null)
                 {
-                    print("Room Complete");
+                    spawnedModel.doors[i].SetActive(false);
 
-                    roomCompleted = true;
+                    if (currentType == RoomTypes.End)
+                    {
+                        CreateExit((int)DungeonGenerator.Instance.ReverseDirection((Directions)i));
+
+                        spawnedModel.doors[(int)DungeonGenerator.Instance.ReverseDirection((Directions)i)].SetActive(false);
+                    }
                 }
-            }
-
-        }
-        else if (!isCurrentRoom)
-        {
-            foreach (Door door in doors)
-            {
-                door.OpenDoor();
             }
         }
     }
 
+    //Selects one of the possible room models at random
     public void ChooseRoom()
     {
         possibleRooms = TypeHandler.GetAllInstances<RoomObject>("Rooms");
 
         int randomIndex = Random.Range(0, possibleRooms.Length);
 
-        selectedRoom = possibleRooms[randomIndex];
+        Instantiate(possibleRooms[randomIndex].model, transform.position, Quaternion.identity, transform);
 
-        Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
+        spawnedModel = GetComponentInChildren<RoomModel>();
+    }
 
-        foreach(Door door in GetComponentsInChildren<Door>())
+    public void CreateExit(int direction)
+    {
+        spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
+    }
+
+    //Creates a new room that attaches to the current room on one of its sides
+    //Used during dungeon generation
+    public void AttachConnectedRoom(int directionIndex, Room roomToAttach)
+    {
+        bool firstRoom = true;
+
+        for (int i = 0; i < 4; i++)
         {
-            switch(door.GetDirection())
+            if (connectedRooms[i] != null)
             {
-                case Directions.North:
+                firstRoom = false;
 
-                    doors[0] = door;
-
-                    break;
-
-                case Directions.East:
-
-                    doors[1] = door;
-
-                    break;
-
-                case Directions.South:
-
-                    doors[2] = door;
-
-                    break;
-
-                case Directions.West:
-
-                    doors[3] = door;
-
-                    break;
+                break;
             }
         }
-    }
 
-    void BeginCombat()
-    {
-        int numEnemies = Random.Range(3, 6);
-
-        for (int i = 0; i < numEnemies; i++)
+        if (firstRoom)
         {
-            //float xPos = Random.Range(transform.position.x + (selectedRoom.GetOffset(Directions.West).x / 2), transform.position.x + (selectedRoom.GetOffset(Directions.East).x / 2));
-            //float zPos = Random.Range(transform.position.z + (selectedRoom.GetOffset(Directions.South).z / 2), transform.position.z + (selectedRoom.GetOffset(Directions.North).z / 2));
-
-            //int enemyChoice = Random.Range(0, enemyPrefabs.Count);
-            int enemyChoice = 1;
-
-            //Instantiate(enemyPrefabs[enemyChoice], new Vector3(xPos, enemyPrefabs[enemyChoice].transform.position.y, zPos), Quaternion.identity, transform);
+            originRoom = roomToAttach;
         }
 
-        combatStarted = true;
+        connectedRooms[directionIndex] = roomToAttach;
+
+        CreateExit(directionIndex);
     }
 
-    IEnumerator RoomLockDelay()
+    public Room[] GetConnectedRooms()
     {
-        roomLocked = true;
-
-        yield return new WaitForSeconds(1);
-
-        foreach (Door door in doors)
-        {
-            door.CloseDoor();
-        }
-
-        BeginCombat();
+        return connectedRooms;
     }
 
-    public RoomObject GetSelectedRoom()
+    public GameObject[] GetDoors()
     {
-        return selectedRoom;
+        return spawnedModel.doors;
     }
 
-    public bool GetNorthExitUsed()
+    public RoomModel GetSpawnedModel()
     {
-        return northExitUsed;
-    }
-
-    public bool GetEastExitUsed()
-    {
-        return eastExitUsed;
-    }
-
-    public bool GetSouthExitUsed()
-    {
-        return southExitUsed;
-    }
-
-    public bool GetWestExitUsed()
-    {
-        return westExitUsed;
-    }
-
-    public void SetNorthExitUsed()
-    {
-        northExitUsed = true;
-    }
-
-    public void SetEastExitUsed()
-    {
-        eastExitUsed = true;
-    }
-
-    public void SetSouthExitUsed()
-    {
-        southExitUsed = true;
-    }
-
-    public void SetWestExitUsed()
-    {
-        westExitUsed = true;
-    }
-
-    public void SetCurrentRoom(bool isCurrent)
-    {
-        isCurrentRoom = isCurrent;
-    }
-
-    public void SetRoomCompleted(bool iscomplete)
-    {
-        roomCompleted = iscomplete;
-    }
-
-    public bool GetExitUsed(Directions exit)
-    {
-        bool isUsed = false;
-
-        switch (exit)
-        {
-            case Directions.North:
-
-                isUsed = GetNorthExitUsed();
-
-                break;
-
-            case Directions.East:
-
-                isUsed = GetEastExitUsed();
-
-                break;
-
-            case Directions.South:
-
-                isUsed = GetSouthExitUsed();
-
-                break;
-
-            case Directions.West:
-
-                isUsed = GetWestExitUsed();
-
-                break;
-        }
-
-        return isUsed;
-    }
-
-    public void SetExitUsed(Directions exit)
-    {
-        switch (exit)
-        {
-            case Directions.North:
-
-                SetNorthExitUsed();
-
-                break;
-
-            case Directions.East:
-
-                SetEastExitUsed();
-
-                break;
-
-            case Directions.South:
-
-                SetSouthExitUsed();
-
-                break;
-
-            case Directions.West:
-
-                SetWestExitUsed();
-
-                break;
-        }
-    }
-
-    public Door[] GetDoors()
-    {
-        return doors;
-    }
-
-    public Vector2 GetDistanceFromStart()
-    {
-        return distanceFromStart;
-    }
-
-    public void SetDistanceFromStart(Vector2 dist)
-    {
-        distanceFromStart = dist;
+        return spawnedModel;
     }
 
     public void SetRoomType(RoomTypes type)
@@ -290,16 +116,23 @@ public class Room : MonoBehaviour
 
         if (type == RoomTypes.Start)
         {
-            GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
-
             roomCompleted = true;
-            isCurrentRoom = true;
         }
-        else if (type == RoomTypes.End)
+        if (type == RoomTypes.End)
         {
-            GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+            GetComponentInChildren<MeshRenderer>().material = entranceMaterial;
 
-            Instantiate(exitPrefab, transform.position, Quaternion.identity, transform);
+
         }
     }
+}
+
+public enum RoomTypes
+{
+    Start,
+    Fight,
+    End,
+    Totem,
+    Shop,
+    Marking
 }

@@ -8,9 +8,9 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] GameObject roomPrefab;
     //[SerializeField] GameObject doorPrefab;
 
-    List<NewRoom> rooms = new List<NewRoom>();
+    List<Room> rooms = new List<Room>();
 
-    NewRoom currentRoom;
+    Room currentRoom;
 
     public static DungeonGenerator Instance { get; set; }
 
@@ -22,9 +22,9 @@ public class DungeonGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitDungeon();
+        //InitDungeon();
 
-        InputManager.Instance.SwapActionMap("Player");
+        //InputManager.Instance.SwapActionMap("Player");
     }
 
     // Update is called once per frame
@@ -45,9 +45,9 @@ public class DungeonGenerator : MonoBehaviour
 
     public void InitDungeon()
     {
-        rooms = new List<NewRoom>();
+        rooms = new List<Room>();
 
-        foreach (NewRoom room in FindObjectsOfType<NewRoom>())
+        foreach (Room room in FindObjectsOfType<Room>())
         {
             Destroy(room.gameObject);
         }
@@ -56,7 +56,7 @@ public class DungeonGenerator : MonoBehaviour
 
         SpawnRoom();
 
-        //rooms.Add(Instantiate(roomPrefab, Vector3.zero, Quaternion.identity).GetComponent<NewRoom>());
+        //rooms.Add(Instantiate(roomPrefab, Vector3.zero, Quaternion.identity).GetComponent<Room>());
 
         rooms[0].SetRoomType(RoomTypes.Start);
         currentRoom = rooms[0];
@@ -68,7 +68,7 @@ public class DungeonGenerator : MonoBehaviour
 
         //Sets the proper End room for the floor
         //Will be altered later to allow for the different types of end rooms(totem, shop, marking)
-        NewRoom currentEndRoom = rooms[0];
+        Room currentEndRoom = rooms[0];
 
         for (int i = 0; i < rooms.Count; i++)
         {
@@ -83,9 +83,9 @@ public class DungeonGenerator : MonoBehaviour
 
     void Regenerate()
     {
-        rooms = new List<NewRoom>();
+        rooms = new List<Room>();
 
-        foreach (NewRoom room in FindObjectsOfType<NewRoom>())
+        foreach (Room room in FindObjectsOfType<Room>())
         {
             Destroy(room.gameObject);
         }
@@ -93,23 +93,23 @@ public class DungeonGenerator : MonoBehaviour
         InitDungeon();
     }
 
-    void SpawnRoom(NewRoom originRoom = null/*, Vector3 pos = default(Vector3)*/, Directions directionFromOrigin = Directions.None)
+    void SpawnRoom(Room originRoom = null/*, Vector3 pos = default(Vector3)*/, Directions directionFromOrigin = Directions.None)
     {
         var room = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
 
-        room.GetComponent<NewRoom>().ChooseRoom();
+        room.GetComponent<Room>().ChooseRoom();
 
         //If it is not the very first room, it will set the distance of the new room and create the neccessary exits for the connected rooms
         if (originRoom != null)
         {
-            room.GetComponent<NewRoom>().DistanceFromStart = originRoom.DistanceFromStart + 1;
-            room.GetComponent<NewRoom>().AttachConnectedRoom((int)ReverseDirection(directionFromOrigin), originRoom);
+            room.GetComponent<Room>().DistanceFromStart = originRoom.DistanceFromStart + 1;
+            room.GetComponent<Room>().AttachConnectedRoom((int)ReverseDirection(directionFromOrigin), originRoom);
 
-            originRoom.AttachConnectedRoom((int)directionFromOrigin, room.GetComponent<NewRoom>());
+            originRoom.AttachConnectedRoom((int)directionFromOrigin, room.GetComponent<Room>());
         }
 
         //Adds the new room to the list of all rooms
-        rooms.Add(room.GetComponent<NewRoom>());
+        rooms.Add(room.GetComponent<Room>());
     }
 
     //void SpawnRoom(Vector3 pos, Directions directionOfOrigin = Directions.None, Vector2 distanceFromStart = default(Vector2))
@@ -179,7 +179,7 @@ public class DungeonGenerator : MonoBehaviour
         //First selects a random room that already exists
         int randomRoomChoice = Random.Range(0, rooms.Count - 1);
 
-        NewRoom currentRoom = rooms[randomRoomChoice];
+        Room currentRoom = rooms[randomRoomChoice];
 
         //selects all possible directions for a new room location to be based on if the chosen room already has connected rooms on any side
         List<Directions> possibleDirections = new List<Directions>();
@@ -407,12 +407,12 @@ public class DungeonGenerator : MonoBehaviour
         return reversedDir;
     }
 
-    public void SetCurrentRoom(NewRoom room)
+    public void SetCurrentRoom(Room room)
     {
         currentRoom = room;
     }
 
-    public NewRoom GetCurrentRoom()
+    public Room GetCurrentRoom()
     {
         return currentRoom;
     }

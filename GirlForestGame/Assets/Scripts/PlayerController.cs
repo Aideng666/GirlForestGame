@@ -464,7 +464,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator EnterNewRoom(NewRoom room, Vector3 updatedPlayerPos)
+    IEnumerator EnterNewRoom(Room room, Vector3 updatedPlayerPos)
     {
         yield return new WaitForSeconds(UIManager.Instance.GetFadePanel().GetTransitionTime() / 2);
 
