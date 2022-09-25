@@ -36,8 +36,6 @@ public class NodeMapManager : MonoBehaviour
             UpdateMap();
         }
 
-        print(currentLevel);
-
         //if (InputManager.Instance.BowAttack())
         //{
         //    SetNextLevel();
