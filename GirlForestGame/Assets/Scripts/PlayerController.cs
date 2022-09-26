@@ -462,6 +462,10 @@ public class PlayerController : MonoBehaviour
                 DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()].GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
                 .transform.parent.transform.position));
         }
+        if (collision.gameObject.CompareTag("FloorExit"))
+        {
+            NodeMapManager.Instance.SetNextLevel();
+        }
     }
 
     IEnumerator EnterNewRoom(Room room, Vector3 updatedPlayerPos)

@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d773b32ae5226408112fe265dcb023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalRooms: 10
+  totalRooms: 3
   roomPrefab: {fileID: 2541303958802026500, guid: 417432f070b95164b87032e4159359af, type: 3}
 --- !u!1 &607410442 stripped
 GameObject:

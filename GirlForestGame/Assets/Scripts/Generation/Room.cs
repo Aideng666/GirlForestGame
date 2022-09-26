@@ -43,9 +43,13 @@ public class Room : MonoBehaviour
 
                     if (currentType == RoomTypes.End)
                     {
-                        CreateExit((int)DungeonGenerator.Instance.ReverseDirection((Directions)i));
+                        int directionOfExit = (int)DungeonGenerator.Instance.ReverseDirection((Directions)i);
 
-                        spawnedModel.doors[(int)DungeonGenerator.Instance.ReverseDirection((Directions)i)].SetActive(false);
+                        CreateExit(directionOfExit);
+
+                        spawnedModel.doors[directionOfExit].transform.parent.GetComponentInChildren<RoomExit>().tag = "FloorExit";
+
+                        spawnedModel.doors[directionOfExit].SetActive(false);
                     }
                 }
             }

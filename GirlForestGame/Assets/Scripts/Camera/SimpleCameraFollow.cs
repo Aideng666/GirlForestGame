@@ -10,7 +10,9 @@ public class SimpleCameraFollow : MonoBehaviour
     [SerializeField] float boundry;
 
     PlayerController player;
-    //float cameraSpeed = 20;
+
+    bool mapActive;
+    float cameraSpeed = 20;
     
     // Start is called before the first frame update
     void Start()
@@ -21,25 +23,15 @@ public class SimpleCameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (player.transform.position.x > transform.position.x + followOffset)
-        //{
-        //    transform.position += Vector3.right * cameraSpeed * Time.deltaTime;
-        //}
-        //if (player.transform.position.x < transform.position.x - followOffset)
-        //{
-        //    transform.position += Vector3.left * cameraSpeed * Time.deltaTime;
-        //}
-        //if (player.transform.position.z > transform.position.z + zDistanceFromPlayer + followOffset)
-        //{
-        //    transform.position += Vector3.forward * cameraSpeed * Time.deltaTime;
-        //}
-        //if (player.transform.position.z < transform.position.z + zDistanceFromPlayer - followOffset)
-        //{
-        //    transform.position += Vector3.back * cameraSpeed * Time.deltaTime;
-        //}
-
-        //transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
-
+        //Checks which mode the camera is in between node map or combat
+        if (InputManager.Instance.GetPlayerInput().actions.FindActionMap("Player").enabled)
+        {
+            mapActive = false;
+        }
+        if (InputManager.Instance.GetPlayerInput().actions.FindActionMap("NodeMap").enabled)
+        {
+            mapActive = true;
+        }
 
         //follows the player if the room is bigger than the screen size
         if (!DungeonGenerator.Instance.GetCurrentRoom().GetSpawnedModel().isBigRoom)
@@ -51,6 +43,7 @@ public class SimpleCameraFollow : MonoBehaviour
             transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
         }
 
+        //Blocks the camera from moving too far out of the room if in a big room
         if (transform.position.x <= -boundry)
         {
             transform.position = new Vector3(-boundry, transform.position.y, transform.position.z);
@@ -66,6 +59,20 @@ public class SimpleCameraFollow : MonoBehaviour
         if (transform.position.z >= boundry)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, boundry);
+        }
+
+
+        //Allows the player to move the camera up and down when viewing the node map
+        if (mapActive)
+        {
+            if (InputManager.Instance.MapScroll() > 0)
+            {
+                transform.position += Vector3.forward * cameraSpeed * Time.deltaTime;
+            }
+            if (InputManager.Instance.MapScroll() < 0)
+            {
+                transform.position += Vector3.back * cameraSpeed * Time.deltaTime;
+            }
         }
     }
 }

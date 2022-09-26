@@ -276,7 +276,7 @@
                     "name": "MapScroll",
                     "type": "Value",
                     "id": "c0131d99-1d91-4ba1-8e2a-43a541612b6e",
-                    "expectedControlType": "Stick",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -311,6 +311,39 @@
                     "action": "MapScroll",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "W/S",
+                    "id": "4277d44b-4d20-4bed-b57e-ea7dab8ef9cd",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapScroll",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "34881ae7-f5e3-45ae-8da0-b47f6e924a33",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "562fdf95-f45e-4960-bf10-1326b1c06533",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
