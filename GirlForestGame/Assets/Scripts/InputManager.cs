@@ -64,6 +64,11 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public PlayerInput GetPlayerInput()
+    {
+        return playerInput;
+    }
+
     public bool Dash()
     {
         if (playerInput.actions.FindActionMap("Player").enabled)

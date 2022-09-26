@@ -7,6 +7,7 @@ TagManager:
   - MapNode
   - Room
   - Exit
+  - FloorExit
   layers:
   - Default
   - TransparentFX
