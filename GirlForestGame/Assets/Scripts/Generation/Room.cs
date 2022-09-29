@@ -20,6 +20,8 @@ public class Room : MonoBehaviour
 
     int distanceFromStartRoom = 0;
 
+    float cameraBoundary;
+
     public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
 
     // Start is called before the first frame update
@@ -66,6 +68,8 @@ public class Room : MonoBehaviour
         Instantiate(possibleRooms[randomIndex].model, transform.position, Quaternion.identity, transform);
 
         spawnedModel = GetComponentInChildren<RoomModel>();
+
+        cameraBoundary = possibleRooms[randomIndex].cameraBoundary;
     }
 
     public void CreateExit(int direction)

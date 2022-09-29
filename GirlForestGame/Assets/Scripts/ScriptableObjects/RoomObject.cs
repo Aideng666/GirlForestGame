@@ -6,5 +6,7 @@ using UnityEngine;
 public class RoomObject : ScriptableObject
 {
     public GameObject model;
+
+    public float cameraBoundary;
 }
 
