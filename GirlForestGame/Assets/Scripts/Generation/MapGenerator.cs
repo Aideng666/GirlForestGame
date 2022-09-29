@@ -5,14 +5,23 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] GameObject visualNodePrefab;
-    [SerializeField] int endNodeDistance = 4;
-    [SerializeField] int initialNodeSpread = 5;
+    [SerializeField] int endNodeDistance = 4; // How many levels the map has to reach the final node
+    //[SerializeField] int initialNodeSpread = 5;
+    [SerializeField] int numberOfNodeColumns = 5; // How many different spots can the node spawn in vertically
 
     [SerializeField] float blessingNodeChance = 0.2f;
     [SerializeField] float shopNodeChance = 0.2f;
+    [SerializeField] float secondChildChance = 6; // This means it is a 1/value chance to spawn a second child (4 = 25%, 2 = 50%, 5 = 20%)
 
+    GameObject[,] nodeSlots; // The map which dictates which slots (row and column) have nodes in them
+    float[] columnXPositions; // The  X position to spawn each node in the world
+
+    bool isFirstColumnEven;
+
+    //List of all of the spawned nodes
     List<GameObject> visualNodes = new List<GameObject>();
 
+    //Property for the spawned nodes to access getter and setter
     public List<GameObject> Nodes { get { return visualNodes; } }
 
     public static MapGenerator Instance { get; set; }
@@ -25,16 +34,28 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Sets the size of the arrays based on the inputted values in the inspector
+        nodeSlots = new GameObject[endNodeDistance, numberOfNodeColumns];
+        columnXPositions = new float[numberOfNodeColumns];
+
+        //Sets the x position for each column to have nodes spawn in the correct positions
+        for (int i = 1; i < numberOfNodeColumns + 1; i++)
+        {
+            float columnPercentage = ((float)i / ((float)numberOfNodeColumns + 1.0f));
+
+            columnXPositions[i - 1] = Mathf.Lerp(-30, 30, columnPercentage);
+        }
+
         CreateNodeMap();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (InputManager.Instance.Dash())
-        //{
-        //    Regenerate();
-        //}
+        if (InputManager.Instance.RegenMap())
+        {
+            Regenerate();
+        }
     }
 
     void Regenerate()
@@ -44,6 +65,8 @@ public class MapGenerator : MonoBehaviour
             Destroy(visualNode);
         }
 
+        nodeSlots = new GameObject[endNodeDistance, numberOfNodeColumns];
+
         visualNodes = new List<GameObject>();
 
         CreateNodeMap();
@@ -51,63 +74,159 @@ public class MapGenerator : MonoBehaviour
 
     void CreateNodeMap()
     {
-        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero + (Vector3.down * 100), Quaternion.identity));
-        visualNodes[0].GetComponent<MapNode>().SetNode(null, NodeTypes.Default);
+        int numberOfStartingNodes = numberOfNodeColumns / 2;
+        int currentLevel = 0;
 
+        //Spawns in the initial starting nodes on level 0
+        for (int i = 0; i < numberOfStartingNodes; i++)
+        {
+            int selectedColumn = Random.Range(0, numberOfNodeColumns);
 
-        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-        visualNodes[1].GetComponent<MapNode>().SetNode(visualNodes[0].GetComponent<MapNode>(), NodeTypes.Default, 0);
-        visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-        visualNodes[2].GetComponent<MapNode>().SetNode(visualNodes[0].GetComponent<MapNode>(), NodeTypes.Default, 1);
+            if (i == 0 && selectedColumn % 2 == 0)
+            {
+                isFirstColumnEven = true;
+            }
+            else if (i == 0)
+            {
+                isFirstColumnEven = false;
+            }
 
-        visualNodes[1].transform.position = visualNodes[0].transform.position + new Vector3(-initialNodeSpread / visualNodes[1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
-        visualNodes[2].transform.position = visualNodes[0].transform.position + new Vector3(initialNodeSpread / visualNodes[2].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+            if (i == 0)
+            {
+                visualNodes.Add(Instantiate(visualNodePrefab, (Vector3.down * 100) + (new Vector3(columnXPositions[selectedColumn], 0, 0)), Quaternion.identity));
+                visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.Default, selectedColumn);
 
-        //Loops through the nodes in order to create children properly and not too many, stops looping before the end node gets created
-        for (int i = 1; i < endNodeDistance - 1; i++)
+                nodeSlots[currentLevel, selectedColumn] = visualNodes[visualNodes.Count - 1];
+            }
+            else if ((isFirstColumnEven && selectedColumn % 2 != 0) || (!isFirstColumnEven && selectedColumn % 2 == 0))
+            {
+                i--;
+            }
+            else if (nodeSlots[currentLevel, selectedColumn] == null)
+            {
+                visualNodes.Add(Instantiate(visualNodePrefab, (Vector3.down * 100) + (new Vector3(columnXPositions[selectedColumn], 0, 0)), Quaternion.identity));
+                visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.Default, selectedColumn);
+
+                nodeSlots[currentLevel, selectedColumn] = visualNodes[visualNodes.Count - 1];
+            }
+            else
+            {
+                i--;
+            }
+        }
+
+        for (int i = 1; i < endNodeDistance; i++)
         {
             for (int j = 0; j < visualNodes.Count; j++)
             {
-                if (visualNodes[j].GetComponent<MapNode>().GetDistanceFromStart() == i)
+                MapNode currentNode = visualNodes[j].GetComponent<MapNode>();
+
+                if (currentNode.GetDistanceFromStart() == i - 1)
                 {
-                    int childrenCount = Random.Range(1, 4);
-
-                    switch (childrenCount)
+                    //If the current node is all the way on the left, it can only have a child on its right side
+                    if (currentNode.GetColumnNum() == 0)
                     {
-                        case 1:
+                        //Check the node slot where a child would spawn to see if its empty
+                        // if it is empty, has a chance to spawn a child in that spot
+                        if (nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + 1] == null)
+                        {
+                            //25% chance to spawn a second child, if the current node has no children it is guarunteed to spawn one
+                            if (currentNode.GetHasChild() && Random.Range(0, secondChildChance) != 0)
+                            {
+                                continue;
+                            }
 
-                            visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-                            visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 0);
-                            visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(-initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+                            visualNodes.Add(Instantiate(visualNodePrefab,
+                                new Vector3(0, -100, visualNodes[j].transform.position.z) + new Vector3(columnXPositions[currentNode.GetColumnNum() + 1], 0, 10),
+                                Quaternion.identity));
 
-                            break;
+                            nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + 1] = visualNodes[visualNodes.Count - 1];
+                            //visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(currentNode, NodeTypes.Default, currentNode.GetColumnNum() + 1, 1);
+                        }
+                        //else
+                        //{
+                        //Sets the child nodes variables
+                        nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + 1]
+                            .GetComponent<MapNode>().SetNode(currentNode, NodeTypes.Default, currentNode.GetColumnNum() + 1, 1);
+                        //}
+                    }
+                    //If the current node is all the way on the right, it can only have a child on its left side
+                    else if (currentNode.GetColumnNum() == numberOfNodeColumns - 1)
+                    {
+                        if (nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() - 1] == null)
+                        {
+                            if (currentNode.GetHasChild() && Random.Range(0, secondChildChance) != 0)
+                            {
+                                continue;
+                            }
 
-                        case 2:
+                            visualNodes.Add(Instantiate(visualNodePrefab,
+                                new Vector3(0, -100, visualNodes[j].transform.position.z) + new Vector3(columnXPositions[currentNode.GetColumnNum() - 1], 0, 10),
+                                Quaternion.identity));
 
-                            visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-                            visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 1);
-                            visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+                            nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() - 1] = visualNodes[visualNodes.Count - 1];
+                        }
 
-                            break;
+                        nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() - 1]
+                            .GetComponent<MapNode>().SetNode(currentNode, NodeTypes.Default, currentNode.GetColumnNum() - 1, 0);
+                    }
+                    else
+                    {
+                        int columnDirection; // Can only be 1 or -1
 
-                        case 3:
+                        if (Random.Range(0, 2) == 0)
+                        {
+                            columnDirection = -1;
+                        }
+                        else
+                        {
+                            columnDirection = 1;
+                        }
 
-                            visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-                            visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 0);
-                            visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(-initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+                        //Checks Randomly Selected Side first
+                        if (nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + columnDirection] == null)
+                        {
+                            if (currentNode.GetHasChild() && Random.Range(0, secondChildChance) != 0)
+                            {
+                                continue;
+                            }
 
-                            visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-                            visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 1);
-                            visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+                            visualNodes.Add(Instantiate(visualNodePrefab,
+                                new Vector3(0, -100, visualNodes[j].transform.position.z) + new Vector3(columnXPositions[currentNode.GetColumnNum() + columnDirection], 0, 10),
+                                Quaternion.identity));
 
-                            break;
+                            nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + columnDirection] = visualNodes[visualNodes.Count - 1];
+                        }
+
+                        nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + columnDirection]
+                            .GetComponent<MapNode>().SetNode(currentNode, NodeTypes.Default, currentNode.GetColumnNum() + columnDirection, 0);
+
+                        //Then checks the other side
+                        if (nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + -columnDirection] == null)
+                        {
+                            if (currentNode.GetHasChild() && Random.Range(0, secondChildChance) != 0)
+                            {
+                                continue;
+                            }
+
+                            visualNodes.Add(Instantiate(visualNodePrefab,
+                                new Vector3(0, -100, visualNodes[j].transform.position.z) + new Vector3(columnXPositions[currentNode.GetColumnNum() + -columnDirection], 0, 10),
+                                Quaternion.identity));
+
+                            nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + -columnDirection] = visualNodes[visualNodes.Count - 1];
+                        }
+
+                        nodeSlots[currentNode.GetDistanceFromStart() + 1, currentNode.GetColumnNum() + -columnDirection]
+                            .GetComponent<MapNode>().SetNode(currentNode, NodeTypes.Default, currentNode.GetColumnNum() + -columnDirection, 1);
                     }
                 }
             }
         }
 
         visualNodes.Add(Instantiate(visualNodePrefab, new Vector3(0, 0, endNodeDistance * 10) + (Vector3.down * 100), Quaternion.identity));
-        visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.End);
+        visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.End, numberOfNodeColumns / 2);
+
+        nodeSlots[endNodeDistance - 1, numberOfNodeColumns / 2] = visualNodes[visualNodes.Count - 1];
 
         for (int i = 0; i < visualNodes.Count; i++)
         {
@@ -117,6 +236,74 @@ public class MapGenerator : MonoBehaviour
                 visualNodes[i].GetComponent<MapNode>().SetRightChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
             }
         }
+
+
+        //visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero + (Vector3.down * 100), Quaternion.identity));
+        //visualNodes[0].GetComponent<MapNode>().SetNode(null, NodeTypes.Default);
+
+
+        //visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        //visualNodes[1].GetComponent<MapNode>().SetNode(visualNodes[0].GetComponent<MapNode>(), NodeTypes.Default, 0);
+        //visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        //visualNodes[2].GetComponent<MapNode>().SetNode(visualNodes[0].GetComponent<MapNode>(), NodeTypes.Default, 1);
+
+        //visualNodes[1].transform.position = visualNodes[0].transform.position + new Vector3(-initialNodeSpread / visualNodes[1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+        //visualNodes[2].transform.position = visualNodes[0].transform.position + new Vector3(initialNodeSpread / visualNodes[2].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+
+        ////Loops through the nodes in order to create children properly and not too many, stops looping before the end node gets created
+        //for (int i = 1; i < endNodeDistance - 1; i++)
+        //{
+        //    for (int j = 0; j < visualNodes.Count; j++)
+        //    {
+        //        if (visualNodes[j].GetComponent<MapNode>().GetDistanceFromStart() == i)
+        //        {
+        //            int childrenCount = Random.Range(1, 4);
+
+        //            switch (childrenCount)
+        //            {
+        //                case 1:
+
+        //                    visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        //                    visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 0);
+        //                    visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(-initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+
+        //                    break;
+
+        //                case 2:
+
+        //                    visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        //                    visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 1);
+        //                    visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+
+        //                    break;
+
+        //                case 3:
+
+        //                    visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        //                    visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 0);
+        //                    visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(-initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+
+        //                    visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
+        //                    visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 1);
+        //                    visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
+
+        //                    break;
+        //            }
+        //        }
+        //    }
+        //}
+
+        //visualNodes.Add(Instantiate(visualNodePrefab, new Vector3(0, 0, endNodeDistance * 10) + (Vector3.down * 100), Quaternion.identity));
+        //visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.End);
+
+        //for (int i = 0; i < visualNodes.Count; i++)
+        //{
+        //    if (visualNodes[i].GetComponent<MapNode>().GetDistanceFromStart() == endNodeDistance - 1)
+        //    {
+        //        visualNodes[i].GetComponent<MapNode>().SetLeftChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
+        //        visualNodes[i].GetComponent<MapNode>().SetRightChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
+        //    }
+        //}
 
         FillNodes();
     }

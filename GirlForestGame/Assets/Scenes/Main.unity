@@ -378,9 +378,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualNodePrefab: {fileID: 6933593831192278680, guid: 38771b6056505a04ca23cdddb0aa4574, type: 3}
   endNodeDistance: 5
-  initialNodeSpread: 10
+  numberOfNodeColumns: 5
   blessingNodeChance: 0.25
   shopNodeChance: 0.25
+  secondChildChance: 2
 --- !u!114 &543537892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,7 +1202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800207857}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 963e8ed3e70b7ae4ca0f055e1fec817d, type: 3}
   m_Name: 
