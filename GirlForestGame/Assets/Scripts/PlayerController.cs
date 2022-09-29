@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     EffectBlessing currentSwordEffect = null;
     EffectBlessing currentBowEffect = null;
-    StyleBlessing currentSwordStyle = new StyleBlessing();
+    StyleBlessing currentSwordStyle = null;
     StyleBlessing currentBowStyle = null;
     public EffectBlessing SwordEffect { get { return currentSwordEffect; } set { currentSwordEffect = value; } }
     public EffectBlessing BowEffect { get { return currentBowEffect; } set { currentBowEffect = value; } }

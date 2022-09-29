@@ -5,10 +5,12 @@ using UnityEngine.InputSystem;
 
 public class MapNode : MonoBehaviour
 {
-    MapNode parentNode;
+    List<MapNode> parentNodes = new List<MapNode>();
     MapNode leftChild;
     MapNode rightChild;
 
+    int columnNum;
+    bool hasChild = false;
     int distanceFromStart;
     int directionFromParent;
     bool isSelectable;
@@ -53,11 +55,12 @@ public class MapNode : MonoBehaviour
         }
     }
 
-    public void SetNode(MapNode parent, NodeTypes type, int direction = 2 /*0 = left child | 1 = right child*/)
+    public void SetNode(MapNode parent, NodeTypes type, int column, int dirFromParent = 2 /*0 = left child | 1 = right child*/)
     {
-        generator = MapGenerator.Instance;
         nodeType = type;
-        directionFromParent = direction;
+        //directionFromParent = dirFromParent;
+        columnNum = column;
+        generator = MapGenerator.Instance;
 
         if (parent == null && type == NodeTypes.End)
         {
@@ -69,17 +72,17 @@ public class MapNode : MonoBehaviour
         }
         else
         {
-            parentNode = parent;
+            parentNodes.Add(parent);
 
-            distanceFromStart = parentNode.GetDistanceFromStart() + 1;
+            distanceFromStart = parentNodes[parentNodes.Count - 1].GetDistanceFromStart() + 1;
 
-            if (direction == 0)
+            if (dirFromParent == 0)
             {
-                parentNode.SetLeftChild(this);
+                parentNodes[parentNodes.Count - 1].SetLeftChild(this);
             }
-            else if (direction == 1)
+            else if (dirFromParent == 1)
             {
-                parentNode.SetRightChild(this);
+                parentNodes[parentNodes.Count - 1].SetRightChild(this);
             }
         }
     }
@@ -121,11 +124,15 @@ public class MapNode : MonoBehaviour
     public void SetLeftChild(MapNode child)
     {
         leftChild = child;
+
+        hasChild = true;
     }
 
     public void SetRightChild(MapNode child)
     {
         rightChild = child;
+
+        hasChild = true;
     }
 
     public MapNode GetLeftChild()
@@ -148,9 +155,19 @@ public class MapNode : MonoBehaviour
         return directionFromParent;
     }
 
-    public MapNode GetParentNode()
+    public int GetColumnNum()
     {
-        return parentNode;
+        return columnNum;
+    }
+
+    public List<MapNode> GetParentNode()
+    {
+        return parentNodes;
+    }
+
+    public bool GetHasChild()
+    {
+        return hasChild;
     }
 }
 
