@@ -34,14 +34,14 @@ public class SimpleCameraFollow : MonoBehaviour
         }
 
         //follows the player if the room is bigger than the screen size
-        if (!DungeonGenerator.Instance.GetCurrentRoom().GetSpawnedModel().isBigRoom)
-        {
-            transform.position = new Vector3(0, cameraHeight, zDistanceFromPlayer);
-        }
-        else
-        {
-            transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
-        }
+        //if (!DungeonGenerator.Instance.GetCurrentRoom().GetSpawnedModel().isBigRoom)
+        //{
+        //    transform.position = new Vector3(0, cameraHeight, zDistanceFromPlayer);
+        //}
+        //else
+        //{
+        transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
+        //}
 
         //Blocks the camera from moving too far out of the room if in a big room
         if (transform.position.x <= -boundry)
