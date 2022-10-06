@@ -13,6 +13,7 @@ public class NodeMapManager : MonoBehaviour
     static bool mapUpdated;
 
     MapNode activeNode;
+    MapNode previousNode;
 
     public static NodeMapManager Instance { get; set; }
 
@@ -68,11 +69,26 @@ public class NodeMapManager : MonoBehaviour
 
     void UpdateMap()
     {
+        //Loops through the existing nodes and sets the available nodes to be selectable
+        //based on if the previous node was its parent and if it is on the correct level
         for (int i = 0; i < MapGenerator.Instance.Nodes.Count; i++)
         {
             if (MapGenerator.Instance.Nodes[i].GetComponent<MapNode>().GetDistanceFromStart() == currentLevel)
             {
-                MapGenerator.Instance.Nodes[i].GetComponent<MapNode>().Selectable = true;
+
+                for (int j = 0; j < MapGenerator.Instance.Nodes[i].GetComponent<MapNode>().GetParentNode().Count; j++)
+                {
+                    if (MapGenerator.Instance.Nodes[i].GetComponent<MapNode>().GetParentNode()[j] == previousNode)
+                    {
+                        MapGenerator.Instance.Nodes[i].GetComponent<MapNode>().Selectable = true;
+                    }
+                }
+
+                //If the current node has no parents (meaning its in the first row), it will always be selectable on the first level
+                if (MapGenerator.Instance.Nodes[i].GetComponent<MapNode>().GetParentNode().Count == 0)
+                {
+                    MapGenerator.Instance.Nodes[i].GetComponent<MapNode>().Selectable = true;
+                }
 
                 continue;
             }
@@ -86,6 +102,9 @@ public class NodeMapManager : MonoBehaviour
     public void SetNextLevel()
     {
         currentLevel++;
+
+        SetPreviousNode(activeNode);
+        activeNode = null;
 
         mapUpdated = false;
 
@@ -106,5 +125,10 @@ public class NodeMapManager : MonoBehaviour
         mapActive = false;
 
         ToggleNodeMap();
+    }
+
+    public void SetPreviousNode(MapNode node)
+    {
+        previousNode = node;
     }
 }

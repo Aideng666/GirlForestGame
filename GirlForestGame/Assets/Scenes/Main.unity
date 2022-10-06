@@ -1472,6 +1472,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultSwordRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
