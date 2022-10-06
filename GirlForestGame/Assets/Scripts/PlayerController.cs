@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
     //Movement
     [SerializeField] bool controlWithMouse;
     [SerializeField] float defaultSpeed;
@@ -48,6 +49,20 @@ public class PlayerController : MonoBehaviour
     public StyleBlessing BowStyle { get { return currentBowStyle; } set { currentBowStyle = value; } }
 
     public static PlayerController Instance { get; set; }
+    
+    //Sound
+    public FMODUnity.EventReference inputSound;
+    public float stepDelay;
+    bool isWalking;
+    void CallFootsteps()
+    {
+        if (isWalking == true)
+        {
+            Debug.Log(stepDelay);
+            FMODUnity.RuntimeManager.PlayOneShot(inputSound);
+        }
+    }
+
 
     private void Awake()
     {
@@ -68,6 +83,7 @@ public class PlayerController : MonoBehaviour
         livingLayer = LayerMask.NameToLayer("Living");
         spiritLayer = LayerMask.NameToLayer("Spirit");
 
+        InvokeRepeating("CallFootsteps", 0, stepDelay);
         //enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
@@ -184,7 +200,13 @@ public class PlayerController : MonoBehaviour
             moveDir = new Vector3(0, 0, 0);
 
             body.velocity = new Vector3(0, 0, 0);
+            isWalking = false;
         }
+        else
+        {
+            isWalking = true;
+        }
+
 
         body.velocity = speed * moveDir;
     }
