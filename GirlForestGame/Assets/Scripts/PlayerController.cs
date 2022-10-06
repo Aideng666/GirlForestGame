@@ -8,22 +8,13 @@ public class PlayerController : MonoBehaviour
 {
     //Movement
     [SerializeField] bool controlWithMouse;
-    [SerializeField] float defaultSpeed;
-    //[SerializeField] float dashTimespan;
-    //[SerializeField] float dashCooldown = 2;
     CharacterController controller;
     Rigidbody body;
-    //TrailRenderer dashTrail;
-    //float timeToNextDash = 0;
-    //bool isDashing;
-    float speed;
     Vector3 moveDir;
-    //Vector3 dashDirection;
 
     //Combat
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
-    [SerializeField] float swordAttackRange;
     GameObject targetEnemy;
     Vector3 aimDirection;
     //[SerializeField] LayerMask enemyLayer;
@@ -38,6 +29,42 @@ public class PlayerController : MonoBehaviour
 
     public Forms Form { get { return currentForm; } set { currentForm = value; } }
 
+    //Player Attributes
+    [Header("Default Player Attributes")]
+    [SerializeField] float defaultHealth = 6;
+    [SerializeField] float maximumHealth = 12;
+    [SerializeField] float defaultSpeed;
+    [SerializeField] float defaultSwordDamage;
+    [SerializeField] float defaultBowDamage;
+    [SerializeField] float defaultSwordAttackCooldown;
+    [SerializeField] float defaultBowAttackCooldown;
+    [SerializeField] float defaultSwordRange = 5;
+    [SerializeField] float defaultProjectileSpeed;
+    [SerializeField] float defaultCritChance = 0.05f; // between 0 and 1 for 0%-100%
+    float currentMaxHealth;
+    float currentHealth;
+    float currentSpeed;
+    float currentSwordDamage;
+    float currentBowDamage;
+    float currentSwordCooldown;
+    float currentBowCooldown;
+    float currentSwordRange;
+    float currentProjectileSpeed;
+    float currentCritChance;
+
+    public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value; if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
+    public float Health { get { return currentHealth; } set { currentHealth = value;} }
+    public float Speed { get { return currentSpeed; } set { currentSpeed = value; } }
+    public float SwordDamage { get { return currentSwordDamage; } set { currentSwordDamage = value; } }
+    public float BowDamage { get { return currentBowDamage; } set { currentBowDamage = value; } }
+    public float SwordCooldown { get { return currentSwordCooldown; } set { currentSwordCooldown = value; } }
+    public float BowCooldown { get { return currentBowCooldown; } set { currentBowCooldown = value; } }
+    public float SwordRange { get { return currentSwordRange; } set { currentSwordRange = value; } }
+    public float ProjectileSpeed { get { return currentProjectileSpeed; } set { currentProjectileSpeed = value; } }
+    public float CritChance { get { return currentCritChance; } set { currentCritChance = value; } }
+
+
+    //Markings and Totems
     EffectBlessing currentSwordEffect = null;
     EffectBlessing currentBowEffect = null;
     StyleBlessing currentSwordStyle = new StyleBlessing();
@@ -46,6 +73,8 @@ public class PlayerController : MonoBehaviour
     public EffectBlessing BowEffect { get { return currentBowEffect; } set { currentBowEffect = value; } }
     public StyleBlessing SwordStyle { get { return currentSwordStyle; } set { currentSwordStyle = value; } }
     public StyleBlessing BowStyle { get { return currentBowStyle; } set { currentBowStyle = value; } }
+
+    List<Totem> totems = new List<Totem>();
 
     public static PlayerController Instance { get; set; }
 
@@ -63,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         //dashTrail.emitting = false;
 
-        speed = defaultSpeed;
+        currentSpeed = defaultSpeed;
 
         livingLayer = LayerMask.NameToLayer("Living");
         spiritLayer = LayerMask.NameToLayer("Spirit");
@@ -93,7 +122,7 @@ public class PlayerController : MonoBehaviour
                     {
                         StartCoroutine(MoveTowardsAttack(0.5f));
                     }
-                    else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > swordAttackRange )
+                    else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > currentSwordRange )
                     {
                         StartCoroutine(MoveTowardsTargetEnemy(0.5f));
                     }
@@ -186,7 +215,7 @@ public class PlayerController : MonoBehaviour
             body.velocity = new Vector3(0, 0, 0);
         }
 
-        body.velocity = speed * moveDir;
+        body.velocity = currentSpeed * moveDir;
     }
 
     public void ApplyKnockback(Vector3 direction, float power)
@@ -361,6 +390,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void AddTotemToList(Totem totem)
+    {
+        totems.Add(totem);
+    }
+
     IEnumerator MoveTowardsTargetEnemy(float duration)
     {
         float elaspedTime = 0;
@@ -369,7 +403,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(CompleteAttackMovement(duration));
 
         Vector3 endVelo = Vector3.zero;
-        Vector3 startVelo = speed * (targetEnemy.transform.position - transform.position).normalized;
+        Vector3 startVelo = currentSpeed * (targetEnemy.transform.position - transform.position).normalized;
 
         float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
 
@@ -395,7 +429,7 @@ public class PlayerController : MonoBehaviour
 
         float elaspedTime = 0;
         Vector3 endVelo = Vector3.zero;
-        Vector3 startVelo = speed * aimDirection;
+        Vector3 startVelo = currentSpeed * aimDirection;
 
         while (elaspedTime < duration)
         {
@@ -446,15 +480,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Room"))
-        //{
-        //    collision.gameObject.GetComponentInParent<Room>().SetCurrentRoom(true);
-        //}
-
         if (collision.gameObject.CompareTag("Exit"))
         {
-            print("Changing Rooms");
-
             UIManager.Instance.GetFadePanel().BeginRoomTransition();
 
             StartCoroutine(EnterNewRoom(
