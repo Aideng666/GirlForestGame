@@ -62,7 +62,7 @@ public class MapNode : MonoBehaviour
         columnNum = column;
         generator = MapGenerator.Instance;
 
-        if (parent == null && type == NodeTypes.End)
+        if (parent == null && type == NodeTypes.Boss)
         {
             distanceFromStart = generator.GetEndNodeDistance();
         }
@@ -87,7 +87,7 @@ public class MapNode : MonoBehaviour
         }
     }
 
-    public void SetType(NodeTypes type)
+    public void SetNodeType(NodeTypes type)
     {
         nodeType = type;
 
@@ -177,5 +177,5 @@ public enum NodeTypes
     Blessing,
     Shop,
     Challenge,
-    End
+    Boss
 }

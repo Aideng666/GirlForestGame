@@ -224,7 +224,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         visualNodes.Add(Instantiate(visualNodePrefab, new Vector3(0, 0, endNodeDistance * 10) + (Vector3.down * 100), Quaternion.identity));
-        visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.End, numberOfNodeColumns / 2);
+        visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.Boss, numberOfNodeColumns / 2);
 
         nodeSlots[endNodeDistance - 1, numberOfNodeColumns / 2] = visualNodes[visualNodes.Count - 1];
 
@@ -236,74 +236,6 @@ public class MapGenerator : MonoBehaviour
                 visualNodes[i].GetComponent<MapNode>().SetRightChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
             }
         }
-
-
-        //visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero + (Vector3.down * 100), Quaternion.identity));
-        //visualNodes[0].GetComponent<MapNode>().SetNode(null, NodeTypes.Default);
-
-
-        //visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-        //visualNodes[1].GetComponent<MapNode>().SetNode(visualNodes[0].GetComponent<MapNode>(), NodeTypes.Default, 0);
-        //visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-        //visualNodes[2].GetComponent<MapNode>().SetNode(visualNodes[0].GetComponent<MapNode>(), NodeTypes.Default, 1);
-
-        //visualNodes[1].transform.position = visualNodes[0].transform.position + new Vector3(-initialNodeSpread / visualNodes[1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
-        //visualNodes[2].transform.position = visualNodes[0].transform.position + new Vector3(initialNodeSpread / visualNodes[2].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
-
-        ////Loops through the nodes in order to create children properly and not too many, stops looping before the end node gets created
-        //for (int i = 1; i < endNodeDistance - 1; i++)
-        //{
-        //    for (int j = 0; j < visualNodes.Count; j++)
-        //    {
-        //        if (visualNodes[j].GetComponent<MapNode>().GetDistanceFromStart() == i)
-        //        {
-        //            int childrenCount = Random.Range(1, 4);
-
-        //            switch (childrenCount)
-        //            {
-        //                case 1:
-
-        //                    visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-        //                    visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 0);
-        //                    visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(-initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
-
-        //                    break;
-
-        //                case 2:
-
-        //                    visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-        //                    visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 1);
-        //                    visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
-
-        //                    break;
-
-        //                case 3:
-
-        //                    visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-        //                    visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 0);
-        //                    visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(-initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
-
-        //                    visualNodes.Add(Instantiate(visualNodePrefab, Vector3.zero, Quaternion.identity));
-        //                    visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(visualNodes[j].GetComponent<MapNode>(), NodeTypes.Default, 1);
-        //                    visualNodes[visualNodes.Count - 1].transform.position = visualNodes[j].transform.position + new Vector3(initialNodeSpread / visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().GetDistanceFromStart(), 0, 10);
-
-        //                    break;
-        //            }
-        //        }
-        //    }
-        //}
-
-        //visualNodes.Add(Instantiate(visualNodePrefab, new Vector3(0, 0, endNodeDistance * 10) + (Vector3.down * 100), Quaternion.identity));
-        //visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.End);
-
-        //for (int i = 0; i < visualNodes.Count; i++)
-        //{
-        //    if (visualNodes[i].GetComponent<MapNode>().GetDistanceFromStart() == endNodeDistance - 1)
-        //    {
-        //        visualNodes[i].GetComponent<MapNode>().SetLeftChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
-        //        visualNodes[i].GetComponent<MapNode>().SetRightChild(visualNodes[visualNodes.Count - 1].GetComponent<MapNode>());
-        //    }
-        //}
 
         FillNodes();
     }
@@ -321,7 +253,7 @@ public class MapGenerator : MonoBehaviour
 
             if (visualNodes[nodeIndex].GetComponent<MapNode>().GetNodeType() == NodeTypes.Default)
             {
-                visualNodes[nodeIndex].GetComponent<MapNode>().SetType(NodeTypes.Blessing);
+                visualNodes[nodeIndex].GetComponent<MapNode>().SetNodeType(NodeTypes.Blessing);
             }
             else
             {
@@ -335,7 +267,7 @@ public class MapGenerator : MonoBehaviour
 
             if (visualNodes[nodeIndex].GetComponent<MapNode>().GetNodeType() == NodeTypes.Default)
             {
-                visualNodes[nodeIndex].GetComponent<MapNode>().SetType(NodeTypes.Shop);
+                visualNodes[nodeIndex].GetComponent<MapNode>().SetNodeType(NodeTypes.Shop);
             }
             else
             {

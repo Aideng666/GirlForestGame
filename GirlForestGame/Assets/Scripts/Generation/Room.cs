@@ -128,9 +128,32 @@ public class Room : MonoBehaviour
         }
         if (type == RoomTypes.End)
         {
-            GetComponentInChildren<MeshRenderer>().material = entranceMaterial;
+            switch (DungeonGenerator.Instance.GetCurrentFloorType())
+            {
+                case NodeTypes.Default:
 
+                    print("Regular Floor");
 
+                    break;
+
+                case NodeTypes.Blessing:
+
+                    print("Blessing Floor");
+
+                    break;
+
+                case NodeTypes.Shop:
+
+                    print("Shop Floor");
+
+                    break;
+
+                case NodeTypes.Boss:
+
+                    print("Boss Floor");
+
+                    break;
+            }
         }
     }
 }

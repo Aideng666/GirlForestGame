@@ -119,7 +119,7 @@ public class NodeMapManager : MonoBehaviour
     {
         activeNode = node;
 
-        DungeonGenerator.Instance.InitDungeon();
+        DungeonGenerator.Instance.InitDungeon(node.GetNodeType());
 
         InputManager.Instance.SwapActionMap("Player");
         mapActive = false;
