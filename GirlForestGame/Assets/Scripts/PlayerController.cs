@@ -64,10 +64,10 @@ public class PlayerController : MonoBehaviour
 
 
     //Markings and Totems
-    Spirit bowAttribute;
-    Spirit swordAttribute;
-    Spirit bowElement;
-    Spirit swordElement;
+    Spirit bowAttribute = null;
+    Spirit swordAttribute = null;
+    Spirit bowElement = null;
+    Spirit swordElement = null;
 
     public Spirit BowAttribute { get { return bowAttribute; } set { bowAttribute = value; } }
     public Spirit SwordAttribute { get { return swordAttribute; } set { swordAttribute = value; } }
@@ -257,6 +257,48 @@ public class PlayerController : MonoBehaviour
             ActivateSwordHitbox(currentAttackNum);
 
             canAttack = false;
+        }
+    }
+
+    public void ChooseWeapon(Spirit spirit, MarkingTypes type)
+    {
+        StartCoroutine(SelectWeapon(spirit, type));
+    }
+
+    IEnumerator SelectWeapon(Spirit spirit, MarkingTypes type)
+    {
+        bool weaponSelected = false;
+
+        while(!weaponSelected)
+        {
+            if (InputManager.Instance.SelectSword())
+            {
+                if (type == MarkingTypes.Attribute)
+                {
+                    SwordAttribute = spirit;
+                }
+                else if (type == MarkingTypes.Element)
+                {
+                    SwordElement = spirit;
+                }
+
+                weaponSelected = true;
+            }
+            if (InputManager.Instance.SelectBow())
+            {
+                if (type == MarkingTypes.Attribute)
+                {
+                    BowAttribute = spirit;
+                }
+                else if (type == MarkingTypes.Element)
+                {
+                    BowElement = spirit;
+                }
+
+                weaponSelected = true;
+            }
+
+            yield return null;
         }
     }
 

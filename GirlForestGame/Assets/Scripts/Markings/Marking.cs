@@ -37,3 +37,10 @@ public enum MarkingTypes
     Element
 }
 
+//public enum Weapons
+//{
+//    Sword,
+//    Bow
+//}
+
+

@@ -27,7 +27,9 @@ public class MarkingPickup : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            PlayerController.Instance.ChooseWeapon(chosenSpirit, chosenType);
 
+            gameObject.SetActive(false);
         }
     }
 }

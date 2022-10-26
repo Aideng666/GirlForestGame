@@ -16,6 +16,8 @@ public class InputManager : MonoBehaviour
     InputAction bowAttackAction;
     InputAction completeRoomAction;
     InputAction changeFormAction;
+    InputAction selectSwordAction;
+    InputAction selectBowAction;
 
     //Map Controls
     InputAction mapScrollAction;
@@ -44,6 +46,8 @@ public class InputManager : MonoBehaviour
         bowAttackAction = playerInput.actions["BowAttack"];
         completeRoomAction = playerInput.actions["CompleteRoom"];
         changeFormAction = playerInput.actions["ChangeForm"];
+        selectSwordAction = playerInput.actions["SelectSword"];
+        selectBowAction = playerInput.actions["SelectBow"];
         mapScrollAction = playerInput.actions["MapScroll"];
         regenMapAction = playerInput.actions["RegenerateMap"];
         swapActionMapAction = playerInput.actions["SwapActionMap"];
@@ -145,6 +149,26 @@ public class InputManager : MonoBehaviour
         if (playerInput.actions.FindActionMap("Player").enabled)
         {
             return changeFormAction.triggered;
+        }
+
+        return false;
+    }
+
+    public bool SelectSword()
+    {
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return selectSwordAction.triggered;
+        }
+
+        return false;
+    }
+
+    public bool SelectBow()
+    {
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return selectBowAction.triggered;
         }
 
         return false;
