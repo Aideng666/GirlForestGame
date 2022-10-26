@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     //Movement
     [SerializeField] bool controlWithMouse;
-    CharacterController controller;
     Rigidbody body;
     Vector3 moveDir;
 
@@ -65,14 +64,15 @@ public class PlayerController : MonoBehaviour
 
 
     //Markings and Totems
-    EffectBlessing currentSwordEffect = null;
-    EffectBlessing currentBowEffect = null;
-    StyleBlessing currentSwordStyle = new StyleBlessing();
-    StyleBlessing currentBowStyle = null;
-    public EffectBlessing SwordEffect { get { return currentSwordEffect; } set { currentSwordEffect = value; } }
-    public EffectBlessing BowEffect { get { return currentBowEffect; } set { currentBowEffect = value; } }
-    public StyleBlessing SwordStyle { get { return currentSwordStyle; } set { currentSwordStyle = value; } }
-    public StyleBlessing BowStyle { get { return currentBowStyle; } set { currentBowStyle = value; } }
+    Spirit bowAttribute;
+    Spirit swordAttribute;
+    Spirit bowElement;
+    Spirit swordElement;
+
+    public Spirit BowAttribute { get { return bowAttribute; } set { bowAttribute = value; } }
+    public Spirit SwordAttribute { get { return swordAttribute; } set { swordAttribute = value; } }
+    public Spirit BowElement { get { return bowElement; } set { bowElement = value; } }
+    public Spirit SwordElement { get { return swordElement; } set { swordElement = value; } }
 
     List<Totem> totems = new List<Totem>();
 
@@ -86,11 +86,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();
         body = GetComponent<Rigidbody>();
-        //dashTrail = GetComponentInChildren<TrailRenderer>();
-
-        //dashTrail.emitting = false;
 
         currentSpeed = defaultSpeed;
 
@@ -103,8 +99,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!isDashing)
-        //{
         if (!isKnockbackApplied)
         {
             if (!isAttacking)
@@ -149,12 +143,6 @@ public class PlayerController : MonoBehaviour
                     gameObject.layer = livingLayer;
                 }
             }
-
-            //if (InputManager.Instance.Dash() && CanDash())
-            //{
-            //    StartCoroutine(Dash());
-            //}
-            //}
         }
 
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
@@ -202,11 +190,6 @@ public class PlayerController : MonoBehaviour
             aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
             transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
         }
-
-        //if (moveDir != Vector3.zero)
-        //{
-        //    dashDirection = moveDir;
-        //}
 
         if (direction.magnitude <= 0.1f)
         {
@@ -256,65 +239,81 @@ public class PlayerController : MonoBehaviour
     {
         if (canAttack)
         {
-            SwordStyle.Attack(currentAttackNum);
+            switch (currentAttackNum)
+            {
+                case 1:
+
+                   GetComponentInChildren<Animator>().SetTrigger("Attack1");
+
+                    break;
+
+                case 2:
+
+                    GetComponentInChildren<Animator>().SetTrigger("Attack2");
+
+                    break;
+            }
+
+            ActivateSwordHitbox(currentAttackNum);
 
             canAttack = false;
         }
     }
 
-    //IEnumerator Dash()
-    //{
-    //    isDashing = true;
+    void ActivateSwordHitbox(int attackNum)
+    {
+        Collider[] enemyColliders = null;
+        List<Enemy> enemiesHit = new List<Enemy>();
 
-    //    foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
-    //    {
-    //        mesh.enabled = false;
-    //    }
+        switch (attackNum)
+        {
+            case 1:
 
-    //    //gameObject.layer = invincibleLayer;
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), 2);
 
-    //    ParticleManager.Instance.SpawnParticle(ParticleTypes.DashStart, transform.position);
+                if (enemyColliders.Length > 0)
+                {
+                    for (int i = 0; i < enemyColliders.Length; i++)
+                    {
+                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
+                        {
+                            enemiesHit.Add(enemy);
+                        }
+                    }
+                }
 
-    //    dashTrail.emitting = true;
+                for (int i = 0; i < enemiesHit.Count; i++)
+                {
+                    enemiesHit[i].ApplyKnockback(transform.forward, 5);
+                    enemiesHit[i].TakeDamage(SwordDamage);
+                }
 
-    //    float timeElasped = 0;
+                break;
 
-    //    while (timeElasped < dashTimespan)
-    //    {
-    //        controller.Move(dashDirection * defaultSpeed * 5 * Time.deltaTime);
+            case 2:
 
-    //        timeElasped += Time.deltaTime;
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), 2);
 
-    //        yield return null;
-    //    }
+                if (enemyColliders.Length > 0)
+                {
+                    for (int i = 0; i < enemyColliders.Length; i++)
+                    {
+                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
+                        {
+                            enemiesHit.Add(enemy);
+                        }
+                    }
+                }
 
-    //    dashTrail.emitting = false;
+                for (int i = 0; i < enemiesHit.Count; i++)
+                {
+                    enemiesHit[i].ApplyKnockback(transform.forward, 10);
+                    enemiesHit[i].TakeDamage(SwordDamage);
+                }
 
-    //    foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())
-    //    {
-    //        mesh.enabled = true;
-    //    }
-
-    //    //gameObject.layer = playerLayer;
-
-    //    isDashing = false;
-
-    //    ParticleManager.Instance.SpawnParticle(ParticleTypes.DashEnd, transform.position);
-
-    //    yield return null;
-    //}
-
-    //bool CanDash()
-    //{
-    //    if (timeToNextDash <= Time.time)
-    //    {
-    //        timeToNextDash = Time.time + dashCooldown;
-
-    //        return true;
-    //    }
-
-    //    return false;
-    //}
+                break;
+        }
+    }
 
     void SelectTargetEnemy()
     {
