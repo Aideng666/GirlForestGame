@@ -6,9 +6,3 @@ public class ElementMarking : Marking
 {
     
 }
-
-public enum Elements
-{
-    Fire,
-    Wind
-}
