@@ -17,12 +17,6 @@ public class Marking : MonoBehaviour
     {
         
     }
-
-    protected virtual void Blah()
-    {
-        
-    }
-
 }
 
 public enum Spirits
@@ -34,13 +28,22 @@ public enum Spirits
 public enum MarkingTypes
 {
     Attribute,
-    Element
+    Element,
+    None
 }
 
-//public enum Weapons
-//{
-//    Sword,
-//    Bow
-//}
+public enum Weapons
+{
+    Sword,
+    Bow,
+    None
+}
+
+public enum Elements
+{
+    Fire,
+    Wind,
+    None
+}
 
 

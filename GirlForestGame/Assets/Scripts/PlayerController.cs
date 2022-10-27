@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float defaultSpeed;
     [SerializeField] float defaultSwordDamage;
     [SerializeField] float defaultBowDamage;
-    [SerializeField] float defaultSwordAttackCooldown;
-    [SerializeField] float defaultBowAttackCooldown;
+    [SerializeField] float defaultSwordCooldown;
+    [SerializeField] float defaultBowCooldown;
     [SerializeField] float defaultSwordRange = 5;
     [SerializeField] float defaultProjectileSpeed;
     [SerializeField] float defaultCritChance = 0.05f; // between 0 and 1 for 0%-100%
@@ -88,7 +88,16 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
 
+        currentMaxHealth = defaultHealth;
+        currentHealth = defaultHealth;
         currentSpeed = defaultSpeed;
+        currentSwordDamage = defaultSwordDamage;
+        currentBowDamage = defaultBowDamage;
+        currentSwordCooldown = defaultSwordCooldown;
+        currentBowCooldown = defaultBowCooldown;
+        currentSwordRange = defaultSwordRange;
+        currentProjectileSpeed = defaultProjectileSpeed;
+        currentCritChance = defaultCritChance;
 
         livingLayer = LayerMask.NameToLayer("Living");
         spiritLayer = LayerMask.NameToLayer("Spirit");
@@ -99,6 +108,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //float startSwordCooldown = currentSwordCooldown;
+        //float startBowCooldown = currentSwordCooldown;
+
         if (!isKnockbackApplied)
         {
             if (!isAttacking)
@@ -123,7 +135,6 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         SwordAttack();
-                        //StartCoroutine(MoveTowardsAttack(0.5f));
                     }
                 }
             }
@@ -235,28 +246,158 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    void SwordAttack()
+    public void SwordAttack()
     {
-        if (canAttack)
+        switch (currentAttackNum)
         {
-            switch (currentAttackNum)
+            case 1:
+
+                GetComponentInChildren<Animator>().SetTrigger("Attack1");
+
+                break;
+
+            case 2:
+
+                GetComponentInChildren<Animator>().SetTrigger("Attack2");
+
+                break;
+
+            case 3:
+
+                GetComponentInChildren<Animator>().SetTrigger("Attack3");
+
+                break;
+        }
+
+        ActivateSwordHitbox(currentAttackNum);
+
+        canAttack = false;
+    }
+
+    void UpdateMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
+    {
+        if (type == MarkingTypes.Attribute)
+        {
+            for (int i = 0; i < spirit.buffedAttributes.Count; i++)
             {
-                case 1:
+                switch (spirit.buffedAttributes[i])
+                {
+                    case PlayerAttributes.Health:
 
-                   GetComponentInChildren<Animator>().SetTrigger("Attack1");
+                        //Buff these based on the level of the marking when adding level functionality
 
-                    break;
 
-                case 2:
+                        break;
 
-                    GetComponentInChildren<Animator>().SetTrigger("Attack2");
+                    case PlayerAttributes.Attack:
 
-                    break;
+                        if (weapon == Weapons.Sword)
+                        {
+                            SwordDamage *= 1.75f;
+                        }
+                        else if (weapon == Weapons.Bow)
+                        {
+                            BowDamage *= 1.75f;
+                        }
+
+                        break;
+
+                    case PlayerAttributes.AtkSpd:
+
+                        if (weapon == Weapons.Sword)
+                        {
+                            SwordCooldown /= 1.75f;
+                        }
+                        else if (weapon == Weapons.Bow)
+                        {
+                            BowCooldown /= 1.75f;
+                        }
+
+                        break;
+
+                    case PlayerAttributes.Speed:
+
+                        Speed *= 1.75f;
+
+                        break;
+
+                    case PlayerAttributes.Accuracy:
+
+
+
+                        break;
+
+                    case PlayerAttributes.CritChance:
+
+                        CritChance *= 1.75f;
+
+                        break;
+
+
+                }
             }
+        }
+    }
 
-            ActivateSwordHitbox(currentAttackNum);
+    void RemoveMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
+    {
+        if (type == MarkingTypes.Attribute)
+        {
+            for (int i = 0; i < spirit.buffedAttributes.Count; i++)
+            {
+                switch (spirit.buffedAttributes[i])
+                {
+                    case PlayerAttributes.Health:
 
-            canAttack = false;
+
+
+                        break;
+
+                    case PlayerAttributes.Attack:
+
+                        if (weapon == Weapons.Sword)
+                        {
+                            SwordDamage /= 1.75f;
+                        }
+                        else if (weapon == Weapons.Bow)
+                        {
+                            BowDamage /= 1.75f;
+                        }
+
+                        break;
+
+                    case PlayerAttributes.AtkSpd:
+
+                        if (weapon == Weapons.Sword)
+                        {
+                            SwordCooldown *= 1.75f;
+                        }
+                        else if (weapon == Weapons.Bow)
+                        {
+                            BowCooldown *= 1.75f;
+                        }
+
+                        break;
+
+                    case PlayerAttributes.Speed:
+
+                        Speed /= 1.75f;
+
+                        break;
+
+                    case PlayerAttributes.Accuracy:
+
+
+
+                        break;
+
+                    case PlayerAttributes.CritChance:
+
+                        CritChance /= 1.75f;
+
+                        break;
+                }
+            }
         }
     }
 
@@ -275,12 +416,15 @@ public class PlayerController : MonoBehaviour
             {
                 if (type == MarkingTypes.Attribute)
                 {
+                    //CHECK IF THE PLAYER ALREADY HAS A SPIRIT IN EACH SLOT TO BE ABLE TO SWAP
                     SwordAttribute = spirit;
                 }
                 else if (type == MarkingTypes.Element)
                 {
                     SwordElement = spirit;
                 }
+
+                UpdateMarking(spirit, type, Weapons.Sword);
 
                 weaponSelected = true;
             }
@@ -295,11 +439,15 @@ public class PlayerController : MonoBehaviour
                     BowElement = spirit;
                 }
 
+                UpdateMarking(spirit, type, Weapons.Bow);
+
                 weaponSelected = true;
             }
 
             yield return null;
         }
+
+        print($"Spirit: {spirit.name} | Type: {type}");
     }
 
     void ActivateSwordHitbox(int attackNum)
@@ -311,7 +459,7 @@ public class PlayerController : MonoBehaviour
         {
             case 1:
 
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), 2);
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
 
                 if (enemyColliders.Length > 0)
                 {
@@ -334,7 +482,30 @@ public class PlayerController : MonoBehaviour
 
             case 2:
 
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), 2);
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
+
+                if (enemyColliders.Length > 0)
+                {
+                    for (int i = 0; i < enemyColliders.Length; i++)
+                    {
+                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
+                        {
+                            enemiesHit.Add(enemy);
+                        }
+                    }
+                }
+
+                for (int i = 0; i < enemiesHit.Count; i++)
+                {
+                    enemiesHit[i].ApplyKnockback(transform.forward, 10);
+                    enemiesHit[i].TakeDamage(SwordDamage);
+                }
+
+                break;
+
+            case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK
+
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
 
                 if (enemyColliders.Length > 0)
                 {
@@ -495,14 +666,53 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
     }
 
+    public int GetCurrentAttackNum()
+    {
+        return currentAttackNum;
+    }
+
     public void SetCurrentAttackNum(int num)
     {
         currentAttackNum = num;
     }
 
-    public void SetCanAttack(bool value)
+    public bool GetCanAttack()
     {
-        canAttack = value;
+        return canAttack;
+    }
+
+    public void SetCanAttack(bool value, bool applyCooldown, Weapons weaponChoice = Weapons.None)
+    {
+        if (value)
+        {
+            if (applyCooldown)
+            {
+                if (weaponChoice == Weapons.Sword)
+                {
+                    StartCoroutine(BeginAttackCooldown(SwordCooldown));
+                }
+
+                if (weaponChoice == Weapons.Bow)
+                {
+                    StartCoroutine(BeginAttackCooldown(BowCooldown));
+                }
+
+                return;
+            }
+
+            canAttack = true;
+
+            return;
+        }
+
+        canAttack = false;
+    }
+
+    IEnumerator BeginAttackCooldown(float cooldown)
+    {
+        yield return new WaitForSeconds(cooldown);
+
+        canAttack = true;
     }
 
     private void OnDrawGizmos()

@@ -1480,6 +1480,14 @@ PrefabInstance:
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultBowCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultSwordDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: livingFormMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
@@ -1487,6 +1495,14 @@ PrefabInstance:
       propertyPath: spiritFormMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 905ff118dee948847a51283f6b488e8d, type: 2}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultSwordCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultSwordAttackCooldown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863563, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Name
       value: Player
