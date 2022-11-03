@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     bool isAttacking;
     bool isKnockbackApplied;
     bool canAttack = true;
+    bool bowDrawn;
     List<Enemy> visibleEnemies = new List<Enemy>();
     int currentAttackNum = 1;
     Forms currentForm = Forms.Living;
@@ -108,9 +109,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //float startSwordCooldown = currentSwordCooldown;
-        //float startBowCooldown = currentSwordCooldown;
-
         if (!isKnockbackApplied)
         {
             if (!isAttacking)
@@ -120,24 +118,28 @@ public class PlayerController : MonoBehaviour
                 SelectTargetEnemy();
             }
 
-            if (InputManager.Instance.SwordAttack())
+            if (bowDrawn)
             {
-                if (canAttack)
+                if (InputManager.Instance.ReleaseArrow())
                 {
-                    if (targetEnemy == null)
-                    {
-                        StartCoroutine(MoveTowardsAttack(0.5f));
-                    }
-                    else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > currentSwordRange )
-                    {
-                        StartCoroutine(MoveTowardsTargetEnemy(0.5f));
-                    }
-                    else
-                    {
-                        SwordAttack();
-                    }
+                    GetComponentInChildren<Animator>().SetTrigger("ReleaseArrow");
+
+                    bowDrawn = false;
                 }
             }
+
+            //if (InputManager.Instance.SwordAttack())
+            //{
+            //    InitSwordAttack();
+            //}
+
+            //if (InputManager.Instance.ShootBow())
+            //{
+            //    if (canAttack)
+            //    {
+            //        BowAttack();
+            //    }
+            //}
 
             if (InputManager.Instance.ChangeForm())
             {
@@ -246,6 +248,25 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    public void InitSwordAttack()
+    {
+        if (canAttack)
+        {
+            if (targetEnemy == null)
+            {
+                StartCoroutine(MoveTowardsAttack(SwordCooldown));
+            }
+            else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > currentSwordRange)
+            {
+                StartCoroutine(MoveTowardsTargetEnemy(SwordCooldown));
+            }
+            else
+            {
+                SwordAttack();
+            }
+        }
+    }
+
     public void SwordAttack()
     {
         switch (currentAttackNum)
@@ -270,6 +291,19 @@ public class PlayerController : MonoBehaviour
         }
 
         ActivateSwordHitbox(currentAttackNum);
+
+        canAttack = false;
+    }
+
+    public void BowAttack()
+    {
+        GetComponentInChildren<Animator>().SetTrigger("DrawBow");
+
+        bowDrawn = true;
+
+
+
+        //Spawn Arrow Projectile Here
 
         canAttack = false;
     }
@@ -446,8 +480,6 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
-
-        print($"Spirit: {spirit.name} | Type: {type}");
     }
 
     void ActivateSwordHitbox(int attackNum)
