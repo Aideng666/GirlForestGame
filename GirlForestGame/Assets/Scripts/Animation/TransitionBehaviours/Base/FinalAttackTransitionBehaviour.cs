@@ -12,5 +12,7 @@ public class FinalAttackTransitionBehaviour : StateMachineBehaviour
         PlayerController.Instance.SetCanAttack(true, true, Weapons.Sword);
 
         PlayerController.Instance.SetCurrentAttackNum(1);
+
+        animator.ResetTrigger("Attack3");
     }
 }

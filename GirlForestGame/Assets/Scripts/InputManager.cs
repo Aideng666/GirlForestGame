@@ -94,11 +94,21 @@ public class InputManager : MonoBehaviour
         return false;
     }
 
-    public bool BowAttack()
+    public bool ShootBow()
     {
         if (playerInput.actions.FindActionMap("Player").enabled)
         {
             return bowAttackAction.triggered;
+        }
+
+        return false;
+    }
+
+    public bool ReleaseArrow()
+    {
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return bowAttackAction.phase == InputActionPhase.Started || bowAttackAction.phase == InputActionPhase.Waiting;
         }
 
         return false;

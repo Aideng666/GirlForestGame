@@ -9,7 +9,7 @@ public class AttackDelay2TransitionBehaviour : StateMachineBehaviour
     {
         if (PlayerController.Instance.GetCanAttack())
         {
-            PlayerController.Instance.SwordAttack();
+            PlayerController.Instance.InitSwordAttack();
         }
     }
 }

@@ -10,6 +10,8 @@ public class Attack2TransitionBehaviour : StateMachineBehaviour
         PlayerController.Instance.SetCanAttack(true, true, Weapons.Sword);
 
         PlayerController.Instance.SetCurrentAttackNum(3);
+
+        animator.ResetTrigger("Attack2");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -17,7 +19,7 @@ public class Attack2TransitionBehaviour : StateMachineBehaviour
     {
         if (InputManager.Instance.SwordAttack())
         {
-            PlayerController.Instance.SwordAttack();
+            animator.SetTrigger("Attack3");
         }
     }
 }

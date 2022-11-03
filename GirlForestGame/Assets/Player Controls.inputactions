@@ -165,28 +165,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a49f6b1d-48a5-49c5-abc6-475acdc8ded4",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ee7164ca-6f55-463f-b7cd-d3516822db05",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8c98958c-acdc-4fd3-9fc1-3567f6a83659",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -232,7 +210,7 @@
                 {
                     "name": "",
                     "id": "7daf5f1a-8b29-4209-9fa9-26a6ae74516e",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

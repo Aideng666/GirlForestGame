@@ -17,7 +17,7 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
-        if (InputManager.Instance.BowAttack())
+        if (InputManager.Instance.ShootBow())
         {
             print("Opening Doors");
 

@@ -17,9 +17,7 @@ public class Attack1TransitionBehaviour : StateMachineBehaviour
     {
         if (InputManager.Instance.SwordAttack())
         {
-            PlayerController.Instance.SwordAttack();
-
-            //animator.SetTrigger("Attack2");
+            animator.SetTrigger("Attack2");
         }
     }
 }
