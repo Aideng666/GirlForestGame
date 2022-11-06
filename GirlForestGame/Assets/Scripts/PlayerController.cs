@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
 
     //Combat
+    [SerializeField] GameObject arrowPrefab;
+    [SerializeField] GameObject bowAimCanvas;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
     GameObject targetEnemy;
@@ -103,6 +105,8 @@ public class PlayerController : MonoBehaviour
         livingLayer = LayerMask.NameToLayer("Living");
         spiritLayer = LayerMask.NameToLayer("Spirit");
 
+        bowAimCanvas.SetActive(false);
+
         //enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
@@ -120,26 +124,19 @@ public class PlayerController : MonoBehaviour
 
             if (bowDrawn)
             {
+                bowAimCanvas.SetActive(true);
+
                 if (InputManager.Instance.ReleaseArrow())
                 {
                     GetComponentInChildren<Animator>().SetTrigger("ReleaseArrow");
 
                     bowDrawn = false;
+
+                    bowAimCanvas.SetActive(false);
+
+                    SpawnArrow();
                 }
             }
-
-            //if (InputManager.Instance.SwordAttack())
-            //{
-            //    InitSwordAttack();
-            //}
-
-            //if (InputManager.Instance.ShootBow())
-            //{
-            //    if (canAttack)
-            //    {
-            //        BowAttack();
-            //    }
-            //}
 
             if (InputManager.Instance.ChangeForm())
             {
@@ -299,13 +296,14 @@ public class PlayerController : MonoBehaviour
     {
         GetComponentInChildren<Animator>().SetTrigger("DrawBow");
 
-        bowDrawn = true;
-
-
-
-        //Spawn Arrow Projectile Here
-
         canAttack = false;
+    }
+
+    void SpawnArrow()
+    {
+        var arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0));
+
+        arrow.GetComponent<Rigidbody>().velocity = transform.forward * ProjectileSpeed;
     }
 
     void UpdateMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
@@ -316,9 +314,9 @@ public class PlayerController : MonoBehaviour
             {
                 switch (spirit.buffedAttributes[i])
                 {
+                    //Buff all of these based on the level of the marking when adding level functionality
                     case PlayerAttributes.Health:
 
-                        //Buff these based on the level of the marking when adding level functionality
 
 
                         break;
@@ -711,6 +709,11 @@ public class PlayerController : MonoBehaviour
     public bool GetCanAttack()
     {
         return canAttack;
+    }
+
+    public void SetBowDrawn(bool isDrawn)
+    {
+        bowDrawn = isDrawn;
     }
 
     public void SetCanAttack(bool value, bool applyCooldown, Weapons weaponChoice = Weapons.None)
