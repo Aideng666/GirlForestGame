@@ -14,6 +14,6 @@ public class AnimationManager : MonoBehaviour
 
     public void ActivateAttackHitbox(int attackNum)
     {
-        player.SwordStyle.ActivateHitbox(attackNum);
+        //player.SwordStyle.ActivateHitbox(attackNum);
     }
 }

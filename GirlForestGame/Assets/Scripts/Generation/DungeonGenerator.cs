@@ -11,6 +11,7 @@ public class DungeonGenerator : MonoBehaviour
     List<Room> rooms = new List<Room>();
 
     Room currentRoom;
+    NodeTypes currentFloorType = NodeTypes.Default;
 
     public static DungeonGenerator Instance { get; set; }
 
@@ -43,7 +44,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    public void InitDungeon()
+    public void InitDungeon(NodeTypes floorType = NodeTypes.Default)
     {
         rooms = new List<Room>();
 
@@ -51,6 +52,8 @@ public class DungeonGenerator : MonoBehaviour
         {
             Destroy(room.gameObject);
         }
+
+        currentFloorType = floorType;
 
         PlayerController.Instance.transform.position = Vector3.zero;
 
@@ -81,7 +84,7 @@ public class DungeonGenerator : MonoBehaviour
         currentEndRoom.SetRoomType(RoomTypes.End);
     }
 
-    void Regenerate()
+    void Regenerate(NodeTypes type = NodeTypes.Default)
     {
         rooms = new List<Room>();
 
@@ -89,6 +92,8 @@ public class DungeonGenerator : MonoBehaviour
         {
             Destroy(room.gameObject);
         }
+
+        currentFloorType = type;
 
         InitDungeon();
     }
@@ -415,5 +420,10 @@ public class DungeonGenerator : MonoBehaviour
     public Room GetCurrentRoom()
     {
         return currentRoom;
+    }
+
+    public NodeTypes GetCurrentFloorType()
+    {
+        return currentFloorType;
     }
 }

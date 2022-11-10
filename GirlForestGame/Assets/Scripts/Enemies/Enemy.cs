@@ -151,7 +151,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(DeactivateKnockback());
     }
 
-    public void TakeDamage(int value)
+    public void TakeDamage(float value)
     {
         health -= value;
     }

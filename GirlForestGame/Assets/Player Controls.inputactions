@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SelectSword",
+                    "type": "Button",
+                    "id": "1762a2e1-c33c-4195-9419-6856a0af6626",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectBow",
+                    "type": "Button",
+                    "id": "11bae602-2e4a-4881-ab7a-21ea0039dd30",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -147,28 +165,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a49f6b1d-48a5-49c5-abc6-475acdc8ded4",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ee7164ca-6f55-463f-b7cd-d3516822db05",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8c98958c-acdc-4fd3-9fc1-3567f6a83659",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -214,7 +210,7 @@
                 {
                     "name": "",
                     "id": "7daf5f1a-8b29-4209-9fa9-26a6ae74516e",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -263,6 +259,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "ChangeForm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "078b4722-2ad1-4c13-8acf-2279100bb0bc",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectSword",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4898156-8c34-41ab-856b-7c5144173c42",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectSword",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1398eddc-3c25-4a7c-bf2f-0ebe8b707001",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectBow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4c267b5-cc09-42df-a93a-3474029c849a",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectBow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

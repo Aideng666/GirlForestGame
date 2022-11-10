@@ -273,7 +273,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &543537889
 MonoBehaviour:
@@ -348,6 +348,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 49f43157-66c2-44a7-a987-3a7e5d326ac9
     m_ActionName: NodeMap/SelectNode[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1762a2e1-c33c-4195-9419-6856a0af6626
+    m_ActionName: Player/SelectSword[/DualShock4GamepadHID/dpad/left,/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 11bae602-2e4a-4881-ab7a-21ea0039dd30
+    m_ActionName: Player/SelectBow[/DualShock4GamepadHID/dpad/right,/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -827,19 +835,11 @@ Transform:
   m_Father: {fileID: 1800207858}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!1 &1062661130 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5955990372660728705, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+  m_PrefabInstance: {fileID: 5982676203773786904}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
 --- !u!1 &1334400644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3964161196478328804, guid: 9ba1b73828694d644a7ebeba1c908a99, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3964161196478328804, guid: 9ba1b73828694d644a7ebeba1c908a99, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1465,6 +1465,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 6898
       objectReference: {fileID: 0}
+    - target: {fileID: 4790119955218764395, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5982676203208423064, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1474,24 +1478,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
-      propertyPath: stepDelay
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: arrowPrefab
+      value: 
+      objectReference: {fileID: 8105265429908091771, guid: 25b33a299441aa548a6759ab1e2b3910, type: 3}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: bowAimCanvas
+      value: 
+      objectReference: {fileID: 1062661130}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultSpeed
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
-      propertyPath: inputSound.Path
-      value: event:/Walk
+      propertyPath: defaultBowDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: swordAttackRange
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultSwordRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultBowCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultSwordDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: livingFormMaterial
@@ -1502,23 +1522,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 905ff118dee948847a51283f6b488e8d, type: 2}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
-      propertyPath: inputSound.Guid.Data1
-      value: -861215663
+      propertyPath: defaultSwordCooldown
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
-      propertyPath: inputSound.Guid.Data2
-      value: 1214108958
+      propertyPath: defaultProjectileSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
-      propertyPath: inputSound.Guid.Data3
-      value: -324556149
-      objectReference: {fileID: 0}
-    - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
-      propertyPath: inputSound.Guid.Data4
-      value: 1942763737
+      propertyPath: defaultSwordAttackCooldown
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863563, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982676203613863563, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863567, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
