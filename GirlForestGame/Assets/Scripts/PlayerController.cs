@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
                 SelectTargetEnemy();
             }
 
+            //Detects the release of the arrow once the bow is completely drawn back
             if (bowDrawn)
             {
                 bowAimCanvas.SetActive(true);
@@ -137,6 +138,8 @@ public class PlayerController : MonoBehaviour
                     SpawnArrow();
                 }
             }
+            ////////////////////////////////////////////////////////////////////////
+
 
             if (InputManager.Instance.ChangeForm())
             {
@@ -169,6 +172,7 @@ public class PlayerController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
 
+        //Sets mouse variables based on the mouse position in the world
         if (Physics.Raycast(ray, out hit, 100))
         {
             mousePos = hit.point;
@@ -177,6 +181,8 @@ public class PlayerController : MonoBehaviour
 
             mouseAimDirection.y = 0;
         }
+        ///////////////////////////////////////////////////////////////
+
 
         float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
         moveDir = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
@@ -185,21 +191,24 @@ public class PlayerController : MonoBehaviour
         float mouseAimAngle = Mathf.Atan2(mouseAimDirection.x, mouseAimDirection.z) * Mathf.Rad2Deg;
         aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
 
+
+        //Sets the aiming direction of the player along with their rotation to face in the direction that they are aiming
         if (controlWithMouse)
         {
             aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, mouseAimAngle, 0f) * Vector3.forward;
-            transform.rotation = Quaternion.Euler(0, mouseAimAngle + 45, 0);
+            transform.rotation = Quaternion.Euler(0, mouseAimAngle, 0);
         }
-        else if (aimDir.magnitude <= 0.1f)
+        else if (aimDir.magnitude <= 0.1f && direction.magnitude >= 0.1f)
         {
             aimDirection = moveDir;
-            transform.rotation = Quaternion.Euler(0f, targetAngle + 45, 0f);
+            transform.forward = moveDir.normalized;
         }
-        else
+        else if (aimDir.magnitude > 0.1f)
         {
             aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
             transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if (direction.magnitude <= 0.1f)
         {
@@ -245,6 +254,9 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+
+    //allows for the player to perform the little dash forwards before each sword swing
+    //chooses the direction of the dash and attack based on the target enemy and distance
     public void InitSwordAttack()
     {
         if (canAttack)
@@ -266,6 +278,7 @@ public class PlayerController : MonoBehaviour
 
     public void SwordAttack()
     {
+        //Chooses which animation to play based on which attack number they are in the current combo
         switch (currentAttackNum)
         {
             case 1:
@@ -286,12 +299,14 @@ public class PlayerController : MonoBehaviour
 
                 break;
         }
+        ////////////////////////////////////////////////////////////////////
 
         ActivateSwordHitbox(currentAttackNum);
 
         canAttack = false;
     }
 
+    //Initializes the drawing of the bow
     public void BowAttack()
     {
         GetComponentInChildren<Animator>().SetTrigger("DrawBow");
@@ -306,6 +321,9 @@ public class PlayerController : MonoBehaviour
         arrow.GetComponent<Rigidbody>().velocity = transform.forward * ProjectileSpeed;
     }
 
+    //Called every time the player picks up or swaps a marking
+    //Adds the correct stat bonuses to the player if it is an attribute marking
+    //Applies the correct element onto the chosen weapon if it is an element marking
     void UpdateMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
     {
         if (type == MarkingTypes.Attribute)
@@ -314,7 +332,7 @@ public class PlayerController : MonoBehaviour
             {
                 switch (spirit.buffedAttributes[i])
                 {
-                    //Buff all of these based on the level of the marking when adding level functionality
+                    //Buff all of these based on the level of the marking when adding level functionality - This is for Aiden dw abt it
                     case PlayerAttributes.Health:
 
 
@@ -433,10 +451,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Called after picking up a marking before deciding which weapon to put it on
     public void ChooseWeapon(Spirit spirit, MarkingTypes type)
     {
         StartCoroutine(SelectWeapon(spirit, type));
     }
+
 
     IEnumerator SelectWeapon(Spirit spirit, MarkingTypes type)
     {
@@ -448,7 +468,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (type == MarkingTypes.Attribute)
                 {
-                    //CHECK IF THE PLAYER ALREADY HAS A SPIRIT IN EACH SLOT TO BE ABLE TO SWAP
+                    //CHECK IF THE PLAYER ALREADY HAS A SPIRIT IN EACH SLOT TO BE ABLE TO SWAP - This is for aiden dont worry abt it
                     SwordAttribute = spirit;
                 }
                 else if (type == MarkingTypes.Element)
@@ -491,6 +511,7 @@ public class PlayerController : MonoBehaviour
 
                 enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
 
+                //Loops through each hit collider and adds all of the enemies into a list
                 if (enemyColliders.Length > 0)
                 {
                     for (int i = 0; i < enemyColliders.Length; i++)
@@ -501,7 +522,8 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                 }
-
+                //////////////////////////////////////////////////////////////////////////
+                
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(transform.forward, 5);
@@ -533,7 +555,7 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
-            case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK
+            case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK - this is for aiden dw abt it
 
                 enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
 
@@ -564,6 +586,7 @@ public class PlayerController : MonoBehaviour
         Collider[] collidersDetected2 = new Collider[0];
         Collider[] collidersDetected3 = new Collider[0];
 
+        //Creates a "cone" that acts as the players "view" and adds every visible collider to the player into arrays
         if (aimDirection.magnitude > 0)
         {
             collidersDetected = Physics.OverlapSphere(transform.position + (aimDirection.normalized * 1), 1f);
@@ -580,9 +603,12 @@ public class PlayerController : MonoBehaviour
         {
             targetEnemy = null;
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         visibleEnemies = new List<Enemy>();
 
+        //Filters out only enemies from the visible colliders
         if (collidersDetected.Length > 0)
         {
             for (int i = 0; i < collidersDetected.Length; i++)
@@ -613,7 +639,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        /////////////////////////////////////////////////////
 
+        //Sets the target enemy to the closest enemy that is within the player's view
         if (visibleEnemies.Count > 0)
         {
             targetEnemy = visibleEnemies[0].gameObject;
@@ -630,8 +658,10 @@ public class PlayerController : MonoBehaviour
         {
             targetEnemy = null;
         }
+        ///////////////////////////////////////////////////////////////////////////////
     }
 
+    //Called when player picks up a totem
     public void AddTotemToList(Totem totem)
     {
         totems.Add(totem);
@@ -639,11 +669,12 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator MoveTowardsTargetEnemy(float duration)
     {
-        float elaspedTime = 0;
         isAttacking = true;
 
         StartCoroutine(CompleteAttackMovement(duration));
-
+        
+        //Uses lerp to give the player a small dash forward towards their attack
+        float elaspedTime = 0;
         Vector3 endVelo = Vector3.zero;
         Vector3 startVelo = currentSpeed * (targetEnemy.transform.position - transform.position).normalized;
 
@@ -659,6 +690,7 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+        //////////////////////////////////////////////////////////////////////////
 
         yield return null;
     }
@@ -669,6 +701,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(CompleteAttackMovement(duration));
 
+        //Uses lerp to give the player a small dash forward towards their attack
         float elaspedTime = 0;
         Vector3 endVelo = Vector3.zero;
         Vector3 startVelo = currentSpeed * aimDirection;
@@ -681,10 +714,12 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+        /////////////////////////////////////////////////////////////////////////
 
         yield return null;
     }
 
+    //Starts the sword attack only a little bit into the dash in order to be able to attack at the end of the dash instead of beginning
     IEnumerator CompleteAttackMovement(float duration)
     {
         yield return new WaitForSeconds(duration * 0.25f);
@@ -766,6 +801,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //To transition from room to room
         if (collision.gameObject.CompareTag("Exit"))
         {
             UIManager.Instance.GetFadePanel().BeginRoomTransition();
@@ -775,6 +811,7 @@ public class PlayerController : MonoBehaviour
                 DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()].GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
                 .transform.parent.transform.position));
         }
+        //To transition to the node map after completing a full floor
         if (collision.gameObject.CompareTag("FloorExit"))
         {
             NodeMapManager.Instance.SetNextLevel();
