@@ -82,6 +82,11 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         currentEndRoom.SetRoomType(RoomTypes.End);
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            rooms[i].UpdateVisualExits();
+        }
     }
 
     void Regenerate(NodeTypes type = NodeTypes.Default)
@@ -116,68 +121,6 @@ public class DungeonGenerator : MonoBehaviour
         //Adds the new room to the list of all rooms
         rooms.Add(room.GetComponent<Room>());
     }
-
-    //void SpawnRoom(Vector3 pos, Directions directionOfOrigin = Directions.None, Vector2 distanceFromStart = default(Vector2))
-    //{
-        //var room = Instantiate(roomPrefab, pos, Quaternion.identity);
-
-        //room.GetComponent<Room>().ChooseRoom();
-        //room.GetComponent<Room>().SetDistanceFromStart(distanceFromStart);
-
-        //if (directionOfOrigin == Directions.North)
-        //{
-        //    room.transform.position += -room.GetComponent<Room>().GetSelectedRoom().northExitOffset;
-
-        //    room.GetComponent<Room>().SetNorthExitUsed();
-        //}
-        //if (directionOfOrigin == Directions.East)
-        //{
-        //    room.transform.position += -room.GetComponent<Room>().GetSelectedRoom().eastExitOffset;
-
-        //    room.GetComponent<Room>().SetEastExitUsed();
-        //}
-        //if (directionOfOrigin == Directions.South)
-        //{
-        //    room.transform.position += -room.GetComponent<Room>().GetSelectedRoom().southExitOffset;
-
-        //    room.GetComponent<Room>().SetSouthExitUsed();
-        //}
-        //if (directionOfOrigin == Directions.West)
-        //{
-        //    room.transform.position += -room.GetComponent<Room>().GetSelectedRoom().westExitOffset;
-
-        //    room.GetComponent<Room>().SetWestExitUsed();
-        //}
-
-        //if (!CanSpawnRoom(room.GetComponent<Room>()))
-        //{
-        //    Destroy(room);
-
-        //    ChooseNewRoomLocation();
-
-        //    return;
-        //}
-
-        //rooms.Add(room.GetComponent<Room>());
-
-        //UpdateUsedExits();
-    //}
-
-    //bool CanSpawnRoom(Room room)
-    //{
-    //    for (int i = 0; i < rooms.Count; i++)
-    //    {
-    //        if (room.transform.position.x < rooms[i].transform.position.x + (rooms[i].GetSelectedRoom().eastExitOffset.x + -room.GetSelectedRoom().westExitOffset.x)
-    //            && room.transform.position.x + (room.GetSelectedRoom().eastExitOffset.x + -rooms[i].GetSelectedRoom().westExitOffset.x) > rooms[i].transform.position.x
-    //            && room.transform.position.z < rooms[i].transform.position.z + (rooms[i].GetSelectedRoom().northExitOffset.z + -room.GetSelectedRoom().southExitOffset.z)
-    //            && room.transform.position.z + (room.GetSelectedRoom().northExitOffset.z + -rooms[i].GetSelectedRoom().southExitOffset.z) > rooms[i].transform.position.z)
-    //        {
-    //            return false;
-    //        }
-    //    }
-
-    //    return true;
-    //}
 
     void ChooseNewRoomLocation()
     {
@@ -223,159 +166,7 @@ public class DungeonGenerator : MonoBehaviour
 
         SpawnRoom(currentRoom, possibleDirections[directionChoice]);
 
-        //switch (possibleDirections[directionChoice])
-        //{
-        //    case Directions.North:
-
-        //        SpawnRoom(currentRoom, currentRoom.transform.position + new Vector3(0, 0, 30), possibleDirections[directionChoice]);
-
-        //        break;
-
-        //    case Directions.South:
-
-        //        SpawnRoom(currentRoom, currentRoom.transform.position + new Vector3(0, 0, -30), possibleDirections[directionChoice]);
-
-        //        break;
-
-        //    case Directions.East:
-
-        //        SpawnRoom(currentRoom, currentRoom.transform.position + new Vector3(30, 0, 0), possibleDirections[directionChoice]);
-
-        //        break;
-
-        //    case Directions.West:
-
-        //        SpawnRoom(currentRoom, currentRoom.transform.position + new Vector3(-30, 0, 0), possibleDirections[directionChoice]);
-
-        //        break;
-        //}
-
-        //Vector2 newRoomDistance;
-
-        //switch (possibleDirections[directionChoice])
-        //{
-        //    case Directions.North:
-
-        //        newRoomDistance = currentRoom.GetDistanceFromStart() + new Vector2(0, 1);
-
-        //        for (int i = 0; i < rooms.Count; i++)
-        //        {
-        //            if ((rooms[i].GetDistanceFromStart().x - 1 == newRoomDistance.x && rooms[i].GetDistanceFromStart().y == newRoomDistance.y)
-        //                || (rooms[i].GetDistanceFromStart().x + 1 == newRoomDistance.x && rooms[i].GetDistanceFromStart().y == newRoomDistance.y)
-        //                || (rooms[i].GetDistanceFromStart().x == newRoomDistance.x && rooms[i].GetDistanceFromStart().y - 1 == newRoomDistance.y))
-        //            {
-        //                ChooseNewRoomLocation();
-
-        //                return;
-        //            }
-        //        }
-
-        //        SpawnRoom(currentRoom.transform.position + currentRoom.GetSelectedRoom().northExitOffset, Directions.South, newRoomDistance);
-
-        //        currentRoom.SetNorthExitUsed();
-
-        //        break;
-
-        //    case Directions.East:
-
-        //        newRoomDistance = currentRoom.GetDistanceFromStart() + new Vector2(1, 0);
-
-        //        for (int i = 0; i < rooms.Count; i++)
-        //        {
-        //            if ((rooms[i].GetDistanceFromStart().x - 1 == newRoomDistance.x && rooms[i].GetDistanceFromStart().y == newRoomDistance.y)
-        //                || (rooms[i].GetDistanceFromStart().x == newRoomDistance.x && rooms[i].GetDistanceFromStart().y + 1 == newRoomDistance.y)
-        //                || (rooms[i].GetDistanceFromStart().x == newRoomDistance.x && rooms[i].GetDistanceFromStart().y - 1 == newRoomDistance.y))
-        //            {
-        //                ChooseNewRoomLocation();
-
-        //                return;
-        //            }
-        //        }
-
-        //        SpawnRoom(currentRoom.transform.position + currentRoom.GetSelectedRoom().eastExitOffset, Directions.West, newRoomDistance);
-
-        //        currentRoom.SetEastExitUsed();
-
-        //        break;
-
-        //    case Directions.South:
-
-        //        newRoomDistance = currentRoom.GetDistanceFromStart() + new Vector2(0, -1);
-
-        //        for (int i = 0; i < rooms.Count; i++)
-        //        {
-        //            if ((rooms[i].GetDistanceFromStart().x - 1 == newRoomDistance.x && rooms[i].GetDistanceFromStart().y == newRoomDistance.y)
-        //                || (rooms[i].GetDistanceFromStart().x + 1 == newRoomDistance.x && rooms[i].GetDistanceFromStart().y == newRoomDistance.y)
-        //                || (rooms[i].GetDistanceFromStart().x == newRoomDistance.x && rooms[i].GetDistanceFromStart().y + 1 == newRoomDistance.y))
-        //            {
-        //                ChooseNewRoomLocation();
-
-        //                return;
-        //            }
-        //        }
-
-        //        SpawnRoom(currentRoom.transform.position + currentRoom.GetSelectedRoom().southExitOffset, Directions.North, newRoomDistance);
-
-        //        currentRoom.SetSouthExitUsed();
-
-        //        break;
-
-        //    case Directions.West:
-
-        //        newRoomDistance = currentRoom.GetDistanceFromStart() + new Vector2(-1, 0);
-
-        //        for (int i = 0; i < rooms.Count; i++)
-        //        {
-        //            if ((rooms[i].GetDistanceFromStart().x + 1 == newRoomDistance.x && rooms[i].GetDistanceFromStart().y == newRoomDistance.y)
-        //                || (rooms[i].GetDistanceFromStart().x == newRoomDistance.x && rooms[i].GetDistanceFromStart().y + 1 == newRoomDistance.y)
-        //                || (rooms[i].GetDistanceFromStart().x == newRoomDistance.x && rooms[i].GetDistanceFromStart().y - 1 == newRoomDistance.y))
-        //            {
-        //                ChooseNewRoomLocation();
-
-        //                return;
-        //            }
-        //        }
-
-        //        SpawnRoom(currentRoom.transform.position + currentRoom.GetSelectedRoom().westExitOffset, Directions.East, newRoomDistance);
-
-        //        currentRoom.SetWestExitUsed();
-
-        //        break;
-        //}
     }
-
-    //void UpdateUsedExits()
-    //{
-    //    for (int i = 0; i < rooms.Count; i++)
-    //    {
-    //        var room = rooms[i].GetComponent<Room>();
-
-    //        Vector3 currentExitCheckOffset;
-
-    //        for (int j = 0; j < 4; j++)
-    //        {
-    //            currentExitCheckOffset = room.GetSelectedRoom().GetOffset((Directions)j);
-
-    //            for (int k = 0; k < rooms.Count; k++)
-    //            {
-    //                if (i != k)
-    //                {
-    //                    for (int l = 0; l < 4; l++)
-    //                    {
-    //                        if (Vector3.Distance(room.transform.position + currentExitCheckOffset,
-    //                            rooms[k].transform.position + rooms[k].GetComponent<Room>().GetSelectedRoom().GetOffset((Directions)l)) < 1)
-    //                        {
-    //                            if (!room.GetExitUsed((Directions)j))
-    //                            {
-    //                                room.SetExitUsed((Directions)j);
-    //                            }
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 
     //outputs the opposite direction of the input
     public Directions ReverseDirection(Directions dir)

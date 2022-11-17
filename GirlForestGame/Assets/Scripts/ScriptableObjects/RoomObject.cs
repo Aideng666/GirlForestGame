@@ -7,6 +7,9 @@ public class RoomObject : ScriptableObject
 {
     public GameObject model;
 
-    public float cameraBoundary;
+    public float northCamBoundary;
+    public float southCamBoundary;
+    public float eastCamBoundary;
+    public float westCamBoundary;
 }
 

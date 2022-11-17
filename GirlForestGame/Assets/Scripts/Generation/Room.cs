@@ -12,6 +12,7 @@ public class Room : MonoBehaviour
 
     RoomObject[] possibleRooms; // List of all of the possible room models for the room to pick
     RoomModel spawnedModel; // the selected model for the room that was spawned, used to access the doors
+    RoomObject selectedRoom;
 
     RoomTypes currentType = RoomTypes.Fight;
 
@@ -49,7 +50,9 @@ public class Room : MonoBehaviour
 
                         CreateExit(directionOfExit);
 
-                        spawnedModel.doors[directionOfExit].transform.parent.GetComponentInChildren<RoomExit>().tag = "FloorExit";
+                        //spawnedModel.doors[directionOfExit].transform.parent.GetComponentInChildren<RoomExit>().tag = "FloorExit";
+                        spawnedModel.exits[directionOfExit].SetActive(true);
+                        spawnedModel.exits[directionOfExit].tag = "FloorExit";
 
                         spawnedModel.doors[directionOfExit].SetActive(false);
                     }
@@ -65,16 +68,29 @@ public class Room : MonoBehaviour
 
         int randomIndex = Random.Range(0, possibleRooms.Length);
 
+        selectedRoom = possibleRooms[randomIndex];
+
         Instantiate(possibleRooms[randomIndex].model, transform.position, Quaternion.identity, transform);
 
         spawnedModel = GetComponentInChildren<RoomModel>();
 
-        cameraBoundary = possibleRooms[randomIndex].cameraBoundary;
+        //cameraBoundary = possibleRooms[randomIndex].cameraBoundary;
     }
 
     public void CreateExit(int direction)
     {
         spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
+    }
+
+    public void UpdateVisualExits()
+    {
+        for (int i = 0; i < connectedRooms.Length; i++)
+        {
+            if (connectedRooms[i] == null)
+            {
+                spawnedModel.exits[i].SetActive(false);
+            }
+        }
     }
 
     //Creates a new room that attaches to the current room on one of its sides
@@ -116,6 +132,11 @@ public class Room : MonoBehaviour
     public RoomModel GetSpawnedModel()
     {
         return spawnedModel;
+    }
+
+    public RoomObject GetRoomObject()
+    {
+        return selectedRoom;
     }
 
     public void SetRoomType(RoomTypes type)
