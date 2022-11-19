@@ -83,6 +83,10 @@ public class DungeonGenerator : MonoBehaviour
 
         currentEndRoom.SetRoomType(RoomTypes.End);
 
+
+
+
+        //Turns off the exits for parts of the rooms that have no connections
         for (int i = 0; i < rooms.Count; i++)
         {
             rooms[i].UpdateVisualExits();
