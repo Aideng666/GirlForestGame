@@ -98,7 +98,9 @@ public class InputManager : MonoBehaviour
     {
         if (playerInput.actions.FindActionMap("Player").enabled)
         {
-            return bowAttackAction.triggered;
+            //return bowAttackAction.triggered;
+
+            return bowAttackAction.IsInProgress();
         }
 
         return false;
