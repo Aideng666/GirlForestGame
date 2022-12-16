@@ -808,8 +808,9 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(EnterNewRoom(
                 DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
-                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()].GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
-                .transform.parent.transform.position));
+                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]
+                .GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
+                .transform.parent.transform.position, DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())));
         }
         //To transition to the node map after completing a full floor
         if (collision.gameObject.CompareTag("FloorExit"))
@@ -818,13 +819,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator EnterNewRoom(Room room, Vector3 updatedPlayerPos)
+    IEnumerator EnterNewRoom(Room room, Vector3 updatedPlayerPos, Directions dirOfPrevRoom)
     {
         yield return new WaitForSeconds(UIManager.Instance.GetFadePanel().GetTransitionTime() / 2);
 
         DungeonGenerator.Instance.SetCurrentRoom(room);
 
         transform.position = updatedPlayerPos;
+
+        Minimap.Instance.VisitRoom(room, dirOfPrevRoom);
 
         yield return null;
     }

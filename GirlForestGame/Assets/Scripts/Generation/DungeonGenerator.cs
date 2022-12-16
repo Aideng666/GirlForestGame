@@ -46,6 +46,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public void InitDungeon(NodeTypes floorType = NodeTypes.Default)
     {
+        //Resets the dungeon by removing all old rooms
         rooms = new List<Room>();
 
         foreach (Room room in FindObjectsOfType<Room>())
@@ -57,13 +58,13 @@ public class DungeonGenerator : MonoBehaviour
 
         PlayerController.Instance.transform.position = Vector3.zero;
 
+        //Creates the starting room
         SpawnRoom();
-
-        //rooms.Add(Instantiate(roomPrefab, Vector3.zero, Quaternion.identity).GetComponent<Room>());
 
         rooms[0].SetRoomType(RoomTypes.Start);
         currentRoom = rooms[0];
 
+        //Creates the rest of the rooms
         for (int i = 0; i < totalRooms - 1; i++)
         {
             ChooseNewRoomLocation();
@@ -83,31 +84,31 @@ public class DungeonGenerator : MonoBehaviour
 
         currentEndRoom.SetRoomType(RoomTypes.End);
 
-
-
-
         //Turns off the exits for parts of the rooms that have no connections
         for (int i = 0; i < rooms.Count; i++)
         {
             rooms[i].UpdateVisualExits();
         }
+
+        Minimap.Instance.ResetMap();
+        Minimap.Instance.VisitRoom(currentRoom, Directions.None);
     }
 
-    void Regenerate(NodeTypes type = NodeTypes.Default)
-    {
-        rooms = new List<Room>();
+    //void Regenerate(NodeTypes type = NodeTypes.Default)
+    //{
+    //    rooms = new List<Room>();
 
-        foreach (Room room in FindObjectsOfType<Room>())
-        {
-            Destroy(room.gameObject);
-        }
+    //    foreach (Room room in FindObjectsOfType<Room>())
+    //    {
+    //        Destroy(room.gameObject);
+    //    }
 
-        currentFloorType = type;
+    //    currentFloorType = type;
 
-        InitDungeon();
-    }
+    //    InitDungeon();
+    //}
 
-    void SpawnRoom(Room originRoom = null/*, Vector3 pos = default(Vector3)*/, Directions directionFromOrigin = Directions.None)
+    void SpawnRoom(Room originRoom = null, Directions directionFromOrigin = Directions.None)
     {
         var room = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
 
@@ -220,5 +221,10 @@ public class DungeonGenerator : MonoBehaviour
     public NodeTypes GetCurrentFloorType()
     {
         return currentFloorType;
+    }
+
+    public List<Room> GetRooms()
+    {
+        return rooms;
     }
 }
