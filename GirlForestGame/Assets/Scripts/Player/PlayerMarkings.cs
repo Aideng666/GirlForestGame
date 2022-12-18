@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMarkings : MonoBehaviour
 {
+    [SerializeField] int numberOfBurnTicks = 5;
+    [SerializeField] int burnTickDamage = 1;
+    [SerializeField] float burnTickDelay = 1;
+
     PlayerController player;
     PlayerAttributes playerAttributes;
 
@@ -206,13 +210,34 @@ public class PlayerMarkings : MonoBehaviour
     void ApplyFireElement(List<Enemy> enemiesHit)
     {
         print("FIRE");
+
+        StartCoroutine(ApplyBurn(enemiesHit));
     }
 
     void ApplyWindElement(List<Enemy> enemiesHit)
     {
         print("Wind");
+
+        foreach(Enemy enemy in enemiesHit)
+        {
+            enemy.ApplyKnockback(player.transform.forward, 10);
+        }
     }
 
+    IEnumerator ApplyBurn(List<Enemy> enemies)
+    {
+        for (int i = 0; i < numberOfBurnTicks; i++)
+        {
+            yield return new WaitForSeconds(burnTickDelay);
+
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.TakeDamage(burnTickDamage);
+            }
+        }
+
+        yield return null;
+    }
 
     IEnumerator SelectWeapon(Spirit spirit, MarkingTypes type)
     {
