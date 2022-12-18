@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MarkingPickup : MonoBehaviour
 {
     Spirit chosenSpirit;
     MarkingTypes chosenType;
+
+    private void OnEnable()
+    {
+        transform.localScale = new Vector3(1, 0, 1);
+
+        transform.DOScale(new Vector3(1, 1, 1), 0.5f);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +36,7 @@ public class MarkingPickup : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerController.Instance.ChooseWeapon(chosenSpirit, chosenType);
+            PlayerController.Instance.playerMarkings.ChooseWeapon(chosenSpirit, chosenType);
 
             gameObject.SetActive(false);
         }

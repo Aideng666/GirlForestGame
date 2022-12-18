@@ -6,6 +6,6 @@ using UnityEngine;
 public class Spirit : ScriptableObject
 {
     public string name;
-    public List<PlayerAttributes> buffedAttributes;
+    public List<Attributes> buffedAttributes;
     public Elements usedElement;
 }

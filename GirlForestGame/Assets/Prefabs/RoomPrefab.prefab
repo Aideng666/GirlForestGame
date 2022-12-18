@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entranceMaterial: {fileID: 2100000, guid: ad03a9de278960f4dbabb117a1ad410f, type: 2}
   totemPrefab: {fileID: 6850629361975643207, guid: 14a05e3d883f7c641836eb8ec07df906, type: 3}
+  markingPrefab: {fileID: 5512418781491973167, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}

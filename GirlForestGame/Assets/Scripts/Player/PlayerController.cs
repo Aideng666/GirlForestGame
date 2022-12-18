@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Material spiritFormMaterial;
     GameObject targetEnemy;
     Vector3 aimDirection;
-    //[SerializeField] LayerMask enemyLayer;
     bool isAttacking;
     bool isKnockbackApplied;
     bool canAttack = true;
@@ -29,53 +28,14 @@ public class PlayerController : MonoBehaviour
     LayerMask livingLayer;
     LayerMask spiritLayer;
 
+    public delegate void OnAttack(List<Enemy> enemiesHit);
+    public static event OnAttack OnSwordHit;
+
     public Forms Form { get { return currentForm; } set { currentForm = value; } }
 
-    //Player Attributes
-    [Header("Default Player Attributes")]
-    [SerializeField] float defaultHealth = 6;
-    [SerializeField] float maximumHealth = 12;
-    [SerializeField] float defaultSpeed;
-    [SerializeField] float defaultSwordDamage;
-    [SerializeField] float defaultBowDamage;
-    [SerializeField] float defaultSwordCooldown;
-    [SerializeField] float defaultBowCooldown;
-    [SerializeField] float defaultSwordRange = 5;
-    [SerializeField] float defaultProjectileSpeed;
-    [SerializeField] float defaultCritChance = 0.05f; // between 0 and 1 for 0%-100%
-    float currentMaxHealth;
-    float currentHealth;
-    float currentSpeed;
-    float currentSwordDamage;
-    float currentBowDamage;
-    float currentSwordCooldown;
-    float currentBowCooldown;
-    float currentSwordRange;
-    float currentProjectileSpeed;
-    float currentCritChance;
-
-    public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value; if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
-    public float Health { get { return currentHealth; } set { currentHealth = value;} }
-    public float Speed { get { return currentSpeed; } set { currentSpeed = value; } }
-    public float SwordDamage { get { return currentSwordDamage; } set { currentSwordDamage = value; } }
-    public float BowDamage { get { return currentBowDamage; } set { currentBowDamage = value; } }
-    public float SwordCooldown { get { return currentSwordCooldown; } set { currentSwordCooldown = value; } }
-    public float BowCooldown { get { return currentBowCooldown; } set { currentBowCooldown = value; } }
-    public float SwordRange { get { return currentSwordRange; } set { currentSwordRange = value; } }
-    public float ProjectileSpeed { get { return currentProjectileSpeed; } set { currentProjectileSpeed = value; } }
-    public float CritChance { get { return currentCritChance; } set { currentCritChance = value; } }
-
-
-    //Markings and Totems
-    Spirit bowAttribute = null;
-    Spirit swordAttribute = null;
-    Spirit bowElement = null;
-    Spirit swordElement = null;
-
-    public Spirit BowAttribute { get { return bowAttribute; } set { bowAttribute = value; } }
-    public Spirit SwordAttribute { get { return swordAttribute; } set { swordAttribute = value; } }
-    public Spirit BowElement { get { return bowElement; } set { bowElement = value; } }
-    public Spirit SwordElement { get { return swordElement; } set { swordElement = value; } }
+    //Player Components
+    public PlayerAttributes playerAttributes;
+    public PlayerMarkings playerMarkings;
 
     List<Totem> totems = new List<Totem>();
 
@@ -91,16 +51,8 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
 
-        currentMaxHealth = defaultHealth;
-        currentHealth = defaultHealth;
-        currentSpeed = defaultSpeed;
-        currentSwordDamage = defaultSwordDamage;
-        currentBowDamage = defaultBowDamage;
-        currentSwordCooldown = defaultSwordCooldown;
-        currentBowCooldown = defaultBowCooldown;
-        currentSwordRange = defaultSwordRange;
-        currentProjectileSpeed = defaultProjectileSpeed;
-        currentCritChance = defaultCritChance;
+        playerAttributes = GetComponent<PlayerAttributes>();
+        playerMarkings = GetComponent<PlayerMarkings>();
 
         livingLayer = LayerMask.NameToLayer("Living");
         spiritLayer = LayerMask.NameToLayer("Spirit");
@@ -217,7 +169,7 @@ public class PlayerController : MonoBehaviour
             body.velocity = new Vector3(0, 0, 0);
         }
 
-        body.velocity = currentSpeed * moveDir;
+        body.velocity = playerAttributes.Speed * moveDir;
     }
 
     public void ApplyKnockback(Vector3 direction, float power)
@@ -263,11 +215,11 @@ public class PlayerController : MonoBehaviour
         {
             if (targetEnemy == null)
             {
-                StartCoroutine(MoveTowardsAttack(SwordCooldown));
+                StartCoroutine(MoveTowardsAttack(playerAttributes.SwordCooldown));
             }
-            else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > currentSwordRange)
+            else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > playerAttributes.SwordRange)
             {
-                StartCoroutine(MoveTowardsTargetEnemy(SwordCooldown));
+                StartCoroutine(MoveTowardsTargetEnemy(playerAttributes.SwordCooldown));
             }
             else
             {
@@ -318,186 +270,7 @@ public class PlayerController : MonoBehaviour
     {
         var arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0));
 
-        arrow.GetComponent<Rigidbody>().velocity = transform.forward * ProjectileSpeed;
-    }
-
-    //Called every time the player picks up or swaps a marking
-    //Adds the correct stat bonuses to the player if it is an attribute marking
-    //Applies the correct element onto the chosen weapon if it is an element marking
-    void UpdateMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
-    {
-        if (type == MarkingTypes.Attribute)
-        {
-            for (int i = 0; i < spirit.buffedAttributes.Count; i++)
-            {
-                switch (spirit.buffedAttributes[i])
-                {
-                    //Buff all of these based on the level of the marking when adding level functionality - This is for Aiden dw abt it
-                    case PlayerAttributes.Health:
-
-
-
-                        break;
-
-                    case PlayerAttributes.Attack:
-
-                        if (weapon == Weapons.Sword)
-                        {
-                            SwordDamage *= 1.75f;
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            BowDamage *= 1.75f;
-                        }
-
-                        break;
-
-                    case PlayerAttributes.AtkSpd:
-
-                        if (weapon == Weapons.Sword)
-                        {
-                            SwordCooldown /= 1.75f;
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            BowCooldown /= 1.75f;
-                        }
-
-                        break;
-
-                    case PlayerAttributes.Speed:
-
-                        Speed *= 1.75f;
-
-                        break;
-
-                    case PlayerAttributes.Accuracy:
-
-
-
-                        break;
-
-                    case PlayerAttributes.CritChance:
-
-                        CritChance *= 1.75f;
-
-                        break;
-
-
-                }
-            }
-        }
-    }
-
-    void RemoveMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
-    {
-        if (type == MarkingTypes.Attribute)
-        {
-            for (int i = 0; i < spirit.buffedAttributes.Count; i++)
-            {
-                switch (spirit.buffedAttributes[i])
-                {
-                    case PlayerAttributes.Health:
-
-
-
-                        break;
-
-                    case PlayerAttributes.Attack:
-
-                        if (weapon == Weapons.Sword)
-                        {
-                            SwordDamage /= 1.75f;
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            BowDamage /= 1.75f;
-                        }
-
-                        break;
-
-                    case PlayerAttributes.AtkSpd:
-
-                        if (weapon == Weapons.Sword)
-                        {
-                            SwordCooldown *= 1.75f;
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            BowCooldown *= 1.75f;
-                        }
-
-                        break;
-
-                    case PlayerAttributes.Speed:
-
-                        Speed /= 1.75f;
-
-                        break;
-
-                    case PlayerAttributes.Accuracy:
-
-
-
-                        break;
-
-                    case PlayerAttributes.CritChance:
-
-                        CritChance /= 1.75f;
-
-                        break;
-                }
-            }
-        }
-    }
-
-    //Called after picking up a marking before deciding which weapon to put it on
-    public void ChooseWeapon(Spirit spirit, MarkingTypes type)
-    {
-        StartCoroutine(SelectWeapon(spirit, type));
-    }
-
-
-    IEnumerator SelectWeapon(Spirit spirit, MarkingTypes type)
-    {
-        bool weaponSelected = false;
-
-        while(!weaponSelected)
-        {
-            if (InputManager.Instance.SelectSword())
-            {
-                if (type == MarkingTypes.Attribute)
-                {
-                    //CHECK IF THE PLAYER ALREADY HAS A SPIRIT IN EACH SLOT TO BE ABLE TO SWAP - This is for aiden dont worry abt it
-                    SwordAttribute = spirit;
-                }
-                else if (type == MarkingTypes.Element)
-                {
-                    SwordElement = spirit;
-                }
-
-                UpdateMarking(spirit, type, Weapons.Sword);
-
-                weaponSelected = true;
-            }
-            if (InputManager.Instance.SelectBow())
-            {
-                if (type == MarkingTypes.Attribute)
-                {
-                    BowAttribute = spirit;
-                }
-                else if (type == MarkingTypes.Element)
-                {
-                    BowElement = spirit;
-                }
-
-                UpdateMarking(spirit, type, Weapons.Bow);
-
-                weaponSelected = true;
-            }
-
-            yield return null;
-        }
+        arrow.GetComponent<Rigidbody>().velocity = transform.forward * playerAttributes.ProjectileSpeed;
     }
 
     void ActivateSwordHitbox(int attackNum)
@@ -509,7 +282,7 @@ public class PlayerController : MonoBehaviour
         {
             case 1:
 
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), playerAttributes.SwordRange);
 
                 //Loops through each hit collider and adds all of the enemies into a list
                 if (enemyColliders.Length > 0)
@@ -527,14 +300,19 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(transform.forward, 5);
-                    enemiesHit[i].TakeDamage(SwordDamage);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                }
+
+                if (enemiesHit.Count > 0)
+                {
+                    OnSwordHit?.Invoke(enemiesHit);
                 }
 
                 break;
 
             case 2:
 
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), playerAttributes.SwordRange);
 
                 if (enemyColliders.Length > 0)
                 {
@@ -550,14 +328,19 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(transform.forward, 10);
-                    enemiesHit[i].TakeDamage(SwordDamage);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                }
+
+                if (enemiesHit.Count > 0)
+                {
+                    OnSwordHit?.Invoke(enemiesHit);
                 }
 
                 break;
 
             case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK - this is for aiden dw abt it
 
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), playerAttributes.SwordRange);
 
                 if (enemyColliders.Length > 0)
                 {
@@ -573,7 +356,12 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(transform.forward, 10);
-                    enemiesHit[i].TakeDamage(SwordDamage);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                }
+
+                if (enemiesHit.Count > 0)
+                {
+                    OnSwordHit?.Invoke(enemiesHit);
                 }
 
                 break;
@@ -676,7 +464,7 @@ public class PlayerController : MonoBehaviour
         //Uses lerp to give the player a small dash forward towards their attack
         float elaspedTime = 0;
         Vector3 endVelo = Vector3.zero;
-        Vector3 startVelo = currentSpeed * (targetEnemy.transform.position - transform.position).normalized;
+        Vector3 startVelo = playerAttributes.Speed * (targetEnemy.transform.position - transform.position).normalized;
 
         float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
 
@@ -704,7 +492,7 @@ public class PlayerController : MonoBehaviour
         //Uses lerp to give the player a small dash forward towards their attack
         float elaspedTime = 0;
         Vector3 endVelo = Vector3.zero;
-        Vector3 startVelo = currentSpeed * aimDirection;
+        Vector3 startVelo = playerAttributes.Speed * aimDirection;
 
         while (elaspedTime < duration)
         {
@@ -759,12 +547,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (weaponChoice == Weapons.Sword)
                 {
-                    StartCoroutine(BeginAttackCooldown(SwordCooldown));
+                    StartCoroutine(BeginAttackCooldown(playerAttributes.SwordCooldown));
                 }
 
                 if (weaponChoice == Weapons.Bow)
                 {
-                    StartCoroutine(BeginAttackCooldown(BowCooldown));
+                    StartCoroutine(BeginAttackCooldown(playerAttributes.BowCooldown));
                 }
 
                 return;
