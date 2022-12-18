@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class AttributeMarking : Marking
 {
-    protected List<PlayerAttributes> buffedAttributes = new List<PlayerAttributes>();
+    protected List<Attributes> buffedAttributes = new List<Attributes>();
 }

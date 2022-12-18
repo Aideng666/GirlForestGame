@@ -6,6 +6,7 @@ public class Room : MonoBehaviour
 {
     [SerializeField] Material entranceMaterial; //temp material to emphasize which spots in the room have exits
     [SerializeField] GameObject totemPrefab; //prefab to spawn totems in rooms
+    [SerializeField] GameObject markingPrefab; //prefab to spawn markings in rooms
 
     Room[] connectedRooms = new Room[4]; //0,1,2,3 = North, South, East, West respectively
     Room originRoom; //The room that this room was originally attached to
@@ -156,9 +157,10 @@ public class Room : MonoBehaviour
 
                         break;
 
-                    case NodeTypes.Blessing:
+                    case NodeTypes.Marking:
 
-                        print("Blessing Floor");
+                        Instantiate(markingPrefab, transform.position + new Vector3(-5, 0, 5), Quaternion.identity, transform);
+                        Instantiate(markingPrefab, transform.position + new Vector3(5, 0, -5), Quaternion.identity, transform);
 
                         break;
 

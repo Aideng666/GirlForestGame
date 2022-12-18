@@ -16,7 +16,7 @@ public class HealthUp : PermanentTotem
     {
         if (!effectApplied)
         {
-            player.MaxHealth += 2;
+            player.playerAttributes.MaxHealth += 2;
 
             effectApplied = true;
 
