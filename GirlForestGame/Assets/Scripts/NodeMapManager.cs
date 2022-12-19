@@ -101,6 +101,8 @@ public class NodeMapManager : MonoBehaviour
 
     public void SetNextLevel()
     {
+        Minimap.Instance.ResetMap();
+
         currentLevel++;
 
         SetPreviousNode(activeNode);

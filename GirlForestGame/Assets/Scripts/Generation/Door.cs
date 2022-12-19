@@ -17,12 +17,12 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
-        if (InputManager.Instance.ShootBow())
-        {
-            print("Opening Doors");
+        //if (InputManager.Instance.ShootBow())
+        //{
+        //    print("Opening Doors");
 
-            anim.SetBool("Open", true);
-        }
+        //    anim.SetBool("Open", true);
+        //}
     }
 
     public void OpenDoor()

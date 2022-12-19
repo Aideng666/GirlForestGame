@@ -253,7 +253,7 @@ public class MapGenerator : MonoBehaviour
 
             if (visualNodes[nodeIndex].GetComponent<MapNode>().GetNodeType() == NodeTypes.Default)
             {
-                visualNodes[nodeIndex].GetComponent<MapNode>().SetNodeType(NodeTypes.Blessing);
+                visualNodes[nodeIndex].GetComponent<MapNode>().SetNodeType(NodeTypes.Marking);
             }
             else
             {

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Spirit : ScriptableObject
 {
-    public string name;
-    public List<PlayerAttributes> buffedAttributes;
+    public string spiritName;
+    public List<Attributes> buffedAttributes;
     public Elements usedElement;
 }

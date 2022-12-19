@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Material spiritFormMaterial;
     GameObject targetEnemy;
     Vector3 aimDirection;
-    //[SerializeField] LayerMask enemyLayer;
     bool isAttacking;
     bool isKnockbackApplied;
     bool canAttack = true;
@@ -29,55 +28,17 @@ public class PlayerController : MonoBehaviour
     LayerMask livingLayer;
     LayerMask spiritLayer;
 
+    public delegate void OnAttack(List<Enemy> enemiesHit);
+    public static event OnAttack OnSwordHit;
+
     public Forms Form { get { return currentForm; } set { currentForm = value; } }
 
-    //Player Attributes
-    [Header("Default Player Attributes")]
-    [SerializeField] float defaultHealth = 6;
-    [SerializeField] float maximumHealth = 12;
-    [SerializeField] float defaultSpeed;
-    [SerializeField] float defaultSwordDamage;
-    [SerializeField] float defaultBowDamage;
-    [SerializeField] float defaultSwordCooldown;
-    [SerializeField] float defaultBowCooldown;
-    [SerializeField] float defaultSwordRange = 5;
-    [SerializeField] float defaultProjectileSpeed;
-    [SerializeField] float defaultCritChance = 0.05f; // between 0 and 1 for 0%-100%
-    float currentMaxHealth;
-    float currentHealth;
-    float currentSpeed;
-    float currentSwordDamage;
-    float currentBowDamage;
-    float currentSwordCooldown;
-    float currentBowCooldown;
-    float currentSwordRange;
-    float currentProjectileSpeed;
-    float currentCritChance;
+    //Player Components
+    public PlayerAttributes playerAttributes;
+    public PlayerMarkings playerMarkings;
+    public PlayerInventory playerInventory;
 
-    public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value; if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
-    public float Health { get { return currentHealth; } set { currentHealth = value;} }
-    public float Speed { get { return currentSpeed; } set { currentSpeed = value; } }
-    public float SwordDamage { get { return currentSwordDamage; } set { currentSwordDamage = value; } }
-    public float BowDamage { get { return currentBowDamage; } set { currentBowDamage = value; } }
-    public float SwordCooldown { get { return currentSwordCooldown; } set { currentSwordCooldown = value; } }
-    public float BowCooldown { get { return currentBowCooldown; } set { currentBowCooldown = value; } }
-    public float SwordRange { get { return currentSwordRange; } set { currentSwordRange = value; } }
-    public float ProjectileSpeed { get { return currentProjectileSpeed; } set { currentProjectileSpeed = value; } }
-    public float CritChance { get { return currentCritChance; } set { currentCritChance = value; } }
-
-
-    //Markings and Totems
-    Spirit bowAttribute = null;
-    Spirit swordAttribute = null;
-    Spirit bowElement = null;
-    Spirit swordElement = null;
-
-    public Spirit BowAttribute { get { return bowAttribute; } set { bowAttribute = value; } }
-    public Spirit SwordAttribute { get { return swordAttribute; } set { swordAttribute = value; } }
-    public Spirit BowElement { get { return bowElement; } set { bowElement = value; } }
-    public Spirit SwordElement { get { return swordElement; } set { swordElement = value; } }
-
-    List<Totem> totems = new List<Totem>();
+    //List<Totem> totems = new List<Totem>();
 
     public static PlayerController Instance { get; set; }
 
@@ -91,16 +52,9 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
 
-        currentMaxHealth = defaultHealth;
-        currentHealth = defaultHealth;
-        currentSpeed = defaultSpeed;
-        currentSwordDamage = defaultSwordDamage;
-        currentBowDamage = defaultBowDamage;
-        currentSwordCooldown = defaultSwordCooldown;
-        currentBowCooldown = defaultBowCooldown;
-        currentSwordRange = defaultSwordRange;
-        currentProjectileSpeed = defaultProjectileSpeed;
-        currentCritChance = defaultCritChance;
+        playerAttributes = GetComponent<PlayerAttributes>();
+        playerMarkings = GetComponent<PlayerMarkings>();
+        playerInventory = GetComponent<PlayerInventory>();
 
         livingLayer = LayerMask.NameToLayer("Living");
         spiritLayer = LayerMask.NameToLayer("Spirit");
@@ -122,6 +76,7 @@ public class PlayerController : MonoBehaviour
                 SelectTargetEnemy();
             }
 
+            //Detects the release of the arrow once the bow is completely drawn back
             if (bowDrawn)
             {
                 bowAimCanvas.SetActive(true);
@@ -137,6 +92,8 @@ public class PlayerController : MonoBehaviour
                     SpawnArrow();
                 }
             }
+            ////////////////////////////////////////////////////////////////////////
+
 
             if (InputManager.Instance.ChangeForm())
             {
@@ -169,6 +126,7 @@ public class PlayerController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
 
+        //Sets mouse variables based on the mouse position in the world
         if (Physics.Raycast(ray, out hit, 100))
         {
             mousePos = hit.point;
@@ -177,6 +135,8 @@ public class PlayerController : MonoBehaviour
 
             mouseAimDirection.y = 0;
         }
+        ///////////////////////////////////////////////////////////////
+
 
         float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;/* + Camera.main.transform.eulerAngles.y;*/
         moveDir = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
@@ -185,21 +145,24 @@ public class PlayerController : MonoBehaviour
         float mouseAimAngle = Mathf.Atan2(mouseAimDirection.x, mouseAimDirection.z) * Mathf.Rad2Deg;
         aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
 
+
+        //Sets the aiming direction of the player along with their rotation to face in the direction that they are aiming
         if (controlWithMouse)
         {
             aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, mouseAimAngle, 0f) * Vector3.forward;
-            transform.rotation = Quaternion.Euler(0, mouseAimAngle + 45, 0);
+            transform.rotation = Quaternion.Euler(0, mouseAimAngle, 0);
         }
-        else if (aimDir.magnitude <= 0.1f)
+        else if (aimDir.magnitude <= 0.1f && direction.magnitude >= 0.1f)
         {
             aimDirection = moveDir;
-            transform.rotation = Quaternion.Euler(0f, targetAngle + 45, 0f);
+            transform.forward = moveDir.normalized;
         }
-        else
+        else if (aimDir.magnitude > 0.1f)
         {
             aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
             transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if (direction.magnitude <= 0.1f)
         {
@@ -208,7 +171,7 @@ public class PlayerController : MonoBehaviour
             body.velocity = new Vector3(0, 0, 0);
         }
 
-        body.velocity = currentSpeed * moveDir;
+        body.velocity = playerAttributes.Speed * moveDir;
     }
 
     public void ApplyKnockback(Vector3 direction, float power)
@@ -245,17 +208,20 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+
+    //allows for the player to perform the little dash forwards before each sword swing
+    //chooses the direction of the dash and attack based on the target enemy and distance
     public void InitSwordAttack()
     {
         if (canAttack)
         {
             if (targetEnemy == null)
             {
-                StartCoroutine(MoveTowardsAttack(SwordCooldown));
+                StartCoroutine(MoveTowardsAttack(playerAttributes.SwordCooldown));
             }
-            else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > currentSwordRange)
+            else if (Vector3.Distance(targetEnemy.transform.position, transform.position) > playerAttributes.SwordRange)
             {
-                StartCoroutine(MoveTowardsTargetEnemy(SwordCooldown));
+                StartCoroutine(MoveTowardsTargetEnemy(playerAttributes.SwordCooldown));
             }
             else
             {
@@ -266,6 +232,7 @@ public class PlayerController : MonoBehaviour
 
     public void SwordAttack()
     {
+        //Chooses which animation to play based on which attack number they are in the current combo
         switch (currentAttackNum)
         {
             case 1:
@@ -286,12 +253,14 @@ public class PlayerController : MonoBehaviour
 
                 break;
         }
+        ////////////////////////////////////////////////////////////////////
 
         ActivateSwordHitbox(currentAttackNum);
 
         canAttack = false;
     }
 
+    //Initializes the drawing of the bow
     public void BowAttack()
     {
         GetComponentInChildren<Animator>().SetTrigger("DrawBow");
@@ -303,181 +272,7 @@ public class PlayerController : MonoBehaviour
     {
         var arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0));
 
-        arrow.GetComponent<Rigidbody>().velocity = transform.forward * ProjectileSpeed;
-    }
-
-    void UpdateMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
-    {
-        if (type == MarkingTypes.Attribute)
-        {
-            for (int i = 0; i < spirit.buffedAttributes.Count; i++)
-            {
-                switch (spirit.buffedAttributes[i])
-                {
-                    //Buff all of these based on the level of the marking when adding level functionality
-                    case PlayerAttributes.Health:
-
-
-
-                        break;
-
-                    case PlayerAttributes.Attack:
-
-                        if (weapon == Weapons.Sword)
-                        {
-                            SwordDamage *= 1.75f;
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            BowDamage *= 1.75f;
-                        }
-
-                        break;
-
-                    case PlayerAttributes.AtkSpd:
-
-                        if (weapon == Weapons.Sword)
-                        {
-                            SwordCooldown /= 1.75f;
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            BowCooldown /= 1.75f;
-                        }
-
-                        break;
-
-                    case PlayerAttributes.Speed:
-
-                        Speed *= 1.75f;
-
-                        break;
-
-                    case PlayerAttributes.Accuracy:
-
-
-
-                        break;
-
-                    case PlayerAttributes.CritChance:
-
-                        CritChance *= 1.75f;
-
-                        break;
-
-
-                }
-            }
-        }
-    }
-
-    void RemoveMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
-    {
-        if (type == MarkingTypes.Attribute)
-        {
-            for (int i = 0; i < spirit.buffedAttributes.Count; i++)
-            {
-                switch (spirit.buffedAttributes[i])
-                {
-                    case PlayerAttributes.Health:
-
-
-
-                        break;
-
-                    case PlayerAttributes.Attack:
-
-                        if (weapon == Weapons.Sword)
-                        {
-                            SwordDamage /= 1.75f;
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            BowDamage /= 1.75f;
-                        }
-
-                        break;
-
-                    case PlayerAttributes.AtkSpd:
-
-                        if (weapon == Weapons.Sword)
-                        {
-                            SwordCooldown *= 1.75f;
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            BowCooldown *= 1.75f;
-                        }
-
-                        break;
-
-                    case PlayerAttributes.Speed:
-
-                        Speed /= 1.75f;
-
-                        break;
-
-                    case PlayerAttributes.Accuracy:
-
-
-
-                        break;
-
-                    case PlayerAttributes.CritChance:
-
-                        CritChance /= 1.75f;
-
-                        break;
-                }
-            }
-        }
-    }
-
-    public void ChooseWeapon(Spirit spirit, MarkingTypes type)
-    {
-        StartCoroutine(SelectWeapon(spirit, type));
-    }
-
-    IEnumerator SelectWeapon(Spirit spirit, MarkingTypes type)
-    {
-        bool weaponSelected = false;
-
-        while(!weaponSelected)
-        {
-            if (InputManager.Instance.SelectSword())
-            {
-                if (type == MarkingTypes.Attribute)
-                {
-                    //CHECK IF THE PLAYER ALREADY HAS A SPIRIT IN EACH SLOT TO BE ABLE TO SWAP
-                    SwordAttribute = spirit;
-                }
-                else if (type == MarkingTypes.Element)
-                {
-                    SwordElement = spirit;
-                }
-
-                UpdateMarking(spirit, type, Weapons.Sword);
-
-                weaponSelected = true;
-            }
-            if (InputManager.Instance.SelectBow())
-            {
-                if (type == MarkingTypes.Attribute)
-                {
-                    BowAttribute = spirit;
-                }
-                else if (type == MarkingTypes.Element)
-                {
-                    BowElement = spirit;
-                }
-
-                UpdateMarking(spirit, type, Weapons.Bow);
-
-                weaponSelected = true;
-            }
-
-            yield return null;
-        }
+        arrow.GetComponent<Rigidbody>().velocity = transform.forward * playerAttributes.ProjectileSpeed;
     }
 
     void ActivateSwordHitbox(int attackNum)
@@ -489,8 +284,9 @@ public class PlayerController : MonoBehaviour
         {
             case 1:
 
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), playerAttributes.SwordRange);
 
+                //Loops through each hit collider and adds all of the enemies into a list
                 if (enemyColliders.Length > 0)
                 {
                     for (int i = 0; i < enemyColliders.Length; i++)
@@ -501,18 +297,24 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                 }
-
+                //////////////////////////////////////////////////////////////////////////
+                
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(transform.forward, 5);
-                    enemiesHit[i].TakeDamage(SwordDamage);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                }
+
+                if (enemiesHit.Count > 0)
+                {
+                    OnSwordHit?.Invoke(enemiesHit);
                 }
 
                 break;
 
             case 2:
 
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), playerAttributes.SwordRange);
 
                 if (enemyColliders.Length > 0)
                 {
@@ -528,14 +330,19 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(transform.forward, 10);
-                    enemiesHit[i].TakeDamage(SwordDamage);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                }
+
+                if (enemiesHit.Count > 0)
+                {
+                    OnSwordHit?.Invoke(enemiesHit);
                 }
 
                 break;
 
-            case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK
+            case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK - this is for aiden dw abt it
 
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), SwordRange);
+                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), playerAttributes.SwordRange);
 
                 if (enemyColliders.Length > 0)
                 {
@@ -551,7 +358,12 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
                     enemiesHit[i].ApplyKnockback(transform.forward, 10);
-                    enemiesHit[i].TakeDamage(SwordDamage);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                }
+
+                if (enemiesHit.Count > 0)
+                {
+                    OnSwordHit?.Invoke(enemiesHit);
                 }
 
                 break;
@@ -564,6 +376,7 @@ public class PlayerController : MonoBehaviour
         Collider[] collidersDetected2 = new Collider[0];
         Collider[] collidersDetected3 = new Collider[0];
 
+        //Creates a "cone" that acts as the players "view" and adds every visible collider to the player into arrays
         if (aimDirection.magnitude > 0)
         {
             collidersDetected = Physics.OverlapSphere(transform.position + (aimDirection.normalized * 1), 1f);
@@ -580,9 +393,12 @@ public class PlayerController : MonoBehaviour
         {
             targetEnemy = null;
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         visibleEnemies = new List<Enemy>();
 
+        //Filters out only enemies from the visible colliders
         if (collidersDetected.Length > 0)
         {
             for (int i = 0; i < collidersDetected.Length; i++)
@@ -613,7 +429,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        /////////////////////////////////////////////////////
 
+        //Sets the target enemy to the closest enemy that is within the player's view
         if (visibleEnemies.Count > 0)
         {
             targetEnemy = visibleEnemies[0].gameObject;
@@ -630,22 +448,25 @@ public class PlayerController : MonoBehaviour
         {
             targetEnemy = null;
         }
+        ///////////////////////////////////////////////////////////////////////////////
     }
 
-    public void AddTotemToList(Totem totem)
-    {
-        totems.Add(totem);
-    }
+    //Called when player picks up a totem
+    //public void AddTotemToList(Totem totem)
+    //{
+    //    totems.Add(totem);
+    //}
 
     IEnumerator MoveTowardsTargetEnemy(float duration)
     {
-        float elaspedTime = 0;
         isAttacking = true;
 
         StartCoroutine(CompleteAttackMovement(duration));
-
+        
+        //Uses lerp to give the player a small dash forward towards their attack
+        float elaspedTime = 0;
         Vector3 endVelo = Vector3.zero;
-        Vector3 startVelo = currentSpeed * (targetEnemy.transform.position - transform.position).normalized;
+        Vector3 startVelo = playerAttributes.Speed * (targetEnemy.transform.position - transform.position).normalized;
 
         float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
 
@@ -659,6 +480,7 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+        //////////////////////////////////////////////////////////////////////////
 
         yield return null;
     }
@@ -669,9 +491,10 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(CompleteAttackMovement(duration));
 
+        //Uses lerp to give the player a small dash forward towards their attack
         float elaspedTime = 0;
         Vector3 endVelo = Vector3.zero;
-        Vector3 startVelo = currentSpeed * aimDirection;
+        Vector3 startVelo = playerAttributes.Speed * aimDirection;
 
         while (elaspedTime < duration)
         {
@@ -681,10 +504,12 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+        /////////////////////////////////////////////////////////////////////////
 
         yield return null;
     }
 
+    //Starts the sword attack only a little bit into the dash in order to be able to attack at the end of the dash instead of beginning
     IEnumerator CompleteAttackMovement(float duration)
     {
         yield return new WaitForSeconds(duration * 0.25f);
@@ -724,12 +549,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (weaponChoice == Weapons.Sword)
                 {
-                    StartCoroutine(BeginAttackCooldown(SwordCooldown));
+                    StartCoroutine(BeginAttackCooldown(playerAttributes.SwordCooldown));
                 }
 
                 if (weaponChoice == Weapons.Bow)
                 {
-                    StartCoroutine(BeginAttackCooldown(BowCooldown));
+                    StartCoroutine(BeginAttackCooldown(playerAttributes.BowCooldown));
                 }
 
                 return;
@@ -766,28 +591,33 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //To transition from room to room
         if (collision.gameObject.CompareTag("Exit"))
         {
             UIManager.Instance.GetFadePanel().BeginRoomTransition();
 
             StartCoroutine(EnterNewRoom(
                 DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
-                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()].GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
-                .transform.parent.transform.position));
+                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]
+                .GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
+                .transform.parent.transform.position, DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())));
         }
+        //To transition to the node map after completing a full floor
         if (collision.gameObject.CompareTag("FloorExit"))
         {
             NodeMapManager.Instance.SetNextLevel();
         }
     }
 
-    IEnumerator EnterNewRoom(Room room, Vector3 updatedPlayerPos)
+    IEnumerator EnterNewRoom(Room room, Vector3 updatedPlayerPos, Directions dirOfPrevRoom)
     {
         yield return new WaitForSeconds(UIManager.Instance.GetFadePanel().GetTransitionTime() / 2);
 
         DungeonGenerator.Instance.SetCurrentRoom(room);
 
         transform.position = updatedPlayerPos;
+
+        Minimap.Instance.VisitRoom(room, dirOfPrevRoom);
 
         yield return null;
     }

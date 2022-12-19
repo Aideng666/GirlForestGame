@@ -8,7 +8,7 @@ public class HawkAttributeMarking : AttributeMarking
     {
         base.Start();
 
-        buffedAttributes.Add(PlayerAttributes.AtkSpd);
-        buffedAttributes.Add(PlayerAttributes.Speed);
+        buffedAttributes.Add(Attributes.AtkSpd);
+        buffedAttributes.Add(Attributes.Speed);
     }
 }

@@ -95,7 +95,7 @@ public class MapNode : MonoBehaviour
         {
             GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
-        else if( type == NodeTypes.Blessing)
+        else if( type == NodeTypes.Marking)
         {
             GetComponent<MeshRenderer>().material.color = Color.blue;
         }
@@ -174,7 +174,7 @@ public class MapNode : MonoBehaviour
 public enum NodeTypes
 {
     Default,
-    Blessing,
+    Marking,
     Shop,
     Challenge,
     Boss

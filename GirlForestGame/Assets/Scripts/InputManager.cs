@@ -25,6 +25,9 @@ public class InputManager : MonoBehaviour
     InputAction swapActionMapAction;
     InputAction selectNodeAction;
 
+    //Global Controls
+     public InputAction openInventoryAction;
+
     public static InputManager Instance { get; set; }
     private void Awake()
     {
@@ -52,6 +55,14 @@ public class InputManager : MonoBehaviour
         regenMapAction = playerInput.actions["RegenerateMap"];
         swapActionMapAction = playerInput.actions["SwapActionMap"];
         selectNodeAction = playerInput.actions["SelectNode"];
+        openInventoryAction = playerInput.actions["OpenInventory"];
+
+        openInventoryAction.started += ToggleInventory;
+    }
+
+    private void OnDisable()
+    {
+        openInventoryAction.started -= ToggleInventory;
     }
 
     public void SwapActionMap(string mapName)
@@ -98,7 +109,9 @@ public class InputManager : MonoBehaviour
     {
         if (playerInput.actions.FindActionMap("Player").enabled)
         {
-            return bowAttackAction.triggered;
+            //return bowAttackAction.triggered;
+
+            return bowAttackAction.IsInProgress();
         }
 
         return false;
@@ -222,5 +235,10 @@ public class InputManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    void ToggleInventory(InputAction.CallbackContext ctx)
+    {
+        PlayerController.Instance.playerInventory.ToggleInventory();
     }
 }

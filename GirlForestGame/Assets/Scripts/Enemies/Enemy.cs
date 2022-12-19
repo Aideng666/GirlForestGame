@@ -138,8 +138,6 @@ public class Enemy : MonoBehaviour
             CancelPrep();
         }
 
-        transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.1f);
-
         direction.y = 0;
 
         direction = direction.normalized;
@@ -154,6 +152,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float value)
     {
         health -= value;
+
+        transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.1f);
     }
 
     void Die()

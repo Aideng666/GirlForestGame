@@ -5,22 +5,21 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     [SerializeField] Material entranceMaterial; //temp material to emphasize which spots in the room have exits
-    //[SerializeField] GameObject[] doors = new GameObject[4]; //0,1,2,3 = North, South, East, West respectively
+    [SerializeField] GameObject totemPrefab; //prefab to spawn totems in rooms
+    [SerializeField] GameObject markingPrefab; //prefab to spawn markings in rooms
 
     Room[] connectedRooms = new Room[4]; //0,1,2,3 = North, South, East, West respectively
     Room originRoom; //The room that this room was originally attached to
 
     RoomObject[] possibleRooms; // List of all of the possible room models for the room to pick
     RoomModel spawnedModel; // the selected model for the room that was spawned, used to access the doors
+    RoomObject selectedRoom;
 
     RoomTypes currentType = RoomTypes.Fight;
 
-    //bool isCurrentRoom; //Is the player currently in this room
     bool roomCompleted; //Has the player defeated all the enemies within this room
 
     int distanceFromStartRoom = 0;
-
-    float cameraBoundary;
 
     public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
 
@@ -49,7 +48,9 @@ public class Room : MonoBehaviour
 
                         CreateExit(directionOfExit);
 
-                        spawnedModel.doors[directionOfExit].transform.parent.GetComponentInChildren<RoomExit>().tag = "FloorExit";
+                        //spawnedModel.doors[directionOfExit].transform.parent.GetComponentInChildren<RoomExit>().tag = "FloorExit";
+                        spawnedModel.exits[directionOfExit].SetActive(true);
+                        spawnedModel.exits[directionOfExit].tag = "FloorExit";
 
                         spawnedModel.doors[directionOfExit].SetActive(false);
                     }
@@ -59,22 +60,33 @@ public class Room : MonoBehaviour
     }
 
     //Selects one of the possible room models at random
-    public void ChooseRoom()
+    public void ChooseRoom(string roomFolder)
     {
-        possibleRooms = TypeHandler.GetAllInstances<RoomObject>("Rooms");
+        possibleRooms = TypeHandler.GetAllInstances<RoomObject>(roomFolder);
 
         int randomIndex = Random.Range(0, possibleRooms.Length);
 
-        Instantiate(possibleRooms[randomIndex].model, transform.position, Quaternion.identity, transform);
+        selectedRoom = possibleRooms[randomIndex];
 
-        spawnedModel = GetComponentInChildren<RoomModel>();
+        var roomModel = Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
 
-        cameraBoundary = possibleRooms[randomIndex].cameraBoundary;
+        spawnedModel = roomModel.GetComponent<RoomModel>();
     }
 
     public void CreateExit(int direction)
     {
         spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
+    }
+
+    public void UpdateVisualExits()
+    {
+        for (int i = 0; i < connectedRooms.Length; i++)
+        {
+            if (connectedRooms[i] == null)
+            {
+                spawnedModel.exits[i].SetActive(false);
+            }
+        }
     }
 
     //Creates a new room that attaches to the current room on one of its sides
@@ -118,44 +130,68 @@ public class Room : MonoBehaviour
         return spawnedModel;
     }
 
+    public RoomObject GetRoomObject()
+    {
+        return selectedRoom;
+    }
+
     public void SetRoomType(RoomTypes type)
     {
         currentType = type;
 
-        if (type == RoomTypes.Start)
+        switch (type)
         {
-            roomCompleted = true;
-        }
-        if (type == RoomTypes.End)
-        {
-            switch (DungeonGenerator.Instance.GetCurrentFloorType())
-            {
-                case NodeTypes.Default:
+            case RoomTypes.Start:
 
-                    print("Regular Floor");
+                roomCompleted = true;
 
-                    break;
+                break;
 
-                case NodeTypes.Blessing:
+            case RoomTypes.End:
 
-                    print("Blessing Floor");
+                switch (DungeonGenerator.Instance.GetCurrentFloorType())
+                {
+                    case NodeTypes.Default:
 
-                    break;
+                       
 
-                case NodeTypes.Shop:
+                        break;
 
-                    print("Shop Floor");
+                    case NodeTypes.Marking:
 
-                    break;
+                        Instantiate(markingPrefab, transform.position + new Vector3(-5, 0, 5), Quaternion.identity, transform);
+                        Instantiate(markingPrefab, transform.position + new Vector3(5, 0, -5), Quaternion.identity, transform);
 
-                case NodeTypes.Boss:
+                        break;
 
-                    print("Boss Floor");
+                    case NodeTypes.Shop:
 
-                    break;
-            }
+                        
+
+                        break;
+
+                    case NodeTypes.Boss:
+
+                        
+
+                        break;
+                }
+
+                break;
+
+            case RoomTypes.Totem:
+
+                Instantiate(totemPrefab, transform);
+
+                break;
         }
     }
+
+    public RoomTypes GetRoomType()
+    {
+        return currentType;
+    }
+
 }
 
 public enum RoomTypes

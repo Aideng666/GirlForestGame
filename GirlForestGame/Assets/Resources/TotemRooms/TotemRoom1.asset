@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b1c5fefb1ff5c4180a24aa5d9006a5, type: 3}
-  m_Name: Hawk
+  m_Script: {fileID: 11500000, guid: d45fca93215b5fb4fb04d9cbe18a2878, type: 3}
+  m_Name: TotemRoom1
   m_EditorClassIdentifier: 
-  spiritName: Hawk
-  buffedAttributes: 0200000003000000
-  usedElement: 1
+  model: {fileID: 8696891222964263858, guid: 4d3c3cffbdb83d649a918d8704707aeb, type: 3}
+  northCamBoundary: 6.5
+  southCamBoundary: -6.5
+  eastCamBoundary: 6.5
+  westCamBoundary: -6.5
