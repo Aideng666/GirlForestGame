@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 5982676203613863553}
   - component: {fileID: 807364247537399498}
   - component: {fileID: 1439183563790741150}
+  - component: {fileID: 1297180804387073770}
   - component: {fileID: 1821254030439938998}
   - component: {fileID: 2453708176110309224}
   m_Layer: 7
@@ -266,16 +267,9 @@ MonoBehaviour:
   bowAimCanvas: {fileID: 0}
   livingFormMaterial: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
   spiritFormMaterial: {fileID: 2100000, guid: 905ff118dee948847a51283f6b488e8d, type: 2}
-  defaultHealth: 6
-  maximumHealth: 12
-  defaultSpeed: 15
-  defaultSwordDamage: 5
-  defaultBowDamage: 5
-  defaultSwordCooldown: 0.3
-  defaultBowCooldown: 0.5
-  defaultSwordRange: 5
-  defaultProjectileSpeed: 20
-  defaultCritChance: 0.05
+  playerAttributes: {fileID: 0}
+  playerMarkings: {fileID: 0}
+  playerInventory: {fileID: 0}
 --- !u!114 &807364247537399498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +304,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6958b1a1bd1bca4890cb1f5dca01098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfBurnTicks: 5
+  burnTickDamage: 1
+  burnTickDelay: 1
+--- !u!114 &1297180804387073770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5982676203613863563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511750e3b1efb354a9e73f55e7cfb57e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markingPrefab: {fileID: 5512418781491973167, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
 --- !u!54 &1821254030439938998
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -36,8 +36,9 @@ public class PlayerController : MonoBehaviour
     //Player Components
     public PlayerAttributes playerAttributes;
     public PlayerMarkings playerMarkings;
+    public PlayerInventory playerInventory;
 
-    List<Totem> totems = new List<Totem>();
+    //List<Totem> totems = new List<Totem>();
 
     public static PlayerController Instance { get; set; }
 
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
         playerAttributes = GetComponent<PlayerAttributes>();
         playerMarkings = GetComponent<PlayerMarkings>();
+        playerInventory = GetComponent<PlayerInventory>();
 
         livingLayer = LayerMask.NameToLayer("Living");
         spiritLayer = LayerMask.NameToLayer("Spirit");
@@ -450,10 +452,10 @@ public class PlayerController : MonoBehaviour
     }
 
     //Called when player picks up a totem
-    public void AddTotemToList(Totem totem)
-    {
-        totems.Add(totem);
-    }
+    //public void AddTotemToList(Totem totem)
+    //{
+    //    totems.Add(totem);
+    //}
 
     IEnumerator MoveTowardsTargetEnemy(float duration)
     {

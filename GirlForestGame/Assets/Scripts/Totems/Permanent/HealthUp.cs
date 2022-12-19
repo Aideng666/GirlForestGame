@@ -20,7 +20,7 @@ public class HealthUp : PermanentTotem
 
             effectApplied = true;
 
-            player.AddTotemToList(this);
+            player.playerInventory.AddTotemToList(this);
         }
     }
 }
