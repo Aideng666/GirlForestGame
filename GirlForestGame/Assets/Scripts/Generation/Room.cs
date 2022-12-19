@@ -153,7 +153,7 @@ public class Room : MonoBehaviour
                 {
                     case NodeTypes.Default:
 
-                        print("Regular Floor");
+                       
 
                         break;
 
@@ -166,13 +166,13 @@ public class Room : MonoBehaviour
 
                     case NodeTypes.Shop:
 
-                        print("Shop Floor");
+                        
 
                         break;
 
                     case NodeTypes.Boss:
 
-                        print("Boss Floor");
+                        
 
                         break;
                 }

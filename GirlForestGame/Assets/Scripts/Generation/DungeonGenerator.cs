@@ -167,8 +167,6 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (roomToChange.GetConnectedRooms()[i])
             {
-                print($"Found Connected Room In This Direction {i}");
-
                 roomToChange.AttachConnectedRoom(i, roomToChange.GetConnectedRooms()[i]);
                 //roomToChange.CreateExit(i);
 
