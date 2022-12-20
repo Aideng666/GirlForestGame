@@ -5,20 +5,22 @@ using DG.Tweening;
 
 public class MarkingPickup : MonoBehaviour
 {
-    Spirit chosenSpirit;
-    MarkingTypes chosenType;
+    [SerializeField] float colliderDelay = 1;
 
-    private void OnEnable()
-    {
-        transform.localScale = new Vector3(1, 0, 1);
-
-        transform.DOScale(new Vector3(1, 1, 1), 0.5f);
-    }
+    Spirit chosenSpirit = null;
+    MarkingTypes chosenType = MarkingTypes.None;
 
     // Start is called before the first frame update
     void Start()
     {
-        ChooseMarking();
+        if (chosenSpirit == null || chosenType == MarkingTypes.None)
+        {
+            ChooseMarking();
+        }
+
+        GetComponent<Collider>().enabled = false;
+
+        StartCoroutine(DelayCollider());
     }
 
     //This is called when a new marking pickup is spawned to randomly select a spirit and type
@@ -38,9 +40,18 @@ public class MarkingPickup : MonoBehaviour
         chosenType = type;
     }
 
+    IEnumerator DelayCollider()
+    {
+        yield return new WaitForSeconds(colliderDelay);
+
+        print("Collider now Active");
+
+        GetComponent<Collider>().enabled = true;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.playerInventory.IsChoosingWeapon)
         {
             PlayerController.Instance.playerInventory.StartWeaponSelection(chosenSpirit, chosenType);
 

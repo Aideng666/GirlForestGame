@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using DG.Tweening;
+using DG.Tweening.Plugins.Core.PathCore;
 
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] GameObject markingPrefab;
+    [SerializeField] Path markingBouncePath;
 
     //0 = Sword Attribute
     //1 = Sword Element
@@ -19,6 +21,8 @@ public class PlayerInventory : MonoBehaviour
 
     bool inventoryOpen = false;
 
+    public bool IsChoosingWeapon { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +34,10 @@ public class PlayerInventory : MonoBehaviour
 
     public void EquipMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
     {
+        float randomXDir = Random.Range(-1f, 1f);
+        float randomZDir = Random.Range(-1f, 1f);
+        float randomDistance = Random.Range(2f, 5f);
+
         if (weapon == Weapons.Sword)
         {
             if (type == MarkingTypes.Attribute)
@@ -38,8 +46,9 @@ public class PlayerInventory : MonoBehaviour
                 {
                     player.playerMarkings.RemoveMarking(markings[0], type, weapon);
 
-                    GameObject markingPickup = Instantiate(markingPrefab, transform.position + (Vector3.right * 5), Quaternion.identity);
+                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z) , Quaternion.identity);
 
+                    markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
                     markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
                 }
 
@@ -51,8 +60,9 @@ public class PlayerInventory : MonoBehaviour
                 {
                     player.playerMarkings.RemoveMarking(markings[1], type, weapon);
 
-                    GameObject markingPickup = Instantiate(markingPrefab, transform.position + (Vector3.right * 5), Quaternion.identity);
+                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
+                    markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
                     markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
                 }
 
@@ -67,8 +77,9 @@ public class PlayerInventory : MonoBehaviour
                 {
                     player.playerMarkings.RemoveMarking(markings[2], type, weapon);
 
-                    GameObject markingPickup = Instantiate(markingPrefab, transform.position + (Vector3.right * 5), Quaternion.identity);
+                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
+                    markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
                     markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
                 }
 
@@ -80,8 +91,9 @@ public class PlayerInventory : MonoBehaviour
                 {
                     player.playerMarkings.RemoveMarking(markings[3], type, weapon);
 
-                    GameObject markingPickup = Instantiate(markingPrefab, transform.position + (Vector3.right * 5), Quaternion.identity);
+                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
+                    markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
                     markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
                 }
 
@@ -100,6 +112,8 @@ public class PlayerInventory : MonoBehaviour
 
     IEnumerator SelectWeapon(Spirit spirit, MarkingTypes type)
     {
+        IsChoosingWeapon = true;
+
         bool weaponSelected = false;
         print("Select Sword: Left D-Pad or 1");
         print("Select Bow: Right D-Pad or 2");
@@ -125,6 +139,8 @@ public class PlayerInventory : MonoBehaviour
 
             yield return null;
         }
+
+        IsChoosingWeapon = false;
     }
 
     public void AddTotemToList(Totem totem)
