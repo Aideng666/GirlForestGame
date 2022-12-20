@@ -320,6 +320,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   markingPrefab: {fileID: 5512418781491973167, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
+  markingBouncePath:
+    wpLengths: []
+    wps: []
+    type: 0
+    subdivisionsXSegment: 0
+    subdivisions: 0
+    controlPoints: []
+    length: 0
+    isFinalized: 0
+    timesTable: []
+    lengthsTable: []
 --- !u!54 &1821254030439938998
 Rigidbody:
   m_ObjectHideFlags: 0
