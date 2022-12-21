@@ -14,7 +14,7 @@ These are the criteria that are needed for the room models:
         
  - The Exits that are created must have 3 Parts (Same way that it is done in unity).
         
-![The nesting of these parts should look like this](https://drive.google.com/file/d/1IlQL2vX_tbdguPtlZc5CyK-jsS2qioJ4/view?usp=share_link)
+![The nesting of these parts should look like this](https://github.com/Aideng666/GirlForestGame/blob/main/RoomModelStepsScreenshots/Room Exits.png)
              
 The Door is the vertical piece, the Exit is the piece that is seperated and goes on the outside of the room, and the RoomEntrance is the horizontal piece that is connected to the Door piece. The RoomEntrance is the Parent of both the Door and the Exit.
 
