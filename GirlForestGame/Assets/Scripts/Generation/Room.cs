@@ -20,6 +20,7 @@ public class Room : MonoBehaviour
     bool roomCompleted; //Has the player defeated all the enemies within this room
 
     int distanceFromStartRoom = 0;
+    Vector2 spotInGrid = Vector2.zero;
 
     public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
 
