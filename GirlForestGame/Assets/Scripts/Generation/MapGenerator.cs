@@ -11,15 +11,18 @@ public class MapGenerator : MonoBehaviour
 
     [SerializeField] float blessingNodeChance = 0.2f;
     [SerializeField] float shopNodeChance = 0.2f;
-    [SerializeField] float secondChildChance = 6; // This means it is a 1/value chance to spawn a second child (4 = 25%, 2 = 50%, 5 = 20%)
+    [SerializeField] float secondChildChance = 2; // This means it is a 1/value chance to spawn a second child (4 = 25%, 2 = 50%, 5 = 20%)
+
+    [SerializeField] Material lineRendererMaterial;
 
     GameObject[,] nodeSlots; // The map which dictates which slots (row and column) have nodes in them
-    float[] columnXPositions; // The  X position to spawn each node in the world
+    float[] columnXPositions; // The X position to spawn each node in the world
 
     bool isFirstColumnEven;
 
     //List of all of the spawned nodes
     List<GameObject> visualNodes = new List<GameObject>();
+    List<GameObject> lineRenderers = new List<GameObject>();
 
     //Property for the spawned nodes to access getter and setter
     public List<GameObject> Nodes { get { return visualNodes; } }
@@ -114,6 +117,8 @@ public class MapGenerator : MonoBehaviour
                 i--;
             }
         }
+        ///////////////////////////////////////////////////
+        
 
         for (int i = 1; i < endNodeDistance; i++)
         {
@@ -238,6 +243,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         FillNodes();
+        DrawLines();
     }
 
     void FillNodes()
@@ -276,6 +282,43 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    void DrawLines()
+    {
+        //Remove any old lines
+        foreach (GameObject lineObject in lineRenderers)
+        {
+            Destroy(lineObject);
+        }
+
+        //Creates the lines in between each node in the map
+        for (int i = 0; i < visualNodes.Count; i++)
+        {
+            GameObject lineObj = new GameObject();
+            LineRenderer line = lineObj.AddComponent<LineRenderer>();
+
+            line.positionCount = 3;
+            line.startColor = Color.cyan;
+            line.endColor = line.startColor;
+            line.startWidth = 0.4f;
+            line.endWidth = line.startWidth;
+            line.material = lineRendererMaterial;
+            line.SetPosition(0, visualNodes[i].transform.position);
+            line.SetPosition(1, visualNodes[i].transform.position);
+            line.SetPosition(2, visualNodes[i].transform.position);
+
+            if (visualNodes[i].GetComponent<MapNode>().GetLeftChild() != null)
+            {    
+                line.SetPosition(0, visualNodes[visualNodes.IndexOf(visualNodes[i].GetComponent<MapNode>().GetLeftChild().gameObject)].transform.position);
+            }
+            if (visualNodes[i].GetComponent<MapNode>().GetRightChild() != null)
+            {
+                line.SetPosition(2, visualNodes[visualNodes.IndexOf(visualNodes[i].GetComponent<MapNode>().GetRightChild().gameObject)].transform.position);
+            }
+
+            lineRenderers.Add(lineObj);
+        }
+    }
+
     public int GetEndNodeDistance()
     {
         return endNodeDistance;
@@ -283,18 +326,18 @@ public class MapGenerator : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.cyan;
+        //Gizmos.color = Color.cyan;
 
-        for (int i = 0; i < visualNodes.Count; i++)
-        {
-            if (visualNodes[i].GetComponent<MapNode>().GetLeftChild() != null)
-            {
-                Gizmos.DrawLine(visualNodes[i].transform.position, visualNodes[visualNodes.IndexOf(visualNodes[i].GetComponent<MapNode>().GetLeftChild().gameObject)].transform.position);
-            }
-            if (visualNodes[i].GetComponent<MapNode>().GetRightChild() != null)
-            {
-                Gizmos.DrawLine(visualNodes[i].transform.position, visualNodes[visualNodes.IndexOf(visualNodes[i].GetComponent<MapNode>().GetRightChild().gameObject)].transform.position);
-            }
-        }
+        //for (int i = 0; i < visualNodes.Count; i++)
+        //{
+        //    if (visualNodes[i].GetComponent<MapNode>().GetLeftChild() != null)
+        //    {
+        //        Gizmos.DrawLine(visualNodes[i].transform.position, visualNodes[visualNodes.IndexOf(visualNodes[i].GetComponent<MapNode>().GetLeftChild().gameObject)].transform.position);
+        //    }
+        //    if (visualNodes[i].GetComponent<MapNode>().GetRightChild() != null)
+        //    {
+        //        Gizmos.DrawLine(visualNodes[i].transform.position, visualNodes[visualNodes.IndexOf(visualNodes[i].GetComponent<MapNode>().GetRightChild().gameObject)].transform.position);
+        //    }
+        //}
     }
 }
