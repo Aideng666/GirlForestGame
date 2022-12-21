@@ -5,7 +5,6 @@ using UnityEngine;
 public class SimpleCameraFollow : MonoBehaviour
 {
     [SerializeField] float followOffset;
-    [SerializeField] float zDistanceFromPlayer = 7;
     [SerializeField] float cameraHeight = 15;
 
     PlayerController player;
@@ -33,7 +32,7 @@ public class SimpleCameraFollow : MonoBehaviour
         }
         /////////////////////////////////////////////////////////////////
 
-        transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z - zDistanceFromPlayer);
+        transform.position = new Vector3(player.transform.position.x, cameraHeight, player.transform.position.z);
 
         if (!mapActive)
         {

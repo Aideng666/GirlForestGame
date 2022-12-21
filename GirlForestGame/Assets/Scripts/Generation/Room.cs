@@ -68,7 +68,9 @@ public class Room : MonoBehaviour
 
         selectedRoom = possibleRooms[randomIndex];
 
-        var roomModel = Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
+        selectedRoom.FindBoundaries();
+
+        var roomModel = Instantiate(selectedRoom.model, transform.position, selectedRoom.model.transform.rotation, transform);
 
         spawnedModel = roomModel.GetComponent<RoomModel>();
     }
