@@ -36,29 +36,6 @@ public class NodeMapManager : MonoBehaviour
         {
             UpdateMap();
         }
-
-        //if (InputManager.Instance.BowAttack())
-        //{
-        //    SetNextLevel();
-
-        //    print($"current level: {currentLevel}");
-        //}
-
-        //if (InputManager.Instance.SwapMapButton())
-        //{
-        //    if (mapActive)
-        //    {
-        //        InputManager.Instance.SwapActionMap("Player");
-        //        mapActive = false;
-        //    }
-        //    else
-        //    {
-        //        InputManager.Instance.SwapActionMap("NodeMap");
-        //        mapActive = true;
-        //    }
-
-        //    SwapCameras();
-        //}
     }
 
     void ToggleNodeMap()
