@@ -14,11 +14,11 @@ These are the criteria that are needed for the room models:
         
  - The Exits that are created must have 3 Parts (Same way that it is done in unity).
         
-![The nesting of these parts should look like this](https://github.com/Aideng666/GirlForestGame/blob/main/RoomModelStepsScreenshots/Room Exits.png)
+![The nesting of these parts should look like this](https://github.com/Aideng666/GirlForestGame/blob/main/RoomModelStepsScreenshots/Nesting.png)
              
 The Door is the vertical piece, the Exit is the piece that is seperated and goes on the outside of the room, and the RoomEntrance is the horizontal piece that is connected to the Door piece. The RoomEntrance is the Parent of both the Door and the Exit.
 
-![This is what it looks like when an exit is connected to the room model](https://drive.google.com/file/d/12maHqDgXGF6WTpfm6XT0zhhn_BCgwr0q/view?usp=share_link)
+![This is what it looks like when an exit is connected to the room model](https://github.com/Aideng666/GirlForestGame/blob/main/RoomModelStepsScreenshots/Combined.png)
              
 The exits can be any size and shape and can be molded to fit the model of the room if its a more organic model however keep the following in mind                       when creating their sizes and shapes:
 
@@ -28,7 +28,7 @@ The exits can be any size and shape and can be molded to fit the model of the ro
   
   - The Door piece is just essentially a wall that gets disabled when the room is completed so the doorway can open up to let the player walk over the Exit piece. The door can also still be any shape or size, just make sure that it perfectly blends with the walls/boundaries of the room so they player cannot glitch through the edge or something similar. Also make sure the entirety of the area is covered (if one of the faces on the outside is culled for some reason the player will go right through it).
 
-![When finished creating the room model the final layout should look something like this](https://drive.google.com/drive/folders/1HaNQrE9h5T2zai3b1SWluK_RtrqExnAh)
+![When finished creating the room model the final layout should look something like this](https://github.com/Aideng666/GirlForestGame/blob/main/RoomModelStepsScreenshots/Completed.png)
  
 Each of the four entrances are perfectly parallel in their respective directions, all of them having proper object nesting and being children of the main room model as a whole.
 
