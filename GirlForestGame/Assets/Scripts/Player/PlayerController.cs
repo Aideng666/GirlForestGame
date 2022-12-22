@@ -303,6 +303,7 @@ public class PlayerController : MonoBehaviour
                 {
                     //enemiesHit[i].ApplyKnockback(transform.forward, 5);
                     enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
+                    enemiesHit[i].GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
                 }
 
                 if (enemiesHit.Count > 0)
@@ -332,6 +333,8 @@ public class PlayerController : MonoBehaviour
                 {
                     //enemiesHit[i].ApplyKnockback(transform.forward, 5);
                     enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
+                    enemiesHit[i].GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
+
                 }
 
                 if (enemiesHit.Count > 0)
@@ -361,6 +364,8 @@ public class PlayerController : MonoBehaviour
                 {
                     //enemiesHit[i].ApplyKnockback(transform.forward, 5);
                     enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
+                    enemiesHit[i].GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
+
                 }
 
                 if (enemiesHit.Count > 0)
