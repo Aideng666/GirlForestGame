@@ -77,7 +77,7 @@ public class MapGenerator : MonoBehaviour
 
     void CreateNodeMap()
     {
-        int numberOfStartingNodes = numberOfNodeColumns / 2;
+        int numberOfStartingNodes = Random.Range(2, (numberOfNodeColumns / 2));
         int currentLevel = 0;
 
         //Spawns in the initial starting nodes on level 0
