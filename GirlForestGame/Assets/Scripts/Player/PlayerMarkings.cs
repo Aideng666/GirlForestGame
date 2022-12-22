@@ -234,32 +234,32 @@ public class PlayerMarkings : MonoBehaviour
         }
     }
 
-    void ApplyFireElement(List<Enemy> enemiesHit)
+    void ApplyFireElement(List<EnemyData> enemiesHit)
     {
         print("FIRE");
 
         StartCoroutine(ApplyBurn(enemiesHit));
     }
 
-    void ApplyWindElement(List<Enemy> enemiesHit)
+    void ApplyWindElement(List<EnemyData> enemiesHit)
     {
         print("Wind");
 
-        foreach(Enemy enemy in enemiesHit)
+        foreach(EnemyData enemy in enemiesHit)
         {
             enemy.ApplyKnockback(player.transform.forward, 10);
         }
     }
 
-    IEnumerator ApplyBurn(List<Enemy> enemies)
+    IEnumerator ApplyBurn(List<EnemyData> enemies)
     {
         for (int i = 0; i < numberOfBurnTicks; i++)
         {
             yield return new WaitForSeconds(burnTickDelay);
 
-            foreach (Enemy enemy in enemies)
+            foreach (EnemyData enemy in enemies)
             {
-                enemy.TakeDamage(burnTickDamage);
+                enemy.TakeDamage(burnTickDamage, false); //false because we want no knockback
             }
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerArrow : MonoBehaviour
 {
-    public delegate void OnHit(List<Enemy> enemyHit);
+    public delegate void OnHit(List<EnemyData> enemyHit);
     public static event OnHit OnBowHit;
 
     // Start is called before the first frame update
@@ -25,12 +25,12 @@ public class PlayerArrow : MonoBehaviour
 
         transform.parent = collision.gameObject.transform;
 
-        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == PlayerController.Instance.Form)
+        if (collision.gameObject.TryGetComponent(out EnemyData enemy) && enemy.form == PlayerController.Instance.Form)
         {
             enemy.ApplyKnockback(transform.forward, 2);
             enemy.TakeDamage(PlayerController.Instance.playerAttributes.BowDamage);
 
-            List<Enemy> enemiesHit = new List<Enemy>();
+            List<EnemyData> enemiesHit = new List<EnemyData>();
 
             enemiesHit.Add(enemy);
 

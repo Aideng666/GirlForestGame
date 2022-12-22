@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     LayerMask livingLayer;
     LayerMask spiritLayer;
 
-    public delegate void OnAttack(List<Enemy> enemiesHit);
+    public delegate void OnAttack(List<EnemyData> enemiesHit);
     public static event OnAttack OnSwordHit;
 
     public Forms Form { get { return currentForm; } set { currentForm = value; } }
@@ -278,7 +278,7 @@ public class PlayerController : MonoBehaviour
     void ActivateSwordHitbox(int attackNum)
     {
         Collider[] enemyColliders = null;
-        List<Enemy> enemiesHit = new List<Enemy>();
+        List<EnemyData> enemiesHit = new List<EnemyData>();
 
         switch (attackNum)
         {
@@ -291,7 +291,7 @@ public class PlayerController : MonoBehaviour
                 {
                     for (int i = 0; i < enemyColliders.Length; i++)
                     {
-                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
+                        if (enemyColliders[i].gameObject.TryGetComponent(out EnemyData enemy) && enemy.form == Form)
                         {
                             enemiesHit.Add(enemy);
                         }
@@ -301,8 +301,8 @@ public class PlayerController : MonoBehaviour
                 
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
-                    enemiesHit[i].ApplyKnockback(transform.forward, 5);
-                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                    //enemiesHit[i].ApplyKnockback(transform.forward, 5);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
                 }
 
                 if (enemiesHit.Count > 0)
@@ -313,24 +313,25 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case 2:
-
                 enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), playerAttributes.SwordRange);
 
+                //Loops through each hit collider and adds all of the enemies into a list
                 if (enemyColliders.Length > 0)
                 {
                     for (int i = 0; i < enemyColliders.Length; i++)
                     {
-                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
+                        if (enemyColliders[i].gameObject.TryGetComponent(out EnemyData enemy) && enemy.form == Form)
                         {
                             enemiesHit.Add(enemy);
                         }
                     }
                 }
+                //////////////////////////////////////////////////////////////////////////
 
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
-                    enemiesHit[i].ApplyKnockback(transform.forward, 10);
-                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                    //enemiesHit[i].ApplyKnockback(transform.forward, 5);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
                 }
 
                 if (enemiesHit.Count > 0)
@@ -344,11 +345,12 @@ public class PlayerController : MonoBehaviour
 
                 enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), playerAttributes.SwordRange);
 
+                //Loops through each hit collider and adds all of the enemies into a list
                 if (enemyColliders.Length > 0)
                 {
                     for (int i = 0; i < enemyColliders.Length; i++)
                     {
-                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
+                        if (enemyColliders[i].gameObject.TryGetComponent(out EnemyData enemy) && enemy.form == Form)
                         {
                             enemiesHit.Add(enemy);
                         }
@@ -357,14 +359,16 @@ public class PlayerController : MonoBehaviour
 
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
-                    enemiesHit[i].ApplyKnockback(transform.forward, 10);
-                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
+                    //enemiesHit[i].ApplyKnockback(transform.forward, 5);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
                 }
 
                 if (enemiesHit.Count > 0)
                 {
                     OnSwordHit?.Invoke(enemiesHit);
                 }
+
+                break;
 
                 break;
         }
