@@ -301,8 +301,8 @@ public class PlayerController : MonoBehaviour
                 
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
-                    //enemiesHit[i].ApplyKnockback(transform.forward, 5);
-                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
+                    enemiesHit[i].ApplyKnockback(transform.forward, 5);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
                     enemiesHit[i].GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
                 }
 
@@ -331,8 +331,8 @@ public class PlayerController : MonoBehaviour
 
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
-                    //enemiesHit[i].ApplyKnockback(transform.forward, 5);
-                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
+                    enemiesHit[i].ApplyKnockback(transform.forward, 5);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
                     enemiesHit[i].GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
 
                 }
@@ -362,8 +362,8 @@ public class PlayerController : MonoBehaviour
 
                 for (int i = 0; i < enemiesHit.Count; i++)
                 {
-                    //enemiesHit[i].ApplyKnockback(transform.forward, 5);
-                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage, true);
+                    enemiesHit[i].ApplyKnockback(transform.forward, 5);
+                    enemiesHit[i].TakeDamage(playerAttributes.SwordDamage);
                     enemiesHit[i].GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
 
                 }

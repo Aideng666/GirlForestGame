@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Distance_Check", menuName = "Conditions/Distance")]
+/// <summary>
+/// Is a condition that will compare if the AI is within the range (min and max) of the player and will change the parameter accordingly
+/// </summary>
 public class Cdt_Distance : Cdt_BaseClass
 {
-    //DESCRIPTION: Is a condition that will compare if the AI is within the range (min and max) of the player and will change the parameter accordingly
 
     public float minRange = 1f;
     public float maxRange = -1f;

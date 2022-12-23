@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+/// <summary>
+/// Is childed to enemy data which has a bunch of basic things like HP and attack strength. 
+/// This contains all the specific things and handles the throwing. It's using the bezier curve addon since it's a lot easier to do something with that than DOTween
+/// </summary>
 public class AI_BoarEnemyClass : EnemyData
 {
     /*

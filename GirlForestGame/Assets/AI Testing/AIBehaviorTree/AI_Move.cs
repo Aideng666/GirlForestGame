@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Attach this script to the state that will track the player. It will update the destination of the AI every frame to the player's 
+/// </summary>
 public class AI_Move : AI_BaseClass
 {
-    //DESCRIPTION: Attach this script to the state that will track the player. It will update the destination of the AI every frame to the player's position
-    //This could have optimisation issues so maybe offloading this to a coroutine could be worthwhile down the line where the AI is being updated on a set rate instead
 
     NavMeshAgent agent;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
