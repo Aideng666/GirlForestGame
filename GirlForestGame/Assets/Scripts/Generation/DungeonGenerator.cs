@@ -181,6 +181,7 @@ public class DungeonGenerator : MonoBehaviour
             case RoomTypes.Totem:
 
                 roomToChange.ChooseRoom("TotemRooms");
+                roomToChange.SetRoomType(RoomTypes.Totem);
 
                 break;
         }
@@ -195,7 +196,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        roomToChange.SetRoomType(RoomTypes.Totem);
+        //roomToChange.SetRoomType(RoomTypes.Totem);
     }
 
     void ChooseNewRoomLocation(bool spawnTotemRoom = false)

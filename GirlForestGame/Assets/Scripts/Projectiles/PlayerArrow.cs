@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerArrow : MonoBehaviour
 {
-    public delegate void OnHit(List<Enemy> enemyHit);
-    public static event OnHit OnBowHit;
+    //public delegate void OnHit(List<Enemy> enemyHit);
+    //public static event OnHit OnBowHit;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,7 @@ public class PlayerArrow : MonoBehaviour
 
             enemiesHit.Add(enemy);
 
-            OnBowHit?.Invoke(enemiesHit);
+            EventManager.Instance.InvokeOnBowHit(enemiesHit);
         }
     }
 }

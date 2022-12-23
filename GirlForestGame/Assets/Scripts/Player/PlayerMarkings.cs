@@ -12,16 +12,6 @@ public class PlayerMarkings : MonoBehaviour
     //The player controller contains access to the other player scripts
     PlayerController player;
 
-    //Spirit bowAttribute = null;
-    //Spirit swordAttribute = null;
-    //Spirit bowElement = null;
-    //Spirit swordElement = null;
-
-    //public Spirit BowAttribute { get { return bowAttribute; } set { bowAttribute = value; } }
-    //public Spirit SwordAttribute { get { return swordAttribute; } set { swordAttribute = value; } }
-    //public Spirit BowElement { get { return bowElement; } set { bowElement = value; } }
-    //public Spirit SwordElement { get { return swordElement; } set { swordElement = value; } }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,10 +20,10 @@ public class PlayerMarkings : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerController.OnSwordHit -= ApplyWindElement;
-        PlayerController.OnSwordHit -= ApplyFireElement;
-        PlayerArrow.OnBowHit -= ApplyFireElement;
-        PlayerArrow.OnBowHit -= ApplyWindElement;
+        EventManager.OnSwordHit -= ApplyWindElement;
+        EventManager.OnSwordHit -= ApplyFireElement;
+        EventManager.OnBowHit -= ApplyFireElement;
+        EventManager.OnBowHit -= ApplyWindElement;
     }
 
     // Update is called once per frame
@@ -114,11 +104,11 @@ public class PlayerMarkings : MonoBehaviour
 
                     if (weapon == Weapons.Sword)
                     {
-                        PlayerController.OnSwordHit += ApplyWindElement;
+                        EventManager.OnSwordHit += ApplyWindElement;
                     }
                     else if (weapon == Weapons.Bow)
                     {
-                        PlayerArrow.OnBowHit += ApplyWindElement;
+                        EventManager.OnBowHit += ApplyWindElement;
                     }
 
                     break;
@@ -127,11 +117,11 @@ public class PlayerMarkings : MonoBehaviour
 
                     if (weapon == Weapons.Sword)
                     {
-                        PlayerController.OnSwordHit += ApplyFireElement;
+                        EventManager.OnSwordHit += ApplyFireElement;
                     }
                     else if (weapon == Weapons.Bow)
                     {
-                        PlayerArrow.OnBowHit += ApplyFireElement;
+                        EventManager.OnBowHit += ApplyFireElement;
                     }
 
                     break;
@@ -209,11 +199,11 @@ public class PlayerMarkings : MonoBehaviour
 
                     if (weapon == Weapons.Sword)
                     {
-                        PlayerController.OnSwordHit -= ApplyWindElement;
+                        EventManager.OnSwordHit -= ApplyWindElement;
                     }
                     else if (weapon == Weapons.Bow)
                     {
-                        PlayerArrow.OnBowHit -= ApplyWindElement;
+                        EventManager.OnBowHit -= ApplyWindElement;
                     }
 
                     break;
@@ -222,11 +212,11 @@ public class PlayerMarkings : MonoBehaviour
 
                     if (weapon == Weapons.Sword)
                     {
-                        PlayerController.OnSwordHit -= ApplyFireElement;
+                        EventManager.OnSwordHit -= ApplyFireElement;
                     }
                     else if (weapon == Weapons.Bow)
                     {
-                        PlayerArrow.OnBowHit -= ApplyFireElement;
+                        EventManager.OnBowHit -= ApplyFireElement;
                     }
 
                     break;

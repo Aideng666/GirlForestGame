@@ -28,17 +28,17 @@ public class PlayerController : MonoBehaviour
     LayerMask livingLayer;
     LayerMask spiritLayer;
 
-    public delegate void OnAttack(List<Enemy> enemiesHit);
-    public static event OnAttack OnSwordHit;
+    //public delegate void OnAttack(List<Enemy> enemiesHit);
+    //public static event OnAttack OnSwordHit;
 
     public Forms Form { get { return currentForm; } set { currentForm = value; } }
 
     //Player Components
-    public PlayerAttributes playerAttributes;
-    public PlayerMarkings playerMarkings;
-    public PlayerInventory playerInventory;
+    [HideInInspector] public PlayerAttributes playerAttributes;
+    [HideInInspector] public PlayerMarkings playerMarkings;
+    [HideInInspector] public PlayerInventory playerInventory;
 
-    //List<Totem> totems = new List<Totem>();
+    EventManager eventManager;
 
     public static PlayerController Instance { get; set; }
 
@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody>();
+
+        eventManager = EventManager.Instance;
 
         playerAttributes = GetComponent<PlayerAttributes>();
         playerMarkings = GetComponent<PlayerMarkings>();
@@ -307,7 +309,7 @@ public class PlayerController : MonoBehaviour
 
                 if (enemiesHit.Count > 0)
                 {
-                    OnSwordHit?.Invoke(enemiesHit);
+                    eventManager.InvokeOnSwordHit(enemiesHit);
                 }
 
                 break;
@@ -335,7 +337,7 @@ public class PlayerController : MonoBehaviour
 
                 if (enemiesHit.Count > 0)
                 {
-                    OnSwordHit?.Invoke(enemiesHit);
+                    eventManager.InvokeOnSwordHit(enemiesHit);
                 }
 
                 break;
@@ -363,7 +365,7 @@ public class PlayerController : MonoBehaviour
 
                 if (enemiesHit.Count > 0)
                 {
-                    OnSwordHit?.Invoke(enemiesHit);
+                    eventManager.InvokeOnSwordHit(enemiesHit);
                 }
 
                 break;

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PermanentTotem : Totem
 {
-    protected bool effectApplied;
-
     protected override void Start()
     {
         base.Start();
@@ -13,8 +11,8 @@ public class PermanentTotem : Totem
         totemType = TotemTypes.Permanent;
     }
 
-    public virtual void ApplyEffect()
+    public override void ApplyEffect()
     {
-     
+        base.ApplyEffect();
     }
 }

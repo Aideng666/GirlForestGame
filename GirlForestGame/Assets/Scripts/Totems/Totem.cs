@@ -8,6 +8,8 @@ public class Totem : MonoBehaviour
     protected PlayerController player;
     protected string totemName;
 
+    protected bool totemInInventory = false;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -16,6 +18,11 @@ public class Totem : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update()
+    {
+
+    }
+
+    public virtual void ApplyEffect()
     {
 
     }

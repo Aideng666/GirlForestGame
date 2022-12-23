@@ -44,8 +44,6 @@ public class MarkingPickup : MonoBehaviour
     {
         yield return new WaitForSeconds(colliderDelay);
 
-        print("Collider now Active");
-
         GetComponent<Collider>().enabled = true;
     }
 

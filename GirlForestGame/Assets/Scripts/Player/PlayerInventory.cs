@@ -7,7 +7,6 @@ using DG.Tweening.Plugins.Core.PathCore;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] GameObject markingPrefab;
-    [SerializeField] Path markingBouncePath;
 
     //0 = Sword Attribute
     //1 = Sword Element
@@ -146,6 +145,11 @@ public class PlayerInventory : MonoBehaviour
     public void AddTotemToList(Totem totem)
     {
         totems.Add(totem);
+
+        if (totem.GetTotemType() == TotemTypes.Permanent)
+        {
+            totem.ApplyEffect();
+        }
     }
 
     public void ToggleInventory()

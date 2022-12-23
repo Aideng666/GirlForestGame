@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class TotemPickup : MonoBehaviour
 {
+    [SerializeField] float colliderDelay = 1;
+
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<Collider>().enabled = false;
+
         ChooseTotem();
+
+        StartCoroutine(DelayCollider());
     }
 
     void ChooseTotem()
@@ -40,5 +46,22 @@ public class TotemPickup : MonoBehaviour
         int totemChoice = Random.Range(0, possibleTotems.Count);
 
         gameObject.AddComponent(possibleTotems[totemChoice]);
+    }
+
+    IEnumerator DelayCollider()
+    {
+        yield return new WaitForSeconds(colliderDelay);
+
+        GetComponent<Collider>().enabled = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.playerInventory.IsChoosingWeapon)
+        {
+            PlayerController.Instance.playerInventory.AddTotemToList(GetComponent<Totem>());
+
+            gameObject.SetActive(false);
+        }
     }
 }

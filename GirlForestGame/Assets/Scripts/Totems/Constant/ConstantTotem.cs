@@ -8,11 +8,23 @@ public class ConstantTotem : Totem
     protected override void Start()
     {
         base.Start();
+
+        totemType = TotemTypes.Constant;
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+
+        if (totemInInventory)
+        {
+            ApplyEffect();
+        }
+    }
+
+    public override void ApplyEffect()
+    {
+        base.ApplyEffect();
     }
 }
