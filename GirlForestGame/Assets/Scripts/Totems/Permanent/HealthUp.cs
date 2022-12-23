@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class HealthUp : PermanentTotem
-{
+//public class HealthUp : PermanentTotem
+//{
 
-    protected override void Start()
-    {
-        base.Start();
+//    protected override void Start()
+//    {
+//        base.Start();
 
-        totemName = "Health Up";
-    }
+//        totemName = "Health Up";
+//    }
 
-    public override void ApplyEffect()
-    {
-        if (!effectApplied)
-        {
-            player.playerAttributes.MaxHealth += 2;
+//    public override void ApplyEffect()
+//    {
+//        if (!effectApplied)
+//        {
+//            player.playerAttributes.MaxHealth += 2;
 
-            effectApplied = true;
+//            effectApplied = true;
 
-            player.playerInventory.AddTotemToList(this);
-        }
-    }
-}
+//            player.playerInventory.AddTotemToList(this);
+//        }
+//    }
+//}

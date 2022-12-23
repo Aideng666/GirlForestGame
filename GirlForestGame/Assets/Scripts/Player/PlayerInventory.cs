@@ -14,7 +14,7 @@ public class PlayerInventory : MonoBehaviour
     //3 = Bow Element
     Spirit[] markings;
 
-    List<Totem> totems;
+    List<TotemObject> totems;
 
     PlayerController player;
 
@@ -26,7 +26,7 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         markings = new Spirit[] { null, null, null, null };
-        totems = new List<Totem>();
+        totems = new List<TotemObject>();
 
         player = GetComponent<PlayerController>();
     }
@@ -142,13 +142,13 @@ public class PlayerInventory : MonoBehaviour
         IsChoosingWeapon = false;
     }
 
-    public void AddTotemToList(Totem totem)
+    public void AddTotemToList(TotemObject totem)
     {
         totems.Add(totem);
 
-        if (totem.GetTotemType() == TotemTypes.Permanent)
+        if (totem.Totem.GetTotemType() == TotemTypes.Permanent)
         {
-            totem.ApplyEffect();
+            totem.Totem.ApplyEffect();
         }
     }
 
@@ -164,9 +164,9 @@ public class PlayerInventory : MonoBehaviour
             print($"Bow Element: {markings[3]?.spiritName}");
             print("Totems:");
 
-            foreach (Totem totem in totems)
+            foreach (TotemObject totem in totems)
             {
-                print($"{totem.name}");
+                print($"{totem.Totem.totemName}");
             }
         //}
     }

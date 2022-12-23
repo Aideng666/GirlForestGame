@@ -10,6 +10,8 @@ public class MarkingPickup : MonoBehaviour
     Spirit chosenSpirit = null;
     MarkingTypes chosenType = MarkingTypes.None;
 
+    float timeElasped;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,27 @@ public class MarkingPickup : MonoBehaviour
 
         GetComponent<Collider>().enabled = false;
 
-        StartCoroutine(DelayCollider());
+        timeElasped = 0;
+    }
+
+    private void OnEnable()
+    {
+        GetComponent<Collider>().enabled = false;
+
+        timeElasped = 0;
+    }
+
+    private void Update()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            timeElasped += Time.deltaTime;
+        }
+
+        if (timeElasped >= colliderDelay)
+        {
+            GetComponent<Collider>().enabled = true;
+        }
     }
 
     //This is called when a new marking pickup is spawned to randomly select a spirit and type
@@ -38,13 +60,6 @@ public class MarkingPickup : MonoBehaviour
     {
         chosenSpirit = spirit;
         chosenType = type;
-    }
-
-    IEnumerator DelayCollider()
-    {
-        yield return new WaitForSeconds(colliderDelay);
-
-        GetComponent<Collider>().enabled = true;
     }
 
     private void OnCollisionEnter(Collision collision)

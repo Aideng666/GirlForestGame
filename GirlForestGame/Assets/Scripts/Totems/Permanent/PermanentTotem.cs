@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PermanentTotem : Totem
-{
-    protected override void Start()
-    {
-        base.Start();
+//public class PermanentTotem : Totem
+//{
+//    protected override void Start()
+//    {
+//        base.Start();
 
-        totemType = TotemTypes.Permanent;
-    }
+//        totemType = TotemTypes.Permanent;
+//    }
 
-    public override void ApplyEffect()
-    {
-        base.ApplyEffect();
-    }
-}
+//    public override void ApplyEffect()
+//    {
+//        base.ApplyEffect();
+//    }
+//}
