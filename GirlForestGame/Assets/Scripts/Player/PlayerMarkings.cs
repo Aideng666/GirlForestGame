@@ -133,8 +133,6 @@ public class PlayerMarkings : MonoBehaviour
     {
         if (type == MarkingTypes.Attribute)
         {
-            print($"Removing {spirit.spiritName} {type.ToString()}");
-
             for (int i = 0; i < spirit.buffedAttributes.Count; i++)
             {
                 switch (spirit.buffedAttributes[i])
@@ -226,15 +224,11 @@ public class PlayerMarkings : MonoBehaviour
 
     void ApplyFireElement(List<Enemy> enemiesHit)
     {
-        print("FIRE");
-
         StartCoroutine(ApplyBurn(enemiesHit));
     }
 
     void ApplyWindElement(List<Enemy> enemiesHit)
     {
-        print("Wind");
-
         foreach(Enemy enemy in enemiesHit)
         {
             enemy.ApplyKnockback(player.transform.forward, 10);
@@ -255,46 +249,4 @@ public class PlayerMarkings : MonoBehaviour
 
         yield return null;
     }
-
-    //IEnumerator SelectWeapon(Spirit spirit, MarkingTypes type)
-    //{
-    //    bool weaponSelected = false;
-
-    //    while (!weaponSelected)
-    //    {
-    //        if (InputManager.Instance.SelectSword())
-    //        {
-    //            if (type == MarkingTypes.Attribute)
-    //            {
-    //                //CHECK IF THE PLAYER ALREADY HAS A SPIRIT IN EACH SLOT TO BE ABLE TO SWAP - This is for aiden dont worry abt it
-    //                SwordAttribute = spirit;
-    //            }
-    //            else if (type == MarkingTypes.Element)
-    //            {
-    //                SwordElement = spirit;
-    //            }
-
-    //            UpdateMarking(spirit, type, Weapons.Sword);
-
-    //            weaponSelected = true;
-    //        }
-    //        if (InputManager.Instance.SelectBow())
-    //        {
-    //            if (type == MarkingTypes.Attribute)
-    //            {
-    //                BowAttribute = spirit;
-    //            }
-    //            else if (type == MarkingTypes.Element)
-    //            {
-    //                BowElement = spirit;
-    //            }
-
-    //            UpdateMarking(spirit, type, Weapons.Bow);
-
-    //            weaponSelected = true;
-    //        }
-
-    //        yield return null;
-    //    }
-    //}
 }

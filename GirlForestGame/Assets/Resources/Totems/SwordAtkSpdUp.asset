@@ -22,4 +22,5 @@ MonoBehaviour:
       data:
         totemType: 0
         totemName: SwordAttackSpeedUp
-        buffAmount: 0.05
+        initialBuffAmount: 0.33
+        stackDampenAmount: 0.65

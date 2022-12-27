@@ -4,6 +4,29 @@ using UnityEngine;
 
 public static class TypeHandler
 {
+    //public static int GetNumOfType<T>(this System.AppDomain aAppDomain, System.Type aType, List<T> list)
+    //{
+    //    int count = 0;
+    //    var assemblies = aAppDomain.GetAssemblies();
+
+    //    foreach (var assembly in assemblies)
+    //    {
+    //        var types = assembly.GetTypes();
+    //        foreach (var type in types)
+    //        {
+    //            if (type == aType)
+    //                count++;
+    //        }
+    //    }
+
+    //    foreach (T entry in list)
+    //    {
+    //        if (aType )
+    //    }
+
+    //    return count;
+    //}
+
     public static System.Type[] GetAllDerivedTypes(this System.AppDomain aAppDomain, System.Type aType)
     {
         var result = new List<System.Type>();

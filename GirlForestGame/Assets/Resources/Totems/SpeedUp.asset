@@ -22,4 +22,5 @@ MonoBehaviour:
       data:
         totemType: 0
         totemName: SpeedUp
-        buffAmount: 1
+        initialBuffAmount: 1
+        stackDampenAmount: 1

@@ -15,6 +15,8 @@ public class PlayerAttributes : MonoBehaviour
     [SerializeField] float defaultSwordRange = 5;
     [SerializeField] float defaultProjectileSpeed;
     [SerializeField] float defaultCritChance = 0.05f; // between 0 and 1 for 0%-100%
+    [SerializeField] float defaultBowChargeTime = 3;
+    [SerializeField] float defaultLuck = 0;
     float currentMaxHealth;
     float currentHealth;
     float currentSpeed;
@@ -25,6 +27,15 @@ public class PlayerAttributes : MonoBehaviour
     float currentSwordRange;
     float currentProjectileSpeed;
     float currentCritChance;
+    float currentBowChargeTime;
+    float currentLuck;
+
+    float prevSwordDamage;
+    float prevBowDamage;
+    float prevSwordCooldown;
+    float prevBowCooldown;
+    float prevRange;
+    float prevChargeTime;
 
     public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value; if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
     public float Health { get { return currentHealth; } set { currentHealth = value; } }
@@ -36,6 +47,16 @@ public class PlayerAttributes : MonoBehaviour
     public float SwordRange { get { return currentSwordRange; } set { currentSwordRange = value; } }
     public float ProjectileSpeed { get { return currentProjectileSpeed; } set { currentProjectileSpeed = value; } }
     public float CritChance { get { return currentCritChance; } set { currentCritChance = value; } }
+    public float BowChargeTime { get { return currentBowChargeTime; } set { currentBowChargeTime = value; } }
+    public float Luck { get { return currentLuck; } set { currentLuck = value; } }
+
+
+    public float PreviousBowDamage { get { return prevBowDamage; } set { prevBowDamage = value; } }
+    public float PreviousSwordDamage { get { return prevSwordDamage; } set { prevSwordDamage = value; } }
+    public float PreviousSwordCooldown { get { return prevSwordCooldown; } set { prevSwordCooldown = value; } }
+    public float PreviousBowCooldown { get { return prevBowCooldown; } set { prevBowCooldown = value; } }
+    public float PreviousRange { get { return prevRange; } set { prevRange = value; } }
+    public float PreviousChargeTime { get { return prevChargeTime; } set { prevChargeTime = value; } }
 
     private void Start()
     {
@@ -49,5 +70,14 @@ public class PlayerAttributes : MonoBehaviour
         currentSwordRange = defaultSwordRange;
         currentProjectileSpeed = defaultProjectileSpeed;
         currentCritChance = defaultCritChance;
+        currentBowChargeTime = defaultBowChargeTime;
+        currentLuck = defaultLuck;
+
+        prevBowDamage = defaultBowDamage;
+        prevSwordDamage = defaultSwordDamage;
+        prevSwordCooldown = defaultSwordCooldown;
+        prevBowCooldown = defaultBowCooldown;
+        prevRange = defaultSwordRange;
+        prevChargeTime = defaultBowChargeTime;
     }
 }

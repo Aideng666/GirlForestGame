@@ -31,6 +31,17 @@ public class PlayerInventory : MonoBehaviour
         player = GetComponent<PlayerController>();
     }
 
+    private void Update()
+    {
+        foreach (TotemObject totem in totems)
+        {
+            if (totem.Totem.GetTotemType() == TotemTypes.Constant)
+            {
+                totem.Totem.ApplyEffect();
+            }
+        }
+    }
+
     public void EquipMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
     {
         float randomXDir = Random.Range(-1f, 1f);
@@ -146,10 +157,30 @@ public class PlayerInventory : MonoBehaviour
     {
         totems.Add(totem);
 
-        if (totem.Totem.GetTotemType() == TotemTypes.Permanent)
+        if (totem.Totem.GetTotemType() == TotemTypes.OnPickup)
         {
             totem.Totem.ApplyEffect();
         }
+    }
+
+    public List<TotemObject> GetTotemList()
+    {
+        return totems;
+    }
+
+    public int GetNumOfTotems(System.Type typeToCheck)
+    {
+        int count = 0;
+
+        foreach (TotemObject totem in totems)
+        {
+            if (typeToCheck == totem.Totem.GetType())
+            {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     public void ToggleInventory()
@@ -158,11 +189,11 @@ public class PlayerInventory : MonoBehaviour
 
         //if (inventoryOpen)
         //{
-            print($"Sword Attribute: {markings[0]?.spiritName}");
-            print($"Sword Element: {markings[1]?.spiritName}");
-            print($"Bow Attribute: {markings[2]?.spiritName}");
-            print($"Bow Element: {markings[3]?.spiritName}");
-            print("Totems:");
+            //print($"Sword Attribute: {markings[0]?.spiritName}");
+            //print($"Sword Element: {markings[1]?.spiritName}");
+            //print($"Bow Attribute: {markings[2]?.spiritName}");
+            //print($"Bow Element: {markings[3]?.spiritName}");
+            //print("Totems:");
 
             foreach (TotemObject totem in totems)
             {

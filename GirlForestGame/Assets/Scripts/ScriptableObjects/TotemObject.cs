@@ -18,6 +18,8 @@ public class TotemObject : ScriptableObject
     [ContextMenu(nameof(SpeedUp))] void SpeedUp() { Totem = new SpeedUpTotem(); }
     [ContextMenu(nameof(SwordRangeUp))] void SwordRangeUp() { Totem = new SwordRangeUpTotem(); }
     [ContextMenu(nameof(ProjSpdUp))] void ProjSpdUp() { Totem = new ProjSpdUpTotem(); }
+    [ContextMenu(nameof(BowChargeSpdUp))] void BowChargeSpdUp() { Totem = new BowChargeSpdUpTotem(); }
+    [ContextMenu(nameof(LuckUp))] void LuckUp() { Totem = new LuckUpTotem(); }
     //[ContextMenu(nameof(Berzerk))] void Berzerk() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(OneUp))] void OneUp() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(Executor))] void Executor() { Totem = new HealthUpTotem(); }
@@ -36,11 +38,16 @@ public class Totem
 {
     public TotemTypes totemType;
     public string totemName;
+    public float initialBuffAmount;
+    public float stackDampenAmount;
     protected PlayerController player;
+    protected int currentStackAmount;
+    protected bool effectApplied;
 
-    protected virtual void Init()
+    public virtual void Init()
     {
         player = PlayerController.Instance;
+        effectApplied = false;
     }
 
     public virtual void ApplyEffect() { }
@@ -49,12 +56,35 @@ public class Totem
     {
         return totemType;
     }
+
+    public float CalcBuffMultiplier(int stackAmount)
+    {
+        float multiplier = 0;
+
+        if (stackDampenAmount > 0)
+        {
+            float amountToAdd = initialBuffAmount / stackDampenAmount;
+
+            for (int i = 0; i < stackAmount; i++)
+            {
+                amountToAdd = amountToAdd * stackDampenAmount;
+
+                multiplier += amountToAdd;
+            }
+        }
+        else
+        {
+            return 1;
+        }
+
+        return multiplier;
+    }
 }
 
 [Serializable]
 public class OnTriggerTotem : Totem
 {
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
 
@@ -65,191 +95,291 @@ public class OnTriggerTotem : Totem
 [Serializable]
 public class ConstantTotem : Totem
 {
-    protected override void Init()
+    public bool conditionMet;
+
+    public override void Init()
     {
         base.Init();
 
         totemType = TotemTypes.Constant;
+
+        conditionMet = false;
     }
 
-    //// Update is called once per frame
-    //protected void Update()
-    //{
-    //    //if (totemInInventory)
-    //    //{
-    //    //    ApplyEffect();
-    //    //}
-    //}
+    public override void ApplyEffect()
+    {
+        CheckCondition();
+    }
+
+    public virtual void CheckCondition()
+    {
+        conditionMet = false;
+    }
 }
 
 [Serializable]
-public class PermanentTotem : Totem
+public class OnPickupTotem : Totem
 {
-    public float buffAmount;
-
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
 
-        totemType = TotemTypes.Permanent;
+        totemType = TotemTypes.OnPickup;
     }
 }
 #endregion
 
 #region Permanent Totems
 [Serializable]
-public class HealthUpTotem : PermanentTotem
+public class HealthUpTotem : OnPickupTotem
 {
-    public HealthUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.MaxHealth += buffAmount;
-        player.playerAttributes.Health += buffAmount;
+        player.playerAttributes.MaxHealth += initialBuffAmount;
+        player.playerAttributes.Health += initialBuffAmount;
+
+        effectApplied = true;
     }
 }
 
 [Serializable]
-public class SwordDmgUpTotem : PermanentTotem
+public class SwordDmgUpTotem : OnPickupTotem
 {
-    public SwordDmgUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.SwordDamage += buffAmount;
+        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(SwordDmgUpTotem));
+
+        float damageToReduce = player.playerAttributes.PreviousSwordDamage * CalcBuffMultiplier(currentStackAmount - 1);
+
+        player.playerAttributes.SwordDamage -= damageToReduce;
+        player.playerAttributes.PreviousSwordDamage = player.playerAttributes.SwordDamage;
+        player.playerAttributes.SwordDamage += player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+
+        effectApplied = true;
     }
 }
 
 [Serializable]
-public class BowDmgUpTotem : PermanentTotem
+public class BowDmgUpTotem : OnPickupTotem
 {
-    public BowDmgUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.BowDamage += buffAmount;
+        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(BowDmgUpTotem));
+        Debug.Log($"CurrentStackAmount: {currentStackAmount}");
+
+        float damageToReduce = player.playerAttributes.PreviousBowDamage * CalcBuffMultiplier(currentStackAmount - 1);
+
+        Debug.Log($"Reduced Damage: {damageToReduce}");
+        player.playerAttributes.BowDamage -= damageToReduce;
+        player.playerAttributes.PreviousBowDamage = player.playerAttributes.BowDamage;
+
+        Debug.Log($"Adding Damage: {player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount)}");
+        player.playerAttributes.BowDamage += player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
+
+        effectApplied = true;
     }
 }
 
 [Serializable]
-public class CritUpTotem : PermanentTotem
+public class CritUpTotem : OnPickupTotem
 {
-    public CritUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.CritChance += buffAmount;
+        player.playerAttributes.CritChance += initialBuffAmount;
+
+        effectApplied = true;
     }
 }
 
 [Serializable]
-public class SwordAtkSpdUpTotem : PermanentTotem
+public class SwordAtkSpdUpTotem : OnPickupTotem
 {
-    public SwordAtkSpdUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.SwordCooldown -= buffAmount;
+        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(SwordAtkSpdUpTotem));
+
+        float cooldownToAdd = player.playerAttributes.PreviousSwordCooldown * CalcBuffMultiplier(currentStackAmount - 1);
+
+        player.playerAttributes.SwordCooldown += cooldownToAdd;
+        player.playerAttributes.PreviousSwordCooldown = player.playerAttributes.SwordCooldown;
+        player.playerAttributes.SwordCooldown -= player.playerAttributes.SwordCooldown * CalcBuffMultiplier(currentStackAmount);
+
+        effectApplied = true;
     }
 }
 
 [Serializable]
-public class BowAtkSpdUpTotem : PermanentTotem
+public class BowAtkSpdUpTotem : OnPickupTotem
 {
-    public BowAtkSpdUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.BowCooldown -= buffAmount;
+        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(BowAtkSpdUpTotem));
+
+        float cooldownToAdd = player.playerAttributes.PreviousBowCooldown * CalcBuffMultiplier(currentStackAmount - 1);
+
+        player.playerAttributes.BowCooldown += cooldownToAdd;
+        player.playerAttributes.PreviousBowCooldown = player.playerAttributes.BowCooldown;
+        player.playerAttributes.BowCooldown -= player.playerAttributes.BowCooldown * CalcBuffMultiplier(currentStackAmount);
+
+        effectApplied = true;
     }
 }
 
 [Serializable]
-public class SpeedUpTotem : PermanentTotem
+public class SpeedUpTotem : OnPickupTotem
 {
-    public SpeedUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.Speed += buffAmount;
+        player.playerAttributes.Speed += initialBuffAmount;
+
+        effectApplied = true;
     }
 }
 
 [Serializable]
-public class SwordRangeUpTotem : PermanentTotem
+public class SwordRangeUpTotem : OnPickupTotem
 {
-    public SwordRangeUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.SwordRange += buffAmount;
+        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(SwordRangeUpTotem));
+
+        float rangeToReduce = player.playerAttributes.PreviousRange * CalcBuffMultiplier(currentStackAmount - 1);
+
+        player.playerAttributes.SwordRange -= rangeToReduce;
+        player.playerAttributes.PreviousRange = player.playerAttributes.SwordRange;
+        player.playerAttributes.SwordRange += player.playerAttributes.SwordRange * CalcBuffMultiplier(currentStackAmount);
+
+        effectApplied = true;
     }
 }
 
 [Serializable]
-public class ProjSpdUpTotem : PermanentTotem
+public class ProjSpdUpTotem : OnPickupTotem
 {
-    public ProjSpdUpTotem()
-    {
-        Init();
-    }
-
     public override void ApplyEffect()
     {
-        player.playerAttributes.ProjectileSpeed += buffAmount;
+        player.playerAttributes.ProjectileSpeed += initialBuffAmount;
+
+        effectApplied = true;
+    }
+}
+
+[Serializable]
+public class BowChargeSpdUpTotem : OnPickupTotem
+{
+    public override void ApplyEffect()
+    {
+        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(BowChargeSpdUpTotem));
+
+        float timeToAdd = player.playerAttributes.PreviousChargeTime * CalcBuffMultiplier(currentStackAmount - 1);
+
+        player.playerAttributes.BowChargeTime += timeToAdd;
+        player.playerAttributes.PreviousChargeTime = player.playerAttributes.BowChargeTime;
+        player.playerAttributes.BowChargeTime -= player.playerAttributes.BowChargeTime * CalcBuffMultiplier(currentStackAmount);
+
+        effectApplied = true;
+    }
+}
+
+[Serializable]
+public class LuckUpTotem : OnPickupTotem
+{
+    public override void ApplyEffect()
+    {
+        player.playerAttributes.Luck += initialBuffAmount;
+
+        effectApplied = true;
     }
 }
 #endregion
 
+#region Constant Totems
+public class BerzerkTotem : ConstantTotem
+{
+    public override void ApplyEffect()
+    {
+        base.ApplyEffect();
+
+        if (conditionMet && !effectApplied)
+        {
+            player.playerAttributes.SwordDamage *= 2;
+            player.playerAttributes.BowDamage *= 2;
+            player.playerAttributes.CritChance *= 2;
+
+            effectApplied = true;
+        }
+        else if (!conditionMet && effectApplied)
+        {
+            player.playerAttributes.SwordDamage /= 2;
+            player.playerAttributes.BowDamage /= 2;
+            player.playerAttributes.CritChance /= 2;
+
+            effectApplied = false;
+        }
+    }
+
+    public override void CheckCondition()
+    {
+        if (player.playerAttributes.Health == 1)
+        {
+            conditionMet =  true;
+        }
+
+        conditionMet = false;
+    }
+}
+#endregion
+
+#region OnTrigger Totems
+public class PlaneBuffTotem : OnTriggerTotem
+{
+    public override void Init()
+    {
+        base.Init();
+
+        EventManager.OnPlaneSwitch += ApplyEffect;
+    }
+
+    public override void ApplyEffect()
+    {
+        if (player.Form == Forms.Living)
+        {
+
+        }
+        else if(player.Form == Forms.Spirit)
+        {
+
+        }
+    }
+}
+
+#endregion
+
 public enum TotemTypes
 {
-    Permanent,
+    OnPickup,
     OnTrigger,
     Constant
 }
 
-//public enum TotemList
-//{
-//    HealthUp,
-//    SwordDmgUp,
-//    BowDmgUp,
-//    CritUp,
-//    SwordAtkSpdUp,
-//    BowAtkSpdUp,
-//    SpeedUp,
-//    SwordRangeUp,
-//    ProjSpdUp,
-//    Berzerk,
-//    OneUp,
-//    Executor,
-//    HealthyHitter,
-//    PlaneWalker,
-//    QuickDraw,
-//    BladeMaster,
-//    PlaneBuff,
-//    RabbitsFoot
-//}
+public enum TotemList
+{
+    HealthUp,
+    SwordDmgUp,
+    BowDmgUp,
+    CritUp,
+    SwordAtkSpdUp,
+    BowAtkSpdUp,
+    SpeedUp,
+    SwordRangeUp,
+    ProjSpdUp,
+    Berzerk,
+    OneUp,
+    Executor,
+    HealthyHitter,
+    PlaneWalker,
+    QuickDraw,
+    BladeMaster,
+    PlaneBuff,
+    RabbitsFoot
+}

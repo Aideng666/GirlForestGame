@@ -22,4 +22,5 @@ MonoBehaviour:
       data:
         totemType: 0
         totemName: HealthUp
-        buffAmount: 2
+        initialBuffAmount: 2
+        stackDampenAmount: 1

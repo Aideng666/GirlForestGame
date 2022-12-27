@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfb78f856477f6745949d66f753b55fe, type: 3}
-  m_Name: SwordDmgUp
+  m_Name: BowChargeSpdUp
   m_EditorClassIdentifier: 
   Totem:
-    rid: 3358588547401515013
+    rid: 3358588549324865538
   references:
     version: 2
     RefIds:
-    - rid: 3358588547401515013
-      type: {class: SwordDmgUpTotem, ns: , asm: Assembly-CSharp}
+    - rid: 3358588549324865538
+      type: {class: BowChargeSpdUpTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 0
-        totemName: SwordDamageUp
-        initialBuffAmount: 0.4
-        stackDampenAmount: 0.5
+        totemName: Bow Charge Speed Up
+        initialBuffAmount: 0.33
+        stackDampenAmount: 0.65

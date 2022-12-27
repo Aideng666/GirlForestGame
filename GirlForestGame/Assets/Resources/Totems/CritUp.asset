@@ -22,4 +22,5 @@ MonoBehaviour:
       data:
         totemType: 0
         totemName: CritUp
-        buffAmount: 0.01
+        initialBuffAmount: 0.01
+        stackDampenAmount: 1
