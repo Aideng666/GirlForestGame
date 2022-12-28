@@ -59,7 +59,7 @@ public class PlayerInventory : MonoBehaviour
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z) , Quaternion.identity);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
                 }
 
                 markings[0] = spirit;
@@ -73,7 +73,7 @@ public class PlayerInventory : MonoBehaviour
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
                 }
 
                 markings[1] = spirit;
@@ -90,7 +90,7 @@ public class PlayerInventory : MonoBehaviour
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
                 }
 
                 markings[2] = spirit;
@@ -104,7 +104,7 @@ public class PlayerInventory : MonoBehaviour
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
                 }
 
                 markings[3] = spirit;
@@ -132,7 +132,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (InputManager.Instance.SelectSword())
             {
-                print($"Putting the {spirit.spiritName} {type.ToString()} on your Sword");
+                print($"Putting the level {spirit.markingLevel} {spirit.spiritName} {type.ToString()} on your Sword");
 
                 EquipMarking(spirit, type, Weapons.Sword);
 
@@ -189,16 +189,21 @@ public class PlayerInventory : MonoBehaviour
 
         //if (inventoryOpen)
         //{
-            //print($"Sword Attribute: {markings[0]?.spiritName}");
-            //print($"Sword Element: {markings[1]?.spiritName}");
-            //print($"Bow Attribute: {markings[2]?.spiritName}");
-            //print($"Bow Element: {markings[3]?.spiritName}");
-            //print("Totems:");
+        print($"Sword Attribute: {markings[0]?.spiritName}");
+        print($"Sword Element: {markings[1]?.spiritName}");
+        print($"Bow Attribute: {markings[2]?.spiritName}");
+        print($"Bow Element: {markings[3]?.spiritName}");
+        //print("Totems:");
 
-            foreach (TotemObject totem in totems)
-            {
-                print($"{totem.Totem.totemName}");
-            }
+        //foreach (TotemObject totem in totems)
+        //{
+        //    print($"{totem.Totem.totemName}");
         //}
+        //}
+    }
+
+    public Spirit[] GetMarkings()
+    {
+        return markings;
     }
 }

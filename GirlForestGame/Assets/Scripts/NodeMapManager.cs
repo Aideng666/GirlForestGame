@@ -8,9 +8,10 @@ public class NodeMapManager : MonoBehaviour
     [SerializeField] Camera mapCam;
 
     static int currentLevel = 0;
-
     static bool mapActive = true;
     static bool mapUpdated;
+
+    int currentCycle = 1;
 
     MapNode activeNode;
     MapNode previousNode;
@@ -109,5 +110,10 @@ public class NodeMapManager : MonoBehaviour
     public void SetPreviousNode(MapNode node)
     {
         previousNode = node;
+    }
+
+    public int GetCurrentMapCycle()
+    {
+        return currentCycle;
     }
 }

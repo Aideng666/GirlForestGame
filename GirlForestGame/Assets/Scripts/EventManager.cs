@@ -6,7 +6,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     //For Player Attack Events
-    public delegate void OnHitAttack(List<Enemy> enemiesHit);
+    public delegate void OnHitAttack(List<Enemy> enemiesHit, Weapons weapon);
     public static event OnHitAttack OnSwordHit;
     public static event OnHitAttack OnBowHit;
 
@@ -29,12 +29,12 @@ public class EventManager : MonoBehaviour
 
     public void InvokeOnSwordHit(List<Enemy> enemiesHit)
     {
-        OnSwordHit?.Invoke(enemiesHit);
+        OnSwordHit?.Invoke(enemiesHit, Weapons.Sword);
     }
 
     public void InvokeOnBowHit(List<Enemy> enemiesHit)
     {
-        OnBowHit?.Invoke(enemiesHit);
+        OnBowHit?.Invoke(enemiesHit, Weapons.Bow);
     }
 
     public void InvokeTotemTrigger(TotemList totem)

@@ -9,7 +9,7 @@ public class MarkingPickup : MonoBehaviour
 
     Spirit chosenSpirit = null;
     MarkingTypes chosenType = MarkingTypes.None;
-
+    int markingLevel;
     float timeElasped;
 
     // Start is called before the first frame update
@@ -53,13 +53,34 @@ public class MarkingPickup : MonoBehaviour
 
         chosenSpirit = possibleSpirits[randomIndex];
         chosenType = (MarkingTypes)Random.Range(0, 2);
+
+        ChooseLevel();
     }
 
     //This is called when swapping one marking for another, it gives the newly spawned totem the correct spirit and type after swapping
-    public void ChooseMarking(Spirit spirit, MarkingTypes type)
+    public void ChooseMarking(Spirit spirit, MarkingTypes type, int level)
     {
         chosenSpirit = spirit;
         chosenType = type;
+
+        if (level > 0 && level < 4)
+        {
+            ChooseLevel(level);
+        }
+    }
+
+    public void ChooseLevel(int level = 0)
+    {
+        if (level == 0)
+        {
+            markingLevel = NodeMapManager.Instance.GetCurrentMapCycle();
+        }
+        else if (level < 4)
+        {
+            markingLevel = level;
+        }
+
+        chosenSpirit.SetLevel(markingLevel);
     }
 
     private void OnCollisionEnter(Collision collision)
