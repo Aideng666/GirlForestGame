@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class PlayerArrow : MonoBehaviour
 {
-    //public delegate void OnHit(List<Enemy> enemyHit);
-    //public static event OnHit OnBowHit;
-
-    // Start is called before the first frame update
-    void Start()
+    float chargedArrowDamage;
+    public void SetArrowChargeMultiplier(float percentage)
     {
-        
-    }
+        chargedArrowDamage = PlayerController.Instance.playerAttributes.BowDamage * percentage;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        print($"Adding {percentage} of the total bow damage to this shot");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -25,10 +18,10 @@ public class PlayerArrow : MonoBehaviour
 
         transform.parent = collision.gameObject.transform;
 
-        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == PlayerController.Instance.Form)
+        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == PlayerController.Instance.playerCombat.Form)
         {
             enemy.ApplyKnockback(transform.forward, 2);
-            enemy.TakeDamage(PlayerController.Instance.playerAttributes.BowDamage);
+            enemy.TakeDamage(PlayerController.Instance.playerAttributes.BowDamage + chargedArrowDamage);
 
             List<Enemy> enemiesHit = new List<Enemy>();
 

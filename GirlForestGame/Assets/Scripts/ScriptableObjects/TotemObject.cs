@@ -342,11 +342,11 @@ public class PlaneBuffTotem : OnTriggerTotem
 
     public override void ApplyEffect()
     {
-        if (player.Form == Forms.Living)
+        if (player.playerCombat.Form == Forms.Living)
         {
 
         }
-        else if(player.Form == Forms.Spirit)
+        else if(player.playerCombat.Form == Forms.Spirit)
         {
 
         }

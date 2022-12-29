@@ -17,7 +17,7 @@ public class BowAttackTransitionBehaviour : StateMachineBehaviour
         {
             Debug.Log("Bow Drawn");
 
-            PlayerController.Instance.SetBowDrawn(true);
+            PlayerController.Instance.playerCombat.SetBowDrawn(true);
 
             bowDrawn = true;
         }

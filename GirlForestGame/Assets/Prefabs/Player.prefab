@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 807364247537399498}
   - component: {fileID: 1439183563790741150}
   - component: {fileID: 1297180804387073770}
+  - component: {fileID: 2345695844193929904}
   - component: {fileID: 1821254030439938998}
   - component: {fileID: 2453708176110309224}
   m_Layer: 7
@@ -244,13 +245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlWithMouse: 0
-  arrowPrefab: {fileID: 8105265429908091771, guid: 25b33a299441aa548a6759ab1e2b3910, type: 3}
-  bowAimCanvas: {fileID: 0}
-  livingFormMaterial: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
-  spiritFormMaterial: {fileID: 2100000, guid: 905ff118dee948847a51283f6b488e8d, type: 2}
   playerAttributes: {fileID: 0}
   playerMarkings: {fileID: 0}
   playerInventory: {fileID: 0}
+  playerCombat: {fileID: 0}
 --- !u!114 &807364247537399498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,8 +286,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfBurnTicks: 5
-  burnTickDamage: 1
+  baseBurnTickDamage: 1
   burnTickDelay: 1
+  baseWindKnockbackPower: 10
   attributeMultipliers:
   - 1.33
   - 1.66
@@ -311,6 +310,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   markingPrefab: {fileID: 5512418781491973167, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
+--- !u!114 &2345695844193929904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5982676203613863563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add042b24b2fbc643ad27c54df9b3c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 8105265429908091771, guid: 25b33a299441aa548a6759ab1e2b3910, type: 3}
+  bowAimCanvas: {fileID: 0}
+  livingFormMaterial: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
+  spiritFormMaterial: {fileID: 2100000, guid: 905ff118dee948847a51283f6b488e8d, type: 2}
 --- !u!54 &1821254030439938998
 Rigidbody:
   m_ObjectHideFlags: 0

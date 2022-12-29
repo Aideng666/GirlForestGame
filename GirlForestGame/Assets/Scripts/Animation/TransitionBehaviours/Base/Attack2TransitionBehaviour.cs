@@ -7,9 +7,9 @@ public class Attack2TransitionBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerController.Instance.SetCanAttack(true, true, Weapons.Sword);
+        PlayerController.Instance.playerCombat.SetCanAttack(true, true, Weapons.Sword);
 
-        PlayerController.Instance.SetCurrentAttackNum(3);
+        PlayerController.Instance.playerCombat.SetCurrentAttackNum(3);
 
         animator.ResetTrigger("Attack2");
     }
