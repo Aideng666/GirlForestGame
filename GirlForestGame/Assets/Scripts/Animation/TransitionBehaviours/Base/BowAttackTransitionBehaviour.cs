@@ -15,8 +15,6 @@ public class BowAttackTransitionBehaviour : StateMachineBehaviour
     {
         if (stateInfo.normalizedTime >= 1 && !bowDrawn)
         {
-            Debug.Log("Bow Drawn");
-
             PlayerController.Instance.playerCombat.SetBowDrawn(true);
 
             bowDrawn = true;

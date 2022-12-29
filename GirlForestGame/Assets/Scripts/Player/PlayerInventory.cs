@@ -189,16 +189,16 @@ public class PlayerInventory : MonoBehaviour
 
         //if (inventoryOpen)
         //{
-        print($"Sword Attribute: {markings[0]?.spiritName}");
-        print($"Sword Element: {markings[1]?.spiritName}");
-        print($"Bow Attribute: {markings[2]?.spiritName}");
-        print($"Bow Element: {markings[3]?.spiritName}");
+        //print($"Sword Attribute: {markings[0]?.spiritName}");
+        //print($"Sword Element: {markings[1]?.spiritName}");
+        //print($"Bow Attribute: {markings[2]?.spiritName}");
+        //print($"Bow Element: {markings[3]?.spiritName}");
         //print("Totems:");
 
-        //foreach (TotemObject totem in totems)
-        //{
-        //    print($"{totem.Totem.totemName}");
-        //}
+        foreach (TotemObject totem in totems)
+        {
+            print($"{totem.Totem.totemName}");
+        }
         //}
     }
 

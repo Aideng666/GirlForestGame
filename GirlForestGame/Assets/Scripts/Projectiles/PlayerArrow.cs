@@ -8,8 +8,6 @@ public class PlayerArrow : MonoBehaviour
     public void SetArrowChargeMultiplier(float percentage)
     {
         chargedArrowDamage = PlayerController.Instance.playerAttributes.BowDamage * percentage;
-
-        print($"Adding {percentage} of the total bow damage to this shot");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -28,6 +26,8 @@ public class PlayerArrow : MonoBehaviour
             enemiesHit.Add(enemy);
 
             EventManager.Instance.InvokeOnBowHit(enemiesHit);
+
+            Destroy(gameObject);
         }
     }
 }

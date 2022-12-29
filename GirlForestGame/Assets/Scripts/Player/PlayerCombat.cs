@@ -16,9 +16,15 @@ public class PlayerCombat : MonoBehaviour
     public bool isKnockbackApplied { get; private set; }
 
     bool canAttack = true;
+
+    //Bow Stuff
     bool bowDrawn;
     bool bowCharging;
+    bool isDrawingBow;
+    bool quickfirePerformed;
     float currentBowChargeTime = 0;
+
+    //Sword Stuff
     int currentAttackNum = 1;
 
     Forms currentForm = Forms.Living;
@@ -53,16 +59,12 @@ public class PlayerCombat : MonoBehaviour
             if (body.velocity == Vector3.zero)
             {
                 bowCharging = true;
-
-                print("Charging");
             }
             else
             {
                 bowCharging = false;
 
                 currentBowChargeTime = 0;
-
-                print("Reset");
             }
 
             if (bowCharging)
@@ -83,10 +85,24 @@ public class PlayerCombat : MonoBehaviour
 
                 bowAimCanvas.SetActive(false);
 
-                SpawnArrow();
+                if (quickfirePerformed)
+                {
+                    SpawnArrow(targetEnemy);
 
-                currentBowChargeTime = 0;
+                    quickfirePerformed = false;
+                }
+                else
+                {
+                    SpawnArrow();
+
+                    currentBowChargeTime = 0;
+                }
             }
+        }
+
+        if (isDrawingBow && InputManager.Instance.ReleaseArrow())
+        {
+            quickfirePerformed = true;
         }
         
         //Detects Form Swapping
@@ -242,14 +258,31 @@ public class PlayerCombat : MonoBehaviour
         GetComponentInChildren<Animator>().SetTrigger("DrawBow");
 
         canAttack = false;
+        isDrawingBow = true;
     }
 
-    void SpawnArrow()
+    void SpawnArrow(GameObject target = null)
     {
-        var arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0));
+        GameObject arrow;
+
+        if (target == null)
+        {
+            arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0));
+
+            arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
+            arrow.GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+
+            return;
+        }
+
+        arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
+        //arrow.transform.forward = target.transform.position - arrow.transform.position;
+        arrow.transform.LookAt(target.transform);
 
         arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
-        arrow.GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+        arrow.GetComponent<Rigidbody>().velocity = arrow.transform.forward * player.playerAttributes.ProjectileSpeed;
+
+        arrow.transform.Rotate(new Vector3(1, 0, 0), 90);
     }
 
     void ActivateSwordHitbox(int attackNum)
@@ -438,6 +471,11 @@ public class PlayerCombat : MonoBehaviour
     public void SetBowDrawn(bool isDrawn)
     {
         bowDrawn = isDrawn;
+
+        if (isDrawn)
+        {
+            isDrawingBow = false;
+        }
     }
 
     public void SetCanAttack(bool value, bool applyCooldown, Weapons weaponChoice = Weapons.None)
