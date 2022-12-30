@@ -30,13 +30,6 @@ public class PlayerAttributes : MonoBehaviour
     float currentBowChargeTime;
     float currentLuck;
 
-    float prevSwordDamage;
-    float prevBowDamage;
-    float prevSwordCooldown;
-    float prevBowCooldown;
-    float prevRange;
-    float prevChargeTime;
-
     public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value; if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
     public float Health { get { return currentHealth; } set { currentHealth = value; } }
     public float Speed { get { return currentSpeed; } set { currentSpeed = value; } }
@@ -49,14 +42,6 @@ public class PlayerAttributes : MonoBehaviour
     public float CritChance { get { return currentCritChance; } set { currentCritChance = value; } }
     public float BowChargeTime { get { return currentBowChargeTime; } set { currentBowChargeTime = value; } }
     public float Luck { get { return currentLuck; } set { currentLuck = value; } }
-
-
-    public float PreviousBowDamage { get { return prevBowDamage; } set { prevBowDamage = value; } }
-    public float PreviousSwordDamage { get { return prevSwordDamage; } set { prevSwordDamage = value; } }
-    public float PreviousSwordCooldown { get { return prevSwordCooldown; } set { prevSwordCooldown = value; } }
-    public float PreviousBowCooldown { get { return prevBowCooldown; } set { prevBowCooldown = value; } }
-    public float PreviousRange { get { return prevRange; } set { prevRange = value; } }
-    public float PreviousChargeTime { get { return prevChargeTime; } set { prevChargeTime = value; } }
 
     private void Start()
     {
@@ -72,12 +57,5 @@ public class PlayerAttributes : MonoBehaviour
         currentCritChance = defaultCritChance;
         currentBowChargeTime = defaultBowChargeTime;
         currentLuck = defaultLuck;
-
-        prevBowDamage = defaultBowDamage;
-        prevSwordDamage = defaultSwordDamage;
-        prevSwordCooldown = defaultSwordCooldown;
-        prevBowCooldown = defaultBowCooldown;
-        prevRange = defaultSwordRange;
-        prevChargeTime = defaultBowChargeTime;
     }
 }

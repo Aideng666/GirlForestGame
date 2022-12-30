@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -20,7 +21,8 @@ public class TotemObject : ScriptableObject
     [ContextMenu(nameof(ProjSpdUp))] void ProjSpdUp() { Totem = new ProjSpdUpTotem(); }
     [ContextMenu(nameof(BowChargeSpdUp))] void BowChargeSpdUp() { Totem = new BowChargeSpdUpTotem(); }
     [ContextMenu(nameof(LuckUp))] void LuckUp() { Totem = new LuckUpTotem(); }
-    //[ContextMenu(nameof(Berzerk))] void Berzerk() { Totem = new HealthUpTotem(); }
+    [ContextMenu(nameof(Berzerk))] void Berzerk() { Totem = new BerzerkTotem(); }
+
     //[ContextMenu(nameof(OneUp))] void OneUp() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(Executor))] void Executor() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(HealthyHitter))] void HealthyHitter() { Totem = new HealthUpTotem(); }
@@ -42,6 +44,7 @@ public class Totem
     public float stackDampenAmount;
     protected PlayerController player;
     protected int currentStackAmount;
+    protected float previousAmountAdded;
     protected bool effectApplied;
 
     public virtual void Init()
@@ -147,12 +150,13 @@ public class SwordDmgUpTotem : OnPickupTotem
 {
     public override void ApplyEffect()
     {
-        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(SwordDmgUpTotem));
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(SwordDmgUpTotem)];
 
-        float damageToReduce = player.playerAttributes.PreviousSwordDamage * CalcBuffMultiplier(currentStackAmount - 1);
+        //Subtracting the previous buff because the new one is stacked
+        player.playerAttributes.SwordDamage -= previousAmountAdded;
 
-        player.playerAttributes.SwordDamage -= damageToReduce;
-        player.playerAttributes.PreviousSwordDamage = player.playerAttributes.SwordDamage;
+        //Adding the new Buff
+        previousAmountAdded = player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
         player.playerAttributes.SwordDamage += player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
 
         effectApplied = true;
@@ -164,16 +168,11 @@ public class BowDmgUpTotem : OnPickupTotem
 {
     public override void ApplyEffect()
     {
-        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(BowDmgUpTotem));
-        Debug.Log($"CurrentStackAmount: {currentStackAmount}");
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(BowDmgUpTotem)];
 
-        float damageToReduce = player.playerAttributes.PreviousBowDamage * CalcBuffMultiplier(currentStackAmount - 1);
+        player.playerAttributes.BowDamage -= previousAmountAdded;
 
-        Debug.Log($"Reduced Damage: {damageToReduce}");
-        player.playerAttributes.BowDamage -= damageToReduce;
-        player.playerAttributes.PreviousBowDamage = player.playerAttributes.BowDamage;
-
-        Debug.Log($"Adding Damage: {player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount)}");
+        previousAmountAdded = player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
         player.playerAttributes.BowDamage += player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
 
         effectApplied = true;
@@ -196,12 +195,11 @@ public class SwordAtkSpdUpTotem : OnPickupTotem
 {
     public override void ApplyEffect()
     {
-        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(SwordAtkSpdUpTotem));
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(SwordAtkSpdUpTotem)];
 
-        float cooldownToAdd = player.playerAttributes.PreviousSwordCooldown * CalcBuffMultiplier(currentStackAmount - 1);
+        player.playerAttributes.SwordCooldown += previousAmountAdded;
 
-        player.playerAttributes.SwordCooldown += cooldownToAdd;
-        player.playerAttributes.PreviousSwordCooldown = player.playerAttributes.SwordCooldown;
+        previousAmountAdded = player.playerAttributes.SwordCooldown * CalcBuffMultiplier(currentStackAmount);
         player.playerAttributes.SwordCooldown -= player.playerAttributes.SwordCooldown * CalcBuffMultiplier(currentStackAmount);
 
         effectApplied = true;
@@ -213,12 +211,11 @@ public class BowAtkSpdUpTotem : OnPickupTotem
 {
     public override void ApplyEffect()
     {
-        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(BowAtkSpdUpTotem));
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(BowAtkSpdUpTotem)];
 
-        float cooldownToAdd = player.playerAttributes.PreviousBowCooldown * CalcBuffMultiplier(currentStackAmount - 1);
+        player.playerAttributes.BowCooldown += previousAmountAdded;
 
-        player.playerAttributes.BowCooldown += cooldownToAdd;
-        player.playerAttributes.PreviousBowCooldown = player.playerAttributes.BowCooldown;
+        previousAmountAdded = player.playerAttributes.BowCooldown * CalcBuffMultiplier(currentStackAmount);
         player.playerAttributes.BowCooldown -= player.playerAttributes.BowCooldown * CalcBuffMultiplier(currentStackAmount);
 
         effectApplied = true;
@@ -241,12 +238,11 @@ public class SwordRangeUpTotem : OnPickupTotem
 {
     public override void ApplyEffect()
     {
-        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(SwordRangeUpTotem));
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(SwordRangeUpTotem)];
 
-        float rangeToReduce = player.playerAttributes.PreviousRange * CalcBuffMultiplier(currentStackAmount - 1);
+        player.playerAttributes.SwordRange -= previousAmountAdded;
 
-        player.playerAttributes.SwordRange -= rangeToReduce;
-        player.playerAttributes.PreviousRange = player.playerAttributes.SwordRange;
+        previousAmountAdded = player.playerAttributes.SwordRange * CalcBuffMultiplier(currentStackAmount);
         player.playerAttributes.SwordRange += player.playerAttributes.SwordRange * CalcBuffMultiplier(currentStackAmount);
 
         effectApplied = true;
@@ -269,12 +265,11 @@ public class BowChargeSpdUpTotem : OnPickupTotem
 {
     public override void ApplyEffect()
     {
-        currentStackAmount = player.playerInventory.GetNumOfTotems(typeof(BowChargeSpdUpTotem));
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(BowChargeSpdUpTotem)];
 
-        float timeToAdd = player.playerAttributes.PreviousChargeTime * CalcBuffMultiplier(currentStackAmount - 1);
+        player.playerAttributes.BowChargeTime += previousAmountAdded;
 
-        player.playerAttributes.BowChargeTime += timeToAdd;
-        player.playerAttributes.PreviousChargeTime = player.playerAttributes.BowChargeTime;
+        previousAmountAdded = player.playerAttributes.BowChargeTime * CalcBuffMultiplier(currentStackAmount);
         player.playerAttributes.BowChargeTime -= player.playerAttributes.BowChargeTime * CalcBuffMultiplier(currentStackAmount);
 
         effectApplied = true;
@@ -296,23 +291,33 @@ public class LuckUpTotem : OnPickupTotem
 #region Constant Totems
 public class BerzerkTotem : ConstantTotem
 {
+    private float previousSwdDmgAdded;
+    private float previousBowDmgAdded;
+    private float previousCritChanceAdded;
+
     public override void ApplyEffect()
     {
         base.ApplyEffect();
 
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(BerzerkTotem)];
+
         if (conditionMet && !effectApplied)
         {
-            player.playerAttributes.SwordDamage *= 2;
-            player.playerAttributes.BowDamage *= 2;
-            player.playerAttributes.CritChance *= 2;
+            previousSwdDmgAdded = player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+            previousBowDmgAdded = player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
+            previousCritChanceAdded = player.playerAttributes.CritChance * CalcBuffMultiplier(currentStackAmount);
+
+            player.playerAttributes.SwordDamage += player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+            player.playerAttributes.BowDamage += player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
+            player.playerAttributes.CritChance += player.playerAttributes.CritChance * CalcBuffMultiplier(currentStackAmount);
 
             effectApplied = true;
         }
         else if (!conditionMet && effectApplied)
         {
-            player.playerAttributes.SwordDamage /= 2;
-            player.playerAttributes.BowDamage /= 2;
-            player.playerAttributes.CritChance /= 2;
+            player.playerAttributes.SwordDamage -= previousSwdDmgAdded;
+            player.playerAttributes.BowDamage -= previousBowDmgAdded;
+            player.playerAttributes.CritChance -= previousCritChanceAdded;
 
             effectApplied = false;
         }

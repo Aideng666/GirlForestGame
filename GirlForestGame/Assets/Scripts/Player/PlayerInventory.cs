@@ -15,6 +15,7 @@ public class PlayerInventory : MonoBehaviour
     Spirit[] markings;
 
     List<TotemObject> totems;
+    public Dictionary<System.Type, int> totemDictionary { get; private set; } // the int value shows how many of each totem the player has
 
     PlayerController player;
 
@@ -27,8 +28,14 @@ public class PlayerInventory : MonoBehaviour
     {
         markings = new Spirit[] { null, null, null, null };
         totems = new List<TotemObject>();
+        totemDictionary = new Dictionary<System.Type, int>();
 
         player = GetComponent<PlayerController>();
+
+        foreach (var totemType in System.AppDomain.CurrentDomain.GetAllDerivedTypes(typeof(Totem)))
+        {
+            totemDictionary.Add(totemType, 0);
+        }
     }
 
     private void Update()
@@ -155,11 +162,31 @@ public class PlayerInventory : MonoBehaviour
 
     public void AddTotemToList(TotemObject totem)
     {
-        totems.Add(totem);
+        //totems.Add(totem);
+
+        System.Type totemType = totem.Totem.GetType();
+
+        if (totemDictionary.ContainsKey(totemType))
+        {
+            totemDictionary[totemType] += 1;
+
+            if (totemDictionary[totemType] == 1)
+            {
+                totems.Add(totem);
+            }
+        }
 
         if (totem.Totem.GetTotemType() == TotemTypes.OnPickup)
         {
-            totem.Totem.ApplyEffect();
+            //totem.Totem.ApplyEffect();
+
+            foreach (TotemObject t in totems)
+            {
+                if (t.Totem.totemName == totem.Totem.totemName)
+                {
+                    t.Totem.ApplyEffect();
+                }
+            }
         }
     }
 
@@ -168,20 +195,20 @@ public class PlayerInventory : MonoBehaviour
         return totems;
     }
 
-    public int GetNumOfTotems(System.Type typeToCheck)
-    {
-        int count = 0;
+    //public int GetNumOfTotems(System.Type typeToCheck)
+    //{
+    //    int count = 0;
 
-        foreach (TotemObject totem in totems)
-        {
-            if (typeToCheck == totem.Totem.GetType())
-            {
-                count++;
-            }
-        }
+    //    foreach (TotemObject totem in totems)
+    //    {
+    //        if (typeToCheck == totem.Totem.GetType())
+    //        {
+    //            count++;
+    //        }
+    //    }
 
-        return count;
-    }
+    //    return count;
+    //}
 
     public void ToggleInventory()
     {
