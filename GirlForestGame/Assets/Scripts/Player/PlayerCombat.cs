@@ -8,9 +8,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] GameObject bowAimCanvas;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
+    [SerializeField] Collider bowTargetCollider;
 
-    List<Enemy> visibleEnemies = new List<Enemy>();
-    GameObject targetEnemy;
 
     public bool isAttacking { get; private set; }
     public bool isKnockbackApplied { get; private set; }
@@ -18,6 +17,8 @@ public class PlayerCombat : MonoBehaviour
     bool canAttack = true;
 
     //Bow Stuff
+    GameObject bowTargetEnemy;
+    List<Enemy> bowTargetsInView = new List<Enemy>();
     bool bowDrawn;
     bool bowCharging;
     bool isDrawingBow;
@@ -25,6 +26,8 @@ public class PlayerCombat : MonoBehaviour
     float currentBowChargeTime = 0;
 
     //Sword Stuff
+    GameObject swordTargetEnemy;
+    List<Enemy> swordTargetsInView = new List<Enemy>();
     int currentAttackNum = 1;
 
     Forms currentForm = Forms.Living;
@@ -87,7 +90,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (quickfirePerformed)
                 {
-                    SpawnArrow(targetEnemy);
+                    SpawnArrow(bowTargetEnemy);
 
                     quickfirePerformed = false;
                 }
@@ -164,14 +167,14 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            if (targetEnemy != null && Vector3.Distance(targetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange)
+            if (swordTargetEnemy != null && Vector3.Distance(swordTargetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange)
             {
                 SwordAttack();
 
                 return;
             }
 
-            StartCoroutine(MoveTowardsAttack(player.playerAttributes.SwordCooldown, targetEnemy));
+            StartCoroutine(MoveTowardsAttack(player.playerAttributes.SwordCooldown, swordTargetEnemy));
         }
     }
 
@@ -186,13 +189,13 @@ public class PlayerCombat : MonoBehaviour
         Vector3 endVelo = Vector3.zero;
         Vector3 startVelo = Vector3.zero;
 
-        if (targetEnemy == null)
+        if (swordTargetEnemy == null)
         {
             startVelo = player.playerAttributes.Speed * player.aimDirection;
         }
         else
         {
-            startVelo = player.playerAttributes.Speed * (targetEnemy.transform.position - transform.position).normalized;
+            startVelo = player.playerAttributes.Speed * (swordTargetEnemy.transform.position - transform.position).normalized;
         }
 
         float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
@@ -380,77 +383,117 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void SelectTargetEnemy(Vector3 direction)
+    public void SelectSwordTargetEnemy(/*Vector3 direction*/)
     {
-        Collider[] collidersDetected = new Collider[0];
-        Collider[] collidersDetected2 = new Collider[0];
-        Collider[] collidersDetected3 = new Collider[0];
+        //Collider[] collidersDetected = new Collider[0];
+        //Collider[] collidersDetected2 = new Collider[0];
+        //Collider[] collidersDetected3 = new Collider[0];
 
-        if (direction.magnitude < 0.1f)
-        {
-            targetEnemy = null;
+        //if (direction.magnitude < 0.1f)
+        //{
+        //    swordTargetEnemy = null;
 
-            return;
-        }
+        //    return;
+        //}
 
-        //Creates a "cone" that acts as the players "view" and adds every visible collider to the player into arrays
-        collidersDetected = Physics.OverlapSphere(transform.position + (direction.normalized * 1), 1f);
-        collidersDetected2 = Physics.OverlapSphere(transform.position + (direction.normalized * 3), 2f);
-        collidersDetected3 = Physics.OverlapSphere(transform.position + (direction.normalized * 5), 3f);
+        ////Creates a "cone" that acts as the players "view" and adds every visible collider to the player into arrays
+        //collidersDetected = Physics.OverlapSphere(transform.position + (direction.normalized * 1), 1f);
+        //collidersDetected2 = Physics.OverlapSphere(transform.position + (direction.normalized * 3), 2f);
+        //collidersDetected3 = Physics.OverlapSphere(transform.position + (direction.normalized * 5), 3f);
 
-        visibleEnemies = new List<Enemy>();
+        //swordTargetsInView = new List<Enemy>();
 
         //Filters out only enemies from the visible colliders
-        if (collidersDetected.Length > 0)
-        {
-            for (int i = 0; i < collidersDetected.Length; i++)
-            {
-                if (collidersDetected[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-                {
-                    visibleEnemies.Add(enemy);
-                }
-            }
-        }
-        if (collidersDetected2.Length > 0)
-        {
-            for (int i = 0; i < collidersDetected2.Length; i++)
-            {
-                if (collidersDetected2[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-                {
-                    visibleEnemies.Add(enemy);
-                }
-            }
-        }
-        if (collidersDetected3.Length > 0)
-        {
-            for (int i = 0; i < collidersDetected3.Length; i++)
-            {
-                if (collidersDetected3[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-                {
-                    visibleEnemies.Add(enemy);
-                }
-            }
-        }
+        //if (collidersDetected.Length > 0)
+        //{
+        //    for (int i = 0; i < collidersDetected.Length; i++)
+        //    {
+        //        if (collidersDetected[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        //        {
+        //            swordTargetsInView.Add(enemy);
+        //        }
+        //    }
+        //}
+        //if (collidersDetected2.Length > 0)
+        //{
+        //    for (int i = 0; i < collidersDetected2.Length; i++)
+        //    {
+        //        if (collidersDetected2[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        //        {
+        //            swordTargetsInView.Add(enemy);
+        //        }
+        //    }
+        //}
+        //if (collidersDetected3.Length > 0)
+        //{
+        //    for (int i = 0; i < collidersDetected3.Length; i++)
+        //    {
+        //        if (collidersDetected3[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        //        {
+        //            swordTargetsInView.Add(enemy);
+        //        }
+        //    }
+        //}
         /////////////////////////////////////////////////////
 
         //Sets the target enemy to the closest enemy that is within the player's view
-        if (visibleEnemies.Count > 0)
+        if (swordTargetsInView.Count > 0)
         {
-            targetEnemy = visibleEnemies[0].gameObject;
+            swordTargetEnemy = swordTargetsInView[0].gameObject;
 
-            for (int i = 0; i < visibleEnemies.Count; i++)
+            for (int i = 0; i < swordTargetsInView.Count; i++)
             {
-                if (Vector3.Distance(visibleEnemies[i].transform.position, transform.position) < Vector3.Distance(targetEnemy.transform.position, transform.position))
+                if (Vector3.Distance(swordTargetsInView[i].transform.position, transform.position) < Vector3.Distance(swordTargetEnemy.transform.position, transform.position))
                 {
-                    targetEnemy = visibleEnemies[i].gameObject;
+                    swordTargetEnemy = swordTargetsInView[i].gameObject;
                 }
             }
         }
         else
         {
-            targetEnemy = null;
+            swordTargetEnemy = null;
         }
         ///////////////////////////////////////////////////////////////////////////////
+    }
+
+    public void SelectBowTargetEnemy()
+    {
+        if (bowTargetsInView.Count > 0)
+        {
+            bowTargetEnemy = bowTargetsInView[0].gameObject;
+
+            for (int i = 0; i < bowTargetsInView.Count; i++)
+            {
+                if (Vector3.Distance(bowTargetsInView[i].transform.position, transform.position) < Vector3.Distance(bowTargetEnemy.transform.position, transform.position))
+                {
+                    bowTargetEnemy = bowTargetsInView[i].gameObject;
+                }
+            }
+        }
+        else
+        {
+            bowTargetEnemy = null;
+        }
+    }
+
+    public void AddBowTarget(Enemy enemy)
+    {
+        bowTargetsInView.Add(enemy);
+    }
+
+    public void RemoveBowTarget(Enemy enemy)
+    {
+        bowTargetsInView.RemoveAt(bowTargetsInView.IndexOf(enemy));
+    }
+
+    public void AddSwordTarget(Enemy enemy)
+    {
+        swordTargetsInView.Add(enemy);
+    }
+
+    public void RemoveSwordTarget(Enemy enemy)
+    {
+        swordTargetsInView.RemoveAt(swordTargetsInView.IndexOf(enemy));
     }
 
     public int GetCurrentAttackNum()

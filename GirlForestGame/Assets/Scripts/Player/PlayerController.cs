@@ -115,7 +115,8 @@ public class PlayerController : MonoBehaviour
         body.velocity = playerAttributes.Speed * moveDir;
 
         //Starts the selection of the target enemy based on the direction the player is aiming
-        playerCombat.SelectTargetEnemy(aimDirection);
+        playerCombat.SelectSwordTargetEnemy(/*aimDirection*/);
+        playerCombat.SelectBowTargetEnemy();
     }
     private void OnCollisionEnter(Collision collision)
     {
