@@ -383,59 +383,8 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void SelectSwordTargetEnemy(/*Vector3 direction*/)
+    public void SelectSwordTargetEnemy()
     {
-        //Collider[] collidersDetected = new Collider[0];
-        //Collider[] collidersDetected2 = new Collider[0];
-        //Collider[] collidersDetected3 = new Collider[0];
-
-        //if (direction.magnitude < 0.1f)
-        //{
-        //    swordTargetEnemy = null;
-
-        //    return;
-        //}
-
-        ////Creates a "cone" that acts as the players "view" and adds every visible collider to the player into arrays
-        //collidersDetected = Physics.OverlapSphere(transform.position + (direction.normalized * 1), 1f);
-        //collidersDetected2 = Physics.OverlapSphere(transform.position + (direction.normalized * 3), 2f);
-        //collidersDetected3 = Physics.OverlapSphere(transform.position + (direction.normalized * 5), 3f);
-
-        //swordTargetsInView = new List<Enemy>();
-
-        //Filters out only enemies from the visible colliders
-        //if (collidersDetected.Length > 0)
-        //{
-        //    for (int i = 0; i < collidersDetected.Length; i++)
-        //    {
-        //        if (collidersDetected[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-        //        {
-        //            swordTargetsInView.Add(enemy);
-        //        }
-        //    }
-        //}
-        //if (collidersDetected2.Length > 0)
-        //{
-        //    for (int i = 0; i < collidersDetected2.Length; i++)
-        //    {
-        //        if (collidersDetected2[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-        //        {
-        //            swordTargetsInView.Add(enemy);
-        //        }
-        //    }
-        //}
-        //if (collidersDetected3.Length > 0)
-        //{
-        //    for (int i = 0; i < collidersDetected3.Length; i++)
-        //    {
-        //        if (collidersDetected3[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-        //        {
-        //            swordTargetsInView.Add(enemy);
-        //        }
-        //    }
-        //}
-        /////////////////////////////////////////////////////
-
         //Sets the target enemy to the closest enemy that is within the player's view
         if (swordTargetsInView.Count > 0)
         {
@@ -453,7 +402,6 @@ public class PlayerCombat : MonoBehaviour
         {
             swordTargetEnemy = null;
         }
-        ///////////////////////////////////////////////////////////////////////////////
     }
 
     public void SelectBowTargetEnemy()
@@ -474,6 +422,11 @@ public class PlayerCombat : MonoBehaviour
         {
             bowTargetEnemy = null;
         }
+    }
+
+    public void TakeDamage()
+    {
+        player.playerAttributes.Health -= 1;
     }
 
     public void AddBowTarget(Enemy enemy)

@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     EventManager eventManager;
 
+    bool deathStarted;
+
     public static PlayerController Instance { get; set; }
 
     private void Awake()
@@ -43,6 +45,23 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerAttributes.Health <= 0)
+        {
+            if (playerInventory.totemDictionary[typeof(ExtraLifeTotem)] < 1)
+            {
+                if (!deathStarted)
+                {
+                    Die();
+                }
+            }
+            else
+            {
+                EventManager.Instance.InvokeTotemTrigger(TotemList.ExtraLife);
+                playerInventory.RemoveTotem(typeof(ExtraLifeTotem));
+            }
+
+        }
+
         if (!playerCombat.isKnockbackApplied)
         {
             if (!playerCombat.isAttacking)
@@ -115,9 +134,17 @@ public class PlayerController : MonoBehaviour
         body.velocity = playerAttributes.Speed * moveDir;
 
         //Starts the selection of the target enemy based on the direction the player is aiming
-        playerCombat.SelectSwordTargetEnemy(/*aimDirection*/);
+        playerCombat.SelectSwordTargetEnemy();
         playerCombat.SelectBowTargetEnemy();
     }
+
+    void Die()
+    {
+        print("Died");
+
+        deathStarted = true;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         //To transition from room to room

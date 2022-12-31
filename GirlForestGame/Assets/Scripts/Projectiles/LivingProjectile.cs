@@ -23,8 +23,7 @@ public class LivingProjectile : MonoBehaviour
         if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController player) && isActive)
         {
             player.playerCombat.ApplyKnockback((player.transform.position - transform.position).normalized, 20);
-
-            print("Hit: " + collision.gameObject.name);
+            player.playerCombat.TakeDamage();
 
             Destroy(gameObject);
         }

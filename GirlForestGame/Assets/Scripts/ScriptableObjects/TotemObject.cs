@@ -22,8 +22,7 @@ public class TotemObject : ScriptableObject
     [ContextMenu(nameof(BowChargeSpdUp))] void BowChargeSpdUp() { Totem = new BowChargeSpdUpTotem(); }
     [ContextMenu(nameof(LuckUp))] void LuckUp() { Totem = new LuckUpTotem(); }
     [ContextMenu(nameof(Berzerk))] void Berzerk() { Totem = new BerzerkTotem(); }
-
-    //[ContextMenu(nameof(OneUp))] void OneUp() { Totem = new HealthUpTotem(); }
+    [ContextMenu(nameof(ExtraLife))] void ExtraLife() { Totem = new ExtraLifeTotem(); }
     //[ContextMenu(nameof(Executor))] void Executor() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(HealthyHitter))] void HealthyHitter() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(PlaneWalker))] void PlaneWalker() { Totem = new HealthUpTotem(); }
@@ -289,6 +288,7 @@ public class LuckUpTotem : OnPickupTotem
 #endregion
 
 #region Constant Totems
+[Serializable]
 public class BerzerkTotem : ConstantTotem
 {
     private float previousSwdDmgAdded;
@@ -336,27 +336,24 @@ public class BerzerkTotem : ConstantTotem
 #endregion
 
 #region OnTrigger Totems
-public class PlaneBuffTotem : OnTriggerTotem
+[Serializable]
+public class ExtraLifeTotem : OnTriggerTotem
 {
     public override void Init()
     {
         base.Init();
 
-        EventManager.OnPlaneSwitch += ApplyEffect;
+        EventManager.OnPlayerDeath += ApplyEffect;
     }
 
     public override void ApplyEffect()
     {
-        if (player.playerCombat.Form == Forms.Living)
-        {
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(ExtraLifeTotem)];
 
-        }
-        else if(player.playerCombat.Form == Forms.Spirit)
-        {
-
-        }
+        player.playerAttributes.Health += initialBuffAmount * currentStackAmount;
     }
 }
+
 
 #endregion
 
@@ -379,7 +376,7 @@ public enum TotemList
     SwordRangeUp,
     ProjSpdUp,
     Berzerk,
-    OneUp,
+    ExtraLife,
     Executor,
     HealthyHitter,
     PlaneWalker,

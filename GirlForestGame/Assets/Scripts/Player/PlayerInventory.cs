@@ -190,6 +190,24 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    public void RemoveTotem(System.Type totemType)
+    {
+        if (totemDictionary.ContainsKey(totemType))
+        {
+            totemDictionary[totemType] = 0;
+
+            foreach (TotemObject t in totems)
+            {
+                if (t.Totem.GetType() == totemType)
+                {
+                    totems.Remove(t);
+
+                    return;
+                }
+            }
+        }
+    }
+
     public List<TotemObject> GetTotemList()
     {
         return totems;

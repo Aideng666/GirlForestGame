@@ -30,8 +30,11 @@ public class PlayerAttributes : MonoBehaviour
     float currentBowChargeTime;
     float currentLuck;
 
-    public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value; if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
-    public float Health { get { return currentHealth; } set { currentHealth = value; } }
+    public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value;
+            if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
+    public float Health { get { return currentHealth; } set { currentHealth = value;
+            if (currentHealth > currentMaxHealth) currentHealth = currentMaxHealth;
+            if (currentHealth < 0) currentHealth = 0;} }
     public float Speed { get { return currentSpeed; } set { currentSpeed = value; } }
     public float SwordDamage { get { return currentSwordDamage; } set { currentSwordDamage = value; } }
     public float BowDamage { get { return currentBowDamage; } set { currentBowDamage = value; } }

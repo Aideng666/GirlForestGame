@@ -1942,7 +1942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6636760196860391136, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7893677416200457466, guid: 2a65bdc7064c66a438a1a2d6b84326a2, type: 3}
       propertyPath: m_UseGravity
@@ -1960,6 +1960,10 @@ PrefabInstance:
     - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultSpeed
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultHealth
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1286212614620366135, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_LocalPosition.x

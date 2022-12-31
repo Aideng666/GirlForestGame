@@ -24,20 +24,11 @@ public class SpiritProjectile : MonoBehaviour
         if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController player) && isActive)
         {
             player.playerCombat.ApplyKnockback((player.transform.position - transform.position).normalized, 20);
+            player.playerCombat.TakeDamage();
 
             Destroy(gameObject);
         }
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.TryGetComponent<PlayerController>(out PlayerController player) && isActive && player.Form == Forms.Spirit)
-    //    {
-    //        player.ApplyKnockback((player.transform.position - transform.position).normalized, 20);
-
-    //        Destroy(gameObject);
-    //    }
-    //}
 
     public void SetActive(bool active)
     {

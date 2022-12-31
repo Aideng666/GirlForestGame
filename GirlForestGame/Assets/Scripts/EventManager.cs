@@ -13,7 +13,7 @@ public class EventManager : MonoBehaviour
     //For OnTrigger Totem events
     public delegate void OnTotemTrigger();
     public static event OnTotemTrigger OnExecute;
-    public static event OnTotemTrigger OnPlaneSwitch;
+    public static event OnTotemTrigger OnPlayerDeath;
 
     public static EventManager Instance { get; set; }
 
@@ -47,9 +47,9 @@ public class EventManager : MonoBehaviour
 
                 break;
 
-            case TotemList.PlaneBuff:
+            case TotemList.ExtraLife:
 
-                OnPlaneSwitch?.Invoke();
+                OnPlayerDeath?.Invoke();
 
                 break;
         }
