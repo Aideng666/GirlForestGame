@@ -11,9 +11,11 @@ public class EventManager : MonoBehaviour
     public static event OnHitAttack OnBowHit;
 
     //For OnTrigger Totem events
-    public delegate void OnTotemTrigger();
-    public static event OnTotemTrigger OnExecute;
-    public static event OnTotemTrigger OnPlayerDeath;
+    //public delegate void OnTotemTrigger();
+    //public static event OnTotemTrigger OnEnemyKill;
+    //public static event OnTotemTrigger OnPlayerDeath;
+    //public static event OnTotemTrigger OnPlaneSwitch;
+    //public static event OnTotemTrigger OnSwordSwing;
 
     public static EventManager Instance { get; set; }
 
@@ -37,21 +39,41 @@ public class EventManager : MonoBehaviour
         OnBowHit?.Invoke(enemiesHit, Weapons.Bow);
     }
 
-    public void InvokeTotemTrigger(TotemList totem)
-    {
-        switch (totem)
-        {
-            case TotemList.Executor:
+    //public void InvokeTotemTrigger(TotemEvents totemEvent)
+    //{
+    //    switch (totemEvent)
+    //    {
+    //        case TotemEvents.OnEnemyKill:
 
-                OnExecute?.Invoke();
+    //            OnEnemyKill?.Invoke();
 
-                break;
+    //            break;
 
-            case TotemList.ExtraLife:
+    //        case TotemEvents.OnPlayerDeath:
 
-                OnPlayerDeath?.Invoke();
+    //            OnPlayerDeath?.Invoke();
 
-                break;
-        }
-    }
+    //            break;
+
+    //        case TotemEvents.OnPlaneSwitch:
+
+    //            OnPlaneSwitch?.Invoke();
+
+    //            break;
+
+    //        case TotemEvents.OnSwordSwing:
+
+    //            OnSwordSwing?.Invoke();
+
+    //            break;
+    //    }
+    //}
+}
+
+public enum TotemEvents
+{
+    OnEnemyKill,
+    OnPlayerDeath,
+    OnPlaneSwitch,
+    OnSwordSwing
 }

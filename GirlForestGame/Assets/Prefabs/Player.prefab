@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2401186950673904152}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.25, z: 6.5}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.25, z: 6.5000024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5982676203613863567}
-  m_RootOrder: 2
+  m_Father: {fileID: 1957264861422623543}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &7983642040164700049
 MonoBehaviour:
@@ -814,15 +814,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5955990372660728705}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5521710128399293011}
   - {fileID: 4577294852570819295}
-  m_Father: {fileID: 5982676203613863567}
-  m_RootOrder: 1
+  m_Father: {fileID: 1957264861422623543}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -939,9 +939,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5214929380070089809}
-  - {fileID: 4790119955218764395}
-  - {fileID: 316433692735821152}
-  - {fileID: 6534963147270855764}
+  - {fileID: 1957264861422623543}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -957,6 +955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8cd0d7a380341a4c8b0bf9a5914320d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimColliders: {fileID: 8985858459354596363}
   controlWithMouse: 0
   playerAttributes: {fileID: 0}
   playerMarkings: {fileID: 0}
@@ -1258,13 +1257,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8559466078478661585}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.25, z: 3.5}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.25, z: 3.5000012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5982676203613863567}
-  m_RootOrder: 3
+  m_Father: {fileID: 1957264861422623543}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &7603293084556601176
 MonoBehaviour:
@@ -1940,6 +1939,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: 0
+--- !u!1 &8985858459354596363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1957264861422623543}
+  m_Layer: 0
+  m_Name: AimColliders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1957264861422623543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985858459354596363}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 316433692735821152}
+  - {fileID: 6534963147270855764}
+  - {fileID: 4790119955218764395}
+  m_Father: {fileID: 5982676203613863567}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5752679854825669562
 PrefabInstance:
   m_ObjectHideFlags: 0

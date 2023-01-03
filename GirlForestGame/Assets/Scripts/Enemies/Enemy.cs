@@ -158,6 +158,9 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        //EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnEnemyKill);
+        player.playerInventory.GetTotemFromList(typeof(VampireBiteTotem)).Totem.ApplyEffect();
+
         Destroy(gameObject);
     }
 

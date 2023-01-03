@@ -23,9 +23,9 @@ public class TotemObject : ScriptableObject
     [ContextMenu(nameof(LuckUp))] void LuckUp() { Totem = new LuckUpTotem(); }
     [ContextMenu(nameof(Berzerk))] void Berzerk() { Totem = new BerzerkTotem(); }
     [ContextMenu(nameof(ExtraLife))] void ExtraLife() { Totem = new ExtraLifeTotem(); }
-    //[ContextMenu(nameof(Executor))] void Executor() { Totem = new HealthUpTotem(); }
-    //[ContextMenu(nameof(HealthyHitter))] void HealthyHitter() { Totem = new HealthUpTotem(); }
-    //[ContextMenu(nameof(PlaneWalker))] void PlaneWalker() { Totem = new HealthUpTotem(); }
+    [ContextMenu(nameof(VampireBite))] void VampireBite() { Totem = new VampireBiteTotem(); }
+    [ContextMenu(nameof(PlaneSwapEmpowerment))] void PlaneSwapEmpowerment() { Totem = new PlaneSwapEmpowermentTotem(); }
+    [ContextMenu(nameof(BladeMaster))] void BladeMaster() { Totem = new BladeMasterTotem(); }
     //[ContextMenu(nameof(QuickDraw))] void QuickDraw() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(BladeMaster))] void BladeMaster() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(PlaneBuff))] void PlaneBuff() { Totem = new HealthUpTotem(); }
@@ -44,7 +44,7 @@ public class Totem
     protected PlayerController player;
     protected int currentStackAmount;
     protected float previousAmountAdded;
-    protected bool effectApplied;
+    public bool effectApplied { get; protected set; }
 
     public virtual void Init()
     {
@@ -53,6 +53,8 @@ public class Totem
     }
 
     public virtual void ApplyEffect() { }
+
+    public virtual void RemoveEffect() { }
 
     public TotemTypes GetTotemType()
     {
@@ -337,13 +339,43 @@ public class BerzerkTotem : ConstantTotem
 
 #region OnTrigger Totems
 [Serializable]
+public class BladeMasterTotem : OnTriggerTotem
+{
+    public override void Init()
+    {
+        base.Init();
+    }
+
+    public override void ApplyEffect()
+    {
+        if (!effectApplied)
+        {
+            currentStackAmount = player.playerInventory.totemDictionary[typeof(BladeMasterTotem)];
+
+            previousAmountAdded = player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+            player.playerAttributes.SwordDamage += player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+
+            effectApplied = true;
+        }
+    }
+
+    public override void RemoveEffect()
+    {
+        if (effectApplied)
+        {
+            player.playerAttributes.SwordDamage -= previousAmountAdded;
+
+            effectApplied = false;
+        }
+    }
+}
+
+[Serializable]
 public class ExtraLifeTotem : OnTriggerTotem
 {
     public override void Init()
     {
         base.Init();
-
-        EventManager.OnPlayerDeath += ApplyEffect;
     }
 
     public override void ApplyEffect()
@@ -354,7 +386,75 @@ public class ExtraLifeTotem : OnTriggerTotem
     }
 }
 
+[Serializable]
+public class VampireBiteTotem : OnTriggerTotem
+{
+    public override void Init()
+    {
+        base.Init();
 
+        //EventManager.OnEnemyKill += ApplyEffect;
+    }
+
+    public override void ApplyEffect()
+    {
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(VampireBiteTotem)];
+
+        float percentage = UnityEngine.Random.Range(0f, 1f);
+
+        if (percentage <= initialBuffAmount * currentStackAmount)
+        {
+            player.playerAttributes.Health += 1;
+        }
+    }
+}
+
+[Serializable]
+public class PlaneSwapEmpowermentTotem : OnTriggerTotem
+{
+    float previousSwordAmountAdded;
+    float previousBowAmountAdded;
+
+    public override void Init()
+    {
+        base.Init();
+    }
+
+    public override void ApplyEffect()
+    {
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)];
+
+        if (player.playerCombat.Form == Forms.Living)
+        {
+            previousSwordAmountAdded = player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+            player.playerAttributes.SwordDamage += player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+        }
+        else if (player.playerCombat.Form == Forms.Spirit)
+        {
+            previousBowAmountAdded = player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
+            player.playerAttributes.BowDamage += player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
+        }
+
+        effectApplied = true;
+    }
+
+    public override void RemoveEffect()
+    {
+        if (effectApplied)
+        {
+            if (player.playerCombat.Form == Forms.Living)
+            {
+                player.playerAttributes.SwordDamage -= previousSwordAmountAdded;
+            }
+            else if (player.playerCombat.Form == Forms.Spirit)
+            {
+                player.playerAttributes.BowDamage -= previousBowAmountAdded;
+            }
+
+            effectApplied = false;
+        }
+    }
+}
 #endregion
 
 public enum TotemTypes
@@ -377,7 +477,7 @@ public enum TotemList
     ProjSpdUp,
     Berzerk,
     ExtraLife,
-    Executor,
+    VampireBite,
     HealthyHitter,
     PlaneWalker,
     QuickDraw,

@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //Movement
+    [SerializeField] GameObject aimColliders;
     [SerializeField] bool controlWithMouse;
     Rigidbody body;
     Vector3 moveDir;
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerInventory playerInventory;
     [HideInInspector] public PlayerCombat playerCombat;
 
-    EventManager eventManager;
+    //EventManager eventManager;
 
     bool deathStarted;
 
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
 
-        eventManager = EventManager.Instance;
+        //eventManager = EventManager.Instance;
 
         playerAttributes = GetComponent<PlayerAttributes>();
         playerMarkings = GetComponent<PlayerMarkings>();
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Checks for player death
         if (playerAttributes.Health <= 0)
         {
             if (playerInventory.totemDictionary[typeof(ExtraLifeTotem)] < 1)
@@ -56,10 +58,10 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                EventManager.Instance.InvokeTotemTrigger(TotemList.ExtraLife);
+                /*EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlayerDeath);*/
+                playerInventory.GetTotemFromList(typeof(ExtraLifeTotem)).Totem.ApplyEffect();
                 playerInventory.RemoveTotem(typeof(ExtraLifeTotem));
             }
-
         }
 
         if (!playerCombat.isKnockbackApplied)
@@ -113,21 +115,29 @@ public class PlayerController : MonoBehaviour
         if (controlWithMouse)
         {
             aimDirection = /*Quaternion.AngleAxis(45, Vector3.up) * */Quaternion.Euler(0f, mouseAimAngle, 0f) * Vector3.forward;
-            transform.rotation = Quaternion.Euler(0, mouseAimAngle, 0);
+            aimColliders.transform.rotation = Quaternion.Euler(0, mouseAimAngle, 0);
+            //transform.rotation = Quaternion.Euler(0, mouseAimAngle, 0);
         }
         else if (aimDir.magnitude <= 0.1f && direction.magnitude >= 0.1f)
         {
             aimDirection = moveDir;
-            transform.forward = moveDir.normalized;
+            aimColliders.transform.forward = moveDir.normalized;
+            //transform.forward = moveDir.normalized;
         }
         else if (aimDir.magnitude > 0.1f)
         {
             aimDirection = Quaternion.AngleAxis(45, Vector3.up) * Quaternion.Euler(0f, aimAngle, 0f) * Vector3.forward;
-            transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
+            aimColliders.transform.rotation = Quaternion.Euler(0, aimAngle + 45, 0);
+            //transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
         }
         else if (aimDir.magnitude < 0.1f && direction.magnitude <= 0.1f)
         {
             aimDirection = transform.forward;
+        }
+
+        if (moveDir != Vector3.zero)
+        {
+            transform.forward = moveDir.normalized;
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

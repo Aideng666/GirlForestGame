@@ -10,7 +10,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] Material spiritFormMaterial;
     [SerializeField] Collider bowTargetCollider;
 
-
     public bool isAttacking { get; private set; }
     public bool isKnockbackApplied { get; private set; }
 
@@ -111,6 +110,11 @@ public class PlayerCombat : MonoBehaviour
         //Detects Form Swapping
         if (InputManager.Instance.ChangeForm())
         {
+            if (player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.effectApplied)
+            {
+                player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
+            }
+
             if (currentForm == Forms.Living)
             {
                 currentForm = Forms.Spirit;
@@ -123,6 +127,10 @@ public class PlayerCombat : MonoBehaviour
                 GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
                 gameObject.layer = livingLayer;
             }
+
+            //EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlaneSwitch);
+
+            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.ApplyEffect();
         }
     }
 
@@ -270,10 +278,13 @@ public class PlayerCombat : MonoBehaviour
 
         if (target == null)
         {
-            arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.Euler(90, transform.rotation.eulerAngles.y, 0));
+            arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
+            arrow.transform.forward = player.aimDirection;
 
             arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
-            arrow.GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+            arrow.GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
+
+            arrow.transform.Rotate(new Vector3(1, 0, 0), 90);
 
             return;
         }

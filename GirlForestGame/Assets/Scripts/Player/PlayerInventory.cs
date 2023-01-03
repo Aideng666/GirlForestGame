@@ -163,6 +163,7 @@ public class PlayerInventory : MonoBehaviour
     public void AddTotemToList(TotemObject totem)
     {
         //totems.Add(totem);
+        print($"{totem.Totem.totemName}");
 
         System.Type totemType = totem.Totem.GetType();
 
@@ -211,6 +212,22 @@ public class PlayerInventory : MonoBehaviour
     public List<TotemObject> GetTotemList()
     {
         return totems;
+    }
+
+    public TotemObject GetTotemFromList(System.Type totemType)
+    {
+        if (totemDictionary.ContainsKey(totemType))
+        {
+            foreach (TotemObject t in totems)
+            {
+                if (t.Totem.GetType() == totemType)
+                {
+                    return t;
+                }
+            }
+        }
+
+        return null;
     }
 
     //public int GetNumOfTotems(System.Type typeToCheck)
