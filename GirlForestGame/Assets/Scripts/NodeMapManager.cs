@@ -11,6 +11,8 @@ public class NodeMapManager : MonoBehaviour
     static bool mapActive = true;
     static bool mapUpdated;
 
+    bool nextLevelSet;
+
     int currentCycle = 1;
 
     MapNode activeNode;
@@ -79,25 +81,32 @@ public class NodeMapManager : MonoBehaviour
 
     public void SetNextLevel()
     {
-        Minimap.Instance.ResetMap();
+        if (!nextLevelSet)
+        {
+            Minimap.Instance.ResetMap();
 
-        currentLevel++;
+            currentLevel++;
 
-        SetPreviousNode(activeNode);
-        activeNode = null;
+            SetPreviousNode(activeNode);
+            activeNode = null;
 
-        mapUpdated = false;
+            mapUpdated = false;
 
-        ToggleNodeMap();
+            ToggleNodeMap();
 
-        mapActive = true;
+            mapActive = true;
 
-        InputManager.Instance.SwapActionMap("NodeMap");
+            InputManager.Instance.SwapActionMap("NodeMap");
+
+            nextLevelSet = true;
+        }
     }
 
     public void SetActiveNode(MapNode node)
     {
         activeNode = node;
+
+        nextLevelSet = false;
 
         DungeonGenerator.Instance.InitDungeon(node.GetNodeType());
 

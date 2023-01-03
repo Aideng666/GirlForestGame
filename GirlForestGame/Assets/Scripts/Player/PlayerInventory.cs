@@ -7,6 +7,7 @@ using DG.Tweening.Plugins.Core.PathCore;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] GameObject markingPrefab;
+    [SerializeField] int startingMoney;
 
     //0 = Sword Attribute
     //1 = Sword Element
@@ -19,16 +20,17 @@ public class PlayerInventory : MonoBehaviour
 
     PlayerController player;
 
+    int moneyAmount;
     bool inventoryOpen = false;
 
     public bool IsChoosingWeapon { get; private set; }
 
-    // Start is called before the first frame update
     void Start()
     {
         markings = new Spirit[] { null, null, null, null };
         totems = new List<TotemObject>();
         totemDictionary = new Dictionary<System.Type, int>();
+        moneyAmount =  startingMoney;
 
         player = GetComponent<PlayerController>();
 
@@ -230,20 +232,22 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
 
-    //public int GetNumOfTotems(System.Type typeToCheck)
-    //{
-    //    int count = 0;
+    public void ModifyMoney(int value)
+    {
+        moneyAmount += value;
 
-    //    foreach (TotemObject totem in totems)
-    //    {
-    //        if (typeToCheck == totem.Totem.GetType())
-    //        {
-    //            count++;
-    //        }
-    //    }
+        if (moneyAmount < 0)
+        {
+            moneyAmount = 0;
+        }
+    }
 
-    //    return count;
-    //}
+    public int GetMoneyAmount()
+    {
+        return moneyAmount;
+    }
+
+
 
     public void ToggleInventory()
     {

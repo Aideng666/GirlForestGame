@@ -110,7 +110,7 @@ public class PlayerCombat : MonoBehaviour
         //Detects Form Swapping
         if (InputManager.Instance.ChangeForm())
         {
-            if (player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.effectApplied)
+            if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0 && player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.effectApplied)
             {
                 player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
             }
@@ -130,7 +130,10 @@ public class PlayerCombat : MonoBehaviour
 
             //EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlaneSwitch);
 
-            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.ApplyEffect();
+            if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
+            {
+                player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.ApplyEffect();
+            }
         }
     }
 
