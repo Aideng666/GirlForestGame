@@ -61,16 +61,22 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    void Regenerate()
+    public void Regenerate()
     {
         foreach(GameObject visualNode in visualNodes)
         {
             Destroy(visualNode);
         }
 
+        foreach (GameObject lineRenderer in lineRenderers)
+        {
+            Destroy(lineRenderer);
+        }
+
         nodeSlots = new GameObject[endNodeDistance, numberOfNodeColumns];
 
         visualNodes = new List<GameObject>();
+        lineRenderers = new List<GameObject>();
 
         CreateNodeMap();
     }

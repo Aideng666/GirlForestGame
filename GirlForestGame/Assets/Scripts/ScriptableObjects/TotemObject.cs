@@ -26,7 +26,7 @@ public class TotemObject : ScriptableObject
     [ContextMenu(nameof(VampireBite))] void VampireBite() { Totem = new VampireBiteTotem(); }
     [ContextMenu(nameof(PlaneSwapEmpowerment))] void PlaneSwapEmpowerment() { Totem = new PlaneSwapEmpowermentTotem(); }
     [ContextMenu(nameof(BladeMaster))] void BladeMaster() { Totem = new BladeMasterTotem(); }
-    //[ContextMenu(nameof(QuickDraw))] void QuickDraw() { Totem = new HealthUpTotem(); }
+    [ContextMenu(nameof(Assassin))] void Assassin() { Totem = new AssassinTotem(); }
     //[ContextMenu(nameof(BladeMaster))] void BladeMaster() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(PlaneBuff))] void PlaneBuff() { Totem = new HealthUpTotem(); }
     //[ContextMenu(nameof(RabbitsFoot))] void RabbitsFoot() { Totem = new HealthUpTotem(); }
@@ -339,13 +339,62 @@ public class BerzerkTotem : ConstantTotem
 
 #region OnTrigger Totems
 [Serializable]
-public class BladeMasterTotem : OnTriggerTotem
+public class AssassinTotem : OnTriggerTotem
 {
-    public override void Init()
+    Weapons weaponUsed;
+    float previousSwordAmountAdded;
+    float previousBowAmountAdded;
+
+    public void SetWeaponUsed(Weapons weapon)
     {
-        base.Init();
+        weaponUsed = weapon;
+
+        ApplyEffect();
     }
 
+    public override void ApplyEffect()
+    {
+        if (!effectApplied)
+        {
+            currentStackAmount = player.playerInventory.totemDictionary[typeof(AssassinTotem)];
+
+            if (weaponUsed == Weapons.Sword)
+            {
+                previousSwordAmountAdded = player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+                player.playerAttributes.SwordDamage += player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
+            }
+            else if (weaponUsed == Weapons.Bow)
+            {
+                previousBowAmountAdded = player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
+                player.playerAttributes.BowDamage += player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
+            }
+
+            effectApplied = true;
+        }
+    }
+
+    public override void RemoveEffect()
+    {
+        if (effectApplied)
+        {
+            if (weaponUsed == Weapons.Sword)
+            {
+                player.playerAttributes.SwordDamage -= previousSwordAmountAdded;
+            }
+            else if (weaponUsed == Weapons.Bow)
+            {
+                player.playerAttributes.BowDamage -= previousBowAmountAdded;
+            }
+
+            effectApplied = false;
+        }
+    }
+
+}
+
+[Serializable]
+public class BladeMasterTotem : OnTriggerTotem
+{
     public override void ApplyEffect()
     {
         if (!effectApplied)
@@ -373,11 +422,6 @@ public class BladeMasterTotem : OnTriggerTotem
 [Serializable]
 public class ExtraLifeTotem : OnTriggerTotem
 {
-    public override void Init()
-    {
-        base.Init();
-    }
-
     public override void ApplyEffect()
     {
         currentStackAmount = player.playerInventory.totemDictionary[typeof(ExtraLifeTotem)];
@@ -389,13 +433,6 @@ public class ExtraLifeTotem : OnTriggerTotem
 [Serializable]
 public class VampireBiteTotem : OnTriggerTotem
 {
-    public override void Init()
-    {
-        base.Init();
-
-        //EventManager.OnEnemyKill += ApplyEffect;
-    }
-
     public override void ApplyEffect()
     {
         currentStackAmount = player.playerInventory.totemDictionary[typeof(VampireBiteTotem)];
@@ -414,11 +451,6 @@ public class PlaneSwapEmpowermentTotem : OnTriggerTotem
 {
     float previousSwordAmountAdded;
     float previousBowAmountAdded;
-
-    public override void Init()
-    {
-        base.Init();
-    }
 
     public override void ApplyEffect()
     {

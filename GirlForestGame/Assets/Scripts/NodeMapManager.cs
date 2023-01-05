@@ -6,6 +6,9 @@ public class NodeMapManager : MonoBehaviour
 {
     [SerializeField] Camera dungeonCam;
     [SerializeField] Camera mapCam;
+    [SerializeField] int totalMapCycles = 3;
+
+    Vector3 mapCamStartPos = new Vector3(0, -70, 12);
 
     static int currentLevel = 0;
     static bool mapActive = true;
@@ -85,10 +88,25 @@ public class NodeMapManager : MonoBehaviour
         {
             Minimap.Instance.ResetMap();
 
-            currentLevel++;
+            if (currentLevel == MapGenerator.Instance.GetEndNodeDistance())
+            {
+                MapGenerator.Instance.Regenerate();
 
-            SetPreviousNode(activeNode);
-            activeNode = null;
+                currentLevel = 0;
+                currentCycle++;
+
+                SetPreviousNode(null);
+                activeNode = null;
+
+                mapCam.transform.position = mapCamStartPos;
+            }
+            else
+            {
+                currentLevel++;
+
+                SetPreviousNode(activeNode);
+                activeNode = null;
+            }
 
             mapUpdated = false;
 

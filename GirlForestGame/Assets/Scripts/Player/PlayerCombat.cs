@@ -261,7 +261,7 @@ public class PlayerCombat : MonoBehaviour
         }
         ////////////////////////////////////////////////////////////////////
 
-        ActivateSwordHitbox(currentAttackNum);
+        ActivateSwordHitbox(/*currentAttackNum*/);
 
         canAttack = false;
     }
@@ -302,98 +302,230 @@ public class PlayerCombat : MonoBehaviour
         arrow.transform.Rotate(new Vector3(1, 0, 0), 90);
     }
 
-    void ActivateSwordHitbox(int attackNum)
+    void ActivateSwordHitbox(/*int attackNum*/)
     {
+        print("Checking Who was hit");
+
         Collider[] enemyColliders = null;
         List<Enemy> enemiesHit = new List<Enemy>();
 
-        switch (attackNum)
+        //switch (attackNum)
+        //{
+        //    case 1:
+
+        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange);
+
+        //        //Loops through each hit collider and adds all of the enemies into a list
+        //        if (enemyColliders.Length > 0)
+        //        {
+        //            for (int i = 0; i < enemyColliders.Length; i++)
+        //            {
+        //                if (enemyColliders[i].gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == Form)
+        //                {
+        //                    enemiesHit.Add(enemy);
+        //                }
+        //            }
+        //        }
+        //        //////////////////////////////////////////////////////////////////////////
+
+        //        for (int i = 0; i < enemiesHit.Count; i++)
+        //        {
+        //            //Checks for hitting from behind
+        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
+        //            {
+        //                AssassinTotem t;
+        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
+
+        //                if (assassinTotemExists)
+        //                {
+        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+
+        //                    t.SetWeaponUsed(Weapons.Sword);
+        //                }
+
+        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+
+        //                if (assassinTotemExists)
+        //                {
+        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+
+        //                    t.RemoveEffect();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+        //            }
+        //        }
+
+        //        if (enemiesHit.Count > 0)
+        //        {
+        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
+        //        }
+
+        //        break;
+
+        //    case 2:
+
+        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
+
+        //        if (enemyColliders.Length > 0)
+        //        {
+        //            for (int i = 0; i < enemyColliders.Length; i++)
+        //            {
+        //                if (enemyColliders[i].gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == Form)
+        //                {
+        //                    enemiesHit.Add(enemy);
+        //                }
+        //            }
+        //        }
+
+        //        for (int i = 0; i < enemiesHit.Count; i++)
+        //        {
+        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
+        //            {
+        //                AssassinTotem t;
+        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
+
+        //                if (assassinTotemExists)
+        //                {
+        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+
+        //                    t.SetWeaponUsed(Weapons.Sword);
+        //                }
+
+        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+
+        //                if (assassinTotemExists)
+        //                {
+        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+
+        //                    t.RemoveEffect();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+        //            }
+        //        }
+
+        //        if (enemiesHit.Count > 0)
+        //        {
+        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
+        //        }
+
+        //        break;
+
+        //    case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK - this is for aiden dw abt it
+
+        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
+
+        //        if (enemyColliders.Length > 0)
+        //        {
+        //            for (int i = 0; i < enemyColliders.Length; i++)
+        //            {
+        //                if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
+        //                {
+        //                    enemiesHit.Add(enemy);
+        //                }
+        //            }
+        //        }
+
+        //        for (int i = 0; i < enemiesHit.Count; i++)
+        //        {
+        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
+        //            {
+        //                AssassinTotem t;
+        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
+
+        //                if (assassinTotemExists)
+        //                {
+        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+
+        //                    t.SetWeaponUsed(Weapons.Sword);
+        //                }
+
+        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+
+        //                if (assassinTotemExists)
+        //                {
+        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+
+        //                    t.RemoveEffect();
+        //                }
+        //            }
+        //            else
+        //            {
+        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+        //            }
+        //        }
+
+        //        if (enemiesHit.Count > 0)
+        //        {
+        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
+        //        }
+
+        //        break;
+        //}
+
+        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange);
+
+        //Loops through each hit collider and adds all of the enemies into a list
+        if (enemyColliders.Length > 0)
         {
-            case 1:
-
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
-
-                //Loops through each hit collider and adds all of the enemies into a list
-                if (enemyColliders.Length > 0)
+            for (int i = 0; i < enemyColliders.Length; i++)
+            {
+                if (enemyColliders[i].gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == Form)
                 {
-                    for (int i = 0; i < enemyColliders.Length; i++)
-                    {
-                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
-                        {
-                            enemiesHit.Add(enemy);
-                        }
-                    }
+                    enemiesHit.Add(enemy);
+
+                    print("Adding an enemy");
                 }
-                //////////////////////////////////////////////////////////////////////////
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////
 
-                for (int i = 0; i < enemiesHit.Count; i++)
+        for (int i = 0; i < enemiesHit.Count; i++)
+        {
+            //Checks for hitting from behind
+            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
+            {
+                AssassinTotem t;
+                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
+
+                if (assassinTotemExists)
                 {
-                    enemiesHit[i].ApplyKnockback(transform.forward, 5);
-                    enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-                }
+                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
 
-                if (enemiesHit.Count > 0)
-                {
-                    EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-                }
-
-                break;
-
-            case 2:
-
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
-
-                if (enemyColliders.Length > 0)
-                {
-                    for (int i = 0; i < enemyColliders.Length; i++)
-                    {
-                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
-                        {
-                            enemiesHit.Add(enemy);
-                        }
-                    }
+                    t.SetWeaponUsed(Weapons.Sword);
                 }
 
-                for (int i = 0; i < enemiesHit.Count; i++)
+                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+
+                if (assassinTotemExists)
                 {
-                    enemiesHit[i].ApplyKnockback(transform.forward, 10);
-                    enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+
+                    t.RemoveEffect();
                 }
+            }
+            else
+            {
+                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
+            }
+        }
 
-                if (enemiesHit.Count > 0)
-                {
-                    EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-                }
-
-                break;
-
-            case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK - this is for aiden dw abt it
-
-                enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
-
-                if (enemyColliders.Length > 0)
-                {
-                    for (int i = 0; i < enemyColliders.Length; i++)
-                    {
-                        if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
-                        {
-                            enemiesHit.Add(enemy);
-                        }
-                    }
-                }
-
-                for (int i = 0; i < enemiesHit.Count; i++)
-                {
-                    enemiesHit[i].ApplyKnockback(transform.forward, 10);
-                    enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-                }
-
-                if (enemiesHit.Count > 0)
-                {
-                    EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-                }
-
-                break;
+        if (enemiesHit.Count > 0)
+        {
+            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
         }
     }
 
