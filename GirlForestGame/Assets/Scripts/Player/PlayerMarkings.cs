@@ -287,7 +287,7 @@ public class PlayerMarkings : MonoBehaviour
         {
             yield return new WaitForSeconds(burnTickDelay);
 
-            foreach (Enemy enemy in enemies)
+            foreach (EnemyData enemy in enemies)
             {
                 if (weapon == Weapons.Sword)
                 {
