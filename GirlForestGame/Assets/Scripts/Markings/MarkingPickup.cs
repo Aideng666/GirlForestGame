@@ -9,6 +9,8 @@ public class MarkingPickup : MonoBehaviour
 
     Spirit chosenSpirit = null;
     MarkingTypes chosenType = MarkingTypes.None;
+    int markingLevel;
+    float timeElasped;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,27 @@ public class MarkingPickup : MonoBehaviour
 
         GetComponent<Collider>().enabled = false;
 
-        StartCoroutine(DelayCollider());
+        timeElasped = 0;
+    }
+
+    private void OnEnable()
+    {
+        GetComponent<Collider>().enabled = false;
+
+        timeElasped = 0;
+    }
+
+    private void Update()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            timeElasped += Time.deltaTime;
+        }
+
+        if (timeElasped >= colliderDelay)
+        {
+            GetComponent<Collider>().enabled = true;
+        }
     }
 
     //This is called when a new marking pickup is spawned to randomly select a spirit and type
@@ -31,22 +53,34 @@ public class MarkingPickup : MonoBehaviour
 
         chosenSpirit = possibleSpirits[randomIndex];
         chosenType = (MarkingTypes)Random.Range(0, 2);
+
+        ChooseLevel();
     }
 
     //This is called when swapping one marking for another, it gives the newly spawned totem the correct spirit and type after swapping
-    public void ChooseMarking(Spirit spirit, MarkingTypes type)
+    public void ChooseMarking(Spirit spirit, MarkingTypes type, int level)
     {
         chosenSpirit = spirit;
         chosenType = type;
+
+        if (level > 0 && level < 4)
+        {
+            ChooseLevel(level);
+        }
     }
 
-    IEnumerator DelayCollider()
+    public void ChooseLevel(int level = 0)
     {
-        yield return new WaitForSeconds(colliderDelay);
+        if (level == 0)
+        {
+            markingLevel = NodeMapManager.Instance.GetCurrentMapCycle();
+        }
+        else if (level < 4)
+        {
+            markingLevel = level;
+        }
 
-        print("Collider now Active");
-
-        GetComponent<Collider>().enabled = true;
+        chosenSpirit.SetLevel(markingLevel);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -7,9 +7,16 @@ public class Attack1TransitionBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerController.Instance.SetCanAttack(true, true, Weapons.Sword);
+        PlayerController player = PlayerController.Instance;
 
-        PlayerController.Instance.SetCurrentAttackNum(2);
+        if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
+        {
+            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
+        }
+
+        player.playerCombat.SetCanAttack(true, true, Weapons.Sword);
+
+        player.playerCombat.SetCurrentAttackNum(2);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

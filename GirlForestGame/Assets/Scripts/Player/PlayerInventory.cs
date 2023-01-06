@@ -7,7 +7,7 @@ using DG.Tweening.Plugins.Core.PathCore;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] GameObject markingPrefab;
-    [SerializeField] Path markingBouncePath;
+    [SerializeField] int startingMoney;
 
     //0 = Sword Attribute
     //1 = Sword Element
@@ -15,21 +15,40 @@ public class PlayerInventory : MonoBehaviour
     //3 = Bow Element
     Spirit[] markings;
 
-    List<Totem> totems;
+    List<TotemObject> totems;
+    public Dictionary<System.Type, int> totemDictionary { get; private set; } // the int value shows how many of each totem the player has
 
     PlayerController player;
 
+    int moneyAmount;
     bool inventoryOpen = false;
 
     public bool IsChoosingWeapon { get; private set; }
 
-    // Start is called before the first frame update
     void Start()
     {
         markings = new Spirit[] { null, null, null, null };
-        totems = new List<Totem>();
+        totems = new List<TotemObject>();
+        totemDictionary = new Dictionary<System.Type, int>();
+        moneyAmount =  startingMoney;
 
         player = GetComponent<PlayerController>();
+
+        foreach (var totemType in System.AppDomain.CurrentDomain.GetAllDerivedTypes(typeof(Totem)))
+        {
+            totemDictionary.Add(totemType, 0);
+        }
+    }
+
+    private void Update()
+    {
+        foreach (TotemObject totem in totems)
+        {
+            if (totem.Totem.GetTotemType() == TotemTypes.Constant)
+            {
+                totem.Totem.ApplyEffect();
+            }
+        }
     }
 
     public void EquipMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
@@ -49,7 +68,7 @@ public class PlayerInventory : MonoBehaviour
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z) , Quaternion.identity);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
                 }
 
                 markings[0] = spirit;
@@ -63,7 +82,7 @@ public class PlayerInventory : MonoBehaviour
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
                 }
 
                 markings[1] = spirit;
@@ -80,7 +99,7 @@ public class PlayerInventory : MonoBehaviour
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
                 }
 
                 markings[2] = spirit;
@@ -94,7 +113,7 @@ public class PlayerInventory : MonoBehaviour
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
                 }
 
                 markings[3] = spirit;
@@ -122,7 +141,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (InputManager.Instance.SelectSword())
             {
-                print($"Putting the {spirit.spiritName} {type.ToString()} on your Sword");
+                print($"Putting the level {spirit.markingLevel} {spirit.spiritName} {type.ToString()} on your Sword");
 
                 EquipMarking(spirit, type, Weapons.Sword);
 
@@ -143,10 +162,92 @@ public class PlayerInventory : MonoBehaviour
         IsChoosingWeapon = false;
     }
 
-    public void AddTotemToList(Totem totem)
+    public void AddTotemToList(TotemObject totem)
     {
-        totems.Add(totem);
+        //totems.Add(totem);
+        print($"{totem.Totem.totemName}");
+
+        System.Type totemType = totem.Totem.GetType();
+
+        if (totemDictionary.ContainsKey(totemType))
+        {
+            totemDictionary[totemType] += 1;
+
+            if (totemDictionary[totemType] == 1)
+            {
+                totems.Add(totem);
+            }
+        }
+
+        if (totem.Totem.GetTotemType() == TotemTypes.OnPickup)
+        {
+            //totem.Totem.ApplyEffect();
+
+            foreach (TotemObject t in totems)
+            {
+                if (t.Totem.totemName == totem.Totem.totemName)
+                {
+                    t.Totem.ApplyEffect();
+                }
+            }
+        }
     }
+
+    public void RemoveTotem(System.Type totemType)
+    {
+        if (totemDictionary.ContainsKey(totemType))
+        {
+            totemDictionary[totemType] = 0;
+
+            foreach (TotemObject t in totems)
+            {
+                if (t.Totem.GetType() == totemType)
+                {
+                    totems.Remove(t);
+
+                    return;
+                }
+            }
+        }
+    }
+
+    public List<TotemObject> GetTotemList()
+    {
+        return totems;
+    }
+
+    public TotemObject GetTotemFromList(System.Type totemType)
+    {
+        if (totemDictionary.ContainsKey(totemType))
+        {
+            foreach (TotemObject t in totems)
+            {
+                if (t.Totem.GetType() == totemType)
+                {
+                    return t;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void ModifyMoney(int value)
+    {
+        moneyAmount += value;
+
+        if (moneyAmount < 0)
+        {
+            moneyAmount = 0;
+        }
+    }
+
+    public int GetMoneyAmount()
+    {
+        return moneyAmount;
+    }
+
+
 
     public void ToggleInventory()
     {
@@ -154,16 +255,21 @@ public class PlayerInventory : MonoBehaviour
 
         //if (inventoryOpen)
         //{
-            print($"Sword Attribute: {markings[0]?.spiritName}");
-            print($"Sword Element: {markings[1]?.spiritName}");
-            print($"Bow Attribute: {markings[2]?.spiritName}");
-            print($"Bow Element: {markings[3]?.spiritName}");
-            print("Totems:");
+        //print($"Sword Attribute: {markings[0]?.spiritName}");
+        //print($"Sword Element: {markings[1]?.spiritName}");
+        //print($"Bow Attribute: {markings[2]?.spiritName}");
+        //print($"Bow Element: {markings[3]?.spiritName}");
+        //print("Totems:");
 
-            foreach (Totem totem in totems)
-            {
-                print($"{totem.name}");
-            }
+        foreach (TotemObject totem in totems)
+        {
+            print($"{totem.Totem.totemName}");
+        }
         //}
+    }
+
+    public Spirit[] GetMarkings()
+    {
+        return markings;
     }
 }

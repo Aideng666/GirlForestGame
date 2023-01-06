@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-    [SerializeField] ParticleSystem dashParticleStart;
-    [SerializeField] ParticleSystem dashParticleEnd;
+    [SerializeField] ParticleSystem bowChargeStart;
+    [SerializeField] ParticleSystem bowChargeComplete;
     [SerializeField] ParticleSystem swordSlashLeftToRight;
     [SerializeField] ParticleSystem swordSlashRightToLeft;
 
@@ -24,13 +24,13 @@ public class ParticleManager : MonoBehaviour
         {
             case ParticleTypes.DashStart:
 
-                currentParticle = Instantiate(dashParticleStart, position, Quaternion.Euler(-90, 0, 0));
+                currentParticle = Instantiate(bowChargeStart, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
 
             case ParticleTypes.DashEnd:
 
-                currentParticle = Instantiate(dashParticleEnd, position, Quaternion.Euler(-90, 0, 0));
+                currentParticle = Instantiate(bowChargeComplete, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
 

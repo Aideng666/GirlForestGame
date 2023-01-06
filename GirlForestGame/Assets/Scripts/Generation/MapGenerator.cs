@@ -61,23 +61,29 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    void Regenerate()
+    public void Regenerate()
     {
         foreach(GameObject visualNode in visualNodes)
         {
             Destroy(visualNode);
         }
 
+        foreach (GameObject lineRenderer in lineRenderers)
+        {
+            Destroy(lineRenderer);
+        }
+
         nodeSlots = new GameObject[endNodeDistance, numberOfNodeColumns];
 
         visualNodes = new List<GameObject>();
+        lineRenderers = new List<GameObject>();
 
         CreateNodeMap();
     }
 
     void CreateNodeMap()
     {
-        int numberOfStartingNodes = numberOfNodeColumns / 2;
+        int numberOfStartingNodes = Random.Range(2, (numberOfNodeColumns / 2));
         int currentLevel = 0;
 
         //Spawns in the initial starting nodes on level 0

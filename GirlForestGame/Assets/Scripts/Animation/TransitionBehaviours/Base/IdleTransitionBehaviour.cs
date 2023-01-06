@@ -9,14 +9,14 @@ public class IdleTransitionBehaviour : StateMachineBehaviour
     {
         if (InputManager.Instance.SwordAttack())
         {
-            PlayerController.Instance.InitSwordAttack();
+            PlayerController.Instance.playerCombat.InitSwordAttack();
         }
 
         if (InputManager.Instance.ShootBow())
         {
-            if (PlayerController.Instance.GetCanAttack())
+            if (PlayerController.Instance.playerCombat.GetCanAttack())
             {
-                PlayerController.Instance.BowAttack();
+                PlayerController.Instance.playerCombat.BowAttack();
             }
         }
     }
