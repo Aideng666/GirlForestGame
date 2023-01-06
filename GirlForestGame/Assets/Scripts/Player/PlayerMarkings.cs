@@ -261,14 +261,14 @@ public class PlayerMarkings : MonoBehaviour
         }
     }
 
-    void ApplyFireElement(List<Enemy> enemiesHit, Weapons weapon)
+    void ApplyFireElement(List<EnemyData> enemiesHit, Weapons weapon)
     {
         StartCoroutine(ApplyBurn(enemiesHit, weapon));
     }
 
-    void ApplyWindElement(List<Enemy> enemiesHit, Weapons weapon)
+    void ApplyWindElement(List<EnemyData> enemiesHit, Weapons weapon)
     {
-        foreach(Enemy enemy in enemiesHit)
+        foreach(EnemyData enemy in enemiesHit)
         {
             if (weapon == Weapons.Sword)
             {
@@ -281,13 +281,13 @@ public class PlayerMarkings : MonoBehaviour
         }
     }
 
-    IEnumerator ApplyBurn(List<Enemy> enemies, Weapons weapon)
+    IEnumerator ApplyBurn(List<EnemyData> enemies, Weapons weapon)
     {
         for (int i = 0; i < numberOfBurnTicks; i++)
         {
             yield return new WaitForSeconds(burnTickDelay);
 
-            foreach (Enemy enemy in enemies)
+            foreach (EnemyData enemy in enemies)
             {
                 if (weapon == Weapons.Sword)
                 {

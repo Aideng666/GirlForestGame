@@ -307,7 +307,7 @@ public class PlayerCombat : MonoBehaviour
         print("Checking Who was hit");
 
         Collider[] enemyColliders = null;
-        List<Enemy> enemiesHit = new List<Enemy>();
+        List<EnemyData> enemiesHit = new List<EnemyData>();
 
         //switch (attackNum)
         //{
@@ -481,7 +481,7 @@ public class PlayerCombat : MonoBehaviour
         {
             for (int i = 0; i < enemyColliders.Length; i++)
             {
-                if (enemyColliders[i].gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == Form)
+                if (enemyColliders[i].gameObject.TryGetComponent(out EnemyData enemy) && enemy.Form == Form)
                 {
                     enemiesHit.Add(enemy);
 
