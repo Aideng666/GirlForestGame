@@ -17,9 +17,9 @@ public class PlayerArrow : MonoBehaviour
 
         transform.parent = collision.gameObject.transform;
 
-        if (collision.gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == PlayerController.Instance.playerCombat.Form)
+        if (collision.gameObject.TryGetComponent(out EnemyData enemy) && enemy.Form == PlayerController.Instance.playerCombat.Form)
         {
-            List<Enemy> enemiesHit = new List<Enemy>();
+            List<EnemyData> enemiesHit = new List<EnemyData>();
 
             enemiesHit.Add(enemy);
 
