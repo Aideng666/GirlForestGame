@@ -23,9 +23,7 @@ public class DungeonGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //InitDungeon();
 
-        //InputManager.Instance.SwapActionMap("Player");
     }
 
     // Update is called once per frame
@@ -160,19 +158,34 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     //This method takes a random existing regular room, and turns it into a room of the given type
-    void RespawnRoomModel(RoomTypes newRoomType)
+    public void RespawnRoomModel(RoomTypes newRoomType, bool isEndRoom = false)
     {
-        List<Room> possibleRooms = new List<Room>();
+        Room roomToChange = null;
 
-        foreach (Room room in rooms)
+        if (!isEndRoom)
         {
-            if (room.GetRoomType() == RoomTypes.Fight)
+            List<Room> possibleRooms = new List<Room>();
+
+            foreach (Room room in rooms)
             {
-                possibleRooms.Add(room);
+                if (room.GetRoomType() == RoomTypes.Fight)
+                {
+                    possibleRooms.Add(room);
+                }
+            }
+
+            roomToChange = possibleRooms[Random.Range(0, possibleRooms.Count)];
+        }
+        else
+        {
+            foreach (Room room in rooms)
+            {
+                if (room.GetRoomType() == RoomTypes.End)
+                {
+                    roomToChange = room;
+                }
             }
         }
-
-        Room roomToChange = possibleRooms[Random.Range(0, possibleRooms.Count)];
 
         Destroy(roomToChange.GetSpawnedModel().gameObject);
 
@@ -182,6 +195,18 @@ public class DungeonGenerator : MonoBehaviour
 
                 roomToChange.ChooseRoom("TotemRooms");
                 roomToChange.SetRoomType(RoomTypes.Totem);
+
+                break;
+
+            case RoomTypes.Shop:
+
+                roomToChange.ChooseRoom("ShopRooms");
+
+                break;
+
+            case RoomTypes.Marking:
+
+                roomToChange.ChooseRoom("MarkingRooms");
 
                 break;
         }
@@ -195,8 +220,6 @@ public class DungeonGenerator : MonoBehaviour
                 roomToChange.GetConnectedRooms()[i].AttachConnectedRoom((int)ReverseDirection((Directions)i), roomToChange);
             }
         }
-
-        //roomToChange.SetRoomType(RoomTypes.Totem);
     }
 
     void ChooseNewRoomLocation(bool spawnTotemRoom = false)

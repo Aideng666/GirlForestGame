@@ -163,15 +163,16 @@ public class Room : MonoBehaviour
 
                     case NodeTypes.Marking:
 
-                        Instantiate(markingPrefab, transform.position + new Vector3(-5, 0, 5), Quaternion.identity, transform);
-                        Instantiate(markingPrefab, transform.position + new Vector3(5, 0, -5), Quaternion.identity, transform);
+                        //Instantiate(markingPrefab, transform.position + new Vector3(-5, 0, 5), Quaternion.identity, transform);
+                        //Instantiate(markingPrefab, transform.position + new Vector3(5, 0, -5), Quaternion.identity, transform);
+
+                        DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Marking, true);
 
                         break;
 
                     case NodeTypes.Shop:
 
-                        Instantiate(shopItemPrefab, transform.position + new Vector3(-5, 0, 5), Quaternion.identity, transform);
-                        Instantiate(shopItemPrefab, transform.position + new Vector3(5, 0, -5), Quaternion.identity, transform);
+                        DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Shop, true);
 
                         break;
 
@@ -181,12 +182,6 @@ public class Room : MonoBehaviour
 
                         break;
                 }
-
-                break;
-
-            case RoomTypes.Totem:
-
-                Instantiate(totemPrefab, transform);
 
                 break;
         }

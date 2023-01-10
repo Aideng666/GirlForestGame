@@ -41,8 +41,8 @@ public class PlayerCombat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        livingLayer = LayerMask.NameToLayer("Living");
-        spiritLayer = LayerMask.NameToLayer("Spirit");
+        livingLayer = LayerMask.NameToLayer("PlayerLiving");
+        spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
 
         bowAimCanvas.SetActive(false);
 

@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     PlayerInput playerInput;
 
     //Gameplay Controls
-    InputAction dashAction;
+    InputAction interactAction;
     InputAction moveAction;
     InputAction aimAction;
     InputAction mouseAimAction;
@@ -41,7 +41,7 @@ public class InputManager : MonoBehaviour
         playerInput.actions.FindActionMap("NodeMap").Enable();
         playerInput.actions.FindActionMap("Global").Enable();
 
-        dashAction = playerInput.actions["Dash"];
+        interactAction = playerInput.actions["Interact"];
         moveAction = playerInput.actions["Move"];
         aimAction = playerInput.actions["Aim"];
         mouseAimAction = playerInput.actions["MouseAim"];
@@ -84,11 +84,11 @@ public class InputManager : MonoBehaviour
         return playerInput;
     }
 
-    public bool Dash()
+    public bool Interact()
     {
         if (playerInput.actions.FindActionMap("Player").enabled)
         {
-            return dashAction.triggered;
+            return interactAction.triggered;
         }
 
 

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92299b270eb6d894b8d5bb4d767ea668, type: 3}
   m_Name: Totem
   m_EditorClassIdentifier: 
-  itemName: Totem
+  itemType: 1
   value: 20
   item: {fileID: 6850629361975643207, guid: 14a05e3d883f7c641836eb8ec07df906, type: 3}
