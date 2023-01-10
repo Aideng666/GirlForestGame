@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92299b270eb6d894b8d5bb4d767ea668, type: 3}
-  m_Name: Heart
+  m_Name: HalfHeart
   m_EditorClassIdentifier: 
   itemType: 2
-  value: 10
+  value: 5
   item: {fileID: 0}

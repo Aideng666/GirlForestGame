@@ -165,7 +165,6 @@ public class PlayerInventory : MonoBehaviour
     public void AddTotemToList(TotemObject totem)
     {
         //totems.Add(totem);
-        print($"{totem.Totem.totemName}");
 
         System.Type totemType = totem.Totem.GetType();
 

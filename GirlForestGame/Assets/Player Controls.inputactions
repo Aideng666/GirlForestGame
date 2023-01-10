@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Dash",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "e7ad41a0-8171-498d-8143-284ae3c593d1",
                     "expectedControlType": "Button",
@@ -303,6 +303,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SelectBow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a12e8b14-6923-4242-888e-1e74c200f2bc",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fecefd32-dd98-474b-8fc6-33845a751b1d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

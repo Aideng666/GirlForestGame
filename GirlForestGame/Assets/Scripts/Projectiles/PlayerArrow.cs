@@ -4,11 +4,37 @@ using UnityEngine;
 
 public class PlayerArrow : MonoBehaviour
 {
+    LayerMask livingLayer;
+    LayerMask spiritLayer;
     float chargedArrowDamage;
+
+    private void Start()
+    {
+        print(LayerMask.NameToLayer("PlayerLiving"));
+
+        livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
+        spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
+
+        SetPlane(PlayerController.Instance.playerCombat.Form);
+    }
+
     public void SetArrowChargeMultiplier(float percentage)
     {
         chargedArrowDamage = PlayerController.Instance.playerAttributes.BowDamage * percentage;
     }
+
+    public void SetPlane(Forms plane)
+    {
+        if (plane == Forms.Living)
+        {
+            gameObject.layer = livingLayer.value;
+        }
+        else if (plane == Forms.Spirit)
+        {
+            gameObject.layer = spiritLayer.value;
+        }
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {

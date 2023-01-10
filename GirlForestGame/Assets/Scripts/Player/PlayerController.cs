@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
             if (!playerCombat.isAttacking)
             {
                 Move();
+
+                Interact();
             }
         }
 
@@ -146,6 +148,19 @@ public class PlayerController : MonoBehaviour
         //Starts the selection of the target enemy based on the direction the player is aiming
         playerCombat.SelectSwordTargetEnemy();
         playerCombat.SelectBowTargetEnemy();
+    }
+
+    void Interact()
+    {
+        GameObject itemToInteract = GetComponentInChildren<InteractRing>().selectedObject;
+
+        if (itemToInteract != null && InputManager.Instance.Interact())
+        {
+            if (itemToInteract.TryGetComponent(out ShopItem shopItem))
+            {
+                shopItem.Buy();
+            }
+        }
     }
 
     void Die()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2445463225402820324}
   - component: {fileID: 7481290312874299376}
   - component: {fileID: 4699521205513953269}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Spirit Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
