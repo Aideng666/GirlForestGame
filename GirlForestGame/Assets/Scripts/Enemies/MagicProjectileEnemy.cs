@@ -95,14 +95,14 @@ public class MagicProjectileEnemy : Enemy
                             spawnedProjectile = Instantiate(spiritProjectilePrefab, transform.position + transform.forward, Quaternion.identity);
                             spawnedProjectile.transform.localScale = Vector3.zero;
 
-                            spawnedProjectile.transform.DOScale(projectileMaxSize, attackPreparationTime);
+                            //spawnedProjectile.transform.DOScale(projectileMaxSize, attackPreparationTime);
                         }
                         else
                         {
                             spawnedProjectile = Instantiate(livingProjectilePrefab, transform.position + transform.forward + Vector3.down, Quaternion.identity);
 
                             //spawnedProjectile.transform.DOScale(projectileMaxSize, attackPreparationTime);
-                            spawnedProjectile.transform.DOMoveY(transform.position.y, attackPreparationTime);
+                            //spawnedProjectile.transform.DOMoveY(transform.position.y, attackPreparationTime);
                         }
                         projectileSpawned = true;
                     }
@@ -138,16 +138,16 @@ public class MagicProjectileEnemy : Enemy
                     {
                         spawnedProjectile.GetComponent<SpiritProjectile>().SetActive(true);
 
-                        spawnedProjectile.transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.25f);
+                        //spawnedProjectile.transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.25f);
                     }
                     else
                     {
                         spawnedProjectile.GetComponent<LivingProjectile>().SetActive(true);
 
-                        spawnedProjectile.transform.DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f), 0.25f);
+                        //spawnedProjectile.transform.DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f), 0.25f);
                     }
 
-                    transform.DOPunchScale(new Vector3(0, 0, -0.5f), 0.25f);
+                    //transform.DOPunchScale(new Vector3(0, 0, -0.5f), 0.05f);
 
                     projectileSpawned = false;
 
@@ -160,8 +160,6 @@ public class MagicProjectileEnemy : Enemy
 
     protected override void CancelPrep()
     {
-        print("Cancelling Attack Preparation");
-
         Destroy(spawnedProjectile);
 
         projectileSpawned = false;

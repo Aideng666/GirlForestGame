@@ -15,6 +15,8 @@ public class PlayerAttributes : MonoBehaviour
     [SerializeField] float defaultSwordRange = 5;
     [SerializeField] float defaultProjectileSpeed;
     [SerializeField] float defaultCritChance = 0.05f; // between 0 and 1 for 0%-100%
+    [SerializeField] float defaultBowChargeTime = 3;
+    [SerializeField] float defaultLuck = 0;
     float currentMaxHealth;
     float currentHealth;
     float currentSpeed;
@@ -25,9 +27,14 @@ public class PlayerAttributes : MonoBehaviour
     float currentSwordRange;
     float currentProjectileSpeed;
     float currentCritChance;
+    float currentBowChargeTime;
+    float currentLuck;
 
-    public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value; if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
-    public float Health { get { return currentHealth; } set { currentHealth = value; } }
+    public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value;
+            if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
+    public float Health { get { return currentHealth; } set { currentHealth = value;
+            if (currentHealth > currentMaxHealth) currentHealth = currentMaxHealth;
+            if (currentHealth < 0) currentHealth = 0;} }
     public float Speed { get { return currentSpeed; } set { currentSpeed = value; } }
     public float SwordDamage { get { return currentSwordDamage; } set { currentSwordDamage = value; } }
     public float BowDamage { get { return currentBowDamage; } set { currentBowDamage = value; } }
@@ -36,6 +43,8 @@ public class PlayerAttributes : MonoBehaviour
     public float SwordRange { get { return currentSwordRange; } set { currentSwordRange = value; } }
     public float ProjectileSpeed { get { return currentProjectileSpeed; } set { currentProjectileSpeed = value; } }
     public float CritChance { get { return currentCritChance; } set { currentCritChance = value; } }
+    public float BowChargeTime { get { return currentBowChargeTime; } set { currentBowChargeTime = value; } }
+    public float Luck { get { return currentLuck; } set { currentLuck = value; } }
 
     private void Start()
     {
@@ -49,5 +58,7 @@ public class PlayerAttributes : MonoBehaviour
         currentSwordRange = defaultSwordRange;
         currentProjectileSpeed = defaultProjectileSpeed;
         currentCritChance = defaultCritChance;
+        currentBowChargeTime = defaultBowChargeTime;
+        currentLuck = defaultLuck;
     }
 }

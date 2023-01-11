@@ -6,11 +6,17 @@ public class NodeMapManager : MonoBehaviour
 {
     [SerializeField] Camera dungeonCam;
     [SerializeField] Camera mapCam;
+    [SerializeField] int totalMapCycles = 3;
+
+    Vector3 mapCamStartPos = new Vector3(0, -70, 12);
 
     static int currentLevel = 0;
-
     static bool mapActive = true;
     static bool mapUpdated;
+
+    bool nextLevelSet;
+
+    int currentCycle = 1;
 
     MapNode activeNode;
     MapNode previousNode;
@@ -36,29 +42,6 @@ public class NodeMapManager : MonoBehaviour
         {
             UpdateMap();
         }
-
-        //if (InputManager.Instance.BowAttack())
-        //{
-        //    SetNextLevel();
-
-        //    print($"current level: {currentLevel}");
-        //}
-
-        //if (InputManager.Instance.SwapMapButton())
-        //{
-        //    if (mapActive)
-        //    {
-        //        InputManager.Instance.SwapActionMap("Player");
-        //        mapActive = false;
-        //    }
-        //    else
-        //    {
-        //        InputManager.Instance.SwapActionMap("NodeMap");
-        //        mapActive = true;
-        //    }
-
-        //    SwapCameras();
-        //}
     }
 
     void ToggleNodeMap()
@@ -101,25 +84,47 @@ public class NodeMapManager : MonoBehaviour
 
     public void SetNextLevel()
     {
-        Minimap.Instance.ResetMap();
+        if (!nextLevelSet)
+        {
+            Minimap.Instance.ResetMap();
 
-        currentLevel++;
+            if (currentLevel == MapGenerator.Instance.GetEndNodeDistance())
+            {
+                MapGenerator.Instance.Regenerate();
 
-        SetPreviousNode(activeNode);
-        activeNode = null;
+                currentLevel = 0;
+                currentCycle++;
 
-        mapUpdated = false;
+                SetPreviousNode(null);
+                activeNode = null;
 
-        ToggleNodeMap();
+                mapCam.transform.position = mapCamStartPos;
+            }
+            else
+            {
+                currentLevel++;
 
-        mapActive = true;
+                SetPreviousNode(activeNode);
+                activeNode = null;
+            }
 
-        InputManager.Instance.SwapActionMap("NodeMap");
+            mapUpdated = false;
+
+            ToggleNodeMap();
+
+            mapActive = true;
+
+            InputManager.Instance.SwapActionMap("NodeMap");
+
+            nextLevelSet = true;
+        }
     }
 
     public void SetActiveNode(MapNode node)
     {
         activeNode = node;
+
+        nextLevelSet = false;
 
         DungeonGenerator.Instance.InitDungeon(node.GetNodeType());
 
@@ -132,5 +137,10 @@ public class NodeMapManager : MonoBehaviour
     public void SetPreviousNode(MapNode node)
     {
         previousNode = node;
+    }
+
+    public int GetCurrentMapCycle()
+    {
+        return currentCycle;
     }
 }

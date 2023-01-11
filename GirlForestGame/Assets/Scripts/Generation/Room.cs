@@ -7,6 +7,7 @@ public class Room : MonoBehaviour
     [SerializeField] Material entranceMaterial; //temp material to emphasize which spots in the room have exits
     [SerializeField] GameObject totemPrefab; //prefab to spawn totems in rooms
     [SerializeField] GameObject markingPrefab; //prefab to spawn markings in rooms
+    [SerializeField] GameObject shopItemPrefab; //prefab to spawn markings in rooms
 
     Room[] connectedRooms = new Room[4]; //0,1,2,3 = North, South, East, West respectively
     Room originRoom; //The room that this room was originally attached to
@@ -20,6 +21,7 @@ public class Room : MonoBehaviour
     bool roomCompleted; //Has the player defeated all the enemies within this room
 
     int distanceFromStartRoom = 0;
+    Vector2 spotInGrid = Vector2.zero;
 
     public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
 
@@ -68,7 +70,9 @@ public class Room : MonoBehaviour
 
         selectedRoom = possibleRooms[randomIndex];
 
-        var roomModel = Instantiate(selectedRoom.model, transform.position, Quaternion.identity, transform);
+        selectedRoom.FindBoundaries();
+
+        var roomModel = Instantiate(selectedRoom.model, transform.position, selectedRoom.model.transform.rotation, transform);
 
         spawnedModel = roomModel.GetComponent<RoomModel>();
     }
@@ -166,7 +170,8 @@ public class Room : MonoBehaviour
 
                     case NodeTypes.Shop:
 
-                        
+                        Instantiate(shopItemPrefab, transform.position + new Vector3(-5, 0, 5), Quaternion.identity, transform);
+                        Instantiate(shopItemPrefab, transform.position + new Vector3(5, 0, -5), Quaternion.identity, transform);
 
                         break;
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Room_2
   m_EditorClassIdentifier: 
   model: {fileID: 3949410913006336559, guid: f4936e12258599348b91420064734671, type: 3}
-  northCamBoundary: 6.5
-  southCamBoundary: -6.5
-  eastCamBoundary: 6.5
-  westCamBoundary: -6.5
+  northCamBoundary: 10.865704
+  southCamBoundary: -10.865709
+  eastCamBoundary: 10.865709
+  westCamBoundary: -10.83392

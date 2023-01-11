@@ -6,9 +6,9 @@ public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] int totalRooms = 15;
     [SerializeField] GameObject roomPrefab;
-    //[SerializeField] GameObject doorPrefab;
 
     List<Room> rooms = new List<Room>();
+    List<Vector2> roomSpots = new List<Vector2>();
 
     Room currentRoom;
     NodeTypes currentFloorType = NodeTypes.Default;
@@ -48,6 +48,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         //Resets the dungeon by removing all old rooms
         rooms = new List<Room>();
+        roomSpots = new List<Vector2>();
 
         foreach (Room room in FindObjectsOfType<Room>())
         {
@@ -64,19 +65,12 @@ public class DungeonGenerator : MonoBehaviour
         rooms[0].SetRoomType(RoomTypes.Start);
         currentRoom = rooms[0];
 
-        //int randomTotemRoomIndex = Random.Range(0, totalRooms / 2);
+        roomSpots.Add(Vector2.zero);
 
         //Creates the rest of the rooms
         for (int i = 0; i < totalRooms - 1; i++)
         {
-            //if (i == randomTotemRoomIndex)
-            //{
-            //    ChooseNewRoomLocation(true);
-            //}
-            //else
-            //{
-                ChooseNewRoomLocation();
-            //}
+            ChooseNewRoomLocation();
         }
 
         //Sets the proper End room for the floor
@@ -132,12 +126,40 @@ public class DungeonGenerator : MonoBehaviour
             room.GetComponent<Room>().AttachConnectedRoom((int)ReverseDirection(directionFromOrigin), originRoom);
 
             originRoom.AttachConnectedRoom((int)directionFromOrigin, room.GetComponent<Room>());
+
+            switch(directionFromOrigin)
+            {
+                case Directions.North:
+
+                    roomSpots.Add(roomSpots[rooms.IndexOf(originRoom)] + Vector2.up);
+
+                    break;
+
+                case Directions.South:
+
+                    roomSpots.Add(roomSpots[rooms.IndexOf(originRoom)] + Vector2.down);
+
+                    break;
+
+                case Directions.East:
+
+                    roomSpots.Add(roomSpots[rooms.IndexOf(originRoom)] + Vector2.right);
+
+                    break;
+
+                case Directions.West:
+
+                    roomSpots.Add(roomSpots[rooms.IndexOf(originRoom)] + Vector2.left);
+
+                    break;
+            }
         }
 
         //Adds the new room to the list of all rooms
         rooms.Add(room.GetComponent<Room>());
     }
 
+    //This method takes a random existing regular room, and turns it into a room of the given type
     void RespawnRoomModel(RoomTypes newRoomType)
     {
         List<Room> possibleRooms = new List<Room>();
@@ -159,6 +181,7 @@ public class DungeonGenerator : MonoBehaviour
             case RoomTypes.Totem:
 
                 roomToChange.ChooseRoom("TotemRooms");
+                roomToChange.SetRoomType(RoomTypes.Totem);
 
                 break;
         }
@@ -168,13 +191,12 @@ public class DungeonGenerator : MonoBehaviour
             if (roomToChange.GetConnectedRooms()[i])
             {
                 roomToChange.AttachConnectedRoom(i, roomToChange.GetConnectedRooms()[i]);
-                //roomToChange.CreateExit(i);
 
                 roomToChange.GetConnectedRooms()[i].AttachConnectedRoom((int)ReverseDirection((Directions)i), roomToChange);
             }
         }
 
-        roomToChange.SetRoomType(RoomTypes.Totem);
+        //roomToChange.SetRoomType(RoomTypes.Totem);
     }
 
     void ChooseNewRoomLocation(bool spawnTotemRoom = false)
@@ -183,28 +205,81 @@ public class DungeonGenerator : MonoBehaviour
         int randomRoomChoice = Random.Range(0, rooms.Count - 1);
 
         Room currentRoom = rooms[randomRoomChoice];
+        Vector2 currentRoomSpot = roomSpots[randomRoomChoice];
 
         //selects all possible directions for a new room location to be, based on if the chosen room already has connected rooms on any side
         List<Directions> possibleDirections = new List<Directions>();
 
         if (!currentRoom.GetConnectedRooms()[0])
         {
-            possibleDirections.Add(Directions.North);
+            bool roomAlreadyExists = false;
+
+            foreach (Vector2 roomSpot in roomSpots)
+            {
+                if (roomSpot == currentRoomSpot + Vector2.up)
+                {
+                    roomAlreadyExists = true;
+                }
+            }
+
+            if (!roomAlreadyExists)
+            {
+                possibleDirections.Add(Directions.North);
+            }
         }
 
         if (!currentRoom.GetConnectedRooms()[1])
         {
-            possibleDirections.Add(Directions.South);
+            bool roomAlreadyExists = false;
+
+            foreach (Vector2 roomSpot in roomSpots)
+            {
+                if (roomSpot == currentRoomSpot + Vector2.down)
+                {
+                    roomAlreadyExists = true;
+                }
+            }
+
+            if (!roomAlreadyExists)
+            {
+                possibleDirections.Add(Directions.South);
+            }
         }
 
         if (!currentRoom.GetConnectedRooms()[2])
         {
-            possibleDirections.Add(Directions.East);
+            bool roomAlreadyExists = false;
+
+            foreach (Vector2 roomSpot in roomSpots)
+            {
+                if (roomSpot == currentRoomSpot + Vector2.right)
+                {
+                    roomAlreadyExists = true;
+                }
+            }
+
+            if (!roomAlreadyExists)
+            {
+                possibleDirections.Add(Directions.East);
+            }
         }
 
         if (!currentRoom.GetConnectedRooms()[3])
         {
-            possibleDirections.Add(Directions.West);
+            bool roomAlreadyExists = false;
+
+            foreach (Vector2 roomSpot in roomSpots)
+            {
+                if (roomSpot == currentRoomSpot + Vector2.left)
+                {
+                    roomAlreadyExists = true;
+                }
+            }
+
+            if (!roomAlreadyExists)
+            {
+                possibleDirections.Add(Directions.West);
+            }
         }
 
         //If there are no possible directions to connect a new room to the selected room
@@ -219,14 +294,7 @@ public class DungeonGenerator : MonoBehaviour
         //Picks a random direction out of the possible directions that were selected above
         int directionChoice = Random.Range(0, possibleDirections.Count);
 
-        //if (spawnTotemRoom)
-        //{
-        //    SpawnRoom(currentRoom, possibleDirections[directionChoice], "TotemRooms");
-        //}
-        //else
-        //{
-            SpawnRoom(currentRoom, possibleDirections[directionChoice]);
-        //}
+        SpawnRoom(currentRoom, possibleDirections[directionChoice]);
     }
 
     //outputs the opposite direction of the input

@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnTriggerTotem : Totem
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+//public class OnTriggerTotem : Totem
+//{
+//    protected override void Start()
+//    {
+//        base.Start();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+//        totemType = TotemTypes.OnTrigger;
+//    }
+
+//    public override void ApplyEffect()
+//    {
+//        base.ApplyEffect();
+//    }
+//}

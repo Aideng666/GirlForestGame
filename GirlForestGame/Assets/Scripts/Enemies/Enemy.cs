@@ -153,11 +153,21 @@ public class Enemy : MonoBehaviour
     {
         health -= value;
 
-        transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.1f);
+        print(value);
+
+        //transform.DOPunchScale(new Vector3(-0.5f, -0.5f, -0.5f), 0.05f);
     }
 
     void Die()
     {
+        //EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnEnemyKill);
+        if (player.playerInventory.totemDictionary[typeof(VampireBiteTotem)] > 0)
+        {
+            player.playerInventory.GetTotemFromList(typeof(VampireBiteTotem)).Totem.ApplyEffect();
+        }
+
+        player.playerCombat.RemoveSwordTarget(this);
+
         Destroy(gameObject);
     }
 
