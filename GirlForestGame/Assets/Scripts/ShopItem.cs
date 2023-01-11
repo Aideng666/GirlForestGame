@@ -15,9 +15,9 @@ public class ShopItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ChooseItem();
-
         priceText.enabled = false;
+
+        ChooseItem();
     }
 
     // Update is called once per frame
@@ -51,8 +51,6 @@ public class ShopItem : MonoBehaviour
         {
             chosenTotem = totem.GetRandomTotem();
         }
-
-        //priceText.text = $"{itemInfo.value}";
     }
 
     public void Buy()

@@ -170,6 +170,11 @@ public class PlayerController : MonoBehaviour
         deathStarted = true;
     }
 
+    public bool MouseControlActive()
+    {
+        return controlWithMouse;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         //To transition from room to room
