@@ -17,7 +17,11 @@ public class ShopItem : MonoBehaviour
     {
         priceText.enabled = false;
 
+<<<<<<< HEAD
         ChooseItem();
+=======
+        priceText.enabled = false;
+>>>>>>> Aiden
     }
 
     // Update is called once per frame
@@ -46,11 +50,21 @@ public class ShopItem : MonoBehaviour
                 }
             }
         }
+<<<<<<< HEAD
 
         if (itemInfo.item.TryGetComponent(out TotemPickup totem))
         {
             chosenTotem = totem.GetRandomTotem();
         }
+=======
+
+        if (itemInfo.item.TryGetComponent(out TotemPickup totem))
+        {
+            chosenTotem = totem.GetRandomTotem();
+        }
+
+        //priceText.text = $"{itemInfo.value}";
+>>>>>>> Aiden
     }
 
     public void Buy()
