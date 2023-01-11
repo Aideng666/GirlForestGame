@@ -22,11 +22,7 @@ public class PlayerController : MonoBehaviour
     //EventManager eventManager;
     //List<Totem> totems = new List<Totem>();
     
-    //Sound Stuff
-    private FMOD.Studio.EventInstance BowSFX;
-    private FMOD.Studio.EventInstance SPCharge;
-    private FMOD.Studio.EventInstance ArrowSFX;
-    private FMOD.Studio.EventInstance SwordSFX;
+
 
     bool deathStarted;
 
@@ -35,11 +31,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        BowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow");
-        SPCharge = FMODUnity.RuntimeManager.CreateInstance("event:/Player/SpecialShot");
-        ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Arrow");
-        SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword");
-
     }
     
     // Start is called before the first frame update
@@ -59,21 +50,36 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Checks for player death
-        if (playerAttributes.Health <= 0)
-        {
-            if (playerInventory.totemDictionary[typeof(ExtraLifeTotem)] < 1)
-            {
-                if (!deathStarted)
-                {
-                    Die();
-                }
-            }
-            else
-            {
-                /*EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlayerDeath);*/
-                playerInventory.GetTotemFromList(typeof(ExtraLifeTotem)).Totem.ApplyEffect();
-                playerInventory.RemoveTotem(typeof(ExtraLifeTotem));
-            }
+        if (playerAttributes.Health <= 0)
+
+        {
+
+            if (playerInventory.totemDictionary[typeof(ExtraLifeTotem)] < 1)
+
+            {
+
+                if (!deathStarted)
+
+                {
+
+                    Die();
+
+                }
+
+            }
+
+            else
+
+            {
+
+                /*EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlayerDeath);*/
+
+                playerInventory.GetTotemFromList(typeof(ExtraLifeTotem)).Totem.ApplyEffect();
+
+                playerInventory.RemoveTotem(typeof(ExtraLifeTotem));
+
+            }
+
         }
 
         if (!playerCombat.isKnockbackApplied)
@@ -142,14 +148,20 @@ public class PlayerController : MonoBehaviour
             aimColliders.transform.rotation = Quaternion.Euler(0, aimAngle + 45, 0);
             //transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
         }
-        else if (aimDir.magnitude < 0.1f && direction.magnitude <= 0.1f)
-        {
-            aimDirection = transform.forward;
+        else if (aimDir.magnitude < 0.1f && direction.magnitude <= 0.1f)
+
+        {
+
+            aimDirection = transform.forward;
+
         }
 
-        if (moveDir != Vector3.zero)
-        {
-            transform.forward = moveDir.normalized;
+        if (moveDir != Vector3.zero)
+
+        {
+
+            transform.forward = moveDir.normalized;
+
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -160,11 +172,16 @@ public class PlayerController : MonoBehaviour
         playerCombat.SelectBowTargetEnemy();
     }
 
-    void Die()
-    {
-        print("Died");
-
-        deathStarted = true;
+    void Die()
+
+    {
+
+        print("Died");
+
+
+
+        deathStarted = true;
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -200,12 +217,5 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    private void OnDestroy()
-    {
-        BowSFX.release();
-        ArrowSFX.release();
-        SPCharge.release();
-        SPCharge.release();
-    }
 }
 

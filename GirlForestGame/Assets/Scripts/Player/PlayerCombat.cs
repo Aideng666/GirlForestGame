@@ -24,10 +24,17 @@ public class PlayerCombat : MonoBehaviour
     bool quickfirePerformed;
     float currentBowChargeTime = 0;
 
+    private FMOD.Studio.EventInstance BowSFX;
+    private FMOD.Studio.EventInstance SFXCharge;
+    private FMOD.Studio.EventInstance ArrowSFX;
+
     //Sword Stuff
     GameObject swordTargetEnemy;
     List<Enemy> swordTargetsInView = new List<Enemy>();
     int currentAttackNum = 1;
+
+    private FMOD.Studio.EventInstance SwordSFX;
+
 
     Forms currentForm = Forms.Living;
     LayerMask livingLayer;
@@ -50,6 +57,15 @@ public class PlayerCombat : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
+    private void Awake()
+    {
+        BowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow");
+        SFXCharge = FMODUnity.RuntimeManager.CreateInstance("event:/Player/SpecialShot");
+        SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword");
+        ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Arrow");
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -57,7 +73,6 @@ public class PlayerCombat : MonoBehaviour
         if (bowDrawn)
         {
             bowAimCanvas.SetActive(true);
-
             if (body.velocity == Vector3.zero)
             {
                 bowCharging = true;
@@ -99,6 +114,8 @@ public class PlayerCombat : MonoBehaviour
 
                     currentBowChargeTime = 0;
                 }
+                BowSFX.keyOff();
+                ArrowSFX.start();
             }
         }
 
@@ -244,21 +261,22 @@ public class PlayerCombat : MonoBehaviour
             case 1:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack1");
-
+                SwordSFX.start();
                 break;
 
             case 2:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack2");
-
+                SwordSFX.keyOff();
                 break;
 
             case 3:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack3");
-
+                SwordSFX.keyOff();
                 break;
         }
+
         ////////////////////////////////////////////////////////////////////
 
         ActivateSwordHitbox(/*currentAttackNum*/);
@@ -613,6 +631,7 @@ public class PlayerCombat : MonoBehaviour
     public void SetBowDrawn(bool isDrawn)
     {
         bowDrawn = isDrawn;
+        BowSFX.start();
 
         if (isDrawn)
         {
@@ -653,6 +672,14 @@ public class PlayerCombat : MonoBehaviour
 
         canAttack = true;
     }
+    private void OnDestroy()
+    {
+        BowSFX.release();
+        SFXCharge.release();
+        SwordSFX.release();
+        ArrowSFX.release();
+    }
+
 }
 
 public enum Forms
