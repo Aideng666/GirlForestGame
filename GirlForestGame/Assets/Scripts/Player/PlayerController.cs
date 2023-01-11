@@ -39,14 +39,25 @@ public class PlayerController : MonoBehaviour
     public PlayerInventory playerInventory;
 
     //List<Totem> totems = new List<Totem>();
+    
+    //Sound Stuff
+    private FMOD.Studio.EventInstance BowSFX;
+    private FMOD.Studio.EventInstance SPCharge;
+    private FMOD.Studio.EventInstance ArrowSFX;
+    private FMOD.Studio.EventInstance SwordSFX;
 
     public static PlayerController Instance { get; set; }
 
     private void Awake()
     {
         Instance = this;
-    }
+        BowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow");
+        SPCharge = FMODUnity.RuntimeManager.CreateInstance("event:/Player/SpecialShot");
+        ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Arrow");
+        SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword");
 
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -84,12 +95,17 @@ public class PlayerController : MonoBehaviour
                 if (InputManager.Instance.ReleaseArrow())
                 {
                     GetComponentInChildren<Animator>().SetTrigger("ReleaseArrow");
-
+                    
                     bowDrawn = false;
 
                     bowAimCanvas.SetActive(false);
 
                     SpawnArrow();
+
+                    Debug.Log(BowSFX.keyOff());
+                    BowSFX.keyOff();
+                    ArrowSFX.start();
+
                 }
             }
             ////////////////////////////////////////////////////////////////////////
@@ -226,6 +242,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 SwordAttack();
+                SwordSFX.start();
             }
         }
     }
@@ -238,7 +255,7 @@ public class PlayerController : MonoBehaviour
             case 1:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack1");
-
+                //SwordSFX.keyOff();
                 break;
 
             case 2:
@@ -539,6 +556,7 @@ public class PlayerController : MonoBehaviour
     public void SetBowDrawn(bool isDrawn)
     {
         bowDrawn = isDrawn;
+        BowSFX.start();
     }
 
     public void SetCanAttack(bool value, bool applyCooldown, Weapons weaponChoice = Weapons.None)
@@ -620,6 +638,14 @@ public class PlayerController : MonoBehaviour
         Minimap.Instance.VisitRoom(room, dirOfPrevRoom);
 
         yield return null;
+    }
+
+    private void OnDestroy()
+    {
+        BowSFX.release();
+        ArrowSFX.release();
+        SPCharge.release();
+        SPCharge.release();
     }
 }
 

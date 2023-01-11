@@ -1075,6 +1075,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbb8a748bb706d49a33aa4bf64cf67b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openInventoryAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!4 &543537888
 Transform:
   m_ObjectHideFlags: 0
@@ -4496,6 +4505,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
+    - target: {fileID: 8518085256554570358, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: pControl
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2453708176110309224, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
     - {fileID: 5982676203613863552, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}

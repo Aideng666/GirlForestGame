@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8618195615685439471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Footsteps
+  Guid:
+    Data1: -861215663
+    Data2: 1214108958
+    Data3: -324556149
+    Data4: 1942763737
+  Banks:
+  - {fileID: -5003194148719884625}
+  - {fileID: -6251309486437539833}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -1480367506354024578}
+  - {fileID: -1590239985068814445}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 600
+--- !u!114 &-6251309486437539833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638090239661117177
+  FileSizes:
+  - Name: Desktop
+    Value: 181056
+  Exists: 1
 --- !u!114 &-5003194148719884625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,10 +65,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638070713851197014
+  lastModified: 638090239660643869
   FileSizes:
   - Name: Desktop
-    Value: 7936
+    Value: 172128
   Exists: 1
 --- !u!114 &-4839324148640367417
 MonoBehaviour:
@@ -35,10 +85,139 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638070713851226934
+  lastModified: 638090239660702734
   FileSizes:
   - Name: Desktop
-    Value: 754
+    Value: 1204
+  Exists: 1
+--- !u!114 &-1590239985068814445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Grass
+  m_EditorClassIdentifier: 
+  Name: Grass
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1993289814
+    data2: 2012089949
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-1480367506354024578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Wood
+  m_EditorClassIdentifier: 
+  Name: Wood
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4143787214
+    data2: 2529559044
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-1324383976730068739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/SpecialShot
+  m_EditorClassIdentifier: 
+  Path: event:/Player/SpecialShot
+  Guid:
+    Data1: 775043102
+    Data2: 1261431203
+    Data3: -359893064
+    Data4: 425971023
+  Banks:
+  - {fileID: -6251309486437539833}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1105851744753048582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow
+  Guid:
+    Data1: -1131497390
+    Data2: 1104670672
+    Data3: 1823540357
+    Data4: -623202662
+  Banks:
+  - {fileID: -5003194148719884625}
+  - {fileID: -6251309486437539833}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2112317157986752100}
+  - {fileID: -227750698741311241}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 100
+--- !u!114 &-227750698741311241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Bow/Fire Totem
+  m_EditorClassIdentifier: 
+  Name: Fire Totem
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2123498595
+    data2: 375163882
+  Type: 0
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -55,16 +234,70 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -4839324148640367417}
   - {fileID: -5003194148719884625}
+  - {fileID: 6378734843394525912}
+  - {fileID: -6251309486437539833}
   EditorEvents:
-  - {fileID: 6841398445113704080}
+  - {fileID: -8618195615685439471}
+  - {fileID: -1105851744753048582}
+  - {fileID: 1583043428430734625}
+  - {fileID: -1324383976730068739}
+  - {fileID: 6580124295716502370}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5003194148719884625}
   StringsBanks:
   - {fileID: -4839324148640367417}
-  cacheTime: 638070713851226934
+  cacheTime: 638090239661117177
   cacheVersion: 131592
---- !u!114 &6841398445113704080
+--- !u!114 &722742311149711009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/Wind Totem
+  m_EditorClassIdentifier: 
+  Name: Wind Totem
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3384103917
+    data2: 2437845430
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &1404287829662071831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sword/Fire Totem
+  m_EditorClassIdentifier: 
+  Name: Fire Totem
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2123498595
+    data2: 375163882
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &1583043428430734625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,20 +307,143 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Walk
+  m_Name: event:/Player/Arrow
   m_EditorClassIdentifier: 
-  Path: event:/Walk
+  Path: event:/Player/Arrow
   Guid:
-    Data1: -861215663
-    Data2: 1214108958
-    Data3: -324556149
-    Data4: 1942763737
+    Data1: -130938069
+    Data2: 1185972490
+    Data3: 1936641173
+    Data4: -673207744
   Banks:
-  - {fileID: -5003194148719884625}
+  - {fileID: -6251309486437539833}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 722742311149711009}
+  - {fileID: 2785074538500511334}
   MinDistance: 1
   MaxDistance: 20
-  Length: 444
+  Length: 470
+--- !u!114 &2112317157986752100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Bow/Wind Totem
+  m_EditorClassIdentifier: 
+  Name: Wind Totem
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3384103917
+    data2: 2437845430
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &2785074538500511334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/Fire Totem
+  m_EditorClassIdentifier: 
+  Name: Fire Totem
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2123498595
+    data2: 375163882
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6283552947130150861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sword/Wind Totem
+  m_EditorClassIdentifier: 
+  Name: Wind Totem
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3384103917
+    data2: 2437845430
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6378734843394525912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/BGM.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/BGM.bank
+  Name: BGM
+  StudioPath: bank:/BGM
+  lastModified: 638090239660095441
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
+--- !u!114 &6580124295716502370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Sword
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Sword
+  Guid:
+    Data1: -695841875
+    Data2: 1082838553
+    Data3: -319374439
+    Data4: -21184420
+  Banks:
+  - {fileID: -6251309486437539833}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 1404287829662071831}
+  - {fileID: 6283552947130150861}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
