@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf7dc3ecc306b194ba0d0a266389ccd5, type: 3}
-  m_Name: Distance_1
+  m_Name: Distance_10
   m_EditorClassIdentifier: 
-  minRange: -1
-  maxRange: 3
-  Condition_Parameter: In_Attack_Range
+  minRange: 0
+  maxRange: 10
+  Condition_Parameter: Close_To_Player

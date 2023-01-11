@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: -1318938639767656248}
   - component: {fileID: 7573156427045109547}
   m_Layer: 7
-  m_Name: BoarTest
+  m_Name: StoneGolemTest
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6707d196c990e774db86dc18f92895cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -165,7 +165,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 1
   m_Acceleration: 100000000
   avoidancePriority: 50
   m_AngularSpeed: 100000000
@@ -197,7 +197,7 @@ MonoBehaviour:
   strength: 2
   projectile: {fileID: 700446156454173222}
   curve: {fileID: 2600092459065448556}
-  duration: 0.5
+  duration: 3
 --- !u!54 &7573156427045109547
 Rigidbody:
   m_ObjectHideFlags: 0

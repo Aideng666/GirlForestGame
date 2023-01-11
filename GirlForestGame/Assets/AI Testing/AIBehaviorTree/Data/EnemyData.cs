@@ -20,9 +20,11 @@ public class EnemyData : MonoBehaviour
     //What damage an attack does. Down the line this can become a list for the different attacks the AI can have
     public float attackDamage = 1f;
 
+
     //CHANGE THIS TO BE MORE FLEXIBLE
     protected Forms form = Forms.Living;
     public Forms Form { get { return form; } }
+
 
     //This timer is for the attack cooldown for AI, but at this time it's using the exit time to trigger when to allow it to attack again
     void Update() 

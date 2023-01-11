@@ -9,7 +9,9 @@ using UnityEngine;
 public class Cdt_Distance : Cdt_BaseClass
 {
 
+    [Range(0, 50)]
     public float minRange = 1f;
+    [Range(-1, 51)]
     public float maxRange = -1f;
     public string Condition_Parameter = "Close_To_Player";
     public override void CheckCondition(Animator animator)
