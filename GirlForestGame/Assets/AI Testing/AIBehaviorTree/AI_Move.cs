@@ -14,7 +14,8 @@ public class AI_Move : AI_BaseClass
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponentInParent<NavMeshAgent>();
-        agent.isStopped = false; //turns AI movement on
+        agent.enabled = true;
+        //turns AI movement on
     }
 
     ////OnStateUpdate is handled in the AI_BaseClass////
@@ -23,14 +24,17 @@ public class AI_Move : AI_BaseClass
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //Turns off the AI movement
-        agent.isStopped = true;
+        agent.enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //Targets the player
-        agent.SetDestination(PlayerController.Instance.transform.position);
+        if (agent.enabled)
+        {
+            agent.SetDestination(PlayerController.Instance.transform.position);
+        }
     }
 
     // OnStateIK is called right after Animator.OnAnimatorIK()

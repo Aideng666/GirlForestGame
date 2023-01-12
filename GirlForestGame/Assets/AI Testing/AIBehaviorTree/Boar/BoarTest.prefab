@@ -28,9 +28,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 700446156454173223}
+  - {fileID: 272001146437961372}
   m_Father: {fileID: 700446156201332268}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &700446155698007779
 Animator:
@@ -65,7 +67,7 @@ GameObject:
   - component: {fileID: 700446156201332266}
   - component: {fileID: 700446156201332265}
   - component: {fileID: 700446156201332269}
-  - component: {fileID: -1318938639767656248}
+  - component: {fileID: 3775080145192275807}
   - component: {fileID: 7573156427045109547}
   m_Layer: 7
   m_Name: BoarTest
@@ -86,9 +88,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 272001146437961372}
   - {fileID: 700446155698007778}
-  - {fileID: 700446156454173223}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -177,7 +177,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-1318938639767656248
+--- !u!114 &3775080145192275807
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 700446156201332264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bbf23af54bf38b48a50bb0e911494b2, type: 3}
+  m_Script: {fileID: 11500000, guid: ea7ae1ee75ed49a4a9dea8405c695cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 1
@@ -194,10 +194,6 @@ MonoBehaviour:
   actionCooldown: 0
   weight: 1
   attackDamage: 1
-  strength: 2
-  projectile: {fileID: 700446156454173222}
-  curve: {fileID: 2600092459065448556}
-  duration: 0.5
 --- !u!54 &7573156427045109547
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -240,13 +236,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700446156454173222}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.8, z: -0.35}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 700446156201332268}
-  m_RootOrder: 2
+  m_Father: {fileID: 700446155698007778}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &700446156454173211
 MeshFilter:
@@ -488,8 +484,8 @@ Transform:
   - {fileID: 2568997440458205533}
   - {fileID: 2312910041172877003}
   - {fileID: 3470951760206669628}
-  m_Father: {fileID: 700446156201332268}
-  m_RootOrder: 0
+  m_Father: {fileID: 700446155698007778}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2600092459065448556
 MonoBehaviour:

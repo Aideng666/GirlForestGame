@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// EnemyData is the parent class to all enemies in the game.
@@ -20,11 +21,17 @@ public class EnemyData : MonoBehaviour
     //What damage an attack does. Down the line this can become a list for the different attacks the AI can have
     public float attackDamage = 1f;
 
+    //reference to navmesh for knockback
+  //  NavMeshAgent mesh;
 
     //CHANGE THIS TO BE MORE FLEXIBLE
     protected Forms form = Forms.Living;
     public Forms Form { get { return form; } }
 
+    //private void Start()
+    //{
+    //    mesh = GetComponent<NavMeshAgent>();
+    //}
 
     //This timer is for the attack cooldown for AI, but at this time it's using the exit time to trigger when to allow it to attack again
     void Update() 
@@ -61,6 +68,7 @@ public class EnemyData : MonoBehaviour
     public void ApplyKnockback(Vector3 direction, float knockBack) 
     {
         //Vector3 dir = transform.position - PlayerController.Instance.transform.position;
+        GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
         direction.y = 0f;
         GetComponent<Rigidbody>().AddForce(direction.normalized * knockBack, ForceMode.VelocityChange);
         //float force = weight / damageAmount;
