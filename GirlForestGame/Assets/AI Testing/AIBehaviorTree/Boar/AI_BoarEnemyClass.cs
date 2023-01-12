@@ -25,7 +25,7 @@ public class AI_BoarEnemyClass : EnemyData
     //Using the bezier curve created it will move the projectile to the next point along the curve
     IEnumerator projectileAnimation(AI_Boar_ThrowAttack throwAttack) 
     {
-        for (float time = 0; time < duration; time += Time.deltaTime)
+        for (float time = 0; time < throwDuration; time += Time.deltaTime)
         {
             projectile.transform.position = curve.GetPointAt(time / throwDuration);
             //transform.localRotation = Quaternion.Euler(0f, 360f * time / duration, 0f); //Spinning

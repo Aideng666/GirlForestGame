@@ -90,6 +90,8 @@ public class EnemyData : MonoBehaviour
     {
         //Children are supposed to override so that they can have unique death events
         GetComponentInChildren<Animator>().SetTrigger("Is_Dead");
+
+        EnemyPool.Instance.AddBoarToPool(gameObject);
     }
 
     /// <summary>
