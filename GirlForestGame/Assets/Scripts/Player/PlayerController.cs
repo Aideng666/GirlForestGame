@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
             if (!playerCombat.isAttacking)
             {
                 Move();
+
+                Interact();
             }
         }
 
@@ -148,11 +150,29 @@ public class PlayerController : MonoBehaviour
         playerCombat.SelectBowTargetEnemy();
     }
 
+    void Interact()
+    {
+        GameObject itemToInteract = GetComponentInChildren<InteractRing>().selectedObject;
+
+        if (itemToInteract != null && InputManager.Instance.Interact())
+        {
+            if (itemToInteract.TryGetComponent(out ShopItem shopItem))
+            {
+                shopItem.Buy();
+            }
+        }
+    }
+
     void Die()
     {
         print("Died");
 
         deathStarted = true;
+    }
+
+    public bool MouseControlActive()
+    {
+        return controlWithMouse;
     }
 
     private void OnCollisionEnter(Collision collision)

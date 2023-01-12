@@ -272,11 +272,11 @@ public class PlayerMarkings : MonoBehaviour
         {
             if (weapon == Weapons.Sword)
             {
-                enemy.ApplyKnockback(player.transform.forward, baseWindKnockbackPower * elementMultipliers[markings[1].markingLevel - 1]);
+                enemy.ApplyKnockback(baseWindKnockbackPower * elementMultipliers[markings[1].markingLevel - 1], player.transform.forward);
             }
             else if (weapon == Weapons.Bow)
             {
-                enemy.ApplyKnockback(player.transform.forward, baseWindKnockbackPower * elementMultipliers[markings[3].markingLevel - 1]);
+                enemy.ApplyKnockback(baseWindKnockbackPower * elementMultipliers[markings[3].markingLevel - 1], player.transform.forward);
             }
         }
     }

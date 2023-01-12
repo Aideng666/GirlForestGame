@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     PlayerInput playerInput;
 
     //Gameplay Controls
-    InputAction dashAction;
+    InputAction interactAction;
     InputAction moveAction;
     InputAction aimAction;
     InputAction mouseAimAction;
@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour
     InputAction regenMapAction;
     InputAction swapActionMapAction;
     InputAction selectNodeAction;
+    InputAction moveSelectionAction;
 
     //Global Controls
      public InputAction openInventoryAction;
@@ -41,7 +42,7 @@ public class InputManager : MonoBehaviour
         playerInput.actions.FindActionMap("NodeMap").Enable();
         playerInput.actions.FindActionMap("Global").Enable();
 
-        dashAction = playerInput.actions["Dash"];
+        interactAction = playerInput.actions["Interact"];
         moveAction = playerInput.actions["Move"];
         aimAction = playerInput.actions["Aim"];
         mouseAimAction = playerInput.actions["MouseAim"];
@@ -55,6 +56,7 @@ public class InputManager : MonoBehaviour
         regenMapAction = playerInput.actions["RegenerateMap"];
         swapActionMapAction = playerInput.actions["SwapActionMap"];
         selectNodeAction = playerInput.actions["SelectNode"];
+        moveSelectionAction = playerInput.actions["MoveSelection"];
         openInventoryAction = playerInput.actions["OpenInventory"];
 
         openInventoryAction.started += ToggleInventory;
@@ -84,13 +86,12 @@ public class InputManager : MonoBehaviour
         return playerInput;
     }
 
-    public bool Dash()
+    public bool Interact()
     {
         if (playerInput.actions.FindActionMap("Player").enabled)
         {
-            return dashAction.triggered;
+            return interactAction.triggered;
         }
-
 
         return false;
     }
@@ -132,6 +133,16 @@ public class InputManager : MonoBehaviour
         if (playerInput.actions.FindActionMap("Player").enabled)
         {
             return moveAction.ReadValue<Vector2>();
+        }
+
+        return Vector2.zero;
+    }
+
+    public Vector2 MoveSelection()
+    {
+        if (playerInput.actions.FindActionMap("NodeMap").enabled && moveSelectionAction.triggered)
+        {
+            return moveSelectionAction.ReadValue<Vector2>();
         }
 
         return Vector2.zero;

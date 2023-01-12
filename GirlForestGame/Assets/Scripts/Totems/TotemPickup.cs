@@ -8,12 +8,15 @@ public class TotemPickup : MonoBehaviour
 
     float timeElasped;
 
-    TotemObject chosenTotem;
+    TotemObject chosenTotem = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        ChooseTotem();
+        if (chosenTotem == null)
+        {
+            ChooseTotem();
+        }
     }
 
     private void OnEnable()
@@ -44,6 +47,20 @@ public class TotemPickup : MonoBehaviour
         chosenTotem = possibleTotems[randomIndex];
 
         chosenTotem.Totem.Init();
+    }
+
+    public void ChooseTotem(TotemObject totem)
+    {
+        chosenTotem = totem;
+        chosenTotem.Totem.Init();
+    }
+
+    public TotemObject GetRandomTotem()
+    {
+        TotemObject[] possibleTotems = TypeHandler.GetAllInstances<TotemObject>("Totems");
+        int randomIndex = Random.Range(0, possibleTotems.Length);
+
+        return possibleTotems[randomIndex];
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -41,8 +41,8 @@ public class PlayerCombat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        livingLayer = LayerMask.NameToLayer("Living");
-        spiritLayer = LayerMask.NameToLayer("Spirit");
+        livingLayer = LayerMask.NameToLayer("PlayerLiving");
+        spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
 
         bowAimCanvas.SetActive(false);
 
@@ -304,175 +304,10 @@ public class PlayerCombat : MonoBehaviour
 
     void ActivateSwordHitbox(/*int attackNum*/)
     {
-        print("Checking Who was hit");
+        //print("Checking Who was hit");
 
         Collider[] enemyColliders = null;
         List<EnemyData> enemiesHit = new List<EnemyData>();
-
-        //switch (attackNum)
-        //{
-        //    case 1:
-
-        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange);
-
-        //        //Loops through each hit collider and adds all of the enemies into a list
-        //        if (enemyColliders.Length > 0)
-        //        {
-        //            for (int i = 0; i < enemyColliders.Length; i++)
-        //            {
-        //                if (enemyColliders[i].gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == Form)
-        //                {
-        //                    enemiesHit.Add(enemy);
-        //                }
-        //            }
-        //        }
-        //        //////////////////////////////////////////////////////////////////////////
-
-        //        for (int i = 0; i < enemiesHit.Count; i++)
-        //        {
-        //            //Checks for hitting from behind
-        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
-        //            {
-        //                AssassinTotem t;
-        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.SetWeaponUsed(Weapons.Sword);
-        //                }
-
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.RemoveEffect();
-        //                }
-        //            }
-        //            else
-        //            {
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-        //            }
-        //        }
-
-        //        if (enemiesHit.Count > 0)
-        //        {
-        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-        //        }
-
-        //        break;
-
-        //    case 2:
-
-        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
-
-        //        if (enemyColliders.Length > 0)
-        //        {
-        //            for (int i = 0; i < enemyColliders.Length; i++)
-        //            {
-        //                if (enemyColliders[i].gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == Form)
-        //                {
-        //                    enemiesHit.Add(enemy);
-        //                }
-        //            }
-        //        }
-
-        //        for (int i = 0; i < enemiesHit.Count; i++)
-        //        {
-        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
-        //            {
-        //                AssassinTotem t;
-        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.SetWeaponUsed(Weapons.Sword);
-        //                }
-
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.RemoveEffect();
-        //                }
-        //            }
-        //            else
-        //            {
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-        //            }
-        //        }
-
-        //        if (enemiesHit.Count > 0)
-        //        {
-        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-        //        }
-
-        //        break;
-
-        //    case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK - this is for aiden dw abt it
-
-        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
-
-        //        if (enemyColliders.Length > 0)
-        //        {
-        //            for (int i = 0; i < enemyColliders.Length; i++)
-        //            {
-        //                if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
-        //                {
-        //                    enemiesHit.Add(enemy);
-        //                }
-        //            }
-        //        }
-
-        //        for (int i = 0; i < enemiesHit.Count; i++)
-        //        {
-        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
-        //            {
-        //                AssassinTotem t;
-        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.SetWeaponUsed(Weapons.Sword);
-        //                }
-
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.RemoveEffect();
-        //                }
-        //            }
-        //            else
-        //            {
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-        //            }
-        //        }
-
-        //        if (enemiesHit.Count > 0)
-        //        {
-        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-        //        }
-
-        //        break;
-        //}
 
         enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange);
 
@@ -485,7 +320,7 @@ public class PlayerCombat : MonoBehaviour
                 {
                     enemiesHit.Add(enemy);
 
-                    print("Adding an enemy");
+                    //print("Adding an enemy");
                 }
             }
         }
@@ -493,6 +328,8 @@ public class PlayerCombat : MonoBehaviour
 
         for (int i = 0; i < enemiesHit.Count; i++)
         {
+            //print(Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward));
+
             //Checks for hitting from behind
             if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
             {
@@ -506,7 +343,7 @@ public class PlayerCombat : MonoBehaviour
                     t.SetWeaponUsed(Weapons.Sword);
                 }
 
-                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+                enemiesHit[i].ApplyKnockback(10, transform.forward);
                 enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
 
                 if (assassinTotemExists)
@@ -518,7 +355,7 @@ public class PlayerCombat : MonoBehaviour
             }
             else
             {
-                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+                enemiesHit[i].ApplyKnockback(10, transform.forward);
                 enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
             }
         }

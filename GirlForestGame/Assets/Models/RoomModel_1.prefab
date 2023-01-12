@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &11771101155889051
 Transform:
@@ -303,7 +303,7 @@ GameObject:
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &11771101198026121
 Transform:
@@ -587,7 +587,7 @@ GameObject:
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &11771101898511817
 Transform:
@@ -873,7 +873,7 @@ GameObject:
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &11771102015255318
 Transform:
@@ -1159,7 +1159,7 @@ GameObject:
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &11771102041877878
 Transform:
@@ -1445,7 +1445,7 @@ GameObject:
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &11771102298012225
 Transform:
@@ -1730,7 +1730,7 @@ GameObject:
   m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5053163817408000064
 Transform:
@@ -2028,7 +2028,7 @@ GameObject:
   m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5520945616261384041
 Transform:
@@ -2326,7 +2326,7 @@ GameObject:
   m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2209281833389090077
 Transform:
@@ -2619,12 +2619,13 @@ GameObject:
   - component: {fileID: 7061429397895047348}
   - component: {fileID: 7061429397895047349}
   - component: {fileID: 8081140774929226032}
+  - component: {fileID: 4928174025491796796}
   m_Layer: 0
   m_Name: RoomModel_1
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7061429397895047344
 Transform:
@@ -12753,7 +12754,37 @@ MonoBehaviour:
   - {fileID: 148922315229940917}
   - {fileID: 4100924672317801301}
   - {fileID: 4371476402903298412}
-  isBigRoom: 0
+  obstacles: []
+--- !u!114 &4928174025491796796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061429397895047354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 4de556f289059f043a86178dd78d9c87, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1001 &4199262398293866005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12768,6 +12799,10 @@ PrefabInstance:
     - target: {fileID: 4210609628782826477, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210609628782826479, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4210609628782826481, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
       propertyPath: m_Mesh
@@ -12784,6 +12819,10 @@ PrefabInstance:
     - target: {fileID: 4210609629073584680, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
       propertyPath: m_Name
       value: NorthEntrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210609629073584680, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4210609629073584681, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
       propertyPath: m_RootOrder
@@ -12856,6 +12895,10 @@ PrefabInstance:
     - target: {fileID: 6256683551917640408, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652056677187617886, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49adccccf4fce7a409c25edf29ab1741, type: 3}
