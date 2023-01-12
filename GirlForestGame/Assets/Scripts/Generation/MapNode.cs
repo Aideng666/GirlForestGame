@@ -9,7 +9,7 @@ public class MapNode : MonoBehaviour
     MapNode leftChild;
     MapNode rightChild;
 
-    int columnNum;
+    public int columnNum { get; private set; }
     bool hasChild = false;
     int distanceFromStart;
     int directionFromParent;
@@ -22,7 +22,7 @@ public class MapNode : MonoBehaviour
 
     MapGenerator generator;
 
-    Vector3 defaultSize;
+    public Vector3 defaultSize { get; private set; }
 
     private void Start()
     {
@@ -31,28 +31,28 @@ public class MapNode : MonoBehaviour
 
     private void Update()
     {
-        if (isSelectable)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
+        //if (isSelectable)
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        //    RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-                if (hit.collider.gameObject == this.gameObject)
-                {
-                    SetSelected(true);
-                }
-                else
-                {
-                    SetSelected(false);
-                }
-            }
-        }
+        //    if (Physics.Raycast(ray, out hit, 100))
+        //    {
+        //        if (hit.collider.gameObject == this.gameObject)
+        //        {
+        //            SetSelected(true);
+        //        }
+        //        else
+        //        {
+        //            SetSelected(false);
+        //        }
+        //    }
+        //}
 
-        if (selected && InputManager.Instance.SelectNode())
-        {
-            NodeMapManager.Instance.SetActiveNode(this);
-        }
+        //if (selected && InputManager.Instance.SelectNode())
+        //{
+        //    NodeMapManager.Instance.SetActiveNode(this);
+        //}
     }
 
     public void SetNode(MapNode parent, NodeTypes type, int column, int dirFromParent = 2 /*0 = left child | 1 = right child*/)
@@ -65,6 +65,14 @@ public class MapNode : MonoBehaviour
         if (parent == null && type == NodeTypes.Boss)
         {
             distanceFromStart = generator.GetEndNodeDistance();
+
+            for (int i = 0; i < generator.Nodes.Count; i++)
+            {
+                if (generator.Nodes[i].GetComponent<MapNode>().GetDistanceFromStart() == generator.GetEndNodeDistance() - 1)
+                {
+                    parentNodes.Add(generator.Nodes[i].GetComponent<MapNode>());
+                }
+            }
         }
         else if (parent == null)
         {
@@ -107,19 +115,19 @@ public class MapNode : MonoBehaviour
         return nodeType;
     }
     
-    public void SetSelected(bool isSelected)
-    {
-        if (isSelected)
-        {
-            transform.localScale = defaultSize * 2;
-            selected = true;
+    //public void SetSelected(bool isSelected)
+    //{
+    //    if (isSelected)
+    //    {
+    //        transform.localScale = defaultSize * 2;
+    //        selected = true;
 
-            return;
-        }
+    //        return;
+    //    }
 
-        transform.localScale = defaultSize;
-        selected = false;
-    }
+    //    transform.localScale = defaultSize;
+    //    selected = false;
+    //}
 
     public void SetLeftChild(MapNode child)
     {
@@ -160,7 +168,7 @@ public class MapNode : MonoBehaviour
         return columnNum;
     }
 
-    public List<MapNode> GetParentNode()
+    public List<MapNode> GetParentNodes()
     {
         return parentNodes;
     }

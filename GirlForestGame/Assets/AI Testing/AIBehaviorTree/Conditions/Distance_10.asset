@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Distance_10
   m_EditorClassIdentifier: 
   minRange: 0
-  maxRange: 10
+  maxRange: 20
   Condition_Parameter: Close_To_Player

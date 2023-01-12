@@ -189,11 +189,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7ae1ee75ed49a4a9dea8405c695cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHealth: 1
-  maxHealth: 1
+  curHealth: 100
+  maxHealth: 100
   actionCooldown: 0
   weight: 1
   attackDamage: 1
+  strength: 2
+  projectile: {fileID: 700446156454173222}
+  curve: {fileID: 2600092459065448556}
+  throwDuration: 1
 --- !u!54 &7573156427045109547
 Rigidbody:
   m_ObjectHideFlags: 0

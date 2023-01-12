@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92299b270eb6d894b8d5bb4d767ea668, type: 3}
-  m_Name: Half-Heart
+  m_Script: {fileID: 11500000, guid: d45fca93215b5fb4fb04d9cbe18a2878, type: 3}
+  m_Name: MarkingRoom1
   m_EditorClassIdentifier: 
-  itemName: Half Heart
-  value: 5
-  item: {fileID: 0}
+  model: {fileID: 555592096212597669, guid: 2ac3c5f44bd515846bb481c850bad591, type: 3}
+  northCamBoundary: 0
+  southCamBoundary: 0
+  eastCamBoundary: 0
+  westCamBoundary: 0
