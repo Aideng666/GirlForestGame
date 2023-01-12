@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// EnemyData is the parent class to all enemies in the game.
@@ -24,9 +25,14 @@ public class EnemyData : MonoBehaviour
     float wallOffsetToSpawn = 5;
     bool enemyInitialized = false; //This is a flag to be able to spawn enemies only when you walk in the room
 
+    //reference to navmesh for knockback
+  //  NavMeshAgent mesh;
+
     //CHANGE THIS TO BE MORE FLEXIBLE
     protected Forms form = Forms.Living;
     public Forms Form { get { return form; } }
+
+    //    mesh = GetComponent<NavMeshAgent>();
 
     Rigidbody body;
 
@@ -124,6 +130,7 @@ public class EnemyData : MonoBehaviour
     public void ApplyKnockback(float knockBack, Vector3 direction = default(Vector3))
     {
         body.velocity = Vector3.zero;
+        GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
 
         if (direction == Vector3.zero)
         {
