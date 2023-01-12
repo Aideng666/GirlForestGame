@@ -22,9 +22,6 @@ public class EnemyData : MonoBehaviour
     //What damage an attack does. Down the line this can become a list for the different attacks the AI can have
     //public float attackDamage = 1f;
 
-    float wallOffsetToSpawn = 5;
-    bool enemyInitialized = false; //This is a flag to be able to spawn enemies only when you walk in the room
-
     //reference to navmesh for knockback
   //  NavMeshAgent mesh;
 
@@ -39,13 +36,6 @@ public class EnemyData : MonoBehaviour
     private void OnEnable()
     {
         curHealth = maxHealth;
-
-        if (enemyInitialized)
-        {
-            transform.position = SelectSpawnPosition();
-        }
-
-        enemyInitialized = true;
     }
 
     private void Start()
@@ -61,29 +51,7 @@ public class EnemyData : MonoBehaviour
             actionCooldown -= Time.deltaTime;
         }
 
-        transform.position = new Vector3(transform.position.x, 1, transform.position.z);
-    }
-
-    Vector3 SelectSpawnPosition()
-    {
-        //Selects a random spawn location for the enemy
-        float randomXPos = Random.Range(DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().westCamBoundary + wallOffsetToSpawn,
-            DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().eastCamBoundary - wallOffsetToSpawn);
-        float randomZPos = Random.Range(DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().southCamBoundary + wallOffsetToSpawn,
-            DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().northCamBoundary - wallOffsetToSpawn);
-
-        Vector3 selectedSpawnPosition = new Vector3(randomXPos, transform.position.y, randomZPos);
-
-        //Checks if the selected spawn location is too close to an obstacle in the room
-        foreach (GameObject obstacle in DungeonGenerator.Instance.GetCurrentRoom().GetSpawnedModel().obstacles)
-        {
-            if (Vector3.Distance(selectedSpawnPosition, obstacle.transform.position) < wallOffsetToSpawn)
-            {
-                return SelectSpawnPosition();
-            }
-        }
-
-        return selectedSpawnPosition;
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
 
     virtual public void EnemyDeath() 

@@ -10,6 +10,7 @@ public class EnemyPool : MonoBehaviour
     Queue<GameObject> availableBoars = new Queue<GameObject>();
     //Queue<GameObject> availableShooters = new Queue<GameObject>();
 
+    float enemySpawnWallOffset = 5;
     int numEachEnemy = 5;
 
     public static EnemyPool Instance { get; private set; }
@@ -18,6 +19,28 @@ public class EnemyPool : MonoBehaviour
     {
         Instance = this;
         CreatePools();
+    }
+
+    Vector3 SelectSpawnPosition(GameObject instance)
+    {
+        //Selects a random spawn location for the enemy
+        float randomXPos = Random.Range(DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().westCamBoundary,
+            DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().eastCamBoundary);
+        float randomZPos = Random.Range(DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().southCamBoundary,
+            DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().northCamBoundary);
+
+        Vector3 selectedSpawnPosition = new Vector3(randomXPos, instance.transform.position.y, randomZPos);
+
+        //Checks if the selected spawn location is too close to an obstacle in the room
+        foreach (GameObject obstacle in DungeonGenerator.Instance.GetCurrentRoom().GetSpawnedModel().obstacles)
+        {
+            if (Vector3.Distance(selectedSpawnPosition, obstacle.transform.position) < enemySpawnWallOffset)
+            {
+                return SelectSpawnPosition(instance);
+            }
+        }
+
+        return selectedSpawnPosition;
     }
 
     public GameObject GetBoarFromPool()
@@ -29,7 +52,7 @@ public class EnemyPool : MonoBehaviour
 
         GameObject instance = availableBoars.Dequeue();
 
-        //instance.transform.position = spawnerPos;
+        instance.transform.position = SelectSpawnPosition(instance);
 
         instance.SetActive(true);
         return instance;
