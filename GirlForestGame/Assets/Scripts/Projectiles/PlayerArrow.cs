@@ -65,7 +65,7 @@ public class PlayerArrow : MonoBehaviour
                     print("Increased Damage");
                 }
 
-                enemy.ApplyKnockback(transform.forward, 2);
+                enemy.ApplyKnockback(2, transform.forward);
                 enemy.TakeDamage(player.playerAttributes.BowDamage + chargedArrowDamage);
 
                 print($"Enemy Took {player.playerAttributes.BowDamage + chargedArrowDamage}");
@@ -81,7 +81,7 @@ public class PlayerArrow : MonoBehaviour
             }
             else
             {
-                enemy.ApplyKnockback(transform.forward, 2);
+                enemy.ApplyKnockback(2, transform.forward);
                 enemy.TakeDamage(player.playerAttributes.BowDamage + chargedArrowDamage);
             }
 

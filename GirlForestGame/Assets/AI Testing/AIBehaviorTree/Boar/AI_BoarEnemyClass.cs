@@ -16,7 +16,7 @@ public class AI_BoarEnemyClass : EnemyData
     [SerializeField] float strength = 2f;
     [SerializeField] GameObject projectile;
     [SerializeField] BezierCurve curve;
-    [SerializeField] float duration = 3f;
+    [SerializeField] float throwDuration = 3f;
 
     public void ThrowProjectile(AI_Boar_ThrowAttack throwAttack) 
     {
@@ -25,9 +25,9 @@ public class AI_BoarEnemyClass : EnemyData
     //Using the bezier curve created it will move the projectile to the next point along the curve
     IEnumerator projectileAnimation(AI_Boar_ThrowAttack throwAttack) 
     {
-        for (float time = 0; time < duration; time += Time.fixedDeltaTime)
+        for (float time = 0; time < throwDuration; time += Time.fixedDeltaTime)
         {
-            projectile.transform.position = curve.GetPointAt(time / duration);
+            projectile.transform.position = curve.GetPointAt(time / throwDuration);
             //transform.localRotation = Quaternion.Euler(0f, 360f * time / duration, 0f); //Spinning
             yield return new WaitForFixedUpdate();
         }

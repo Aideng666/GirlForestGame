@@ -31,6 +31,8 @@ public class EnemyData : MonoBehaviour
         {
             actionCooldown -= Time.deltaTime;
         }
+
+        transform.position = new Vector3(transform.position.x, 1, transform.position.z);
     }
 
     virtual public void EnemyDeath() 
@@ -45,33 +47,49 @@ public class EnemyData : MonoBehaviour
     public void TakeDamage(float damageAmount, bool applyKnockback = false) //Take Damage applies damage and gives knockback based on the damage, unless false
     {
         curHealth -= damageAmount;
+
         if(curHealth <= 0) 
         {
             EnemyDeath();
         }
-        if(applyKnockback)
+        if (applyKnockback)
+        {
             ApplyKnockback(damageAmount);
+        }
     }
 
     /// <summary>
     ///  2 Overloads: With direction, and with default direction (agent pos - player pos)
     /// </summary>
-    public void ApplyKnockback(Vector3 direction, float knockBack) 
+    //public void ApplyKnockback(Vector3 direction, float knockBack)
+    //{
+    //    //Vector3 dir = transform.position - PlayerController.Instance.transform.position;
+    //    direction.y = 0f;
+    //    GetComponent<Rigidbody>().AddForce(direction.normalized * knockBack, ForceMode.VelocityChange);
+    //    //float force = weight / damageAmount;
+    //    //GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * force);
+
+    //}
+    //public void ApplyKnockback(float knockback)
+    //{
+    //    Vector3 direction = transform.position - PlayerController.Instance.transform.position;
+    //    direction.y = 0f;
+    //    GetComponent<Rigidbody>().AddForce(direction.normalized * knockback, ForceMode.VelocityChange);
+    //    //float force = weight / damageAmount;
+    //    //GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * force);
+
+    //}
+
+    public void ApplyKnockback(float knockBack, Vector3 direction = default(Vector3))
     {
-        //Vector3 dir = transform.position - PlayerController.Instance.transform.position;
+        if (direction == Vector3.zero)
+        {
+            direction = transform.position - PlayerController.Instance.transform.position;
+        }
+
         direction.y = 0f;
         GetComponent<Rigidbody>().AddForce(direction.normalized * knockBack, ForceMode.VelocityChange);
         //float force = weight / damageAmount;
         //GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * force);
-
-    }
-    public void ApplyKnockback(float knockback)
-    {
-        Vector3 direction = transform.position - PlayerController.Instance.transform.position;
-        direction.y = 0f;
-        GetComponent<Rigidbody>().AddForce(direction.normalized * knockback, ForceMode.VelocityChange);
-        //float force = weight / damageAmount;
-        //GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * force);
-
     }
 }
