@@ -10,8 +10,6 @@ public class PlayerArrow : MonoBehaviour
 
     private void Start()
     {
-        print(LayerMask.NameToLayer("PlayerLiving"));
-
         livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
 

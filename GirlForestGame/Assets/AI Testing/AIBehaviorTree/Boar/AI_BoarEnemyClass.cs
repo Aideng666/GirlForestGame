@@ -13,7 +13,7 @@ public class AI_BoarEnemyClass : EnemyData
      DESCRIPTION: Is childed to enemy data which has a bunch of basic things like HP and attack strength. 
      This contains all the specific things and handles the throwing. It's using the bezier curve addon since it's a lot easier to do something with that than DOTween
      */
-    [SerializeField] float strength = 2f;
+    //[SerializeField] float strength = 2f;
     [SerializeField] GameObject projectile;
     [SerializeField] BezierCurve curve;
     [SerializeField] float throwDuration = 3f;

@@ -548,7 +548,7 @@ MonoBehaviour:
   - {fileID: 1119749004452235634}
   - {fileID: 1940670077911902478}
   - {fileID: 664663565496032846}
-  isBigRoom: 0
+  obstacles: []
 --- !u!1 &1940670077911902478
 GameObject:
   m_ObjectHideFlags: 0

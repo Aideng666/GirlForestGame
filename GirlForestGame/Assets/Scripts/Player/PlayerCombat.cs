@@ -304,7 +304,7 @@ public class PlayerCombat : MonoBehaviour
 
     void ActivateSwordHitbox(/*int attackNum*/)
     {
-        print("Checking Who was hit");
+        //print("Checking Who was hit");
 
         Collider[] enemyColliders = null;
         List<EnemyData> enemiesHit = new List<EnemyData>();
@@ -320,7 +320,7 @@ public class PlayerCombat : MonoBehaviour
                 {
                     enemiesHit.Add(enemy);
 
-                    print("Adding an enemy");
+                    //print("Adding an enemy");
                 }
             }
         }
@@ -328,7 +328,7 @@ public class PlayerCombat : MonoBehaviour
 
         for (int i = 0; i < enemiesHit.Count; i++)
         {
-            print(Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward));
+            //print(Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward));
 
             //Checks for hitting from behind
             if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
