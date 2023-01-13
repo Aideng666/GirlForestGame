@@ -1019,7 +1019,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2258
+  m_Name: pb_Mesh-2060
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3217,7 +3217,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2274
+  m_Name: pb_Mesh-2076
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5257,7 +5257,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2316
+  m_Name: pb_Mesh-2118
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5872,11 +5872,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultSpeed
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultHealth
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultSwordCooldown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 888884933367481658, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Mesh
@@ -7136,7 +7140,7 @@ PrefabInstance:
       objectReference: {fileID: 1992219134}
     - target: {fileID: 3499881327916099185, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 72
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 3856917944956632236, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Mesh
@@ -7188,7 +7192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: controlWithMouse
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultBowDamage
@@ -7316,7 +7320,7 @@ PrefabInstance:
       objectReference: {fileID: 990408170}
     - target: {fileID: 7603293084556601176, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 1588
+      value: 1612
       objectReference: {fileID: 0}
     - target: {fileID: 7983642040164700049, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Mesh
@@ -7324,7 +7328,7 @@ PrefabInstance:
       objectReference: {fileID: 460729394}
     - target: {fileID: 7983642040164700049, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 395
+      value: 419
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2453708176110309224, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}

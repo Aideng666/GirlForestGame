@@ -17,7 +17,7 @@ public class PlayerCombat : MonoBehaviour
 
     //Bow Stuff
     GameObject bowTargetEnemy;
-    List<Enemy> bowTargetsInView = new List<Enemy>();
+    List<EnemyData> bowTargetsInView = new List<EnemyData>();
     bool bowDrawn;
     bool bowCharging;
     bool isDrawingBow;
@@ -26,7 +26,7 @@ public class PlayerCombat : MonoBehaviour
 
     //Sword Stuff
     GameObject swordTargetEnemy;
-    List<Enemy> swordTargetsInView = new List<Enemy>();
+    List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
 
     Forms currentForm = Forms.Living;
@@ -180,12 +180,18 @@ public class PlayerCombat : MonoBehaviour
         {
             if (swordTargetEnemy != null && Vector3.Distance(swordTargetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange)
             {
+                float targetAngle = Mathf.Atan2((swordTargetEnemy.transform.position - transform.position).normalized.x, (swordTargetEnemy.transform.position - transform.position).normalized.z) * Mathf.Rad2Deg;
+
+                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
                 SwordAttack();
 
                 return;
             }
 
-            StartCoroutine(MoveTowardsAttack(player.playerAttributes.SwordCooldown, swordTargetEnemy));
+            StartCoroutine(MoveTowardsAttack(0.25f, swordTargetEnemy));
+
+            canAttack = false;
         }
     }
 
@@ -260,19 +266,21 @@ public class PlayerCombat : MonoBehaviour
                 break;
         }
         ////////////////////////////////////////////////////////////////////
-
-        ActivateSwordHitbox(/*currentAttackNum*/);
-
         canAttack = false;
+
+        ActivateSwordHitbox();
     }
 
     //Initializes the drawing of the bow
     public void BowAttack()
     {
-        GetComponentInChildren<Animator>().SetTrigger("DrawBow");
+        if (canAttack)
+        {
+            GetComponentInChildren<Animator>().SetTrigger("DrawBow");
 
-        canAttack = false;
-        isDrawingBow = true;
+            canAttack = false;
+            isDrawingBow = true;
+        }
     }
 
     void SpawnArrow(GameObject target = null)
@@ -302,14 +310,12 @@ public class PlayerCombat : MonoBehaviour
         arrow.transform.Rotate(new Vector3(1, 0, 0), 90);
     }
 
-    void ActivateSwordHitbox(/*int attackNum*/)
+    void ActivateSwordHitbox()
     {
-        //print("Checking Who was hit");
-
         Collider[] enemyColliders = null;
         List<EnemyData> enemiesHit = new List<EnemyData>();
 
-        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange);
+        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange / 2);
 
         //Loops through each hit collider and adds all of the enemies into a list
         if (enemyColliders.Length > 0)
@@ -319,8 +325,6 @@ public class PlayerCombat : MonoBehaviour
                 if (enemyColliders[i].gameObject.TryGetComponent(out EnemyData enemy) && enemy.Form == Form)
                 {
                     enemiesHit.Add(enemy);
-
-                    //print("Adding an enemy");
                 }
             }
         }
@@ -412,22 +416,22 @@ public class PlayerCombat : MonoBehaviour
         player.playerAttributes.Health -= 1;
     }
 
-    public void AddBowTarget(Enemy enemy)
+    public void AddBowTarget(EnemyData enemy)
     {
         bowTargetsInView.Add(enemy);
     }
 
-    public void RemoveBowTarget(Enemy enemy)
+    public void RemoveBowTarget(EnemyData enemy)
     {
         bowTargetsInView.RemoveAt(bowTargetsInView.IndexOf(enemy));
     }
 
-    public void AddSwordTarget(Enemy enemy)
+    public void AddSwordTarget(EnemyData enemy)
     {
         swordTargetsInView.Add(enemy);
     }
 
-    public void RemoveSwordTarget(Enemy enemy)
+    public void RemoveSwordTarget(EnemyData enemy)
     {
         swordTargetsInView.RemoveAt(swordTargetsInView.IndexOf(enemy));
     }

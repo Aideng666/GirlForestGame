@@ -7,7 +7,7 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] GameObject boarPrefab;
     //[SerializeField] GameObject sharpshooterPrefab;
 
-    Queue<GameObject> availableBoars = new Queue<GameObject>();
+    public Queue<GameObject> availableBoars { get; private set; } = new Queue<GameObject>();
     //Queue<GameObject> availableShooters = new Queue<GameObject>();
 
     float enemySpawnWallOffset = 5;

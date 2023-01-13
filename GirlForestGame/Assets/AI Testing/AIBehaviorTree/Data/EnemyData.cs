@@ -23,15 +23,14 @@ public class EnemyData : MonoBehaviour
     //public float attackDamage = 1f;
 
     //reference to navmesh for knockback
-  //  NavMeshAgent mesh;
+    NavMeshAgent mesh;
+    Rigidbody body;
+    PlayerController player;
 
     //CHANGE THIS TO BE MORE FLEXIBLE
     protected Forms form = Forms.Living;
     public Forms Form { get { return form; } }
 
-    //    mesh = GetComponent<NavMeshAgent>();
-
-    Rigidbody body;
 
     private void OnEnable()
     {
@@ -41,6 +40,8 @@ public class EnemyData : MonoBehaviour
     private void Start()
     {
         body = GetComponent<Rigidbody>();
+        mesh = GetComponent<NavMeshAgent>();
+        player = PlayerController.Instance;
     }
 
     //This timer is for the attack cooldown for AI, but at this time it's using the exit time to trigger when to allow it to attack again
@@ -58,6 +59,13 @@ public class EnemyData : MonoBehaviour
     {
         //Children are supposed to override so that they can have unique death events
         GetComponentInChildren<Animator>().SetTrigger("Is_Dead");
+
+        if (player.playerInventory.totemDictionary[typeof(VampireBiteTotem)] > 0)
+        {
+            player.playerInventory.GetTotemFromList(typeof(VampireBiteTotem)).Totem.ApplyEffect();
+        }
+
+        player.playerCombat.RemoveSwordTarget(this);
 
         EnemyPool.Instance.AddBoarToPool(gameObject);
     }
