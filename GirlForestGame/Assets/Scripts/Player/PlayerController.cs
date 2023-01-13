@@ -177,21 +177,63 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //To transition from room to room
-        if (collision.gameObject.CompareTag("Exit"))
-        {
-            UIManager.Instance.GetFadePanel().BeginRoomTransition();
+        print($"Collided with {collision.gameObject.tag}");
 
-            StartCoroutine(EnterNewRoom(
-                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
-                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]
-                .GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
-                .transform.parent.transform.position, DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())));
-        }
-        //To transition to the node map after completing a full floor
-        if (collision.gameObject.CompareTag("FloorExit"))
+        switch(collision.gameObject.tag)
         {
-            NodeMapManager.Instance.SetNextLevel();
+            //To transition from room to room
+            case "Exit":
+
+                UIManager.Instance.GetFadePanel().BeginRoomTransition();
+
+                StartCoroutine(EnterNewRoom(
+                    DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
+                    DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]
+                    .GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
+                    .transform.parent.transform.position, DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())));
+
+                break;
+
+            //To transition to the node map after completing a full floor
+            case "FloorExit":
+
+                NodeMapManager.Instance.SetNextLevel();
+
+                break;
+
+            case "HalfHeart":
+
+                if (playerAttributes.Health < playerAttributes.MaxHealth)
+                {
+                    playerAttributes.Health += 1;
+                    PickupPool.Instance.AddHalfHeart(collision.gameObject);
+                }
+
+                break;
+
+            case "Heart":
+
+                if (playerAttributes.Health < playerAttributes.MaxHealth)
+                {
+                    playerAttributes.Health += 2;
+                    PickupPool.Instance.AddHeart(collision.gameObject);
+                }
+
+                break;
+
+            case "Coin":
+
+                playerInventory.ModifyMoney(1);
+                PickupPool.Instance.AddCoin(collision.gameObject);
+
+                break;
+
+            case "Enemy":
+
+                print("Player Hit");
+                playerCombat.TakeDamage();
+
+                break;
         }
     }
 

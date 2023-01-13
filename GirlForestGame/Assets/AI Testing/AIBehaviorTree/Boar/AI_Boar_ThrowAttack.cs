@@ -47,6 +47,7 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     IEnumerator<float> _projectileAnimation()
     {
         curve.GetAnchorPoints()[2].transform.position = PlayerController.Instance.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[3].transform.position = PlayerController.Instance.transform.position + Vector3.up;
 
         for (float time = 0; time < duration; time += Time.deltaTime)
         {

@@ -16,6 +16,9 @@ public class EnemyData : MonoBehaviour
     //Cooldown between each attack from the condition
     public float actionCooldown = 0f;
 
+    [SerializeField] float defaultCoinDropChance = 0.25f;
+    [SerializeField] float defaultHealthDropChance = 0.05f;
+
     //May not be needed
     //public float weight = 1f;
 
@@ -66,8 +69,30 @@ public class EnemyData : MonoBehaviour
         }
 
         player.playerCombat.RemoveSwordTarget(this);
-
+        player.playerCombat.RemoveBowTarget(this);
         EnemyPool.Instance.AddBoarToPool(gameObject);
+
+        float coinRoll = Random.Range(0f, 1f);
+        float heartRoll = Random.Range(0f, 1f);
+
+        if (coinRoll < defaultCoinDropChance + player.playerAttributes.Luck)
+        {
+            PickupPool.Instance.GetCoinFromPool(transform.position);
+        }
+
+        if (heartRoll < defaultHealthDropChance + (player.playerAttributes.Luck / 2))
+        {
+            int heartToDrop = Random.Range(0, 2);
+
+            if (heartToDrop == 0)
+            {
+                PickupPool.Instance.GetHalfHeartFromPool(transform.position);
+            }
+            if (heartToDrop == 1)
+            {
+                PickupPool.Instance.GetHeartFromPool(transform.position);
+            }
+        }
     }
 
     /// <summary>

@@ -9,6 +9,11 @@ TagManager:
   - Exit
   - FloorExit
   - Arrow
+  - Enemy
+  - Heart
+  - HalfHeart
+  - Coin
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
