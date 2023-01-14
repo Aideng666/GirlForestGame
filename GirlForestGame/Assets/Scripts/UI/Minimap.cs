@@ -9,8 +9,8 @@ public class Minimap : MonoBehaviour
     [SerializeField] GameObject pathIconPrefab;
     [SerializeField] Vector2 iconSpacing = new Vector2(40, 40);
     [SerializeField] Vector2 pathwaySpacing = new Vector2(20, 20);
-    [SerializeField] Color currentRoomColour;
-    [SerializeField] Color nonCurrentRoomColour;
+    [SerializeField] Color defaultRoomColor;
+    [SerializeField] Color totemRoomColor;
 
     List<GameObject> mapIcons = new List<GameObject>();
     List<GameObject> mapPathways = new List<GameObject>();
@@ -86,6 +86,10 @@ public class Minimap : MonoBehaviour
                 {
                     icon.GetComponent<RectTransform>().position += (Vector3.up * iconSpacing.y) + (Vector3.left * iconSpacing.x);
                 }
+                foreach (GameObject path in mapPathways)
+                {
+                    path.GetComponent<RectTransform>().position += (Vector3.up * iconSpacing.y) + (Vector3.left * iconSpacing.x);
+                }
 
                 break;
 
@@ -94,6 +98,10 @@ public class Minimap : MonoBehaviour
                 foreach (GameObject icon in mapIcons)
                 {
                     icon.GetComponent<RectTransform>().position += (Vector3.down * iconSpacing.y) + (Vector3.right * iconSpacing.x);
+                }
+                foreach (GameObject path in mapPathways)
+                {
+                    path.GetComponent<RectTransform>().position += (Vector3.down * iconSpacing.y) + (Vector3.right * iconSpacing.x);
                 }
 
                 break;
@@ -104,6 +112,10 @@ public class Minimap : MonoBehaviour
                 {
                     icon.GetComponent<RectTransform>().position += (Vector3.up * iconSpacing.y) + (Vector3.right * iconSpacing.x);
                 }
+                foreach (GameObject path in mapPathways)
+                {
+                    path.GetComponent<RectTransform>().position += (Vector3.up * iconSpacing.y) + (Vector3.right * iconSpacing.x);
+                }
 
                 break;
 
@@ -112,6 +124,10 @@ public class Minimap : MonoBehaviour
                 foreach (GameObject icon in mapIcons)
                 {
                     icon.GetComponent<RectTransform>().position += (Vector3.down * iconSpacing.y) + (Vector3.left * iconSpacing.x);
+                }
+                foreach (GameObject path in mapPathways)
+                {
+                    path.GetComponent<RectTransform>().position += (Vector3.down * iconSpacing.y) + (Vector3.left * iconSpacing.x);
                 }
 
                 break;
@@ -126,37 +142,37 @@ public class Minimap : MonoBehaviour
             {
                 case Directions.North:
 
-                    mapIcons.Add(Instantiate(pathIconPrefab, this.transform));
+                    mapPathways.Add(Instantiate(pathIconPrefab, this.transform));
 
-                    mapIcons[mapIcons.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 45);
-                    mapIcons[mapIcons.Count - 1].GetComponent<RectTransform>().position += (Vector3.up * pathwaySpacing.y) + (Vector3.left * pathwaySpacing.x);
+                    mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 45);
+                    mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.up * pathwaySpacing.y) + (Vector3.left * pathwaySpacing.x);
 
                     break;
 
                 case Directions.South:
 
-                    mapIcons.Add(Instantiate(pathIconPrefab, this.transform));
+                    mapPathways.Add(Instantiate(pathIconPrefab, this.transform));
 
-                    mapIcons[mapIcons.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 45);
-                    mapIcons[mapIcons.Count - 1].GetComponent<RectTransform>().position += (Vector3.down * pathwaySpacing.y) + (Vector3.right * pathwaySpacing.x);
+                    mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 45);
+                    mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.down * pathwaySpacing.y) + (Vector3.right * pathwaySpacing.x);
 
                     break;
 
                 case Directions.East:
 
-                    mapIcons.Add(Instantiate(pathIconPrefab, this.transform));
+                    mapPathways.Add(Instantiate(pathIconPrefab, this.transform));
 
-                    mapIcons[mapIcons.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -45);
-                    mapIcons[mapIcons.Count - 1].GetComponent<RectTransform>().position += (Vector3.up * pathwaySpacing.y) + (Vector3.right * pathwaySpacing.x);
+                    mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -45);
+                    mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.up * pathwaySpacing.y) + (Vector3.right * pathwaySpacing.x);
 
                     break;
 
                 case Directions.West:
 
-                    mapIcons.Add(Instantiate(pathIconPrefab, this.transform));
+                    mapPathways.Add(Instantiate(pathIconPrefab, this.transform));
 
-                    mapIcons[mapIcons.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -45);
-                    mapIcons[mapIcons.Count - 1].GetComponent<RectTransform>().position += (Vector3.down * pathwaySpacing.y) + (Vector3.left * pathwaySpacing.x);
+                    mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -45);
+                    mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.down * pathwaySpacing.y) + (Vector3.left * pathwaySpacing.x);
 
                     break;
             }
@@ -165,14 +181,36 @@ public class Minimap : MonoBehaviour
         //Updates the color of the icons based on if they are in the room and what type of room it is
         foreach (GameObject icon in mapIcons)
         {
+            Color iconColor = icon.GetComponent<Image>().color;
+
             if (icon.GetComponent<RectTransform>().localPosition == Vector3.zero)
             {
-                icon.GetComponent<Image>().color = currentRoomColour;
+                if (!roomPreviouslyVisited)
+                {
+                    switch (visitedRoom.GetRoomType())
+                    {
+                        case RoomTypes.Fight:
+
+                            iconColor = defaultRoomColor;
+
+                            break;
+
+                        case RoomTypes.Totem:
+
+                            iconColor = totemRoomColor;
+
+                            break;
+                    }
+                }
+
+                iconColor.a = 1;
             }
             else
             {
-                icon.GetComponent<Image>().color = nonCurrentRoomColour;
+                iconColor.a = 0.25f;
             }
+
+            icon.GetComponent<Image>().color = iconColor;
         }
     }
 }

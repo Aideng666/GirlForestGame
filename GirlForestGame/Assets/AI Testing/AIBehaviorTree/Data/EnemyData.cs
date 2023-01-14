@@ -16,41 +16,35 @@ public class EnemyData : MonoBehaviour
     //Cooldown between each attack from the condition
     public float actionCooldown = 0f;
 
+    [SerializeField] float defaultCoinDropChance = 0.25f;
+    [SerializeField] float defaultHealthDropChance = 0.05f;
+
     //May not be needed
     //public float weight = 1f;
 
     //What damage an attack does. Down the line this can become a list for the different attacks the AI can have
     //public float attackDamage = 1f;
 
-    float wallOffsetToSpawn = 5;
-    bool enemyInitialized = false; //This is a flag to be able to spawn enemies only when you walk in the room
-
     //reference to navmesh for knockback
-  //  NavMeshAgent mesh;
+    NavMeshAgent mesh;
+    Rigidbody body;
+    PlayerController player;
 
     //CHANGE THIS TO BE MORE FLEXIBLE
     protected Forms form = Forms.Living;
     public Forms Form { get { return form; } }
 
-    //    mesh = GetComponent<NavMeshAgent>();
-
-    Rigidbody body;
 
     private void OnEnable()
     {
         curHealth = maxHealth;
-
-        if (enemyInitialized)
-        {
-            transform.position = SelectSpawnPosition();
-        }
-
-        enemyInitialized = true;
     }
 
     private void Start()
     {
         body = GetComponent<Rigidbody>();
+        mesh = GetComponent<NavMeshAgent>();
+        player = PlayerController.Instance;
     }
 
     //This timer is for the attack cooldown for AI, but at this time it's using the exit time to trigger when to allow it to attack again
@@ -61,29 +55,7 @@ public class EnemyData : MonoBehaviour
             actionCooldown -= Time.deltaTime;
         }
 
-        transform.position = new Vector3(transform.position.x, 1, transform.position.z);
-    }
-
-    Vector3 SelectSpawnPosition()
-    {
-        //Selects a random spawn location for the enemy
-        float randomXPos = Random.Range(DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().westCamBoundary + wallOffsetToSpawn,
-            DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().eastCamBoundary - wallOffsetToSpawn);
-        float randomZPos = Random.Range(DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().southCamBoundary + wallOffsetToSpawn,
-            DungeonGenerator.Instance.GetCurrentRoom().GetRoomObject().northCamBoundary - wallOffsetToSpawn);
-
-        Vector3 selectedSpawnPosition = new Vector3(randomXPos, transform.position.y, randomZPos);
-
-        //Checks if the selected spawn location is too close to an obstacle in the room
-        foreach (GameObject obstacle in DungeonGenerator.Instance.GetCurrentRoom().GetSpawnedModel().obstacles)
-        {
-            if (Vector3.Distance(selectedSpawnPosition, obstacle.transform.position) < wallOffsetToSpawn)
-            {
-                return SelectSpawnPosition();
-            }
-        }
-
-        return selectedSpawnPosition;
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
 
     virtual public void EnemyDeath() 
@@ -91,7 +63,39 @@ public class EnemyData : MonoBehaviour
         //Children are supposed to override so that they can have unique death events
         GetComponentInChildren<Animator>().SetTrigger("Is_Dead");
 
+        if (player.playerInventory.totemDictionary[typeof(VampireBiteTotem)] > 0)
+        {
+            player.playerInventory.GetTotemFromList(typeof(VampireBiteTotem)).Totem.ApplyEffect();
+        }
+
+        player.playerCombat.RemoveSwordTarget(this);
+        player.playerCombat.RemoveBowTarget(this);
         EnemyPool.Instance.AddBoarToPool(gameObject);
+
+        float coinRoll = Random.Range(0f, 1f);
+        float heartRoll = Random.Range(0f, 1f);
+
+        if (coinRoll < defaultCoinDropChance + player.playerAttributes.Luck)
+        {
+            GameObject coin = PickupPool.Instance.GetCoinFromPool(transform.position);
+            coin.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
+        }
+
+        if (heartRoll < defaultHealthDropChance + (player.playerAttributes.Luck / 2))
+        {
+            int heartToDrop = Random.Range(0, 2);
+
+            if (heartToDrop == 0)
+            {
+                GameObject heart = PickupPool.Instance.GetHalfHeartFromPool(transform.position);
+                heart.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
+            }
+            if (heartToDrop == 1)
+            {
+                GameObject heart = PickupPool.Instance.GetHeartFromPool(transform.position);
+                heart.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
+            }
+        }
     }
 
     /// <summary>
