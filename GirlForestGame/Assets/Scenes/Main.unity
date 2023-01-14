@@ -3931,8 +3931,8 @@ MonoBehaviour:
   pathIconPrefab: {fileID: 1593287771912624609, guid: 3c5c95b710d95dc49af62bbedfd46116, type: 3}
   iconSpacing: {x: 40, y: 40}
   pathwaySpacing: {x: 20, y: 20}
-  currentRoomColour: {r: 1, g: 1, b: 1, a: 1}
-  nonCurrentRoomColour: {r: 1, g: 1, b: 1, a: 0.3137255}
+  defaultRoomColor: {r: 1, g: 1, b: 1, a: 0}
+  totemRoomColor: {r: 1, g: 0.82395935, b: 0, a: 0}
 --- !u!4 &1188865353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6850629361975643202, guid: 14a05e3d883f7c641836eb8ec07df906, type: 3}
@@ -5923,7 +5923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultHealth
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultSwordCooldown

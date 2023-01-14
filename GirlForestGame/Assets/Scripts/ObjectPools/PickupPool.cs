@@ -32,7 +32,7 @@ public class PickupPool : MonoBehaviour
 
         GameObject instance = availableHalfHearts.Dequeue();
 
-        instance.transform.position = spawnPos;
+        instance.transform.position = new Vector3(spawnPos.x, instance.transform.position.y, spawnPos.z);
 
         instance.SetActive(true);
         return instance;
@@ -47,7 +47,7 @@ public class PickupPool : MonoBehaviour
 
         var instance = availableHearts.Dequeue();
 
-        instance.transform.position = spawnPos;
+        instance.transform.position = new Vector3(spawnPos.x, instance.transform.position.y, spawnPos.z);
 
         instance.SetActive(true);
         return instance;
@@ -62,7 +62,7 @@ public class PickupPool : MonoBehaviour
 
         var instance = availableCoins.Dequeue();
 
-        instance.transform.position = spawnPos;
+        instance.transform.position = new Vector3(spawnPos.x, instance.transform.position.y, spawnPos.z);
 
         instance.SetActive(true);
         return instance;
@@ -91,18 +91,21 @@ public class PickupPool : MonoBehaviour
 
     public void AddHalfHeart(GameObject instance)
     {
+        instance.transform.parent = transform;
         instance.SetActive(false);
         availableHalfHearts.Enqueue(instance);
     }
 
     public void AddHeart(GameObject instance)
     {
+        instance.transform.parent = transform;
         instance.SetActive(false);
         availableHearts.Enqueue(instance);
     }
 
     public void AddCoin(GameObject instance)
     {
+        instance.transform.parent = transform;
         instance.SetActive(false);
         availableCoins.Enqueue(instance);
     }

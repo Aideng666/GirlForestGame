@@ -423,7 +423,10 @@ public class PlayerCombat : MonoBehaviour
 
     public void RemoveBowTarget(EnemyData enemy)
     {
-        bowTargetsInView.RemoveAt(bowTargetsInView.IndexOf(enemy));
+        if (bowTargetsInView.Contains(enemy))
+        {
+            bowTargetsInView.RemoveAt(bowTargetsInView.IndexOf(enemy));
+        }
     }
 
     public void AddSwordTarget(EnemyData enemy)
@@ -433,7 +436,10 @@ public class PlayerCombat : MonoBehaviour
 
     public void RemoveSwordTarget(EnemyData enemy)
     {
-        swordTargetsInView.RemoveAt(swordTargetsInView.IndexOf(enemy));
+        if (swordTargetsInView.Contains(enemy))
+        {
+            swordTargetsInView.RemoveAt(swordTargetsInView.IndexOf(enemy));
+        }
     }
 
     public int GetCurrentAttackNum()

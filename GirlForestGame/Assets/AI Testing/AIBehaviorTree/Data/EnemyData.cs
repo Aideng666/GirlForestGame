@@ -77,7 +77,8 @@ public class EnemyData : MonoBehaviour
 
         if (coinRoll < defaultCoinDropChance + player.playerAttributes.Luck)
         {
-            PickupPool.Instance.GetCoinFromPool(transform.position);
+            GameObject coin = PickupPool.Instance.GetCoinFromPool(transform.position);
+            coin.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
         }
 
         if (heartRoll < defaultHealthDropChance + (player.playerAttributes.Luck / 2))
@@ -86,11 +87,13 @@ public class EnemyData : MonoBehaviour
 
             if (heartToDrop == 0)
             {
-                PickupPool.Instance.GetHalfHeartFromPool(transform.position);
+                GameObject heart = PickupPool.Instance.GetHalfHeartFromPool(transform.position);
+                heart.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
             }
             if (heartToDrop == 1)
             {
-                PickupPool.Instance.GetHeartFromPool(transform.position);
+                GameObject heart = PickupPool.Instance.GetHeartFromPool(transform.position);
+                heart.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
             }
         }
     }

@@ -113,8 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 100
-  maxHealth: 50
+  maxHealth: 5
   actionCooldown: 1
+  defaultCoinDropChance: 0.25
+  defaultHealthDropChance: 0.05
 --- !u!23 &700446156201332266
 MeshRenderer:
   m_ObjectHideFlags: 0
