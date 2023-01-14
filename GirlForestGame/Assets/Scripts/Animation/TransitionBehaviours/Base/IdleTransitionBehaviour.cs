@@ -14,10 +14,7 @@ public class IdleTransitionBehaviour : StateMachineBehaviour
 
         if (InputManager.Instance.ShootBow())
         {
-            if (PlayerController.Instance.playerCombat.GetCanAttack())
-            {
-                PlayerController.Instance.playerCombat.BowAttack();
-            }
+            PlayerController.Instance.playerCombat.BowAttack();
         }
     }
 }

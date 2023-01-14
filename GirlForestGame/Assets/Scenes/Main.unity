@@ -666,7 +666,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171005277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6402507, y: 2.2547736, z: -2.6605897}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1019,7 +1019,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2258
+  m_Name: pb_Mesh-2060
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1266,6 +1266,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &462925826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 462925828}
+  - component: {fileID: 462925827}
+  m_Layer: 0
+  m_Name: PickupPools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &462925827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462925826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cccc517f3aad11547a274958551307d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  halfHeartPrefab: {fileID: 7982345155227785169, guid: 6d09e763d8676e648b97bfb33da4f6df, type: 3}
+  heartPrefab: {fileID: 1070003549920668578, guid: b98bc7e3befcc06498608798747bed30, type: 3}
+  coinPrefab: {fileID: 3782068503022363083, guid: cccb0b59f96935749b2d8111eae48fcc, type: 3}
+--- !u!4 &462925828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462925826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.6171265, y: 1.0425278, z: -0.23617887}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &464826748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1735,7 +1782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d773b32ae5226408112fe265dcb023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalRooms: 10
+  totalRooms: 4
   roomPrefab: {fileID: 2541303958802026500, guid: 417432f070b95164b87032e4159359af, type: 3}
 --- !u!114 &543537895
 MonoBehaviour:
@@ -3217,7 +3264,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2274
+  m_Name: pb_Mesh-2076
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3884,8 +3931,8 @@ MonoBehaviour:
   pathIconPrefab: {fileID: 1593287771912624609, guid: 3c5c95b710d95dc49af62bbedfd46116, type: 3}
   iconSpacing: {x: 40, y: 40}
   pathwaySpacing: {x: 20, y: 20}
-  currentRoomColour: {r: 1, g: 1, b: 1, a: 1}
-  nonCurrentRoomColour: {r: 1, g: 1, b: 1, a: 0.3137255}
+  defaultRoomColor: {r: 1, g: 1, b: 1, a: 0}
+  totemRoomColor: {r: 1, g: 0.82395935, b: 0, a: 0}
 --- !u!4 &1188865353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6850629361975643202, guid: 14a05e3d883f7c641836eb8ec07df906, type: 3}
@@ -5257,7 +5304,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2316
+  m_Name: pb_Mesh-2118
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5872,11 +5919,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultHealth
-      value: 6
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 807364247537399498, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
+      propertyPath: defaultSwordCooldown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 888884933367481658, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Mesh
@@ -7136,7 +7187,7 @@ PrefabInstance:
       objectReference: {fileID: 1992219134}
     - target: {fileID: 3499881327916099185, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 72
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 3856917944956632236, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Mesh
@@ -7188,7 +7239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: controlWithMouse
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultBowDamage
@@ -7316,7 +7367,7 @@ PrefabInstance:
       objectReference: {fileID: 990408170}
     - target: {fileID: 7603293084556601176, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 1588
+      value: 1612
       objectReference: {fileID: 0}
     - target: {fileID: 7983642040164700049, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Mesh
@@ -7324,7 +7375,7 @@ PrefabInstance:
       objectReference: {fileID: 460729394}
     - target: {fileID: 7983642040164700049, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 395
+      value: 419
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2453708176110309224, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}

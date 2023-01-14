@@ -30,8 +30,8 @@ public class InteractRing : MonoBehaviour
                     }
                 }
             }
-            selectedObject.GetComponent<ShopItem>().SetText();
 
+            selectedObject.GetComponent<ShopItem>().SetText();
             foreach (GameObject interactable in interactablesInRange)
             {
                 if (selectedObject != interactable)

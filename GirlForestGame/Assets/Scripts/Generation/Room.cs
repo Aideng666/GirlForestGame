@@ -29,6 +29,8 @@ public class Room : MonoBehaviour
     {
         if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
         {
+            roomCompleted = false;
+
             for (int i = 0; i < Random.Range(3, 6); i++)
             {
                 EnemyPool.Instance.GetBoarFromPool();
@@ -39,8 +41,7 @@ public class Room : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TEMP
-        roomCompleted = true;
+        
     }
 
     // Update is called once per frame
@@ -69,6 +70,10 @@ public class Room : MonoBehaviour
                     }
                 }
             }
+        }
+        else if (EnemyPool.Instance.availableBoars.Count % 5 == 0)
+        {
+            roomCompleted = true;
         }
     }
 

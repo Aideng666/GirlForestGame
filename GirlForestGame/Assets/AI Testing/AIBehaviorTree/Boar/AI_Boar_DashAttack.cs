@@ -19,7 +19,7 @@ public class AI_Boar_DashAttack : AI_BaseClass
     // OnStateMove is called right after Animator.OnAnimatorMove()
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
     }
 
     // OnStateIK is called right after Animator.OnAnimatorIK()
