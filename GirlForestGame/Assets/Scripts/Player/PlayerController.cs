@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     //EventManager eventManager;
 
     bool deathStarted;
+    bool roomTransitionStarted;
 
     public static PlayerController Instance { get; set; }
 
@@ -177,26 +178,77 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //To transition from room to room
-        if (collision.gameObject.CompareTag("Exit"))
+        switch(collision.gameObject.tag)
         {
-            UIManager.Instance.GetFadePanel().BeginRoomTransition();
+            //To transition from room to room
+            case "Exit":
 
-            StartCoroutine(EnterNewRoom(
-                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
-                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]
-                .GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
-                .transform.parent.transform.position, DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())));
+                UIManager.Instance.GetFadePanel().BeginRoomTransition();
+
+                if (!roomTransitionStarted)
+                {
+                    StartCoroutine(EnterNewRoom(
+                        DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
+                        DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]
+                        .GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
+                        .transform.parent.transform.position, DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())));
+                }
+
+                break;
+
+            //To transition to the node map after completing a full floor
+            case "FloorExit":
+
+                NodeMapManager.Instance.SetNextLevel();
+
+                break;
+
+            case "Enemy":
+
+                print("Player Hit");
+                playerCombat.TakeDamage();
+
+                break;
         }
-        //To transition to the node map after completing a full floor
-        if (collision.gameObject.CompareTag("FloorExit"))
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
         {
-            NodeMapManager.Instance.SetNextLevel();
+            case "HalfHeart":
+
+                if (playerAttributes.Health < playerAttributes.MaxHealth)
+                {
+                    playerAttributes.Health += 1;
+                    PickupPool.Instance.AddHalfHeart(other.gameObject);
+                }
+
+                break;
+
+            case "Heart":
+
+                if (playerAttributes.Health < playerAttributes.MaxHealth)
+                {
+                    playerAttributes.Health += 2;
+                    PickupPool.Instance.AddHeart(other.gameObject);
+                }
+
+                break;
+
+            case "Coin":
+
+                playerInventory.ModifyMoney(1);
+                PickupPool.Instance.AddCoin(other.gameObject);
+
+                break;
         }
     }
 
     IEnumerator EnterNewRoom(Room room, Vector3 updatedPlayerPos, Directions dirOfPrevRoom)
     {
+        roomTransitionStarted = true;
+
         yield return new WaitForSeconds(UIManager.Instance.GetFadePanel().GetTransitionTime() / 2);
 
         DungeonGenerator.Instance.SetCurrentRoom(room);
@@ -206,6 +258,8 @@ public class PlayerController : MonoBehaviour
         Minimap.Instance.VisitRoom(room, dirOfPrevRoom);
 
         yield return null;
+
+        roomTransitionStarted = false;
     }
 }
 

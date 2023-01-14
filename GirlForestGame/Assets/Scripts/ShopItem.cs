@@ -11,6 +11,7 @@ public class ShopItem : MonoBehaviour
     ShopItemInfo itemInfo;
 
     TotemObject chosenTotem;
+    int healthOption; // 0 = half heart | 1 = full heart
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,20 @@ public class ShopItem : MonoBehaviour
             int randomIndex = Random.Range(0, possibleItems.Length);
 
             itemInfo = possibleItems[randomIndex];
+        }
+        else if (itemType == ShopItemTypes.Health)
+        {
+            List<ShopItemInfo> healthItems = new List<ShopItemInfo>();
+
+            foreach (ShopItemInfo item in possibleItems)
+            {
+                if (item.itemType == itemType)
+                {
+                    healthItems.Add(item);
+                }
+            }
+
+            itemInfo = healthItems[Random.Range(0, 2)];
         }
         else
         {
@@ -63,7 +78,7 @@ public class ShopItem : MonoBehaviour
 
             PlayerController.Instance.playerInventory.ModifyMoney(-itemInfo.value);
 
-            GameObject item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity);
+            GameObject item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
             item.transform.DOJump(item.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
 
@@ -99,24 +114,6 @@ public class ShopItem : MonoBehaviour
     public void HideText()
     {
         priceText.enabled = false;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (collision.gameObject.CompareTag("Player") && PlayerController.Instance.playerInventory.GetMoneyAmount() >= itemInfo.value)
-        //{
-        //    float randomXDir = Random.Range(-1f, 1f);
-        //    float randomZDir = Random.Range(-1f, 1f);
-        //    float randomDistance = Random.Range(1f, 3f);
-
-        //    PlayerController.Instance.playerInventory.ModifyMoney(-itemInfo.value);
-
-        //    GameObject item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity);
-
-        //    item.transform.DOJump(itemInfo.item.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-
-        //    gameObject.SetActive(false);
-        //}
     }
 }
 
