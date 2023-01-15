@@ -99,6 +99,7 @@ public class PlayerArrow : MonoBehaviour
 
         transform.parent = collision.gameObject.transform;
 
+        //Checks if it hits an enemy first
         if (collision.gameObject.TryGetComponent(out EnemyData enemy) && enemy.Form == PlayerController.Instance.playerCombat.Form)
         {
             List<EnemyData> enemiesHit = new List<EnemyData>();
@@ -139,7 +140,7 @@ public class PlayerArrow : MonoBehaviour
             Destroy(gameObject);
         }
 
-
+        //applies the correct effect for the element of the bow when it collides
         if (_element == Elements.Fire)
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.FireArrow, new Vector3(transform.position.x, 0, transform.position.z), arrowChargePercentage);
