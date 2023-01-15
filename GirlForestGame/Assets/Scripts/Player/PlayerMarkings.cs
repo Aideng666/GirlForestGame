@@ -28,7 +28,7 @@ public class PlayerMarkings : MonoBehaviour
     //1 = Sword Element
     //2 = Bow Attribute
     //3 = Bow Element
-    Spirit[] markings;
+    public Spirit[] markings { get; private set; }
 
     // Start is called before the first frame update
     void Start()

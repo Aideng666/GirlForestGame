@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class ParticleManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem bowChargeComplete;
     [SerializeField] ParticleSystem swordSlashLeftToRight;
     [SerializeField] ParticleSystem swordSlashRightToLeft;
+    [SerializeField] ParticleSystem fireArrow;
 
     ParticleSystem currentParticle;
 
@@ -18,7 +20,7 @@ public class ParticleManager : MonoBehaviour
         Instance = this;
     }
 
-    public GameObject SpawnParticle(ParticleTypes type, Vector3 position)
+    public GameObject SpawnParticle(ParticleTypes type, Vector3 position, float percentageOfAddedRadius = 0)
     {
         switch (type)
         {
@@ -43,6 +45,18 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.SwordSlashRL:
 
                 currentParticle = Instantiate(swordSlashRightToLeft, position, Quaternion.Euler(-90, 0, 0));
+
+                break;
+
+            case ParticleTypes.FireArrow:
+
+                var particle = Instantiate(fireArrow, position, Quaternion.Euler(-90, 0, 0));
+
+                var particleShape = particle.GetComponent<ParticleSystem>().shape;
+
+                particleShape.radius += particleShape.radius * percentageOfAddedRadius;
+
+                currentParticle = particle;
 
                 break;
         }
