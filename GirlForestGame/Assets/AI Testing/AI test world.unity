@@ -320,7 +320,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1616
+  m_Name: pb_Mesh-1554
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -735,63 +735,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 700446156201332264, guid: 43beeb1565c212948a26d05de1e27067, type: 3}
---- !u!1001 &1097886116
+--- !u!1001 &1080212030
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 700446156201332264, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332264, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_Name
-      value: StoneGolemTest
+      value: StoneGolem
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.5708733
+      value: -4.9422464
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9504771
+      value: 0.0006942749
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 700446156201332268, guid: 692d651a658858843a32bd84a346f262, type: 3}
+    - target: {fileID: 700446156201332268, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 692d651a658858843a32bd84a346f262, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 3e3076b9d38fb9349bbe4bfc5a9ee31c, type: 3}
 --- !u!1001 &1375626355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -994,7 +994,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1600
+  m_Name: pb_Mesh-1538
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
