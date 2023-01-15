@@ -8,7 +8,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] GameObject bowAimCanvas;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
-    [SerializeField] Collider bowTargetCollider;
 
     public bool isAttacking { get; private set; }
     public bool isKnockbackApplied { get; private set; }
@@ -46,7 +45,7 @@ public class PlayerCombat : MonoBehaviour
 
         bowAimCanvas.SetActive(false);
 
-        player = GetComponent<PlayerController>();
+        player = PlayerController.Instance;
         body = GetComponent<Rigidbody>();
     }
 
@@ -69,6 +68,7 @@ public class PlayerCombat : MonoBehaviour
                 currentBowChargeTime = 0;
             }
 
+            //Charges the bow when standing still
             if (bowCharging)
             {
                 if (currentBowChargeTime < player.playerAttributes.BowChargeTime)
@@ -79,6 +79,7 @@ public class PlayerCombat : MonoBehaviour
                 }
             }
 
+            //Detects when the player released the arrow to fire
             if (InputManager.Instance.ReleaseArrow())
             {
                 GetComponentInChildren<Animator>().SetTrigger("ReleaseArrow");
@@ -102,6 +103,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
+        //Detects if a quickfire was performed
         if (isDrawingBow && InputManager.Instance.ReleaseArrow())
         {
             quickfirePerformed = true;
@@ -127,8 +129,6 @@ public class PlayerCombat : MonoBehaviour
                 GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
                 gameObject.layer = livingLayer;
             }
-
-            //EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlaneSwitch);
 
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
             {
@@ -286,28 +286,17 @@ public class PlayerCombat : MonoBehaviour
     void SpawnArrow(GameObject target = null)
     {
         GameObject arrow;
+        arrow = Instantiate(arrowPrefab, transform.position + (Vector3.up + transform.forward) / 2, Quaternion.identity);
+        arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
 
-        if (target == null)
+        if (player.playerMarkings.markings[3] != null)
         {
-            arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
-            arrow.transform.forward = player.aimDirection;
-
-            arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
-            arrow.GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
-
-            arrow.transform.Rotate(new Vector3(1, 0, 0), 90);
+            arrow.GetComponent<PlayerArrow>().SetMovement(player.playerMarkings.markings[3].usedElement, target);
 
             return;
         }
 
-        arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
-        //arrow.transform.forward = target.transform.position - arrow.transform.position;
-        arrow.transform.LookAt(target.transform);
-
-        arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
-        arrow.GetComponent<Rigidbody>().velocity = arrow.transform.forward * player.playerAttributes.ProjectileSpeed;
-
-        arrow.transform.Rotate(new Vector3(1, 0, 0), 90);
+        arrow.GetComponent<PlayerArrow>().SetMovement(Elements.None, target);
     }
 
     void ActivateSwordHitbox()

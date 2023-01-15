@@ -65,7 +65,7 @@ public class PlayerInventory : MonoBehaviour
                 {
                     player.playerMarkings.RemoveMarking(markings[0], type, weapon);
 
-                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z) , Quaternion.identity);
+                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z) , Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
                     markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
@@ -79,7 +79,7 @@ public class PlayerInventory : MonoBehaviour
                 {
                     player.playerMarkings.RemoveMarking(markings[1], type, weapon);
 
-                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
+                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
                     markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
@@ -96,7 +96,7 @@ public class PlayerInventory : MonoBehaviour
                 {
                     player.playerMarkings.RemoveMarking(markings[2], type, weapon);
 
-                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
+                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
                     markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);
@@ -110,7 +110,7 @@ public class PlayerInventory : MonoBehaviour
                 {
                     player.playerMarkings.RemoveMarking(markings[3], type, weapon);
 
-                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity);
+                    GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
                     markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, spirit.markingLevel);

@@ -197,6 +197,12 @@ public class Room : MonoBehaviour
                 }
 
                 break;
+
+            case RoomTypes.Totem:
+
+                roomCompleted = true;
+
+                break;
         }
     }
 

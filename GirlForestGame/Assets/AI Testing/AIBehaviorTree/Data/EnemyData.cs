@@ -19,16 +19,11 @@ public class EnemyData : MonoBehaviour
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
 
-    //May not be needed
-    //public float weight = 1f;
-
-    //What damage an attack does. Down the line this can become a list for the different attacks the AI can have
-    //public float attackDamage = 1f;
-
     //reference to navmesh for knockback
     NavMeshAgent mesh;
     Rigidbody body;
     PlayerController player;
+    bool isDead;
 
     //CHANGE THIS TO BE MORE FLEXIBLE
     protected Forms form = Forms.Living;
@@ -38,6 +33,7 @@ public class EnemyData : MonoBehaviour
     private void OnEnable()
     {
         curHealth = maxHealth;
+        isDead = false;
     }
 
     private void Start()
@@ -50,16 +46,21 @@ public class EnemyData : MonoBehaviour
     //This timer is for the attack cooldown for AI, but at this time it's using the exit time to trigger when to allow it to attack again
     void Update() 
     {
-        if (actionCooldown > 0)
+        if (!isDead)
         {
-            actionCooldown -= Time.deltaTime;
-        }
+            if (actionCooldown > 0)
+            {
+                actionCooldown -= Time.deltaTime;
+            }
 
-        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+        }
     }
 
-    virtual public void EnemyDeath() 
+    public void EnemyDeath() 
     {
+        isDead = true;
+
         //Children are supposed to override so that they can have unique death events
         GetComponentInChildren<Animator>().SetTrigger("Is_Dead");
 
@@ -103,11 +104,14 @@ public class EnemyData : MonoBehaviour
     /// </summary>
     public void TakeDamage(float damageAmount) //Take Damage applies damage and gives knockback based on the damage, unless false
     {
-        curHealth -= damageAmount;
-
-        if(curHealth <= 0) 
+        if (!isDead)
         {
-            EnemyDeath();
+            curHealth -= damageAmount;
+
+            if (curHealth <= 0)
+            {
+                EnemyDeath();
+            }
         }
     }
 
