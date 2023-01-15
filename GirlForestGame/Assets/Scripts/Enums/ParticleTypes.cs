@@ -7,5 +7,6 @@ public enum ParticleTypes
     DashStart,
     DashEnd,
     SwordSlashLR,
-    SwordSlashRL
+    SwordSlashRL,
+    FireArrow
 }
