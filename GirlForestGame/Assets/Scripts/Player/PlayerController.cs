@@ -205,8 +205,8 @@ public class PlayerController : MonoBehaviour
 
             case "Enemy":
 
-                print("Player Hit");
                 playerCombat.TakeDamage();
+                playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
 
                 break;
         }

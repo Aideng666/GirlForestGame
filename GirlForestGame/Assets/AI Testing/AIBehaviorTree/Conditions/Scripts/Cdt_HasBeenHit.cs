@@ -11,7 +11,7 @@ public class Cdt_HasBeenHit : Cdt_BaseClass
 
     public string triggerParameter = "Is_Hit";
 
-    public override void CheckCondition(Animator animator)
+    public override void CheckCondition(Animator animator, AI_BaseClass enemy = null)
     {
 
         //
