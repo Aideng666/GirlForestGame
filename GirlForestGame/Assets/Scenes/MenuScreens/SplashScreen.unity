@@ -971,7 +971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7288347588571403768, guid: 670363e2e1d030c41826294a44093778, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7288347588571403770, guid: 670363e2e1d030c41826294a44093778, type: 3}
       propertyPath: sceneToLoad
@@ -1203,7 +1203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splashUIPanel: {fileID: 447776822}
-  animEventsobj: {fileID: 1427806526}
+  animEventsObj: {fileID: 1427806526}
+  cineCamAnimator: {fileID: 105572417}
 --- !u!1 &989642915
 GameObject:
   m_ObjectHideFlags: 0
