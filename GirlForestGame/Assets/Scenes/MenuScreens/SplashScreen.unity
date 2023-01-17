@@ -978,6 +978,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7288347588571403770, guid: 670363e2e1d030c41826294a44093778, type: 3}
+      propertyPath: splashUIPanel
+      value: 
+      objectReference: {fileID: 447776822}
+    - target: {fileID: 7288347588571403770, guid: 670363e2e1d030c41826294a44093778, type: 3}
+      propertyPath: canPressStartButton
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288347588571403770, guid: 670363e2e1d030c41826294a44093778, type: 3}
       propertyPath: shouldLoadSceneAutomatically
       value: 0
       objectReference: {fileID: 0}
@@ -1659,6 +1667,62 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1483189953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7288347588571403768, guid: 670363e2e1d030c41826294a44093778, type: 3}
+  m_PrefabInstance: {fileID: 846362940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1483189957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483189953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbb8a748bb706d49a33aa4bf64cf67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openInventoryAction:
+    m_Name: Open Inventory
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: beadbdff-68d7-4448-aa36-7807c9ac4089
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+--- !u!114 &1483189958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483189953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: dc3b3eddba13a254dbf8d9e8d76f6b2c, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1512603291
 GameObject:
   m_ObjectHideFlags: 0

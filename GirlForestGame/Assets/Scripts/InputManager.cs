@@ -29,6 +29,8 @@ public class InputManager : MonoBehaviour
     //Global Controls
      public InputAction openInventoryAction;
 
+    InputAction proceedAction;
+
     public static InputManager Instance { get; set; }
     private void Awake()
     {
@@ -60,6 +62,8 @@ public class InputManager : MonoBehaviour
         openInventoryAction = playerInput.actions["OpenInventory"];
 
         openInventoryAction.started += ToggleInventory;
+
+        proceedAction = playerInput.actions["ProceedAction"];
     }
 
     private void OnDisable()
@@ -251,5 +255,10 @@ public class InputManager : MonoBehaviour
     void ToggleInventory(InputAction.CallbackContext ctx)
     {
         PlayerController.Instance.playerInventory.ToggleInventory();
+    }
+
+    public bool Proceed()
+    {
+        return proceedAction.triggered;          
     }
 }

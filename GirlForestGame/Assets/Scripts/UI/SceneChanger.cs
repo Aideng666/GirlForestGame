@@ -6,16 +6,20 @@ public class SceneChanger : MonoBehaviour
     public Animator animator;
     public int sceneToLoad;
     public bool shouldLoadSceneAutomatically = false;
-    //public GameObject splashUIPanel;
-    //bool canPressStartButton = false;
+    [SerializeField] GameObject splashUIPanel;
+    public bool canPressStartButton = false;
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    FadeToScene();
-        //}      
+        if (canPressStartButton)
+        {
+            if (InputManager.Instance.Proceed())
+            {
+                //Debug.Log("CHECK");
+                splashUIPanel.SetActive(false);
+            }
+        }      
     }
 
     public void FadeToScene()
@@ -37,5 +41,10 @@ public class SceneChanger : MonoBehaviour
         {
             FadeToScene();
         }     
+    }
+
+    public void CanPressToBegin()
+    {
+
     }
 }
