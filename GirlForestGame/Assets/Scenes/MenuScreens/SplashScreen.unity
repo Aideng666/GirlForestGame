@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 105572415}
   - component: {fileID: 105572416}
   - component: {fileID: 105572417}
+  - component: {fileID: 105572418}
   m_Layer: 0
   m_Name: Cinemachine Camera START
   m_TagString: Untagged
@@ -309,6 +310,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &105572418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105572413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e157f362da458ec4c8bf7cb7f8780712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &178211116
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +626,7 @@ GameObject:
   - component: {fileID: 433866823}
   - component: {fileID: 433866822}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Quit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -629,14 +642,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6.082225, y: 6.082225, z: 6.082225}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1662516622}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1309, y: -2138}
+  m_AnchoredPosition: {x: -2234, y: -2138}
   m_SizeDelta: {x: 1200, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433866822
@@ -1389,8 +1402,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splashUIPanel: {fileID: 447776822}
+  mainMenuUIPanel: {fileID: 1662516621}
   animEventsObj: {fileID: 447776827}
   cineCamAnimator: {fileID: 105572417}
+  camEventObj: {fileID: 105572418}
 --- !u!1 &989642915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,7 +1928,7 @@ GameObject:
   - component: {fileID: 1432275094}
   - component: {fileID: 1432275093}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Play Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1929,14 +1944,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6.082225, y: 6.082225, z: 6.082225}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1662516622}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1309, y: -359.89404}
+  m_AnchoredPosition: {x: -2234, y: -359.89404}
   m_SizeDelta: {x: 1200, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1432275093
@@ -2067,7 +2082,7 @@ GameObject:
   - component: {fileID: 1532632850}
   - component: {fileID: 1532632849}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2083,14 +2098,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6.082225, y: 6.082225, z: 6.082225}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1662516622}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1309, y: -1313.9}
+  m_AnchoredPosition: {x: -2234, y: -1313.9}
   m_SizeDelta: {x: 1200, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1532632849
@@ -2259,7 +2274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1662516622
 RectTransform:
   m_ObjectHideFlags: 0

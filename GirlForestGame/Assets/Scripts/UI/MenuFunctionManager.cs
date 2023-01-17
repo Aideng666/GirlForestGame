@@ -3,10 +3,17 @@ using UnityEngine;
 public class MenuFunctionManager : MonoBehaviour
 {
     [SerializeField] GameObject splashUIPanel;
+    [SerializeField] GameObject mainMenuUIPanel;
     [SerializeField] AnimationEvents animEventsObj;
     [SerializeField] Animator cineCamAnimator;
+    [SerializeField] AnimationEvents camEventObj;
 
     bool moveCam = false;
+
+    private void Start()
+    {
+        mainMenuUIPanel.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,6 +34,11 @@ public class MenuFunctionManager : MonoBehaviour
         if (moveCam)
         {
             cineCamAnimator.SetBool("canProceed", true);
+        }
+
+        if (camEventObj.GetOnCamTranComplete())
+        {
+            mainMenuUIPanel.SetActive(true);
         }
     }
 }
