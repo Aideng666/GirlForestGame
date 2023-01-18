@@ -203,7 +203,7 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 4
+  - time: 3.5
     functionName: OnCameraTransitionComplete
     data: 
     objectReferenceParameter: {fileID: 0}
