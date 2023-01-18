@@ -22,6 +22,7 @@ public class InteractRing : MonoBehaviour
 
             if (interactablesInRange.Count > 1)
             {
+                //Selects closest in range
                 foreach (GameObject interactable in interactablesInRange)
                 {
                     if (Vector3.Distance(PlayerController.Instance.transform.position, interactable.transform.position) < Vector3.Distance(PlayerController.Instance.transform.position, selectedObject.transform.position))
@@ -31,7 +32,9 @@ public class InteractRing : MonoBehaviour
                 }
             }
 
+            //Sets text for the interactables
             selectedObject.GetComponent<ShopItem>().SetText();
+
             foreach (GameObject interactable in interactablesInRange)
             {
                 if (selectedObject != interactable)

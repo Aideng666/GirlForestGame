@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using TMPro;
 
-public class ShopItem : MonoBehaviour
+public class ShopItem : InteractableObject
 {
     [SerializeField] ShopItemTypes itemType;
-    [SerializeField] TextMeshProUGUI priceText;
     ShopItemInfo itemInfo;
 
     TotemObject chosenTotem;
@@ -16,7 +14,7 @@ public class ShopItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        priceText.enabled = false;
+        popupText.enabled = false;
 
         ChooseItem();
     }
@@ -70,6 +68,29 @@ public class ShopItem : MonoBehaviour
 
     public void Buy()
     {
+        //if (PlayerController.Instance.playerInventory.GetMoneyAmount() >= itemInfo.value)
+        //{
+        //    float randomXDir = Random.Range(-1f, 1f);
+        //    float randomZDir = Random.Range(-1f, 1f);
+        //    float randomDistance = Random.Range(1f, 3f);
+
+        //    PlayerController.Instance.playerInventory.ModifyMoney(-itemInfo.value);
+
+        //    GameObject item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
+
+        //    item.transform.DOJump(item.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
+
+        //    if (item.TryGetComponent(out TotemPickup totem))
+        //    {
+        //        totem.ChooseTotem(chosenTotem);
+        //    }
+
+        //    gameObject.SetActive(false);
+        //}
+    }
+
+    public override void Pickup()
+    {
         if (PlayerController.Instance.playerInventory.GetMoneyAmount() >= itemInfo.value)
         {
             float randomXDir = Random.Range(-1f, 1f);
@@ -91,29 +112,24 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void SetText()
+    public override void SetText()
     {
-        priceText.enabled = true;
+        popupText.enabled = true;
 
         switch(itemType)
         {
             case ShopItemTypes.Totem:
 
-                priceText.text = $"{chosenTotem.Totem.totemName} - {itemInfo.value}";
+                popupText.text = $"{chosenTotem.Totem.totemName} - {itemInfo.value}";
 
                 break;
 
             case ShopItemTypes.Health:
 
-                priceText.text = $"{itemInfo.value}";
+                popupText.text = $"{itemInfo.value}";
 
                 break;
         }
-    }
-
-    public void HideText()
-    {
-        priceText.enabled = false;
     }
 }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class MarkingPickup : MonoBehaviour
+public class MarkingPickup : InteractableObject
 {
     [SerializeField] float colliderDelay = 1;
 
@@ -83,13 +83,30 @@ public class MarkingPickup : MonoBehaviour
         chosenSpirit.SetLevel(markingLevel);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public override void Pickup()
     {
-        if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.playerInventory.IsChoosingWeapon)
+        if (!PlayerController.Instance.playerInventory.IsChoosingWeapon)
         {
             PlayerController.Instance.playerInventory.StartWeaponSelection(chosenSpirit, chosenType);
 
             gameObject.SetActive(false);
         }
+    }
+
+    public override void SetText()
+    {
+        popupText.enabled = true;
+
+        popupText.text = $"{chosenSpirit.spiritName} {chosenType}";
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.playerInventory.IsChoosingWeapon)
+        //{
+        //    PlayerController.Instance.playerInventory.StartWeaponSelection(chosenSpirit, chosenType);
+
+        //    gameObject.SetActive(false);
+        //}
     }
 }

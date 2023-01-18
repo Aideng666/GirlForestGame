@@ -161,6 +161,10 @@ public class PlayerController : MonoBehaviour
             {
                 shopItem.Buy();
             }
+            if (itemToInteract.TryGetComponent(out MarkingPickup marking))
+            {
+                marking.Pickup();
+            }
         }
     }
 
