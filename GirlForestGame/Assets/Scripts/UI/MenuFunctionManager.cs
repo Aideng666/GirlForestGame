@@ -1,18 +1,23 @@
 using UnityEngine;
+using Cinemachine;
 
 public class MenuFunctionManager : MonoBehaviour
 {
     [SerializeField] GameObject splashUIPanel;
-    [SerializeField] GameObject mainMenuUIPanel;
+    //[SerializeField] GameObject mainMenuUIPanel;
     [SerializeField] AnimationEvents animEventsObj;
     [SerializeField] Animator cineCamAnimator;
     [SerializeField] AnimationEvents camEventObj;
+
+    [SerializeField] CinemachineVirtualCamera currentCam;
+    [SerializeField] CinemachineVirtualCamera firstCamTarget;
 
     bool moveCam = false;
 
     private void Start()
     {
-        mainMenuUIPanel.SetActive(false);
+        //mainMenuUIPanel.SetActive(false);
+        currentCam.Priority++;
     }
 
     // Update is called once per frame
@@ -33,12 +38,27 @@ public class MenuFunctionManager : MonoBehaviour
 
         if (moveCam)
         {
-            cineCamAnimator.SetBool("canProceed", true);
+            UpdateCamera(firstCamTarget);
+            //cineCamAnimator.SetBool("canProceed", true);
         }
 
         if (camEventObj.GetOnCamTranComplete())
         {
-            mainMenuUIPanel.SetActive(true);
+            //mainMenuUIPanel.SetActive(true);
         }
+
+        //if (cineCamAnimator.GetBool("canProceed"))
+        //{
+        //    UpdateCamera(firstCamTarget);
+        //}
+    }
+
+    public void UpdateCamera(CinemachineVirtualCamera target)
+    {
+        currentCam.Priority--;
+
+        currentCam = target;
+
+        currentCam.Priority++;
     }
 }
