@@ -18,8 +18,6 @@ public class InteractRing : MonoBehaviour
     {
         if (interactablesInRange.Count > 0)
         {
-            print("HI");
-
             selectedObject = interactablesInRange[0];
 
             if (interactablesInRange.Count > 1)
