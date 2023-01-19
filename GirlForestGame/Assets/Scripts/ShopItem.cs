@@ -11,10 +11,9 @@ public class ShopItem : InteractableObject
     TotemObject chosenTotem;
     int healthOption; // 0 = half heart | 1 = full heart
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        popupText.enabled = false;
+        base.Start();
 
         ChooseItem();
     }
@@ -64,29 +63,6 @@ public class ShopItem : InteractableObject
         {
             chosenTotem = totem.GetRandomTotem();
         }
-    }
-
-    public void Buy()
-    {
-        //if (PlayerController.Instance.playerInventory.GetMoneyAmount() >= itemInfo.value)
-        //{
-        //    float randomXDir = Random.Range(-1f, 1f);
-        //    float randomZDir = Random.Range(-1f, 1f);
-        //    float randomDistance = Random.Range(1f, 3f);
-
-        //    PlayerController.Instance.playerInventory.ModifyMoney(-itemInfo.value);
-
-        //    GameObject item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
-
-        //    item.transform.DOJump(item.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-
-        //    if (item.TryGetComponent(out TotemPickup totem))
-        //    {
-        //        totem.ChooseTotem(chosenTotem);
-        //    }
-
-        //    gameObject.SetActive(false);
-        //}
     }
 
     public override void Pickup()

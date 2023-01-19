@@ -6,6 +6,12 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI popupText;
+
+    protected virtual void Start()
+    {
+        popupText.enabled = false;
+    }
+
     public virtual void Pickup()
     {
 

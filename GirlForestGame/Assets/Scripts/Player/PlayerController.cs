@@ -157,13 +157,9 @@ public class PlayerController : MonoBehaviour
 
         if (itemToInteract != null && InputManager.Instance.Interact())
         {
-            if (itemToInteract.TryGetComponent(out ShopItem shopItem))
+            if (itemToInteract.TryGetComponent(out InteractableObject item))
             {
-                shopItem.Buy();
-            }
-            if (itemToInteract.TryGetComponent(out MarkingPickup marking))
-            {
-                marking.Pickup();
+                item.Pickup();
             }
         }
     }
@@ -207,8 +203,10 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
+            //Might need to be changed
             case "Enemy":
 
+                print(collision.gameObject.name);
                 playerCombat.TakeDamage();
                 playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
 

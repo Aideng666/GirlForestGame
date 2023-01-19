@@ -297,6 +297,8 @@ public class NodeMapManager : MonoBehaviour
             InputManager.Instance.SwapActionMap("NodeMap");
 
             nextLevelSet = true;
+
+            PlayerController.Instance.GetComponentInChildren<InteractRing>().ResetInteractablesInRange();
         }
     }
 

@@ -8,19 +8,24 @@ public class AI_Boar_DashAttack : AI_BaseClass
 {
     [SerializeField] string triggerParameter = "Dash_Attack_Completed";
     [SerializeField] float duration = 3;
-    float elaspedTime = 0;
 
     bool attackCharged = false;
+    float attackTimer = 0;
+    float dashTimer = 0;
+    float chargeTimer = 0;
+    float timeBetweenEachAttack = 0.33f;
+    float totalChargeTime = 1;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
-        elaspedTime = 0;
+        dashTimer = 0;
+        attackTimer = 0;
         agent.speed = 0;
 
-        Timing.RunCoroutine(BeginAttackCharge());
+        attackCharged = false;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -31,7 +36,7 @@ public class AI_Boar_DashAttack : AI_BaseClass
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (elaspedTime >= duration)
+        if (dashTimer >= duration)
         {
             animator.SetTrigger(triggerParameter);
         }
@@ -40,44 +45,37 @@ public class AI_Boar_DashAttack : AI_BaseClass
         {
             agent.speed = animator.GetComponentInParent<EnemyData>().enemyMaxSpeed;
             agent.SetDestination(PlayerController.Instance.transform.position);
-            //Attack over and over again, can do this using animation events when we have the anims
+            
+            if (attackTimer >= timeBetweenEachAttack)
+            {
+                Collider[] hits = Physics.OverlapSphere(agent.transform.position + (agent.transform.forward * 2), 2);
 
-            elaspedTime += Time.deltaTime;
+                if (hits.Length > 0)
+                {
+                    foreach (Collider hit in hits)
+                    {
+                        if (hit.TryGetComponent(out PlayerController player))
+                        {
+                            //player.playerCombat.ApplyKnockback(agent.transform.forward, 5);
+                            player.playerCombat.TakeDamage();
+                        }
+                    }
+                }
+
+                attackTimer = 0;
+            }
+
+            attackTimer += Time.deltaTime;
+            dashTimer += Time.deltaTime;
         }
-    }
-
-    IEnumerator<float> BeginAttackCharge()
-    {
-        attackCharged = false;
-        float elaspedChargeTime = 0;
-        float totalChargeTime = 1f;
-
-        while (!attackCharged)
+        else
         {
-            elaspedChargeTime += Time.deltaTime;
-
-            Debug.Log("Paused");
-
-            if (elaspedChargeTime >= totalChargeTime)
+            if (chargeTimer >= totalChargeTime)
             {
                 attackCharged = true;
             }
 
-            yield return 0f;
+            chargeTimer += Time.deltaTime;
         }
-
-        yield return 0f;
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        //Debug.Log("Attack");
-    }
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }
