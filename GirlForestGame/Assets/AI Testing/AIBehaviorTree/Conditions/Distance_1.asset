@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Distance_1
   m_EditorClassIdentifier: 
   minRange: 0
-  maxRange: 4
+  maxRange: 8
   Condition_Parameter: In_Attack_Range

@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using TMPro;
 
-public class ShopItem : MonoBehaviour
+public class ShopItem : InteractableObject
 {
     [SerializeField] ShopItemTypes itemType;
-    [SerializeField] TextMeshProUGUI priceText;
     ShopItemInfo itemInfo;
 
     TotemObject chosenTotem;
     int healthOption; // 0 = half heart | 1 = full heart
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        priceText.enabled = false;
+        base.Start();
 
         ChooseItem();
     }
@@ -68,7 +65,7 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void Buy()
+    public override void Pickup()
     {
         if (PlayerController.Instance.playerInventory.GetMoneyAmount() >= itemInfo.value)
         {
@@ -91,29 +88,24 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void SetText()
+    public override void SetText()
     {
-        priceText.enabled = true;
+        popupText.enabled = true;
 
         switch(itemType)
         {
             case ShopItemTypes.Totem:
 
-                priceText.text = $"{chosenTotem.Totem.totemName} - {itemInfo.value}";
+                popupText.text = $"{chosenTotem.Totem.totemName} - {itemInfo.value}";
 
                 break;
 
             case ShopItemTypes.Health:
 
-                priceText.text = $"{itemInfo.value}";
+                popupText.text = $"{itemInfo.value}";
 
                 break;
         }
-    }
-
-    public void HideText()
-    {
-        priceText.enabled = false;
     }
 }
 

@@ -5,12 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "cdt", menuName = "Conditions/Base")]
 abstract public class Cdt_BaseClass : ScriptableObject
 {
-    virtual public void CheckCondition(Animator animator)
+    virtual public void CheckCondition(Animator animator, AI_BaseClass enemy = null)
     {
         //Checks and set Animator parameters here.
     }
-    virtual public void CheckCondition(Animator animator, AI_BaseClass enemy)
+
+    public virtual void ResetCondition(Animator animator)
     {
-        //Checks and set Animator parameters here. and has the enemy as a potential override
+
     }
 }

@@ -27,7 +27,8 @@ public class InputManager : MonoBehaviour
     InputAction moveSelectionAction;
 
     //Global Controls
-     public InputAction openInventoryAction;
+    public InputAction openInventoryAction;
+    public InputAction pauseAction; 
 
     public static InputManager Instance { get; set; }
     private void Awake()
@@ -58,6 +59,7 @@ public class InputManager : MonoBehaviour
         selectNodeAction = playerInput.actions["SelectNode"];
         moveSelectionAction = playerInput.actions["MoveSelection"];
         openInventoryAction = playerInput.actions["OpenInventory"];
+        pauseAction = playerInput.actions["Pause"];
 
         openInventoryAction.started += ToggleInventory;
     }
@@ -246,6 +248,11 @@ public class InputManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool Pause()
+    {
+        return pauseAction.triggered;
     }
 
     void ToggleInventory(InputAction.CallbackContext ctx)
