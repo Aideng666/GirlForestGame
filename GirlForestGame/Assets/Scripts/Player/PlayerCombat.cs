@@ -321,8 +321,6 @@ public class PlayerCombat : MonoBehaviour
 
         for (int i = 0; i < enemiesHit.Count; i++)
         {
-            //print(Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward));
-
             //Checks for hitting from behind
             if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
             {
