@@ -401,8 +401,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178211116}
-  m_LocalRotation: {x: 0.017435743, y: -0.9718359, z: 0.076265156, w: 0.22229393}
-  m_LocalPosition: {x: 804.2, y: 15.8, z: 905.8}
+  m_LocalRotation: {x: 0.035009503, y: -0.89149195, z: 0.06996223, w: 0.44623065}
+  m_LocalPosition: {x: 930, y: 6, z: 932}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1309,8 +1309,6 @@ MonoBehaviour:
   animEventsObj: {fileID: 447776827}
   cineCamAnimator: {fileID: 105572417}
   camEventObj: {fileID: 105572418}
-  currentCam: {fileID: 105572415}
-  firstCamTarget: {fileID: 967238300}
 --- !u!1 &967238295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,7 +1326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &967238296
 Transform:
   m_ObjectHideFlags: 0
