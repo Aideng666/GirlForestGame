@@ -14,7 +14,7 @@ public class Cdt_Distance : Cdt_BaseClass
     [Range(-1, 51)]
     public float maxRange = -1f;
     public string Condition_Parameter = "Close_To_Player";
-    public override void CheckCondition(Animator animator)
+    public override void CheckCondition(Animator animator, AI_BaseClass enemy = null)
     {
         float dist = Vector3.Distance(animator.transform.position, PlayerController.Instance.transform.position);
         //Checks the distance and will set the bool to true if in range, otherwise false

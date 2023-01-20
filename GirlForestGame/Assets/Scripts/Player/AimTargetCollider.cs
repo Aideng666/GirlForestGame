@@ -14,7 +14,7 @@ public class AimTargetCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        if (other.gameObject.TryGetComponent(out EnemyData enemy))
         {
             if (weapon == Weapons.Bow)
             {
@@ -29,7 +29,7 @@ public class AimTargetCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        if (other.gameObject.TryGetComponent(out EnemyData enemy))
         {
             if (weapon == Weapons.Bow)
             {
