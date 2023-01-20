@@ -234,6 +234,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+        //Adds the final node of the map
         visualNodes.Add(Instantiate(visualNodePrefab, new Vector3(0, 0, endNodeDistance * 10) + (Vector3.down * 100), Quaternion.identity));
         visualNodes[visualNodes.Count - 1].GetComponent<MapNode>().SetNode(null, NodeTypes.Boss, numberOfNodeColumns / 2);
 

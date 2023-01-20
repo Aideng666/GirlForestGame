@@ -8,7 +8,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] GameObject bowAimCanvas;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
-    [SerializeField] Collider bowTargetCollider;
 
     public bool isAttacking { get; private set; }
     public bool isKnockbackApplied { get; private set; }
@@ -17,7 +16,7 @@ public class PlayerCombat : MonoBehaviour
 
     //Bow Stuff
     GameObject bowTargetEnemy;
-    List<Enemy> bowTargetsInView = new List<Enemy>();
+    List<EnemyData> bowTargetsInView = new List<EnemyData>();
     bool bowDrawn;
     bool bowCharging;
     bool isDrawingBow;
@@ -26,7 +25,7 @@ public class PlayerCombat : MonoBehaviour
 
     //Sword Stuff
     GameObject swordTargetEnemy;
-    List<Enemy> swordTargetsInView = new List<Enemy>();
+    List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
 
     Forms currentForm = Forms.Living;
@@ -41,12 +40,12 @@ public class PlayerCombat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        livingLayer = LayerMask.NameToLayer("Living");
-        spiritLayer = LayerMask.NameToLayer("Spirit");
+        livingLayer = LayerMask.NameToLayer("PlayerLiving");
+        spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
 
         bowAimCanvas.SetActive(false);
 
-        player = GetComponent<PlayerController>();
+        player = PlayerController.Instance;
         body = GetComponent<Rigidbody>();
     }
 
@@ -69,6 +68,7 @@ public class PlayerCombat : MonoBehaviour
                 currentBowChargeTime = 0;
             }
 
+            //Charges the bow when standing still
             if (bowCharging)
             {
                 if (currentBowChargeTime < player.playerAttributes.BowChargeTime)
@@ -79,6 +79,7 @@ public class PlayerCombat : MonoBehaviour
                 }
             }
 
+            //Detects when the player released the arrow to fire
             if (InputManager.Instance.ReleaseArrow())
             {
                 GetComponentInChildren<Animator>().SetTrigger("ReleaseArrow");
@@ -102,6 +103,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
+        //Detects if a quickfire was performed
         if (isDrawingBow && InputManager.Instance.ReleaseArrow())
         {
             quickfirePerformed = true;
@@ -127,8 +129,6 @@ public class PlayerCombat : MonoBehaviour
                 GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
                 gameObject.layer = livingLayer;
             }
-
-            //EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlaneSwitch);
 
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
             {
@@ -178,14 +178,20 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            if (swordTargetEnemy != null && Vector3.Distance(swordTargetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange)
+            if (swordTargetEnemy != null && Vector3.Distance(swordTargetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange / 3)
             {
+                float targetAngle = Mathf.Atan2((swordTargetEnemy.transform.position - transform.position).normalized.x, (swordTargetEnemy.transform.position - transform.position).normalized.z) * Mathf.Rad2Deg;
+
+                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
                 SwordAttack();
 
                 return;
             }
 
-            StartCoroutine(MoveTowardsAttack(player.playerAttributes.SwordCooldown, swordTargetEnemy));
+            StartCoroutine(MoveTowardsAttack(0.25f, swordTargetEnemy));
+
+            canAttack = false;
         }
     }
 
@@ -260,221 +266,45 @@ public class PlayerCombat : MonoBehaviour
                 break;
         }
         ////////////////////////////////////////////////////////////////////
-
-        ActivateSwordHitbox(/*currentAttackNum*/);
-
         canAttack = false;
+
+        ActivateSwordHitbox();
     }
 
     //Initializes the drawing of the bow
     public void BowAttack()
     {
-        GetComponentInChildren<Animator>().SetTrigger("DrawBow");
+        if (canAttack)
+        {
+            GetComponentInChildren<Animator>().SetTrigger("DrawBow");
 
-        canAttack = false;
-        isDrawingBow = true;
+            canAttack = false;
+            isDrawingBow = true;
+        }
     }
 
     void SpawnArrow(GameObject target = null)
     {
         GameObject arrow;
+        arrow = Instantiate(arrowPrefab, transform.position + (Vector3.up + transform.forward) / 2, Quaternion.identity);
+        arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
 
-        if (target == null)
+        if (player.playerMarkings.markings[3] != null)
         {
-            arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
-            arrow.transform.forward = player.aimDirection;
-
-            arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
-            arrow.GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
-
-            arrow.transform.Rotate(new Vector3(1, 0, 0), 90);
+            arrow.GetComponent<PlayerArrow>().SetMovement(player.playerMarkings.markings[3].usedElement, target);
 
             return;
         }
 
-        arrow = Instantiate(arrowPrefab, transform.position + Vector3.up + transform.forward, Quaternion.identity);
-        //arrow.transform.forward = target.transform.position - arrow.transform.position;
-        arrow.transform.LookAt(target.transform);
-
-        arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
-        arrow.GetComponent<Rigidbody>().velocity = arrow.transform.forward * player.playerAttributes.ProjectileSpeed;
-
-        arrow.transform.Rotate(new Vector3(1, 0, 0), 90);
+        arrow.GetComponent<PlayerArrow>().SetMovement(Elements.None, target);
     }
 
-    void ActivateSwordHitbox(/*int attackNum*/)
+    void ActivateSwordHitbox()
     {
-        print("Checking Who was hit");
-
         Collider[] enemyColliders = null;
         List<EnemyData> enemiesHit = new List<EnemyData>();
 
-        //switch (attackNum)
-        //{
-        //    case 1:
-
-        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange);
-
-        //        //Loops through each hit collider and adds all of the enemies into a list
-        //        if (enemyColliders.Length > 0)
-        //        {
-        //            for (int i = 0; i < enemyColliders.Length; i++)
-        //            {
-        //                if (enemyColliders[i].gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == Form)
-        //                {
-        //                    enemiesHit.Add(enemy);
-        //                }
-        //            }
-        //        }
-        //        //////////////////////////////////////////////////////////////////////////
-
-        //        for (int i = 0; i < enemiesHit.Count; i++)
-        //        {
-        //            //Checks for hitting from behind
-        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
-        //            {
-        //                AssassinTotem t;
-        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.SetWeaponUsed(Weapons.Sword);
-        //                }
-
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.RemoveEffect();
-        //                }
-        //            }
-        //            else
-        //            {
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-        //            }
-        //        }
-
-        //        if (enemiesHit.Count > 0)
-        //        {
-        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-        //        }
-
-        //        break;
-
-        //    case 2:
-
-        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
-
-        //        if (enemyColliders.Length > 0)
-        //        {
-        //            for (int i = 0; i < enemyColliders.Length; i++)
-        //            {
-        //                if (enemyColliders[i].gameObject.TryGetComponent(out Enemy enemy) && enemy.Form == Form)
-        //                {
-        //                    enemiesHit.Add(enemy);
-        //                }
-        //            }
-        //        }
-
-        //        for (int i = 0; i < enemiesHit.Count; i++)
-        //        {
-        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
-        //            {
-        //                AssassinTotem t;
-        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.SetWeaponUsed(Weapons.Sword);
-        //                }
-
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.RemoveEffect();
-        //                }
-        //            }
-        //            else
-        //            {
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-        //            }
-        //        }
-
-        //        if (enemiesHit.Count > 0)
-        //        {
-        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-        //        }
-
-        //        break;
-
-        //    case 3: // CHANGE THIS WHEN WE GET THE THIRD ATTACK - this is for aiden dw abt it
-
-        //        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * 2), player.playerAttributes.SwordRange);
-
-        //        if (enemyColliders.Length > 0)
-        //        {
-        //            for (int i = 0; i < enemyColliders.Length; i++)
-        //            {
-        //                if (enemyColliders[i].gameObject.TryGetComponent<Enemy>(out Enemy enemy) && enemy.Form == Form)
-        //                {
-        //                    enemiesHit.Add(enemy);
-        //                }
-        //            }
-        //        }
-
-        //        for (int i = 0; i < enemiesHit.Count; i++)
-        //        {
-        //            if (Vector3.Angle((enemiesHit[i].transform.position - transform.position).normalized, enemiesHit[i].transform.forward) < 90)
-        //            {
-        //                AssassinTotem t;
-        //                bool assassinTotemExists = player.playerInventory.totemDictionary[typeof(AssassinTotem)] > 0;
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.SetWeaponUsed(Weapons.Sword);
-        //                }
-
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-
-        //                if (assassinTotemExists)
-        //                {
-        //                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
-
-        //                    t.RemoveEffect();
-        //                }
-        //            }
-        //            else
-        //            {
-        //                enemiesHit[i].ApplyKnockback(transform.forward, 10);
-        //                enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
-        //            }
-        //        }
-
-        //        if (enemiesHit.Count > 0)
-        //        {
-        //            EventManager.Instance.InvokeOnSwordHit(enemiesHit);
-        //        }
-
-        //        break;
-        //}
-
-        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange);
+        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange / 2);
 
         //Loops through each hit collider and adds all of the enemies into a list
         if (enemyColliders.Length > 0)
@@ -484,8 +314,6 @@ public class PlayerCombat : MonoBehaviour
                 if (enemyColliders[i].gameObject.TryGetComponent(out EnemyData enemy) && enemy.Form == Form)
                 {
                     enemiesHit.Add(enemy);
-
-                    print("Adding an enemy");
                 }
             }
         }
@@ -506,7 +334,7 @@ public class PlayerCombat : MonoBehaviour
                     t.SetWeaponUsed(Weapons.Sword);
                 }
 
-                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+                enemiesHit[i].ApplyKnockback(10, transform.forward);
                 enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
 
                 if (assassinTotemExists)
@@ -518,7 +346,7 @@ public class PlayerCombat : MonoBehaviour
             }
             else
             {
-                enemiesHit[i].ApplyKnockback(transform.forward, 10);
+                enemiesHit[i].ApplyKnockback(10, transform.forward);
                 enemiesHit[i].TakeDamage(player.playerAttributes.SwordDamage);
             }
         }
@@ -575,24 +403,30 @@ public class PlayerCombat : MonoBehaviour
         player.playerAttributes.Health -= 1;
     }
 
-    public void AddBowTarget(Enemy enemy)
+    public void AddBowTarget(EnemyData enemy)
     {
         bowTargetsInView.Add(enemy);
     }
 
-    public void RemoveBowTarget(Enemy enemy)
+    public void RemoveBowTarget(EnemyData enemy)
     {
-        bowTargetsInView.RemoveAt(bowTargetsInView.IndexOf(enemy));
+        if (bowTargetsInView.Contains(enemy))
+        {
+            bowTargetsInView.RemoveAt(bowTargetsInView.IndexOf(enemy));
+        }
     }
 
-    public void AddSwordTarget(Enemy enemy)
+    public void AddSwordTarget(EnemyData enemy)
     {
         swordTargetsInView.Add(enemy);
     }
 
-    public void RemoveSwordTarget(Enemy enemy)
+    public void RemoveSwordTarget(EnemyData enemy)
     {
-        swordTargetsInView.RemoveAt(swordTargetsInView.IndexOf(enemy));
+        if (swordTargetsInView.Contains(enemy))
+        {
+            swordTargetsInView.RemoveAt(swordTargetsInView.IndexOf(enemy));
+        }
     }
 
     public int GetCurrentAttackNum()

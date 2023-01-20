@@ -161,12 +161,12 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         //EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnEnemyKill);
-        if (player.playerInventory.totemDictionary[typeof(VampireBiteTotem)] > 0)
-        {
-            player.playerInventory.GetTotemFromList(typeof(VampireBiteTotem)).Totem.ApplyEffect();
-        }
+        //if (player.playerInventory.totemDictionary[typeof(VampireBiteTotem)] > 0)
+        //{
+        //    player.playerInventory.GetTotemFromList(typeof(VampireBiteTotem)).Totem.ApplyEffect();
+        //}
 
-        player.playerCombat.RemoveSwordTarget(this);
+        //player.playerCombat.RemoveSwordTarget(this);
 
         Destroy(gameObject);
     }

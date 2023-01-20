@@ -5,8 +5,8 @@ Steps to create room models:
 1. Export the model titled RoomModel_1 in the Models folder of the project and import it into Blender. This is to get an idea of the size and scale of the room
 
 
-2. Model a new room floor of any shape (It can also technically be of any size if you wanted to make extra small or extra large rooms and have whacky shapes). You can also put like holes in the middle for places in the room that the player cant walk. This could also work with obstacles as well.
-These are the criteria that are needed for the room models:
+2. Model a new room floor of any shape (It can also technically be of any size if you wanted to make extra small or extra large rooms and have whacky shapes). You can also put like holes in the middle for places in the room that the player cant walk. This could also work with obstacles as well. If different parts of the room's floor are gonna have different materials or textures, seperate these parts of the floor into different objects. That way, they can have different tags in unity to allow for different sound effects to be played for each material.
+These are the criteria that are needed when making the room models:
 
  - The room must have walls surrounding the outside edge of the floor as well as surrounding any holes in the middle of the floor with outward facing walls. The reason they need to be outward facing is because if the walls are culled, the player will just walk right through them in the game. The walls should be a seperate object as a child of the main model object. They can be any height, I just extruded mine up by 2 units in Blender and that seemed to be good. The reason we need the walls is strictly for colliders, when they are put into Unity, they will be invisible and only have colliders.
         
@@ -38,10 +38,11 @@ Each of the four entrances are perfectly parallel in their respective directions
 
 3. After completing the model, you must export the finished model as an FBX. Here is what you need to export correctly:
 
- - Before exporting, make sure to apply transforms on all objects, and make sure to reset all of the Origin points to geometery for the Entrances, Doors, and Exits. Do not use the Apply Transform option in the export menu as it does not work I tried it.
+ - Before Exporting, rotate the whole object so the TOP of the object is facing towards the POSITIVE Y DIRECTION in blender and the North Door is facing towards the POSITIVE Z DIRECTION. After rotating, scale the object by 100 on all axes (ik this seems dumb and makes it rlly rlly big but for some reason Unity turns a 1 scale from blender into 100 in Unity so if u scale it by 100 in blender before exporting, you can just downscale it back to 1 in Unity because it starts at 100 on the scale).
+ - After rotating and scaling, make sure to apply all transforms on all objects. After applying transforms make sure to reset all of the Origin points to geometery for all of the objects that are a part of the room (Doors, exits, entrances, obstacles, floor, etc). Do not use the Apply Transform option in the export menu as it does not work I tried it.
  - Do not export the Camera or Light with the object
  - Make sure to Triangulate Faces
- - Set the forward to Y Forward and the up to Z up
+ - Set the forward to -Z Forward and the up to Y up
 
 You want to save the file in the Unity project in side the Assets/FBXs/Room Models folder and name the file accordingly with the naming convention RoomModel_n where n is the model number. 
 
@@ -54,6 +55,8 @@ You want to save the file in the Unity project in side the Assets/FBXs/Room Mode
  - First, select EVERY object together (including all children, it wont select unless the drop downs in the hierarchy are completely open), at the bottom of the inspector window while everything is selected press Add Component and add a MeshCollider component. This will add the proper colliders for every object in the room model
 
  - Next, Select only the main model (the parent of the prefab) and add the RoomModel script onto it either through the inspector like above or dragging the script onto the object in the hierarchy. This script has a list for Doors and Exits. You must add each door and exit that exists in the model into those lists and they must be in this exact order. North, South, East, West. If they are in the list in any other order it will not work properly. A nice and easy way to do this part is, when you have the Room Model component open in the inspector, lock the inspector window using the little lock looking button all the way at the top right of the inspector window. When it is locked you can select all of the doors in order at the same time and then drag them all into the Doors section in the inspector and it should add all 4 of them at the same time, then all u need to do is put them in the correct order. Also do the same with the exits. Make sure to unlock the inspector after as well as it could cause confusion if you forget to.
+
+- With only the room model still selected, add a NavMeshSurface component in the inspector and press the Bake button in the component. This will create the nav mesh for the room so the enemies will be able to walk in the room.
 
  - Then, select all of the Exits. Once they are all selected, add the RoomExit script onto them through the inspector. You will see a variable with a drop down menu under the RoomExit script in the Exits, the variable is called Exit Dir. Change each of the exits to their respective direction(East Exit has East Dir, North has North, etc). Finally set all of the tags of each Exit to be the Exit tag.
  

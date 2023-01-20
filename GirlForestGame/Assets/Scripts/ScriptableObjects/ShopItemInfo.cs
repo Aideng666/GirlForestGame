@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ShopItemInfo : ScriptableObject
 {
-    public string itemName;
+    public ShopItemTypes itemType;
     public int value;
     public GameObject item;
     //public GameObject visualComponent;

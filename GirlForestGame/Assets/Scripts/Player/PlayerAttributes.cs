@@ -41,7 +41,8 @@ public class PlayerAttributes : MonoBehaviour
     public float SwordCooldown { get { return currentSwordCooldown; } set { currentSwordCooldown = value; } }
     public float BowCooldown { get { return currentBowCooldown; } set { currentBowCooldown = value; } }
     public float SwordRange { get { return currentSwordRange; } set { currentSwordRange = value; } }
-    public float ProjectileSpeed { get { return currentProjectileSpeed; } set { currentProjectileSpeed = value; } }
+    public float ProjectileSpeed { get { return currentProjectileSpeed; } set { currentProjectileSpeed = value;
+            if (currentProjectileSpeed > 99) currentProjectileSpeed = 99;} }
     public float CritChance { get { return currentCritChance; } set { currentCritChance = value; } }
     public float BowChargeTime { get { return currentBowChargeTime; } set { currentBowChargeTime = value; } }
     public float Luck { get { return currentLuck; } set { currentLuck = value; } }
