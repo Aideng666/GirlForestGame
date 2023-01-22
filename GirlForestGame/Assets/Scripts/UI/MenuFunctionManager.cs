@@ -4,7 +4,7 @@ using Cinemachine;
 public class MenuFunctionManager : MonoBehaviour
 {
     [SerializeField] GameObject splashUIPanel;
-    //[SerializeField] GameObject mainMenuUIPanel;
+    [SerializeField] GameObject mainMenuUIPanel;
     [SerializeField] AnimationEvents animEventsObj;
     [SerializeField] Animator cineCamAnimator;
     [SerializeField] AnimationEvents camEventObj;
@@ -13,7 +13,7 @@ public class MenuFunctionManager : MonoBehaviour
 
     private void Start()
     {
-        //mainMenuUIPanel.SetActive(false);
+        mainMenuUIPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,12 +34,12 @@ public class MenuFunctionManager : MonoBehaviour
 
         if (moveCam)
         {
-            //cineCamAnimator.SetBool("canProceed", true);
+            cineCamAnimator.SetBool("canProceed", true);
         }
 
         if (camEventObj.GetOnCamTranComplete())
         {
-            //mainMenuUIPanel.SetActive(true);
+            mainMenuUIPanel.SetActive(true);
         }
     }
 }
