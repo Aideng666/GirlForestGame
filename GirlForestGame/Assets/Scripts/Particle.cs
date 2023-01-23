@@ -31,7 +31,35 @@ public class Particle : MonoBehaviour
 
         if (particleType == ParticleTypes.WindArrow)
         {
-            Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, GetComponent<ParticleSystem>().shape.radius);
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+
+            foreach (Collider collision in collidersInRange)
+            {
+                if (collision.TryGetComponent(out EnemyData enemy))
+                {
+                    enemy.GetComponent<Rigidbody>().AddForce((transform.position - enemy.transform.position).normalized * Time.deltaTime * 5, ForceMode.VelocityChange);
+                }
+            }
+        }
+        else if (particleType == ParticleTypes.WindArrow2)
+        {
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+
+            foreach (Collider collision in collidersInRange)
+            {
+                if (collision.TryGetComponent(out EnemyData enemy))
+                {
+                    //enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    //enemy.GetComponent<Rigidbody>().AddForce((enemy.transform.position - transform.position).normalized * 5, ForceMode.Impulse);
+                    enemy.ApplyKnockback(1, (enemy.transform.position - transform.position).normalized);
+
+                    List<EnemyData> enemiesHit = new List<EnemyData>();
+
+                    enemiesHit.Add(enemy);
+
+                    EventManager.Instance.InvokeOnBowHit(enemiesHit);
+                }
+            }
         }
     }
 
@@ -47,7 +75,7 @@ public class Particle : MonoBehaviour
 
                     enemiesHit.Add(enemy);
 
-                    EventManager.Instance.InvokeOnBowHit(enemiesHit);
+                    EventManager.Instance.InvokeOnBowHit(enemiesHit, true);
                 }
 
                 break;

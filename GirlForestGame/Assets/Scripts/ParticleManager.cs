@@ -15,6 +15,8 @@ public class ParticleManager : MonoBehaviour
 
     ParticleSystem currentParticle;
 
+    ShapeModule windParticleShape;
+
     public static ParticleManager Instance { get; set; }
 
     private void Awake()
@@ -68,7 +70,7 @@ public class ParticleManager : MonoBehaviour
 
                 var windParticle = Instantiate(windArrow, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
 
-                var windParticleShape = windParticle.GetComponent<ParticleSystem>().shape;
+                windParticleShape = windParticle.GetComponent<ParticleSystem>().shape;
 
                 windParticleShape.radius += windParticleShape.radius * percentageOfAddedRadius;
 
@@ -81,6 +83,8 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.WindArrow2:
 
                 currentParticle = Instantiate(windArrow2, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+
+                currentParticle.GetComponent<SphereCollider>().radius = windParticleShape.radius;
 
                 break;
         }

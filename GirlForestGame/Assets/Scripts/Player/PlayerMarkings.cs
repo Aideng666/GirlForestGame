@@ -22,6 +22,7 @@ public class PlayerMarkings : MonoBehaviour
     [Header("Level Multipliers")]
     [SerializeField] float[] attributeMultipliers = new float[3];
     [SerializeField] float[] elementMultipliers = new float[3];
+    [SerializeField] float[] elementActivationChances = new float[3];
 
     public float[] ElementMultipliers { get { return elementMultipliers; } private set { } }
 
@@ -266,23 +267,76 @@ public class PlayerMarkings : MonoBehaviour
         }
     }
 
-    void ApplyFireElement(List<EnemyData> enemiesHit, Weapons weapon)
+    void ApplyFireElement(List<EnemyData> enemiesHit, Weapons weapon, bool guaranteeActivation = false)
     {
-        StartCoroutine(ApplyBurn(enemiesHit, weapon));
-    }
-
-    void ApplyWindElement(List<EnemyData> enemiesHit, Weapons weapon)
-    {
-        foreach(EnemyData enemy in enemiesHit)
+        if (!guaranteeActivation)
         {
-            enemy.GetComponentInChildren<Animator>().SetTrigger("Winded");
+            int invokeRoll = Random.Range(1, 101);
 
             if (weapon == Weapons.Sword)
             {
+                if (invokeRoll <= (elementActivationChances[markings[1].markingLevel - 1] + (PlayerController.Instance.playerAttributes.Luck * 100)))
+                {
+                    StartCoroutine(ApplyBurn(enemiesHit, weapon));
+                }
+            }
+            else if (weapon == Weapons.Bow)
+            {
+                if (invokeRoll <= (elementActivationChances[markings[3].markingLevel - 1] + (PlayerController.Instance.playerAttributes.Luck * 100)))
+                {
+                    StartCoroutine(ApplyBurn(enemiesHit, weapon));
+                }
+            }
+
+            return;
+        }
+
+        StartCoroutine(ApplyBurn(enemiesHit, weapon));
+    }
+
+    void ApplyWindElement(List<EnemyData> enemiesHit, Weapons weapon, bool guaranteeActivation = false)
+    {
+        if (!guaranteeActivation)
+        {
+            foreach (EnemyData enemy in enemiesHit)
+            {
+                int invokeRoll = Random.Range(1, 101);
+
+                if (weapon == Weapons.Sword)
+                {
+                    if (invokeRoll <= (elementActivationChances[markings[1].markingLevel - 1] + (PlayerController.Instance.playerAttributes.Luck * 100)))
+                    {
+                        enemy.GetComponentInChildren<Animator>().SetTrigger("Winded");
+
+                        windedDuration = baseWindedDuration * elementMultipliers[markings[1].markingLevel - 1];
+                    }
+                }
+                else if (weapon == Weapons.Bow)
+                {
+                    if (invokeRoll <= (elementActivationChances[markings[3].markingLevel - 1] + (PlayerController.Instance.playerAttributes.Luck * 100)))
+                    {
+                        enemy.GetComponentInChildren<Animator>().SetTrigger("Winded");
+
+                        windedDuration = baseWindedDuration * elementMultipliers[markings[3].markingLevel - 1];
+                    }
+                }
+            }
+
+            return;
+        }
+
+        foreach (EnemyData enemy in enemiesHit)
+        {
+            if (weapon == Weapons.Sword)
+            {
+                enemy.GetComponentInChildren<Animator>().SetTrigger("Winded");
+
                 windedDuration = baseWindedDuration * elementMultipliers[markings[1].markingLevel - 1];
             }
             else if (weapon == Weapons.Bow)
             {
+                enemy.GetComponentInChildren<Animator>().SetTrigger("Winded");
+
                 windedDuration = baseWindedDuration * elementMultipliers[markings[3].markingLevel - 1];
             }
         }
