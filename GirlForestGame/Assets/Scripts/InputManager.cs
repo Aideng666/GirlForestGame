@@ -30,6 +30,8 @@ public class InputManager : MonoBehaviour
     public InputAction openInventoryAction;
     public InputAction pauseAction; 
 
+    InputAction proceedAction;
+
     public static InputManager Instance { get; set; }
     private void Awake()
     {
@@ -62,6 +64,8 @@ public class InputManager : MonoBehaviour
         pauseAction = playerInput.actions["Pause"];
 
         openInventoryAction.started += ToggleInventory;
+
+        proceedAction = playerInput.actions["ProceedAction"];
     }
 
     private void OnDisable()
@@ -258,5 +262,10 @@ public class InputManager : MonoBehaviour
     void ToggleInventory(InputAction.CallbackContext ctx)
     {
         PlayerController.Instance.playerInventory.ToggleInventory();
+    }
+
+    public bool Proceed()
+    {
+        return proceedAction.triggered;          
     }
 }
