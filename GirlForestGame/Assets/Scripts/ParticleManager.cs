@@ -10,6 +10,8 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem swordSlashLeftToRight;
     [SerializeField] ParticleSystem swordSlashRightToLeft;
     [SerializeField] ParticleSystem fireArrow;
+    [SerializeField] ParticleSystem windArrow;
+    [SerializeField] ParticleSystem windArrow2;
 
     ParticleSystem currentParticle;
 
@@ -24,13 +26,13 @@ public class ParticleManager : MonoBehaviour
     {
         switch (type)
         {
-            case ParticleTypes.DashStart:
+            case ParticleTypes.BowCharge:
 
                 currentParticle = Instantiate(bowChargeStart, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                 break;
 
-            case ParticleTypes.DashEnd:
+            case ParticleTypes.BowCharge2:
 
                 currentParticle = Instantiate(bowChargeComplete, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
 
@@ -50,15 +52,35 @@ public class ParticleManager : MonoBehaviour
 
             case ParticleTypes.FireArrow:
 
-                var particle = Instantiate(fireArrow, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                var fireParticle = Instantiate(fireArrow, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
 
-                var particleShape = particle.GetComponent<ParticleSystem>().shape;
+                var fireParticleShape = fireParticle.GetComponent<ParticleSystem>().shape;
 
-                particleShape.radius += particleShape.radius * percentageOfAddedRadius;
+                fireParticleShape.radius += fireParticleShape.radius * percentageOfAddedRadius;
 
-                currentParticle = particle;
+                currentParticle = fireParticle;
 
-                currentParticle.GetComponent<SphereCollider>().radius = particleShape.radius;
+                currentParticle.GetComponent<SphereCollider>().radius = fireParticleShape.radius;
+
+                break;
+
+            case ParticleTypes.WindArrow:
+
+                var windParticle = Instantiate(windArrow, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+
+                var windParticleShape = windParticle.GetComponent<ParticleSystem>().shape;
+
+                windParticleShape.radius += windParticleShape.radius * percentageOfAddedRadius;
+
+                currentParticle = windParticle;
+
+                currentParticle.GetComponent<SphereCollider>().radius = windParticleShape.radius;
+
+                break;
+
+            case ParticleTypes.WindArrow2:
+
+                currentParticle = Instantiate(windArrow2, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                 break;
         }

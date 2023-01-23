@@ -5,6 +5,7 @@ using UnityEngine;
 public class Particle : MonoBehaviour
 {
     [SerializeField] ParticleTypes particleType;
+    [SerializeField] ParticleTypes childParticle = ParticleTypes.None;
     ParticleSystem particle;
 
     // Start is called before the first frame update
@@ -18,7 +19,19 @@ public class Particle : MonoBehaviour
     {
         if (!particle.isPlaying)
         {
+            if (childParticle != ParticleTypes.None)
+            {
+                ParticleManager.Instance.SpawnParticle(childParticle, transform.position);
+            }
+
             Destroy(gameObject);
+
+            return;
+        }
+
+        if (particleType == ParticleTypes.WindArrow)
+        {
+            Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, GetComponent<ParticleSystem>().shape.radius);
         }
     }
 
@@ -35,8 +48,6 @@ public class Particle : MonoBehaviour
                     enemiesHit.Add(enemy);
 
                     EventManager.Instance.InvokeOnBowHit(enemiesHit);
-
-                    print("Enemy walked into fire");
                 }
 
                 break;

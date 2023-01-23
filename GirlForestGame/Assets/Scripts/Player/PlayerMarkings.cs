@@ -12,13 +12,18 @@ public class PlayerMarkings : MonoBehaviour
     [Space(1)]
 
     [Header("Hawk Element Variables")]
-    [SerializeField] float baseWindKnockbackPower = 10;
+    [SerializeField] float baseWindedDuration = 2;
+    float windedDuration;
+
+    public float BaseWindedDuration { get { return baseWindedDuration; } private set { } }
 
     [Space(1)]
 
     [Header("Level Multipliers")]
     [SerializeField] float[] attributeMultipliers = new float[3];
     [SerializeField] float[] elementMultipliers = new float[3];
+
+    public float[] ElementMultipliers { get { return elementMultipliers; } private set { } }
 
     //to access the player's scripts
     //The player controller contains access to the other player scripts
@@ -270,15 +275,22 @@ public class PlayerMarkings : MonoBehaviour
     {
         foreach(EnemyData enemy in enemiesHit)
         {
+            enemy.GetComponentInChildren<Animator>().SetTrigger("Winded");
+
             if (weapon == Weapons.Sword)
             {
-                enemy.ApplyKnockback(baseWindKnockbackPower * elementMultipliers[markings[1].markingLevel - 1], player.transform.forward);
+                windedDuration = baseWindedDuration * elementMultipliers[markings[1].markingLevel - 1];
             }
             else if (weapon == Weapons.Bow)
             {
-                enemy.ApplyKnockback(baseWindKnockbackPower * elementMultipliers[markings[3].markingLevel - 1], player.transform.forward);
+                windedDuration = baseWindedDuration * elementMultipliers[markings[3].markingLevel - 1];
             }
         }
+    }
+
+    public float GetWindedDuration()
+    {
+        return windedDuration;
     }
 
     IEnumerator ApplyBurn(List<EnemyData> enemies, Weapons weapon)
