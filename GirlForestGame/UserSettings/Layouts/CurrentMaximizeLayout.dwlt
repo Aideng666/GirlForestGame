@@ -9,19 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_EditorHideFlags: 0
 =======
   m_EditorHideFlags: 1
 >>>>>>> Tyler
+=======
+  m_EditorHideFlags: 1
+>>>>>>> Aiden
   m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 3}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   - {fileID: 15}
 >>>>>>> Tyler
+=======
+  - {fileID: 13}
+>>>>>>> Aiden
   m_Position:
     serializedVersion: 2
     x: 0
@@ -31,6 +39,7 @@ MonoBehaviour:
     height: 926
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
+<<<<<<< HEAD
   vertical: 1
   controlID: 9695
 =======
@@ -41,6 +50,10 @@ MonoBehaviour:
   vertical: 0
   controlID: 1175
 >>>>>>> Tyler
+=======
+  vertical: 0
+  controlID: 806
+>>>>>>> Aiden
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -62,8 +75,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 175
+    x: 323.66666
     y: 19
+<<<<<<< HEAD
     width: 1260
     height: 607.6667
 =======
@@ -76,6 +90,10 @@ MonoBehaviour:
     width: 507
     height: 681
 >>>>>>> Tyler
+=======
+    width: 978.66675
+    height: 719.6667
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -134,6 +152,7 @@ MonoBehaviour:
       x: 0
       y: 21
 <<<<<<< HEAD
+<<<<<<< HEAD
       width: 1260
       height: 586.6667
     m_Scale: {x: 0.81481487, y: 0.81481487}
@@ -144,12 +163,19 @@ MonoBehaviour:
     m_Scale: {x: 0.2640625, y: 0.2640625}
     m_Translation: {x: 253.5, y: 330}
 >>>>>>> Tyler
+=======
+      width: 978.66675
+      height: 698.6667
+    m_Scale: {x: 0.7645834, y: 0.7645834}
+    m_Translation: {x: 489.33337, y: 349.33334}
+>>>>>>> Aiden
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
       x: -773.18176
       y: -360
@@ -167,6 +193,15 @@ MonoBehaviour:
   m_defaultScale: 0.2640625
   m_LastWindowPixelSize: {x: 507, y: 681}
 >>>>>>> Tyler
+=======
+      x: -640
+      y: -456.8937
+      width: 1280
+      height: 913.7874
+    m_MinimalGUI: 1
+  m_defaultScale: 0.7645834
+  m_LastWindowPixelSize: {x: 1468.0001, y: 1079.5}
+>>>>>>> Aiden
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -186,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 4}
+<<<<<<< HEAD
 <<<<<<< HEAD
   - {fileID: 15}
 =======
@@ -229,18 +265,25 @@ MonoBehaviour:
   - {fileID: 7}
 >>>>>>> Tyler
   - {fileID: 10}
+=======
+  - {fileID: 9}
+>>>>>>> Aiden
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 1436
+=======
+    width: 1303.3334
+>>>>>>> Aiden
     height: 926
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 9697
---- !u!114 &5
+  controlID: 807
+--- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,17 +296,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 6}
-  - {fileID: 8}
+  - {fileID: 5}
+  - {fileID: 7}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1436
-    height: 706.6667
+    width: 1303.3334
+    height: 616
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
+<<<<<<< HEAD
   controlID: 9698
 --- !u!114 &6
 =======
@@ -275,6 +319,10 @@ MonoBehaviour:
   controlID: 1177
 --- !u!114 &5
 >>>>>>> Tyler
+=======
+  controlID: 779
+--- !u!114 &5
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,15 +344,24 @@ MonoBehaviour:
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 174
     height: 706.6667
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 7}
+=======
+    width: 322.66666
+    height: 616
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 6}
+>>>>>>> Aiden
   m_Panes:
-  - {fileID: 7}
+  - {fileID: 6}
   m_Selected: 0
   m_LastSelected: 0
+<<<<<<< HEAD
 --- !u!114 &7
 =======
     width: 399
@@ -318,6 +375,9 @@ MonoBehaviour:
   m_LastSelected: 0
 --- !u!114 &6
 >>>>>>> Tyler
+=======
+--- !u!114 &6
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -344,6 +404,7 @@ MonoBehaviour:
     x: 0
 <<<<<<< HEAD
     y: 72.66667
+<<<<<<< HEAD
     width: 173
     height: 685.6667
 =======
@@ -351,6 +412,10 @@ MonoBehaviour:
     width: 398
     height: 681
 >>>>>>> Tyler
+=======
+    width: 321.66666
+    height: 595
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -361,10 +426,14 @@ MonoBehaviour:
       m_SelectedIDs: 
       m_LastClickedID: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_ExpandedIDs: c481ffffe481fffffc81ffff1482ffff1c82ffffea8afffffe93ffff4edeffff60deffff48e3ffff68e3ffff80e3ffff98e3ffff36eeffff30fbffff
 =======
       m_ExpandedIDs: e8faffff426e0000466e0000ac6e0000
 >>>>>>> Tyler
+=======
+      m_ExpandedIDs: a6f9ffffd6faffff
+>>>>>>> Aiden
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -381,10 +450,14 @@ MonoBehaviour:
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
         m_ClientGUIView: {fileID: 8}
 =======
         m_ClientGUIView: {fileID: 5}
 >>>>>>> Tyler
+=======
+        m_ClientGUIView: {fileID: 0}
+>>>>>>> Aiden
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -393,10 +466,14 @@ MonoBehaviour:
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &8
 =======
 --- !u!114 &7
 >>>>>>> Tyler
+=======
+--- !u!114 &7
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -418,18 +495,23 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 174
+=======
+    x: 322.66666
+>>>>>>> Aiden
     y: 0
-    width: 1262
-    height: 706.6667
+    width: 980.66675
+    height: 616
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 2}
   m_Panes:
-  - {fileID: 9}
+  - {fileID: 8}
   - {fileID: 2}
   m_Selected: 1
   m_LastSelected: 0
+<<<<<<< HEAD
 --- !u!114 &9
 =======
     x: 399
@@ -446,6 +528,9 @@ MonoBehaviour:
   m_LastSelected: 0
 --- !u!114 &8
 >>>>>>> Tyler
+=======
+--- !u!114 &8
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -466,8 +551,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 174
+    x: 322.6667
     y: 72.66667
+<<<<<<< HEAD
     width: 1260
     height: 685.6667
 =======
@@ -480,6 +566,10 @@ MonoBehaviour:
     width: 557
     height: 681
 >>>>>>> Tyler
+=======
+    width: 978.66675
+    height: 595
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -491,10 +581,14 @@ MonoBehaviour:
       displayed: 1
       snapOffset: {x: 0, y: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
       snapOffsetDelta: {x: -98.666626, y: -26}
 =======
       snapOffsetDelta: {x: -101, y: -26}
 >>>>>>> Tyler
+=======
+      snapOffsetDelta: {x: -98.66669, y: -26}
+>>>>>>> Aiden
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -538,10 +632,14 @@ MonoBehaviour:
       collapsed: 0
       displayed: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
       snapOffset: {x: 0, y: 24.666666}
 =======
       snapOffset: {x: 0, y: 0}
 >>>>>>> Tyler
+=======
+      snapOffset: {x: 0, y: 0}
+>>>>>>> Aiden
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -614,10 +712,14 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       snapOffset: {x: 0, y: 24.666666}
 =======
       snapOffset: {x: 0, y: 0}
 >>>>>>> Tyler
+=======
+      snapOffset: {x: 0, y: 0}
+>>>>>>> Aiden
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Navmesh Display
@@ -700,6 +802,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: 4.760922, y: -2.7965727, z: 2.1907616}
     speed: 2
     m_Value: {x: 4.760922, y: -2.7965727, z: 2.1907616}
@@ -708,6 +811,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 109.40747, y: -193.7933, z: 913.5448}
 >>>>>>> Tyler
+=======
+    m_Target: {x: 7.4248233, y: 8.63999, z: 1.177412}
+    speed: 2
+    m_Value: {x: 7.4248233, y: 8.63999, z: 1.177412}
+>>>>>>> Aiden
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -734,7 +842,11 @@ MonoBehaviour:
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_Size: {x: 1, y: 1}
+=======
+      m_Size: {x: 0, y: 0}
+>>>>>>> Aiden
     yGrid:
       m_Fade:
         m_Target: 1
@@ -758,18 +870,23 @@ MonoBehaviour:
         m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
       m_Size: {x: 1, y: 1}
 <<<<<<< HEAD
+=======
+      m_Size: {x: 0, y: 0}
+>>>>>>> Aiden
     m_ShowGrid: 1
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.27885818, y: 0.0031862487, z: -0.0009237724, w: 0.9603421}
+    m_Target: {x: -0.16629088, y: -0.32816917, z: 0.05880522, w: -0.9280073}
     speed: 2
-    m_Value: {x: 0.27885404, y: 0.0031862012, z: -0.00092375866, w: 0.9603278}
+    m_Value: {x: -0.16629063, y: -0.32816866, z: 0.05880513, w: -0.9280059}
   m_Size:
-    m_Target: 22.75074
+    m_Target: 22.124428
     speed: 2
+<<<<<<< HEAD
     m_Value: 22.75074
 =======
     m_ShowGrid: 0
@@ -784,6 +901,9 @@ MonoBehaviour:
     speed: 2
     m_Value: 354.13205
 >>>>>>> Tyler
+=======
+    m_Value: 22.124428
+>>>>>>> Aiden
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -816,6 +936,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 --- !u!114 &9
@@ -935,6 +1056,9 @@ MonoBehaviour:
     m_SelectedLayerIndex: 0
 >>>>>>> Tyler
 --- !u!114 &10
+=======
+--- !u!114 &9
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -980,13 +1104,23 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 706.6667
     width: 1436
     height: 219.33331
   m_MinSize: {x: 230, y: 250}
   m_MaxSize: {x: 10000, y: 10000}
   m_ActualView: {fileID: 11}
+=======
+    y: 616
+    width: 1303.3334
+    height: 310
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 10}
+>>>>>>> Aiden
   m_Panes:
+  - {fileID: 10}
   - {fileID: 11}
 =======
     y: 702
@@ -998,16 +1132,18 @@ MonoBehaviour:
   m_Panes:
 >>>>>>> Tyler
   - {fileID: 12}
-  - {fileID: 13}
-  - {fileID: 14}
   m_Selected: 0
 <<<<<<< HEAD
   m_LastSelected: 1
+<<<<<<< HEAD
 --- !u!114 &11
 =======
   m_LastSelected: 2
 --- !u!114 &12
 >>>>>>> Tyler
+=======
+--- !u!114 &10
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1033,6 +1169,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 779.3334
     width: 1435
     height: 198.33331
@@ -1041,6 +1178,11 @@ MonoBehaviour:
     width: 1466
     height: 224
 >>>>>>> Tyler
+=======
+    y: 688.6667
+    width: 1302.3334
+    height: 289
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1059,22 +1201,31 @@ MonoBehaviour:
     m_SearchArea: 1
     m_Folders:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/Models
 =======
     - Assets/Scripts/UI
 >>>>>>> Tyler
+=======
+    - Assets/Scripts/Projectiles
+>>>>>>> Aiden
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - Assets/Models
+=======
+  - Assets/Scripts/Projectiles
+>>>>>>> Aiden
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\agimp\OneDrive\Documents\GitHub\4th Year\GirlForestGame\GirlForestGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 300}
     m_SelectedIDs: ee730000
     m_LastClickedID: 29678
@@ -1091,6 +1242,12 @@ MonoBehaviour:
     m_LastClickedID: 29334
     m_ExpandedIDs: 00000000a27000008e72000000ca9a3b
 >>>>>>> Tyler
+=======
+    scrollPos: {x: 0, y: 275}
+    m_SelectedIDs: a0700000
+    m_LastClickedID: 28832
+    m_ExpandedIDs: 00000000686e00005270000000ca9a3b
+>>>>>>> Aiden
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1119,10 +1276,14 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000c0730000c2730000c473000000ca9a3b
 =======
     m_ExpandedIDs: 00000000a270000000ca9a3b
 >>>>>>> Tyler
+=======
+    m_ExpandedIDs: 00000000686e000000ca9a3b
+>>>>>>> Aiden
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1147,9 +1308,14 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
 <<<<<<< HEAD
+=======
+    m_SelectedInstanceIDs: a60d0000
+    m_LastClickedInstanceID: 3494
+>>>>>>> Aiden
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
 =======
@@ -1172,10 +1338,14 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_ClientGUIView: {fileID: 10}
 =======
       m_ClientGUIView: {fileID: 0}
 >>>>>>> Tyler
+=======
+      m_ClientGUIView: {fileID: 9}
+>>>>>>> Aiden
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -1188,11 +1358,15 @@ MonoBehaviour:
   m_SkipHiddenPackages: 0
 <<<<<<< HEAD
   m_DirectoriesAreaWidth: 207
+<<<<<<< HEAD
 --- !u!114 &12
 =======
   m_DirectoriesAreaWidth: 149
 --- !u!114 &13
 >>>>>>> Tyler
+=======
+--- !u!114 &11
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1214,14 +1388,14 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 701.3334
-    width: 1435
-    height: 276.3333
+    y: 813.3334
+    width: 1302.3334
+    height: 164.33331
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
---- !u!114 &13
+--- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1246,6 +1420,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 701.3334
     width: 1435
     height: 276.3333
@@ -1254,6 +1429,11 @@ MonoBehaviour:
     width: 1466
     height: 364
 >>>>>>> Tyler
+=======
+    y: 750
+    width: 1302.3334
+    height: 227.66669
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1262,32 +1442,15 @@ MonoBehaviour:
   m_ViewTransforms:
     m_KeySerializationHelper:
     - {fileID: 8760450671090587685, guid: 50707e94767e6e14f9280f9bc479f02d, type: 2}
-    - {fileID: -5284007265615370731, guid: 50a1111dcd21d9742933483cedcd91f7, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.4405474
+    - e00: 0.40640602
       e01: 0
       e02: 0
-      e03: 98.4754
+      e03: 125.766846
       e10: 0
-      e11: 0.4405474
+      e11: 0.40640602
       e12: 0
-      e13: 108.33026
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.6515315
-      e01: 0
-      e02: 0
-      e03: 261.09616
-      e10: 0
-      e11: 0.6515315
-      e12: 0
-      e13: 104.13753
+      e13: 58.771885
       e20: 0
       e21: 0
       e22: 1
@@ -1312,6 +1475,7 @@ MonoBehaviour:
   m_CurrentEditor: 1
   m_LayerEditor:
     m_SelectedLayerIndex: 0
+<<<<<<< HEAD
 =======
 >>>>>>> Tyler
 --- !u!114 &14
@@ -1364,6 +1528,9 @@ MonoBehaviour:
   m_LastSelectedObjectID: 28154
 >>>>>>> Tyler
 --- !u!114 &15
+=======
+--- !u!114 &13
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1374,26 +1541,34 @@ MonoBehaviour:
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Name: InspectorWindow
 =======
   m_Name: 
 >>>>>>> Tyler
+=======
+  m_Name: 
+>>>>>>> Aiden
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 1436
+=======
+    x: 1303.3334
+>>>>>>> Aiden
     y: 0
-    width: 270.66663
+    width: 403.33325
     height: 926
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 16}
+  m_ActualView: {fileID: 14}
   m_Panes:
-  - {fileID: 16}
-  - {fileID: 17}
+  - {fileID: 14}
   m_Selected: 0
+<<<<<<< HEAD
   m_LastSelected: 1
 =======
     x: 1467
@@ -1409,6 +1584,10 @@ MonoBehaviour:
   m_LastSelected: 0
 >>>>>>> Tyler
 --- !u!114 &16
+=======
+  m_LastSelected: 0
+--- !u!114 &14
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1429,9 +1608,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1436
+    x: 1303.3334
     y: 72.66667
-    width: 269.66663
+    width: 402.33325
     height: 905
 =======
     m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
@@ -1451,19 +1630,24 @@ MonoBehaviour:
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_CachedPref: -389
 =======
     m_CachedPref: 160
 >>>>>>> Tyler
+=======
+    m_CachedPref: 160
+>>>>>>> Aiden
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: 3494
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!114 &17
 MonoBehaviour:
@@ -1495,3 +1679,5 @@ MonoBehaviour:
     m_SaveData: []
 =======
 >>>>>>> Tyler
+=======
+>>>>>>> Aiden

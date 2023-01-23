@@ -206,7 +206,6 @@ public class PlayerController : MonoBehaviour
             //Might need to be changed
             case "Enemy":
 
-                print(collision.gameObject.name);
                 playerCombat.TakeDamage();
                 playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
 
