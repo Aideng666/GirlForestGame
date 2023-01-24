@@ -8,23 +8,52 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+<<<<<<< HEAD
+<<<<<<< HEAD
+  m_EditorHideFlags: 0
+=======
   m_EditorHideFlags: 1
+>>>>>>> Tyler
+=======
+  m_EditorHideFlags: 1
+>>>>>>> Aiden
   m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 3}
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
   - {fileID: 15}
+>>>>>>> Tyler
+=======
+  - {fileID: 13}
+>>>>>>> Aiden
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< HEAD
+    width: 1706.6666
+    height: 926
+  m_MinSize: {x: 300, y: 200}
+  m_MaxSize: {x: 24288, y: 16192}
+<<<<<<< HEAD
+  vertical: 1
+  controlID: 9695
+=======
     width: 1920
     height: 947
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
   controlID: 1175
+>>>>>>> Tyler
+=======
+  vertical: 0
+  controlID: 806
+>>>>>>> Aiden
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -41,6 +70,17 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Game
+<<<<<<< HEAD
+    m_Image: {fileID: 4621777727084837110, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 323.66666
+    y: 19
+<<<<<<< HEAD
+    width: 1260
+    height: 607.6667
+=======
     m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
@@ -49,6 +89,11 @@ MonoBehaviour:
     y: 73
     width: 507
     height: 681
+>>>>>>> Tyler
+=======
+    width: 978.66675
+    height: 719.6667
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -74,10 +119,17 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
+<<<<<<< HEAD
+    m_HBaseRangeMin: -640
+    m_HBaseRangeMax: 640
+    m_VBaseRangeMin: -360
+    m_VBaseRangeMax: 360
+=======
     m_HBaseRangeMin: -960
     m_HBaseRangeMax: 960
     m_VBaseRangeMin: -540
     m_VBaseRangeMax: 540
+>>>>>>> Tyler
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -86,7 +138,11 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
+<<<<<<< HEAD
+    m_EnableMouseInput: 0
+=======
     m_EnableMouseInput: 1
+>>>>>>> Tyler
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -95,16 +151,40 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
+<<<<<<< HEAD
+<<<<<<< HEAD
+      width: 1260
+      height: 586.6667
+    m_Scale: {x: 0.81481487, y: 0.81481487}
+    m_Translation: {x: 630, y: 293.33334}
+=======
       width: 507
       height: 660
     m_Scale: {x: 0.2640625, y: 0.2640625}
     m_Translation: {x: 253.5, y: 330}
+>>>>>>> Tyler
+=======
+      width: 978.66675
+      height: 698.6667
+    m_Scale: {x: 0.7645834, y: 0.7645834}
+    m_Translation: {x: 489.33337, y: 349.33334}
+>>>>>>> Aiden
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD
+      x: -773.18176
+      y: -360
+      width: 1546.3635
+      height: 720
+    m_MinimalGUI: 1
+  m_defaultScale: 0.81481487
+  m_LastWindowPixelSize: {x: 1890, y: 911.5}
+=======
       x: -960
       y: -1249.7042
       width: 1920
@@ -112,6 +192,16 @@ MonoBehaviour:
     m_MinimalGUI: 1
   m_defaultScale: 0.2640625
   m_LastWindowPixelSize: {x: 507, y: 681}
+>>>>>>> Tyler
+=======
+      x: -640
+      y: -456.8937
+      width: 1280
+      height: 913.7874
+    m_MinimalGUI: 1
+  m_defaultScale: 0.7645834
+  m_LastWindowPixelSize: {x: 1468.0001, y: 1079.5}
+>>>>>>> Aiden
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -131,17 +221,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 4}
+<<<<<<< HEAD
+<<<<<<< HEAD
+  - {fileID: 15}
+=======
   - {fileID: 11}
+>>>>>>> Tyler
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
+    width: 1706.6666
+    height: 926
+  m_MinSize: {x: 300, y: 200}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 0
+  controlID: 9696
+=======
     width: 1467
     height: 947
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
   controlID: 1176
+>>>>>>> Tyler
+--- !u!114 &4
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 5}
+<<<<<<< HEAD
+=======
+  - {fileID: 7}
+>>>>>>> Tyler
+  - {fileID: 10}
+=======
+  - {fileID: 9}
+>>>>>>> Aiden
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+    width: 1436
+=======
+    width: 1303.3334
+>>>>>>> Aiden
+    height: 926
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 16192, y: 16192}
+  vertical: 1
+  controlID: 807
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -157,11 +298,19 @@ MonoBehaviour:
   m_Children:
   - {fileID: 5}
   - {fileID: 7}
-  - {fileID: 10}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
+    width: 1303.3334
+    height: 616
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+<<<<<<< HEAD
+  controlID: 9698
+--- !u!114 &6
+=======
     width: 1467
     height: 702
   m_MinSize: {x: 300, y: 100}
@@ -169,6 +318,11 @@ MonoBehaviour:
   vertical: 0
   controlID: 1177
 --- !u!114 &5
+>>>>>>> Tyler
+=======
+  controlID: 779
+--- !u!114 &5
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,13 +332,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
+  m_Name: 
+=======
   m_Name: SceneHierarchyWindow
+>>>>>>> Tyler
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+    width: 174
+    height: 706.6667
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 7}
+=======
+    width: 322.66666
+    height: 616
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 6}
+>>>>>>> Aiden
+  m_Panes:
+  - {fileID: 6}
+  m_Selected: 0
+  m_LastSelected: 0
+<<<<<<< HEAD
+--- !u!114 &7
+=======
     width: 399
     height: 702
   m_MinSize: {x: 201, y: 221}
@@ -195,6 +374,10 @@ MonoBehaviour:
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &6
+>>>>>>> Tyler
+=======
+--- !u!114 &6
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,14 +393,29 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Hierarchy
+<<<<<<< HEAD
+    m_Image: {fileID: -3734745235275155857, guid: 0000000000000000d000000000000000, type: 0}
+=======
     m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000, type: 0}
+>>>>>>> Tyler
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
+    y: 72.66667
+<<<<<<< HEAD
+    width: 173
+    height: 685.6667
+=======
     y: 73
     width: 398
     height: 681
+>>>>>>> Tyler
+=======
+    width: 321.66666
+    height: 595
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -227,7 +425,15 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+      m_ExpandedIDs: c481ffffe481fffffc81ffff1482ffff1c82ffffea8afffffe93ffff4edeffff60deffff48e3ffff68e3ffff80e3ffff98e3ffff36eeffff30fbffff
+=======
       m_ExpandedIDs: e8faffff426e0000466e0000ac6e0000
+>>>>>>> Tyler
+=======
+      m_ExpandedIDs: a6f9ffffd6faffff
+>>>>>>> Aiden
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -243,7 +449,15 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+        m_ClientGUIView: {fileID: 8}
+=======
         m_ClientGUIView: {fileID: 5}
+>>>>>>> Tyler
+=======
+        m_ClientGUIView: {fileID: 0}
+>>>>>>> Aiden
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -251,7 +465,15 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
+<<<<<<< HEAD
+<<<<<<< HEAD
+--- !u!114 &8
+=======
 --- !u!114 &7
+>>>>>>> Tyler
+=======
+--- !u!114 &7
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,13 +481,39 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+<<<<<<< HEAD
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: GameView
+=======
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: SceneView
+>>>>>>> Tyler
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD
+    x: 174
+=======
+    x: 322.66666
+>>>>>>> Aiden
+    y: 0
+    width: 980.66675
+    height: 616
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 2}
+  m_Panes:
+  - {fileID: 8}
+  - {fileID: 2}
+  m_Selected: 1
+  m_LastSelected: 0
+<<<<<<< HEAD
+--- !u!114 &9
+=======
     x: 399
     y: 0
     width: 559
@@ -279,6 +527,10 @@ MonoBehaviour:
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &8
+>>>>>>> Tyler
+=======
+--- !u!114 &8
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,6 +546,17 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Scene
+<<<<<<< HEAD
+    m_Image: {fileID: 8634526014445323508, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 322.6667
+    y: 72.66667
+<<<<<<< HEAD
+    width: 1260
+    height: 685.6667
+=======
     m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
@@ -302,6 +565,11 @@ MonoBehaviour:
     y: 73
     width: 557
     height: 681
+>>>>>>> Tyler
+=======
+    width: 978.66675
+    height: 595
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -312,7 +580,15 @@ MonoBehaviour:
       collapsed: 0
       displayed: 1
       snapOffset: {x: 0, y: 0}
+<<<<<<< HEAD
+<<<<<<< HEAD
+      snapOffsetDelta: {x: -98.666626, y: -26}
+=======
       snapOffsetDelta: {x: -101, y: -26}
+>>>>>>> Tyler
+=======
+      snapOffsetDelta: {x: -98.66669, y: -26}
+>>>>>>> Aiden
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -355,7 +631,15 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
+<<<<<<< HEAD
+<<<<<<< HEAD
+      snapOffset: {x: 0, y: 24.666666}
+=======
       snapOffset: {x: 0, y: 0}
+>>>>>>> Tyler
+=======
+      snapOffset: {x: 0, y: 0}
+>>>>>>> Aiden
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -366,9 +650,15 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
+<<<<<<< HEAD
+      snapOffset: {x: 67.5, y: 86}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+=======
       snapOffset: {x: 67.5, y: -123}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 2
+>>>>>>> Tyler
       id: Orientation
       index: 0
       layout: 4
@@ -421,7 +711,15 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+      snapOffset: {x: 0, y: 24.666666}
+=======
       snapOffset: {x: 0, y: 0}
+>>>>>>> Tyler
+=======
+      snapOffset: {x: 0, y: 0}
+>>>>>>> Aiden
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Navmesh Display
@@ -503,9 +801,21 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
+<<<<<<< HEAD
+    m_Target: {x: 4.760922, y: -2.7965727, z: 2.1907616}
+    speed: 2
+    m_Value: {x: 4.760922, y: -2.7965727, z: 2.1907616}
+=======
     m_Target: {x: 109.40747, y: -193.7933, z: 913.5448}
     speed: 2
     m_Value: {x: 109.40747, y: -193.7933, z: 913.5448}
+>>>>>>> Tyler
+=======
+    m_Target: {x: 7.4248233, y: 8.63999, z: 1.177412}
+    speed: 2
+    m_Value: {x: 7.4248233, y: 8.63999, z: 1.177412}
+>>>>>>> Aiden
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -531,12 +841,25 @@ MonoBehaviour:
         m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
+<<<<<<< HEAD
+      m_Size: {x: 1, y: 1}
+=======
+      m_Size: {x: 0, y: 0}
+>>>>>>> Aiden
+    yGrid:
+      m_Fade:
+        m_Target: 1
+        speed: 2
+        m_Value: 1
+=======
       m_Size: {x: 0, y: 0}
     yGrid:
       m_Fade:
         m_Target: 0
         speed: 2
         m_Value: 0
+>>>>>>> Tyler
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -547,7 +870,25 @@ MonoBehaviour:
         m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
       m_Size: {x: 1, y: 1}
+<<<<<<< HEAD
+=======
+      m_Size: {x: 0, y: 0}
+>>>>>>> Aiden
+    m_ShowGrid: 1
+    m_GridAxis: 1
+    m_gridOpacity: 0.5
+  m_Rotation:
+    m_Target: {x: -0.16629088, y: -0.32816917, z: 0.05880522, w: -0.9280073}
+    speed: 2
+    m_Value: {x: -0.16629063, y: -0.32816866, z: 0.05880513, w: -0.9280059}
+  m_Size:
+    m_Target: 22.124428
+    speed: 2
+<<<<<<< HEAD
+    m_Value: 22.75074
+=======
     m_ShowGrid: 0
     m_GridAxis: 1
     m_gridOpacity: 0.5
@@ -559,12 +900,20 @@ MonoBehaviour:
     m_Target: 354.13205
     speed: 2
     m_Value: 354.13205
+>>>>>>> Tyler
+=======
+    m_Value: 22.124428
+>>>>>>> Aiden
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
+<<<<<<< HEAD
+    m_Speed: 1
+=======
     m_Speed: 1.0005
+>>>>>>> Tyler
     m_SpeedNormalized: 0.5
     m_SpeedMin: 0.001
     m_SpeedMax: 2
@@ -576,13 +925,20 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
+<<<<<<< HEAD
+  m_LastSceneViewRotation: {x: 0, y: 0, z: 0, w: 0}
+=======
   m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+>>>>>>> Tyler
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -698,7 +1054,11 @@ MonoBehaviour:
   m_CurrentEditor: 1
   m_LayerEditor:
     m_SelectedLayerIndex: 0
+>>>>>>> Tyler
 --- !u!114 &10
+=======
+--- !u!114 &9
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -706,6 +1066,8 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+<<<<<<< HEAD
+=======
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: GameView
@@ -732,6 +1094,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+>>>>>>> Tyler
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: ProjectBrowser
@@ -740,6 +1103,26 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+    y: 706.6667
+    width: 1436
+    height: 219.33331
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_ActualView: {fileID: 11}
+=======
+    y: 616
+    width: 1303.3334
+    height: 310
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 10}
+>>>>>>> Aiden
+  m_Panes:
+  - {fileID: 10}
+  - {fileID: 11}
+=======
     y: 702
     width: 1467
     height: 245
@@ -747,12 +1130,20 @@ MonoBehaviour:
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 12}
   m_Panes:
+>>>>>>> Tyler
   - {fileID: 12}
-  - {fileID: 13}
-  - {fileID: 14}
   m_Selected: 0
+<<<<<<< HEAD
+  m_LastSelected: 1
+<<<<<<< HEAD
+--- !u!114 &11
+=======
   m_LastSelected: 2
 --- !u!114 &12
+>>>>>>> Tyler
+=======
+--- !u!114 &10
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -768,14 +1159,30 @@ MonoBehaviour:
   m_MaxSize: {x: 10000, y: 10000}
   m_TitleContent:
     m_Text: Project
+<<<<<<< HEAD
+    m_Image: {fileID: -5179483145760003458, guid: 0000000000000000d000000000000000, type: 0}
+=======
     m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000, type: 0}
+>>>>>>> Tyler
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+    y: 779.3334
+    width: 1435
+    height: 198.33331
+=======
     y: 775
     width: 1466
     height: 224
+>>>>>>> Tyler
+=======
+    y: 688.6667
+    width: 1302.3334
+    height: 289
+>>>>>>> Aiden
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -793,12 +1200,37 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< HEAD
+<<<<<<< HEAD
+    - Assets/Models
+=======
     - Assets/Scripts/UI
+>>>>>>> Tyler
+=======
+    - Assets/Scripts/Projectiles
+>>>>>>> Aiden
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
+<<<<<<< HEAD
+<<<<<<< HEAD
+  - Assets/Models
+=======
+  - Assets/Scripts/Projectiles
+>>>>>>> Aiden
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: C:\Users\agimp\OneDrive\Documents\GitHub\4th Year\GirlForestGame\GirlForestGame
+  m_LockTracker:
+    m_IsLocked: 0
+  m_FolderTreeState:
+<<<<<<< HEAD
+    scrollPos: {x: 0, y: 300}
+    m_SelectedIDs: ee730000
+    m_LastClickedID: 29678
+    m_ExpandedIDs: 00000000c0730000c2730000c4730000e8730000f8730000fe73000000ca9a3b
+=======
   - Assets/Scripts/UI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Tyler\Documents\Repositories\GirlForestGame\GirlForestGame
@@ -809,6 +1241,13 @@ MonoBehaviour:
     m_SelectedIDs: 96720000
     m_LastClickedID: 29334
     m_ExpandedIDs: 00000000a27000008e72000000ca9a3b
+>>>>>>> Tyler
+=======
+    scrollPos: {x: 0, y: 275}
+    m_SelectedIDs: a0700000
+    m_LastClickedID: 28832
+    m_ExpandedIDs: 00000000686e00005270000000ca9a3b
+>>>>>>> Aiden
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -836,7 +1275,15 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+    m_ExpandedIDs: 00000000c0730000c2730000c473000000ca9a3b
+=======
     m_ExpandedIDs: 00000000a270000000ca9a3b
+>>>>>>> Tyler
+=======
+    m_ExpandedIDs: 00000000686e000000ca9a3b
+>>>>>>> Aiden
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -861,10 +1308,20 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
+<<<<<<< HEAD
+=======
+    m_SelectedInstanceIDs: a60d0000
+    m_LastClickedInstanceID: 3494
+>>>>>>> Aiden
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c6230000
+=======
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000407400004c740000
+>>>>>>> Tyler
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -880,7 +1337,15 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
+<<<<<<< HEAD
+<<<<<<< HEAD
+      m_ClientGUIView: {fileID: 10}
+=======
       m_ClientGUIView: {fileID: 0}
+>>>>>>> Tyler
+=======
+      m_ClientGUIView: {fileID: 9}
+>>>>>>> Aiden
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -891,8 +1356,17 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
+<<<<<<< HEAD
+  m_DirectoriesAreaWidth: 207
+<<<<<<< HEAD
+--- !u!114 &12
+=======
   m_DirectoriesAreaWidth: 149
 --- !u!114 &13
+>>>>>>> Tyler
+=======
+--- !u!114 &11
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -908,18 +1382,102 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Console
-    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
+<<<<<<< HEAD
+    m_Image: {fileID: -4950941429401207979, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 635
-    width: 1466
-    height: 364
+    y: 813.3334
+    width: 1302.3334
+    height: 164.33331
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
+--- !u!114 &12
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Animator
+    m_Image: {fileID: 1711060831702674872, guid: 0000000000000000d000000000000000, type: 0}
+=======
+    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
+>>>>>>> Tyler
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+<<<<<<< HEAD
+<<<<<<< HEAD
+    y: 701.3334
+    width: 1435
+    height: 276.3333
+=======
+    y: 635
+    width: 1466
+    height: 364
+>>>>>>> Tyler
+=======
+    y: 750
+    width: 1302.3334
+    height: 227.66669
+>>>>>>> Aiden
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+<<<<<<< HEAD
+  m_ViewTransforms:
+    m_KeySerializationHelper:
+    - {fileID: 8760450671090587685, guid: 50707e94767e6e14f9280f9bc479f02d, type: 2}
+    m_ValueSerializationHelper:
+    - e00: 0.40640602
+      e01: 0
+      e02: 0
+      e03: 125.766846
+      e10: 0
+      e11: 0.40640602
+      e12: 0
+      e13: 58.771885
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  m_PreviewAnimator: {fileID: 0}
+  m_AnimatorController: {fileID: 9100000, guid: 50707e94767e6e14f9280f9bc479f02d, type: 2}
+  m_BreadCrumbs:
+  - m_Target: {fileID: 8760450671090587685, guid: 50707e94767e6e14f9280f9bc479f02d, type: 2}
+    m_ScrollPosition: {x: 0, y: 0}
+  stateMachineGraph: {fileID: 0}
+  stateMachineGraphGUI: {fileID: 0}
+  blendTreeGraph: {fileID: 0}
+  blendTreeGraphGUI: {fileID: 0}
+  m_AutoLiveLink: 1
+  m_MiniTool: 0
+  m_LockTracker:
+    m_IsLocked: 0
+  m_CurrentEditor: 1
+  m_LayerEditor:
+    m_SelectedLayerIndex: 0
+<<<<<<< HEAD
+=======
+>>>>>>> Tyler
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -932,26 +1490,47 @@ MonoBehaviour:
   m_Script: {fileID: 12071, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_TitleContent:
+    m_Text: Animation
+    m_Image: {fileID: -3237396543322336831, guid: 0000000000000000d000000000000000, type: 0}
+=======
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Animation
     m_Image: {fileID: -8166618308981325432, guid: 0000000000000000d000000000000000, type: 0}
+>>>>>>> Tyler
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
+    y: 518
+    width: 1435
+    height: 459.66666
+=======
     y: 775
     width: 1466
     height: 224
+>>>>>>> Tyler
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
+<<<<<<< HEAD
+  m_LastSelectedObjectID: 27868
+=======
   m_LastSelectedObjectID: 28154
+>>>>>>> Tyler
 --- !u!114 &15
+=======
+--- !u!114 &13
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -961,11 +1540,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
+<<<<<<< HEAD
+  m_Name: InspectorWindow
+=======
   m_Name: 
+>>>>>>> Tyler
+=======
+  m_Name: 
+>>>>>>> Aiden
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD
+    x: 1436
+=======
+    x: 1303.3334
+>>>>>>> Aiden
+    y: 0
+    width: 403.33325
+    height: 926
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 14}
+  m_Panes:
+  - {fileID: 14}
+  m_Selected: 0
+<<<<<<< HEAD
+  m_LastSelected: 1
+=======
     x: 1467
     y: 0
     width: 453
@@ -977,7 +1582,12 @@ MonoBehaviour:
   - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 0
+>>>>>>> Tyler
 --- !u!114 &16
+=======
+  m_LastSelected: 0
+--- !u!114 &14
+>>>>>>> Aiden
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -993,6 +1603,16 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Inspector
+<<<<<<< HEAD
+    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1303.3334
+    y: 72.66667
+    width: 402.33325
+    height: 905
+=======
     m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
@@ -1001,6 +1621,7 @@ MonoBehaviour:
     y: 73
     width: 452
     height: 926
+>>>>>>> Tyler
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1008,13 +1629,55 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
+<<<<<<< HEAD
+<<<<<<< HEAD
+    m_CachedPref: -389
+=======
     m_CachedPref: 160
+>>>>>>> Tyler
+=======
+    m_CachedPref: 160
+>>>>>>> Aiden
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: 3494
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
+<<<<<<< HEAD
+<<<<<<< HEAD
+--- !u!114 &17
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12141, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 300, y: 360}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Navigation
+    m_Image: {fileID: 1087843850482249999, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1436
+    y: 72.66667
+    width: 269.66675
+    height: 905
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+=======
+>>>>>>> Tyler
+=======
+>>>>>>> Aiden

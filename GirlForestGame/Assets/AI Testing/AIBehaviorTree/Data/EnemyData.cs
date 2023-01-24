@@ -16,11 +16,13 @@ public class EnemyData : MonoBehaviour
     //Cooldown between each attack from the condition
     public float actionCooldown = 0f;
 
+    public float enemyMaxSpeed { get; private set; } = 5;
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
 
     //reference to navmesh for knockback
-    NavMeshAgent mesh;
+    public NavMeshAgent agent { get; private set; }
+
     Rigidbody body;
     PlayerController player;
     bool isDead;
@@ -28,7 +30,6 @@ public class EnemyData : MonoBehaviour
     //CHANGE THIS TO BE MORE FLEXIBLE
     protected Forms form = Forms.Living;
     public Forms Form { get { return form; } }
-
 
     private void OnEnable()
     {
@@ -39,7 +40,7 @@ public class EnemyData : MonoBehaviour
     private void Start()
     {
         body = GetComponent<Rigidbody>();
-        mesh = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         player = PlayerController.Instance;
     }
 
@@ -48,10 +49,7 @@ public class EnemyData : MonoBehaviour
     {
         if (!isDead)
         {
-            if (actionCooldown > 0)
-            {
-                actionCooldown -= Time.deltaTime;
-            }
+            //RunCooldownTimer();
 
             transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
         }
@@ -149,5 +147,13 @@ public class EnemyData : MonoBehaviour
 
         direction.y = 0f;
         body.AddForce(direction.normalized * knockBack, ForceMode.VelocityChange);
+    }
+
+    public void RunCooldownTimer()
+    {
+        if (actionCooldown > 0)
+        {
+            actionCooldown -= Time.deltaTime;
+        }
     }
 }

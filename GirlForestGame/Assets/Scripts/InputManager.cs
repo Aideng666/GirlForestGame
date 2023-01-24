@@ -27,7 +27,8 @@ public class InputManager : MonoBehaviour
     InputAction moveSelectionAction;
 
     //Global Controls
-     public InputAction openInventoryAction;
+    [HideInInspector] public InputAction openInventoryAction;
+    [HideInInspector] public InputAction pauseAction; 
 
     InputAction proceedAction;
 
@@ -38,7 +39,6 @@ public class InputManager : MonoBehaviour
 
         //controls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
-
 
         playerInput.actions.FindActionMap("Player").Disable();
         playerInput.actions.FindActionMap("NodeMap").Enable();
@@ -60,6 +60,7 @@ public class InputManager : MonoBehaviour
         selectNodeAction = playerInput.actions["SelectNode"];
         moveSelectionAction = playerInput.actions["MoveSelection"];
         openInventoryAction = playerInput.actions["OpenInventory"];
+        pauseAction = playerInput.actions["Pause"];
 
         openInventoryAction.started += ToggleInventory;
 
@@ -252,6 +253,11 @@ public class InputManager : MonoBehaviour
         return false;
     }
 
+    public bool Pause()
+    {
+        return pauseAction.triggered;
+    }
+
     void ToggleInventory(InputAction.CallbackContext ctx)
     {
         PlayerController.Instance.playerInventory.ToggleInventory();
@@ -259,6 +265,6 @@ public class InputManager : MonoBehaviour
 
     public bool Proceed()
     {
-        return proceedAction.triggered;          
+        return proceedAction.triggered;
     }
 }

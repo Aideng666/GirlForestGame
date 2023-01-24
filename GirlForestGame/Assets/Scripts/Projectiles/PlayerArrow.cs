@@ -88,6 +88,21 @@ public class PlayerArrow : MonoBehaviour
                     }
 
                     break;
+
+                case Elements.Wind:
+
+                    if (target == null)
+                    {
+                        transform.forward = player.aimDirection;
+                        GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
+                    }
+                    else
+                    {
+                        transform.LookAt(target.transform);
+                        GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+                    }
+
+                    break;
             }
         }
     }
@@ -144,6 +159,12 @@ public class PlayerArrow : MonoBehaviour
         if (_element == Elements.Fire)
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.FireArrow, new Vector3(transform.position.x, 0, transform.position.z), arrowChargePercentage);
+
+            Destroy(gameObject);
+        }
+        else if (_element == Elements.Wind)
+        {
+            ParticleManager.Instance.SpawnParticle(ParticleTypes.WindArrow, new Vector3(transform.position.x, 1, transform.position.z), arrowChargePercentage);
 
             Destroy(gameObject);
         }

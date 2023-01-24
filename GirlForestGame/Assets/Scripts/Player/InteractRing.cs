@@ -22,6 +22,7 @@ public class InteractRing : MonoBehaviour
 
             if (interactablesInRange.Count > 1)
             {
+                //Selects closest in range
                 foreach (GameObject interactable in interactablesInRange)
                 {
                     if (Vector3.Distance(PlayerController.Instance.transform.position, interactable.transform.position) < Vector3.Distance(PlayerController.Instance.transform.position, selectedObject.transform.position))
@@ -31,37 +32,53 @@ public class InteractRing : MonoBehaviour
                 }
             }
 
-            selectedObject.GetComponent<ShopItem>().SetText();
+            //Sets text for the interactables
+            selectedObject.GetComponent<InteractableObject>().SetText();
+
             foreach (GameObject interactable in interactablesInRange)
             {
                 if (selectedObject != interactable)
                 {
-                    interactable.GetComponent<ShopItem>().HideText();
+                    interactable.GetComponent<InteractableObject>().HideText();
                 }
             }
+        }
+        else
+        {
+            selectedObject = null;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out ShopItem shopItem))
+        if (other.gameObject.TryGetComponent(out InteractableObject item))
         {
-            interactablesInRange.Add(shopItem.gameObject);
+            interactablesInRange.Add(item.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out ShopItem shopItem))
+        if (other.gameObject.TryGetComponent(out InteractableObject item))
         {
-            if (selectedObject == shopItem.gameObject)
+            if (selectedObject == item.gameObject)
             {
                 selectedObject = null;
             }
 
-            interactablesInRange.Remove(shopItem.gameObject);
+            interactablesInRange.Remove(item.gameObject);
 
-            shopItem.HideText();
+            item.HideText();
         }
+    }
+
+    public void SetSelectedObject(GameObject selected)
+    {
+        selectedObject = selected;
+    }
+
+    public void ResetInteractablesInRange()
+    {
+        interactablesInRange = new List<GameObject>();
     }
 }

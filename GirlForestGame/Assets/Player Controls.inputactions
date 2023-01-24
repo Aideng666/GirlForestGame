@@ -540,9 +540,18 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "35a8629a-f7a1-40bd-9a0d-4161e8f21fc7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ProceedAction",
                     "type": "Button",
-                    "id": "fae88011-54ec-4df8-9bbd-50e6b01231a5",
+                    "id": "2d4c803f-ec28-42a9-9449-ae103dbbaf59",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -585,8 +594,30 @@
                 },
                 {
                     "name": "",
-                    "id": "5b55e89c-11ec-454b-a03b-bbe9ce3b306f",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "97369730-5ccf-47ba-8015-360ed5776768",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d1db63b-ea78-4e03-a683-fa57111de90e",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "101b5ed9-76db-4ce5-a380-c6fd8e50f624",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -596,8 +627,8 @@
                 },
                 {
                     "name": "",
-                    "id": "17cf61ff-3309-4edf-8f02-b3f65615bf16",
-                    "path": "<Mouse>/leftButton",
+                    "id": "aa4774b7-e961-4d6d-b57c-40b8e9f668ab",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

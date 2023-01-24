@@ -4825,3 +4825,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a5e90a03790a148b4f972239debc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleType: 1
+  childParticle: 2

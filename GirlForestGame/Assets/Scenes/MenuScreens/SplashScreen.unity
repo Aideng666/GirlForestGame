@@ -1508,6 +1508,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  pauseAction:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 152dff41-3c57-4081-ac31-ff2ccb4df6cc
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &859405468
 MonoBehaviour:
   m_ObjectHideFlags: 0
