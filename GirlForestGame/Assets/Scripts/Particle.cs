@@ -8,15 +8,22 @@ public class Particle : MonoBehaviour
     [SerializeField] ParticleTypes childParticle = ParticleTypes.None;
     ParticleSystem particle;
 
+    LayerMask livingLayer;
+    LayerMask spiritLayer;
+
     // Start is called before the first frame update
     void Start()
     {
+        livingLayer = LayerMask.NameToLayer("PlayerLiving");
+        spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
         particle = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        gameObject.layer = PlayerController.Instance.gameObject.layer;
+
         if (!particle.isPlaying)
         {
             if (childParticle != ParticleTypes.None)
