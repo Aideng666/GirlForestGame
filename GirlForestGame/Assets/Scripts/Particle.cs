@@ -8,15 +8,37 @@ public class Particle : MonoBehaviour
     [SerializeField] ParticleTypes childParticle = ParticleTypes.None;
     ParticleSystem particle;
 
+    LayerMask livingLayer;
+    LayerMask spiritLayer;
+    LayerMask defaultLayer;
+
     // Start is called before the first frame update
     void Start()
     {
+        livingLayer = LayerMask.NameToLayer("EnemyLiving");
+        spiritLayer = LayerMask.NameToLayer("EnemySpirit");
+        defaultLayer = LayerMask.NameToLayer("Default");
         particle = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        int colliderLayerMask = (1 << defaultLayer);
+
+        if (PlayerController.Instance.playerCombat.Form == Forms.Living)
+        {
+            gameObject.layer = livingLayer;
+            colliderLayerMask |= (1 << livingLayer);
+            colliderLayerMask &= ~(1 << spiritLayer);
+        }
+        else
+        {
+            gameObject.layer = spiritLayer;
+            colliderLayerMask |= (1 << spiritLayer);
+            colliderLayerMask &= ~(1 << livingLayer);
+        }
+
         if (!particle.isPlaying)
         {
             if (childParticle != ParticleTypes.None)
@@ -31,7 +53,7 @@ public class Particle : MonoBehaviour
 
         if (particleType == ParticleTypes.WindArrow)
         {
-            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius, colliderLayerMask);
 
             foreach (Collider collision in collidersInRange)
             {
@@ -43,7 +65,7 @@ public class Particle : MonoBehaviour
         }
         else if (particleType == ParticleTypes.WindArrow2)
         {
-            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius, colliderLayerMask);
 
             foreach (Collider collision in collidersInRange)
             {
