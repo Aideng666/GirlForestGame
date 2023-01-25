@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8896277112045657452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Bow/Wind Mark
+  m_EditorClassIdentifier: 
+  Name: Wind Mark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3384103917
+    data2: 2437845430
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-8618195615685439471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20,7 +44,7 @@ MonoBehaviour:
     Data4: 1942763737
   Banks:
   - {fileID: -5003194148719884625}
-  - {fileID: -6251309486437539833}
+  - {fileID: -6431827650137564339}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -30,7 +54,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 600
---- !u!114 &-6251309486437539833
+--- !u!114 &-7583945043810400079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/Fieldfire
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/Fieldfire
+  Guid:
+    Data1: 1222362810
+    Data2: 1240232332
+    Data3: 1834010043
+    Data4: 848994211
+  Banks:
+  - {fileID: -6564172777338818758}
+  - {fileID: -6431827650137564339}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6564172777338818758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,16 +92,90 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
+  m_Name: bank:/Environment.bank
   m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638090261444939392
+  Path: FMOD/Build/Desktop/Environment.bank
+  Name: Environment
+  StudioPath: bank:/Environment
+  lastModified: 638101072425827761
   FileSizes:
   - Name: Desktop
-    Value: 182016
+    Value: 1548
   Exists: 1
+--- !u!114 &-6431827650137564339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Player.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Player.bank
+  Name: Player
+  StudioPath: bank:/Player
+  lastModified: 638101072428258450
+  FileSizes:
+  - Name: Desktop
+    Value: 542944
+  Exists: 1
+--- !u!114 &-5535523908280687748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Bow/Fire Mark
+  m_EditorClassIdentifier: 
+  Name: Fire Mark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2123498595
+    data2: 375163882
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-5455571572187115738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Charge
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Charge
+  Guid:
+    Data1: 906979528
+    Data2: 1313502078
+    Data3: -589234533
+    Data4: -54052057
+  Banks:
+  - {fileID: -6431827650137564339}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 7403268328946493463}
+  - {fileID: -3957893216712080567}
+  - {fileID: 2962816796061979821}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 254
 --- !u!114 &-5003194148719884625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,10 +191,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638090261444483182
+  lastModified: 638101072426886215
   FileSizes:
   - Name: Desktop
-    Value: 172128
+    Value: 387616
   Exists: 1
 --- !u!114 &-4839324148640367417
 MonoBehaviour:
@@ -85,10 +211,58 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638090261444553044
+  lastModified: 638101072426936084
   FileSizes:
   - Name: Desktop
-    Value: 1204
+    Value: 1496
+  Exists: 1
+--- !u!114 &-3957893216712080567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charge/Wind Mark
+  m_EditorClassIdentifier: 
+  Name: Wind Mark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3384103917
+    data2: 2437845430
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-3844704879653187092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/SPShot
+  m_EditorClassIdentifier: 
+  Name: SPShot
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4262409882
+    data2: 3205451469
+  Type: 0
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &-1590239985068814445
 MonoBehaviour:
@@ -138,33 +312,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-1324383976730068739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/SpecialShot
-  m_EditorClassIdentifier: 
-  Path: event:/Player/SpecialShot
-  Guid:
-    Data1: 775043102
-    Data2: 1261431203
-    Data3: -359893064
-    Data4: 425971023
-  Banks:
-  - {fileID: -6251309486437539833}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-1105851744753048582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,40 +332,16 @@ MonoBehaviour:
     Data4: -623202662
   Banks:
   - {fileID: -5003194148719884625}
-  - {fileID: -6251309486437539833}
+  - {fileID: -6431827650137564339}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 2112317157986752100}
-  - {fileID: -227750698741311241}
+  - {fileID: -8896277112045657452}
+  - {fileID: -5535523908280687748}
   MinDistance: 1
   MaxDistance: 20
-  Length: 100
---- !u!114 &-227750698741311241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Bow/Fire Totem
-  m_EditorClassIdentifier: 
-  Name: Fire Totem
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2123498595
-    data2: 375163882
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Length: 1400
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,20 +358,53 @@ MonoBehaviour:
   - {fileID: -4839324148640367417}
   - {fileID: -5003194148719884625}
   - {fileID: 6378734843394525912}
-  - {fileID: -6251309486437539833}
+  - {fileID: 4826569370257597100}
+  - {fileID: -6564172777338818758}
+  - {fileID: -6431827650137564339}
+  - {fileID: 4641619776582512156}
   EditorEvents:
   - {fileID: -8618195615685439471}
   - {fileID: -1105851744753048582}
   - {fileID: 1583043428430734625}
-  - {fileID: -1324383976730068739}
   - {fileID: 6580124295716502370}
+  - {fileID: -5455571572187115738}
+  - {fileID: 5944851507903417401}
+  - {fileID: -7583945043810400079}
+  - {fileID: 324940077775498066}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5003194148719884625}
   StringsBanks:
   - {fileID: -4839324148640367417}
-  cacheTime: 638090261444939392
+  cacheTime: 638101072428299635
   cacheVersion: 131592
+--- !u!114 &324940077775498066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Draw
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Draw
+  Guid:
+    Data1: 945641847
+    Data2: 1217834966
+    Data3: 1891553413
+    Data4: 207115751
+  Banks:
+  - {fileID: -6431827650137564339}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 391
 --- !u!114 &722742311149711009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,9 +415,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Arrow/Wind Totem
+  m_Name: parameter:/Arrow/Wind Mark
   m_EditorClassIdentifier: 
-  Name: Wind Totem
+  Name: Wind Mark
   StudioPath: 
   Min: 0
   Max: 1
@@ -283,9 +439,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Sword/Fire Totem
+  m_Name: parameter:/Sword/Fire Mark
   m_EditorClassIdentifier: 
-  Name: Fire Totem
+  Name: Fire Mark
   StudioPath: 
   Min: 0
   Max: 1
@@ -316,40 +472,17 @@ MonoBehaviour:
     Data3: 1936641173
     Data4: -673207744
   Banks:
-  - {fileID: -6251309486437539833}
+  - {fileID: -6431827650137564339}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
   - {fileID: 722742311149711009}
   - {fileID: 2785074538500511334}
+  - {fileID: -3844704879653187092}
   MinDistance: 1
   MaxDistance: 20
-  Length: 470
---- !u!114 &2112317157986752100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Bow/Wind Totem
-  m_EditorClassIdentifier: 
-  Name: Wind Totem
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3384103917
-    data2: 2437845430
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Length: 940
 --- !u!114 &2785074538500511334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,9 +493,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Arrow/Fire Totem
+  m_Name: parameter:/Arrow/Fire Mark
   m_EditorClassIdentifier: 
-  Name: Fire Totem
+  Name: Fire Mark
   StudioPath: 
   Min: 0
   Max: 1
@@ -374,6 +507,97 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &2962816796061979821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charge/SPShot
+  m_EditorClassIdentifier: 
+  Name: SPShot
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4262409882
+    data2: 3205451469
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4641619776582512156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/UI.bank
+  Name: UI
+  StudioPath: bank:/UI
+  lastModified: 638101072428299635
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
+--- !u!114 &4826569370257597100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Enemy.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Enemy.bank
+  Name: Enemy
+  StudioPath: bank:/Enemy
+  lastModified: 638101072425224314
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
+--- !u!114 &5944851507903417401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/Ambience
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/Ambience
+  Guid:
+    Data1: 209279232
+    Data2: 1273830358
+    Data3: -1314846837
+    Data4: -1839314968
+  Banks:
+  - {fileID: -6564172777338818758}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6283552947130150861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,9 +608,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Sword/Wind Totem
+  m_Name: parameter:/Sword/Wind Mark
   m_EditorClassIdentifier: 
-  Name: Wind Totem
+  Name: Wind Mark
   StudioPath: 
   Min: 0
   Max: 1
@@ -413,7 +637,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638090261444049175
+  lastModified: 638101072425184576
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -437,7 +661,7 @@ MonoBehaviour:
     Data3: -319374439
     Data4: -21184420
   Banks:
-  - {fileID: -6251309486437539833}
+  - {fileID: -6431827650137564339}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -446,4 +670,28 @@ MonoBehaviour:
   - {fileID: 6283552947130150861}
   MinDistance: 1
   MaxDistance: 20
-  Length: 1906
+  Length: 1750
+--- !u!114 &7403268328946493463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Charge/Fire Mark
+  m_EditorClassIdentifier: 
+  Name: Fire Mark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2123498595
+    data2: 375163882
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
