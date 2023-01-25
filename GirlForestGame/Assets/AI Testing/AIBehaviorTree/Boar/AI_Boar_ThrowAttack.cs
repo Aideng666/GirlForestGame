@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MEC;
 
 public class AI_Boar_ThrowAttack : AI_BaseClass
 {
@@ -10,40 +11,65 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
      parameters in the animator    
      */
     public string triggerParameter = "Projectile_Has_Returned";
-    
-    AI_BoarEnemyClass boarParentClass;
-    bool hasThrown = false;
 
-    public void setProjectileStatus(bool hasReturned) 
-    {
-        hasThrown = hasReturned;
-    }
+    [SerializeField] float duration = 1f;
+    Transform projectile;
+    BezierCurve curve;
+    
+    //AI_BoarEnemyClass boarParentClass;
+    bool projectileHasReturned = false;
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
         //sets the state in the machine so it can/can't leave the thrown state
-        if (hasThrown)
+        if (projectileHasReturned)
         {
             animator.SetTrigger(triggerParameter);
-            hasThrown = false;
+            projectileHasReturned = false;
         }
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        base.OnStateEnter(animator, stateInfo, layerIndex);
         //It's pretty stupid to do this eeverytime we enter the state but I don't have another way of setting this at this time
         //It's the only way that I could figure out how to throw a projectile 
-        boarParentClass =  animator.GetComponentInParent<AI_BoarEnemyClass>();
-        boarParentClass.ThrowProjectile(this);
+        //boarParentClass =  animator.GetComponentInParent<AI_BoarEnemyClass>();
+        //boarParentClass.ThrowProjectile(this);
+        agent.speed = 0;
+
+        //Using MEC to run the coroutine
+        projectile = animator.transform.GetChild(0);
+        curve = animator.GetComponentInChildren<BezierCurve>();
+        Timing.RunCoroutine(_projectileAnimation().CancelWith(animator.gameObject));
+
+    }
+    IEnumerator<float> _projectileAnimation()
+    {
+        curve.GetAnchorPoints()[2].transform.position = PlayerController.Instance.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[3].transform.position = PlayerController.Instance.transform.position + Vector3.up;
+
+        for (float time = 0; time < duration; time += Time.deltaTime)
+        {
+            projectile.position = curve.GetPointAt(time / duration);
+            //transform.localRotation = Quaternion.Euler(0f, 360f * time / duration, 0f); //Spinning
+            yield return Timing.WaitForOneFrame;
+        }
+
+        projectileHasReturned = true; //The projectile has returned and can now change states back to tracking if the player has moved too far away
     }
 
+
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    hasThrown = false;
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        foreach (var cond in conditions)
+        {
+            cond.ResetCondition(animator);
+        }
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
 
     bool deathStarted;
+    bool roomTransitionStarted;
 
     public static PlayerController Instance { get; set; }
 
@@ -87,6 +88,8 @@ public class PlayerController : MonoBehaviour
             if (!playerCombat.isAttacking)
             {
                 Move();
+
+                Interact();
             }
         }
 
@@ -172,40 +175,105 @@ public class PlayerController : MonoBehaviour
         playerCombat.SelectBowTargetEnemy();
     }
 
-    void Die()
+    void Interact()
+    {
+        GameObject itemToInteract = GetComponentInChildren<InteractRing>().selectedObject;
+
+        if (itemToInteract != null && InputManager.Instance.Interact())
+        {
+            if (itemToInteract.TryGetComponent(out InteractableObject item))
+            {
+                item.Pickup();
+            }
+        }
+    }
 
-    {
+    void Die()
+    {
+        print("Died");
+
+        deathStarted = true;
+    }
 
-        print("Died");
-
-
-
-        deathStarted = true;
-
+    public bool MouseControlActive()
+    {
+        return controlWithMouse;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //To transition from room to room
-        if (collision.gameObject.CompareTag("Exit"))
-        {
-            UIManager.Instance.GetFadePanel().BeginRoomTransition();
+        switch(collision.gameObject.tag)
+        {
+            //To transition from room to room
+            case "Exit":
+
+                UIManager.Instance.GetFadePanel().BeginRoomTransition();
+
+                if (!roomTransitionStarted)
+                {
+                    StartCoroutine(EnterNewRoom(
+                        DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
+                        DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]
+                        .GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
+                        .transform.parent.transform.position, DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())));
+                }
+
+                break;
+
+            //To transition to the node map after completing a full floor
+            case "FloorExit":
+
+                NodeMapManager.Instance.SetNextLevel();
+
+                break;
+
+            //Might need to be changed
+            case "Enemy":
+
+                playerCombat.TakeDamage();
+                playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
+
+                break;
+        }
+    }
 
-            StartCoroutine(EnterNewRoom(
-                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()],
-                DungeonGenerator.Instance.GetCurrentRoom().GetConnectedRooms()[(int)collision.gameObject.GetComponent<RoomExit>().GetExitDirection()]
-                .GetDoors()[(int)DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())]
-                .transform.parent.transform.position, DungeonGenerator.Instance.ReverseDirection(collision.gameObject.GetComponent<RoomExit>().GetExitDirection())));
-        }
-        //To transition to the node map after completing a full floor
-        if (collision.gameObject.CompareTag("FloorExit"))
-        {
-            NodeMapManager.Instance.SetNextLevel();
-        }
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "HalfHeart":
+
+                if (playerAttributes.Health < playerAttributes.MaxHealth)
+                {
+                    playerAttributes.Health += 1;
+                    PickupPool.Instance.AddHalfHeart(other.gameObject);
+                }
+
+                break;
+
+            case "Heart":
+
+                if (playerAttributes.Health < playerAttributes.MaxHealth)
+                {
+                    playerAttributes.Health += 2;
+                    PickupPool.Instance.AddHeart(other.gameObject);
+                }
+
+                break;
+
+            case "Coin":
+
+                playerInventory.ModifyMoney(1);
+                PickupPool.Instance.AddCoin(other.gameObject);
+
+                break;
+        }
     }
 
     IEnumerator EnterNewRoom(Room room, Vector3 updatedPlayerPos, Directions dirOfPrevRoom)
     {
+        roomTransitionStarted = true;
+
         yield return new WaitForSeconds(UIManager.Instance.GetFadePanel().GetTransitionTime() / 2);
 
         DungeonGenerator.Instance.SetCurrentRoom(room);
@@ -215,6 +283,8 @@ public class PlayerController : MonoBehaviour
         Minimap.Instance.VisitRoom(room, dirOfPrevRoom);
 
         yield return null;
+
+        roomTransitionStarted = false;
     }
 
 }

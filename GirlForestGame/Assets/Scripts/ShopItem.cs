@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using TMPro;
 
-public class ShopItem : MonoBehaviour
+public class ShopItem : InteractableObject
 {
-    [SerializeField] TextMeshProUGUI priceText;
+    [SerializeField] ShopItemTypes itemType;
     ShopItemInfo itemInfo;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        ChooseItem();
+    TotemObject chosenTotem;
+    int healthOption; // 0 = half heart | 1 = full heart
 
-        //priceText.transform.parent.rotation = Quaternion.Euler(30, 45, 0);
+    protected override void Start()
+    {
+        base.Start();
+
+        ChooseItem();
     }
 
     // Update is called once per frame
@@ -26,16 +27,47 @@ public class ShopItem : MonoBehaviour
     void ChooseItem()
     {
         ShopItemInfo[] possibleItems = TypeHandler.GetAllInstances<ShopItemInfo>("ShopItems");
-        int randomIndex = Random.Range(0, possibleItems.Length);
 
-        itemInfo = possibleItems[randomIndex];
+        if (itemType == ShopItemTypes.None)
+        {
+            int randomIndex = Random.Range(0, possibleItems.Length);
 
-        priceText.text = $"{itemInfo.value}";
+            itemInfo = possibleItems[randomIndex];
+        }
+        else if (itemType == ShopItemTypes.Health)
+        {
+            List<ShopItemInfo> healthItems = new List<ShopItemInfo>();
+
+            foreach (ShopItemInfo item in possibleItems)
+            {
+                if (item.itemType == itemType)
+                {
+                    healthItems.Add(item);
+                }
+            }
+
+            itemInfo = healthItems[Random.Range(0, 2)];
+        }
+        else
+        {
+            foreach (ShopItemInfo item in possibleItems)
+            {
+                if (item.itemType == itemType)
+                {
+                    itemInfo = item;
+                }
+            }
+        }
+
+        if (itemInfo.item.TryGetComponent(out TotemPickup totem))
+        {
+            chosenTotem = totem.GetRandomTotem();
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public override void Pickup()
     {
-        if (collision.gameObject.CompareTag("Player") && PlayerController.Instance.playerInventory.GetMoneyAmount() >= itemInfo.value)
+        if (PlayerController.Instance.playerInventory.GetMoneyAmount() >= itemInfo.value)
         {
             float randomXDir = Random.Range(-1f, 1f);
             float randomZDir = Random.Range(-1f, 1f);
@@ -43,11 +75,45 @@ public class ShopItem : MonoBehaviour
 
             PlayerController.Instance.playerInventory.ModifyMoney(-itemInfo.value);
 
-            GameObject item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity);
+            GameObject item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
-            item.transform.DOJump(itemInfo.item.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
+            item.transform.DOJump(item.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
+
+            if (item.TryGetComponent(out TotemPickup totem))
+            {
+                totem.ChooseTotem(chosenTotem);
+            }
 
             gameObject.SetActive(false);
         }
     }
+
+    public override void SetText()
+    {
+        popupText.enabled = true;
+
+        switch(itemType)
+        {
+            case ShopItemTypes.Totem:
+
+                popupText.text = $"{chosenTotem.Totem.totemName} - {itemInfo.value}";
+
+                break;
+
+            case ShopItemTypes.Health:
+
+                popupText.text = $"{itemInfo.value}";
+
+                break;
+        }
+    }
 }
+
+public enum ShopItemTypes
+{
+    None,
+    Totem,
+    Health,
+    Marking
+}
+

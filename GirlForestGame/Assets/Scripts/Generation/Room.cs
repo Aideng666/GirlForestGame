@@ -25,11 +25,23 @@ public class Room : MonoBehaviour
 
     public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
 
+    private void OnEnable()
+    {
+        if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
+        {
+            roomCompleted = false;
+
+            for (int i = 0; i < Random.Range(3, 6); i++)
+            {
+                EnemyPool.Instance.GetBoarFromPool();
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        //TEMP
-        roomCompleted = true;
+        
     }
 
     // Update is called once per frame
@@ -58,6 +70,10 @@ public class Room : MonoBehaviour
                     }
                 }
             }
+        }
+        else if (EnemyPool.Instance.availableBoars.Count % 5 == 0)
+        {
+            roomCompleted = true;
         }
     }
 
@@ -163,15 +179,13 @@ public class Room : MonoBehaviour
 
                     case NodeTypes.Marking:
 
-                        Instantiate(markingPrefab, transform.position + new Vector3(-5, 0, 5), Quaternion.identity, transform);
-                        Instantiate(markingPrefab, transform.position + new Vector3(5, 0, -5), Quaternion.identity, transform);
+                        DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Marking, true);
 
                         break;
 
                     case NodeTypes.Shop:
 
-                        Instantiate(shopItemPrefab, transform.position + new Vector3(-5, 0, 5), Quaternion.identity, transform);
-                        Instantiate(shopItemPrefab, transform.position + new Vector3(5, 0, -5), Quaternion.identity, transform);
+                        DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Shop, true);
 
                         break;
 
@@ -186,7 +200,7 @@ public class Room : MonoBehaviour
 
             case RoomTypes.Totem:
 
-                Instantiate(totemPrefab, transform);
+                roomCompleted = true;
 
                 break;
         }
