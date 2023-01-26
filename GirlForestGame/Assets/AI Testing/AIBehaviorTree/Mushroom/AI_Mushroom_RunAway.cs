@@ -1,29 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MEC;
 
-public class AI_Mushroom_Wander : AI_BaseClass
+public class AI_Mushroom_RunAway : AI_BaseClass
 {
-    [SerializeField] Vector2 randomTimingRange;
+    [SerializeField] float distanceMultiplier = 2f;
+    Vector3 vectorFromPlayer;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //On Enter because once it's complete it will go to another state 
         agent = animator.GetComponentInParent<UnityEngine.AI.NavMeshAgent>();
-        Timing.RunCoroutine(_moveOnTimer(animator).CancelWith(animator.gameObject));
-    }
+        //Written this way to ignored the y axis
+        vectorFromPlayer = Vector3.Normalize(Vector3.Scale(PlayerController.Instance.transform.position - animator.transform.position,Vector3.one - Vector3.up));
+        Vector3 destination = animator.transform.position - (vectorFromPlayer * distanceMultiplier);
 
-    IEnumerator<float> _moveOnTimer(Animator animator) 
-    {
-        bool loop = true;
-        while (loop)
+        RaycastHit hit;
+        if (Physics.Raycast(animator.transform.position, vectorFromPlayer, out hit,Vector3.Magnitude(destination))) 
         {
-            //Pick Random destination in room, move at low speed
-            agent.SetDestination(animator.transform.position + new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4)));
-
-            //Wait before moving again
-            yield return Timing.WaitForSeconds(Random.Range(randomTimingRange.x, randomTimingRange.y));
+            //Set destination to random location in the level
+            if (hit.collider.CompareTag("Environment"))
+            {
+                //TODO NOT MAKE THIS 0, 0
+                agent.SetDestination(Vector3.zero);
+            }
         }
+        agent.SetDestination(destination);
     }
 
     ////OnStateUpdate is handled in the AI_BaseClass////
@@ -37,6 +39,12 @@ public class AI_Mushroom_Wander : AI_BaseClass
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
+    //    // Implement code that processes and affects root motion
+    //    //if (agent.enabled)
+    //    //{
+    //    //    //do raycast
+    //    //    //do speed change
+    //    //}
     //}
 
     // OnStateIK is called right after Animator.OnAnimatorIK()
