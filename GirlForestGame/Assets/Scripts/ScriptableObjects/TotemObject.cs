@@ -139,8 +139,8 @@ public class HealthUpTotem : OnPickupTotem
 {
     public override void ApplyEffect()
     {
-        player.playerAttributes.MaxHealth += initialBuffAmount;
-        player.playerAttributes.Health += initialBuffAmount;
+        player.playerAttributes.MaxHealth += (int)initialBuffAmount;
+        player.playerAttributes.Health += (int)initialBuffAmount;
 
         effectApplied = true;
     }
@@ -426,7 +426,7 @@ public class ExtraLifeTotem : OnTriggerTotem
     {
         currentStackAmount = player.playerInventory.totemDictionary[typeof(ExtraLifeTotem)];
 
-        player.playerAttributes.Health += initialBuffAmount * currentStackAmount;
+        player.playerAttributes.Health += (int)initialBuffAmount * currentStackAmount;
     }
 }
 

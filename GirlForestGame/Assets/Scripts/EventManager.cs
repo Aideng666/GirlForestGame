@@ -10,6 +10,10 @@ public class EventManager : MonoBehaviour
     public static event OnHitAttack OnSwordHit;
     public static event OnHitAttack OnBowHit;
 
+    //General Events
+    public delegate void OnEvent();
+    public static event OnEvent OnHealthChange;
+
     public static EventManager Instance { get; set; }
 
     private void Awake()
@@ -31,6 +35,12 @@ public class EventManager : MonoBehaviour
     {
         OnBowHit?.Invoke(enemiesHit, Weapons.Bow, guaranteeActivation);
     }
+
+    public void InvokeOnHealthChange()
+    {
+        OnHealthChange?.Invoke();
+    }
+
 }
 
 public enum TotemEvents

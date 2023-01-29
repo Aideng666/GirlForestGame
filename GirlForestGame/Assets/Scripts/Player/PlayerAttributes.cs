@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerAttributes : MonoBehaviour
 {
     [Header("Default Player Attributes")]
-    [SerializeField] float defaultHealth = 6;
-    [SerializeField] float maximumHealth = 12;
+    [SerializeField] int defaultHealth = 6;
+    [SerializeField] int maximumHealth = 12;
     [SerializeField] float defaultSpeed;
     [SerializeField] float defaultSwordDamage;
     [SerializeField] float defaultBowDamage;
@@ -17,8 +17,8 @@ public class PlayerAttributes : MonoBehaviour
     [SerializeField] float defaultCritChance = 0.05f; // between 0 and 1 for 0%-100%
     [SerializeField] float defaultBowChargeTime = 3;
     [SerializeField] float defaultLuck = 0;
-    float currentMaxHealth;
-    float currentHealth;
+    int currentMaxHealth;
+    int currentHealth;
     float currentSpeed;
     float currentSwordDamage;
     float currentBowDamage;
@@ -30,11 +30,13 @@ public class PlayerAttributes : MonoBehaviour
     float currentBowChargeTime;
     float currentLuck;
 
-    public float MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value;
+    public int MaxHealth { get { return currentMaxHealth; } set { currentMaxHealth = value;
             if (currentMaxHealth > maximumHealth) currentMaxHealth = maximumHealth; } }
-    public float Health { get { return currentHealth; } set { currentHealth = value;
+    public int Health { get { return currentHealth; } set { currentHealth = value;
             if (currentHealth > currentMaxHealth) currentHealth = currentMaxHealth;
-            if (currentHealth < 0) currentHealth = 0;} }
+            if (currentHealth < 0) currentHealth = 0;
+            EventManager.Instance.InvokeOnHealthChange();
+        } }
     public float Speed { get { return currentSpeed; } set { currentSpeed = value; } }
     public float SwordDamage { get { return currentSwordDamage; } set { currentSwordDamage = value; } }
     public float BowDamage { get { return currentBowDamage; } set { currentBowDamage = value; } }
