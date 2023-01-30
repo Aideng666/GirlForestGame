@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AI_Mushroom_RunAway : AI_BaseClass
 {
     [SerializeField] float distanceMultiplier = 2f;
+    [SerializeField] float escapeTime = 1f;
     Vector3 vectorFromPlayer;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,8 +23,10 @@ public class AI_Mushroom_RunAway : AI_BaseClass
             //Set destination to random location in the level
             if (hit.collider.CompareTag("Environment"))
             {
+                Vector3 newLocation = Vector3.zero;
                 //TODO NOT MAKE THIS 0, 0
-                agent.SetDestination(Vector3.zero);
+                //agent.SetDestination(Vector3.zero);
+                animator.gameObject.transform.DOMove(newLocation, escapeTime);
             }
         }
         agent.SetDestination(destination);

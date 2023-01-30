@@ -46,9 +46,9 @@ public class EnemyData : MonoBehaviour
     //This timer is for the attack cooldown for AI, but at this time it's using the exit time to trigger when to allow it to attack again
     void Update() 
     {
+        //RunCooldownTimer();
         if (!isDead)
         {
-            //RunCooldownTimer();
 
             transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
         }

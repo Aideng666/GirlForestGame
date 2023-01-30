@@ -15,7 +15,9 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     [SerializeField] float duration = 1f;
     Transform projectile;
     BezierCurve curve;
-    
+
+
+    private CoroutineHandle projectileAnim;
     //AI_BoarEnemyClass boarParentClass;
     bool projectileHasReturned = false;
 
@@ -43,7 +45,7 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         //Using MEC to run the coroutine
         projectile = animator.transform.GetChild(0);
         curve = animator.GetComponentInChildren<BezierCurve>();
-        Timing.RunCoroutine(_projectileAnimation().CancelWith(animator.gameObject));
+        projectileAnim = Timing.RunCoroutine(_projectileAnimation().CancelWith(animator.gameObject));
 
     }
     IEnumerator<float> _projectileAnimation()
@@ -69,6 +71,9 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         {
             cond.ResetCondition(animator);
         }
+
+        //This is a safety net in case something malfunctions with MEC
+        Timing.KillCoroutines(projectileAnim);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
