@@ -1,16 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HUD : MonoBehaviour
 {
-    [Header("Hearts")]
+    [Header("Hearts Panel")]
     [SerializeField] GameObject heartPanel;
     [SerializeField] Sprite[] heartImages = new Sprite[5];
     [SerializeField] List<GameObject> startingHearts = new List<GameObject>();
-
     List<GameObject> currentHeartImages;
+
+    [Header("Attribute Panel")]
+    [SerializeField] GameObject attributePanel;
+    [SerializeField] TextMeshProUGUI speedText;
+    [SerializeField] TextMeshProUGUI swdDmgText;
+    [SerializeField] TextMeshProUGUI bowDmgText;
+    [SerializeField] TextMeshProUGUI swdCdnText;
+    [SerializeField] TextMeshProUGUI bowCdnText;
+    [SerializeField] TextMeshProUGUI swdRangeText;
+    [SerializeField] TextMeshProUGUI projSpdText;
+    [SerializeField] TextMeshProUGUI critChanceText;
+    [SerializeField] TextMeshProUGUI bowChargeSpdText;
+    [SerializeField] TextMeshProUGUI luckText;
+    bool attributePanelActive = false;
+    
 
     PlayerController player;
 
@@ -20,22 +36,29 @@ public class HUD : MonoBehaviour
         player = PlayerController.Instance;
 
         currentHeartImages = startingHearts;
+
+        UpdateAttributes();
     }
 
     private void OnEnable()
     {
         EventManager.OnHealthChange += UpdateHealth;
+        EventManager.OnAttributeChange += UpdateAttributes;
     }
 
     private void OnDisable()
     {
         EventManager.OnHealthChange -= UpdateHealth;
+        EventManager.OnAttributeChange -= UpdateAttributes;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //UpdateHealth();
+        if (InputManager.Instance.OpenAttributes())
+        {
+            ToggleAttributePanel();
+        }
     }
 
     void UpdateHealth()
@@ -44,14 +67,6 @@ public class HUD : MonoBehaviour
         int maxHealth = player.playerAttributes.MaxHealth;
 
         int numHealthImages = (int)Mathf.Ceil(maxHealth / 2);
-
-        ////If there is an extra health image that exists, remove it
-        //if (numHealthImages > currentHeartImages.Count)
-        //{
-        //    currentHeartImages.RemoveAt(currentHeartImages.Count - 1);
-
-        //    Destroy(currentHeartImages[currentHeartImages.Count - 1]);
-        //}
 
         for (int i = 0; i < numHealthImages; i++)
         {
@@ -97,5 +112,33 @@ public class HUD : MonoBehaviour
             currentHealth -= 2;
             maxHealth -= 2;
         }
+    }
+
+    void UpdateAttributes()
+    {
+        speedText.text = $"SPD: {player.playerAttributes.Speed}";
+        swdDmgText.text = $"SWD DMG: {player.playerAttributes.SwordDamage}";
+        bowDmgText.text = $"BOW DMG: {player.playerAttributes.BowDamage}";
+        swdCdnText.text = $"SWD CDN: {player.playerAttributes.SwordCooldown}";
+        bowCdnText.text = $"Bow CDN: {player.playerAttributes.BowCooldown}";
+        swdRangeText.text = $"SWD RANGE: {player.playerAttributes.SwordRange}";
+        projSpdText.text = $"PROJ SPD: {player.playerAttributes.ProjectileSpeed}";
+        critChanceText.text = $"CRIT CHANCE: {player.playerAttributes.CritChance}";
+        bowChargeSpdText.text = $"BOW CHARGE TIME: {player.playerAttributes.BowChargeTime}";
+        luckText.text = $"LUCK: {player.playerAttributes.Luck}";
+    }
+
+    void ToggleAttributePanel()
+    {
+        attributePanelActive = !attributePanelActive;
+
+        if (!attributePanelActive)
+        {
+            attributePanel.transform.DOMove(new Vector3(-150, 540, 0), 0.5f);
+
+            return;
+        }
+
+        attributePanel.transform.DOMove(new Vector3(150, 540, 0), 0.5f);
     }
 }

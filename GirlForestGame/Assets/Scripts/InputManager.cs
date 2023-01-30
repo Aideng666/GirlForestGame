@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     InputAction changeFormAction;
     InputAction selectSwordAction;
     InputAction selectBowAction;
+    InputAction openAttributesAction;
 
     //Map Controls
     InputAction mapScrollAction;
@@ -61,10 +62,10 @@ public class InputManager : MonoBehaviour
         moveSelectionAction = playerInput.actions["MoveSelection"];
         openInventoryAction = playerInput.actions["OpenInventory"];
         pauseAction = playerInput.actions["Pause"];
+        openAttributesAction = playerInput.actions["OpenAttributes"];
+        proceedAction = playerInput.actions["ProceedAction"];
 
         openInventoryAction.started += ToggleInventory;
-
-        proceedAction = playerInput.actions["ProceedAction"];
     }
 
     private void OnDisable()
@@ -208,6 +209,16 @@ public class InputManager : MonoBehaviour
         if (playerInput.actions.FindActionMap("Player").enabled)
         {
             return selectBowAction.triggered;
+        }
+
+        return false;
+    }
+
+    public bool OpenAttributes()
+    {
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return openAttributesAction.triggered;
         }
 
         return false;

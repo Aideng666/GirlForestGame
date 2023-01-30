@@ -35,19 +35,28 @@ public class PlayerAttributes : MonoBehaviour
     public int Health { get { return currentHealth; } set { currentHealth = value;
             if (currentHealth > currentMaxHealth) currentHealth = currentMaxHealth;
             if (currentHealth < 0) currentHealth = 0;
-            EventManager.Instance.InvokeOnHealthChange();
-        } }
-    public float Speed { get { return currentSpeed; } set { currentSpeed = value; } }
-    public float SwordDamage { get { return currentSwordDamage; } set { currentSwordDamage = value; } }
-    public float BowDamage { get { return currentBowDamage; } set { currentBowDamage = value; } }
-    public float SwordCooldown { get { return currentSwordCooldown; } set { currentSwordCooldown = value; } }
-    public float BowCooldown { get { return currentBowCooldown; } set { currentBowCooldown = value; } }
-    public float SwordRange { get { return currentSwordRange; } set { currentSwordRange = value; } }
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.Health);} }
+    public float Speed { get { return currentSpeed; } set { currentSpeed = value;
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.Speed);} }
+    public float SwordDamage { get { return currentSwordDamage; } set { currentSwordDamage = value;
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.SwordDamage);} }
+    public float BowDamage { get { return currentBowDamage; } set { currentBowDamage = value; 
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.BowDamage); } }
+    public float SwordCooldown { get { return currentSwordCooldown; } set { currentSwordCooldown = value; 
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.SwordCooldown); } }
+    public float BowCooldown { get { return currentBowCooldown; } set { currentBowCooldown = value; 
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.BowCooldown); } }
+    public float SwordRange { get { return currentSwordRange; } set { currentSwordRange = value; 
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.SwordRange); } }
     public float ProjectileSpeed { get { return currentProjectileSpeed; } set { currentProjectileSpeed = value;
-            if (currentProjectileSpeed > 99) currentProjectileSpeed = 99;} }
-    public float CritChance { get { return currentCritChance; } set { currentCritChance = value; } }
-    public float BowChargeTime { get { return currentBowChargeTime; } set { currentBowChargeTime = value; } }
-    public float Luck { get { return currentLuck; } set { currentLuck = value; } }
+            if (currentProjectileSpeed > 99) currentProjectileSpeed = 99; 
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.ProjectileSpeed);} }
+    public float CritChance { get { return currentCritChance; } set { currentCritChance = value; 
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.CritChance); } }
+    public float BowChargeTime { get { return currentBowChargeTime; } set { currentBowChargeTime = value; 
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.BowChargeTime); } }
+    public float Luck { get { return currentLuck; } set { currentLuck = value; 
+            EventManager.Instance.InvokeOnAttributeChange(Attributes.Luck); } }
 
     private void Start()
     {
@@ -64,4 +73,19 @@ public class PlayerAttributes : MonoBehaviour
         currentBowChargeTime = defaultBowChargeTime;
         currentLuck = defaultLuck;
     }
+}
+
+public enum Attributes
+{
+    Health,
+    Speed,
+    SwordDamage,
+    BowDamage,
+    SwordCooldown,
+    BowCooldown,
+    SwordRange,
+    ProjectileSpeed,
+    CritChance,
+    BowChargeTime,
+    Luck
 }

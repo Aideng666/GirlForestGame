@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
 
     //General Events
     public delegate void OnEvent();
+    public static event OnEvent OnAttributeChange;
     public static event OnEvent OnHealthChange;
 
     public static EventManager Instance { get; set; }
@@ -36,11 +37,19 @@ public class EventManager : MonoBehaviour
         OnBowHit?.Invoke(enemiesHit, Weapons.Bow, guaranteeActivation);
     }
 
-    public void InvokeOnHealthChange()
+    public void InvokeOnAttributeChange(Attributes attribute)
     {
-        OnHealthChange?.Invoke();
-    }
+        OnAttributeChange?.Invoke();
 
+        switch (attribute)
+        {
+            case Attributes.Health:
+
+                OnHealthChange?.Invoke();
+
+                break;
+        }
+    }
 }
 
 public enum TotemEvents
