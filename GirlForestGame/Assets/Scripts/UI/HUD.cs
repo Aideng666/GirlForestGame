@@ -7,6 +7,10 @@ using DG.Tweening;
 
 public class HUD : MonoBehaviour
 {
+    [Header("General")]
+    [SerializeField] Canvas canvas;
+    [SerializeField] float hiddenPanelVisibilityPercentage = 0.1f;
+
     [Header("Hearts Panel")]
     [SerializeField] GameObject heartPanel;
     [SerializeField] Sprite[] heartImages = new Sprite[5];
@@ -26,7 +30,11 @@ public class HUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI bowChargeSpdText;
     [SerializeField] TextMeshProUGUI luckText;
     bool attributePanelActive = false;
-    
+
+    [Header("Markings Panel")]
+    [SerializeField] GameObject markingsPanel;
+    [SerializeField] Image[] images = new Image[4]; // 0 = SwordAttribute | 1 = SwordElement | 2 = BowAttribute | 3 = BowElement
+    bool markingsPanelActive = true;
 
     PlayerController player;
 
@@ -36,20 +44,16 @@ public class HUD : MonoBehaviour
         player = PlayerController.Instance;
 
         currentHeartImages = startingHearts;
-
-        UpdateAttributes();
     }
 
     private void OnEnable()
     {
         EventManager.OnHealthChange += UpdateHealth;
-        EventManager.OnAttributeChange += UpdateAttributes;
     }
 
     private void OnDisable()
     {
         EventManager.OnHealthChange -= UpdateHealth;
-        EventManager.OnAttributeChange -= UpdateAttributes;
     }
 
     // Update is called once per frame
@@ -59,6 +63,23 @@ public class HUD : MonoBehaviour
         {
             ToggleAttributePanel();
         }
+
+        if (InputManager.Instance.OpenMarkings())
+        {
+            ToggleMarkingsPanel();
+        }
+    }
+
+    public void ToggleHUD(bool hudOn)
+    {
+        if (hudOn)
+        {
+            gameObject.SetActive(true);
+
+            return;
+        }
+
+        gameObject.SetActive(false);
     }
 
     void UpdateHealth()
@@ -128,17 +149,44 @@ public class HUD : MonoBehaviour
         luckText.text = $"LUCK: {player.playerAttributes.Luck}";
     }
 
+    void UpdateMarkings()
+    {
+
+    }
+
     void ToggleAttributePanel()
     {
         attributePanelActive = !attributePanelActive;
 
         if (!attributePanelActive)
         {
-            attributePanel.transform.DOMove(new Vector3(-150, 540, 0), 0.5f);
+            attributePanel.transform.DOMove(attributePanel.transform.position +
+                (Vector3.left * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             return;
         }
 
-        attributePanel.transform.DOMove(new Vector3(150, 540, 0), 0.5f);
+        UpdateAttributes();
+
+        attributePanel.transform.DOMove(attributePanel.transform.position +
+            (Vector3.right * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+    }
+
+    void ToggleMarkingsPanel()
+    {
+        markingsPanelActive = !markingsPanelActive;
+
+        if (!markingsPanelActive)
+        {
+            markingsPanel.transform.DOMove(markingsPanel.transform.position + 
+                (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+
+            return;
+        }
+
+        UpdateMarkings();
+
+        markingsPanel.transform.DOMove(markingsPanel.transform.position + 
+            (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
     }
 }
