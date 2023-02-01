@@ -21,7 +21,8 @@ public class EnemyData : MonoBehaviour
     [SerializeField] float defaultHealthDropChance = 0.05f;
 
     //reference to navmesh for knockback
-    NavMeshAgent mesh;
+    public NavMeshAgent agent { get; private set; }
+
     Rigidbody body;
     PlayerController player;
     bool isDead;
@@ -39,7 +40,7 @@ public class EnemyData : MonoBehaviour
     private void Start()
     {
         body = GetComponent<Rigidbody>();
-        mesh = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         player = PlayerController.Instance;
     }
 

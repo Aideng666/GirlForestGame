@@ -4835,7 +4835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a5e90a03790a148b4f972239debc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleType: 4
+  particleType: 5
+  childParticle: 0
 --- !u!135 &8116026586230563149
 SphereCollider:
   m_ObjectHideFlags: 0
