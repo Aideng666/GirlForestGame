@@ -456,12 +456,12 @@ public class PlaneSwapEmpowermentTotem : OnTriggerTotem
     {
         currentStackAmount = player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)];
 
-        if (player.playerCombat.Form == Forms.Living)
+        if (player.playerCombat.Form == Planes.Terrestrial)
         {
             previousSwordAmountAdded = player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
             player.playerAttributes.SwordDamage += player.playerAttributes.SwordDamage * CalcBuffMultiplier(currentStackAmount);
         }
-        else if (player.playerCombat.Form == Forms.Spirit)
+        else if (player.playerCombat.Form == Planes.Astral)
         {
             previousBowAmountAdded = player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
             player.playerAttributes.BowDamage += player.playerAttributes.BowDamage * CalcBuffMultiplier(currentStackAmount);
@@ -474,11 +474,11 @@ public class PlaneSwapEmpowermentTotem : OnTriggerTotem
     {
         if (effectApplied)
         {
-            if (player.playerCombat.Form == Forms.Living)
+            if (player.playerCombat.Form == Planes.Terrestrial)
             {
                 player.playerAttributes.SwordDamage -= previousSwordAmountAdded;
             }
-            else if (player.playerCombat.Form == Forms.Spirit)
+            else if (player.playerCombat.Form == Planes.Astral)
             {
                 player.playerAttributes.BowDamage -= previousBowAmountAdded;
             }

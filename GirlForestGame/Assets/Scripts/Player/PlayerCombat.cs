@@ -31,12 +31,12 @@ public class PlayerCombat : MonoBehaviour
     List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
 
-    Forms currentForm = Forms.Living;
+    Planes currentForm = Planes.Terrestrial;
     LayerMask livingLayer;
     LayerMask spiritLayer;
     LayerMask iFramesLayer;
 
-    public Forms Form { get { return currentForm; } set { currentForm = value; } }
+    public Planes Form { get { return currentForm; } set { currentForm = value; } }
 
     PlayerController player;
     Rigidbody body;
@@ -122,15 +122,15 @@ public class PlayerCombat : MonoBehaviour
                 player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
             }
 
-            if (currentForm == Forms.Living)
+            if (currentForm == Planes.Terrestrial)
             {
-                currentForm = Forms.Spirit;
+                currentForm = Planes.Astral;
                 GetComponentInChildren<SkinnedMeshRenderer>().material = spiritFormMaterial;
                 gameObject.layer = spiritLayer;
             }
             else
             {
-                currentForm = Forms.Living;
+                currentForm = Planes.Terrestrial;
                 GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
                 gameObject.layer = livingLayer;
             }
@@ -517,8 +517,8 @@ public class PlayerCombat : MonoBehaviour
     }
 }
 
-public enum Forms
+public enum Planes
 {
-    Living,
-    Spirit
+    Terrestrial,
+    Astral
 }

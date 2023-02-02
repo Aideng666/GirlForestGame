@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected Forms form;
+    [SerializeField] protected Planes form;
     [SerializeField] protected float health;
     [SerializeField] protected float damage;
     [SerializeField] protected float moveSpeed;
@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float attackRange;
     [SerializeField] protected float attackPreparationTime = 1.5f;
 
-    public Forms Form { get { return form; }}
+    public Planes Form { get { return form; }}
     public float AttackPrepTime { get { return attackPreparationTime; }/* set { attackPreparationTime = value; } */}
 
     protected PlayerController player;
