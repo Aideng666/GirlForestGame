@@ -26,7 +26,7 @@ public class Particle : MonoBehaviour
     {
         int colliderLayerMask = (1 << defaultLayer);
 
-        if (PlayerController.Instance.playerCombat.Form == Forms.Living)
+        if (PlayerController.Instance.playerCombat.Form == Planes.Terrestrial)
         {
             gameObject.layer = livingLayer;
             colliderLayerMask |= (1 << livingLayer);

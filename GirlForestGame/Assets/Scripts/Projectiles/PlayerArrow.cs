@@ -32,13 +32,13 @@ public class PlayerArrow : MonoBehaviour
         chargedArrowDamage = player.playerAttributes.BowDamage * percentage;
     }
 
-    public void SetPlane(Forms plane)
+    public void SetPlane(Planes plane)
     {
-        if (plane == Forms.Living)
+        if (plane == Planes.Terrestrial)
         {
             gameObject.layer = livingLayer.value;
         }
-        else if (plane == Forms.Spirit)
+        else if (plane == Planes.Astral)
         {
             gameObject.layer = spiritLayer.value;
         }
