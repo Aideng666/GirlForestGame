@@ -5,7 +5,7 @@ using UnityEngine;
 public class AI_MushroomGasAttack : StateMachineBehaviour
 {
     [SerializeField] GameObject gas;
-    AI_MushroomData mushroomData;
+    EnemyData mushroomData;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -15,8 +15,8 @@ public class AI_MushroomGasAttack : StateMachineBehaviour
         gasRef.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward);
 
 
-        mushroomData = animator.GetComponentInParent<AI_MushroomData>();
-        mushroomData.startTimer(0);
+        mushroomData = animator.GetComponentInParent<EnemyData>();
+        //mushroomData.startTimer(0);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -34,7 +34,7 @@ public class AI_MushroomGasAttack : StateMachineBehaviour
     // OnStateMove is called right after Animator.OnAnimatorMove()
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("GasAttackReady", mushroomData.canGasAttack);
+        //animator.SetBool("GasAttackReady", mushroomData.canGasAttack);
     }
 
     // OnStateIK is called right after Animator.OnAnimatorIK()

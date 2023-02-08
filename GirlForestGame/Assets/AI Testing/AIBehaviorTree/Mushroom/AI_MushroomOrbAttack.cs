@@ -2,45 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using DG.Tweening;
 
-public class AI_MushroomOrbAttack : StateMachineBehaviour
+public class AI_MushroomOrbAttack : AI_BaseClass
 {
     [SerializeField] float projectileForce = 1f;
     //Used in the "3 shots". The gaps between each shot
     [SerializeField] float timeBetweenShots = 0.3f;
     [SerializeField] GameObject orb;
-    AI_MushroomData mushroomData;
+    [SerializeField] float rotationSpeed = 0.4f;
+    //EnemyData mushroomData;
     Animator animator;
+    List<CoroutineHandle> handles;
+    
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        mushroomData = animator.GetComponentInParent<AI_MushroomData>();
-        mushroomData.startTimer(1);
+        agent = animator.GetComponentInParent<UnityEngine.AI.NavMeshAgent>();
+        //This is required in order to get the cube to look at the player as it fires the orbs off
+        //If this is true, unity's AI system will take over and not allow a rotation
+        //It is re-enabled on exit
+        agent.updateRotation = false;
+        animator.transform.parent.DOLookAt(PlayerController.Instance.transform.position, rotationSpeed);
         this.animator = animator;
+        handles = new List<CoroutineHandle>();
+        handles.Add(Timing.RunCoroutine(_waitUntilLooking()));
 
-        if (Random.Range(0, 1) == 0)
+    }
+    IEnumerator<float> _waitUntilLooking()
+    {
+        yield return Timing.WaitForSeconds(rotationSpeed * 1.02f);
+        if (Random.Range(0, 2) == 0)
         {
             FanAttack();
         }
-        else 
+        else
         {
-            Timing.RunCoroutine(_ThreeInARow());
+            handles.Add(Timing.RunCoroutine(_ThreeInARow()));
         }
-
     }
 
     void FanAttack() 
     {
-        List<GameObject> orbRef = new List<GameObject>();
-        for (int i = 0; i < 3; i++)
-        {
-            //TODO: REMOVE INSTANTIATE AND USE OBJECT POOLING
-            orbRef.Add(Instantiate(orb, animator.transform.position, Quaternion.identity));
-            //Add force to projectile
-        }
-        orbRef[0].GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
-        orbRef[1].GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.right) * projectileForce);
-        orbRef[2].GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.left) * projectileForce);
+        //This is gross but it's a quick and easy way to do it
+        Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
+        Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.right) * projectileForce);
+        Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.left) * projectileForce);
+        //This is used so that it can delay firing the shots enough to be looking at the player, as opposed to firing any which way
+        animator.SetTrigger("Has_Fired");
     }
 
     IEnumerator<float> _ThreeInARow() 
@@ -50,11 +59,13 @@ public class AI_MushroomOrbAttack : StateMachineBehaviour
             FireOrb();
             yield return Timing.WaitForSeconds(0.3f);
         }
+        //This is used so that it can delay firing the shots enough to be looking at the player, as opposed to firing any which way
+        animator.SetTrigger("Has_Fired");
     }
 
     void FireOrb() 
     {
-        Instantiate(orb, animator.transform.position, Quaternion.identity).GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
+        Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -64,16 +75,20 @@ public class AI_MushroomOrbAttack : StateMachineBehaviour
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        agent.updateRotation = true;
+        foreach (CoroutineHandle h in handles)
+        {
+            Timing.KillCoroutines(h);
+        }
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
-    override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.SetBool("OrbAttackReady", mushroomData.canOrbAttack);
-    }
+    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    //animator.SetBool("OrbAttackReady", mushroomData.canOrbAttack);
+    //}
 
     // OnStateIK is called right after Animator.OnAnimatorIK()
     //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
