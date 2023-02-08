@@ -46,6 +46,7 @@ public class EnemyData : MonoBehaviour
 
     void Update() 
     {
+        //RunCooldownTimer();
         if (!isDead)
         {
             transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);

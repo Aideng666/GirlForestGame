@@ -128,6 +128,9 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         {
             cond.ResetCondition(animator);
         }
+
+        //This is a safety net in case something malfunctions with MEC
+        Timing.KillCoroutines(projectileAnim);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
