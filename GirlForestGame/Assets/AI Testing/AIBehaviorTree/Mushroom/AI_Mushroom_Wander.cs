@@ -8,29 +8,26 @@ public class AI_Mushroom_Wander : AI_BaseClass
     [SerializeField] Vector2 randomTimingRange;
 
     private CoroutineHandle moveTimer;
-    private AI_MushroomData mushroomData;
+    //private AI_MushroomData mushroomData;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        mushroomData = animator.GetComponentInParent<AI_MushroomData>();
+        //mushroomData = animator.GetComponentInParent<AI_MushroomData>();
         agent = animator.GetComponentInParent<UnityEngine.AI.NavMeshAgent>();
         moveTimer = Timing.RunCoroutine(_moveOnTimer(animator).CancelWith(animator.gameObject));
-        //This start the timers when it wakes up from it's slumber
-        mushroomData.startTimer(0);
-        mushroomData.startTimer(1);
+
     }
 
     IEnumerator<float> _moveOnTimer(Animator animator) 
     {
-        bool loop = true;
-        while (loop)
+        while (true)
         {
-            //Pick Random destination in room, move at low speed
-            agent.SetDestination(animator.transform.position + new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4)));
-
             //Wait before moving again
             yield return Timing.WaitForSeconds(Random.Range(randomTimingRange.x, randomTimingRange.y));
+            //Pick Random destination in room, move at low speed
+            agent.SetDestination(animator.transform.position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2)));
+
         }
     }
 
@@ -42,16 +39,24 @@ public class AI_Mushroom_Wander : AI_BaseClass
         //Doing this to make sure that the coroutine stops when it leaves the state
         //It may be redundant but it's a safety net because we aren't destroying the object when changing states
         Timing.KillCoroutines(moveTimer);
+
+        //Stops all the movement to favor any other state
+        agent.ResetPath();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //The moment the attacks are ready it will attack
-        animator.SetBool("GasAttackReady", mushroomData.canGasAttack);
-        animator.SetBool("OrbAttackReady", mushroomData.canOrbAttack);
+        //animator.SetBool("GasAttackReady", mushroomData.canGasAttack);
+        //animator.SetBool("OrbAttackReady", mushroomData.canOrbAttack);
     }
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
 
+        animator.GetComponentInParent<EnemyData>().RunCooldownTimer();
+    }
     // OnStateIK is called right after Animator.OnAnimatorIK()
     //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
