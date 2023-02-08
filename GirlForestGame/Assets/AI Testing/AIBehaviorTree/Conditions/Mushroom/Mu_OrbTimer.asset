@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf7dc3ecc306b194ba0d0a266389ccd5, type: 3}
-  m_Name: Evade_Range
+  m_Script: {fileID: 11500000, guid: edafd8dd0b0ef644a9ddf3a1d68b6c4d, type: 3}
+  m_Name: Mu_OrbTimer
   m_EditorClassIdentifier: 
-  minRange: 0
-  maxRange: 3
-  Condition_Parameter: Close_To_Player
+  attackTime: 10
+  boolParameter: Can_Attack
