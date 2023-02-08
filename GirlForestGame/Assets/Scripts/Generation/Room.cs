@@ -220,5 +220,6 @@ public enum RoomTypes
     End,
     Totem,
     Shop,
-    Marking
+    Marking,
+    Rare
 }

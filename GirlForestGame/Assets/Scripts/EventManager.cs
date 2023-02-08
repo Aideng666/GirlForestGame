@@ -10,6 +10,11 @@ public class EventManager : MonoBehaviour
     public static event OnHitAttack OnSwordHit;
     public static event OnHitAttack OnBowHit;
 
+    //General Events
+    public delegate void OnEvent();
+    public static event OnEvent OnAttributeChange;
+    public static event OnEvent OnHealthChange;
+
     public static EventManager Instance { get; set; }
 
     private void Awake()
@@ -30,6 +35,20 @@ public class EventManager : MonoBehaviour
     public void InvokeOnBowHit(List<EnemyData> enemiesHit, bool guaranteeActivation = false)
     {
         OnBowHit?.Invoke(enemiesHit, Weapons.Bow, guaranteeActivation);
+    }
+
+    public void InvokeOnAttributeChange(Attributes attribute)
+    {
+        OnAttributeChange?.Invoke();
+
+        switch (attribute)
+        {
+            case Attributes.Health:
+
+                OnHealthChange?.Invoke();
+
+                break;
+        }
     }
 }
 

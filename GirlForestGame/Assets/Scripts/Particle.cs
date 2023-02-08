@@ -10,19 +10,34 @@ public class Particle : MonoBehaviour
 
     LayerMask livingLayer;
     LayerMask spiritLayer;
+    LayerMask defaultLayer;
 
     // Start is called before the first frame update
     void Start()
     {
-        livingLayer = LayerMask.NameToLayer("PlayerLiving");
-        spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
+        livingLayer = LayerMask.NameToLayer("EnemyLiving");
+        spiritLayer = LayerMask.NameToLayer("EnemySpirit");
+        defaultLayer = LayerMask.NameToLayer("Default");
         particle = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.layer = PlayerController.Instance.gameObject.layer;
+        int colliderLayerMask = (1 << defaultLayer);
+
+        if (PlayerController.Instance.playerCombat.Form == Planes.Terrestrial)
+        {
+            gameObject.layer = livingLayer;
+            colliderLayerMask |= (1 << livingLayer);
+            colliderLayerMask &= ~(1 << spiritLayer);
+        }
+        else
+        {
+            gameObject.layer = spiritLayer;
+            colliderLayerMask |= (1 << spiritLayer);
+            colliderLayerMask &= ~(1 << livingLayer);
+        }
 
         if (!particle.isPlaying)
         {
@@ -38,7 +53,7 @@ public class Particle : MonoBehaviour
 
         if (particleType == ParticleTypes.WindArrow)
         {
-            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius, colliderLayerMask);
 
             foreach (Collider collision in collidersInRange)
             {
@@ -50,7 +65,7 @@ public class Particle : MonoBehaviour
         }
         else if (particleType == ParticleTypes.WindArrow2)
         {
-            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius, colliderLayerMask);
 
             foreach (Collider collision in collidersInRange)
             {
