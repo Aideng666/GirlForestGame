@@ -3184,9 +3184,9 @@ MonoBehaviour:
   - 2
   - 3
   elementActivationChances:
-  - 0
-  - 0
-  - 0
+  - 15
+  - 25
+  - 40
 --- !u!114 &1297180804387073770
 MonoBehaviour:
   m_ObjectHideFlags: 0
