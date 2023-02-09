@@ -5,6 +5,7 @@ using UnityEngine;
 public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] int totalRooms = 15;
+    [SerializeField] int rareRoomChance = 5;
     [SerializeField] GameObject roomPrefab;
 
     List<Room> rooms = new List<Room>();
@@ -86,6 +87,11 @@ public class DungeonGenerator : MonoBehaviour
         currentEndRoom.SetRoomType(RoomTypes.End);
 
         RespawnRoomModel(RoomTypes.Totem);
+
+        if (Random.Range(1, 101) <= rareRoomChance + (PlayerController.Instance.playerAttributes.Luck * 100))
+        {
+            RespawnRoomModel(RoomTypes.Rare);
+        }
 
         //Turns off the exits for parts of the rooms that have no connections
         for (int i = 0; i < rooms.Count; i++)
@@ -174,6 +180,12 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
 
+            //If there are no available rooms to swap then we will not swap a room at all
+            if (possibleRooms.Count < 1)
+            {
+                return;
+            }
+
             roomToChange = possibleRooms[Random.Range(0, possibleRooms.Count)];
         }
         else
@@ -207,6 +219,12 @@ public class DungeonGenerator : MonoBehaviour
             case RoomTypes.Marking:
 
                 roomToChange.ChooseRoom("MarkingRooms");
+
+                break;
+
+            case RoomTypes.Rare:
+
+                roomToChange.ChooseRoom("RareRooms");
 
                 break;
         }

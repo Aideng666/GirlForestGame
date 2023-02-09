@@ -13,50 +13,107 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     public string triggerParameter = "Projectile_Has_Returned";
 
     [SerializeField] float duration = 1f;
-    Transform projectile;
+    [SerializeField] float attackChargeDelay = 1;
+    Transform leftAxe;
+    Transform rightAxe;
     BezierCurve curve;
 
+    Vector3 leftAxeRestingPos;
+    Vector3 rightAxeRestingPos;
 
-    private CoroutineHandle projectileAnim;
-    //AI_BoarEnemyClass boarParentClass;
     bool projectileHasReturned = false;
+    bool hasThrownProjectile = false;
+    float elaspedChargetime;
+    int axeSelection;
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
+
+        if (elaspedChargetime >= attackChargeDelay && !hasThrownProjectile)
+        {
+            if (axeSelection == 0)
+            {
+                //Using MEC to run the coroutine
+                Timing.RunCoroutine(LeftAxeThrow().CancelWith(animator.gameObject));
+            }
+            else if (axeSelection == 1)
+            {
+                Timing.RunCoroutine(RightAxeThrow().CancelWith(animator.gameObject));
+            }
+
+            hasThrownProjectile = true;
+        }
+
+
         //sets the state in the machine so it can/can't leave the thrown state
         if (projectileHasReturned)
         {
             animator.SetTrigger(triggerParameter);
             projectileHasReturned = false;
         }
+
+        elaspedChargetime += Time.deltaTime;
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        //It's pretty stupid to do this eeverytime we enter the state but I don't have another way of setting this at this time
-        //It's the only way that I could figure out how to throw a projectile 
-        //boarParentClass =  animator.GetComponentInParent<AI_BoarEnemyClass>();
-        //boarParentClass.ThrowProjectile(this);
+
+        leftAxe = animator.transform.GetChild(0);
+        rightAxe = animator.transform.GetChild(1);
+        curve = animator.GetComponentInChildren<BezierCurve>();
+        leftAxeRestingPos = leftAxe.position;
+        rightAxeRestingPos = rightAxe.position;
+
+        projectileHasReturned = false;
+        hasThrownProjectile = false;
+        elaspedChargetime = 0;
         agent.speed = 0;
 
-        //Using MEC to run the coroutine
-        projectile = animator.transform.GetChild(0);
-        curve = animator.GetComponentInChildren<BezierCurve>();
-        projectileAnim = Timing.RunCoroutine(_projectileAnimation().CancelWith(animator.gameObject));
+        axeSelection = Random.Range(0, 2);
 
+        if (axeSelection == 0)
+        {
+            animator.transform.parent.GetComponentInChildren<EnemyUI>().IndicateAttack(Planes.Terrestrial, attackChargeDelay);
+        }
+        else if (axeSelection == 1)
+        {
+            animator.transform.parent.GetComponentInChildren<EnemyUI>().IndicateAttack(Planes.Astral, attackChargeDelay);
+        }
+        //MAKE A DELAY BEFORE THE ATTACK STARTS
+        //This is to give the player a second to realise the attack is coming
+        //This is also where we can put the indicator above the enemy for which type of attack an enemy is giving
     }
-    IEnumerator<float> _projectileAnimation()
+
+    IEnumerator<float> LeftAxeThrow()
     {
+        curve.GetAnchorPoints()[0].transform.position = leftAxeRestingPos;
+        curve.GetAnchorPoints()[1].transform.position = PlayerController.Instance.transform.position + Vector3.up;
         curve.GetAnchorPoints()[2].transform.position = PlayerController.Instance.transform.position + Vector3.up;
-        curve.GetAnchorPoints()[3].transform.position = PlayerController.Instance.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[3].transform.position = leftAxeRestingPos;
 
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
-            projectile.position = curve.GetPointAt(time / duration);
+            leftAxe.position = curve.GetPointAt(time / duration);
             //transform.localRotation = Quaternion.Euler(0f, 360f * time / duration, 0f); //Spinning
+            yield return Timing.WaitForOneFrame;
+        }
+
+        projectileHasReturned = true; //The projectile has returned and can now change states back to tracking if the player has moved too far away
+    }
+
+    IEnumerator<float> RightAxeThrow()
+    {
+        curve.GetAnchorPoints()[0].transform.position = rightAxeRestingPos;
+        curve.GetAnchorPoints()[1].transform.position = PlayerController.Instance.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[2].transform.position = PlayerController.Instance.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[3].transform.position = rightAxeRestingPos;
+
+        for (float time = 0; time < duration; time += Time.deltaTime)
+        {
+            rightAxe.position = curve.GetPointAt(time / duration);
             yield return Timing.WaitForOneFrame;
         }
 
@@ -73,7 +130,7 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         }
 
         //This is a safety net in case something malfunctions with MEC
-        Timing.KillCoroutines(projectileAnim);
+        Timing.KillCoroutines();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

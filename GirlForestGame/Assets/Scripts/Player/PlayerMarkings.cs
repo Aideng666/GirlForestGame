@@ -76,29 +76,27 @@ public class PlayerMarkings : MonoBehaviour
 
                         break;
 
-                    case Attributes.Attack:
+                    case Attributes.SwordDamage:
 
-                        if (weapon == Weapons.Sword)
-                        {
-                            player.playerAttributes.SwordDamage *= attributeMultipliers[spirit.markingLevel - 1];
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            player.playerAttributes.BowDamage *= attributeMultipliers[spirit.markingLevel - 1];
-                        }
+                        player.playerAttributes.SwordDamage *= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
 
-                    case Attributes.AtkSpd:
+                    case Attributes.BowDamage:
 
-                        if (weapon == Weapons.Sword)
-                        {
-                            player.playerAttributes.SwordCooldown /= attributeMultipliers[spirit.markingLevel - 1];
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            player.playerAttributes.BowCooldown /= attributeMultipliers[spirit.markingLevel - 1];
-                        }
+                        player.playerAttributes.BowDamage *= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.SwordCooldown:
+
+                        player.playerAttributes.SwordCooldown /= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.BowCooldown:
+
+                        player.playerAttributes.BowCooldown /= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
 
@@ -108,15 +106,33 @@ public class PlayerMarkings : MonoBehaviour
 
                         break;
 
-                    case Attributes.Accuracy:
+                    case Attributes.ProjectileSpeed:
 
                         player.playerAttributes.ProjectileSpeed *= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.SwordRange:
+
+                        player.playerAttributes.SwordRange *= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
 
                     case Attributes.CritChance:
 
                         player.playerAttributes.CritChance *= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.BowChargeTime:
+
+                        player.playerAttributes.BowChargeTime /= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.Luck:
+
+                        player.playerAttributes.Luck *= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
                 }
@@ -188,29 +204,27 @@ public class PlayerMarkings : MonoBehaviour
 
                         break;
 
-                    case Attributes.Attack:
+                    case Attributes.SwordDamage:
 
-                        if (weapon == Weapons.Sword)
-                        {
-                            player.playerAttributes.SwordDamage /= attributeMultipliers[spirit.markingLevel - 1];
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            player.playerAttributes.BowDamage /= attributeMultipliers[spirit.markingLevel - 1];
-                        }
+                        player.playerAttributes.SwordDamage /= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
 
-                    case Attributes.AtkSpd:
+                    case Attributes.BowDamage:
 
-                        if (weapon == Weapons.Sword)
-                        {
-                            player.playerAttributes.SwordCooldown *= attributeMultipliers[spirit.markingLevel - 1];
-                        }
-                        else if (weapon == Weapons.Bow)
-                        {
-                            player.playerAttributes.BowCooldown *= attributeMultipliers[spirit.markingLevel - 1];
-                        }
+                        player.playerAttributes.BowDamage /= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.SwordCooldown:
+
+                        player.playerAttributes.SwordCooldown *= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.BowCooldown:
+
+                        player.playerAttributes.BowCooldown *= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
 
@@ -220,15 +234,33 @@ public class PlayerMarkings : MonoBehaviour
 
                         break;
 
-                    case Attributes.Accuracy:
+                    case Attributes.ProjectileSpeed:
 
                         player.playerAttributes.ProjectileSpeed /= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.SwordRange:
+
+                        player.playerAttributes.SwordRange /= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
 
                     case Attributes.CritChance:
 
                         player.playerAttributes.CritChance /= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.BowChargeTime:
+
+                        player.playerAttributes.BowChargeTime *= attributeMultipliers[spirit.markingLevel - 1];
+
+                        break;
+
+                    case Attributes.Luck:
+
+                        player.playerAttributes.Luck /= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
                 }
