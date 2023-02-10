@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 700446156201332265}
   - component: {fileID: 700446156201332269}
   - component: {fileID: 7573156427045109547}
-  - component: {fileID: 4137492470614405561}
+  - component: {fileID: 3441410454446191348}
   m_Layer: 9
   m_Name: Mushroom
   m_TagString: Enemy
@@ -82,7 +82,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700446156201332264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -191,7 +191,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4137492470614405561
+--- !u!114 &3441410454446191348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,15 +200,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 700446156201332264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff644b28ec3a0045b55bd661a7135a3, type: 3}
+  m_Script: {fileID: 11500000, guid: ea7ae1ee75ed49a4a9dea8405c695cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHealth: 1
+  curHealth: 0
   maxHealth: 1
   actionCooldown: 0
   defaultCoinDropChance: 0.25
   defaultHealthDropChance: 0.05
-  gasTime: 1
-  orbTime: 1
-  canGasAttack: 0
-  canOrbAttack: 0
