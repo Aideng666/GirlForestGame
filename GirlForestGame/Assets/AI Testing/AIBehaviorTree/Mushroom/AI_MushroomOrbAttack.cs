@@ -18,16 +18,16 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent = animator.GetComponentInParent<UnityEngine.AI.NavMeshAgent>();
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+
         //This is required in order to get the cube to look at the player as it fires the orbs off
         //If this is true, unity's AI system will take over and not allow a rotation
         //It is re-enabled on exit
         agent.updateRotation = false;
-        animator.transform.parent.DOLookAt(PlayerController.Instance.transform.position, rotationSpeed);
+        agent.transform.DOLookAt(player.transform.position, rotationSpeed);
         this.animator = animator;
         handles = new List<CoroutineHandle>();
         handles.Add(Timing.RunCoroutine(_waitUntilLooking()));
-
     }
     IEnumerator<float> _waitUntilLooking()
     {
@@ -68,12 +68,6 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -83,16 +77,4 @@ public class AI_MushroomOrbAttack : AI_BaseClass
             Timing.KillCoroutines(h);
         }
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    //animator.SetBool("OrbAttackReady", mushroomData.canOrbAttack);
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

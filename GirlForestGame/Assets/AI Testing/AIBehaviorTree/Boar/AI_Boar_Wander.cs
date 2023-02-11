@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MEC;
 
 /// <summary>
 /// Attach this script to the state that will track the player. It will update the destination of the AI every frame to the player's 
@@ -13,7 +14,6 @@ public class AI_Boar_Wander : AI_BaseClass
         agent = animator.GetComponentInParent<UnityEngine.AI.NavMeshAgent>();
         agent.enabled = true;
         agent.speed = 2;
-        //turns AI movement on
     }
 
     ////OnStateUpdate is handled in the AI_BaseClass////
@@ -31,7 +31,7 @@ public class AI_Boar_Wander : AI_BaseClass
         //Targets the player
         if (agent.enabled)
         {
-            agent.SetDestination(PlayerController.Instance.transform.position);
+            agent.SetDestination(player.transform.position);
         }
     }
 
@@ -39,6 +39,6 @@ public class AI_Boar_Wander : AI_BaseClass
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
-        animator.GetComponentInParent<EnemyData>().RunCooldownTimer();
+        enemyData.RunCooldownTimer();
     }
 }

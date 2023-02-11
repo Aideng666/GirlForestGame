@@ -11,6 +11,7 @@ public class EnemyData : MonoBehaviour
 {
     [HideInInspector]
     public float curHealth;
+    [SerializeField] EnemyTypes enemyType;
     public float maxHealth = 1f;
 
     //Cooldown between each attack from the condition
@@ -67,7 +68,7 @@ public class EnemyData : MonoBehaviour
 
         player.playerCombat.RemoveSwordTarget(this);
         player.playerCombat.RemoveBowTarget(this);
-        EnemyPool.Instance.AddBoarToPool(gameObject);
+        EnemyPool.Instance.AddEnemyToPool(enemyType, gameObject);
 
         float coinRoll = Random.Range(0f, 1f);
         float heartRoll = Random.Range(0f, 1f);
@@ -102,6 +103,9 @@ public class EnemyData : MonoBehaviour
     {
         if (!isDead)
         {
+            //For Mushroom Spirit activation if it gets hit before the enemy gets close
+            transform.parent.GetComponentInChildren<Animator>().SetTrigger("Awaken_From_Idle");
+
             curHealth -= damageAmount;
 
             if (curHealth <= 0)
@@ -131,5 +135,16 @@ public class EnemyData : MonoBehaviour
         {
             actionCooldown -= Time.deltaTime;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+
+        //Vector3 directionVector = transform.position - player.transform.position;
+        //directionVector.y = 0;
+        //directionVector = directionVector.normalized;
+
+        //Gizmos.DrawRay(new Vector3(player.transform.position.x, 0, player.transform.position.z), directionVector * 12);
     }
 }

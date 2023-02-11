@@ -9,11 +9,18 @@ using UnityEngine.AI;
 public class AI_BaseClass : StateMachineBehaviour
 {
     protected NavMeshAgent agent;
+    protected PlayerController player;
+    protected EnemyData enemyData;
+    protected EnemyUI enemyUI;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponentInParent<NavMeshAgent>();
         agent.enabled = true;
+
+        player = PlayerController.Instance;
+        enemyData = animator.GetComponentInParent<EnemyData>();
+        enemyUI = animator.transform.parent.GetComponentInChildren<EnemyUI>();
     }
 
     [SerializeField]public List<Cdt_BaseClass> conditions;

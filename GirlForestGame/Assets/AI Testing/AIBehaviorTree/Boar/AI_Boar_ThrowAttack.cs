@@ -21,40 +21,13 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     Vector3 leftAxeRestingPos;
     Vector3 rightAxeRestingPos;
 
+    private CoroutineHandle leftAxeThrow;
+    private CoroutineHandle rightAxeThrow;
+
     bool projectileHasReturned = false;
     bool hasThrownProjectile = false;
     float elaspedChargetime;
     int axeSelection;
-
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        base.OnStateUpdate(animator, stateInfo, layerIndex);
-
-        if (elaspedChargetime >= attackChargeDelay && !hasThrownProjectile)
-        {
-            if (axeSelection == 0)
-            {
-                //Using MEC to run the coroutine
-                Timing.RunCoroutine(LeftAxeThrow().CancelWith(animator.gameObject));
-            }
-            else if (axeSelection == 1)
-            {
-                Timing.RunCoroutine(RightAxeThrow().CancelWith(animator.gameObject));
-            }
-
-            hasThrownProjectile = true;
-        }
-
-
-        //sets the state in the machine so it can/can't leave the thrown state
-        if (projectileHasReturned)
-        {
-            animator.SetTrigger(triggerParameter);
-            projectileHasReturned = false;
-        }
-
-        elaspedChargetime += Time.deltaTime;
-    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -76,28 +49,54 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
 
         if (axeSelection == 0)
         {
-            animator.transform.parent.GetComponentInChildren<EnemyUI>().IndicateAttack(Planes.Terrestrial, attackChargeDelay);
+            enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeDelay);
         }
         else if (axeSelection == 1)
         {
-            animator.transform.parent.GetComponentInChildren<EnemyUI>().IndicateAttack(Planes.Astral, attackChargeDelay);
+            enemyUI.IndicateAttack(Planes.Astral, attackChargeDelay);
         }
-        //MAKE A DELAY BEFORE THE ATTACK STARTS
-        //This is to give the player a second to realise the attack is coming
-        //This is also where we can put the indicator above the enemy for which type of attack an enemy is giving
+    }
+
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
+
+        if (elaspedChargetime >= attackChargeDelay && !hasThrownProjectile)
+        {
+            if (axeSelection == 0)
+            {
+                //Using MEC to run the coroutine
+                leftAxeThrow = Timing.RunCoroutine(LeftAxeThrow().CancelWith(animator.gameObject));
+            }
+            else if (axeSelection == 1)
+            {
+                rightAxeThrow = Timing.RunCoroutine(RightAxeThrow().CancelWith(animator.gameObject));
+            }
+
+            hasThrownProjectile = true;
+        }
+
+
+        //sets the state in the machine so it can/can't leave the thrown state
+        if (projectileHasReturned)
+        {
+            animator.SetTrigger(triggerParameter);
+            projectileHasReturned = false;
+        }
+
+        elaspedChargetime += Time.deltaTime;
     }
 
     IEnumerator<float> LeftAxeThrow()
     {
         curve.GetAnchorPoints()[0].transform.position = leftAxeRestingPos;
-        curve.GetAnchorPoints()[1].transform.position = PlayerController.Instance.transform.position + Vector3.up;
-        curve.GetAnchorPoints()[2].transform.position = PlayerController.Instance.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[1].transform.position = player.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[2].transform.position = player.transform.position + Vector3.up;
         curve.GetAnchorPoints()[3].transform.position = leftAxeRestingPos;
 
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             leftAxe.position = curve.GetPointAt(time / duration);
-            //transform.localRotation = Quaternion.Euler(0f, 360f * time / duration, 0f); //Spinning
             yield return Timing.WaitForOneFrame;
         }
 
@@ -107,8 +106,8 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     IEnumerator<float> RightAxeThrow()
     {
         curve.GetAnchorPoints()[0].transform.position = rightAxeRestingPos;
-        curve.GetAnchorPoints()[1].transform.position = PlayerController.Instance.transform.position + Vector3.up;
-        curve.GetAnchorPoints()[2].transform.position = PlayerController.Instance.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[1].transform.position = player.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[2].transform.position = player.transform.position + Vector3.up;
         curve.GetAnchorPoints()[3].transform.position = rightAxeRestingPos;
 
         for (float time = 0; time < duration; time += Time.deltaTime)
@@ -130,18 +129,7 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         }
 
         //This is a safety net in case something malfunctions with MEC
-        Timing.KillCoroutines();
+        Timing.KillCoroutines(leftAxeThrow);
+        Timing.KillCoroutines(rightAxeThrow);
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }
