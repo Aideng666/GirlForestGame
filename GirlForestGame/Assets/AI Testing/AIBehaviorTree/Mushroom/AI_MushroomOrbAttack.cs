@@ -9,11 +9,19 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     [SerializeField] float projectileForce = 1f;
     //Used in the "3 shots". The gaps between each shot
     [SerializeField] float timeBetweenShots = 0.3f;
-    [SerializeField] GameObject orb;
+    [SerializeField] GameObject terrestrialOrb;
+    [SerializeField] GameObject astralOrb;
     [SerializeField] float rotationSpeed = 0.4f;
-    //EnemyData mushroomData;
-    Animator animator;
+    [SerializeField] float attackChargeTime = 1;
+
     List<CoroutineHandle> handles;
+    Animator animator;
+
+    int randomAttackChoice;
+    int randomOrbChoice;
+    float elaspedChargeTime;
+    bool chargeComplete;
+    bool attackFired;
     
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -27,45 +35,108 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         agent.transform.DOLookAt(player.transform.position, rotationSpeed);
         this.animator = animator;
         handles = new List<CoroutineHandle>();
-        handles.Add(Timing.RunCoroutine(_waitUntilLooking()));
+        //handles.Add(Timing.RunCoroutine(_waitUntilLooking()));
+
+        randomAttackChoice = Random.Range(0, 2);
+        randomOrbChoice = Random.Range(0, 2);
+        elaspedChargeTime = 0;
+        attackFired = false;
+
+        //Indicate Attack
+        if (randomOrbChoice == 0)
+        {
+            enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeTime);
+        }
+        else if (randomOrbChoice == 1)
+        {
+            enemyUI.IndicateAttack(Planes.Astral, attackChargeTime);
+        }
     }
-    IEnumerator<float> _waitUntilLooking()
+
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        yield return Timing.WaitForSeconds(rotationSpeed * 1.02f);
-        if (Random.Range(0, 2) == 0)
+        if (elaspedChargeTime >= attackChargeTime && !attackFired)
         {
-            FanAttack();
+            if (randomAttackChoice == 0)
+            {
+                FanAttack();
+            }
+            else
+            {
+                handles.Add(Timing.RunCoroutine(_FiveInARow()));
+            }
+
+            attackFired = true;
         }
-        else
-        {
-            handles.Add(Timing.RunCoroutine(_ThreeInARow()));
-        }
+
+        elaspedChargeTime += Time.deltaTime;
     }
+
+
+    //IEnumerator<float> _waitUntilLooking()
+    //{
+    //    yield return Timing.WaitForSeconds(rotationSpeed * 1.02f);
+    //    if (Random.Range(0, 2) == 0)
+    //    {
+    //        FanAttack();
+    //    }
+    //    else
+    //    {
+    //        handles.Add(Timing.RunCoroutine(_ThreeInARow()));
+    //    }
+    //}
 
     void FanAttack() 
     {
         //This is gross but it's a quick and easy way to do it
-        Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
-        Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.right) * projectileForce);
-        Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.left) * projectileForce);
+        //if (randomOrbChoice == 0)
+        //{
+        //    FireOrb(terrestrialOrb, Vector3.forward);
+        //    FireOrb(terrestrialOrb, Vector3.Normalize(Vector3.forward + Vector3.right));
+        //    FireOrb(terrestrialOrb, Vector3.Normalize(Vector3.forward + Vector3.left));
+        //}
+        //else
+        //{
+        //    FireOrb(astralOrb, Vector3.forward);
+        //    FireOrb(astralOrb, Vector3.Normalize(Vector3.forward + Vector3.right));
+        //    FireOrb(astralOrb, Vector3.Normalize(Vector3.forward + Vector3.left));
+        //}
+        FireOrb((player.transform.position - agent.transform.position).normalized);
+        FireOrb(Quaternion.Euler(0, 15, 0) * (player.transform.position - agent.transform.position).normalized);
+        FireOrb(Quaternion.Euler(0, -15, 0) * (player.transform.position - agent.transform.position).normalized);
+        FireOrb(Quaternion.Euler(0, 30, 0) * (player.transform.position - agent.transform.position).normalized);
+        FireOrb(Quaternion.Euler(0, -30, 0) * (player.transform.position - agent.transform.position).normalized);
+
+        //Instantiate(terrestrialOrb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
+        //Instantiate(terrestrialOrb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.right) * projectileForce);
+        //Instantiate(terrestrialOrb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.left) * projectileForce);
         //This is used so that it can delay firing the shots enough to be looking at the player, as opposed to firing any which way
         animator.SetTrigger("Has_Fired");
     }
 
-    IEnumerator<float> _ThreeInARow() 
+    IEnumerator<float> _FiveInARow() 
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
-            FireOrb();
-            yield return Timing.WaitForSeconds(0.3f);
+            FireOrb((player.transform.position - agent.transform.position).normalized);
+
+            yield return Timing.WaitForSeconds(timeBetweenShots);
         }
         //This is used so that it can delay firing the shots enough to be looking at the player, as opposed to firing any which way
         animator.SetTrigger("Has_Fired");
     }
 
-    void FireOrb() 
+    void FireOrb(Vector3 direction) 
     {
-        Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
+        if (randomOrbChoice == 0)
+        {
+            ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, animator.transform.position).GetComponent<Rigidbody>().AddRelativeForce(direction * projectileForce);
+        }
+        else
+        {
+            ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, animator.transform.position).GetComponent<Rigidbody>().AddRelativeForce(direction * projectileForce);
+        }
+        //Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(direction * projectileForce);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

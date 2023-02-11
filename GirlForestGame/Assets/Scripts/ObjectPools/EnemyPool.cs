@@ -8,7 +8,7 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] GameObject mushroomPrefab;
 
     public Queue<GameObject> availableBoars { get; private set; } = new Queue<GameObject>();
-    public Queue<GameObject> availableMushrooms = new Queue<GameObject>();
+    public Queue<GameObject> availableMushrooms { get; private set; } = new Queue<GameObject>();
 
     float enemySpawnWallOffset = 5;
     int numEachEnemy = 5;

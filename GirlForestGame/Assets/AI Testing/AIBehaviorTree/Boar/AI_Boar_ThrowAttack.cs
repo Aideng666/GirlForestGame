@@ -74,6 +74,7 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
             }
 
             hasThrownProjectile = true;
+            enemyData.IsAttacking = true;
         }
 
 
@@ -94,13 +95,21 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         curve.GetAnchorPoints()[2].transform.position = player.transform.position + Vector3.up;
         curve.GetAnchorPoints()[3].transform.position = leftAxeRestingPos;
 
+        //leftAxe.transform.parent = null;
+
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             leftAxe.position = curve.GetPointAt(time / duration);
+
+            curve.GetAnchorPoints()[3].transform.position = agent.transform.position + (agent.transform.forward + (-agent.transform.right)).normalized;
+
             yield return Timing.WaitForOneFrame;
         }
 
-        projectileHasReturned = true; //The projectile has returned and can now change states back to tracking if the player has moved too far away
+        projectileHasReturned = true;
+        enemyData.IsAttacking = false;
+
+        //leftAxe.transform.parent = agent.GetComponentInChildren<Animator>().transform;
     }
 
     IEnumerator<float> RightAxeThrow()
@@ -110,13 +119,21 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         curve.GetAnchorPoints()[2].transform.position = player.transform.position + Vector3.up;
         curve.GetAnchorPoints()[3].transform.position = rightAxeRestingPos;
 
+        //leftAxe.transform.parent = null;
+
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             rightAxe.position = curve.GetPointAt(time / duration);
+
+            curve.GetAnchorPoints()[3].transform.position = agent.transform.position + (agent.transform.forward + agent.transform.right).normalized;
+
             yield return Timing.WaitForOneFrame;
         }
 
-        projectileHasReturned = true; //The projectile has returned and can now change states back to tracking if the player has moved too far away
+        projectileHasReturned = true;
+        enemyData.IsAttacking = false;
+
+        //leftAxe.transform.parent = agent.GetComponentInChildren<Animator>().transform;
     }
 
 

@@ -18,6 +18,7 @@ public class EnemyData : MonoBehaviour
     public float actionCooldown = 0f;
 
     public float enemyMaxSpeed { get; private set; } = 5;
+    [SerializeField] protected Planes form;
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
 
@@ -27,9 +28,9 @@ public class EnemyData : MonoBehaviour
     Rigidbody body;
     PlayerController player;
     bool isDead;
+    bool isAttacking;
+    public bool IsAttacking { get { return isAttacking; } set { isAttacking = value; } }
 
-    //CHANGE THIS TO BE MORE FLEXIBLE
-    protected Planes form = Planes.Terrestrial;
     public Planes Form { get { return form; } }
 
     private void OnEnable()
