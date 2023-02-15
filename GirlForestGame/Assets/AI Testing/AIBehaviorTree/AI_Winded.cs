@@ -23,7 +23,7 @@ public class AI_Winded : AI_BaseClass
 
         if (elaspedTime >= duration)
         {
-            animator.SetTrigger("Done_Winded");
+            animator.SetBool("Winded", false);
         }
 
         elaspedTime += Time.deltaTime;

@@ -24,6 +24,7 @@ public class Particle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Creates the correct layer mask for the colliders to hit the proper enemies at any given time
         int colliderLayerMask = (1 << defaultLayer);
 
         if (PlayerController.Instance.playerCombat.Form == Planes.Terrestrial)
@@ -39,6 +40,7 @@ public class Particle : MonoBehaviour
             colliderLayerMask &= ~(1 << livingLayer);
         }
 
+        //If a particle has a different particle that comes after it, this will spawn it
         if (!particle.isPlaying)
         {
             if (childParticle != ParticleTypes.None)
@@ -98,6 +100,15 @@ public class Particle : MonoBehaviour
                     enemiesHit.Add(enemy);
 
                     EventManager.Instance.InvokeOnBowHit(enemiesHit, true);
+                }
+
+                break;
+
+            case ParticleTypes.GasCloud:
+
+                if (other.gameObject.TryGetComponent(out PlayerCombat player))
+                {
+                    player.TakeDamage();
                 }
 
                 break;

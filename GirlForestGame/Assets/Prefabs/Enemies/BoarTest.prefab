@@ -107,7 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 100
-  maxHealth: 10
+  enemyType: 0
+  maxHealth: 20
   actionCooldown: 1
   defaultCoinDropChance: 0.25
   defaultHealthDropChance: 0.05

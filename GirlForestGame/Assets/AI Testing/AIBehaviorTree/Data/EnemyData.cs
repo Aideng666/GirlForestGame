@@ -11,12 +11,14 @@ public class EnemyData : MonoBehaviour
 {
     [HideInInspector]
     public float curHealth;
+    [SerializeField] EnemyTypes enemyType;
     public float maxHealth = 1f;
 
     //Cooldown between each attack from the condition
     public float actionCooldown = 0f;
 
     public float enemyMaxSpeed { get; private set; } = 5;
+    [SerializeField] protected Planes form;
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
 
@@ -26,9 +28,9 @@ public class EnemyData : MonoBehaviour
     Rigidbody body;
     PlayerController player;
     bool isDead;
+    bool isAttacking;
+    public bool IsAttacking { get { return isAttacking; } set { isAttacking = value; } }
 
-    //CHANGE THIS TO BE MORE FLEXIBLE
-    protected Planes form = Planes.Terrestrial;
     public Planes Form { get { return form; } }
 
     private void OnEnable()
@@ -67,7 +69,7 @@ public class EnemyData : MonoBehaviour
 
         player.playerCombat.RemoveSwordTarget(this);
         player.playerCombat.RemoveBowTarget(this);
-        EnemyPool.Instance.AddBoarToPool(gameObject);
+        EnemyPool.Instance.AddEnemyToPool(enemyType, gameObject);
 
         float coinRoll = Random.Range(0f, 1f);
         float heartRoll = Random.Range(0f, 1f);
@@ -102,6 +104,9 @@ public class EnemyData : MonoBehaviour
     {
         if (!isDead)
         {
+            //For Mushroom Spirit activation if it gets hit before the enemy gets close
+            transform.parent.GetComponentInChildren<Animator>().SetTrigger("Awaken_From_Idle");
+
             curHealth -= damageAmount;
 
             if (curHealth <= 0)
@@ -131,5 +136,16 @@ public class EnemyData : MonoBehaviour
         {
             actionCooldown -= Time.deltaTime;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+
+        //Vector3 directionVector = transform.position - player.transform.position;
+        //directionVector.y = 0;
+        //directionVector = directionVector.normalized;
+
+        //Gizmos.DrawRay(new Vector3(player.transform.position.x, 0, player.transform.position.z), directionVector * 12);
     }
 }

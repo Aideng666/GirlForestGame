@@ -12,6 +12,7 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem fireArrow;
     [SerializeField] ParticleSystem windArrow;
     [SerializeField] ParticleSystem windArrow2;
+    [SerializeField] ParticleSystem gasCloud;
 
     ParticleSystem currentParticle;
 
@@ -85,6 +86,12 @@ public class ParticleManager : MonoBehaviour
                 currentParticle = Instantiate(windArrow2, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                 currentParticle.GetComponent<SphereCollider>().radius = windParticleShape.radius;
+
+                break;
+
+            case ParticleTypes.GasCloud:
+
+                currentParticle = Instantiate(gasCloud, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                 break;
         }

@@ -43,8 +43,8 @@ public class AI_Boar_DashAttack : AI_BaseClass
 
         if (attackCharged)
         {
-            agent.speed = animator.GetComponentInParent<EnemyData>().enemyMaxSpeed;
-            agent.SetDestination(PlayerController.Instance.transform.position);
+            agent.speed = enemyData.enemyMaxSpeed;
+            agent.SetDestination(player.transform.position);
             
             //Change this collision part into a function when we get animations
             //Also swap between Terrestial and Astral
@@ -56,10 +56,10 @@ public class AI_Boar_DashAttack : AI_BaseClass
                 {
                     foreach (Collider hit in hits)
                     {
-                        if (hit.TryGetComponent(out PlayerController player))
+                        if (hit.TryGetComponent(out PlayerCombat playerHit))
                         {
                             //player.playerCombat.ApplyKnockback(agent.transform.forward, 5);
-                            player.playerCombat.TakeDamage();
+                            playerHit.TakeDamage();
                         }
                     }
                 }
