@@ -7,6 +7,7 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI dialogueText;
+
     [Range(1, 5)]
     [SerializeField] float textSpeed;
 
@@ -18,12 +19,13 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-    }
+        if (Instance != null)
+        {
+            Destroy(Instance);
+        }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+        Instance = this;
+
         sentences = new Queue<string>();
     }
 

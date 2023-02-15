@@ -482,9 +482,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     sentences:
-    - "Welcome To Vi\xF0r"
-    - To make your way through the forest successfully, you will need the guidance
-      of us spirits
+    - Hello Biotch
+    - Ur Gonna Die Now
+    - Boom ur dead
 --- !u!4 &347989010
 Transform:
   m_ObjectHideFlags: 0
