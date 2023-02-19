@@ -13,6 +13,8 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem windArrow;
     [SerializeField] ParticleSystem windArrow2;
     [SerializeField] ParticleSystem gasCloud;
+    [SerializeField] ParticleSystem astralBarrier;
+    [SerializeField] ParticleSystem fearfulAura;
 
     ParticleSystem currentParticle;
 
@@ -91,7 +93,19 @@ public class ParticleManager : MonoBehaviour
 
             case ParticleTypes.GasCloud:
 
-                currentParticle = Instantiate(gasCloud, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(gasCloud, position, gasCloud.gameObject.transform.rotation, DungeonGenerator.Instance.GetCurrentRoom().transform);
+
+                break;
+
+            case ParticleTypes.AstralBarrier:
+
+                currentParticle = Instantiate(astralBarrier, new Vector3(position.x, astralBarrier.transform.position.y, position.z), astralBarrier.gameObject.transform.rotation, PlayerController.Instance.transform);
+
+                break;
+
+            case ParticleTypes.FearfulAura:
+
+                currentParticle = Instantiate(fearfulAura, new Vector3(position.x, fearfulAura.transform.position.y, position.z), fearfulAura.gameObject.transform.rotation, PlayerController.Instance.transform);
 
                 break;
         }

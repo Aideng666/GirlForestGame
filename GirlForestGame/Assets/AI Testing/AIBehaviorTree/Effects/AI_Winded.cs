@@ -5,27 +5,31 @@ using UnityEngine;
 public class AI_Winded : AI_BaseClass
 {
     float duration;
-    float elaspedTime;
+    float startSpeed;
+    float startAnimSpeed;
+    //float elaspedTime;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
         duration = PlayerController.Instance.playerMarkings.GetWindedDuration();
-        elaspedTime = 0;
 
+        startSpeed = agent.speed;
+        startAnimSpeed = animator.speed;
+
+        animator.speed = 1 / duration;
         agent.speed = 0;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
+    }
 
-        if (elaspedTime >= duration)
-        {
-            animator.SetBool("Winded", false);
-        }
-
-        elaspedTime += Time.deltaTime;
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        agent.speed = startSpeed;
+        animator.speed = startAnimSpeed;
     }
 }

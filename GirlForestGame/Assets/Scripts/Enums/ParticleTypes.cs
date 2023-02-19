@@ -12,5 +12,7 @@ public enum ParticleTypes
     FireArrow,
     WindArrow,
     WindArrow2,
-    GasCloud
+    GasCloud,
+    AstralBarrier,
+    FearfulAura
 }

@@ -27,8 +27,8 @@ public class TotemObject : ScriptableObject
     [ContextMenu(nameof(PlaneSwapEmpowerment))] void PlaneSwapEmpowerment() { Totem = new PlaneSwapEmpowermentTotem(); }
     [ContextMenu(nameof(BladeMaster))] void BladeMaster() { Totem = new BladeMasterTotem(); }
     [ContextMenu(nameof(Assassin))] void Assassin() { Totem = new AssassinTotem(); }
-    //[ContextMenu(nameof(BladeMaster))] void BladeMaster() { Totem = new HealthUpTotem(); }
-    //[ContextMenu(nameof(PlaneBuff))] void PlaneBuff() { Totem = new HealthUpTotem(); }
+    [ContextMenu(nameof(AstralBarrier))] void AstralBarrier() { Totem = new AstralBarrierTotem(); }
+    [ContextMenu(nameof(FearfulAura))] void FearfulAura() { Totem = new FearfulAuraTotem(); }
     //[ContextMenu(nameof(RabbitsFoot))] void RabbitsFoot() { Totem = new HealthUpTotem(); }
     #endregion
 }
@@ -99,6 +99,7 @@ public class OnTriggerTotem : Totem
 [Serializable]
 public class ConstantTotem : Totem
 {
+    [HideInInspector]
     public bool conditionMet;
 
     public override void Init()
@@ -333,6 +334,87 @@ public class BerzerkTotem : ConstantTotem
         }
 
         conditionMet = false;
+    }
+}
+
+public class AstralBarrierTotem : ConstantTotem
+{
+    GameObject astralBarrier;
+    float baseRadius;
+    
+    public override void ApplyEffect()
+    {
+        base.ApplyEffect();
+
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(AstralBarrierTotem)];
+
+        if (conditionMet && !effectApplied)
+        {
+            //Turn on Barrier
+            if (astralBarrier == null)
+            {
+                astralBarrier = ParticleManager.Instance.SpawnParticle(ParticleTypes.AstralBarrier, player.transform.position);
+                baseRadius = astralBarrier.GetComponent<SphereCollider>().radius;
+            }
+            else
+            {
+                astralBarrier.SetActive(true);
+            }
+
+            if (currentStackAmount != 1)
+            {
+                astralBarrier.GetComponent<SphereCollider>().radius = baseRadius;
+                astralBarrier.GetComponent<SphereCollider>().radius += astralBarrier.GetComponent<SphereCollider>().radius * CalcBuffMultiplier(currentStackAmount);
+            }
+
+            effectApplied = true;
+        }
+        else if (!conditionMet && effectApplied)
+        {
+            //Turn off Barrier
+            astralBarrier.SetActive(false);
+            effectApplied = false;
+        }
+    }
+
+    public override void CheckCondition()
+    {
+        if (player.playerCombat.Form == Planes.Astral)
+        {
+            conditionMet = true;
+
+            return;
+        }
+
+        conditionMet = false;
+    }
+}
+
+public class FearfulAuraTotem : ConstantTotem
+{
+    [SerializeField] float basePulseTimer = 5;
+    float elaspedTime = 0;
+    GameObject fearParticle = null;
+
+    public override void ApplyEffect()
+    {
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(AstralBarrierTotem)];
+
+        if (elaspedTime >= basePulseTimer - ((currentStackAmount - 1) * initialBuffAmount))
+        {
+            if (fearParticle == null)
+            {
+                fearParticle = ParticleManager.Instance.SpawnParticle(ParticleTypes.FearfulAura, player.transform.position);
+            }
+            else
+            {
+                fearParticle.SetActive(true);
+            }
+
+            elaspedTime = 0;
+        }
+
+        elaspedTime += Time.deltaTime;
     }
 }
 #endregion

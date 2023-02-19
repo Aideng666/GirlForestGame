@@ -145,6 +145,11 @@ public class PlayerCombat : MonoBehaviour
             {
                 player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.ApplyEffect();
             }
+
+            if (player.playerInventory.totemDictionary[typeof(AstralBarrierTotem)] > 0)
+            {
+                player.playerInventory.GetTotemFromList(typeof(AstralBarrierTotem)).Totem.ApplyEffect();
+            }
         }
     }
 

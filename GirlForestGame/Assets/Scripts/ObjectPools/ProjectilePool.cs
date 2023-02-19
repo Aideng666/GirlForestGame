@@ -75,6 +75,8 @@ public class ProjectilePool : MonoBehaviour
 
     public void AddProjectileToPool(Planes plane, GameObject instance)
     {
+        instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
         switch (plane)
         {
             case Planes.Astral:

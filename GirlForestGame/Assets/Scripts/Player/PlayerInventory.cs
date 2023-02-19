@@ -42,12 +42,17 @@ public class PlayerInventory : MonoBehaviour
 
     private void Update()
     {
-        foreach (TotemObject totem in totems)
+        //foreach (TotemObject totem in totems)
+        //{
+        //    if (totem.Totem.GetTotemType() == TotemTypes.Constant)
+        //    {
+        //        totem.Totem.ApplyEffect();
+        //    }
+        //}
+
+        if (player.playerInventory.totemDictionary[typeof(FearfulAuraTotem)] > 0)
         {
-            if (totem.Totem.GetTotemType() == TotemTypes.Constant)
-            {
-                totem.Totem.ApplyEffect();
-            }
+            player.playerInventory.GetTotemFromList(typeof(FearfulAuraTotem)).Totem.ApplyEffect();
         }
     }
 
@@ -164,8 +169,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void AddTotemToList(TotemObject totem)
     {
-        //totems.Add(totem);
-
         System.Type totemType = totem.Totem.GetType();
 
         if (totemDictionary.ContainsKey(totemType))
@@ -180,8 +183,6 @@ public class PlayerInventory : MonoBehaviour
 
         if (totem.Totem.GetTotemType() == TotemTypes.OnPickup)
         {
-            //totem.Totem.ApplyEffect();
-
             foreach (TotemObject t in totems)
             {
                 if (t.Totem.totemName == totem.Totem.totemName)

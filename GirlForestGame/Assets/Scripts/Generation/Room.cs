@@ -31,9 +31,9 @@ public class Room : MonoBehaviour
         {
             roomCompleted = false;
 
-            for (int i = 0; i < Random.Range(3, 7); i++)
+            for (int i = 0; i < Random.Range(1, 2); i++)
             {
-                int randomEnemySelection = Random.Range(0, 2);
+                int randomEnemySelection = Random.Range(1, 2);
 
                 switch (randomEnemySelection)
                 {

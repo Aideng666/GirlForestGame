@@ -31,8 +31,6 @@ public class AI_Boar_Wander : AI_BaseClass
         //}
     }
 
-    ////OnStateUpdate is handled in the AI_BaseClass////
-
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -56,12 +54,10 @@ public class AI_Boar_Wander : AI_BaseClass
 
         if (leftAxe.position != agent.transform.position + (agent.transform.forward + (-agent.transform.right)).normalized)
         {
-            //leftAxe.DOMove(agent.transform.position + (agent.transform.forward + (-agent.transform.right)).normalized, 0.1f);
             leftAxe.position = agent.transform.position + (agent.transform.forward + (-agent.transform.right)).normalized;
         }
         if (rightAxe.position != agent.transform.position + (agent.transform.forward + agent.transform.right).normalized)
         {
-            //rightAxe.DOMove(agent.transform.position + (agent.transform.forward + agent.transform.right).normalized, 0.1f);
             rightAxe.position = agent.transform.position + (agent.transform.forward + agent.transform.right).normalized;
         }
 

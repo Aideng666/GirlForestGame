@@ -338,7 +338,7 @@ public class PlayerMarkings : MonoBehaviour
                 {
                     if (invokeRoll <= (elementActivationChances[markings[1].markingLevel - 1] + (PlayerController.Instance.playerAttributes.Luck * 100)))
                     {
-                        enemy.GetComponentInChildren<Animator>().SetBool("Winded", true);
+                        enemy.GetComponentInChildren<Animator>().SetTrigger("Winded");
 
                         windedDuration = baseWindedDuration * elementMultipliers[markings[1].markingLevel - 1];
                     }
@@ -347,7 +347,7 @@ public class PlayerMarkings : MonoBehaviour
                 {
                     if (invokeRoll <= (elementActivationChances[markings[3].markingLevel - 1] + (PlayerController.Instance.playerAttributes.Luck * 100)))
                     {
-                        enemy.GetComponentInChildren<Animator>().SetBool("Winded", true);
+                        enemy.GetComponentInChildren<Animator>().SetTrigger("Winded");
 
                         windedDuration = baseWindedDuration * elementMultipliers[markings[3].markingLevel - 1];
                     }
