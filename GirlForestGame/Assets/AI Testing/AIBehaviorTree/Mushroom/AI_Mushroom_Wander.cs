@@ -14,7 +14,7 @@ public class AI_Mushroom_Wander : AI_BaseClass
 
     Ray moveRay;
 
-    private CoroutineHandle moveCoroutine;
+    //private CoroutineHandle moveCoroutine;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -75,7 +75,7 @@ public class AI_Mushroom_Wander : AI_BaseClass
     {
         //Doing this to make sure that the coroutine stops when it leaves the state
         //It may be redundant but it's a safety net because we aren't destroying the object when changing states
-        Timing.KillCoroutines(moveCoroutine);
+        //Timing.KillCoroutines(moveCoroutine);
 
         //Stops all the movement to favor any other state
         agent.ResetPath();

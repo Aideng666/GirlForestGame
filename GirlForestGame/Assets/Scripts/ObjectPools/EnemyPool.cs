@@ -6,9 +6,13 @@ public class EnemyPool : MonoBehaviour
 {
     [SerializeField] GameObject boarPrefab;
     [SerializeField] GameObject mushroomPrefab;
+    [SerializeField] GameObject draugrPrefab;
+    [SerializeField] GameObject stoneGolemPrefab;
 
     public Queue<GameObject> availableBoars { get; private set; } = new Queue<GameObject>();
     public Queue<GameObject> availableMushrooms { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableDraugrs { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableGolems { get; private set; } = new Queue<GameObject>();
 
     float enemySpawnWallOffset = 5;
     int numEachEnemy = 5;
@@ -74,6 +78,32 @@ public class EnemyPool : MonoBehaviour
                 instance.SetActive(true);
 
                 break;
+
+            case EnemyTypes.Draugr:
+
+                if (availableDraugrs.Count == 0)
+                {
+                    CreatePools();
+                }
+
+                instance = availableDraugrs.Dequeue();
+                instance.transform.position = SelectSpawnPosition(instance);
+                instance.SetActive(true);
+
+                break;
+
+            case EnemyTypes.StoneGolem:
+
+                if (availableGolems.Count == 0)
+                {
+                    CreatePools();
+                }
+
+                instance = availableGolems.Dequeue();
+                instance.transform.position = SelectSpawnPosition(instance);
+                instance.SetActive(true);
+
+                break;
         }
 
         return instance;
@@ -94,6 +124,20 @@ public class EnemyPool : MonoBehaviour
             instanceToAdd.transform.SetParent(transform);
             AddEnemyToPool(EnemyTypes.MushroomSpirit, instanceToAdd);
         }
+
+        for (int i = 0; i < numEachEnemy; ++i)
+        {
+            GameObject instanceToAdd = Instantiate(draugrPrefab);
+            instanceToAdd.transform.SetParent(transform);
+            AddEnemyToPool(EnemyTypes.Draugr, instanceToAdd);
+        }
+
+        for (int i = 0; i < numEachEnemy; ++i)
+        {
+            GameObject instanceToAdd = Instantiate(stoneGolemPrefab);
+            instanceToAdd.transform.SetParent(transform);
+            AddEnemyToPool(EnemyTypes.StoneGolem, instanceToAdd);
+        }
     }
 
     public void AddEnemyToPool(EnemyTypes enemy, GameObject instance)
@@ -113,6 +157,20 @@ public class EnemyPool : MonoBehaviour
                 availableMushrooms.Enqueue(instance);
 
                 break;
+
+            case EnemyTypes.Draugr:
+
+                instance.SetActive(false);
+                availableDraugrs.Enqueue(instance);
+
+                break;
+
+            case EnemyTypes.StoneGolem:
+
+                instance.SetActive(false);
+                availableGolems.Enqueue(instance);
+
+                break;
         }
     }
 }
@@ -122,5 +180,5 @@ public enum EnemyTypes
     Boar,
     MushroomSpirit,
     StoneGolem,
-    UndeadSpirit
+    Draugr
 }

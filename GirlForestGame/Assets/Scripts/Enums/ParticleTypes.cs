@@ -14,5 +14,7 @@ public enum ParticleTypes
     WindArrow2,
     GasCloud,
     AstralBarrier,
-    FearfulAura
+    FearfulAura,
+    Teleport,
+    TeleportAttack
 }

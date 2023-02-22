@@ -15,6 +15,8 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem gasCloud;
     [SerializeField] ParticleSystem astralBarrier;
     [SerializeField] ParticleSystem fearfulAura;
+    [SerializeField] ParticleSystem teleport;
+    [SerializeField] ParticleSystem teleportAttack;
 
     ParticleSystem currentParticle;
 
@@ -106,6 +108,18 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.FearfulAura:
 
                 currentParticle = Instantiate(fearfulAura, new Vector3(position.x, fearfulAura.transform.position.y, position.z), fearfulAura.gameObject.transform.rotation, PlayerController.Instance.transform);
+
+                break;
+
+            case ParticleTypes.Teleport:
+
+                currentParticle = Instantiate(teleport, new Vector3(position.x, teleport.transform.position.y, position.z), teleport.gameObject.transform.rotation, DungeonGenerator.Instance.GetCurrentRoom().transform);
+
+                break;
+
+            case ParticleTypes.TeleportAttack:
+
+                currentParticle = Instantiate(teleportAttack, new Vector3(position.x, teleportAttack.transform.position.y, position.z), teleportAttack.gameObject.transform.rotation, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                 break;
         }

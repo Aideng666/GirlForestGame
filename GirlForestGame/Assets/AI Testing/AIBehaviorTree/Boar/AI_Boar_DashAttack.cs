@@ -8,6 +8,7 @@ public class AI_Boar_DashAttack : AI_BaseClass
 {
     [SerializeField] string triggerParameter = "Dash_Attack_Completed";
     [SerializeField] float duration = 3;
+    [SerializeField] float attackRange = 1.5f;
 
     bool attackCharged = false;
     float attackTimer = 0;
@@ -28,12 +29,6 @@ public class AI_Boar_DashAttack : AI_BaseClass
         attackCharged = false;
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (dashTimer >= duration)
@@ -50,7 +45,7 @@ public class AI_Boar_DashAttack : AI_BaseClass
             //Also swap between Terrestial and Astral
             if (attackTimer >= timeBetweenEachAttack)
             {
-                Collider[] hits = Physics.OverlapSphere(agent.transform.position + (agent.transform.forward * 1.5f), 1.5f);
+                Collider[] hits = Physics.OverlapSphere(agent.transform.position + (agent.transform.forward * 1.5f), attackRange);
 
                 if (hits.Length > 0)
                 {
