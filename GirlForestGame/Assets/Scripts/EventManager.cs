@@ -6,16 +6,14 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     //For Player Attack Events
-    public delegate void OnHitAttack(List<EnemyData> enemiesHit, Weapons weapon);
+    public delegate void OnHitAttack(List<EnemyData> enemiesHit, Weapons weapon, bool guaranteeActivation = false);
     public static event OnHitAttack OnSwordHit;
     public static event OnHitAttack OnBowHit;
 
-    //For OnTrigger Totem events
-    //public delegate void OnTotemTrigger();
-    //public static event OnTotemTrigger OnEnemyKill;
-    //public static event OnTotemTrigger OnPlayerDeath;
-    //public static event OnTotemTrigger OnPlaneSwitch;
-    //public static event OnTotemTrigger OnSwordSwing;
+    //General Events
+    public delegate void OnEvent();
+    public static event OnEvent OnAttributeChange;
+    public static event OnEvent OnHealthChange;
 
     public static EventManager Instance { get; set; }
 
@@ -29,45 +27,29 @@ public class EventManager : MonoBehaviour
         Instance = this;
     }
 
-    public void InvokeOnSwordHit(List<EnemyData> enemiesHit)
+    public void InvokeOnSwordHit(List<EnemyData> enemiesHit, bool guaranteeActivation = false)
     {
-        OnSwordHit?.Invoke(enemiesHit, Weapons.Sword);
+        OnSwordHit?.Invoke(enemiesHit, Weapons.Sword, guaranteeActivation);
     }
 
-    public void InvokeOnBowHit(List<EnemyData> enemiesHit)
+    public void InvokeOnBowHit(List<EnemyData> enemiesHit, bool guaranteeActivation = false)
     {
-        OnBowHit?.Invoke(enemiesHit, Weapons.Bow);
+        OnBowHit?.Invoke(enemiesHit, Weapons.Bow, guaranteeActivation);
     }
 
-    //public void InvokeTotemTrigger(TotemEvents totemEvent)
-    //{
-    //    switch (totemEvent)
-    //    {
-    //        case TotemEvents.OnEnemyKill:
+    public void InvokeOnAttributeChange(Attributes attribute)
+    {
+        OnAttributeChange?.Invoke();
 
-    //            OnEnemyKill?.Invoke();
+        switch (attribute)
+        {
+            case Attributes.Health:
 
-    //            break;
+                OnHealthChange?.Invoke();
 
-    //        case TotemEvents.OnPlayerDeath:
-
-    //            OnPlayerDeath?.Invoke();
-
-    //            break;
-
-    //        case TotemEvents.OnPlaneSwitch:
-
-    //            OnPlaneSwitch?.Invoke();
-
-    //            break;
-
-    //        case TotemEvents.OnSwordSwing:
-
-    //            OnSwordSwing?.Invoke();
-
-    //            break;
-    //    }
-    //}
+                break;
+        }
+    }
 }
 
 public enum TotemEvents

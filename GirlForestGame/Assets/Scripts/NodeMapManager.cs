@@ -7,12 +7,13 @@ public class NodeMapManager : MonoBehaviour
 {
     [SerializeField] Camera dungeonCam;
     [SerializeField] Camera mapCam;
+    [SerializeField] GameObject gameHUD;
     [SerializeField] int totalMapCycles = 3;
 
     Vector3 mapCamStartPos = new Vector3(0, -70, 12);
 
     static int currentLevel = 0;
-    static bool mapActive = true;
+    public static bool mapActive { get; private set; } = true;
     static bool mapUpdated;
 
     bool nextLevelSet;
@@ -37,6 +38,8 @@ public class NodeMapManager : MonoBehaviour
     {
         mapCam.enabled = true;
         dungeonCam.enabled = false;
+
+        gameHUD.SetActive(false);
     }
 
     // Update is called once per frame
@@ -206,6 +209,8 @@ public class NodeMapManager : MonoBehaviour
 
     void ToggleNodeMap()
     {
+        gameHUD.GetComponent<HUD>().ToggleHUD(!mapActive);
+
         mapCam.enabled = !mapCam.enabled;
         dungeonCam.enabled = !dungeonCam.enabled;
     }
@@ -289,10 +294,9 @@ public class NodeMapManager : MonoBehaviour
             }
 
             mapUpdated = false;
+            mapActive = true;
 
             ToggleNodeMap();
-
-            mapActive = true;
 
             InputManager.Instance.SwapActionMap("NodeMap");
 

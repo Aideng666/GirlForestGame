@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7dc3ecc306b194ba0d0a266389ccd5, type: 3}
   m_Name: Evade_Range
   m_EditorClassIdentifier: 
-  minRange: -1
-  maxRange: 0
+  minRange: 0
+  maxRange: 3
   Condition_Parameter: Close_To_Player

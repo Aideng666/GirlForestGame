@@ -4,9 +4,12 @@ using UnityEngine;
 
 public enum ParticleTypes
 {
-    DashStart,
-    DashEnd,
+    None,
+    BowCharge,
+    BowCharge2,
     SwordSlashLR,
     SwordSlashRL,
-    FireArrow
+    FireArrow,
+    WindArrow,
+    WindArrow2
 }

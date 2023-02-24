@@ -18,6 +18,8 @@ public class InputManager : MonoBehaviour
     InputAction changeFormAction;
     InputAction selectSwordAction;
     InputAction selectBowAction;
+    InputAction openAttributesAction;
+    InputAction openMarkingsAction;
 
     //Map Controls
     InputAction mapScrollAction;
@@ -27,8 +29,10 @@ public class InputManager : MonoBehaviour
     InputAction moveSelectionAction;
 
     //Global Controls
-    public InputAction openInventoryAction;
-    public InputAction pauseAction; 
+    [HideInInspector] public InputAction openInventoryAction;
+    [HideInInspector] public InputAction pauseAction; 
+
+    InputAction proceedAction;
 
     public static InputManager Instance { get; set; }
     private void Awake()
@@ -37,7 +41,6 @@ public class InputManager : MonoBehaviour
 
         //controls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
-
 
         playerInput.actions.FindActionMap("Player").Disable();
         playerInput.actions.FindActionMap("NodeMap").Enable();
@@ -60,6 +63,9 @@ public class InputManager : MonoBehaviour
         moveSelectionAction = playerInput.actions["MoveSelection"];
         openInventoryAction = playerInput.actions["OpenInventory"];
         pauseAction = playerInput.actions["Pause"];
+        openAttributesAction = playerInput.actions["OpenAttributes"];
+        openMarkingsAction = playerInput.actions["OpenMarkings"];
+        proceedAction = playerInput.actions["ProceedAction"];
 
         openInventoryAction.started += ToggleInventory;
     }
@@ -210,6 +216,26 @@ public class InputManager : MonoBehaviour
         return false;
     }
 
+    public bool OpenAttributes()
+    {
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return openAttributesAction.triggered;
+        }
+
+        return false;
+    }
+
+    public bool OpenMarkings()
+    {
+        if (playerInput.actions.FindActionMap("Player").enabled)
+        {
+            return openMarkingsAction.triggered;
+        }
+
+        return false;
+    }
+
     public float MapScroll()
     {
         if (playerInput.actions.FindActionMap("NodeMap").enabled)
@@ -258,5 +284,10 @@ public class InputManager : MonoBehaviour
     void ToggleInventory(InputAction.CallbackContext ctx)
     {
         PlayerController.Instance.playerInventory.ToggleInventory();
+    }
+
+    public bool Proceed()
+    {
+        return proceedAction.triggered;
     }
 }

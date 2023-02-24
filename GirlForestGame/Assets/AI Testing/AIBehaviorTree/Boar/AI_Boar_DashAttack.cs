@@ -46,9 +46,11 @@ public class AI_Boar_DashAttack : AI_BaseClass
             agent.speed = animator.GetComponentInParent<EnemyData>().enemyMaxSpeed;
             agent.SetDestination(PlayerController.Instance.transform.position);
             
+            //Change this collision part into a function when we get animations
+            //Also swap between Terrestial and Astral
             if (attackTimer >= timeBetweenEachAttack)
             {
-                Collider[] hits = Physics.OverlapSphere(agent.transform.position + (agent.transform.forward * 2), 2);
+                Collider[] hits = Physics.OverlapSphere(agent.transform.position + (agent.transform.forward * 1.5f), 1.5f);
 
                 if (hits.Length > 0)
                 {

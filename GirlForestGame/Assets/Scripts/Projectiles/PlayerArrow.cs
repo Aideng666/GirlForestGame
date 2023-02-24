@@ -32,13 +32,13 @@ public class PlayerArrow : MonoBehaviour
         chargedArrowDamage = player.playerAttributes.BowDamage * percentage;
     }
 
-    public void SetPlane(Forms plane)
+    public void SetPlane(Planes plane)
     {
-        if (plane == Forms.Living)
+        if (plane == Planes.Terrestrial)
         {
             gameObject.layer = livingLayer.value;
         }
-        else if (plane == Forms.Spirit)
+        else if (plane == Planes.Astral)
         {
             gameObject.layer = spiritLayer.value;
         }
@@ -85,6 +85,21 @@ public class PlayerArrow : MonoBehaviour
                         transform.rotation = transform.rotation * Quaternion.AngleAxis(-45, Vector3.right);
                         transform.DOJump(new Vector3(target.transform.position.x, 0, target.transform.position.z), 5, 1, 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
                         transform.DORotateQuaternion(transform.rotation * Quaternion.AngleAxis(135, Vector3.right), 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
+                    }
+
+                    break;
+
+                case Elements.Wind:
+
+                    if (target == null)
+                    {
+                        transform.forward = player.aimDirection;
+                        GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
+                    }
+                    else
+                    {
+                        transform.LookAt(target.transform);
+                        GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
                     }
 
                     break;
@@ -144,6 +159,12 @@ public class PlayerArrow : MonoBehaviour
         if (_element == Elements.Fire)
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.FireArrow, new Vector3(transform.position.x, 0, transform.position.z), arrowChargePercentage);
+
+            Destroy(gameObject);
+        }
+        else if (_element == Elements.Wind)
+        {
+            ParticleManager.Instance.SpawnParticle(ParticleTypes.WindArrow, new Vector3(transform.position.x, 1, transform.position.z), arrowChargePercentage);
 
             Destroy(gameObject);
         }
