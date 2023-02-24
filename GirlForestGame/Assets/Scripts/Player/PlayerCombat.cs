@@ -14,9 +14,6 @@ public class PlayerCombat : MonoBehaviour
 
     bool canAttack = true;
 
-    private float FireAttack;
-    private float WindAttack;
-
     //Bow Stuff
     GameObject bowTargetEnemy;
     List<EnemyData> bowTargetsInView = new List<EnemyData>();
@@ -26,9 +23,8 @@ public class PlayerCombat : MonoBehaviour
     bool quickfirePerformed;
     float currentBowChargeTime = 0;
 
-    private FMOD.Studio.EventInstance BowSFX;
-    private FMOD.Studio.EventInstance SFXCharge;
-    private FMOD.Studio.EventInstance ArrowSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance BowSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance ArrowSFX;
     private FMOD.Studio.EventInstance DrawSFX;
 
     //Sword Stuff
@@ -36,7 +32,7 @@ public class PlayerCombat : MonoBehaviour
     List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
 
-    private FMOD.Studio.EventInstance SwordSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance SwordSFX;
 
     Forms currentForm = Forms.Living;
     LayerMask livingLayer;
@@ -61,23 +57,12 @@ public class PlayerCombat : MonoBehaviour
 
     private void Awake()
     {
-        BowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow");
-        SFXCharge = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Charge");
-        SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword");
-        ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Arrow");
-        DrawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Draw");
-        
-        SwordSFX.getParameterByName("FireTotem", out FireAttack);
-        SwordSFX.getParameterByName("WindTotem", out WindAttack);
+        BowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Bow");
+        ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Arrow");
+        DrawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Draw");
+        SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword/Sword");
 
-        ArrowSFX.getParameterByName("FireTotem", out FireAttack);
-        ArrowSFX.getParameterByName("WindTotem", out WindAttack);
-        ArrowSFX.getParameterByName("SPShot", out currentBowChargeTime);
-
-        //SFXCharge.getParameterByName("FireTotem", out FireAttack);
-        //SFXCharge.getParameterByName("WindTotem", out WindAttack);
-        //SFXCharge.getParameterByName("SPShot", out currentBowChargeTime);
-
+        ArrowSFX.getParameterByName("SPCharge", out currentBowChargeTime);
 
     }
 
@@ -91,14 +76,12 @@ public class PlayerCombat : MonoBehaviour
             if (body.velocity == Vector3.zero)
             {
                 bowCharging = true;
-                //SFXCharge.start();
             }
             else
             {
                 bowCharging = false;
                 currentBowChargeTime = 0;
-                //SFXCharge.setParameterByName("SPShot", 0);
-                //SFXCharge.keyOff();
+
 
             }
 
@@ -110,9 +93,7 @@ public class PlayerCombat : MonoBehaviour
                     currentBowChargeTime += Time.deltaTime;
 
                     currentBowChargeTime = Mathf.Clamp(currentBowChargeTime, 0, player.playerAttributes.BowChargeTime);
-                    ArrowSFX.setParameterByName("SPShot", currentBowChargeTime);
-                    //SFXCharge.setParameterByName("SPShot", currentBowChargeTime);
-                    //SFXCharge.keyOff();
+                    ArrowSFX.setParameterByName("SPCharge", currentBowChargeTime);
 
                 }
             }
@@ -135,9 +116,9 @@ public class PlayerCombat : MonoBehaviour
                 else
                 {
                     SpawnArrow();
-                    BowSFX.keyOff();
                     currentBowChargeTime = 0;
                 }
+                BowSFX.keyOff();
                 ArrowSFX.start();
             }
         }
@@ -320,8 +301,9 @@ public class PlayerCombat : MonoBehaviour
 
             canAttack = false;
             isDrawingBow = true;
+            DrawSFX.start();
+
         }
-        DrawSFX.start();
     }
 
     void SpawnArrow(GameObject target = null)
@@ -532,7 +514,6 @@ public class PlayerCombat : MonoBehaviour
     private void OnDestroy()
     {
         BowSFX.release();
-        SFXCharge.release();
         SwordSFX.release();
         ArrowSFX.release();
         DrawSFX.release();

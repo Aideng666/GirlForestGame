@@ -1,29 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8896277112045657452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Bow/Wind Mark
-  m_EditorClassIdentifier: 
-  Name: Wind Mark
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3384103917
-    data2: 2437845430
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &-8618195615685439471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,43 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Player/Footsteps
   Guid:
-    Data1: -861215663
-    Data2: 1214108958
-    Data3: -324556149
-    Data4: 1942763737
+    Data1: -355910866
+    Data2: 1258688607
+    Data3: -1489726569
+    Data4: -117818190
   Banks:
-  - {fileID: -5003194148719884625}
-  - {fileID: -6431827650137564339}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -1480367506354024578}
-  - {fileID: -1590239985068814445}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 600
---- !u!114 &-7583945043810400079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/Fieldfire
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/Fieldfire
-  Guid:
-    Data1: 1222362810
-    Data2: 1240232332
-    Data3: 1834010043
-    Data4: 848994211
-  Banks:
-  - {fileID: -6564172777338818758}
-  - {fileID: -6431827650137564339}
+  - {fileID: -1975568493038996643}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -82,71 +27,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-6564172777338818758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Environment.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/Environment.bank
-  Name: Environment
-  StudioPath: bank:/Environment
-  lastModified: 638101072425827761
-  FileSizes:
-  - Name: Desktop
-    Value: 1548
-  Exists: 1
---- !u!114 &-6431827650137564339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Player.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/Player.bank
-  Name: Player
-  StudioPath: bank:/Player
-  lastModified: 638101072428258450
-  FileSizes:
-  - Name: Desktop
-    Value: 542944
-  Exists: 1
---- !u!114 &-5535523908280687748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Bow/Fire Mark
-  m_EditorClassIdentifier: 
-  Name: Fire Mark
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2123498595
-    data2: 375163882
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-5455571572187115738
+--- !u!114 &-7420331318779095469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,26 +37,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/Charge
+  m_Name: event:/Player/Sword/Sword
   m_EditorClassIdentifier: 
-  Path: event:/Player/Charge
+  Path: event:/Player/Sword/Sword
   Guid:
-    Data1: 906979528
-    Data2: 1313502078
-    Data3: -589234533
-    Data4: -54052057
+    Data1: -467979474
+    Data2: 1166287510
+    Data3: -844699499
+    Data4: -1876342362
   Banks:
-  - {fileID: -6431827650137564339}
+  - {fileID: -1975568493038996643}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 7403268328946493463}
-  - {fileID: -3957893216712080567}
-  - {fileID: 2962816796061979821}
+  - {fileID: -4642030883385154565}
+  - {fileID: 8514157902515603312}
   MinDistance: 1
   MaxDistance: 20
-  Length: 254
+  Length: 1358
+--- !u!114 &-5483988177874421708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Draw
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Draw
+  Guid:
+    Data1: -1369717577
+    Data2: 1129995541
+    Data3: -988279656
+    Data4: -1016289096
+  Banks:
+  - {fileID: -1975568493038996643}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 626
 --- !u!114 &-5003194148719884625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,10 +98,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638101072426886215
+  lastModified: 638127956928525518
   FileSizes:
   - Name: Desktop
-    Value: 387616
+    Value: 1036
   Exists: 1
 --- !u!114 &-4839324148640367417
 MonoBehaviour:
@@ -211,12 +118,12 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638101072426936084
+  lastModified: 638127956928555438
   FileSizes:
   - Name: Desktop
-    Value: 1496
+    Value: 1220
   Exists: 1
---- !u!114 &-3957893216712080567
+--- !u!114 &-4642030883385154565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,21 +133,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Charge/Wind Mark
+  m_Name: parameter:/Sword/WindMark
   m_EditorClassIdentifier: 
-  Name: Wind Mark
+  Name: WindMark
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 3384103917
-    data2: 2437845430
+    data1: 1996816440
+    data2: 3821101351
   Type: 0
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-3844704879653187092
+--- !u!114 &-1975568493038996643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,99 +156,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Arrow/SPShot
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Player.bank
   m_EditorClassIdentifier: 
-  Name: SPShot
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 4262409882
-    data2: 3205451469
-  Type: 0
-  IsGlobal: 0
-  Labels: []
+  Path: FMOD/Build/Desktop/Player.bank
+  Name: Player
+  StudioPath: bank:/SFX/Player
+  lastModified: 638127956929436358
+  FileSizes:
+  - Name: Desktop
+    Value: 249088
   Exists: 1
---- !u!114 &-1590239985068814445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Footsteps/Grass
-  m_EditorClassIdentifier: 
-  Name: Grass
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1993289814
-    data2: 2012089949
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-1480367506354024578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Footsteps/Wood
-  m_EditorClassIdentifier: 
-  Name: Wood
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 4143787214
-    data2: 2529559044
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-1105851744753048582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/Bow
-  m_EditorClassIdentifier: 
-  Path: event:/Player/Bow
-  Guid:
-    Data1: -1131497390
-    Data2: 1104670672
-    Data3: 1823540357
-    Data4: -623202662
-  Banks:
-  - {fileID: -5003194148719884625}
-  - {fileID: -6431827650137564339}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -8896277112045657452}
-  - {fileID: -5535523908280687748}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1400
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,55 +182,22 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -4839324148640367417}
   - {fileID: -5003194148719884625}
-  - {fileID: 6378734843394525912}
-  - {fileID: 4826569370257597100}
-  - {fileID: -6564172777338818758}
-  - {fileID: -6431827650137564339}
-  - {fileID: 4641619776582512156}
+  - {fileID: 3896001524447373004}
+  - {fileID: -1975568493038996643}
   EditorEvents:
   - {fileID: -8618195615685439471}
-  - {fileID: -1105851744753048582}
-  - {fileID: 1583043428430734625}
-  - {fileID: 6580124295716502370}
-  - {fileID: -5455571572187115738}
-  - {fileID: 5944851507903417401}
-  - {fileID: -7583945043810400079}
-  - {fileID: 324940077775498066}
+  - {fileID: -7420331318779095469}
+  - {fileID: -5483988177874421708}
+  - {fileID: 6815051651879252626}
+  - {fileID: 3712209513752869890}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5003194148719884625}
   StringsBanks:
   - {fileID: -4839324148640367417}
-  cacheTime: 638101072428299635
+  cacheTime: 638127956929436358
   cacheVersion: 131592
---- !u!114 &324940077775498066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/Draw
-  m_EditorClassIdentifier: 
-  Path: event:/Player/Draw
-  Guid:
-    Data1: 945641847
-    Data2: 1217834966
-    Data3: 1891553413
-    Data4: 207115751
-  Banks:
-  - {fileID: -6431827650137564339}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 391
---- !u!114 &722742311149711009
+--- !u!114 &176522490354491495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,21 +207,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Arrow/Wind Mark
+  m_Name: parameter:/Arrow/WindMark
   m_EditorClassIdentifier: 
-  Name: Wind Mark
+  Name: WindMark
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 3384103917
-    data2: 2437845430
+    data1: 1996816440
+    data2: 3821101351
   Type: 0
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &1404287829662071831
+--- !u!114 &489207285361962666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -439,21 +231,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Sword/Fire Mark
+  m_Name: parameter:/Bow/FireMark
   m_EditorClassIdentifier: 
-  Name: Fire Mark
+  Name: FireMark
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 2123498595
-    data2: 375163882
+    data1: 1299158568
+    data2: 2054997423
   Type: 0
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &1583043428430734625
+--- !u!114 &3712209513752869890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -463,166 +255,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/Arrow
+  m_Name: event:/Player/Bow/Arrow
   m_EditorClassIdentifier: 
-  Path: event:/Player/Arrow
+  Path: event:/Player/Bow/Arrow
   Guid:
-    Data1: -130938069
-    Data2: 1185972490
-    Data3: 1936641173
-    Data4: -673207744
+    Data1: -1918112840
+    Data2: 1076791034
+    Data3: -1035270751
+    Data4: -510632377
   Banks:
-  - {fileID: -6431827650137564339}
+  - {fileID: -1975568493038996643}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 722742311149711009}
-  - {fileID: 2785074538500511334}
-  - {fileID: -3844704879653187092}
+  - {fileID: 6408542837847707050}
+  - {fileID: 4110229521865661098}
+  - {fileID: 176522490354491495}
   MinDistance: 1
   MaxDistance: 20
   Length: 940
---- !u!114 &2785074538500511334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Arrow/Fire Mark
-  m_EditorClassIdentifier: 
-  Name: Fire Mark
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2123498595
-    data2: 375163882
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &2962816796061979821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Charge/SPShot
-  m_EditorClassIdentifier: 
-  Name: SPShot
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 4262409882
-    data2: 3205451469
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &4641619776582512156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/UI.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/UI.bank
-  Name: UI
-  StudioPath: bank:/UI
-  lastModified: 638101072428299635
-  FileSizes:
-  - Name: Desktop
-    Value: 494
-  Exists: 1
---- !u!114 &4826569370257597100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Enemy.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/Enemy.bank
-  Name: Enemy
-  StudioPath: bank:/Enemy
-  lastModified: 638101072425224314
-  FileSizes:
-  - Name: Desktop
-    Value: 494
-  Exists: 1
---- !u!114 &5944851507903417401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/Ambience
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/Ambience
-  Guid:
-    Data1: 209279232
-    Data2: 1273830358
-    Data3: -1314846837
-    Data4: -1839314968
-  Banks:
-  - {fileID: -6564172777338818758}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &6283552947130150861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Sword/Wind Mark
-  m_EditorClassIdentifier: 
-  Name: Wind Mark
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3384103917
-    data2: 2437845430
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &6378734843394525912
+--- !u!114 &3896001524447373004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -637,41 +290,12 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638101072425184576
+  lastModified: 638127956927591492
   FileSizes:
   - Name: Desktop
     Value: 494
   Exists: 1
---- !u!114 &6580124295716502370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/Sword
-  m_EditorClassIdentifier: 
-  Path: event:/Player/Sword
-  Guid:
-    Data1: -695841875
-    Data2: 1082838553
-    Data3: -319374439
-    Data4: -21184420
-  Banks:
-  - {fileID: -6431827650137564339}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 1404287829662071831}
-  - {fileID: 6283552947130150861}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1750
---- !u!114 &7403268328946493463
+--- !u!114 &4110229521865661098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -681,16 +305,117 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Charge/Fire Mark
+  m_Name: parameter:/Arrow/SPCharge
   m_EditorClassIdentifier: 
-  Name: Fire Mark
+  Name: SPCharge
   StudioPath: 
   Min: 0
   Max: 1
   Default: 0
   ID:
-    data1: 2123498595
-    data2: 375163882
+    data1: 758330890
+    data2: 1341172951
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6408542837847707050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/FireMark
+  m_EditorClassIdentifier: 
+  Name: FireMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1299158568
+    data2: 2054997423
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6815051651879252626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Bow
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Bow
+  Guid:
+    Data1: -1210159270
+    Data2: 1171872377
+    Data3: 713227156
+    Data4: -971701987
+  Banks:
+  - {fileID: -1975568493038996643}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 489207285361962666}
+  - {fileID: 7861090912630093036}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &7861090912630093036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Bow/WindMark
+  m_EditorClassIdentifier: 
+  Name: WindMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1996816440
+    data2: 3821101351
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &8514157902515603312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sword/FireMark
+  m_EditorClassIdentifier: 
+  Name: FireMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1299158568
+    data2: 2054997423
   Type: 0
   IsGlobal: 0
   Labels: []

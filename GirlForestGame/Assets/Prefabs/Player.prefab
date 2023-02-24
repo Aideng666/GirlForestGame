@@ -3175,7 +3175,7 @@ MonoBehaviour:
   numberOfBurnTicks: 5
   baseBurnTickDamage: 1
   burnTickDelay: 1
-  baseWindKnockbackPower: 10
+  baseWindedDuration: 2
   attributeMultipliers:
   - 1.33
   - 1.66
@@ -3184,6 +3184,10 @@ MonoBehaviour:
   - 1
   - 2
   - 3
+  elementActivationChances:
+  - 0
+  - 0
+  - 0
 --- !u!114 &1297180804387073770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3214,7 +3218,6 @@ MonoBehaviour:
   bowAimCanvas: {fileID: 0}
   livingFormMaterial: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
   spiritFormMaterial: {fileID: 2100000, guid: 905ff118dee948847a51283f6b488e8d, type: 2}
-  bowTargetCollider: {fileID: 0}
 --- !u!54 &1821254030439938998
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3259,13 +3262,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputFootsteps:
     Guid:
-      Data1: -861215663
-      Data2: 1214108958
-      Data3: -324556149
-      Data4: 1942763737
+      Data1: -355910866
+      Data2: 1258688607
+      Data3: -1489726569
+      Data4: -117818190
     Path: event:/Player/Footsteps
   pControl: {fileID: 5982676203613863553}
-  walkingSpeed: 0.63
+  paceSpeed: 0
 --- !u!1 &6570217027516757620
 GameObject:
   m_ObjectHideFlags: 0

@@ -587,10 +587,7 @@ MonoBehaviour:
   - Master
   Banks:
   - BGM
-  - Enemy
-  - Environment
   - Player
-  - UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

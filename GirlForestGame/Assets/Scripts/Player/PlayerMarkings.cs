@@ -29,6 +29,7 @@ public class PlayerMarkings : MonoBehaviour
     //to access the player's scripts
     //The player controller contains access to the other player scripts
     PlayerController player;
+    
 
     //0 = Sword Attribute
     //1 = Sword Element
@@ -141,10 +142,14 @@ public class PlayerMarkings : MonoBehaviour
                     if (weapon == Weapons.Sword)
                     {
                         EventManager.OnSwordHit += ApplyWindElement;
+                        player.playerCombat.SwordSFX.setParameterByName("WindMark", 1);
                     }
                     else if (weapon == Weapons.Bow)
                     {
                         EventManager.OnBowHit += ApplyWindElement;
+                        player.playerCombat.ArrowSFX.setParameterByName("WindMark", 1);
+                        player.playerCombat.BowSFX.setParameterByName("WindMark", 1);
+
                     }
 
                     break;
@@ -154,10 +159,15 @@ public class PlayerMarkings : MonoBehaviour
                     if (weapon == Weapons.Sword)
                     {
                         EventManager.OnSwordHit += ApplyFireElement;
+                        player.playerCombat.SwordSFX.setParameterByName("FireMark", 1);
+
                     }
                     else if (weapon == Weapons.Bow)
                     {
                         EventManager.OnBowHit += ApplyFireElement;
+                        player.playerCombat.ArrowSFX.setParameterByName("FireMark", 1);
+                        player.playerCombat.BowSFX.setParameterByName("FireMark", 1);
+
                     }
 
                     break;
@@ -243,10 +253,16 @@ public class PlayerMarkings : MonoBehaviour
                     if (weapon == Weapons.Sword)
                     {
                         EventManager.OnSwordHit -= ApplyWindElement;
+                        player.playerCombat.SwordSFX.setParameterByName("WindMark", 0);
+
+
                     }
                     else if (weapon == Weapons.Bow)
                     {
                         EventManager.OnBowHit -= ApplyWindElement;
+                        player.playerCombat.ArrowSFX.setParameterByName("WindMark", 0);
+                        player.playerCombat.BowSFX.setParameterByName("WindMark", 0);
+
                     }
 
                     break;
@@ -256,10 +272,15 @@ public class PlayerMarkings : MonoBehaviour
                     if (weapon == Weapons.Sword)
                     {
                         EventManager.OnSwordHit -= ApplyFireElement;
+                        player.playerCombat.SwordSFX.setParameterByName("FireMark", 0);
+
                     }
                     else if (weapon == Weapons.Bow)
                     {
                         EventManager.OnBowHit -= ApplyFireElement;
+                        player.playerCombat.ArrowSFX.setParameterByName("FireMark", 0);
+                        player.playerCombat.BowSFX.setParameterByName("FireMark", 0);
+
                     }
 
                     break;
