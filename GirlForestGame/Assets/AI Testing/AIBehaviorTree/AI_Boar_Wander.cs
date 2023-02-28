@@ -41,10 +41,4 @@ public class AI_Boar_Wander : AI_BaseClass
 
         animator.GetComponentInParent<EnemyData>().RunCooldownTimer();
     }
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

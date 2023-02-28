@@ -42,4 +42,9 @@ public class MenuFunctionManager : MonoBehaviour
             mainMenuUIPanel.SetActive(true);
         }
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

@@ -98,7 +98,7 @@ public class MarkingPickup : InteractableObject
     {
         popupText.enabled = true;
 
-        popupText.text = $"{chosenSpirit.spiritName} {chosenType}";
+        popupText.text = $"{chosenSpirit.spiritName} {chosenType} - Lvl {markingLevel}";
     }
 
     private void OnCollisionEnter(Collision collision)

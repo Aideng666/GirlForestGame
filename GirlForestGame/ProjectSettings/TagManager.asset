@@ -14,6 +14,7 @@ TagManager:
   - HalfHeart
   - Coin
   - EnemyProjectile
+  - Environment
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - EnemySpirit
   - Pickup
   - Post Processing
-  - 
+  - IFrames
   - 
   - 
   - 

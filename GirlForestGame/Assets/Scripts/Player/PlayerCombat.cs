@@ -8,11 +8,14 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] GameObject bowAimCanvas;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
+    [SerializeField] Shader iFrameShader;
+    [SerializeField] float iFrameTime = 1;
 
     public bool isAttacking { get; private set; }
     public bool isKnockbackApplied { get; private set; }
 
     bool canAttack = true;
+    bool iFramesActive = false;
 
     //Bow Stuff
     GameObject bowTargetEnemy;
@@ -32,13 +35,13 @@ public class PlayerCombat : MonoBehaviour
     List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
 
+    Planes currentForm = Planes.Terrestrial;
     [HideInInspector] public FMOD.Studio.EventInstance SwordSFX;
-
-    Forms currentForm = Forms.Living;
     LayerMask livingLayer;
     LayerMask spiritLayer;
+    LayerMask iFramesLayer;
 
-    public Forms Form { get { return currentForm; } set { currentForm = value; } }
+    public Planes Form { get { return currentForm; } set { currentForm = value; } }
 
     PlayerController player;
     Rigidbody body;
@@ -48,6 +51,7 @@ public class PlayerCombat : MonoBehaviour
     {
         livingLayer = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
+        iFramesLayer = LayerMask.NameToLayer("IFrames");
 
         bowAimCanvas.SetActive(false);
 
@@ -130,22 +134,22 @@ public class PlayerCombat : MonoBehaviour
         }
         
         //Detects Form Swapping
-        if (InputManager.Instance.ChangeForm())
+        if (InputManager.Instance.ChangeForm() && !iFramesActive)
         {
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0 && player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.effectApplied)
             {
                 player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
             }
 
-            if (currentForm == Forms.Living)
+            if (currentForm == Planes.Terrestrial)
             {
-                currentForm = Forms.Spirit;
+                currentForm = Planes.Astral;
                 GetComponentInChildren<SkinnedMeshRenderer>().material = spiritFormMaterial;
                 gameObject.layer = spiritLayer;
             }
             else
             {
-                currentForm = Forms.Living;
+                currentForm = Planes.Terrestrial;
                 GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
                 gameObject.layer = livingLayer;
             }
@@ -423,7 +427,30 @@ public class PlayerCombat : MonoBehaviour
 
     public void TakeDamage()
     {
-        player.playerAttributes.Health -= 1;
+        if (!iFramesActive)
+        {
+            player.playerAttributes.Health -= 1;
+
+            StartCoroutine(BeginIFrames());
+        }
+    }
+
+    IEnumerator BeginIFrames()
+    {
+        iFramesActive = true;
+
+        Shader originalShader = GetComponentInChildren<SkinnedMeshRenderer>().material.shader;
+        LayerMask originalLayer = gameObject.layer;
+
+        gameObject.layer = iFramesLayer;
+        GetComponentInChildren<SkinnedMeshRenderer>().material.shader = iFrameShader;
+
+        yield return new WaitForSeconds(iFrameTime);
+
+        iFramesActive = false;
+
+        gameObject.layer = originalLayer;
+        GetComponentInChildren<SkinnedMeshRenderer>().material.shader = originalShader;
     }
 
     public void AddBowTarget(EnemyData enemy)
@@ -521,8 +548,8 @@ public class PlayerCombat : MonoBehaviour
 
 }
 
-public enum Forms
+public enum Planes
 {
-    Living,
-    Spirit
+    Terrestrial,
+    Astral
 }

@@ -9,7 +9,7 @@ public class SetPlayer : MonoBehaviour
     void Start()
     {
         InputManager.Instance.SwapActionMap("Player");
-        Instantiate(enemyToSpawn, Vector3.up, Quaternion.identity);
+        //Instantiate(enemyToSpawn, Vector3.up, Quaternion.identity);
     }
 
 }
