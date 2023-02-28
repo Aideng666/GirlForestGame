@@ -33,7 +33,7 @@ public class Room : MonoBehaviour
 
             for (int i = 0; i < Random.Range(1, 2); i++)
             {
-                int randomEnemySelection = Random.Range(1, 2);
+                int randomEnemySelection = Random.Range(1, 3);
 
                 switch (randomEnemySelection)
                 {
@@ -46,6 +46,12 @@ public class Room : MonoBehaviour
                     case 1:
 
                         EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
+
+                        break;
+
+                    case 2:
+
+                        EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
 
                         break;
                 }

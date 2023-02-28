@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class ShopItem : InteractableObject
 {
@@ -74,8 +75,16 @@ public class ShopItem : InteractableObject
             float randomDistance = Random.Range(1f, 3f);
 
             PlayerController.Instance.playerInventory.ModifyMoney(-itemInfo.value);
+            GameObject item = null;
 
-            GameObject item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main"))
+            {
+                item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
+            }
+            else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+            {
+                item = Instantiate(itemInfo.item, new Vector3(transform.position.x, itemInfo.item.transform.position.y, transform.position.z), Quaternion.identity);
+            }
 
             item.transform.DOJump(item.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
 
