@@ -11,10 +11,12 @@ public class MenuFunctionManager : MonoBehaviour
     [SerializeField] GameObject playButton;
     [SerializeField] GameObject quitButton;
     [SerializeField] Animator settingsButtonAnimator;
+    [SerializeField] Animator creditsButtonAnimator;
 
     bool moveCam = false;
 
     bool hasClickedSettings = false;
+    bool hasClickedCredits = false;
 
     private void Start()
     {
@@ -59,17 +61,31 @@ public class MenuFunctionManager : MonoBehaviour
         
         if (!hasClickedSettings)
         {
-            //playButton.SetActive(true);
-            //quitButton.SetActive(true);
             settingsButtonAnimator.SetBool("hasClickedSettings", false);
         }
         else
         {
-            //playButton.SetActive(false);
-            //quitButton.SetActive(false);
             settingsButtonAnimator.SetBool("hasClickedSettings", true);
 
         }
-        //Debug.Log(hasClickedSettings.ToString());
+    }
+
+    public void Credits()
+    {
+        hasClickedCredits = !hasClickedCredits;
+
+        if (!hasClickedCredits)
+        {
+            creditsButtonAnimator.SetBool("hasClickedCredits", false);
+        }
+        else
+        {
+            creditsButtonAnimator.SetBool("hasClickedCredits", true);
+        }
+    }
+
+    public void Play()
+    {
+        LoadingScreen.Instance.LoadScene("Main");
     }
 }
