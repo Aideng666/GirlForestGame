@@ -5,8 +5,11 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> rooms;
+    [SerializeField] GameObject mushroomSpirit;
 
+    PlayerController player;
     int currentRoomNum = 0;
+    public int currentDialogueNum { get; private set; } = 0;
     bool roomTransitionStarted;
 
     public static TutorialManager Instance { get; private set; }
@@ -20,13 +23,93 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         currentRoomNum = 0;
+        currentDialogueNum = 0;
         InputManager.Instance.GetPlayerInput().actions.FindActionMap("Player").Enable();
+
+        player = PlayerController.Instance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!DialogueManager.Instance.isTyping)
+        {
+            switch(currentDialogueNum)
+            {
+                case 0:
+
+                    TriggerTutorialSection(1);
+
+                    break;
+
+                case 2:
+
+                    TriggerTutorialSection(3);
+
+                    break;
+
+                case 3:
+
+                    if (player.playerCombat.Form == Planes.Astral)
+                    {
+                        TriggerTutorialSection(4);
+                    }
+
+                    break;
+
+                case 4:
+
+                    TriggerTutorialSection(5);
+
+                    break;
+
+                case 7:
+
+                    TriggerTutorialSection(8);
+
+                    break;
+
+                case 8:
+
+                    TriggerTutorialSection(9);
+
+                    break;
+
+                case 11:
+
+                    TriggerTutorialSection(12);
+
+                    break;
+
+                case 14:
+
+                    TriggerTutorialSection(15);
+
+                    break;
+
+                case 16:
+
+                    TriggerTutorialSection(17);
+
+                    break;
+
+                case 19:
+
+                    TriggerTutorialSection(20);
+
+                    break;
+            }
+        }
+    }
+
+    public void TriggerTutorialSection(int section)
+    {
+        if (currentDialogueNum == section - 1)
+        {
+            currentDialogueNum++;
+
+            DialogueManager.Instance.DisplayNextSentence();
+        }
     }
 
     public void NextRoom()

@@ -70,6 +70,8 @@ public class TotemPickup : MonoBehaviour
             PlayerController.Instance.playerInventory.AddTotemToList(chosenTotem);
 
             gameObject.SetActive(false);
+
+            TutorialManager.Instance.TriggerTutorialSection(14);
         }
     }
 }

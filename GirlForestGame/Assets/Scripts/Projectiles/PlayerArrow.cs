@@ -153,6 +153,8 @@ public class PlayerArrow : MonoBehaviour
             }
 
             Destroy(gameObject);
+
+            TutorialManager.Instance.TriggerTutorialSection(6);
         }
 
         //applies the correct effect for the element of the bow when it collides

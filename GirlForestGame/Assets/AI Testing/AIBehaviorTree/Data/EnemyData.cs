@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// EnemyData is the parent class to all enemies in the game.
@@ -77,7 +78,11 @@ public class EnemyData : MonoBehaviour
         if (coinRoll < defaultCoinDropChance + player.playerAttributes.Luck)
         {
             GameObject coin = PickupPool.Instance.GetCoinFromPool(transform.position);
-            coin.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
+
+            if (SceneManager.GetActiveScene().name == "Main")
+            {
+                coin.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
+            }
         }
 
         if (heartRoll < defaultHealthDropChance + (player.playerAttributes.Luck / 2))
@@ -95,6 +100,9 @@ public class EnemyData : MonoBehaviour
                 heart.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
             }
         }
+
+        TutorialManager.Instance.TriggerTutorialSection(9);
+        TutorialManager.Instance.TriggerTutorialSection(10);
     }
 
     /// <summary>
@@ -105,7 +113,10 @@ public class EnemyData : MonoBehaviour
         if (!isDead)
         {
             //For Mushroom Spirit activation if it gets hit before the enemy gets close
-            transform.parent.GetComponentInChildren<Animator>().SetTrigger("Awaken_From_Idle");
+            if (enemyType == EnemyTypes.MushroomSpirit)
+            {
+                GetComponentInChildren<Animator>().SetTrigger("Awaken_From_Idle");
+            }
 
             curHealth -= damageAmount;
 

@@ -11,6 +11,8 @@ public class AI_Mushroom_Idle : AI_BaseClass
         if (Vector3.Distance(animator.transform.position, player.transform.position) < activationDistance)
         {
             animator.SetTrigger("Awaken_From_Idle");
+
+            TutorialManager.Instance.TriggerTutorialSection(2);
         }
     }
 }

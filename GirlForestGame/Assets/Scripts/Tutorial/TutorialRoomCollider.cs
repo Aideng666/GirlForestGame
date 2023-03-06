@@ -16,6 +16,9 @@ public class TutorialRoomCollider : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             TutorialManager.Instance.NextRoom();
+            TutorialManager.Instance.TriggerTutorialSection(13);
+            TutorialManager.Instance.TriggerTutorialSection(16);
+            TutorialManager.Instance.TriggerTutorialSection(19);
         }
     }
 }

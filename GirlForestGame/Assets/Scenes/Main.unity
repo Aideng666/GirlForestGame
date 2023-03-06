@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boarPrefab: {fileID: 700446156201332264, guid: 43beeb1565c212948a26d05de1e27067, type: 3}
   mushroomPrefab: {fileID: 700446156201332264, guid: a2255e9f0a3630840be6a4ed00ea066d, type: 3}
-  draugrPrefab: {fileID: 0}
+  draugrPrefab: {fileID: 3472284349790607284, guid: e015bde69fb0bf44cbe025ccc15f3021, type: 3}
   stoneGolemPrefab: {fileID: 0}
 --- !u!4 &171005279
 Transform:
@@ -8834,8 +8834,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -100}
-  m_SizeDelta: {x: 300, y: 200}
+  m_AnchoredPosition: {x: 300, y: -100}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1759541071
 MonoBehaviour:

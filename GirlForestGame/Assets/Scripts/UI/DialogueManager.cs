@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     Queue<string> sentences;
 
-    bool isTyping = false;
+    public bool isTyping { get; private set; } = false;
 
     public static DialogueManager Instance { get; private set; }
 
@@ -27,6 +27,11 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
 
         sentences = new Queue<string>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -43,19 +48,19 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
-        {
-            EndDialogue();
+        //if (!isTyping)
+        //{
+            if (sentences.Count == 0)
+            {
+                EndDialogue();
 
-            return;
-        }
+                return;
+            }
 
-        string currentSentence = sentences.Dequeue();
+            string currentSentence = sentences.Dequeue();
 
-        if (!isTyping)
-        {
             StartCoroutine(TypeSentence(currentSentence));
-        }
+        //}
     }
 
     IEnumerator TypeSentence(string sentence)
