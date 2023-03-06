@@ -5,7 +5,6 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> rooms;
-    [SerializeField] GameObject mushroomSpirit;
 
     PlayerController player;
     int currentRoomNum = 0;
