@@ -12,7 +12,7 @@ public class AI_Mushroom_Idle : AI_BaseClass
         {
             animator.SetTrigger("Awaken_From_Idle");
 
-            TutorialManager.Instance.TriggerTutorialSection(2);
+            TutorialManager.Instance.TriggerTutorialSection(2, true);
         }
     }
 }

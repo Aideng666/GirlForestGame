@@ -58,6 +58,8 @@ MonoBehaviour:
   form: 1
   defaultCoinDropChance: 0.25
   defaultHealthDropChance: 0.05
+  damageTakenMat: {fileID: 2100000, guid: 13a1cd0a470561242a8b2f910e59ee2c, type: 2}
+  damageShaderDuration: 1
 --- !u!33 &3472284349790607287
 MeshFilter:
   m_ObjectHideFlags: 0

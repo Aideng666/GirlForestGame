@@ -38,6 +38,7 @@ public class TutorialManager : MonoBehaviour
                 case 0:
 
                     TriggerTutorialSection(1);
+                    //DialogueManager.Instance.QueueNextSentence();
 
                     break;
 
@@ -97,17 +98,39 @@ public class TutorialManager : MonoBehaviour
                     TriggerTutorialSection(20);
 
                     break;
+
+                case 21:
+
+                    if (rooms[4].GetComponent<TutorialRoom>().GetRoomComplete())
+                    {
+                        TriggerTutorialSection(22);
+                    }
+
+                    break;
+
+                case 22:
+
+                    FinishTutorial();
+
+                    break;
             }
         }
     }
 
-    public void TriggerTutorialSection(int section)
+    public void TriggerTutorialSection(int section, bool displayImmediately = false)
     {
         if (currentDialogueNum == section - 1)
         {
             currentDialogueNum++;
 
-            DialogueManager.Instance.DisplayNextSentence();
+            if (displayImmediately && !DialogueManager.Instance.isTyping)
+            {
+                DialogueManager.Instance.DisplayNextSentence();
+
+                return;
+            }
+
+            DialogueManager.Instance.QueueNextSentence();
         }
     }
 
@@ -121,6 +144,11 @@ public class TutorialManager : MonoBehaviour
 
             StartCoroutine(EnterNewRoom(rooms[currentRoomNum].GetComponent<RoomModel>().doors[3].transform.parent.position));
         }
+    }
+
+    void FinishTutorial()
+    {
+        print("Tutorial Complete");
     }
 
     IEnumerator EnterNewRoom(Vector3 updatedPlayerPos)

@@ -22,6 +22,8 @@ public class EnemyData : MonoBehaviour
     [SerializeField] protected Planes form;
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
+    [SerializeField] Material damageTakenMat;
+    [SerializeField] float damageShaderDuration;
 
     //reference to navmesh for knockback
     public NavMeshAgent agent { get; private set; }
@@ -58,6 +60,15 @@ public class EnemyData : MonoBehaviour
 
     public void EnemyDeath() 
     {
+        //Check if the enemy is part of the tutorial, if so, make sure it cant die until it is supposed to
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+        {
+            if (TutorialManager.Instance.currentDialogueNum < 9)
+            {
+                return;
+            }
+        }
+
         isDead = true;
 
         //Children are supposed to override so that they can have unique death events
@@ -79,7 +90,7 @@ public class EnemyData : MonoBehaviour
         {
             GameObject coin = PickupPool.Instance.GetCoinFromPool(transform.position);
 
-            if (SceneManager.GetActiveScene().name == "Main")
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main"))
             {
                 coin.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
             }
@@ -101,8 +112,7 @@ public class EnemyData : MonoBehaviour
             }
         }
 
-        TutorialManager.Instance.TriggerTutorialSection(9);
-        TutorialManager.Instance.TriggerTutorialSection(10);
+        TutorialManager.Instance.TriggerTutorialSection(10, true);
     }
 
     /// <summary>
@@ -124,7 +134,21 @@ public class EnemyData : MonoBehaviour
             {
                 EnemyDeath();
             }
+
+            StartCoroutine(ApplyDamageShader());
         }
+    }
+
+    IEnumerator ApplyDamageShader()
+    {
+        //Shader originalShader = GetComponentInChildren<SkinnedMeshRenderer>().material.shader;
+        Material originalMat = GetComponent<MeshRenderer>().material;
+
+        GetComponentInChildren<MeshRenderer>().material = damageTakenMat;
+
+        yield return new WaitForSeconds(damageShaderDuration);
+
+        GetComponentInChildren<MeshRenderer>().material = originalMat;
     }
 
     public void ApplyKnockback(float knockBack, Vector3 direction = default(Vector3))

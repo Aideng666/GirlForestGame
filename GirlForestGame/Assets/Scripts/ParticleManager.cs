@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.ParticleSystem;
 
 public class ParticleManager : MonoBehaviour
@@ -35,31 +36,31 @@ public class ParticleManager : MonoBehaviour
         {
             case ParticleTypes.BowCharge:
 
-                currentParticle = Instantiate(bowChargeStart, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(bowChargeStart, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
 
             case ParticleTypes.BowCharge2:
 
-                currentParticle = Instantiate(bowChargeComplete, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(bowChargeComplete, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
 
             case ParticleTypes.SwordSlashLR:
 
-                currentParticle = Instantiate(swordSlashLeftToRight, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(swordSlashLeftToRight, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
 
             case ParticleTypes.SwordSlashRL:
 
-                currentParticle = Instantiate(swordSlashRightToLeft, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(swordSlashRightToLeft, position, Quaternion.Euler(-90, 0, 0));
 
                 break;
 
             case ParticleTypes.FireArrow:
 
-                var fireParticle = Instantiate(fireArrow, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                var fireParticle = Instantiate(fireArrow, position, Quaternion.Euler(-90, 0, 0));
 
                 var fireParticleShape = fireParticle.GetComponent<ParticleSystem>().shape;
 
@@ -73,7 +74,7 @@ public class ParticleManager : MonoBehaviour
 
             case ParticleTypes.WindArrow:
 
-                var windParticle = Instantiate(windArrow, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                var windParticle = Instantiate(windArrow, position, Quaternion.Euler(-90, 0, 0));
 
                 windParticleShape = windParticle.GetComponent<ParticleSystem>().shape;
 
@@ -87,7 +88,7 @@ public class ParticleManager : MonoBehaviour
 
             case ParticleTypes.WindArrow2:
 
-                currentParticle = Instantiate(windArrow2, position, Quaternion.Euler(-90, 0, 0), DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(windArrow2, position, Quaternion.Euler(-90, 0, 0));
 
                 currentParticle.GetComponent<SphereCollider>().radius = windParticleShape.radius;
 
@@ -95,7 +96,7 @@ public class ParticleManager : MonoBehaviour
 
             case ParticleTypes.GasCloud:
 
-                currentParticle = Instantiate(gasCloud, position, gasCloud.gameObject.transform.rotation, DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(gasCloud, position, gasCloud.gameObject.transform.rotation);
 
                 break;
 
@@ -113,15 +114,20 @@ public class ParticleManager : MonoBehaviour
 
             case ParticleTypes.Teleport:
 
-                currentParticle = Instantiate(teleport, new Vector3(position.x, teleport.transform.position.y, position.z), teleport.gameObject.transform.rotation, DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(teleport, new Vector3(position.x, teleport.transform.position.y, position.z), teleport.gameObject.transform.rotation);
 
                 break;
 
             case ParticleTypes.TeleportAttack:
 
-                currentParticle = Instantiate(teleportAttack, new Vector3(position.x, teleportAttack.transform.position.y, position.z), teleportAttack.gameObject.transform.rotation, DungeonGenerator.Instance.GetCurrentRoom().transform);
+                currentParticle = Instantiate(teleportAttack, new Vector3(position.x, teleportAttack.transform.position.y, position.z), teleportAttack.gameObject.transform.rotation);
 
                 break;
+        }
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main"))
+        {
+            currentParticle.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
         }
 
         return currentParticle.gameObject;

@@ -164,7 +164,7 @@ public class PlayerInventory : MonoBehaviour
             yield return null;
         }
 
-        TutorialManager.Instance.TriggerTutorialSection(18);
+        TutorialManager.Instance.TriggerTutorialSection(18, true);
 
         IsChoosingWeapon = false;
     }

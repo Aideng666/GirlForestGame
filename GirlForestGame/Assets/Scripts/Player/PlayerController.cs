@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
 
                 playerInventory.ModifyMoney(1);
                 PickupPool.Instance.AddCoin(other.gameObject);
-                TutorialManager.Instance.TriggerTutorialSection(11);
+                TutorialManager.Instance.TriggerTutorialSection(11, true);
 
                 break;
         }

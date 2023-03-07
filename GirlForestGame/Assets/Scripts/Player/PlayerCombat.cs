@@ -385,7 +385,7 @@ public class PlayerCombat : MonoBehaviour
         {
             EventManager.Instance.InvokeOnSwordHit(enemiesHit);
 
-            TutorialManager.Instance.TriggerTutorialSection(7);
+            TutorialManager.Instance.TriggerTutorialSection(7, true);
         }
     }
 

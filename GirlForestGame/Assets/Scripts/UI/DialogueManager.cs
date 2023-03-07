@@ -12,8 +12,13 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] float textSpeed;
 
     Queue<string> sentences;
+    Queue<string> sentencesToType;
 
     public bool isTyping { get; private set; } = false;
+
+    float nextDialogueDelay = 1;
+    float elaspedDelayTime = 0;
+    bool delayActive;
 
     public static DialogueManager Instance { get; private set; }
 
@@ -27,11 +32,27 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
 
         sentences = new Queue<string>();
+        sentencesToType = new Queue<string>();
     }
 
     private void Update()
     {
-        
+        if (!isTyping && sentencesToType.Count > 0 && !delayActive)
+        {
+            BeginTextDelay();
+        }
+
+        if (delayActive)
+        {
+            if (elaspedDelayTime >= nextDialogueDelay)
+            {
+                DisplayQueuedSentence();
+
+                delayActive = false;
+            }
+
+            elaspedDelayTime += Time.deltaTime;
+        }
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -48,8 +69,8 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        //if (!isTyping)
-        //{
+        if (!isTyping)
+        {
             if (sentences.Count == 0)
             {
                 EndDialogue();
@@ -60,7 +81,20 @@ public class DialogueManager : MonoBehaviour
             string currentSentence = sentences.Dequeue();
 
             StartCoroutine(TypeSentence(currentSentence));
-        //}
+        }
+    }
+
+    public void DisplayQueuedSentence()
+    {
+        if (!isTyping)
+        {
+            StartCoroutine(TypeSentence(sentencesToType.Dequeue()));
+        }
+    }
+
+    public void QueueNextSentence()
+    {
+        sentencesToType.Enqueue(sentences.Dequeue());
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -84,5 +118,11 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         print("Convo Ended");
+    }
+
+    void BeginTextDelay()
+    {
+        delayActive = true;
+        elaspedDelayTime = 0;
     }
 }
