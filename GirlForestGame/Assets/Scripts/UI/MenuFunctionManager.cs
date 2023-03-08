@@ -8,8 +8,14 @@ public class MenuFunctionManager : MonoBehaviour
     [SerializeField] AnimationEvents animEventsObj;
     [SerializeField] Animator cineCamAnimator;
     [SerializeField] AnimationEvents camEventObj;
+    [SerializeField] GameObject playButton;
+    [SerializeField] GameObject quitButton;
+    [SerializeField] Animator settingsButtonAnimator;
+    [SerializeField] GameObject settingsUIPanel;
 
     bool moveCam = false;
+
+    bool hasClickedSettings = false;
 
     private void Start()
     {
@@ -46,5 +52,27 @@ public class MenuFunctionManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Settings()
+    {
+        hasClickedSettings = !hasClickedSettings;
+        
+        if (!hasClickedSettings)
+        {
+            settingsButtonAnimator.SetBool("hasClickedSettings", false);
+            settingsUIPanel.SetActive(false);
+        }
+        else
+        {
+            settingsButtonAnimator.SetBool("hasClickedSettings", true);
+            settingsUIPanel.SetActive(true);
+
+        }
+    }
+
+    public void Play()
+    {
+        LoadingScreen.Instance.LoadScene("Main");
     }
 }
