@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -26,14 +27,22 @@ public class PlayerCombat : MonoBehaviour
     bool quickfirePerformed;
     float currentBowChargeTime = 0;
 
+    [HideInInspector] public FMOD.Studio.EventInstance BowSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance ArrowSFX;
+    private FMOD.Studio.EventInstance DrawSFX;
+
     //Sword Stuff
     GameObject swordTargetEnemy;
     List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
 
     Planes currentForm = Planes.Terrestrial;
+    [HideInInspector] public FMOD.Studio.EventInstance SwordSFX;
     LayerMask livingLayer;
     LayerMask spiritLayer;
+    LayerMask defaultLayer;
+    LayerMask enemyTerrestrialLayer;
+    LayerMask enemyAstralLayer;
     LayerMask iFramesLayer;
 
     public Planes Form { get { return currentForm; } set { currentForm = value; } }
@@ -46,12 +55,26 @@ public class PlayerCombat : MonoBehaviour
     {
         livingLayer = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
+        enemyTerrestrialLayer = LayerMask.NameToLayer("EnemyLiving");
+        enemyAstralLayer = LayerMask.NameToLayer("EnemySpirit");
         iFramesLayer = LayerMask.NameToLayer("IFrames");
+        defaultLayer = LayerMask.NameToLayer("Default");
 
         bowAimCanvas.SetActive(false);
 
         player = PlayerController.Instance;
         body = GetComponent<Rigidbody>();
+    }
+
+    private void Awake()
+    {
+        BowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Bow");
+        ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Arrow");
+        DrawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Draw");
+        SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword/Sword");
+
+        ArrowSFX.getParameterByName("SPCharge", out currentBowChargeTime);
+
     }
 
     // Update is called once per frame
@@ -61,7 +84,6 @@ public class PlayerCombat : MonoBehaviour
         if (bowDrawn)
         {
             bowAimCanvas.SetActive(true);
-
             if (body.velocity == Vector3.zero)
             {
                 bowCharging = true;
@@ -69,8 +91,9 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 bowCharging = false;
-
                 currentBowChargeTime = 0;
+
+
             }
 
             //Charges the bow when standing still
@@ -81,6 +104,8 @@ public class PlayerCombat : MonoBehaviour
                     currentBowChargeTime += Time.deltaTime;
 
                     currentBowChargeTime = Mathf.Clamp(currentBowChargeTime, 0, player.playerAttributes.BowChargeTime);
+                    ArrowSFX.setParameterByName("SPCharge", currentBowChargeTime);
+
                 }
             }
 
@@ -102,9 +127,10 @@ public class PlayerCombat : MonoBehaviour
                 else
                 {
                     SpawnArrow();
-
                     currentBowChargeTime = 0;
                 }
+                BowSFX.keyOff();
+                ArrowSFX.start();
             }
         }
 
@@ -138,6 +164,11 @@ public class PlayerCombat : MonoBehaviour
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
             {
                 player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.ApplyEffect();
+            }
+
+            if (player.playerInventory.totemDictionary[typeof(AstralBarrierTotem)] > 0)
+            {
+                player.playerInventory.GetTotemFromList(typeof(AstralBarrierTotem)).Totem.ApplyEffect();
             }
         }
     }
@@ -255,21 +286,22 @@ public class PlayerCombat : MonoBehaviour
             case 1:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack1");
-
+                SwordSFX.start();
                 break;
 
             case 2:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack2");
-
+                SwordSFX.keyOff();
                 break;
 
             case 3:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack3");
-
+                SwordSFX.keyOff();
                 break;
         }
+
         ////////////////////////////////////////////////////////////////////
         canAttack = false;
 
@@ -285,6 +317,8 @@ public class PlayerCombat : MonoBehaviour
 
             canAttack = false;
             isDrawingBow = true;
+            DrawSFX.start();
+
         }
     }
 
@@ -309,7 +343,21 @@ public class PlayerCombat : MonoBehaviour
         Collider[] enemyColliders = null;
         List<EnemyData> enemiesHit = new List<EnemyData>();
 
-        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange / 2);
+        //Creates the correct layer mask for the colliders to hit the proper enemies at any given time
+        int colliderLayerMask = (1 << defaultLayer);
+
+        if (Form == Planes.Terrestrial)
+        {
+            colliderLayerMask |= (1 << enemyTerrestrialLayer);
+            colliderLayerMask &= ~(1 << enemyAstralLayer);
+        }
+        else
+        {
+            colliderLayerMask |= (1 << enemyAstralLayer);
+            colliderLayerMask &= ~(1 << enemyTerrestrialLayer);
+        }
+
+        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange / 2, colliderLayerMask);
 
         //Loops through each hit collider and adds all of the enemies into a list
         if (enemyColliders.Length > 0)
@@ -359,6 +407,11 @@ public class PlayerCombat : MonoBehaviour
         if (enemiesHit.Count > 0)
         {
             EventManager.Instance.InvokeOnSwordHit(enemiesHit);
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+            {
+                TutorialManager.Instance.TriggerTutorialSection(7, true);
+            }
         }
     }
 
@@ -476,6 +529,7 @@ public class PlayerCombat : MonoBehaviour
     {
         bowDrawn = isDrawn;
 
+        BowSFX.start();
         if (isDrawn)
         {
             isDrawingBow = false;
@@ -515,6 +569,14 @@ public class PlayerCombat : MonoBehaviour
 
         canAttack = true;
     }
+    private void OnDestroy()
+    {
+        BowSFX.release();
+        SwordSFX.release();
+        ArrowSFX.release();
+        DrawSFX.release();
+    }
+
 }
 
 public enum Planes

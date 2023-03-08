@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{c94a0d16-d400-4acc-9997-3029974c2c53}">
+		<property name="name">
+			<value>WindMark</value>
+		</property>
+		<relationship name="folder">
+			<destination>{3ba1ec8e-8c9d-4dac-a5e3-60ddbb14a771}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{f9afadc2-f7dd-4f19-9602-3a147e5a325b}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{f9afadc2-f7dd-4f19-9602-3a147e5a325b}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PlayerArrow : MonoBehaviour
 {
@@ -153,6 +154,11 @@ public class PlayerArrow : MonoBehaviour
             }
 
             Destroy(gameObject);
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+            {
+                TutorialManager.Instance.TriggerTutorialSection(6, true);
+            }
         }
 
         //applies the correct effect for the element of the bow when it collides

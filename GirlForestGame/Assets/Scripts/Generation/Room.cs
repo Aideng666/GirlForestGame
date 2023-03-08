@@ -30,10 +30,32 @@ public class Room : MonoBehaviour
         if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
         {
             roomCompleted = false;
-
+            
+            //Num of enemies in a room
             for (int i = 0; i < Random.Range(3, 6); i++)
             {
-                EnemyPool.Instance.GetBoarFromPool();
+                int randomEnemySelection = Random.Range(0, 3);
+
+                switch (randomEnemySelection)
+                {
+                    case 0:
+
+                        EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
+
+                        break;
+
+                    case 1:
+
+                        EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
+
+                        break;
+
+                    case 2:
+
+                        EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
+
+                        break;
+                }
             }
         }
     }
@@ -71,7 +93,8 @@ public class Room : MonoBehaviour
                 }
             }
         }
-        else if (EnemyPool.Instance.availableBoars.Count % 5 == 0)
+        else if (EnemyPool.Instance.availableBoars.Count % 5 == 0
+            && EnemyPool.Instance.availableMushrooms.Count % 5 == 0)
         {
             roomCompleted = true;
         }

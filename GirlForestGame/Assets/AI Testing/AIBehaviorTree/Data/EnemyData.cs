@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// EnemyData is the parent class to all enemies in the game.
@@ -11,14 +12,18 @@ public class EnemyData : MonoBehaviour
 {
     [HideInInspector]
     public float curHealth;
+    [SerializeField] EnemyTypes enemyType;
     public float maxHealth = 1f;
 
     //Cooldown between each attack from the condition
     public float actionCooldown = 0f;
 
     public float enemyMaxSpeed { get; private set; } = 5;
+    [SerializeField] protected Planes form;
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
+    [SerializeField] Material damageTakenMat;
+    [SerializeField] float damageShaderDuration;
 
     //reference to navmesh for knockback
     public NavMeshAgent agent { get; private set; }
@@ -26,9 +31,9 @@ public class EnemyData : MonoBehaviour
     Rigidbody body;
     PlayerController player;
     bool isDead;
+    bool isAttacking;
+    public bool IsAttacking { get { return isAttacking; } set { isAttacking = value; } }
 
-    //CHANGE THIS TO BE MORE FLEXIBLE
-    protected Planes form = Planes.Terrestrial;
     public Planes Form { get { return form; } }
 
     private void OnEnable()
@@ -55,6 +60,15 @@ public class EnemyData : MonoBehaviour
 
     public void EnemyDeath() 
     {
+        //Check if the enemy is part of the tutorial, if so, make sure it cant die until it is supposed to
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+        {
+            if (TutorialManager.Instance.currentDialogueNum < 9)
+            {
+                return;
+            }
+        }
+
         isDead = true;
 
         //Children are supposed to override so that they can have unique death events
@@ -67,7 +81,7 @@ public class EnemyData : MonoBehaviour
 
         player.playerCombat.RemoveSwordTarget(this);
         player.playerCombat.RemoveBowTarget(this);
-        EnemyPool.Instance.AddBoarToPool(gameObject);
+        EnemyPool.Instance.AddEnemyToPool(enemyType, gameObject);
 
         float coinRoll = Random.Range(0f, 1f);
         float heartRoll = Random.Range(0f, 1f);
@@ -75,7 +89,11 @@ public class EnemyData : MonoBehaviour
         if (coinRoll < defaultCoinDropChance + player.playerAttributes.Luck)
         {
             GameObject coin = PickupPool.Instance.GetCoinFromPool(transform.position);
-            coin.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main"))
+            {
+                coin.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
+            }
         }
 
         if (heartRoll < defaultHealthDropChance + (player.playerAttributes.Luck / 2))
@@ -93,6 +111,11 @@ public class EnemyData : MonoBehaviour
                 heart.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
             }
         }
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+        {
+            TutorialManager.Instance.TriggerTutorialSection(10, true);
+        }
     }
 
     /// <summary>
@@ -102,13 +125,33 @@ public class EnemyData : MonoBehaviour
     {
         if (!isDead)
         {
+            //For Mushroom Spirit activation if it gets hit before the enemy gets close
+            if (enemyType == EnemyTypes.MushroomSpirit)
+            {
+                GetComponentInChildren<Animator>().SetTrigger("Awaken_From_Idle");
+            }
+
             curHealth -= damageAmount;
+
+            StartCoroutine(ApplyDamageShader());
 
             if (curHealth <= 0)
             {
                 EnemyDeath();
             }
         }
+    }
+
+    IEnumerator ApplyDamageShader()
+    {
+        //Shader originalShader = GetComponentInChildren<SkinnedMeshRenderer>().material.shader;
+        Material originalMat = GetComponent<MeshRenderer>().material;
+
+        GetComponentInChildren<MeshRenderer>().material = damageTakenMat;
+
+        yield return new WaitForSeconds(damageShaderDuration);
+
+        GetComponentInChildren<MeshRenderer>().material = originalMat;
     }
 
     public void ApplyKnockback(float knockBack, Vector3 direction = default(Vector3))
@@ -131,5 +174,16 @@ public class EnemyData : MonoBehaviour
         {
             actionCooldown -= Time.deltaTime;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+
+        //Vector3 directionVector = transform.position - player.transform.position;
+        //directionVector.y = 0;
+        //directionVector = directionVector.normalized;
+
+        //Gizmos.DrawRay(new Vector3(player.transform.position.x, 0, player.transform.position.z), directionVector * 12);
     }
 }

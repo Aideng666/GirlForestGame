@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Evade_Range
   m_EditorClassIdentifier: 
   minRange: 0
-  maxRange: 3
+  maxRange: 5
   Condition_Parameter: Close_To_Player

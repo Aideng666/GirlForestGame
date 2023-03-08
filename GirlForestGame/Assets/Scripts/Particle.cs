@@ -24,6 +24,7 @@ public class Particle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Creates the correct layer mask for the colliders to hit the proper enemies at any given time
         int colliderLayerMask = (1 << defaultLayer);
 
         if (PlayerController.Instance.playerCombat.Form == Planes.Terrestrial)
@@ -39,11 +40,19 @@ public class Particle : MonoBehaviour
             colliderLayerMask &= ~(1 << livingLayer);
         }
 
-        if (!particle.isPlaying)
+        //If a particle has a different particle that comes after it, this will spawn it
+        if (!particle.main.loop && !particle.isPlaying)
         {
             if (childParticle != ParticleTypes.None)
             {
                 ParticleManager.Instance.SpawnParticle(childParticle, transform.position);
+            }
+
+            if (particleType == ParticleTypes.FearfulAura)
+            {
+                gameObject.SetActive(false);
+
+                return;
             }
 
             Destroy(gameObject);
@@ -71,8 +80,6 @@ public class Particle : MonoBehaviour
             {
                 if (collision.TryGetComponent(out EnemyData enemy))
                 {
-                    //enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    //enemy.GetComponent<Rigidbody>().AddForce((enemy.transform.position - transform.position).normalized * 5, ForceMode.Impulse);
                     enemy.ApplyKnockback(1, (enemy.transform.position - transform.position).normalized);
 
                     List<EnemyData> enemiesHit = new List<EnemyData>();
@@ -80,6 +87,38 @@ public class Particle : MonoBehaviour
                     enemiesHit.Add(enemy);
 
                     EventManager.Instance.InvokeOnBowHit(enemiesHit);
+                }
+            }
+        }
+        else if (particleType == ParticleTypes.AstralBarrier)
+        {
+            transform.position = new Vector3 (PlayerController.Instance.transform.position.x, transform.position.y, PlayerController.Instance.transform.position.z);
+
+            Collider[] projectilesInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+
+            foreach (Collider collision in projectilesInRange)
+            {
+                if (collision.CompareTag("EnemyProjectile"))
+                {
+                    Vector3 forceDirection = (collision.transform.position - transform.position).normalized;
+                    forceDirection.y = 0;
+                    forceDirection = forceDirection.normalized;
+
+                    collision.GetComponent<Rigidbody>().AddForce(forceDirection * Time.deltaTime * 5, ForceMode.VelocityChange);
+                }
+            }
+        }
+        else if (particleType == ParticleTypes.FearfulAura)
+        {
+            transform.position = new Vector3(PlayerController.Instance.transform.position.x, transform.position.y, PlayerController.Instance.transform.position.z);
+
+            Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius);
+
+            foreach (Collider collision in enemiesInRange)
+            {
+                if (collision.TryGetComponent(out EnemyData enemy))
+                {
+                    enemy.GetComponentInChildren<Animator>().SetTrigger("Feared");
                 }
             }
         }
@@ -101,6 +140,24 @@ public class Particle : MonoBehaviour
                 }
 
                 break;
+
+            case ParticleTypes.GasCloud:
+
+                if (other.gameObject.TryGetComponent(out PlayerCombat player))
+                {
+                    player.TakeDamage();
+                }
+
+                break;
+
+            //case ParticleTypes.FearfulAura:
+
+            //    if (other.gameObject.TryGetComponent(out EnemyData fearedEnemy))
+            //    {
+            //        fearedEnemy.GetComponentInChildren<Animator>().SetBool("Feared", true);
+            //    }
+
+            //    break;
         }
     }
 }

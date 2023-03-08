@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{084cdd7f-6ff0-443c-b1c0-6f19885692ac}">
+		<property name="assetPath">
+			<value>Bow/String.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.0448979591836736</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7c7ccdde-64fb-4897-bf7f-53f888c51482}</destination>
+		</relationship>
+	</object>
+</objects>
