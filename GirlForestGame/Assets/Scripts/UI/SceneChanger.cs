@@ -27,4 +27,9 @@ public class SceneChanger : MonoBehaviour
             FadeToScene();
         }     
     }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

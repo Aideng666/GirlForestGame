@@ -38,11 +38,23 @@ Each of the four entrances are perfectly parallel in their respective directions
 
 3. After completing the model, you must export the finished model as an FBX. Here is what you need to export correctly:
 
- - Before Exporting, rotate the whole object so the TOP of the object is facing towards the POSITIVE Y DIRECTION in blender and the North Door is facing towards the POSITIVE Z DIRECTION. After rotating, scale the object by 100 on all axes (ik this seems dumb and makes it rlly rlly big but for some reason Unity turns a 1 scale from blender into 100 in Unity so if u scale it by 100 in blender before exporting, you can just downscale it back to 1 in Unity because it starts at 100 on the scale).
- - After rotating and scaling, make sure to apply all transforms on all objects. After applying transforms make sure to reset all of the Origin points to geometery for all of the objects that are a part of the room (Doors, exits, entrances, obstacles, floor, etc). Do not use the Apply Transform option in the export menu as it does not work I tried it.
+ - Before Exporting, rotate the whole object so the TOP of the object is facing towards the POSITIVE Y DIRECTION in blender and the North Door is facing towards the POSITIVE Z DIRECTION. 
+ - It should be the lowest door and be facing upwards, on the z axis 
+ - After rotating, make sure to apply all transforms on all objects. After applying transforms make sure to reset all of the Origin points to geometery for all of the objects that are a part of the room (Doors, exits, entrances, obstacles, floor, etc). Do not use the Apply Transform option in the export menu as it does not work I tried it.
+ - Set X rotation to 90 degrees and don't apply this, it will now be flat 
  - Do not export the Camera or Light with the object
  - Make sure to Triangulate Faces
  - Set the forward to -Z Forward and the up to Y up
+ - Apply Scaling (FBX units) instead of making it 100, Apply Unit
+
+Jonathan's Notes:
+-You can set a shortcut for the origin to geometry by right clicking the setting and selecting a button
+-You can also scale it 100 but you can always do it this way so it doesn't mess up your object 
+-Make sure that every object has at least one location that is 0m exactly
+-Rotate the object by -90 degree on the x axis
+-Don't select hierarchy, only select the floor and then you don't need to apply 
+-All faces need to facing inside 
+
 
 You want to save the file in the Unity project in side the Assets/FBXs/Room Models folder and name the file accordingly with the naming convention RoomModel_n where n is the model number. 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{5ab22f59-4937-4bb9-8ea9-264585ab99ed}">
+		<property name="name">
+			<value>FireMark</value>
+		</property>
+		<relationship name="folder">
+			<destination>{3ba1ec8e-8c9d-4dac-a5e3-60ddbb14a771}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{77cb60d4-e4f5-4b37-9c16-8b7b1452abe0}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{77cb60d4-e4f5-4b37-9c16-8b7b1452abe0}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
