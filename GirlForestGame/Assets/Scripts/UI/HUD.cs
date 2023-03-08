@@ -38,12 +38,17 @@ public class HUD : MonoBehaviour
 
     PlayerController player;
 
+    Tween attributePanelTween = null;
+    Tween markingsPanelTween = null;
+
     // Start is called before the first frame update
     void Start()
     {
         player = PlayerController.Instance;
 
         currentHeartImages = startingHearts;
+
+        attributePanelActive = false;
     }
 
     private void OnEnable()
@@ -156,37 +161,47 @@ public class HUD : MonoBehaviour
 
     void ToggleAttributePanel()
     {
-        attributePanelActive = !attributePanelActive;
-
-        if (!attributePanelActive)
+        if (!attributePanelActive && (attributePanelTween == null || !attributePanelTween.IsActive()))
         {
-            attributePanel.transform.DOMove(attributePanel.transform.position +
-                (Vector3.left * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+            attributePanelTween = attributePanel.transform.DOMove(attributePanel.transform.position +
+                (Vector3.right * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+
+            attributePanelActive = !attributePanelActive;
 
             return;
         }
 
         UpdateAttributes();
 
-        attributePanel.transform.DOMove(attributePanel.transform.position +
-            (Vector3.right * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+        if (attributePanelTween == null || !attributePanelTween.IsActive())
+        {
+            attributePanelTween = attributePanel.transform.DOMove(attributePanel.transform.position +
+                (Vector3.left * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+
+            attributePanelActive = !attributePanelActive;
+        }
     }
 
     void ToggleMarkingsPanel()
     {
-        markingsPanelActive = !markingsPanelActive;
-
-        if (!markingsPanelActive)
+        if (!markingsPanelActive && (markingsPanelTween == null || !markingsPanelTween.IsActive()))
         {
-            markingsPanel.transform.DOMove(markingsPanel.transform.position + 
-                (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+            markingsPanel.transform.DOMove(markingsPanel.transform.position +
+                (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+
+            markingsPanelActive = !markingsPanelActive;
 
             return;
         }
 
         UpdateMarkings();
 
-        markingsPanel.transform.DOMove(markingsPanel.transform.position + 
-            (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+        if (markingsPanelTween == null || !markingsPanelTween.IsActive())
+        {
+            markingsPanel.transform.DOMove(markingsPanel.transform.position +
+                (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+
+            markingsPanelActive = !markingsPanelActive;
+        }
     }
 }

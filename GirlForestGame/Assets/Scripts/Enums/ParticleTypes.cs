@@ -11,5 +11,10 @@ public enum ParticleTypes
     SwordSlashRL,
     FireArrow,
     WindArrow,
-    WindArrow2
+    WindArrow2,
+    GasCloud,
+    AstralBarrier,
+    FearfulAura,
+    Teleport,
+    TeleportAttack
 }

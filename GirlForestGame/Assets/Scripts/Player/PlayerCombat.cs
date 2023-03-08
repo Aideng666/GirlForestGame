@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class PlayerCombat : MonoBehaviour
     Planes currentForm = Planes.Terrestrial;
     LayerMask livingLayer;
     LayerMask spiritLayer;
+    LayerMask defaultLayer;
+    LayerMask enemyTerrestrialLayer;
+    LayerMask enemyAstralLayer;
     LayerMask iFramesLayer;
 
     public Planes Form { get { return currentForm; } set { currentForm = value; } }
@@ -46,7 +50,10 @@ public class PlayerCombat : MonoBehaviour
     {
         livingLayer = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
+        enemyTerrestrialLayer = LayerMask.NameToLayer("EnemyLiving");
+        enemyAstralLayer = LayerMask.NameToLayer("EnemySpirit");
         iFramesLayer = LayerMask.NameToLayer("IFrames");
+        defaultLayer = LayerMask.NameToLayer("Default");
 
         bowAimCanvas.SetActive(false);
 
@@ -138,6 +145,11 @@ public class PlayerCombat : MonoBehaviour
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
             {
                 player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.ApplyEffect();
+            }
+
+            if (player.playerInventory.totemDictionary[typeof(AstralBarrierTotem)] > 0)
+            {
+                player.playerInventory.GetTotemFromList(typeof(AstralBarrierTotem)).Totem.ApplyEffect();
             }
         }
     }
@@ -309,7 +321,21 @@ public class PlayerCombat : MonoBehaviour
         Collider[] enemyColliders = null;
         List<EnemyData> enemiesHit = new List<EnemyData>();
 
-        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange / 2);
+        //Creates the correct layer mask for the colliders to hit the proper enemies at any given time
+        int colliderLayerMask = (1 << defaultLayer);
+
+        if (Form == Planes.Terrestrial)
+        {
+            colliderLayerMask |= (1 << enemyTerrestrialLayer);
+            colliderLayerMask &= ~(1 << enemyAstralLayer);
+        }
+        else
+        {
+            colliderLayerMask |= (1 << enemyAstralLayer);
+            colliderLayerMask &= ~(1 << enemyTerrestrialLayer);
+        }
+
+        enemyColliders = Physics.OverlapSphere(transform.position + (transform.forward * (player.playerAttributes.SwordRange / 2)), player.playerAttributes.SwordRange / 2, colliderLayerMask);
 
         //Loops through each hit collider and adds all of the enemies into a list
         if (enemyColliders.Length > 0)
@@ -359,6 +385,11 @@ public class PlayerCombat : MonoBehaviour
         if (enemiesHit.Count > 0)
         {
             EventManager.Instance.InvokeOnSwordHit(enemiesHit);
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+            {
+                TutorialManager.Instance.TriggerTutorialSection(7, true);
+            }
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -203,7 +204,7 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
-            //Might need to be changed
+            //Change To Enemy Projectile if we dont want the player to take damage when touching an enemy
             case "Enemy":
 
                 playerCombat.TakeDamage();
@@ -241,6 +242,11 @@ public class PlayerController : MonoBehaviour
 
                 playerInventory.ModifyMoney(1);
                 PickupPool.Instance.AddCoin(other.gameObject);
+
+                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+                {
+                    TutorialManager.Instance.TriggerTutorialSection(11, true);
+                }
 
                 break;
         }
