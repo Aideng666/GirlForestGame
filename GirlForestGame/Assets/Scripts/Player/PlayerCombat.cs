@@ -27,12 +27,17 @@ public class PlayerCombat : MonoBehaviour
     bool quickfirePerformed;
     float currentBowChargeTime = 0;
 
+    [HideInInspector] public FMOD.Studio.EventInstance BowSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance ArrowSFX;
+    private FMOD.Studio.EventInstance DrawSFX;
+
     //Sword Stuff
     GameObject swordTargetEnemy;
     List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
 
     Planes currentForm = Planes.Terrestrial;
+    [HideInInspector] public FMOD.Studio.EventInstance SwordSFX;
     LayerMask livingLayer;
     LayerMask spiritLayer;
     LayerMask defaultLayer;
@@ -61,6 +66,17 @@ public class PlayerCombat : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
+    private void Awake()
+    {
+        BowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Bow");
+        ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Arrow");
+        DrawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Draw");
+        SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword/Sword");
+
+        ArrowSFX.getParameterByName("SPCharge", out currentBowChargeTime);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -68,7 +84,6 @@ public class PlayerCombat : MonoBehaviour
         if (bowDrawn)
         {
             bowAimCanvas.SetActive(true);
-
             if (body.velocity == Vector3.zero)
             {
                 bowCharging = true;
@@ -76,8 +91,9 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 bowCharging = false;
-
                 currentBowChargeTime = 0;
+
+
             }
 
             //Charges the bow when standing still
@@ -88,6 +104,8 @@ public class PlayerCombat : MonoBehaviour
                     currentBowChargeTime += Time.deltaTime;
 
                     currentBowChargeTime = Mathf.Clamp(currentBowChargeTime, 0, player.playerAttributes.BowChargeTime);
+                    ArrowSFX.setParameterByName("SPCharge", currentBowChargeTime);
+
                 }
             }
 
@@ -109,9 +127,10 @@ public class PlayerCombat : MonoBehaviour
                 else
                 {
                     SpawnArrow();
-
                     currentBowChargeTime = 0;
                 }
+                BowSFX.keyOff();
+                ArrowSFX.start();
             }
         }
 
@@ -267,21 +286,22 @@ public class PlayerCombat : MonoBehaviour
             case 1:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack1");
-
+                SwordSFX.start();
                 break;
 
             case 2:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack2");
-
+                SwordSFX.keyOff();
                 break;
 
             case 3:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack3");
-
+                SwordSFX.keyOff();
                 break;
         }
+
         ////////////////////////////////////////////////////////////////////
         canAttack = false;
 
@@ -297,6 +317,8 @@ public class PlayerCombat : MonoBehaviour
 
             canAttack = false;
             isDrawingBow = true;
+            DrawSFX.start();
+
         }
     }
 
@@ -507,6 +529,7 @@ public class PlayerCombat : MonoBehaviour
     {
         bowDrawn = isDrawn;
 
+        BowSFX.start();
         if (isDrawn)
         {
             isDrawingBow = false;
@@ -546,6 +569,14 @@ public class PlayerCombat : MonoBehaviour
 
         canAttack = true;
     }
+    private void OnDestroy()
+    {
+        BowSFX.release();
+        SwordSFX.release();
+        ArrowSFX.release();
+        DrawSFX.release();
+    }
+
 }
 
 public enum Planes

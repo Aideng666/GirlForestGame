@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerCombat playerCombat;
 
     //EventManager eventManager;
+    //List<Totem> totems = new List<Totem>();
+    
+
 
     bool deathStarted;
     bool roomTransitionStarted;
@@ -31,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         Instance = this;
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -50,20 +53,35 @@ public class PlayerController : MonoBehaviour
     {
         //Checks for player death
         if (playerAttributes.Health <= 0)
+
         {
+
             if (playerInventory.totemDictionary[typeof(ExtraLifeTotem)] < 1)
+
             {
+
                 if (!deathStarted)
+
                 {
+
                     Die();
+
                 }
+
             }
+
             else
+
             {
+
                 /*EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlayerDeath);*/
+
                 playerInventory.GetTotemFromList(typeof(ExtraLifeTotem)).Totem.ApplyEffect();
+
                 playerInventory.RemoveTotem(typeof(ExtraLifeTotem));
+
             }
+
         }
 
         if (!playerCombat.isKnockbackApplied)
@@ -135,13 +153,19 @@ public class PlayerController : MonoBehaviour
             //transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
         }
         else if (aimDir.magnitude < 0.1f && direction.magnitude <= 0.1f)
+
         {
+
             aimDirection = transform.forward;
+
         }
 
         if (moveDir != Vector3.zero)
+
         {
+
             transform.forward = moveDir.normalized;
+
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -268,5 +292,6 @@ public class PlayerController : MonoBehaviour
 
         roomTransitionStarted = false;
     }
+
 }
 
