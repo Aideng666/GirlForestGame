@@ -1,5 +1,4 @@
 using UnityEngine;
-using Cinemachine;
 
 public class MenuFunctionManager : MonoBehaviour
 {
@@ -67,7 +66,6 @@ public class MenuFunctionManager : MonoBehaviour
         {
             settingsButtonAnimator.SetBool("hasClickedSettings", true);
             settingsUIPanel.SetActive(true);
-
         }
     }
 
