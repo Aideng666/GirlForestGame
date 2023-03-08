@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -241,7 +242,11 @@ public class PlayerController : MonoBehaviour
 
                 playerInventory.ModifyMoney(1);
                 PickupPool.Instance.AddCoin(other.gameObject);
-                TutorialManager.Instance.TriggerTutorialSection(11, true);
+
+                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+                {
+                    TutorialManager.Instance.TriggerTutorialSection(11, true);
+                }
 
                 break;
         }

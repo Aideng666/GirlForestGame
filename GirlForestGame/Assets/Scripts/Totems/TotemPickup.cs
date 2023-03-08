@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TotemPickup : MonoBehaviour
 {
@@ -71,8 +72,11 @@ public class TotemPickup : MonoBehaviour
 
             gameObject.SetActive(false);
 
-            TutorialManager.Instance.TriggerTutorialSection(14, true);
-            TutorialManager.Instance.TriggerTutorialSection(21, true);
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+            {
+                TutorialManager.Instance.TriggerTutorialSection(14, true);
+                TutorialManager.Instance.TriggerTutorialSection(21, true);
+            }
         }
     }
 }

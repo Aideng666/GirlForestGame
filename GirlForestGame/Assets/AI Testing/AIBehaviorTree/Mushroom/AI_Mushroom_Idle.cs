@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AI_Mushroom_Idle : AI_BaseClass
 {
@@ -12,7 +13,10 @@ public class AI_Mushroom_Idle : AI_BaseClass
         {
             animator.SetTrigger("Awaken_From_Idle");
 
-            TutorialManager.Instance.TriggerTutorialSection(2, true);
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+            {
+                TutorialManager.Instance.TriggerTutorialSection(2, true);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Plugins.Core.PathCore;
+using UnityEngine.SceneManagement;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -164,7 +165,10 @@ public class PlayerInventory : MonoBehaviour
             yield return null;
         }
 
-        TutorialManager.Instance.TriggerTutorialSection(18, true);
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+        {
+            TutorialManager.Instance.TriggerTutorialSection(18, true);
+        }
 
         IsChoosingWeapon = false;
     }

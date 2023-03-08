@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -385,7 +386,10 @@ public class PlayerCombat : MonoBehaviour
         {
             EventManager.Instance.InvokeOnSwordHit(enemiesHit);
 
-            TutorialManager.Instance.TriggerTutorialSection(7, true);
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+            {
+                TutorialManager.Instance.TriggerTutorialSection(7, true);
+            }
         }
     }
 

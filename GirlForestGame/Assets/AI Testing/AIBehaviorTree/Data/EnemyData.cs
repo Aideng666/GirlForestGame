@@ -112,7 +112,10 @@ public class EnemyData : MonoBehaviour
             }
         }
 
-        TutorialManager.Instance.TriggerTutorialSection(10, true);
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+        {
+            TutorialManager.Instance.TriggerTutorialSection(10, true);
+        }
     }
 
     /// <summary>
@@ -130,12 +133,12 @@ public class EnemyData : MonoBehaviour
 
             curHealth -= damageAmount;
 
+            StartCoroutine(ApplyDamageShader());
+
             if (curHealth <= 0)
             {
                 EnemyDeath();
             }
-
-            StartCoroutine(ApplyDamageShader());
         }
     }
 

@@ -30,10 +30,11 @@ public class Room : MonoBehaviour
         if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
         {
             roomCompleted = false;
-
-            for (int i = 0; i < Random.Range(1, 2); i++)
+            
+            //Num of enemies in a room
+            for (int i = 0; i < Random.Range(3, 6); i++)
             {
-                int randomEnemySelection = Random.Range(1, 3);
+                int randomEnemySelection = Random.Range(0, 3);
 
                 switch (randomEnemySelection)
                 {
