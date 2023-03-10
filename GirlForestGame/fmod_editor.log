@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000023CB2FEDDB8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000022B65E49E98 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -20,37 +20,10 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] SoundI::release                          :  (0000023BB002DBA8)
-[LOG] SoundI::release                          :     FireHold (0000023BB0E03F38)
-[LOG] SoundI::release                          :  (0000023CB20C0058)
-[LOG] SoundI::release                          :     rope (0000023BAB966468)
-[LOG] SoundI::release                          :  (0000023BB002DA38)
-[LOG] SoundI::release                          :     arrow (0000023BB0E04278)
-[LOG] SoundI::release                          :  (0000023BB002D758)
-[LOG] SoundI::release                          :     arrow2 (0000023BB0E038B8)
-[LOG] SoundI::release                          :  (0000023CB20C04A8)
-[LOG] SoundI::release                          :     Firefox (0000023BAB965428)
-[LOG] SoundI::release                          :  (0000023BB002D8C8)
-[LOG] SoundI::release                          :     Wood Creek (0000023BB0E04A98)
-[LOG] SoundI::release                          :  (0000023BBDBE2BB8)
-[LOG] SoundI::release                          :     Swing1 (0000023BB0E048F8)
-[LOG] SoundI::release                          :  (0000023CB20BFC08)
-[LOG] SoundI::release                          :     FSwing2 (0000023BAB965AA8)
-[LOG] SoundI::release                          :  (0000023CB25A7BF8)
-[LOG] SoundI::release                          :     Swing3 (0000023BAB966128)
-[LOG] SoundI::release                          :  (0000023CB20BFD78)
-[LOG] SoundI::release                          :     FSwing3 (0000023BAB965DE8)
-[LOG] SoundI::release                          :  (0000023CB25A7D68)
-[LOG] SoundI::release                          :     FSwing1 (0000023BB0E040D8)
-[LOG] SoundI::release                          :  (0000023BB002DD18)
-[LOG] SoundI::release                          :     Swing2 (0000023BB0E03BF8)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] SystemI::close                           : Closed.
