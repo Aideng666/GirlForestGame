@@ -16,5 +16,6 @@ public enum ParticleTypes
     AstralBarrier,
     FearfulAura,
     Teleport,
-    TeleportAttack
+    TeleportAttack,
+    ShieldCrumble
 }

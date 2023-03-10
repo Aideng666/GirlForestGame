@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb78f856477f6745949d66f753b55fe, type: 3}
+  m_Name: TerrestrialShield
+  m_EditorClassIdentifier: 
+  Totem:
+    rid: 1005814790687555584
+  references:
+    version: 2
+    RefIds:
+    - rid: 1005814790687555584
+      type: {class: TerrestrialShieldTotem, ns: , asm: Assembly-CSharp}
+      data:
+        totemType: 2
+        totemName: Terrestrial Shield
+        initialBuffAmount: 0.5
+        stackDampenAmount: 1
+        conditionMet: 1
+        baseCooldownTimer: 3
+        shieldObject: {fileID: 5334948812287270209, guid: 05bd0d822b0942a44a54b26c06ab7bb0, type: 3}
+        shieldCreated: 0

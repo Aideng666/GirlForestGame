@@ -103,20 +103,6 @@ public class DungeonGenerator : MonoBehaviour
         Minimap.Instance.VisitRoom(currentRoom, Directions.None);
     }
 
-    //void Regenerate(NodeTypes type = NodeTypes.Default)
-    //{
-    //    rooms = new List<Room>();
-
-    //    foreach (Room room in FindObjectsOfType<Room>())
-    //    {
-    //        Destroy(room.gameObject);
-    //    }
-
-    //    currentFloorType = type;
-
-    //    InitDungeon();
-    //}
-
     void SpawnRoom(Room originRoom = null, Directions directionFromOrigin = Directions.None, string roomModelFolderName = "Rooms")
     {
         var room = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
