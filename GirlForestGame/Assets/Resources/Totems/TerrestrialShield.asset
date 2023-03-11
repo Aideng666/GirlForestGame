@@ -26,5 +26,5 @@ MonoBehaviour:
         stackDampenAmount: 1
         conditionMet: 1
         baseCooldownTimer: 3
-        shieldObject: {fileID: 5334948812287270209, guid: 05bd0d822b0942a44a54b26c06ab7bb0, type: 3}
+        shieldObject: {fileID: 3846853538633786824, guid: 05bd0d822b0942a44a54b26c06ab7bb0, type: 3}
         shieldCreated: 0

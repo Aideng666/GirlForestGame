@@ -6,6 +6,7 @@ public class TerrestrialShieldObject : MonoBehaviour
 {
     bool cooldownApplied = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,8 @@ public class TerrestrialShieldObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.position = PlayerController.Instance.transform.position + Vector3.up;
+        transform.GetChild(0).RotateAround(transform.position, Vector3.up, 0.2f);
     }
 
     private void OnCollisionEnter(Collision collision)

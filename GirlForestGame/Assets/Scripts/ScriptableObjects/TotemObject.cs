@@ -432,33 +432,28 @@ public class TerrestrialShieldTotem : ConstantTotem
 
         currentStackAmount = player.playerInventory.totemDictionary[typeof(TerrestrialShieldTotem)];
 
-        Debug.Log(shieldCreated);
-
         if (conditionMet)
         {
             if (!shieldCreated)
             {
-                Debug.Log("Creating Shield");
-                shieldObject = GameObject.Instantiate(shieldObject, player.transform.position + (Vector3.forward * 2) + Vector3.up, Quaternion.identity, player.transform);
+                shieldObject = GameObject.Instantiate(shieldObject, player.transform.position + (Vector3.forward * 2) + Vector3.up, Quaternion.identity);
                 shield = shieldObject.GetComponent<TerrestrialShieldObject>();
-
-                Debug.Log(shield);
 
                 shieldCreated = true;
             }
 
-            if (elaspedCooldownTime >= baseCooldownTimer - ((currentStackAmount - 1) * initialBuffAmount)/* || !shield.GetCooldownApplied()*/)
+            if (!shield.GetCooldownApplied())
+            {
+                shieldObject.SetActive(true);
+            }
+            else if (elaspedCooldownTime >= baseCooldownTimer - ((currentStackAmount - 1) * initialBuffAmount)/* || !shield.GetCooldownApplied()*/)
             {
                 shieldObject.SetActive(true);
 
                 elaspedCooldownTime = 0;
+                shield.SetCooldownApplied(false);
             }
-
-            if (shieldObject.activeInHierarchy)
-            {
-                shieldObject.transform.RotateAround(player.transform.position, Vector3.up, 0.1f);
-            }
-            else /*(shield.GetCooldownApplied())*/
+            else
             {
                 elaspedCooldownTime += Time.deltaTime;
             }
@@ -467,7 +462,7 @@ public class TerrestrialShieldTotem : ConstantTotem
         {
             if (shieldObject.activeInHierarchy)
             {
-                //shield.SetCooldownApplied(false);
+                shield.SetCooldownApplied(false);
                 shieldObject.SetActive(false);
             }
         }
