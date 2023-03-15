@@ -18,6 +18,7 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem fearfulAura;
     [SerializeField] ParticleSystem teleport;
     [SerializeField] ParticleSystem teleportAttack;
+    [SerializeField] ParticleSystem shieldCrumble;
 
     ParticleSystem currentParticle;
 
@@ -121,6 +122,12 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.TeleportAttack:
 
                 currentParticle = Instantiate(teleportAttack, new Vector3(position.x, teleportAttack.transform.position.y, position.z), teleportAttack.gameObject.transform.rotation);
+
+                break;
+
+            case ParticleTypes.ShieldCrumble:
+
+                currentParticle = Instantiate(shieldCrumble, new Vector3(position.x, shieldCrumble.transform.position.y, position.z), shieldCrumble.gameObject.transform.rotation);
 
                 break;
         }

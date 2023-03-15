@@ -234,6 +234,8 @@ public class PlayerController : MonoBehaviour
                 playerCombat.TakeDamage();
                 playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
 
+                print("Hit By Enemy");
+
                 break;
         }
     }
@@ -270,6 +272,19 @@ public class PlayerController : MonoBehaviour
                 if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
                 {
                     TutorialManager.Instance.TriggerTutorialSection(11, true);
+                }
+
+                break;
+
+            case "EnemyProjectile":
+
+
+                if (other.GetComponentInParent<EnemyData>().IsAttacking)
+                {
+                    playerCombat.TakeDamage();
+                    playerCombat.ApplyKnockback((transform.position - other.gameObject.transform.position), 2);
+
+                    print("Hit By Projectile");
                 }
 
                 break;

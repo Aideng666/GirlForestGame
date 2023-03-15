@@ -1743,7 +1743,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5574
+  m_Name: pb_Mesh-2778
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2830,6 +2830,7 @@ MonoBehaviour:
   fearfulAura: {fileID: 8554893605923400095, guid: 97d9b294669ed3a478c8804c93dd078c, type: 3}
   teleport: {fileID: 3646500379217239845, guid: 25bb794ebe317f545a336b4de54fae05, type: 3}
   teleportAttack: {fileID: 4458051954683402213, guid: d3b170d894c98ac439b97cbdc4b26d83, type: 3}
+  shieldCrumble: {fileID: 0}
 --- !u!114 &543537891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4101,7 +4102,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5532
+  m_Name: pb_Mesh-2736
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10427,7 +10428,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5516
+  m_Name: pb_Mesh-2720
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12236,7 +12237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: controlWithMouse
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863553, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: defaultBowDamage
