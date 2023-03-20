@@ -123,13 +123,13 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         curve.GetAnchorPoints()[3].transform.position = player.transform.position + Vector3.up + (Quaternion.Euler(0, -30, 0) * (agent.transform.position - player.transform.position).normalized);
         curve.GetAnchorPoints()[4].transform.position = defaultLeftPosition.position;
 
-        leftAxe.rotation = Quaternion.Euler(0, 0, 0);
+        leftAxe.rotation = Quaternion.Euler(90, 0, 0);
 
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             leftAxe.position = curve.GetPointAt(time / duration);
             //leftAxe.rotation = Quaternion.Euler(0, leftAxe.rotation.y, 0);
-            leftAxe.Rotate(Vector3.up, 3, Space.Self);
+            leftAxe.Rotate(Vector3.up, 3, Space.World);
 
             curve.GetAnchorPoints()[0].transform.position = defaultLeftPosition.position;
 
@@ -150,13 +150,13 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         curve.GetAnchorPoints()[3].transform.position = player.transform.position + Vector3.up + (Quaternion.Euler(0, -30, 0) * (agent.transform.position - player.transform.position).normalized);
         curve.GetAnchorPoints()[4].transform.position = defaultRightPosition.position;
 
-        rightAxe.rotation = Quaternion.Euler(0, 0, 0);
+        rightAxe.rotation = Quaternion.Euler(90, 0, 0);
 
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             rightAxe.position = curve.GetPointAt(time / duration);
             //rightAxe.rotation = Quaternion.Euler(0, rightAxe.rotation.y, 0);
-            rightAxe.Rotate(Vector3.up, 3, Space.Self);
+            rightAxe.Rotate(Vector3.up, 3, Space.World);
 
             curve.GetAnchorPoints()[0].transform.position = defaultRightPosition.position;
 
