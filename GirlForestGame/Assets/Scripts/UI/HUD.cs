@@ -19,6 +19,7 @@ public class HUD : MonoBehaviour
 
     [Header("Attribute Panel")]
     [SerializeField] GameObject attributePanel;
+    [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI speedText;
     [SerializeField] TextMeshProUGUI swdDmgText;
     [SerializeField] TextMeshProUGUI bowDmgText;
@@ -142,12 +143,13 @@ public class HUD : MonoBehaviour
 
     void UpdateAttributes()
     {
+        healthText.text = $"MAX HP: {player.playerAttributes.MaxHealth}";
         speedText.text = $"SPD: {player.playerAttributes.Speed}";
         swdDmgText.text = $"SWD DMG: {player.playerAttributes.SwordDamage}";
         bowDmgText.text = $"BOW DMG: {player.playerAttributes.BowDamage}";
-        swdCdnText.text = $"SWD CDN: {player.playerAttributes.SwordCooldown}";
-        bowCdnText.text = $"Bow CDN: {player.playerAttributes.BowCooldown}";
-        swdRangeText.text = $"SWD RANGE: {player.playerAttributes.SwordRange}";
+        swdCdnText.text = $"SWD ATK.SPD: {player.playerAttributes.SwordCooldown}";
+        bowCdnText.text = $"Bow ATK.SPD: {player.playerAttributes.BowCooldown}";
+        swdRangeText.text = $"SWD ATK.RANGE: {player.playerAttributes.SwordRange}";
         projSpdText.text = $"PROJ SPD: {player.playerAttributes.ProjectileSpeed}";
         critChanceText.text = $"CRIT CHANCE: {player.playerAttributes.CritChance}";
         bowChargeSpdText.text = $"BOW CHARGE TIME: {player.playerAttributes.BowChargeTime}";
@@ -161,6 +163,8 @@ public class HUD : MonoBehaviour
 
     void ToggleAttributePanel()
     {
+        UpdateAttributes();
+
         if (!attributePanelActive && (attributePanelTween == null || !attributePanelTween.IsActive()))
         {
             attributePanelTween = attributePanel.transform.DOMove(attributePanel.transform.position +
@@ -171,7 +175,7 @@ public class HUD : MonoBehaviour
             return;
         }
 
-        UpdateAttributes();
+        //UpdateAttributes();
 
         if (attributePanelTween == null || !attributePanelTween.IsActive())
         {
