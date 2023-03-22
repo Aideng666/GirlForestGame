@@ -72,45 +72,15 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         elaspedChargeTime += Time.deltaTime;
     }
 
-
-    //IEnumerator<float> _waitUntilLooking()
-    //{
-    //    yield return Timing.WaitForSeconds(rotationSpeed * 1.02f);
-    //    if (Random.Range(0, 2) == 0)
-    //    {
-    //        FanAttack();
-    //    }
-    //    else
-    //    {
-    //        handles.Add(Timing.RunCoroutine(_ThreeInARow()));
-    //    }
-    //}
-
     void FanAttack() 
     {
-        //This is gross but it's a quick and easy way to do it
-        //if (randomOrbChoice == 0)
-        //{
-        //    FireOrb(terrestrialOrb, Vector3.forward);
-        //    FireOrb(terrestrialOrb, Vector3.Normalize(Vector3.forward + Vector3.right));
-        //    FireOrb(terrestrialOrb, Vector3.Normalize(Vector3.forward + Vector3.left));
-        //}
-        //else
-        //{
-        //    FireOrb(astralOrb, Vector3.forward);
-        //    FireOrb(astralOrb, Vector3.Normalize(Vector3.forward + Vector3.right));
-        //    FireOrb(astralOrb, Vector3.Normalize(Vector3.forward + Vector3.left));
-        //}
+
         FireOrb((player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, 15, 0) * (player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, -15, 0) * (player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, 30, 0) * (player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, -30, 0) * (player.transform.position - agent.transform.position).normalized);
 
-        //Instantiate(terrestrialOrb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * projectileForce);
-        //Instantiate(terrestrialOrb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.right) * projectileForce);
-        //Instantiate(terrestrialOrb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(Vector3.Normalize(Vector3.forward + Vector3.left) * projectileForce);
-        //This is used so that it can delay firing the shots enough to be looking at the player, as opposed to firing any which way
         animator.SetTrigger("Has_Fired");
     }
 
@@ -130,13 +100,12 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     {
         if (randomOrbChoice == 0)
         {
-            ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, animator.transform.position).GetComponent<Rigidbody>().AddRelativeForce(direction * projectileForce);
+            ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, animator.transform.position, EnemyTypes.MushroomSpirit).GetComponent<Rigidbody>().AddRelativeForce(direction * projectileForce);
         }
         else
         {
-            ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, animator.transform.position).GetComponent<Rigidbody>().AddRelativeForce(direction * projectileForce);
+            ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, animator.transform.position, EnemyTypes.MushroomSpirit).GetComponent<Rigidbody>().AddRelativeForce(direction * projectileForce);
         }
-        //Instantiate(orb, animator.transform.position, animator.transform.rotation).GetComponent<Rigidbody>().AddRelativeForce(direction * projectileForce);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

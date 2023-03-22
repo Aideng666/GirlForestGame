@@ -19,11 +19,11 @@ public class Mushroom_Orb : MonoBehaviour
 
         if (gameObject.layer == LayerMask.NameToLayer("EnemyLiving"))
         {
-            ProjectilePool.Instance.AddProjectileToPool(Planes.Terrestrial, gameObject);
+            ProjectilePool.Instance.AddProjectileToPool(Planes.Terrestrial, gameObject, EnemyTypes.MushroomSpirit);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("EnemySpirit"))
         {
-            ProjectilePool.Instance.AddProjectileToPool(Planes.Astral, gameObject);
+            ProjectilePool.Instance.AddProjectileToPool(Planes.Astral, gameObject, EnemyTypes.MushroomSpirit);
         }
     }
 }

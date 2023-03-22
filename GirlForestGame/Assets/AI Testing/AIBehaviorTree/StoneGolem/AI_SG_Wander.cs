@@ -4,27 +4,88 @@ using UnityEngine;
 
 public class AI_SG_Wander : AI_BaseClass
 {
+    [SerializeField] Vector2 randomTimingRange;
+    [SerializeField] float moveDistance;
+
+    float elaspedTime;
+    float moveTimer;
+
+    bool isMoving = false;
+
+    Vector3 previousPos;
+    Ray moveRay;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        agent.speed = 2;
-        agent.isStopped = false;
+        agent.speed = 1;
 
+        elaspedTime = 0;
+        moveTimer = Random.Range(randomTimingRange.x, randomTimingRange.y);
+
+        moveRay = new Ray(agent.transform.position, (Vector3.zero - agent.transform.position).normalized);
+        moveRay.direction = Quaternion.Euler(0, Random.Range(-45, 45), 0) * moveRay.direction;
     }
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
-        //Targets the player
+        animator.GetComponentInParent<EnemyData>().RunCooldownTimer();
+
+        //Moves the golem on a timer
         if (agent.enabled)
         {
-            agent.SetDestination(player.transform.position);
+            if (isMoving)
+            {
+                Debug.Log(Vector3.Distance(previousPos, agent.transform.position) >= moveDistance);
+
+                if (Vector3.Distance(previousPos, agent.transform.position) >= moveDistance)
+                {
+                    isMoving = false;
+
+                    elaspedTime = 0f;
+                    moveTimer = Random.Range(randomTimingRange.x, randomTimingRange.y);
+
+                    moveRay = new Ray(agent.transform.position, (Vector3.zero - agent.transform.position).normalized);
+                    moveRay.direction = Quaternion.Euler(0, Random.Range(-45, 45), 0) * moveRay.direction;
+
+                    agent.speed = 0;
+                    agent.updateRotation = false;
+
+                    Debug.Log("Done Moving");
+                }
+            }
+            else if (elaspedTime >= moveTimer)
+            {
+                if (Physics.Raycast(moveRay, moveDistance * 2, LayerMask.NameToLayer("Default")))
+                {
+                    moveRay.direction = Quaternion.Euler(0, 20, 0) * moveRay.direction;
+
+                    Debug.Log("Changing Direction");
+                }
+                else
+                {
+                    isMoving = true;
+
+                    previousPos = agent.transform.position;
+                    agent.destination = agent.transform.position + (moveRay.direction * moveDistance * 2);
+                    agent.speed = 1;
+                    agent.updateRotation = true;
+
+                    Debug.Log("Started Moving");
+                }
+            }
+            else
+            {
+                elaspedTime += Time.deltaTime;
+
+                Debug.Log("Increasing Timer");
+            }
         }
     }
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // agent.SetDestination(agent.transform.position); //If it leaves for any reason it's current location is the thing
-        agent.isStopped = true;
+        agent.ResetPath();
     }
 }

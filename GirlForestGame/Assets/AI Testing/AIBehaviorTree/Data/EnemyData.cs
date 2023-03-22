@@ -23,7 +23,8 @@ public class EnemyData : MonoBehaviour
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
     [SerializeField] Material damageTakenMat;
-    [SerializeField] float damageShaderDuration;
+    
+    float damageShaderDuration = 0.4f;
 
     //reference to navmesh for knockback
     public NavMeshAgent agent { get; private set; }
