@@ -37,8 +37,6 @@ public class AI_SG_Wander : AI_BaseClass
         {
             if (isMoving)
             {
-                Debug.Log(Vector3.Distance(previousPos, agent.transform.position) >= moveDistance);
-
                 if (Vector3.Distance(previousPos, agent.transform.position) >= moveDistance)
                 {
                     isMoving = false;
@@ -51,8 +49,6 @@ public class AI_SG_Wander : AI_BaseClass
 
                     agent.speed = 0;
                     agent.updateRotation = false;
-
-                    Debug.Log("Done Moving");
                 }
             }
             else if (elaspedTime >= moveTimer)
@@ -60,8 +56,6 @@ public class AI_SG_Wander : AI_BaseClass
                 if (Physics.Raycast(moveRay, moveDistance * 2, LayerMask.NameToLayer("Default")))
                 {
                     moveRay.direction = Quaternion.Euler(0, 20, 0) * moveRay.direction;
-
-                    Debug.Log("Changing Direction");
                 }
                 else
                 {
@@ -71,21 +65,17 @@ public class AI_SG_Wander : AI_BaseClass
                     agent.destination = agent.transform.position + (moveRay.direction * moveDistance * 2);
                     agent.speed = 1;
                     agent.updateRotation = true;
-
-                    Debug.Log("Started Moving");
                 }
             }
             else
             {
                 elaspedTime += Time.deltaTime;
-
-                Debug.Log("Increasing Timer");
             }
         }
     }
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        agent.ResetPath();
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    agent.ResetPath();
+    //}
 }

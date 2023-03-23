@@ -9,8 +9,6 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     [SerializeField] float projectileForce = 1f;
     //Used in the "3 shots". The gaps between each shot
     [SerializeField] float timeBetweenShots = 0.3f;
-    [SerializeField] GameObject terrestrialOrb;
-    [SerializeField] GameObject astralOrb;
     [SerializeField] float rotationSpeed = 0.4f;
     [SerializeField] float attackChargeTime = 1;
 
@@ -74,7 +72,6 @@ public class AI_MushroomOrbAttack : AI_BaseClass
 
     void FanAttack() 
     {
-
         FireOrb((player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, 15, 0) * (player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, -15, 0) * (player.transform.position - agent.transform.position).normalized);

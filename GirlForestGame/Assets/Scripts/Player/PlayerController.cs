@@ -278,13 +278,10 @@ public class PlayerController : MonoBehaviour
 
             case "EnemyProjectile":
 
-
-                if (other.GetComponentInParent<EnemyData>().IsAttacking)
+                if (other.GetComponentInParent<EnemyData>() == null || other.GetComponentInParent<EnemyData>().IsAttacking)
                 {
                     playerCombat.TakeDamage();
                     playerCombat.ApplyKnockback((transform.position - other.gameObject.transform.position), 2);
-
-                    print("Hit By Projectile");
                 }
 
                 break;
