@@ -228,7 +228,6 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
-            //Change To Enemy Projectile if we dont want the player to take damage when touching an enemy
             case "Enemy":
 
                 playerCombat.TakeDamage();

@@ -11,7 +11,7 @@ public class AI_SG_Throw : AI_BaseClass
     float elaspedChargeTime;
     bool chargeComplete;
     bool attackFired;
-    int randomOrbChoice;
+    int randomPlaneChoice;
 
     //Transform projectile;
     //Vector3 defaultLocation;
@@ -31,14 +31,14 @@ public class AI_SG_Throw : AI_BaseClass
         elaspedChargeTime = 0;
         agent.speed = 0;
         attackFired = false;
-        randomOrbChoice = Random.Range(0, 2);
+        randomPlaneChoice = Random.Range(0, 2);
 
         //Indicate Attack
-        if (randomOrbChoice == 0)
+        if (randomPlaneChoice == 0)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeTime);
         }
-        else if (randomOrbChoice == 1)
+        else if (randomPlaneChoice == 1)
         {
             enemyUI.IndicateAttack(Planes.Astral, attackChargeTime);
         }
@@ -72,11 +72,11 @@ public class AI_SG_Throw : AI_BaseClass
     {
         GameObject rock = null;
 
-        if (randomOrbChoice == 0)
+        if (randomPlaneChoice == 0)
         {
             rock = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, agent.transform.position + Vector3.up, EnemyTypes.StoneGolem);
         }
-        else if (randomOrbChoice == 1)
+        else if (randomPlaneChoice == 1)
         {
             rock = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, agent.transform.position + Vector3.up, EnemyTypes.StoneGolem);
         }

@@ -19,6 +19,7 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem teleport;
     [SerializeField] ParticleSystem teleportAttack;
     [SerializeField] ParticleSystem shieldCrumble;
+    [SerializeField] ParticleSystem golemStomp;
 
     ParticleSystem currentParticle;
 
@@ -128,6 +129,12 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.ShieldCrumble:
 
                 currentParticle = Instantiate(shieldCrumble, new Vector3(position.x, shieldCrumble.transform.position.y, position.z), shieldCrumble.gameObject.transform.rotation);
+
+                break;
+
+            case ParticleTypes.GolemStomp:
+
+                currentParticle = Instantiate(golemStomp, new Vector3(position.x, golemStomp.transform.position.y, position.z), golemStomp.gameObject.transform.rotation);
 
                 break;
         }

@@ -17,5 +17,6 @@ public enum ParticleTypes
     FearfulAura,
     Teleport,
     TeleportAttack,
-    ShieldCrumble
+    ShieldCrumble,
+    GolemStomp
 }

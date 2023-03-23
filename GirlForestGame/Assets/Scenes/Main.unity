@@ -2870,6 +2870,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 407824e2-1a7a-4d7e-8b0c-58d287c8710a
     m_ActionName: Player/OpenMarkings[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e088ae36-efbf-4edb-bce9-67f6b5778dbe
+    m_ActionName: Player/EnlargeMinimap[/Keyboard/m]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2900,6 +2904,7 @@ MonoBehaviour:
   teleport: {fileID: 3646500379217239845, guid: 25bb794ebe317f545a336b4de54fae05, type: 3}
   teleportAttack: {fileID: 4458051954683402213, guid: d3b170d894c98ac439b97cbdc4b26d83, type: 3}
   shieldCrumble: {fileID: 0}
+  golemStomp: {fileID: 957930333448229074, guid: ef858fa0278d5f947a1a04bb2f06adb2, type: 3}
 --- !u!114 &543537891
 MonoBehaviour:
   m_ObjectHideFlags: 0

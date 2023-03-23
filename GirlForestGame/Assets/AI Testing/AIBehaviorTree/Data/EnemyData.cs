@@ -157,6 +157,11 @@ public class EnemyData : MonoBehaviour
 
     public void ApplyKnockback(float knockBack, Vector3 direction = default(Vector3))
     {
+        if (enemyType == EnemyTypes.StoneGolem)
+        {
+            return;
+        }
+
         body.velocity = Vector3.zero;
         GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
 
