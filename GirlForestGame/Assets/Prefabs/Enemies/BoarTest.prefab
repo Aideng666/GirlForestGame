@@ -118,7 +118,6 @@ MonoBehaviour:
   defaultCoinDropChance: 0.25
   defaultHealthDropChance: 0.05
   damageTakenMat: {fileID: 2100000, guid: 13a1cd0a470561242a8b2f910e59ee2c, type: 2}
-  damageShaderDuration: 0.4
 --- !u!33 &700446156201332267
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1061,7 +1060,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102502133134716208}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -1274,7 +1273,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8519341655252510407}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1

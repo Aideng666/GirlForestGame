@@ -4,18 +4,8 @@ using UnityEngine;
 
 public class Mushroom_Orb : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        //if (other.gameObject.TryGetComponent(out PlayerController player))
-        //{
-        //    player.playerCombat.ApplyKnockback((player.transform.position - transform.position).normalized, 20);
-        //    player.playerCombat.TakeDamage();
-        //}
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Default"))
-        {
-            return;
-        }
 
         if (gameObject.layer == LayerMask.NameToLayer("EnemyLiving"))
         {

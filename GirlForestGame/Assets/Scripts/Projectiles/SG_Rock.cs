@@ -30,22 +30,50 @@ public class SG_Rock : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.layer == LayerMask.NameToLayer("PassiveCollider"))
+    //    {
+    //        return;
+    //    }
+
+    //    if (isBigRock)
+    //    {
+    //        print("We Big " + other.name);
+
+    //        RockBurst();
+    //    }
+    //    else
+    //    {
+    //        print("SMol Hit " + other.name);
+    //    }
+
+    //    if (gameObject.layer == LayerMask.NameToLayer("EnemyLiving"))
+    //    {
+    //        ProjectilePool.Instance.AddProjectileToPool(Planes.Terrestrial, gameObject, EnemyTypes.StoneGolem);
+    //    }
+    //    else if (gameObject.layer == LayerMask.NameToLayer("EnemySpirit"))
+    //    {
+    //        ProjectilePool.Instance.AddProjectileToPool(Planes.Astral, gameObject, EnemyTypes.StoneGolem);
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("PassiveCollider"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("PassiveCollider"))
         {
             return;
         }
 
         if (isBigRock)
         {
-            print("We Big " + other.name);
+            print("We Big " + collision.gameObject.name);
 
             RockBurst();
         }
         else
         {
-            print("SMol Hit " + other.name);
+            print("SMol Hit " + collision.gameObject.name);
         }
 
         if (gameObject.layer == LayerMask.NameToLayer("EnemyLiving"))

@@ -8,13 +8,15 @@ public class ProjectilePool : MonoBehaviour
     [SerializeField] GameObject terrestrialMushroomOrbPrefab;
     [SerializeField] GameObject astralGolemRock;
     [SerializeField] GameObject terrestrialGolemRock;
+    [SerializeField] GameObject playerArrow;
 
     public Queue<GameObject> availableAstralMushroomOrbs { get; private set; } = new Queue<GameObject>();
     public Queue<GameObject> availableTerrestrialMushroomOrbs { get; private set; } = new Queue<GameObject>();
     public Queue<GameObject> availableAstralGolemRocks { get; private set; } = new Queue<GameObject>();
     public Queue<GameObject> availableTerrestrialGolemRocks { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableArrows { get; private set; } = new Queue<GameObject>();
 
-    int numEachOrb = 10;
+    int numEachProjectile = 10;
 
     public static ProjectilePool Instance { get; private set; }
 
@@ -22,6 +24,7 @@ public class ProjectilePool : MonoBehaviour
     {
         Instance = this;
         CreatePools();
+        CreateArrows();
     }
 
     public GameObject GetProjectileFromPool(Planes plane, Vector3 position, EnemyTypes enemyType)
@@ -88,35 +91,67 @@ public class ProjectilePool : MonoBehaviour
         return instance;
     }
 
+    public GameObject GetArrowFromPool(Vector3 position)
+    {
+        GameObject instance;
+
+        if (availableArrows.Count == 0)
+        {
+            CreateArrows();
+        }
+
+        instance = availableArrows.Dequeue();
+        instance.transform.position = position;
+        instance.SetActive(true);
+
+        return instance;
+    }
+
+    void CreateArrows()
+    {
+        for (int i = 0; i < numEachProjectile; ++i)
+        {
+            GameObject instanceToAdd = Instantiate(playerArrow);
+            instanceToAdd.transform.SetParent(transform);
+            AddArrowToPool(instanceToAdd);
+        }
+    }
+
     private void CreatePools()
     {
-        for (int i = 0; i < numEachOrb; ++i)
+        for (int i = 0; i < numEachProjectile; ++i)
         {
             GameObject instanceToAdd = Instantiate(astralMushroomOrbPrefab);
             instanceToAdd.transform.SetParent(transform);
             AddProjectileToPool(Planes.Astral, instanceToAdd, EnemyTypes.MushroomSpirit);
         }
 
-        for (int i = 0; i < numEachOrb; ++i)
+        for (int i = 0; i < numEachProjectile; ++i)
         {
             GameObject instanceToAdd = Instantiate(terrestrialMushroomOrbPrefab);
             instanceToAdd.transform.SetParent(transform);
             AddProjectileToPool(Planes.Terrestrial, instanceToAdd, EnemyTypes.MushroomSpirit);
         }
 
-        for (int i = 0; i < numEachOrb / 2; ++i)
+        for (int i = 0; i < numEachProjectile; ++i)
         {
             GameObject instanceToAdd = Instantiate(astralGolemRock);
             instanceToAdd.transform.SetParent(transform);
             AddProjectileToPool(Planes.Astral, instanceToAdd, EnemyTypes.StoneGolem);
         }
 
-        for (int i = 0; i < numEachOrb / 2; ++i)
+        for (int i = 0; i < numEachProjectile; ++i)
         {
             GameObject instanceToAdd = Instantiate(terrestrialGolemRock);
             instanceToAdd.transform.SetParent(transform);
             AddProjectileToPool(Planes.Terrestrial, instanceToAdd, EnemyTypes.StoneGolem);
         }
+    }
+
+    public void AddArrowToPool(GameObject instance)
+    {
+        availableArrows.Enqueue(instance);
+        instance.SetActive(false);
     }
 
     public void AddProjectileToPool(Planes plane, GameObject instance, EnemyTypes enemyType)

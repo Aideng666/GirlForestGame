@@ -10542,6 +10542,7 @@ MonoBehaviour:
   terrestrialMushroomOrbPrefab: {fileID: 3458991263078247709, guid: e4673e93fa589434b9c4ad1bf877f42c, type: 3}
   astralGolemRock: {fileID: 3458991263078247709, guid: 31f7f52dee81f974fadc2d453dfab9a1, type: 3}
   terrestrialGolemRock: {fileID: 3458991263078247709, guid: 800db111fb1974a4c9855543099d0a32, type: 3}
+  playerArrow: {fileID: 8105265429908091771, guid: 25b33a299441aa548a6759ab1e2b3910, type: 3}
 --- !u!4 &2056382762
 Transform:
   m_ObjectHideFlags: 0

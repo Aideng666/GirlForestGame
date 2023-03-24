@@ -236,6 +236,16 @@ public class PlayerController : MonoBehaviour
                 print("Hit By Enemy");
 
                 break;
+
+            case "EnemyProjectile":
+
+                if (collision.gameObject.GetComponentInParent<EnemyData>() == null || collision.gameObject.GetComponentInParent<EnemyData>().IsAttacking)
+                {
+                    playerCombat.TakeDamage();
+                    playerCombat.ApplyKnockback((transform.position - collision.gameObject.gameObject.transform.position), 2);
+                }
+
+                break;
         }
     }
 
@@ -275,15 +285,15 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
-            case "EnemyProjectile":
+            //case "EnemyProjectile":
 
-                if (other.GetComponentInParent<EnemyData>() == null || other.GetComponentInParent<EnemyData>().IsAttacking)
-                {
-                    playerCombat.TakeDamage();
-                    playerCombat.ApplyKnockback((transform.position - other.gameObject.transform.position), 2);
-                }
+            //    if (other.GetComponentInParent<EnemyData>() == null || other.GetComponentInParent<EnemyData>().IsAttacking)
+            //    {
+            //        playerCombat.TakeDamage();
+            //        playerCombat.ApplyKnockback((transform.position - other.gameObject.transform.position), 2);
+            //    }
 
-                break;
+            //    break;
         }
     }
 
