@@ -72,7 +72,6 @@ public class PlayerArrow : MonoBehaviour
 
                     if (target == null)
                     {
-                        print("No Target, Going Forward");
                         transform.forward = player.aimDirection;
                         GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
                     }

@@ -33,13 +33,16 @@ public class EnemyData : MonoBehaviour
     PlayerController player;
     bool isDead;
     bool isAttacking;
+
+    float[] statMultiplierPerLevel = new float[3] { 1, 1.5f, 2 };
+
     public bool IsAttacking { get { return isAttacking; } set { isAttacking = value; } }
 
     public Planes Form { get { return form; } }
 
     private void OnEnable()
     {
-        curHealth = maxHealth;
+        curHealth = maxHealth * statMultiplierPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1];
         isDead = false;
     }
 
@@ -48,6 +51,8 @@ public class EnemyData : MonoBehaviour
         body = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         player = PlayerController.Instance;
+
+        statMultiplierPerLevel = new float[3] { 1, 1.5f, 2 };
     }
 
     void Update() 

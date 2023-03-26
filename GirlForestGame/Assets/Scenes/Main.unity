@@ -3084,9 +3084,9 @@ MonoBehaviour:
   visualNodePrefab: {fileID: 6933593831192278680, guid: 38771b6056505a04ca23cdddb0aa4574, type: 3}
   endNodeDistance: 5
   numberOfNodeColumns: 8
-  blessingNodeChance: 0.49
-  shopNodeChance: 0.49
-  secondChildChance: 1.65
+  blessingNodeChance: 0.25
+  shopNodeChance: 0.25
+  secondChildChance: 1.7
   lineRendererMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &543537892
 MonoBehaviour:
@@ -3116,7 +3116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d773b32ae5226408112fe265dcb023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalRooms: 5
+  totalRooms: 4
   rareRoomChance: 5
   roomPrefab: {fileID: 2541303958802026500, guid: 417432f070b95164b87032e4159359af, type: 3}
 --- !u!114 &543537895

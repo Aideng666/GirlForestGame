@@ -18,43 +18,92 @@ public class Room : MonoBehaviour
 
     RoomTypes currentType = RoomTypes.Fight;
 
-    bool roomCompleted; //Has the player defeated all the enemies within this room
+    bool roomCompleted = false; //Has the player defeated all the enemies within this room
+    bool rewardReceived;
 
     int distanceFromStartRoom = 0;
     Vector2 spotInGrid = Vector2.zero;
+
+    Vector2[] enemyCountRangesPerLevel = new Vector2[3] { new Vector2(3, 4), new Vector2(3, 5), new Vector2(4, 6) };
+    float[] totemChancePerLevel;
 
     public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
 
     private void OnEnable()
     {
-        if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
+        if (!roomCompleted)
         {
-            roomCompleted = false;
-            
-            //Num of enemies in a room
-            for (int i = 0; i < Random.Range(3, 6); i++)
+            if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
             {
-                int randomEnemySelection = Random.Range(0, 3);
-
-                switch (randomEnemySelection)
+                //Num of enemies in a room
+                for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 1); i++)
                 {
-                    case 0:
+                    int randomEnemySelection = Random.Range(0, 4);
 
-                        EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
+                    switch (randomEnemySelection)
+                    {
+                        case 0:
 
-                        break;
+                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
 
-                    case 1:
+                            break;
 
-                        EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
+                        case 1:
 
-                        break;
+                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
 
-                    case 2:
+                            break;
 
-                        EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
+                        case 2:
 
-                        break;
+                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
+
+                            break;
+
+                        case 3:
+
+                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
+
+                            break;
+                    }
+                }
+            }
+            else if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.End)
+            {
+                if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default)
+                {
+                    //Num of enemies for final room
+                    for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x + 2, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 3); i++)
+                    {
+                        int randomEnemySelection = Random.Range(0, 4);
+
+                        switch (randomEnemySelection)
+                        {
+                            case 0:
+
+                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
+
+                                break;
+
+                            case 1:
+
+                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
+
+                                break;
+
+                            case 2:
+
+                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
+
+                                break;
+
+                            case 3:
+
+                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
+
+                                break;
+                        }
+                    }
                 }
             }
         }
@@ -63,7 +112,8 @@ public class Room : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        enemyCountRangesPerLevel = new Vector2[3] { new Vector2(3, 4), new Vector2(3, 5) , new Vector2(4, 6) };
+        totemChancePerLevel = new float[3] { 0.2f, 0.4f, 0.6f };
     }
 
     // Update is called once per frame
@@ -92,9 +142,18 @@ public class Room : MonoBehaviour
                     }
                 }
             }
+
+            if (currentType == RoomTypes.End && DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default && !rewardReceived)
+            {
+                Instantiate(totemPrefab, totemPrefab.transform.position, Quaternion.identity, transform);
+
+                rewardReceived = true;
+            }
         }
         else if (EnemyPool.Instance.availableBoars.Count % 5 == 0
-            && EnemyPool.Instance.availableMushrooms.Count % 5 == 0)
+            && EnemyPool.Instance.availableMushrooms.Count % 5 == 0
+            && EnemyPool.Instance.availableDraugrs.Count % 5 == 0
+            && EnemyPool.Instance.availableGolems.Count % 5 == 0)
         {
             roomCompleted = true;
         }
@@ -194,12 +253,6 @@ public class Room : MonoBehaviour
 
                 switch (DungeonGenerator.Instance.GetCurrentFloorType())
                 {
-                    case NodeTypes.Default:
-
-                       
-
-                        break;
-
                     case NodeTypes.Marking:
 
                         DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Marking, true);
@@ -209,12 +262,6 @@ public class Room : MonoBehaviour
                     case NodeTypes.Shop:
 
                         DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Shop, true);
-
-                        break;
-
-                    case NodeTypes.Boss:
-
-                        
 
                         break;
                 }
