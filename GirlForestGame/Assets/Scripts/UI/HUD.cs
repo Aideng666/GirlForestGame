@@ -37,8 +37,11 @@ public class HUD : MonoBehaviour
     [SerializeField] Image[] images = new Image[4]; // 0 = SwordAttribute | 1 = SwordElement | 2 = BowAttribute | 3 = BowElement
     bool markingsPanelActive = true;
 
-    [Header("Coins")]
+    [Header("Player Stuff")]
     [SerializeField] TextMeshProUGUI coinText;
+    [SerializeField] Image planeImage;
+    [SerializeField] Sprite terrestrialSprite;
+    [SerializeField] Sprite astralSprite;
 
     PlayerController player;
 
@@ -53,6 +56,8 @@ public class HUD : MonoBehaviour
         currentHeartImages = startingHearts;
 
         attributePanelActive = false;
+
+        planeImage.sprite = terrestrialSprite;
     }
 
     private void OnEnable()
@@ -80,6 +85,16 @@ public class HUD : MonoBehaviour
 
         // Displays player's current money
         coinText.text = player.playerInventory.GetMoneyAmount().ToString();
+
+        // Displays the player's current plane they are in
+        if (player.playerCombat.Form == Planes.Terrestrial)
+        {
+            planeImage.sprite = terrestrialSprite;
+        }
+        else if (player.playerCombat.Form == Planes.Astral)
+        {
+            planeImage.sprite = astralSprite;
+        }
     }
 
     public void ToggleHUD(bool hudOn)
