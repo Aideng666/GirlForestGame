@@ -25,6 +25,10 @@ public class EnemyData : MonoBehaviour
     [SerializeField] Material damageTakenMat;
     
     float damageShaderDuration = 0.4f;
+    bool damageShaderApplied = false;
+
+    Material originalMat;
+    Shader originalShader;
 
     //reference to navmesh for knockback
     public NavMeshAgent agent { get; private set; }
@@ -139,25 +143,44 @@ public class EnemyData : MonoBehaviour
 
             curHealth -= damageAmount;
 
-            StartCoroutine(ApplyDamageShader());
-
             if (curHealth <= 0)
             {
                 EnemyDeath();
+
+                return;
             }
+
+            StartCoroutine(ApplyDamageShader());
         }
     }
 
     IEnumerator ApplyDamageShader()
     {
-        //Shader originalShader = GetComponentInChildren<SkinnedMeshRenderer>().material.shader;
-        Material originalMat = GetComponent<MeshRenderer>().material;
+        if (!damageShaderApplied)
+        {
+            damageShaderApplied = true;
 
-        GetComponentInChildren<MeshRenderer>().material = damageTakenMat;
+            //originalShader = GetComponentInChildren<SkinnedMeshRenderer>().material.shader;
+            originalMat = GetComponent<MeshRenderer>().material;
 
-        yield return new WaitForSeconds(damageShaderDuration);
+            GetComponentInChildren<MeshRenderer>().material = damageTakenMat;
 
-        GetComponentInChildren<MeshRenderer>().material = originalMat;
+            yield return new WaitForSeconds(damageShaderDuration);
+
+            GetComponentInChildren<MeshRenderer>().material = originalMat;
+
+            damageShaderApplied = false;
+        }
+        else
+        {
+            GetComponentInChildren<MeshRenderer>().material = damageTakenMat;
+
+            yield return new WaitForSeconds(damageShaderDuration);
+
+            GetComponentInChildren<MeshRenderer>().material = originalMat;
+
+            damageShaderApplied = false;
+        }
     }
 
     public void ApplyKnockback(float knockBack, Vector3 direction = default(Vector3))

@@ -3086,7 +3086,7 @@ MonoBehaviour:
   numberOfNodeColumns: 8
   blessingNodeChance: 0.25
   shopNodeChance: 0.25
-  secondChildChance: 1.7
+  secondChildChance: 1.6
   lineRendererMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &543537892
 MonoBehaviour:

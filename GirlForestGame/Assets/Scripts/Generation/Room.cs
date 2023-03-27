@@ -8,6 +8,8 @@ public class Room : MonoBehaviour
     [SerializeField] GameObject totemPrefab; //prefab to spawn totems in rooms
     [SerializeField] GameObject markingPrefab; //prefab to spawn markings in rooms
     [SerializeField] GameObject shopItemPrefab; //prefab to spawn markings in rooms
+    //[SerializeField] GameObject heartPrefab;
+    //[SerializeField] GameObject coinPrefab; 
 
     Room[] connectedRooms = new Room[4]; //0,1,2,3 = North, South, East, West respectively
     Room originRoom; //The room that this room was originally attached to
@@ -20,6 +22,8 @@ public class Room : MonoBehaviour
 
     bool roomCompleted = false; //Has the player defeated all the enemies within this room
     bool rewardReceived;
+    int waveNum = 0;
+    int totalWavesInBossFight = 3;
 
     int distanceFromStartRoom = 0;
     Vector2 spotInGrid = Vector2.zero;
@@ -31,8 +35,11 @@ public class Room : MonoBehaviour
 
     private void OnEnable()
     {
+        waveNum = 0;
+
         if (!roomCompleted)
         {
+            //If this is a regular fighting room
             if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
             {
                 //Num of enemies in a room
@@ -68,6 +75,7 @@ public class Room : MonoBehaviour
                     }
                 }
             }
+            //If this is the final room in a floor
             else if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.End)
             {
                 if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default)
@@ -104,6 +112,12 @@ public class Room : MonoBehaviour
                                 break;
                         }
                     }
+                }
+                if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Boss)
+                {
+                    waveNum = 0;
+
+                    SpawnNextWave();
                 }
             }
         }
@@ -143,9 +157,27 @@ public class Room : MonoBehaviour
                 }
             }
 
+            //Give totem reward on completion of a regular floor
             if (currentType == RoomTypes.End && DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default && !rewardReceived)
             {
                 Instantiate(totemPrefab, totemPrefab.transform.position, Quaternion.identity, transform);
+
+                rewardReceived = true;
+            }
+            else if (currentType == RoomTypes.End && DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Boss && !rewardReceived)
+            {
+                Instantiate(totemPrefab, totemPrefab.transform.position + ((Vector3.forward + Vector3.left) * 5), Quaternion.identity, transform);
+                Instantiate(totemPrefab, totemPrefab.transform.position + ((Vector3.back + Vector3.right) * 5), Quaternion.identity, transform);
+                Instantiate(totemPrefab, totemPrefab.transform.position, Quaternion.identity, transform);
+
+                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5 + ((Vector3.forward + Vector3.left) * 5));
+                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5 + ((Vector3.back + Vector3.right) * 5));
+                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5);
+
+                for (int i = 0; i < 10; i++)
+                {
+                    PickupPool.Instance.GetCoinFromPool(totemPrefab.transform.position + new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f)));
+                }
 
                 rewardReceived = true;
             }
@@ -155,7 +187,56 @@ public class Room : MonoBehaviour
             && EnemyPool.Instance.availableDraugrs.Count % 5 == 0
             && EnemyPool.Instance.availableGolems.Count % 5 == 0)
         {
+            if (waveNum > 0 && waveNum < totalWavesInBossFight)
+            {
+                SpawnNextWave();
+
+                return;
+            }
+            else if (waveNum == totalWavesInBossFight)
+            {
+
+            }
+
             roomCompleted = true;
+        }
+    }
+
+    //Called for the boss fights for spawning multiple waves of enemies. This is to replace the actual boss fight.
+    void SpawnNextWave()
+    {
+        waveNum++;
+
+        for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x + 1, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 2); i++)
+        {
+            int randomEnemySelection = Random.Range(0, 4);
+
+            switch (randomEnemySelection)
+            {
+                case 0:
+
+                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
+
+                    break;
+
+                case 1:
+
+                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
+
+                    break;
+
+                case 2:
+
+                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
+
+                    break;
+
+                case 3:
+
+                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
+
+                    break;
+            }
         }
     }
 
