@@ -37,6 +37,9 @@ public class HUD : MonoBehaviour
     [SerializeField] Image[] images = new Image[4]; // 0 = SwordAttribute | 1 = SwordElement | 2 = BowAttribute | 3 = BowElement
     bool markingsPanelActive = true;
 
+    [Header("Coins")]
+    [SerializeField] TextMeshProUGUI coinText;
+
     PlayerController player;
 
     Tween attributePanelTween = null;
@@ -74,6 +77,9 @@ public class HUD : MonoBehaviour
         {
             ToggleMarkingsPanel();
         }
+
+        // Displays player's current money
+        coinText.text = player.playerInventory.GetMoneyAmount().ToString();
     }
 
     public void ToggleHUD(bool hudOn)
@@ -143,17 +149,17 @@ public class HUD : MonoBehaviour
 
     void UpdateAttributes()
     {
-        healthText.text = $"MAX HP: {player.playerAttributes.MaxHealth}";
-        speedText.text = $"SPD: {player.playerAttributes.Speed}";
-        swdDmgText.text = $"SWD DMG: {player.playerAttributes.SwordDamage}";
-        bowDmgText.text = $"BOW DMG: {player.playerAttributes.BowDamage}";
-        swdCdnText.text = $"SWD ATK.SPD: {player.playerAttributes.SwordCooldown}";
-        bowCdnText.text = $"Bow ATK.SPD: {player.playerAttributes.BowCooldown}";
-        swdRangeText.text = $"SWD ATK.RANGE: {player.playerAttributes.SwordRange}";
-        projSpdText.text = $"PROJ SPD: {player.playerAttributes.ProjectileSpeed}";
-        critChanceText.text = $"CRIT CHANCE: {player.playerAttributes.CritChance}";
-        bowChargeSpdText.text = $"BOW CHARGE TIME: {player.playerAttributes.BowChargeTime}";
-        luckText.text = $"LUCK: {player.playerAttributes.Luck}";
+        healthText.text = (player.playerAttributes.MaxHealth).ToString();
+        speedText.text = (player.playerAttributes.Speed).ToString();
+        swdDmgText.text = (player.playerAttributes.SwordDamage).ToString();
+        bowDmgText.text = (player.playerAttributes.BowDamage).ToString();
+        swdCdnText.text = (player.playerAttributes.SwordCooldown).ToString();
+        bowCdnText.text = (player.playerAttributes.BowCooldown).ToString();
+        swdRangeText.text = (player.playerAttributes.SwordRange).ToString();
+        projSpdText.text = (player.playerAttributes.ProjectileSpeed).ToString();
+        critChanceText.text = (player.playerAttributes.CritChance).ToString();
+        bowChargeSpdText.text = (player.playerAttributes.BowChargeTime).ToString();
+        luckText.text = (player.playerAttributes.Luck).ToString();
     }
 
     void UpdateMarkings()
