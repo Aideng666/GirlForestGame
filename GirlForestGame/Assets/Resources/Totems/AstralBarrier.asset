@@ -21,7 +21,9 @@ MonoBehaviour:
       type: {class: AstralBarrierTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 2
+        totemSprite: {fileID: 21300000, guid: 8c77e6782a4ce044a863aebbe7e3dabe, type: 3}
         totemName: Astral Barrier
+        totemDescription: Gain a forcefield while in the astral plane
         initialBuffAmount: 0.2
         stackDampenAmount: 0.7
         conditionMet: 0
