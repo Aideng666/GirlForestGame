@@ -23,6 +23,10 @@ public class EnemyData : MonoBehaviour
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
     [SerializeField] Material damageTakenMat;
+
+    [SerializeField] ParticleSystem fireEffect;
+    [SerializeField] ParticleSystem windedEffect;
+    [SerializeField] ParticleSystem fearedEffect;
     
     float damageShaderDuration = 0.4f;
     bool damageShaderApplied = false;

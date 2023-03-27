@@ -1746,7 +1746,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2810
+  m_Name: pb_Mesh-106092
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1976,7 +1976,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2852
+  m_Name: pb_Mesh-106134
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8805,7 +8805,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2794
+  m_Name: pb_Mesh-106076
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12196,7 +12196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1297180804387073770, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: startingMoney
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1439183563790741150, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: baseWindedDuration

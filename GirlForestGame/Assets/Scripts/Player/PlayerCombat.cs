@@ -92,8 +92,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 bowCharging = false;
                 currentBowChargeTime = 0;
-
-
+                currentBowChargeTime = 0;
             }
 
             //Charges the bow when standing still
