@@ -37,6 +37,12 @@ public class HUD : MonoBehaviour
     [SerializeField] Image[] images = new Image[4]; // 0 = SwordAttribute | 1 = SwordElement | 2 = BowAttribute | 3 = BowElement
     bool markingsPanelActive = true;
 
+    [Header("Totems Panel")]
+    [SerializeField] Image totemImage;
+    [SerializeField] Sprite[] totemSprites = new Sprite[20];
+    [SerializeField] TextMeshProUGUI totemName;
+    [SerializeField] TextMeshProUGUI totemDescription;
+
     [Header("Player Stuff")]
     [SerializeField] TextMeshProUGUI coinText;
     [SerializeField] Image planeImage;
@@ -95,6 +101,10 @@ public class HUD : MonoBehaviour
         {
             planeImage.sprite = astralSprite;
         }
+
+        
+
+
     }
 
     public void ToggleHUD(bool hudOn)
