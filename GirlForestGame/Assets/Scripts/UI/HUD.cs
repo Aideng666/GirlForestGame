@@ -100,11 +100,7 @@ public class HUD : MonoBehaviour
         else if (player.playerCombat.Form == Planes.Astral)
         {
             planeImage.sprite = astralSprite;
-        }
-
-        
-
-
+        }      
     }
 
     public void ToggleHUD(bool hudOn)

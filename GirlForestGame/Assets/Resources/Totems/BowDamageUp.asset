@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: BowDmgUpTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 0
+        totemSprite: {fileID: 21300000, guid: 347c14465416edd43bec8057f1c062d0, type: 3}
         totemName: BowDamageUp
+        totemDescription: Increased Bow Damage
         initialBuffAmount: 0.4
         stackDampenAmount: 0.5
