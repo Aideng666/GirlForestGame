@@ -70,7 +70,7 @@ public class TotemPickup : MonoBehaviour
         {
             PlayerController.Instance.playerInventory.AddTotemToList(chosenTotem);
 
-
+            HUD.Instance.UpdateTotemHUD(chosenTotem.Totem.totemSprite, chosenTotem.Totem.totemName, chosenTotem.Totem.totemDescription);
 
             gameObject.SetActive(false);
 

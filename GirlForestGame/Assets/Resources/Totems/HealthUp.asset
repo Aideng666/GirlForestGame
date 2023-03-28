@@ -22,7 +22,7 @@ MonoBehaviour:
       data:
         totemType: 0
         totemSprite: {fileID: 21300000, guid: cdeef226993e9c147a32046e5fb4bbb2, type: 3}
-        totemName: HealthUp
+        totemName: Health Up
         totemDescription: Increased Maximum Health
         initialBuffAmount: 2
         stackDampenAmount: 1
