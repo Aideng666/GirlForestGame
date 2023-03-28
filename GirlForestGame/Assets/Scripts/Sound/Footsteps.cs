@@ -3,26 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Footsteps : MonoBehaviour
-{   
-    FMOD.Studio.EventInstance FootstepsEvent;
+{
+    [HideInInspector] public FMOD.Studio.EventInstance FootstepsEvent;
 
     public PlayerController pControl;
-    bool playerismoving;
-    public float paceSpeed;
     //private float WoodValue;
     //private float GrassValue;
 
-    void Start()
+    void OnEnable()
     {
         FootstepsEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Footsteps");
         //FootstepsEvent.getParameterByName("Wood", out WoodValue);
         //FootstepsEvent.getParameterByName("Metal", out MetalValue);
         //FootstepsEvent.getParameterByName("Grass", out GrassValue);
-
-        if (FootstepsEvent.isValid())
-        {
-            FootstepsEvent.setVolume(1.0f);
-        }
         //InvokeRepeating("CallFootsteps", 1, paceSpeed);
     }
 
@@ -34,44 +27,19 @@ public class Footsteps : MonoBehaviour
         //FootstepsEvent.setParameterByName("Metal", MetalValue);
         //FootstepsEvent.setParameterByName("Grass", GrassValue);
 
-        if (InputManager.Instance.Move().magnitude > 0.1f)//(Input.GetAxis("Vertical") >= 0.01f || Input.GetAxis("Horizontal") >= 0.01f || Input.GetAxis("Vertical") <= -0.01f || Input.GetAxis("Horizontal") <= -0.01f)
+        if (InputManager.Instance.Move().magnitude > 0.1f) //(Input.GetAxis("Vertical") >= 0.01f || Input.GetAxis("Horizontal") >= 0.01f || Input.GetAxis("Vertical") <= -0.01f || Input.GetAxis("Horizontal") <= -0.01f)
         {
-            playerismoving = true; 
-            FootstepsEvent.keyOff();
-            Debug.Log("p " + playerismoving);
+            FootstepsEvent.start();
 
         }
         else
         {
-            playerismoving = false;
-            FootstepsEvent.start();
             //FootstepsEvent.keyOff();
-            //FootstepsEvent.release();
-            Debug.Log("p " + playerismoving);
+            FootstepsEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
         }
     }
 
-    void CallFootsteps()
-    {
-        if (playerismoving == true)
-        {
-            //FMODUnity.RuntimeManager.PlayOneShot(InputFootsteps);
-
-            //FootstepsEvent.start();
-           // FootstepsEvent.release();
-        }
-        else if (playerismoving == false)
-        {
-            //FootstepsEvent.keyOff();
-          // FootstepsEvent.release();
-            
-        }
-    }
-
-    void OnDisable()
-    {
-        playerismoving = false;
-    }
 
     //private void OnCollisionEnter(Collision collision)
     //{
@@ -96,10 +64,5 @@ public class Footsteps : MonoBehaviour
     //        GrassValue = 1f;
     //    }
     //}
-    void StopAllPlayerEvents()
-    {
-        FMOD.Studio.Bus playerBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX/Player");
-        playerBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
-    }
 
 }
