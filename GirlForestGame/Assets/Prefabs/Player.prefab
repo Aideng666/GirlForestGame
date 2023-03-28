@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6988928854242709114}
   - component: {fileID: 1616362850096199073}
   - component: {fileID: 749033969539165502}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BowTargetCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,7 +726,7 @@ GameObject:
   - component: {fileID: 3856917944956632236}
   - component: {fileID: 7212411374653614298}
   - component: {fileID: 9081786004957102926}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: InteractRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3445,7 +3445,7 @@ GameObject:
   - component: {fileID: 7041480874719873006}
   - component: {fileID: 7017156420146207126}
   - component: {fileID: 5755017179120684608}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SwordTargetCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

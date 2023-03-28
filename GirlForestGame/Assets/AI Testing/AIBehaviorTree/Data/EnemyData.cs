@@ -23,7 +23,16 @@ public class EnemyData : MonoBehaviour
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
     [SerializeField] Material damageTakenMat;
-    [SerializeField] float damageShaderDuration;
+
+    [SerializeField] ParticleSystem fireEffect;
+    [SerializeField] ParticleSystem windedEffect;
+    [SerializeField] ParticleSystem fearedEffect;
+    
+    float damageShaderDuration = 0.4f;
+    bool damageShaderApplied = false;
+
+    Material originalMat;
+    Shader originalShader;
 
     //reference to navmesh for knockback
     public NavMeshAgent agent { get; private set; }
@@ -32,13 +41,16 @@ public class EnemyData : MonoBehaviour
     PlayerController player;
     bool isDead;
     bool isAttacking;
+
+    float[] statMultiplierPerLevel = new float[3] { 1, 1.5f, 2 };
+
     public bool IsAttacking { get { return isAttacking; } set { isAttacking = value; } }
 
     public Planes Form { get { return form; } }
 
     private void OnEnable()
     {
-        curHealth = maxHealth;
+        curHealth = maxHealth * statMultiplierPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1];
         isDead = false;
     }
 
@@ -47,6 +59,8 @@ public class EnemyData : MonoBehaviour
         body = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         player = PlayerController.Instance;
+
+        statMultiplierPerLevel = new float[3] { 1, 1.5f, 2 };
     }
 
     void Update() 
@@ -133,29 +147,53 @@ public class EnemyData : MonoBehaviour
 
             curHealth -= damageAmount;
 
-            StartCoroutine(ApplyDamageShader());
-
             if (curHealth <= 0)
             {
                 EnemyDeath();
+
+                return;
             }
+
+            StartCoroutine(ApplyDamageShader());
         }
     }
 
     IEnumerator ApplyDamageShader()
     {
-        //Shader originalShader = GetComponentInChildren<SkinnedMeshRenderer>().material.shader;
-        Material originalMat = GetComponent<MeshRenderer>().material;
+        if (!damageShaderApplied)
+        {
+            damageShaderApplied = true;
 
-        GetComponentInChildren<MeshRenderer>().material = damageTakenMat;
+            //originalShader = GetComponentInChildren<SkinnedMeshRenderer>().material.shader;
+            originalMat = GetComponent<MeshRenderer>().material;
 
-        yield return new WaitForSeconds(damageShaderDuration);
+            GetComponentInChildren<MeshRenderer>().material = damageTakenMat;
 
-        GetComponentInChildren<MeshRenderer>().material = originalMat;
+            yield return new WaitForSeconds(damageShaderDuration);
+
+            GetComponentInChildren<MeshRenderer>().material = originalMat;
+
+            damageShaderApplied = false;
+        }
+        else
+        {
+            GetComponentInChildren<MeshRenderer>().material = damageTakenMat;
+
+            yield return new WaitForSeconds(damageShaderDuration);
+
+            GetComponentInChildren<MeshRenderer>().material = originalMat;
+
+            damageShaderApplied = false;
+        }
     }
 
     public void ApplyKnockback(float knockBack, Vector3 direction = default(Vector3))
     {
+        if (enemyType == EnemyTypes.StoneGolem)
+        {
+            return;
+        }
+
         body.velocity = Vector3.zero;
         GetComponentInChildren<Animator>().SetTrigger("Is_Hit");
 

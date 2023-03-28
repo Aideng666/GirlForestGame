@@ -22,6 +22,18 @@ public class PlayerArrow : MonoBehaviour
         player = PlayerController.Instance;
 
         SetPlane(player.playerCombat.Form);
+        movementStarted = false;
+    }
+
+    private void OnEnable()
+    {
+        livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
+        spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
+
+        player = PlayerController.Instance;
+
+        SetPlane(player.playerCombat.Form);
+        movementStarted = false;
     }
 
     public void SetArrowChargeMultiplier(float percentage)
@@ -113,7 +125,7 @@ public class PlayerArrow : MonoBehaviour
     {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-        transform.parent = collision.gameObject.transform;
+        //transform.parent = collision.gameObject.transform;
 
         //Checks if it hits an enemy first
         if (collision.gameObject.TryGetComponent(out EnemyData enemy) && enemy.Form == PlayerController.Instance.playerCombat.Form)
@@ -153,7 +165,7 @@ public class PlayerArrow : MonoBehaviour
                 enemy.TakeDamage(player.playerAttributes.BowDamage + chargedArrowDamage);
             }
 
-            Destroy(gameObject);
+            //ProjectilePool.Instance.AddArrowToPool(gameObject);
 
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
             {
@@ -166,13 +178,15 @@ public class PlayerArrow : MonoBehaviour
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.FireArrow, new Vector3(transform.position.x, 0, transform.position.z), arrowChargePercentage);
 
-            Destroy(gameObject);
+            //ProjectilePool.Instance.AddArrowToPool(gameObject);
         }
         else if (_element == Elements.Wind)
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.WindArrow, new Vector3(transform.position.x, 1, transform.position.z), arrowChargePercentage);
 
-            Destroy(gameObject);
+            //ProjectilePool.Instance.AddArrowToPool(gameObject);
         }
+
+        ProjectilePool.Instance.AddArrowToPool(gameObject);
     }
 }

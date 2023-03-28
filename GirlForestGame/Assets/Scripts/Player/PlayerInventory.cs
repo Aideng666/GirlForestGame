@@ -55,6 +55,11 @@ public class PlayerInventory : MonoBehaviour
         {
             player.playerInventory.GetTotemFromList(typeof(FearfulAuraTotem)).Totem.ApplyEffect();
         }
+
+        if (player.playerInventory.totemDictionary[typeof(TerrestrialShieldTotem)] > 0)
+        {
+            player.playerInventory.GetTotemFromList(typeof(TerrestrialShieldTotem)).Totem.ApplyEffect();
+        }
     }
 
     public void EquipMarking(Spirit spirit, MarkingTypes type, Weapons weapon)

@@ -92,8 +92,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 bowCharging = false;
                 currentBowChargeTime = 0;
-
-
+                currentBowChargeTime = 0;
             }
 
             //Charges the bow when standing still
@@ -318,14 +317,13 @@ public class PlayerCombat : MonoBehaviour
             canAttack = false;
             isDrawingBow = true;
             DrawSFX.start();
-
         }
     }
 
     void SpawnArrow(GameObject target = null)
     {
-        GameObject arrow;
-        arrow = Instantiate(arrowPrefab, transform.position + (Vector3.up + transform.forward) / 2, Quaternion.identity);
+        GameObject arrow = ProjectilePool.Instance.GetArrowFromPool(transform.position + (Vector3.up + transform.forward) / 2);
+
         arrow.GetComponent<PlayerArrow>().SetArrowChargeMultiplier(currentBowChargeTime / player.playerAttributes.BowChargeTime);
 
         if (player.playerMarkings.markings[3] != null)

@@ -14,12 +14,19 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
 
     [SerializeField] float duration = 1f;
     [SerializeField] float attackChargeDelay = 1;
+
     Transform leftAxe;
     Transform rightAxe;
+    Transform defaultLeftPosition;
+    Transform defaultRightPosition;
+    Quaternion defaultLeftRotation;
+    Quaternion defaultRightRotation;
     BezierCurve curve;
 
-    Vector3 leftAxeRestingPos;
-    Vector3 rightAxeRestingPos;
+    MeshCollider leftAxeCollider;
+    MeshCollider rightAxeCollider;
+    TrailRenderer leftTrail;
+    TrailRenderer rightTrail;
 
     private CoroutineHandle leftAxeThrow;
     private CoroutineHandle rightAxeThrow;
@@ -36,9 +43,17 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
 
         leftAxe = animator.transform.GetChild(0);
         rightAxe = animator.transform.GetChild(1);
+        defaultLeftPosition = animator.transform.GetChild(2);
+        defaultRightPosition = animator.transform.GetChild(3);
         curve = animator.GetComponentInChildren<BezierCurve>();
-        leftAxeRestingPos = leftAxe.position;
-        rightAxeRestingPos = rightAxe.position;
+
+        leftAxeCollider = leftAxe.GetComponent<MeshCollider>();
+        rightAxeCollider = rightAxe.GetComponent<MeshCollider>();
+
+        defaultLeftRotation = leftAxe.rotation;
+        defaultRightRotation = rightAxe.rotation;
+        leftTrail = leftAxe.GetComponent<TrailRenderer>();
+        rightTrail = rightAxe.GetComponent<TrailRenderer>();
 
         projectileHasReturned = false;
         hasThrownProjectile = false;
@@ -67,10 +82,16 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
             {
                 //Using MEC to run the coroutine
                 leftAxeThrow = Timing.RunCoroutine(LeftAxeThrow().CancelWith(animator.gameObject));
+
+                leftTrail.emitting = true;
+                rightAxeCollider.enabled = false;
             }
             else if (axeSelection == 1)
             {
                 rightAxeThrow = Timing.RunCoroutine(RightAxeThrow().CancelWith(animator.gameObject));
+
+                rightTrail.emitting = true;
+                leftAxeCollider.enabled = false;
             }
 
             hasThrownProjectile = true;
@@ -81,6 +102,12 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         //sets the state in the machine so it can/can't leave the thrown state
         if (projectileHasReturned)
         {
+            leftAxeCollider.enabled = true;
+            rightAxeCollider.enabled = true;
+
+            leftTrail.emitting = false;
+            rightTrail.emitting = false;
+
             animator.SetTrigger(triggerParameter);
             projectileHasReturned = false;
         }
@@ -90,50 +117,56 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
 
     IEnumerator<float> LeftAxeThrow()
     {
-        curve.GetAnchorPoints()[0].transform.position = leftAxeRestingPos;
-        curve.GetAnchorPoints()[1].transform.position = player.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[0].transform.position = defaultLeftPosition.position;
+        curve.GetAnchorPoints()[1].transform.position = player.transform.position + Vector3.up + (Quaternion.Euler(0, 30, 0) * (agent.transform.position - player.transform.position).normalized);
         curve.GetAnchorPoints()[2].transform.position = player.transform.position + Vector3.up;
-        curve.GetAnchorPoints()[3].transform.position = leftAxeRestingPos;
+        curve.GetAnchorPoints()[3].transform.position = player.transform.position + Vector3.up + (Quaternion.Euler(0, -30, 0) * (agent.transform.position - player.transform.position).normalized);
+        curve.GetAnchorPoints()[4].transform.position = defaultLeftPosition.position;
 
-        //leftAxe.transform.parent = null;
+        leftAxe.rotation = Quaternion.Euler(90, 0, 0);
 
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             leftAxe.position = curve.GetPointAt(time / duration);
+            //leftAxe.rotation = Quaternion.Euler(0, leftAxe.rotation.y, 0);
+            leftAxe.Rotate(Vector3.up, 3, Space.World);
 
-            curve.GetAnchorPoints()[3].transform.position = agent.transform.position + (agent.transform.forward + (-agent.transform.right)).normalized;
+            curve.GetAnchorPoints()[0].transform.position = defaultLeftPosition.position;
 
             yield return Timing.WaitForOneFrame;
         }
 
+        leftAxe.rotation = defaultLeftRotation;
+
         projectileHasReturned = true;
         enemyData.IsAttacking = false;
-
-        //leftAxe.transform.parent = agent.GetComponentInChildren<Animator>().transform;
     }
 
     IEnumerator<float> RightAxeThrow()
     {
-        curve.GetAnchorPoints()[0].transform.position = rightAxeRestingPos;
-        curve.GetAnchorPoints()[1].transform.position = player.transform.position + Vector3.up;
+        curve.GetAnchorPoints()[0].transform.position = defaultRightPosition.position;
+        curve.GetAnchorPoints()[1].transform.position = player.transform.position + Vector3.up + (Quaternion.Euler(0, 30, 0) * (agent.transform.position - player.transform.position).normalized);
         curve.GetAnchorPoints()[2].transform.position = player.transform.position + Vector3.up;
-        curve.GetAnchorPoints()[3].transform.position = rightAxeRestingPos;
+        curve.GetAnchorPoints()[3].transform.position = player.transform.position + Vector3.up + (Quaternion.Euler(0, -30, 0) * (agent.transform.position - player.transform.position).normalized);
+        curve.GetAnchorPoints()[4].transform.position = defaultRightPosition.position;
 
-        //leftAxe.transform.parent = null;
+        rightAxe.rotation = Quaternion.Euler(90, 0, 0);
 
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             rightAxe.position = curve.GetPointAt(time / duration);
+            //rightAxe.rotation = Quaternion.Euler(0, rightAxe.rotation.y, 0);
+            rightAxe.Rotate(Vector3.up, 3, Space.World);
 
-            curve.GetAnchorPoints()[3].transform.position = agent.transform.position + (agent.transform.forward + agent.transform.right).normalized;
+            curve.GetAnchorPoints()[0].transform.position = defaultRightPosition.position;
 
             yield return Timing.WaitForOneFrame;
         }
 
+        rightAxe.rotation = defaultRightRotation;
+
         projectileHasReturned = true;
         enemyData.IsAttacking = false;
-
-        //leftAxe.transform.parent = agent.GetComponentInChildren<Animator>().transform;
     }
 
 

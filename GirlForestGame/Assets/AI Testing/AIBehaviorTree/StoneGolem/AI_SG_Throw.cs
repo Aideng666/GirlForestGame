@@ -5,43 +5,84 @@ using DG.Tweening;
 
 public class AI_SG_Throw : AI_BaseClass
 {
-    Transform projectile;
-    Vector3 defaultLocation;
-    [SerializeField] float  heightOfShot = 1f;
-    [SerializeField] float duration = 1f;
+    [SerializeField] float rotationSpeed = 0.4f;
+    [SerializeField] float attackChargeTime = 1;
+
+    float elaspedChargeTime;
+    bool chargeComplete;
+    bool attackFired;
+    int randomPlaneChoice;
+
+    //Transform projectile;
+    //Vector3 defaultLocation;
+    //[SerializeField] float  heightOfShot = 1f;
+    //[SerializeField] float duration = 1f;
     [SerializeField] string stateChangeTrigger = "Projectile_Complete";
-    [SerializeField] GameObject target;
-    //[SerializeField] GameObject aoeTrigger;
-    //Vector3 direction;
+    //[SerializeField] GameObject target;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        GameObject temp = Instantiate(target, player.transform.position, Quaternion.identity);
+
+        agent.updateRotation = false;
+        agent.transform.DOLookAt(player.transform.position, rotationSpeed);
+
+        elaspedChargeTime = 0;
+        agent.speed = 0;
+        attackFired = false;
+        randomPlaneChoice = Random.Range(0, 2);
+
+        //Indicate Attack
+        if (randomPlaneChoice == 0)
+        {
+            enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeTime);
+        }
+        else if (randomPlaneChoice == 1)
+        {
+            enemyUI.IndicateAttack(Planes.Astral, attackChargeTime);
+        }
+
+        //GameObject temp = Instantiate(target, player.transform.position, Quaternion.identity);
+
         //Getting the projectile child 
-        projectile = animator.transform.GetChild(0);
-        defaultLocation = projectile.position;
-        //direction =  PlayerController.Instance.transform.position;
-        projectile.DOJump(PlayerController.Instance.transform.position, heightOfShot, 1, duration).OnComplete(
-            () => { animator.SetTrigger(stateChangeTrigger); projectile.position = defaultLocation; Destroy(temp); /*aoeTrigger.GetComponent<SphereCollider>().enabled = true;*/ });
+        //projectile = animator.transform.GetChild(0);
+        //defaultLocation = projectile.position;
+
+        //projectile.DOJump(PlayerController.Instance.transform.position, heightOfShot, 1, duration).OnComplete(
+        //() => { animator.SetTrigger(stateChangeTrigger); projectile.position = defaultLocation; Destroy(temp); /*aoeTrigger.GetComponent<SphereCollider>().enabled = true;*/ });
     }
 
 
-    ////OnStateUpdate is handled in the AI_BaseClass////
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //aoeTrigger.GetComponent<SphereCollider>().enabled = false;   
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
+
+        if (elaspedChargeTime >= attackChargeTime && !attackFired)
+        {
+            ThrowRock(animator);
+
+            attackFired = true;
+        }
+
+        elaspedChargeTime += Time.deltaTime;
     }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //}
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+    void ThrowRock(Animator animator)
+    {
+        GameObject rock = null;
+
+        if (randomPlaneChoice == 0)
+        {
+            rock = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, agent.transform.position + Vector3.up, EnemyTypes.StoneGolem);
+        }
+        else if (randomPlaneChoice == 1)
+        {
+            rock = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, agent.transform.position + Vector3.up, EnemyTypes.StoneGolem);
+        }
+
+        rock.transform.DOJump(player.transform.position, 5, 1, 1).SetEase(Ease.InCubic);
+
+        animator.SetTrigger(stateChangeTrigger);
+    }
 }
