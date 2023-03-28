@@ -37,15 +37,17 @@ public class Footsteps : MonoBehaviour
         if (InputManager.Instance.Move().magnitude > 0.1f)//(Input.GetAxis("Vertical") >= 0.01f || Input.GetAxis("Horizontal") >= 0.01f || Input.GetAxis("Vertical") <= -0.01f || Input.GetAxis("Horizontal") <= -0.01f)
         {
             playerismoving = true; 
-            FootstepsEvent.start();
+            FootstepsEvent.keyOff();
             Debug.Log("p " + playerismoving);
 
         }
-        else if (InputManager.Instance.Move().magnitude == 0.0f)
+        else
         {
             playerismoving = false;
-            FootstepsEvent.keyOff();
+            FootstepsEvent.start();
+            //FootstepsEvent.keyOff();
             //FootstepsEvent.release();
+            Debug.Log("p " + playerismoving);
         }
     }
 
