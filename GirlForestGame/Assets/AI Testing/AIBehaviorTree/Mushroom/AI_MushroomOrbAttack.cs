@@ -13,7 +13,8 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     [SerializeField] float attackChargeTime = 1;
 
     List<CoroutineHandle> handles;
-    [HideInInspector] public FMOD.Studio.EventInstance Shot = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Shoot");
+    [HideInInspector] public FMOD.Studio.EventInstance shotSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
     Animator animator;
 
     int randomAttackChoice;
@@ -21,7 +22,13 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     float elaspedChargeTime;
     bool chargeComplete;
     bool attackFired;
-    
+
+    private void OnEnable()
+    {
+        shotSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Shoot");
+        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+    }
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -45,11 +52,15 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         if (randomOrbChoice == 0)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeTime);
-            
+            signalSFX.setParameterByName("Astral", 0);
+            signalSFX.start();
+
         }
         else if (randomOrbChoice == 1)
         {
             enemyUI.IndicateAttack(Planes.Astral, attackChargeTime);
+            signalSFX.setParameterByName("Astral", 1);
+            signalSFX.start();
         }
     }
 
@@ -74,7 +85,8 @@ public class AI_MushroomOrbAttack : AI_BaseClass
 
     void FanAttack() 
     {
-        Shot.start();
+        shotSFX.start();
+        Debug.Log("Fanfire");
         FireOrb((player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, 15, 0) * (player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, -15, 0) * (player.transform.position - agent.transform.position).normalized);
@@ -90,7 +102,9 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         {
             FireOrb((player.transform.position - agent.transform.position).normalized);
             
-            Shot.start();
+            shotSFX.start();
+            Debug.Log("Boop: "+i);
+
 
             yield return Timing.WaitForSeconds(timeBetweenShots);
         }

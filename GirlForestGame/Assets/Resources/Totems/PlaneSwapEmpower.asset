@@ -23,6 +23,6 @@ MonoBehaviour:
         totemType: 1
         totemSprite: {fileID: 21300000, guid: bdcc051c7bf840d4b9d9c7702c02a651, type: 3}
         totemName: 'Plane Swap '
-        totemDescription: Empower you weapons when switching planes
+        totemDescription: Switching planes empowers your weapons
         initialBuffAmount: 0.25
         stackDampenAmount: 0.5
