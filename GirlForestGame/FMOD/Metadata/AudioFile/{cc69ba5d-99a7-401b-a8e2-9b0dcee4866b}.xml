@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{cc69ba5d-99a7-401b-a8e2-9b0dcee4866b}">
+		<property name="assetPath">
+			<value>Enemy/Boar/breath2.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.5338775510204083</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7c7ccdde-64fb-4897-bf7f-53f888c51482}</destination>
+		</relationship>
+	</object>
+</objects>

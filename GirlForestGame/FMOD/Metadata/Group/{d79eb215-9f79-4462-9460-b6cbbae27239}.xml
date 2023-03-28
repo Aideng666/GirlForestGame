@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{d79eb215-9f79-4462-9460-b6cbbae27239}">
+		<property name="volume">
+			<value>-6</value>
+		</property>
+		<property name="name">
+			<value>Enemy UI</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{f5b452c3-c76b-47fe-86b4-f71bb0722a45}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{fc439328-eb9a-46ce-9ec9-309107e1922b}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{6a8d35ca-a8d8-4a4c-8d17-f01f2f4f9a0b}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{f5b452c3-c76b-47fe-86b4-f71bb0722a45}">
+		<relationship name="effects">
+			<destination>{88a94ee4-2162-4527-a2c1-d757f64713c0}</destination>
+			<destination>{8f77beea-4847-432a-94c6-f1723b3a4b8f}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{fc439328-eb9a-46ce-9ec9-309107e1922b}" />
+	<object class="MixerBusFader" id="{88a94ee4-2162-4527-a2c1-d757f64713c0}" />
+	<object class="Sidechain" id="{8f77beea-4847-432a-94c6-f1723b3a4b8f}" />
+</objects>
