@@ -92,6 +92,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditions: []
   activationDistance: 4
+--- !u!1101 &-4867187165813345239
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Winded
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -3307113206553782942}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-4457045578898780197
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -249,7 +274,7 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -2059457822994401815}
+  - {fileID: -4867187165813345239}
   m_StateMachineBehaviours:
   - {fileID: -123931259835599115}
   m_Position: {x: 50, y: 50, z: 0}
@@ -294,31 +319,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &-2059457822994401815
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: Winded
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -3307113206553782942}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 1
-  m_HasExitTime: 1
-  m_HasFixedDuration: 0
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!114 &-1583123790699330977
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -643,8 +643,6 @@ MonoBehaviour:
   conditions: []
   projectileForce: 800
   timeBetweenShots: 0.15
-  terrestrialOrb: {fileID: 3458991263078247709, guid: e4673e93fa589434b9c4ad1bf877f42c, type: 3}
-  astralOrb: {fileID: 3458991263078247709, guid: c5d927ee96a4c794fa61dbabe57770d3, type: 3}
   rotationSpeed: 0.4
   attackChargeTime: 1
 --- !u!1101 &5577043964560095684

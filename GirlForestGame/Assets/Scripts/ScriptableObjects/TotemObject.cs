@@ -30,7 +30,7 @@ public class TotemObject : ScriptableObject
     [ContextMenu(nameof(Assassin))] void Assassin() { Totem = new AssassinTotem(); }
     [ContextMenu(nameof(AstralBarrier))] void AstralBarrier() { Totem = new AstralBarrierTotem(); }
     [ContextMenu(nameof(FearfulAura))] void FearfulAura() { Totem = new FearfulAuraTotem(); }
-    //[ContextMenu(nameof(RabbitsFoot))] void RabbitsFoot() { Totem = new HealthUpTotem(); }
+    [ContextMenu(nameof(TerrestrialShield))] void TerrestrialShield() { Totem = new TerrestrialShieldTotem(); }
     #endregion
 }
 
@@ -419,6 +419,70 @@ public class FearfulAuraTotem : ConstantTotem
 
         elaspedTime += Time.deltaTime;
     }
+}
+
+public class TerrestrialShieldTotem : ConstantTotem
+{
+    [SerializeField] float baseCooldownTimer = 3; 
+    [SerializeField] GameObject shieldObject;
+    [SerializeField] bool shieldCreated = false;
+    TerrestrialShieldObject shield;
+    float elaspedCooldownTime = 0;
+
+    public override void ApplyEffect()
+    {
+        base.ApplyEffect();
+
+        currentStackAmount = player.playerInventory.totemDictionary[typeof(TerrestrialShieldTotem)];
+
+        if (conditionMet)
+        {
+            if (!shieldCreated)
+            {
+                shieldObject = GameObject.Instantiate(shieldObject, player.transform.position + (Vector3.forward * 2) + Vector3.up, Quaternion.identity);
+                shield = shieldObject.GetComponent<TerrestrialShieldObject>();
+
+                shieldCreated = true;
+            }
+
+            if (!shield.GetCooldownApplied())
+            {
+                shieldObject.SetActive(true);
+            }
+            else if (elaspedCooldownTime >= baseCooldownTimer - ((currentStackAmount - 1) * initialBuffAmount)/* || !shield.GetCooldownApplied()*/)
+            {
+                shieldObject.SetActive(true);
+
+                elaspedCooldownTime = 0;
+                shield.SetCooldownApplied(false);
+            }
+            else
+            {
+                elaspedCooldownTime += Time.deltaTime;
+            }
+        }
+        else if (!conditionMet)
+        {
+            if (shieldObject.activeInHierarchy)
+            {
+                shield.SetCooldownApplied(false);
+                shieldObject.SetActive(false);
+            }
+        }
+    }
+
+    public override void CheckCondition()
+    {
+        if (player.playerCombat.Form == Planes.Terrestrial)
+        {
+            conditionMet = true;
+
+            return;
+        }
+
+        conditionMet = false;
+    }
+
 }
 #endregion
 

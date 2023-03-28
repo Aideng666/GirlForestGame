@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class ProjectilePool : MonoBehaviour
 {
-    [SerializeField] GameObject astralOrbPrefab;
-    [SerializeField] GameObject terrestrialOrbPrefab;
+    [SerializeField] GameObject astralMushroomOrbPrefab;
+    [SerializeField] GameObject terrestrialMushroomOrbPrefab;
+    [SerializeField] GameObject astralGolemRock;
+    [SerializeField] GameObject terrestrialGolemRock;
+    [SerializeField] GameObject playerArrow;
 
-    public Queue<GameObject> availableAstralOrbs { get; private set; } = new Queue<GameObject>();
-    public Queue<GameObject> availableTerrestrialOrbs { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableAstralMushroomOrbs { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableTerrestrialMushroomOrbs { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableAstralGolemRocks { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableTerrestrialGolemRocks { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableArrows { get; private set; } = new Queue<GameObject>();
 
-    int numEachOrb = 10;
+    int numEachProjectile = 10;
 
     public static ProjectilePool Instance { get; private set; }
 
@@ -18,9 +24,10 @@ public class ProjectilePool : MonoBehaviour
     {
         Instance = this;
         CreatePools();
+        CreateArrows();
     }
 
-    public GameObject GetProjectileFromPool(Planes plane, Vector3 position)
+    public GameObject GetProjectileFromPool(Planes plane, Vector3 position, EnemyTypes enemyType)
     {
         GameObject instance = null;
 
@@ -28,27 +35,55 @@ public class ProjectilePool : MonoBehaviour
         {
             case Planes.Astral:
 
-                if (availableAstralOrbs.Count == 0)
+                if (enemyType == EnemyTypes.MushroomSpirit)
                 {
-                    CreatePools();
-                }
+                    if (availableAstralMushroomOrbs.Count == 0)
+                    {
+                        CreatePools();
+                    }
 
-                instance = availableAstralOrbs.Dequeue();
-                instance.transform.position = position;
-                instance.SetActive(true);
+                    instance = availableAstralMushroomOrbs.Dequeue();
+                    instance.transform.position = position;
+                    instance.SetActive(true);
+                }
+                else if (enemyType == EnemyTypes.StoneGolem)
+                {
+                    if (availableAstralGolemRocks.Count == 0)
+                    {
+                        CreatePools();
+                    }
+
+                    instance = availableAstralGolemRocks.Dequeue();
+                    instance.transform.position = position;
+                    instance.SetActive(true);
+                }
 
                 break;
 
             case Planes.Terrestrial:
 
-                if (availableTerrestrialOrbs.Count == 0)
+                if (enemyType == EnemyTypes.MushroomSpirit)
                 {
-                    CreatePools();
-                }
+                    if (availableTerrestrialMushroomOrbs.Count == 0)
+                    {
+                        CreatePools();
+                    }
 
-                instance = availableTerrestrialOrbs.Dequeue();
-                instance.transform.position = position;
-                instance.SetActive(true);
+                    instance = availableTerrestrialMushroomOrbs.Dequeue();
+                    instance.transform.position = position;
+                    instance.SetActive(true);
+                }
+                else if (enemyType == EnemyTypes.StoneGolem)
+                {
+                    if (availableTerrestrialGolemRocks.Count == 0)
+                    {
+                        CreatePools();
+                    }
+
+                    instance = availableTerrestrialGolemRocks.Dequeue();
+                    instance.transform.position = position;
+                    instance.SetActive(true);
+                }
 
                 break;
         }
@@ -56,24 +91,70 @@ public class ProjectilePool : MonoBehaviour
         return instance;
     }
 
-    private void CreatePools()
+    public GameObject GetArrowFromPool(Vector3 position)
     {
-        for (int i = 0; i < numEachOrb; ++i)
+        GameObject instance;
+
+        if (availableArrows.Count == 0)
         {
-            GameObject instanceToAdd = Instantiate(astralOrbPrefab);
-            instanceToAdd.transform.SetParent(transform);
-            AddProjectileToPool(Planes.Astral, instanceToAdd);
+            CreateArrows();
         }
 
-        for (int i = 0; i < numEachOrb; ++i)
+        instance = availableArrows.Dequeue();
+        instance.transform.position = position;
+        instance.SetActive(true);
+
+        return instance;
+    }
+
+    void CreateArrows()
+    {
+        for (int i = 0; i < numEachProjectile; ++i)
         {
-            GameObject instanceToAdd = Instantiate(terrestrialOrbPrefab);
+            GameObject instanceToAdd = Instantiate(playerArrow);
             instanceToAdd.transform.SetParent(transform);
-            AddProjectileToPool(Planes.Terrestrial, instanceToAdd);
+            AddArrowToPool(instanceToAdd);
         }
     }
 
-    public void AddProjectileToPool(Planes plane, GameObject instance)
+    private void CreatePools()
+    {
+        for (int i = 0; i < numEachProjectile; ++i)
+        {
+            GameObject instanceToAdd = Instantiate(astralMushroomOrbPrefab);
+            instanceToAdd.transform.SetParent(transform);
+            AddProjectileToPool(Planes.Astral, instanceToAdd, EnemyTypes.MushroomSpirit);
+        }
+
+        for (int i = 0; i < numEachProjectile; ++i)
+        {
+            GameObject instanceToAdd = Instantiate(terrestrialMushroomOrbPrefab);
+            instanceToAdd.transform.SetParent(transform);
+            AddProjectileToPool(Planes.Terrestrial, instanceToAdd, EnemyTypes.MushroomSpirit);
+        }
+
+        for (int i = 0; i < numEachProjectile; ++i)
+        {
+            GameObject instanceToAdd = Instantiate(astralGolemRock);
+            instanceToAdd.transform.SetParent(transform);
+            AddProjectileToPool(Planes.Astral, instanceToAdd, EnemyTypes.StoneGolem);
+        }
+
+        for (int i = 0; i < numEachProjectile; ++i)
+        {
+            GameObject instanceToAdd = Instantiate(terrestrialGolemRock);
+            instanceToAdd.transform.SetParent(transform);
+            AddProjectileToPool(Planes.Terrestrial, instanceToAdd, EnemyTypes.StoneGolem);
+        }
+    }
+
+    public void AddArrowToPool(GameObject instance)
+    {
+        availableArrows.Enqueue(instance);
+        instance.SetActive(false);
+    }
+
+    public void AddProjectileToPool(Planes plane, GameObject instance, EnemyTypes enemyType)
     {
         instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
@@ -81,15 +162,31 @@ public class ProjectilePool : MonoBehaviour
         {
             case Planes.Astral:
 
-                availableAstralOrbs.Enqueue(instance);
-                instance.SetActive(false);
+                if (enemyType == EnemyTypes.MushroomSpirit)
+                {
+                    availableAstralMushroomOrbs.Enqueue(instance);
+                    instance.SetActive(false);
+                }
+                else if (enemyType == EnemyTypes.StoneGolem)
+                {
+                    availableAstralGolemRocks.Enqueue(instance);
+                    instance.SetActive(false);
+                }
 
                 break;
 
             case Planes.Terrestrial:
 
-                availableTerrestrialOrbs.Enqueue(instance);
-                instance.SetActive(false);
+                if (enemyType == EnemyTypes.MushroomSpirit)
+                {
+                    availableTerrestrialMushroomOrbs.Enqueue(instance);
+                    instance.SetActive(false);
+                }
+                else if (enemyType == EnemyTypes.StoneGolem)
+                {
+                    availableTerrestrialGolemRocks.Enqueue(instance);
+                    instance.SetActive(false);
+                }
 
                 break;
         }

@@ -273,7 +273,11 @@ public class NodeMapManager : MonoBehaviour
         {
             Minimap.Instance.ResetMap();
 
-            if (currentLevel == MapGenerator.Instance.GetEndNodeDistance())
+            if (currentLevel == MapGenerator.Instance.GetEndNodeDistance() && currentCycle >= totalMapCycles)
+            {
+                StartCoroutine(WinGame());
+            }
+            else if (currentLevel == MapGenerator.Instance.GetEndNodeDistance())
             {
                 MapGenerator.Instance.Regenerate();
 
@@ -318,6 +322,15 @@ public class NodeMapManager : MonoBehaviour
         mapActive = false;
 
         ToggleNodeMap();
+    }
+
+    IEnumerator WinGame()
+    {
+        print("You Win!");
+
+        yield return new WaitForSeconds(1);
+
+        LoadingScreen.Instance.LoadScene("SplashScreen");
     }
 
     public void SetPreviousNode(MapNode node)

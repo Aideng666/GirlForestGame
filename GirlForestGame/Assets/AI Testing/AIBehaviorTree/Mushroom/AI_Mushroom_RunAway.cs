@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using MEC;
+using UnityEngine.SceneManagement;
 
 public class AI_Mushroom_RunAway : AI_BaseClass
 {
@@ -13,6 +14,7 @@ public class AI_Mushroom_RunAway : AI_BaseClass
 
     [SerializeField] float safeDashDistance = 8;
     [SerializeField] float runAwayDuration = 1;
+    [HideInInspector] public FMOD.Studio.EventInstance Away= FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Away");
 
     //float speedTemp = 0;
     //float clock = 0f;
@@ -26,30 +28,10 @@ public class AI_Mushroom_RunAway : AI_BaseClass
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
 
-        //speedTemp = agent.speed;
-        //agent.speed = 20;
-
-        //Written this way to ignored the y axis
-        //vectorFromPlayer = Vector3.Normalize(Vector3.Scale(animator.transform.position - PlayerController.Instance.transform.position, Vector3.one - Vector3.up));
-        //destination = animator.transform.position + (vectorFromPlayer * distanceMultiplier);
-
-        //RaycastHit hit;
-        //if (Physics.Raycast(animator.transform.position, vectorFromPlayer, out hit, Vector3.Magnitude(destination), ~(1 << 9|1 << 10))) 
-        //{
-        //    //needed if we are moving the agent around without help of the navmesh
-        //    //Set destination to random location in the level
-        //    Debug.Log(hit.collider.gameObject);
-        //    if (hit.collider.CompareTag("Environment"))
-        //    {
-        //        Debug.Log("Wall");
-        //        Vector3 newLocation = Vector3.zero;
-        //        //TODO: NOT MAKE THIS 0, 0
-        //        //agent.SetDestination(Vector3.zero);
-        //        agent.updatePosition = false;
-        //        animator.gameObject.transform.parent.DOMove(newLocation, escapeTime);
-        //    }
-        //}
-        //agent.SetDestination(destination);
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+        {
+            TutorialManager.Instance.TriggerTutorialSection(2, true);
+        }
 
         Vector3 directionVector = animator.transform.position - player.transform.position;
         directionVector.y = 0;
@@ -60,7 +42,6 @@ public class AI_Mushroom_RunAway : AI_BaseClass
 
         agent.updateRotation = true;
         agent.destination = player.transform.position;
-        //agent.speed = 0;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -81,6 +62,8 @@ public class AI_Mushroom_RunAway : AI_BaseClass
             Timing.RunCoroutine(FinishDash(animator));
 
             dashStarted = true;
+            
+            Away.start();
         }
 
         agent.transform.LookAt(player.transform.position);
@@ -98,6 +81,7 @@ public class AI_Mushroom_RunAway : AI_BaseClass
         yield return Timing.WaitForSeconds(runAwayDuration);
 
         animator.SetTrigger("Has_RanAway");
+            
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -13,8 +13,27 @@ public class PlayerArrow : MonoBehaviour
     float arrowChargePercentage;
     float chargedArrowDamage;
     bool movementStarted;
+    [HideInInspector] public FMOD.Studio.EventInstance StickSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance FireSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance WindSFX;
 
+    string windPath = "event:/Player/Bow/Wind", firePath = "event:/Player/Bow/Fire";
     private void Start()
+    {
+        livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
+        spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
+
+        StickSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Notch");
+        FireSFX = FMODUnity.RuntimeManager.CreateInstance(firePath);
+        WindSFX = FMODUnity.RuntimeManager.CreateInstance(windPath);
+
+        player = PlayerController.Instance;
+
+        SetPlane(player.playerCombat.Form);
+        movementStarted = false;
+    }
+
+    private void OnEnable()
     {
         livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
@@ -22,6 +41,7 @@ public class PlayerArrow : MonoBehaviour
         player = PlayerController.Instance;
 
         SetPlane(player.playerCombat.Form);
+        movementStarted = false;
     }
 
     public void SetArrowChargeMultiplier(float percentage)
@@ -60,13 +80,15 @@ public class PlayerArrow : MonoBehaviour
 
                     if (target == null)
                     {
-                        transform.forward = player.aimDirection;
+                        transform.forward = Quaternion.Euler(0, 90, 0) * player.aimDirection;
                         GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
                     }
                     else
                     {
                         transform.LookAt(target.transform);
                         GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+
+                        transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
                     }
 
                     break;
@@ -75,7 +97,7 @@ public class PlayerArrow : MonoBehaviour
 
                     if (target == null)
                     {
-                        transform.forward = player.aimDirection;
+                        transform.forward = Quaternion.Euler(0, 90, 0) * player.aimDirection;
                         transform.rotation = transform.rotation * Quaternion.AngleAxis(-45, Vector3.right);
                         transform.DOJump(player.transform.position + (player.aimDirection * player.playerAttributes.SwordRange * 1.5f), 5, 1, 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
                         transform.DORotateQuaternion(transform.rotation * Quaternion.AngleAxis(135, Vector3.right), 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
@@ -83,6 +105,7 @@ public class PlayerArrow : MonoBehaviour
                     else
                     {
                         transform.LookAt(target.transform);
+                        transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
                         transform.rotation = transform.rotation * Quaternion.AngleAxis(-45, Vector3.right);
                         transform.DOJump(new Vector3(target.transform.position.x, 0, target.transform.position.z), 5, 1, 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
                         transform.DORotateQuaternion(transform.rotation * Quaternion.AngleAxis(135, Vector3.right), 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
@@ -94,13 +117,15 @@ public class PlayerArrow : MonoBehaviour
 
                     if (target == null)
                     {
-                        transform.forward = player.aimDirection;
+                        transform.forward = Quaternion.Euler(0, 90, 0) * player.aimDirection;
                         GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
                     }
                     else
                     {
                         transform.LookAt(target.transform);
                         GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+
+                        transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
                     }
 
                     break;
@@ -112,8 +137,6 @@ public class PlayerArrow : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-        transform.parent = collision.gameObject.transform;
 
         //Checks if it hits an enemy first
         if (collision.gameObject.TryGetComponent(out EnemyData enemy) && enemy.Form == PlayerController.Instance.playerCombat.Form)
@@ -153,7 +176,6 @@ public class PlayerArrow : MonoBehaviour
                 enemy.TakeDamage(player.playerAttributes.BowDamage + chargedArrowDamage);
             }
 
-            Destroy(gameObject);
 
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
             {
@@ -165,14 +187,12 @@ public class PlayerArrow : MonoBehaviour
         if (_element == Elements.Fire)
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.FireArrow, new Vector3(transform.position.x, 0, transform.position.z), arrowChargePercentage);
-
-            Destroy(gameObject);
         }
         else if (_element == Elements.Wind)
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.WindArrow, new Vector3(transform.position.x, 1, transform.position.z), arrowChargePercentage);
-
-            Destroy(gameObject);
         }
+
+        ProjectilePool.Instance.AddArrowToPool(gameObject);
     }
 }
