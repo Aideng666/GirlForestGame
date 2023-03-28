@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Hawk
   m_EditorClassIdentifier: 
   spiritName: Hawk
-  buffedAttributes: 0100000007000000
+  spiritAttributeSprite: {fileID: 21300000, guid: 4e9108db29aa43e468755864a30140d2, type: 3}
+  spiritElementSprite: {fileID: 21300000, guid: 9221f6b8961a8ee468b28e261a8483ab, type: 3}
+  buffedAttributes: 0200000003000000
   usedElement: 1

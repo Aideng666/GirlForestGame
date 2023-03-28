@@ -13,11 +13,19 @@ public class PlayerArrow : MonoBehaviour
     float arrowChargePercentage;
     float chargedArrowDamage;
     bool movementStarted;
+    [HideInInspector] public FMOD.Studio.EventInstance StickSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance FireSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance WindSFX;
 
+    string windPath = "event:/Player/Bow/Wind", firePath = "event:/Player/Bow/Fire";
     private void Start()
     {
         livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
+
+        StickSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Notch");
+        FireSFX = FMODUnity.RuntimeManager.CreateInstance(firePath);
+        WindSFX = FMODUnity.RuntimeManager.CreateInstance(windPath);
 
         player = PlayerController.Instance;
 
@@ -97,6 +105,7 @@ public class PlayerArrow : MonoBehaviour
                     else
                     {
                         transform.LookAt(target.transform);
+                        transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
                         transform.rotation = transform.rotation * Quaternion.AngleAxis(-45, Vector3.right);
                         transform.DOJump(new Vector3(target.transform.position.x, 0, target.transform.position.z), 5, 1, 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
                         transform.DORotateQuaternion(transform.rotation * Quaternion.AngleAxis(135, Vector3.right), 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
@@ -115,6 +124,8 @@ public class PlayerArrow : MonoBehaviour
                     {
                         transform.LookAt(target.transform);
                         GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+
+                        transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
                     }
 
                     break;

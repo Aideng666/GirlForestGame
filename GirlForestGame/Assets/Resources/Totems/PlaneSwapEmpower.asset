@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: PlaneSwapEmpowermentTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 1
-        totemName: Plane Swap Empowerment
+        totemSprite: {fileID: 21300000, guid: bdcc051c7bf840d4b9d9c7702c02a651, type: 3}
+        totemName: 'Plane Swap '
+        totemDescription: Empower you weapons when switching planes
         initialBuffAmount: 0.25
         stackDampenAmount: 0.5

@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: SpeedUpTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 0
-        totemName: SpeedUp
+        totemSprite: {fileID: 21300000, guid: c423eb9c88773af4d88f84a324210ffa, type: 3}
+        totemName: Speed Up
+        totemDescription: Increased Movement Speed
         initialBuffAmount: 1
         stackDampenAmount: 1

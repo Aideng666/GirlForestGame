@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{e5bd391f-800a-4a7b-9034-57032ab63b1c}">
+		<property name="name">
+			<value>Astral</value>
+		</property>
+		<relationship name="folder">
+			<destination>{3ba1ec8e-8c9d-4dac-a5e3-60ddbb14a771}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{51fb0148-d946-4c18-9d70-90ea00891742}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{51fb0148-d946-4c18-9d70-90ea00891742}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

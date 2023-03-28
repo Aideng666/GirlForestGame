@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: ProjSpdUpTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 0
-        totemName: ProjectileSpeedUp
+        totemSprite: {fileID: 21300000, guid: 3c5f39734b64b48499864c7039f5a86b, type: 3}
+        totemName: Projectile Speed Up
+        totemDescription: Increased Projectile Speed
         initialBuffAmount: 1
         stackDampenAmount: 1

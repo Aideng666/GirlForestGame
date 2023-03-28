@@ -3092,7 +3092,8 @@ GameObject:
   - component: {fileID: 2345695844193929904}
   - component: {fileID: 1821254030439938998}
   - component: {fileID: 2453708176110309224}
-  - component: {fileID: 8518085256554570358}
+  - component: {fileID: -7848772138441137745}
+  - component: {fileID: -5953815767974619553}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -3250,7 +3251,7 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.66, z: 0}
---- !u!114 &8518085256554570358
+--- !u!114 &-7848772138441137745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3262,15 +3263,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a359cc027ae82d14b834dcdd3c3159de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputFootsteps:
-    Guid:
-      Data1: -355910866
-      Data2: 1258688607
-      Data3: -1489726569
-      Data4: -117818190
-    Path: event:/Player/Footsteps
   pControl: {fileID: 5982676203613863553}
-  paceSpeed: 0
+  paceSpeed: 1
+--- !u!114 &-5953815767974619553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5982676203613863563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 5982676203613863563}
 --- !u!1 &6570217027516757620
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{8e1c7572-d0d5-41d8-9c43-5e67308c5186}">
 		<property name="assetPath">
-			<value>Sword/FSwing1.mp3</value>
+			<value>Player/Sword/FSwing1.mp3</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
