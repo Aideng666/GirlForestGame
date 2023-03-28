@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: VampireBiteTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 1
-        totemName: VampireBite
+        totemSprite: {fileID: 21300000, guid: 9e1003d8b7dd19645a1df4744251f031, type: 3}
+        totemName: Vampire Bite
+        totemDescription: Chance to heal half a heart upon enemy kill
         initialBuffAmount: 0.03
         stackDampenAmount: 1

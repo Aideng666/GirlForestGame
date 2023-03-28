@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: LuckUpTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 0
+        totemSprite: {fileID: 21300000, guid: a1b7d89fc3fc6fd4ca4cb450992acc5a, type: 3}
         totemName: Rabbit's Foot
+        totemDescription: Increased chance to drop more money from enemies
         initialBuffAmount: 0.01
         stackDampenAmount: 1
