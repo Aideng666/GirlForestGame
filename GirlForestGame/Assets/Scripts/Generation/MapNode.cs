@@ -31,6 +31,13 @@ public class MapNode : MonoBehaviour
     private void Start()
     {
         defaultSize = transform.localScale;
+
+        if (transform.localScale == Vector3.zero)
+        {
+            transform.localScale = new Vector3(2, 2, 2);
+
+            defaultSize = transform.localScale;
+        }
     }
 
     private void Update()

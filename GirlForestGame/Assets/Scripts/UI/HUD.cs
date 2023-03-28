@@ -203,7 +203,7 @@ public class HUD : MonoBehaviour
         this.totemName.text = totemName;
         totemDescription.text = totemDesc;
 
-        sequence.Append(totemPanel.transform.DOScale(1f, 0.8f)).AppendInterval(2f).Append(totemPanel.transform.DOScale(0f, 0.8f));    
+        sequence.Append(totemPanel.transform.DOScale(1f, 0.8f)).AppendInterval(2f).Append(totemPanel.transform.DOScale(0f, 0.8f)); 
     }
 
     void ToggleAttributePanel()

@@ -6,12 +6,16 @@ using DG.Tweening;
 public class MarkingPickup : InteractableObject
 {
     [SerializeField] float colliderDelay = 1;
+    [SerializeField] GameObject foxMarkingPrefab;
+    [SerializeField] GameObject hawkMarkingPrefab;
     [SerializeField] bool isMarkingPair; // If it is a pair, only one out of the two markings can be picked up in a room, if not, they will not dissapear after taking one marking in a room
 
     Spirit chosenSpirit = null;
     MarkingTypes chosenType = MarkingTypes.None;
     int markingLevel;
     float timeElasped;
+
+    GameObject spawnedModel = null;
 
     protected override void Start()
     {
@@ -44,6 +48,11 @@ public class MarkingPickup : InteractableObject
         if (timeElasped >= colliderDelay)
         {
             GetComponent<Collider>().enabled = true;
+        }
+
+        if (spawnedModel != null)
+        {
+            spawnedModel.transform.Rotate(Vector3.up, 0.5f);
         }
     }
 
@@ -83,6 +92,27 @@ public class MarkingPickup : InteractableObject
         }
 
         chosenSpirit.SetLevel(markingLevel);
+
+        if (chosenSpirit.spiritName == "Fox")
+        {
+            spawnedModel = Instantiate(foxMarkingPrefab, transform.position + (Vector3.down * 0.5f), Quaternion.identity, transform);
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.SetLoops(99999999);
+
+            sequence.Append(spawnedModel.transform.DOMoveY(2, 2).SetEase(Ease.InOutSine)).Append(spawnedModel.transform.DOMoveY(0.5f, 2).SetEase(Ease.InOutSine));
+        }
+        else if (chosenSpirit.spiritName == "Hawk")
+        {
+            spawnedModel = Instantiate(hawkMarkingPrefab, transform.position + (Vector3.down * 0.5f), Quaternion.identity, transform);
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.SetLoops(99999999);
+
+            sequence.Append(spawnedModel.transform.DOMoveY(2, 2).SetEase(Ease.InOutSine)).Append(spawnedModel.transform.DOMoveY(0.5f, 2).SetEase(Ease.InOutSine));
+        }
     }
 
     public override void Pickup()
