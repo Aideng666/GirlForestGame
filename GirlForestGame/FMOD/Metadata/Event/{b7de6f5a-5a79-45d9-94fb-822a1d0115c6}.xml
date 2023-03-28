@@ -59,7 +59,7 @@
 			<destination>{7224703b-9043-4992-b864-c3490f782816}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{023cf5a1-ce11-4ba0-9eef-49e9c508bed7}</destination>
+			<destination>{8272f04b-5747-4938-9186-1964a54c0dfd}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{7fda48f6-5e7d-413c-8a31-24a641422ec8}" />
@@ -88,7 +88,7 @@
 			<destination>{61289dd3-ae81-49d2-aba2-5883095d8fc9}</destination>
 		</relationship>
 		<relationship name="modules">
-			<destination>{f39e715b-5854-4692-99b5-313ed5fbb657}</destination>
+			<destination>{a06c52d7-7adc-4971-9cd5-9524e548be6d}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{5945c90f-1b83-4d2e-bf7f-d94c612e797f}</destination>
@@ -98,7 +98,7 @@
 		<relationship name="modules">
 			<destination>{faac0f22-0efa-4f5c-b50f-c4b6a9d08d6a}</destination>
 			<destination>{e35df313-c840-4790-9387-e697c235936f}</destination>
-			<destination>{f39e715b-5854-4692-99b5-313ed5fbb657}</destination>
+			<destination>{a06c52d7-7adc-4971-9cd5-9524e548be6d}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{4ce4aea0-7d88-42e6-a680-211c9e0d9b8c}</destination>
@@ -206,7 +206,7 @@
 			<destination>{6b4e6199-5a48-4be0-b408-52cb11ec77f9}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{f39e715b-5854-4692-99b5-313ed5fbb657}">
+	<object class="SingleSound" id="{a06c52d7-7adc-4971-9cd5-9524e548be6d}">
 		<property name="isAsync">
 			<value>true</value>
 		</property>
@@ -220,7 +220,7 @@
 			<value>true</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{91f3d9d2-d5d1-4e45-b794-13afe6d4595a}</destination>
+			<destination>{bf3f4a66-eacf-4b9f-a25a-3a942d8210fe}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{5945c90f-1b83-4d2e-bf7f-d94c612e797f}">
@@ -349,7 +349,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>-2</value>
+			<value>-5</value>
 		</property>
 	</object>
 </objects>

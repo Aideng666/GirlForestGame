@@ -55,6 +55,11 @@ public class PlayerInventory : MonoBehaviour
         {
             player.playerInventory.GetTotemFromList(typeof(FearfulAuraTotem)).Totem.ApplyEffect();
         }
+
+        if (player.playerInventory.totemDictionary[typeof(TerrestrialShieldTotem)] > 0)
+        {
+            player.playerInventory.GetTotemFromList(typeof(TerrestrialShieldTotem)).Totem.ApplyEffect();
+        }
     }
 
     public void EquipMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
@@ -149,6 +154,15 @@ public class PlayerInventory : MonoBehaviour
             {
                 print($"Putting the level {spirit.markingLevel} {spirit.spiritName} {type.ToString()} on your Sword");
 
+                if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Attribute)
+                {
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 0);
+                }
+                else if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Element)
+                {
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 1);
+                }
+
                 EquipMarking(spirit, type, Weapons.Sword);
 
                 weaponSelected = true;
@@ -156,6 +170,15 @@ public class PlayerInventory : MonoBehaviour
             if (InputManager.Instance.SelectBow())
             {
                 print($"Putting the {spirit.spiritName} {type.ToString()} on your Bow");
+
+                if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Attribute)
+                {
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 2);
+                }
+                else if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Element)
+                {
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 3);
+                }
 
                 EquipMarking(spirit, type, Weapons.Bow);
 

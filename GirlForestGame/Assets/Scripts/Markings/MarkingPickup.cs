@@ -6,6 +6,7 @@ using DG.Tweening;
 public class MarkingPickup : InteractableObject
 {
     [SerializeField] float colliderDelay = 1;
+    [SerializeField] bool isMarkingPair; // If it is a pair, only one out of the two markings can be picked up in a room, if not, they will not dissapear after taking one marking in a room
 
     Spirit chosenSpirit = null;
     MarkingTypes chosenType = MarkingTypes.None;
@@ -90,7 +91,17 @@ public class MarkingPickup : InteractableObject
         {
             PlayerController.Instance.playerInventory.StartWeaponSelection(chosenSpirit, chosenType);
 
-            gameObject.SetActive(false);
+            if (isMarkingPair)
+            {
+                foreach (MarkingPickup marking in transform.parent.GetComponentsInChildren<MarkingPickup>())
+                {
+                    marking.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 
@@ -99,15 +110,5 @@ public class MarkingPickup : InteractableObject
         popupText.enabled = true;
 
         popupText.text = $"{chosenSpirit.spiritName} {chosenType} - Lvl {markingLevel}";
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.playerInventory.IsChoosingWeapon)
-        //{
-        //    PlayerController.Instance.playerInventory.StartWeaponSelection(chosenSpirit, chosenType);
-
-        //    gameObject.SetActive(false);
-        //}
     }
 }

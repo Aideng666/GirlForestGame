@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{f041c5c0-f1b6-4625-aba0-022fdd4797d7}">
 		<property name="assetPath">
-			<value>Bow/holdString.mp3</value>
+			<value>Player/Bow/holdString.mp3</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

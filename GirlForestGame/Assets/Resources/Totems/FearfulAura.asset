@@ -21,7 +21,9 @@ MonoBehaviour:
       type: {class: FearfulAuraTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 2
-        totemName: Fearful aura
+        totemSprite: {fileID: 21300000, guid: 29ff619d2f7e6f94195e26f745180d8e, type: 3}
+        totemName: Fearful Aura
+        totemDescription: Gain a pulsing aura that fears nearby enemies
         initialBuffAmount: 0.5
         stackDampenAmount: 1
         conditionMet: 0

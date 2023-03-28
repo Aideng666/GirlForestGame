@@ -13258,6 +13258,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5512418781491973166, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
+      propertyPath: isMarkingPair
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5512418781491973167, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
       propertyPath: m_Name
       value: Marking 1
@@ -13319,6 +13323,10 @@ PrefabInstance:
     - target: {fileID: 5512418781491973154, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512418781491973166, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
+      propertyPath: isMarkingPair
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5512418781491973167, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
       propertyPath: m_Name

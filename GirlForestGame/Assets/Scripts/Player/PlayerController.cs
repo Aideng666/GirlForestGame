@@ -20,11 +20,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerInventory playerInventory;
     [HideInInspector] public PlayerCombat playerCombat;
 
-    //EventManager eventManager;
-    //List<Totem> totems = new List<Totem>();
-    
-
-
+    [HideInInspector] FMOD.Studio.EventInstance FootstepSFX;
     bool deathStarted;
     bool roomTransitionStarted;
 
@@ -33,14 +29,14 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        FootstepSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Footsteps");
+
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody>();
-
-        //eventManager = EventManager.Instance;
 
         playerAttributes = GetComponent<PlayerAttributes>();
         playerMarkings = GetComponent<PlayerMarkings>();
@@ -53,35 +49,20 @@ public class PlayerController : MonoBehaviour
     {
         //Checks for player death
         if (playerAttributes.Health <= 0)
-
         {
-
             if (playerInventory.totemDictionary[typeof(ExtraLifeTotem)] < 1)
-
             {
-
                 if (!deathStarted)
-
                 {
-
-                    Die();
-
+                    StartCoroutine(Die());
                 }
-
             }
-
             else
-
             {
-
                 /*EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlayerDeath);*/
-
                 playerInventory.GetTotemFromList(typeof(ExtraLifeTotem)).Totem.ApplyEffect();
-
                 playerInventory.RemoveTotem(typeof(ExtraLifeTotem));
-
             }
-
         }
 
         if (!playerCombat.isKnockbackApplied)
@@ -166,7 +147,9 @@ public class PlayerController : MonoBehaviour
 
             transform.forward = moveDir.normalized;
 
+
         }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         body.velocity = playerAttributes.Speed * moveDir;
@@ -189,11 +172,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Die()
+    IEnumerator Die()
     {
-        print("Died");
-
         deathStarted = true;
+
+        yield return new WaitForSeconds(1);
+
+        LoadingScreen.Instance.LoadScene("SplashScreen");
     }
 
     public bool MouseControlActive()
@@ -228,11 +213,19 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
-            //Change To Enemy Projectile if we dont want the player to take damage when touching an enemy
             case "Enemy":
 
                 playerCombat.TakeDamage();
-                playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
+                playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
+                break;
+
+            case "EnemyProjectile":
+
+                if (collision.gameObject.GetComponentInParent<EnemyData>() == null || collision.gameObject.GetComponentInParent<EnemyData>().IsAttacking)
+                {
+                    playerCombat.TakeDamage();
+                    playerCombat.ApplyKnockback((transform.position - collision.gameObject.gameObject.transform.position), 2);
+                }
 
                 break;
         }
@@ -273,6 +266,16 @@ public class PlayerController : MonoBehaviour
                 }
 
                 break;
+
+            //case "EnemyProjectile":
+
+            //    if (other.GetComponentInParent<EnemyData>() == null || other.GetComponentInParent<EnemyData>().IsAttacking)
+            //    {
+            //        playerCombat.TakeDamage();
+            //        playerCombat.ApplyKnockback((transform.position - other.gameObject.transform.position), 2);
+            //    }
+
+            //    break;
         }
     }
 

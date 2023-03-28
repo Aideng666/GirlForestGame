@@ -37,14 +37,22 @@ public class TutorialManager : MonoBehaviour
             {
                 case 0:
 
+                    TutorialIcons.Instance.SwapIcons(ButtonIcons.LStick);
                     TriggerTutorialSection(1);
-                    //DialogueManager.Instance.QueueNextSentence();
+
+                    break;
+
+                case 1:
+
+                    TutorialIcons.Instance.DisableIcon();
 
                     break;
 
                 case 2:
 
                     TriggerTutorialSection(3);
+                    TutorialIcons.Instance.EnableIcon();
+                    TutorialIcons.Instance.SwapIcons(ButtonIcons.Y);
 
                     break;
 
@@ -53,6 +61,7 @@ public class TutorialManager : MonoBehaviour
                     if (player.playerCombat.Form == Planes.Astral)
                     {
                         TriggerTutorialSection(4);
+                        TutorialIcons.Instance.DisableIcon();
                     }
 
                     break;
@@ -60,12 +69,21 @@ public class TutorialManager : MonoBehaviour
                 case 4:
 
                     TriggerTutorialSection(5);
+                    TutorialIcons.Instance.EnableIcon();
+                    TutorialIcons.Instance.SwapIcons(ButtonIcons.LB);
+
+                    break;
+
+                case 6:
+
+                    TutorialIcons.Instance.SwapIcons(ButtonIcons.RB);
 
                     break;
 
                 case 7:
 
                     TriggerTutorialSection(8);
+                    TutorialIcons.Instance.DisableIcon();
 
                     break;
 
@@ -93,9 +111,28 @@ public class TutorialManager : MonoBehaviour
 
                     break;
 
+                case 17:
+
+                    TutorialIcons.Instance.EnableIcon();
+                    TutorialIcons.Instance.SwapIcons(ButtonIcons.A);
+
+                    break;
+
+                case 18:
+
+                    TutorialIcons.Instance.DisableIcon();
+
+                    break;
+
                 case 19:
 
                     TriggerTutorialSection(20);
+
+                    break;
+
+                case 20:
+
+                    TutorialIcons.Instance.EnableIcon();
 
                     break;
 
@@ -104,6 +141,7 @@ public class TutorialManager : MonoBehaviour
                     if (rooms[4].GetComponent<TutorialRoom>().GetRoomComplete())
                     {
                         TriggerTutorialSection(22);
+                        TutorialIcons.Instance.DisableIcon();
                     }
 
                     break;

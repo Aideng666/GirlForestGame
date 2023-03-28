@@ -1,0 +1,2103 @@
+fileFormatVersion: 2
+guid: 0210b3cdfad9731448ec7b83283b135f
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Button Icons_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 229
+        width: 37
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0436927096afce41b24c1670969bd6a
+      internalID: 2139006676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_1
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 229
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85a36b30930ac04488a6b3474c4707e2
+      internalID: 147104709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_2
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 221
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9791fd12095a67429ba70451faede27
+      internalID: 597023602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_3
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 228
+        width: 43
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e5afea119926a049ac26cb3a85c39ee
+      internalID: -1747819388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_4
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 228
+        width: 44
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7920f60ce3970747ae4c61fdf0a3e3f
+      internalID: -1522214490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_5
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 222
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9efcaa4bb5b7b9c4b8f8817c26b9abcb
+      internalID: -1400210693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_6
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 228
+        width: 50
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a45380c82cbf184a9a76bf057a382b1
+      internalID: 251983376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_7
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 225
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb1ab14cda681a744a75824ae19b8c24
+      internalID: -1171498133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_8
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 222
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40f2fafb1be16f249825e7729caee94d
+      internalID: -1518850079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_9
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 223
+        width: 39
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daf3db6013de7234b85cead5166a0ce0
+      internalID: 112572054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_10
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 222
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fa73e0ff26a9cf4e8dd9728e1c8e8c0
+      internalID: 786360202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_11
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 225
+        width: 50
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc19f4940e7ca8c4d89f80ffe0b997d2
+      internalID: 46484632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_12
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 222
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 387d8e48f3a95744d9e3cc6b271e8a32
+      internalID: 87765907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_13
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 222
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9de3eb77de0659347868da6c0c5ce7c0
+      internalID: 888693699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_14
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 222
+        width: 47
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32a40cfceb83f1a40949fa1f8ffa1f45
+      internalID: -358983351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_15
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 223
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3109e32d08e1b5f42aefd11358b5ec3d
+      internalID: 899503504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_16
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 174
+        width: 37
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f8cc590ce52e9f49bf6cdfc51d36500
+      internalID: 21791870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_17
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 174
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff89b96a97f155b48b43ef2d43beb95a
+      internalID: -1749223482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_18
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 166
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2388fd621c3b9354b89579f2e3144ee1
+      internalID: -1553248310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_19
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 173
+        width: 43
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd19f8e980849824c84441250303cd32
+      internalID: 777012807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_20
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 173
+        width: 44
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4b493eddd539d4f8c5d140b49e8b8e
+      internalID: -1818300275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_21
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 166
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 184c72e841fdc2044a52b713a31f50c6
+      internalID: 261328727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_22
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 172
+        width: 50
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d14bc5148ab879941a0a22e79e079d9d
+      internalID: 1514969573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_23
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 170
+        width: 45
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cde00a58c4488ef42b98533aea166396
+      internalID: 1681564804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_24
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 170
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e5e386811b34c245b30873b4bf23590
+      internalID: 387838404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_25
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 170
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb097277bbf349243abd8659a85a014a
+      internalID: 1505928417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_26
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 170
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dba4f66613d35ec4b95d89b128455ec9
+      internalID: -1842777995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_27
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 170
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef6c201b25077d346bb789704fb7a81e
+      internalID: -1301410658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_28
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 170
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b368551726c2c74fa909f8e9a2dcc0c
+      internalID: 167086853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_29
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 170
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e99c9dade8dfb04baff42c5e3c75ce9
+      internalID: 777637756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_30
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 170
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 596509ffd9a57c34fa12158ccc7fec88
+      internalID: 27527515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_31
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 173
+        width: 44
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e880130155dc52a4caaa46b0386750dd
+      internalID: -818946004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_32
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 178
+        width: 43
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d91ecdcb27c1a9419cf4f3f4ae49182
+      internalID: 450271485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_33
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 178
+        width: 42
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58df0af027d4b9b4fafb9d63f529be29
+      internalID: -1328922361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_34
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 121
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 601d12ff9e6f0cf449c36e9c4eae8592
+      internalID: 212101319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_35
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 121
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 188309fd39c3ac047ba85089d72fd7a2
+      internalID: 1408299776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_36
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 121
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c355b4acdb8e1144e896e7571491a4c5
+      internalID: -1956072298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_37
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 121
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fef621d29e61189478320631a5ec9fd6
+      internalID: -747891877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_38
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 121
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa0fba4f543d745418761fbd687d310a
+      internalID: 465522420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_39
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 122
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1a72fc003c3d054c9d56acb111229c8
+      internalID: 240294532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_40
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 122
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6197b7a465991a048b34c4c9b0018195
+      internalID: 42469083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_41
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 119
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6e1c6d8ce58aa94ba0458643ca51aa6
+      internalID: 1514691324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_42
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 119
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21be40bf247c42f4baee4805e7a97738
+      internalID: -333134023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_43
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 119
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09936c64748dc2848901d599bdda230a
+      internalID: 581881804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_44
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 119
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf7a0c1c38e82d7438d3457fbbc8c14f
+      internalID: -1017305096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_45
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 119
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e5d1b775ba76c84ea40075deb6924e5
+      internalID: 227917920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_46
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 119
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30fd04dd95f76e24eb2bd8f84c17c084
+      internalID: -1746059588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_47
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 119
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bf2654d76c91ac43866c32305361b1b
+      internalID: 1449709470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_48
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 119
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 763ca3eb29ef2804590fff161b09ae18
+      internalID: 1048505265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_49
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 117
+        width: 50
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4aba1cd118c96c46b9ffd12489b31fa
+      internalID: 1464306228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_50
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 127
+        width: 50
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af3daf24d6d0f084794c09953e1a71fb
+      internalID: -277452649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_51
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 127
+        width: 50
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c3662a26ea814043b9350ef990aca3b
+      internalID: -1180082181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_52
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 62
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffb4aeaf1bab1f143929305c62e49e11
+      internalID: -348571373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_53
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 62
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb6bc47c949fe224c8f94992b17f48ec
+      internalID: 1404689400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_54
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 62
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ce5ada1ae0165447b619d19f10985cd
+      internalID: 930338457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_55
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 62
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3be78f7677446a0428d47bf2a35b23e2
+      internalID: 1083306048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_56
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 62
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 165e5de6761ff474cb71e0debf06054e
+      internalID: 1659306717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_57
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 62
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec7cb473df8a55d4aab5b3643a64ec9c
+      internalID: 1706732994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_58
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 62
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f0a7ce39255db547bf7ce14fa0edf61
+      internalID: 1314547181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_59
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 60
+        width: 48
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5d4789551ebb804da5e3df84b7f8918
+      internalID: 2145551703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_60
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 61
+        width: 48
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0806eedbda956fb44a166f35b1e5e0f2
+      internalID: -657100782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_61
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 63
+        width: 40
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c34fcd4b413fccf429c85353c09edc01
+      internalID: 1606723502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_62
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 63
+        width: 40
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cd988088a6791a48b4bc04688ad4fd0
+      internalID: 1562710864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_63
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 63
+        width: 40
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d87574c0fbf4e54a91751efe75a2999
+      internalID: 1880294232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_64
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 63
+        width: 40
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26ffa55d95d52d74eb7cfb7d3c57398f
+      internalID: 340602470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_65
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 70
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59c3b4d95ed66d8419b6d620a16f11c5
+      internalID: -1182851861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_66
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 72
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d6983e8cbc8d0649bad74c325aa05f4
+      internalID: 775657342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_67
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 69
+        width: 45
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38c0b64a66b8d714894654a1d9c57746
+      internalID: 1856891724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_68
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 69
+        width: 39
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26f50f57ab52c984387a6be0833c97b2
+      internalID: 1201649759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_69
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 67
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fce6e34c6d9b03a4da773f59f757e6a2
+      internalID: -1900755789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_70
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 67
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d68101fa670e36c45b5f2096e35bd62f
+      internalID: 2085975472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DPad
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 11
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c166023464bf3444af6164246a68286
+      internalID: -384518828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DPad_Up
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 11
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90bbb02288c8cf34f955d4db34d67216
+      internalID: 1969167821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DPad_Down
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 11
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bdbcfce0901b7844962708c7eb7760a
+      internalID: -1755946391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DPad_Left
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 11
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f3920db64341d549a113e229a4ce587
+      internalID: 2129091476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DPad_Right
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 11
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b506a93098125614daff1d95bfd1e1bc
+      internalID: 2067190764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_76
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 11
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a341e6b0faed76f46a2eedd5d665a080
+      internalID: 1186566654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button Icons_77
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 11
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01ee0ebd17d95d04a9b8704d08b23483
+      internalID: 433070027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Left Stick
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 9
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a21ae4ac38634f4793da3b63c4fdb38
+      internalID: 1060513620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Right Stick
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 9
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0bc2c806fae94749b45d09ac7d8ba17
+      internalID: -751596400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: A Button
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 12
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa652cf2fe379dc478bc107f394b5dff
+      internalID: -365657211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: B Button
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 11
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 220524104c1d8634f94b4681fc99b3d2
+      internalID: -2117010454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Y Button
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 12
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac374c29a9d28b34c85ad785418e7733
+      internalID: -1277794832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: X Button
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 12
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1a5bce2c9488aa4384196e80786f954
+      internalID: 1333347437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Select
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 21
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4674d21879f3e44e8a48f663522ff80
+      internalID: 285878318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Start
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 21
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe41f0b11e1848442bf78e4449f22a51
+      internalID: -1511837092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Left Bumper
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 18
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd638fc53ff552b4e881af59f3722362
+      internalID: -1764393466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Right Bumper
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 18
+        width: 34
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9fefa8d67672474aad81b06ffb0b8d2
+      internalID: -1407080935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Left Trigger
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 11
+        width: 35
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcef9bb45c6ba5c40a161a577e5a3189
+      internalID: 1221210123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Right Trigger
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 11
+        width: 34
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f44e931f2281fb4dad65be8e10feebc
+      internalID: 1552577072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 31e3de40b323075498615415d23fba8d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Button Icons_29: 777637756
+      Button Icons_13: 888693699
+      A Button: -365657211
+      Button Icons_35: 1408299776
+      Button Icons_59: 2145551703
+      Button Icons_61: 1606723502
+      Button Icons_66: 775657342
+      Button Icons_27: -1301410658
+      Right Trigger: 1552577072
+      Button Icons_21: 261328727
+      Button Icons_60: -657100782
+      Button Icons_47: 1449709470
+      Button Icons_50: -277452649
+      Button Icons_44: -1017305096
+      Button Icons_8: -1518850079
+      Right Bumper: -1407080935
+      Button Icons_12: 87765907
+      Button Icons_34: 212101319
+      Button Icons_68: 1201649759
+      Button Icons_37: -747891877
+      Button Icons_4: -1522214490
+      Button Icons_9: 112572054
+      Button Icons_10: 786360202
+      Button Icons_76: 1186566654
+      Button Icons_67: 1856891724
+      Button Icons_58: 1314547181
+      Button Icons_30: 27527515
+      Button Icons_40: 42469083
+      Button Icons_6: 251983376
+      Button Icons_15: 899503504
+      Button Icons_49: 1464306228
+      Button Icons_55: 1083306048
+      Button Icons_56: 1659306717
+      DPad_Up: 1969167821
+      Button Icons_0: 2139006676
+      Button Icons_77: 433070027
+      Button Icons_33: -1328922361
+      Right Stick: -751596400
+      Button Icons_63: 1880294232
+      Button Icons_19: 777012807
+      B Button: -2117010454
+      Button Icons_54: 930338457
+      Button Icons_48: 1048505265
+      Button Icons_41: 1514691324
+      Button Icons_22: 1514969573
+      Select: 285878318
+      Button Icons_52: -348571373
+      Button Icons_38: 465522420
+      Button Icons_24: 387838404
+      Button Icons_1: 147104709
+      Button Icons_14: -358983351
+      Button Icons_65: -1182851861
+      Button Icons_31: -818946004
+      Button Icons_26: -1842777995
+      Button Icons_42: -333134023
+      DPad: -384518828
+      Button Icons_3: -1747819388
+      Button Icons_11: 46484632
+      Button Icons_64: 340602470
+      Button Icons_16: 21791870
+      Button Icons_20: -1818300275
+      Left Bumper: -1764393466
+      DPad_Down: -1755946391
+      Button Icons_2: 597023602
+      Button Icons_7: -1171498133
+      Button Icons_69: -1900755789
+      Button Icons_32: 450271485
+      Button Icons_70: 2085975472
+      Start: -1511837092
+      Button Icons_53: 1404689400
+      Button Icons_28: 167086853
+      Left Stick: 1060513620
+      DPad_Right: 2067190764
+      Left Trigger: 1221210123
+      DPad_Left: 2129091476
+      Button Icons_57: 1706732994
+      Button Icons_62: 1562710864
+      Button Icons_25: 1505928417
+      Y Button: -1277794832
+      Button Icons_17: -1749223482
+      Button Icons_18: -1553248310
+      Button Icons_45: 227917920
+      Button Icons_39: 240294532
+      Button Icons_36: -1956072298
+      Button Icons_5: -1400210693
+      Button Icons_23: 1681564804
+      Button Icons_43: 581881804
+      X Button: 1333347437
+      Button Icons_51: -1180082181
+      Button Icons_46: -1746059588
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

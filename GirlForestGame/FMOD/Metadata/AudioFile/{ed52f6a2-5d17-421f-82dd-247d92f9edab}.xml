@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{ed52f6a2-5d17-421f-82dd-247d92f9edab}">
+		<property name="assetPath">
+			<value>Player/Bow/Wind Blast.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.62693877551020405</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7c7ccdde-64fb-4897-bf7f-53f888c51482}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -19,6 +19,7 @@ public class HUD : MonoBehaviour
 
     [Header("Attribute Panel")]
     [SerializeField] GameObject attributePanel;
+    [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI speedText;
     [SerializeField] TextMeshProUGUI swdDmgText;
     [SerializeField] TextMeshProUGUI bowDmgText;
@@ -33,13 +34,32 @@ public class HUD : MonoBehaviour
 
     [Header("Markings Panel")]
     [SerializeField] GameObject markingsPanel;
-    [SerializeField] Image[] images = new Image[4]; // 0 = SwordAttribute | 1 = SwordElement | 2 = BowAttribute | 3 = BowElement
+    [SerializeField] Image[] markingImages = new Image[4]; // 0 = Sword Attribute | 1 = Bow Attribute | 2 = Sword Element | 3 = Bow Element
     bool markingsPanelActive = true;
+
+    [Header("Totems Panel")]
+    [SerializeField] GameObject totemPanel;
+    [SerializeField] Image totemImage;
+    [SerializeField] TextMeshProUGUI totemName;
+    [SerializeField] TextMeshProUGUI totemDescription;
+
+    [Header("Player Stuff")]
+    [SerializeField] TextMeshProUGUI coinText;
+    [SerializeField] Image planeImage;
+    [SerializeField] Sprite terrestrialSprite;
+    [SerializeField] Sprite astralSprite;
 
     PlayerController player;
 
-    Tween attributePanelTween = null;
-    Tween markingsPanelTween = null;
+    //Tween attributePanelTween = null;
+    //Tween markingsPanelTween = null;
+
+    public static HUD Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +69,8 @@ public class HUD : MonoBehaviour
         currentHeartImages = startingHearts;
 
         attributePanelActive = false;
+
+        planeImage.sprite = terrestrialSprite;
     }
 
     private void OnEnable()
@@ -73,6 +95,19 @@ public class HUD : MonoBehaviour
         {
             ToggleMarkingsPanel();
         }
+
+        // Displays player's current money
+        coinText.text = player.playerInventory.GetMoneyAmount().ToString();
+
+        // Displays the player's current plane they are in
+        if (player.playerCombat.Form == Planes.Terrestrial)
+        {
+            planeImage.sprite = terrestrialSprite;
+        }
+        else if (player.playerCombat.Form == Planes.Astral)
+        {
+            planeImage.sprite = astralSprite;
+        }      
     }
 
     public void ToggleHUD(bool hudOn)
@@ -142,28 +177,42 @@ public class HUD : MonoBehaviour
 
     void UpdateAttributes()
     {
-        speedText.text = $"SPD: {player.playerAttributes.Speed}";
-        swdDmgText.text = $"SWD DMG: {player.playerAttributes.SwordDamage}";
-        bowDmgText.text = $"BOW DMG: {player.playerAttributes.BowDamage}";
-        swdCdnText.text = $"SWD CDN: {player.playerAttributes.SwordCooldown}";
-        bowCdnText.text = $"Bow CDN: {player.playerAttributes.BowCooldown}";
-        swdRangeText.text = $"SWD RANGE: {player.playerAttributes.SwordRange}";
-        projSpdText.text = $"PROJ SPD: {player.playerAttributes.ProjectileSpeed}";
-        critChanceText.text = $"CRIT CHANCE: {player.playerAttributes.CritChance}";
-        bowChargeSpdText.text = $"BOW CHARGE TIME: {player.playerAttributes.BowChargeTime}";
-        luckText.text = $"LUCK: {player.playerAttributes.Luck}";
+        healthText.text = (player.playerAttributes.MaxHealth).ToString();
+        speedText.text = (player.playerAttributes.Speed).ToString();
+        swdDmgText.text = (player.playerAttributes.SwordDamage).ToString();
+        bowDmgText.text = (player.playerAttributes.BowDamage).ToString();
+        swdCdnText.text = (player.playerAttributes.SwordCooldown).ToString();
+        bowCdnText.text = (player.playerAttributes.BowCooldown).ToString();
+        swdRangeText.text = (player.playerAttributes.SwordRange).ToString();
+        projSpdText.text = (player.playerAttributes.ProjectileSpeed).ToString();
+        critChanceText.text = (player.playerAttributes.CritChance).ToString();
+        bowChargeSpdText.text = (player.playerAttributes.BowChargeTime).ToString();
+        luckText.text = (player.playerAttributes.Luck).ToString();
     }
 
-    void UpdateMarkings()
+    public void UpdateMarkingsPanel (Sprite markingSprite, int index)
     {
+        markingImages[index].sprite = markingSprite;
+    }
 
+    public void UpdateTotemHUD(Sprite totemSprite, string totemName, string totemDesc)
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        totemImage.sprite = totemSprite;
+        this.totemName.text = totemName;
+        totemDescription.text = totemDesc;
+
+        sequence.Append(totemPanel.transform.DOScale(1f, 0.8f)).AppendInterval(2f).Append(totemPanel.transform.DOScale(0f, 0.8f));    
     }
 
     void ToggleAttributePanel()
     {
-        if (!attributePanelActive && (attributePanelTween == null || !attributePanelTween.IsActive()))
+        UpdateAttributes();
+
+        if (!attributePanelActive /*&& (attributePanelTween == null || !attributePanelTween.IsActive())*/)
         {
-            attributePanelTween = attributePanel.transform.DOMove(attributePanel.transform.position +
+            /*attributePanelTween = */attributePanel.transform.DOMove(attributePanel.transform.position +
                 (Vector3.right * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             attributePanelActive = !attributePanelActive;
@@ -171,20 +220,22 @@ public class HUD : MonoBehaviour
             return;
         }
 
-        UpdateAttributes();
+        //UpdateAttributes();
 
-        if (attributePanelTween == null || !attributePanelTween.IsActive())
-        {
-            attributePanelTween = attributePanel.transform.DOMove(attributePanel.transform.position +
+        //if (attributePanelTween == null || !attributePanelTween.IsActive())
+        //{
+            /*attributePanelTween = */attributePanel.transform.DOMove(attributePanel.transform.position +
                 (Vector3.left * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             attributePanelActive = !attributePanelActive;
-        }
+        //}
     }
 
     void ToggleMarkingsPanel()
     {
-        if (!markingsPanelActive && (markingsPanelTween == null || !markingsPanelTween.IsActive()))
+        //UpdateMarkings();
+
+        if (!markingsPanelActive /*&& (markingsPanelTween == null || !markingsPanelTween.IsActive())*/)
         {
             markingsPanel.transform.DOMove(markingsPanel.transform.position +
                 (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
@@ -194,14 +245,12 @@ public class HUD : MonoBehaviour
             return;
         }
 
-        UpdateMarkings();
-
-        if (markingsPanelTween == null || !markingsPanelTween.IsActive())
-        {
+        //if (markingsPanelTween == null || !markingsPanelTween.IsActive())
+        //{
             markingsPanel.transform.DOMove(markingsPanel.transform.position +
                 (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             markingsPanelActive = !markingsPanelActive;
-        }
+        //}
     }
 }

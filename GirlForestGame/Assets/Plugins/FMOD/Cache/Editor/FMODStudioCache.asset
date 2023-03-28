@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8618195615685439471
+--- !u!114 &-8508543116381335104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,14 +10,89 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/Footsteps
+  m_Name: event:/Enemy/Boar/Hit
   m_EditorClassIdentifier: 
-  Path: event:/Player/Footsteps
+  Path: event:/Enemy/Boar/Hit
   Guid:
-    Data1: -355910866
-    Data2: 1258688607
-    Data3: -1489726569
-    Data4: -117818190
+    Data1: 322681263
+    Data2: 1268691497
+    Data3: -231488118
+    Data4: 486674156
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 830
+--- !u!114 &-8362680404091656613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Signal/Astral
+  m_EditorClassIdentifier: 
+  Name: Astral
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3563381048
+    data2: 1285374394
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-8310811007361492070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sword/WindMark
+  m_EditorClassIdentifier: 
+  Name: WindMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1996816440
+    data2: 3821101351
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-8122506421105302703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Hit
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Hit
+  Guid:
+    Data1: 692955600
+    Data2: 1271137226
+    Data3: -331644506
+    Data4: 1839451985
   Banks:
   - {fileID: -1975568493038996643}
   IsStream: 0
@@ -27,6 +102,53 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7974187371478809261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638156133308933478
+  FileSizes:
+  - Name: Desktop
+    Value: 2640
+  Exists: 1
+--- !u!114 &-7760157970733730548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Die
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Die
+  Guid:
+    Data1: 625395942
+    Data2: 1245923673
+    Data3: -159146351
+    Data4: 1917202797
+  Banks:
+  - {fileID: 6530498524969943338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1123
 --- !u!114 &-7420331318779095469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,26 +159,384 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/Sword/Sword
+  m_Name: event:/Enemy/Fungi/Dash
   m_EditorClassIdentifier: 
-  Path: event:/Player/Sword/Sword
+  Path: event:/Enemy/Fungi/Dash
   Guid:
-    Data1: -467979474
-    Data2: 1166287510
-    Data3: -844699499
-    Data4: -1876342362
+    Data1: -790926678
+    Data2: 1110248976
+    Data3: -1879602257
+    Data4: 831896579
   Banks:
-  - {fileID: -1975568493038996643}
+  - {fileID: -4745015574752976183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 548
+--- !u!114 &-7228127835910048799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Dash
+  Guid:
+    Data1: 1252119301
+    Data2: 1333908084
+    Data3: 206004876
+    Data4: 1052989640
+  Banks:
+  - {fileID: -2652590001858639111}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1358
+--- !u!114 &-7164232799935955854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Bow
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Bow
+  Guid:
+    Data1: -1210159270
+    Data2: 1171872377
+    Data3: 713227156
+    Data4: -971701987
+  Banks:
+  - {fileID: 8221081449114035163}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -4642030883385154565}
-  - {fileID: 8514157902515603312}
+  - {fileID: -847713674552993293}
+  - {fileID: 6350104014160156055}
   MinDistance: 1
   MaxDistance: 20
-  Length: 1358
+  Length: 500
+--- !u!114 &-6566521853608176051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/WindBlast
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/WindBlast
+  Guid:
+    Data1: 1592697220
+    Data2: 1196234687
+    Data3: -557083253
+    Data4: -1792364261
+  Banks:
+  - {fileID: -1975568493038996643}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 583
+--- !u!114 &-6494380889998871796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Wind
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Wind
+  Guid:
+    Data1: 1312656708
+    Data2: 1337590903
+    Data3: -1675676259
+    Data4: 433381113
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 900
+  Length: 200
+--- !u!114 &-6303257637189082093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Signal
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Signal
+  Guid:
+    Data1: -416318891
+    Data2: 1272364560
+    Data3: 2043478427
+    Data4: 1648639865
+  Banks:
+  - {fileID: 3567959378230028313}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -8362680404091656613}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 880
+--- !u!114 &-6288300730446657277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Hit
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Hit
+  Guid:
+    Data1: 829627411
+    Data2: 1210883383
+    Data3: 1930547856
+    Data4: 43622347
+  Banks:
+  - {fileID: 6530498524969943338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 625
+--- !u!114 &-6234174663889715239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Shoot
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Shoot
+  Guid:
+    Data1: -1511420205
+    Data2: 1084324751
+    Data3: 321221760
+    Data4: -1288580213
+  Banks:
+  - {fileID: -4745015574752976183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 626
+--- !u!114 &-6035763326982330942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/BGM.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/BGM.bank
+  Name: BGM
+  StudioPath: bank:/BGM
+  lastModified: 638140520175605787
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
+--- !u!114 &-5981148173000428832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638156133308913473
+  FileSizes:
+  - Name: Desktop
+    Value: 2386
+  Exists: 1
+--- !u!114 &-5860055457672869038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/WindMark
+  m_EditorClassIdentifier: 
+  Name: WindMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1996816440
+    data2: 3821101351
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-5483988177874421708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Wander
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Wander
+  Guid:
+    Data1: -608051445
+    Data2: 1187734525
+    Data3: -1394850370
+    Data4: -1122286664
+  Banks:
+  - {fileID: -4745015574752976183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 200
+--- !u!114 &-5367931902132585679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Arrow
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Arrow
+  Guid:
+    Data1: -1918112840
+    Data2: 1076791034
+    Data3: -1035270751
+    Data4: -510632377
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 4159059629701645846}
+  - {fileID: -980101334956544951}
+  - {fileID: -5860055457672869038}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 940
+--- !u!114 &-5061899434477181295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Catch
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Catch
+  Guid:
+    Data1: -499380308
+    Data2: 1101864798
+    Data3: -56329805
+    Data4: 1034320871
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 417
+--- !u!114 &-5003194148719884625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638138858941671742
+  FileSizes:
+  - Name: Desktop
+    Value: 2386
+  Exists: 1
+--- !u!114 &-4931836988857911096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,26 +563,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 626
---- !u!114 &-5003194148719884625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638138858238560810
-  FileSizes:
-  - Name: Desktop
-    Value: 1036
-  Exists: 1
 --- !u!114 &-4839324148640367417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,134 +578,12 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638138858238570802
+  lastModified: 638138858941671742
   FileSizes:
   - Name: Desktop
-    Value: 1220
+    Value: 2640
   Exists: 1
---- !u!114 &-4642030883385154565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Sword/WindMark
-  m_EditorClassIdentifier: 
-  Name: WindMark
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1996816440
-    data2: 3821101351
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-1975568493038996643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Player.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/Player.bank
-  Name: Player
-  StudioPath: bank:/SFX/Player
-  lastModified: 638138858238585884
-  FileSizes:
-  - Name: Desktop
-    Value: 249088
-  Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -4839324148640367417}
-  - {fileID: -5003194148719884625}
-  - {fileID: 3896001524447373004}
-  - {fileID: -1975568493038996643}
-  EditorEvents:
-  - {fileID: -8618195615685439471}
-  - {fileID: -7420331318779095469}
-  - {fileID: -5483988177874421708}
-  - {fileID: 6815051651879252626}
-  - {fileID: 3712209513752869890}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -5003194148719884625}
-  StringsBanks:
-  - {fileID: -4839324148640367417}
-  cacheTime: 638138858238585884
-  cacheVersion: 131592
---- !u!114 &176522490354491495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Arrow/WindMark
-  m_EditorClassIdentifier: 
-  Name: WindMark
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1996816440
-    data2: 3821101351
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &489207285361962666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Bow/FireMark
-  m_EditorClassIdentifier: 
-  Name: FireMark
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1299158568
-    data2: 2054997423
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &3712209513752869890
+--- !u!114 &-4807566446264184164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,27 +593,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Player/Bow/Arrow
+  m_Name: event:/Enemy/Fungi/Wander
   m_EditorClassIdentifier: 
-  Path: event:/Player/Bow/Arrow
+  Path: event:/Enemy/Fungi/Wander
   Guid:
-    Data1: -1918112840
-    Data2: 1076791034
-    Data3: -1035270751
-    Data4: -510632377
+    Data1: -608051445
+    Data2: 1187734525
+    Data3: -1394850370
+    Data4: -1122286664
   Banks:
-  - {fileID: -1975568493038996643}
+  - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
-  Parameters:
-  - {fileID: 6408542837847707050}
-  - {fileID: 4110229521865661098}
-  - {fileID: 176522490354491495}
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 940
---- !u!114 &3896001524447373004
+  Length: 200
+--- !u!114 &-4745015574752976183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -285,17 +620,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/BGM.bank
+  m_Name: bank:/Fungi.bank
   m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/BGM.bank
-  Name: BGM
-  StudioPath: bank:/BGM
-  lastModified: 638138858238550809
+  Path: FMOD/Build/Desktop/Fungi.bank
+  Name: Fungi
+  StudioPath: bank:/SFX/Enemy/Fungi
+  lastModified: 638155663312461247
   FileSizes:
   - Name: Desktop
-    Value: 494
+    Value: 71392
   Exists: 1
---- !u!114 &4110229521865661098
+--- !u!114 &-4279878361226981206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,22 +639,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Arrow/SPCharge
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Dash
   m_EditorClassIdentifier: 
-  Name: SPCharge
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 758330890
-    data2: 1341172951
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &6408542837847707050
+  Path: event:/Enemy/Boar/Dash
+  Guid:
+    Data1: 1252119301
+    Data2: 1333908084
+    Data3: 206004876
+    Data4: 1052989640
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 100
+--- !u!114 &-4202584486871472663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,7 +681,184 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &6815051651879252626
+--- !u!114 &-4100945697684784008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Form/Astral
+  m_EditorClassIdentifier: 
+  Name: Astral
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3563381048
+    data2: 1285374394
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-4094105882633151807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Form
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Form
+  Guid:
+    Data1: -1377218978
+    Data2: 1248840083
+    Data3: 732510603
+    Data4: -715382918
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -4100945697684784008}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 967
+--- !u!114 &-4046723329529199574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Axe Fly
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Axe Fly
+  Guid:
+    Data1: 241402907
+    Data2: 1292094177
+    Data3: 924435378
+    Data4: 939197050
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 9.8
+  MaxDistance: 30
+  Length: 100
+--- !u!114 &-3794038730595213574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Dash
+  Guid:
+    Data1: -790926678
+    Data2: 1110248976
+    Data3: -1879602257
+    Data4: 831896579
+  Banks:
+  - {fileID: 6530498524969943338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 548
+--- !u!114 &-3778030443273027219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Bow/FireMark
+  m_EditorClassIdentifier: 
+  Name: FireMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1299158568
+    data2: 2054997423
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-3245023879730597125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Footsteps
+  Guid:
+    Data1: -1389389791
+    Data2: 1148985340
+    Data3: 540100252
+    Data4: -1554965676
+  Banks:
+  - {fileID: -2652590001858639111}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 16
+  MaxDistance: 40
+  Length: 200
+--- !u!114 &-2652590001858639111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Boar.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Boar.bank
+  Name: Boar
+  StudioPath: bank:/SFX/Enemy/Boar
+  lastModified: 638155663312092249
+  FileSizes:
+  - Name: Desktop
+    Value: 170880
+  Exists: 1
+--- !u!114 &-2407580750354182175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -367,12 +882,352 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 489207285361962666}
-  - {fileID: 7861090912630093036}
+  - {fileID: -3778030443273027219}
+  - {fileID: 1352611371529004553}
   MinDistance: 1
   MaxDistance: 20
   Length: 500
---- !u!114 &7861090912630093036
+--- !u!114 &-2330706848802259501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Throw
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Throw
+  Guid:
+    Data1: 1481465604
+    Data2: 1262591233
+    Data3: 1582030241
+    Data4: -838355993
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 966
+--- !u!114 &-2184143617061524276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Signal
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Signal
+  Guid:
+    Data1: -416318891
+    Data2: 1272364560
+    Data3: 2043478427
+    Data4: 1648639865
+  Banks:
+  - {fileID: 8171624434805654353}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -655154347466030265}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 880
+--- !u!114 &-2123339304543434264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Sword/Sword
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Sword/Sword
+  Guid:
+    Data1: -467979474
+    Data2: 1166287510
+    Data3: -844699499
+    Data4: -1876342362
+  Banks:
+  - {fileID: -1975568493038996643}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 0}
+  - {fileID: 5394228300583950671}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1370
+--- !u!114 &-2037133039571577566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Footsteps
+  Guid:
+    Data1: -861215663
+    Data2: 1214108958
+    Data3: -324556149
+    Data4: 1942763737
+  Banks:
+  - {fileID: -1975568493038996643}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 550
+--- !u!114 &-1975568493038996643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Player.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Player.bank
+  Name: Player
+  StudioPath: bank:/SFX/Player
+  lastModified: 638138858941686811
+  FileSizes:
+  - Name: Desktop
+    Value: 597504
+  Exists: 1
+--- !u!114 &-1548047308540338991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Fire
+  Guid:
+    Data1: -750329459
+    Data2: 1147311420
+    Data3: -330979686
+    Data4: 496359187
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 4.8
+  Length: 200
+--- !u!114 &-980101334956544951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/SPCharge
+  m_EditorClassIdentifier: 
+  Name: SPCharge
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 758330890
+    data2: 1341172951
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-847713674552993293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Bow/FireMark
+  m_EditorClassIdentifier: 
+  Name: FireMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1299158568
+    data2: 2054997423
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-655154347466030265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Signal/Astral
+  m_EditorClassIdentifier: 
+  Name: Astral
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3563381048
+    data2: 1285374394
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -7974187371478809261}
+  - {fileID: -6035763326982330942}
+  - {fileID: -5981148173000428832}
+  - {fileID: 8221081449114035163}
+  - {fileID: 5180278857975630338}
+  - {fileID: 6530498524969943338}
+  - {fileID: 8171624434805654353}
+  EditorEvents:
+  - {fileID: 2050096758235668550}
+  - {fileID: 9167487859010060302}
+  - {fileID: -7164232799935955854}
+  - {fileID: 5643622025838626605}
+  - {fileID: -5367931902132585679}
+  - {fileID: -2330706848802259501}
+  - {fileID: -4279878361226981206}
+  - {fileID: -4046723329529199574}
+  - {fileID: 6129170739775591016}
+  - {fileID: 1070534010334979623}
+  - {fileID: 4540604534365834866}
+  - {fileID: -5061899434477181295}
+  - {fileID: -8508543116381335104}
+  - {fileID: 6530972275947360771}
+  - {fileID: -4807566446264184164}
+  - {fileID: -6288300730446657277}
+  - {fileID: 3460396202755473406}
+  - {fileID: 7417798905915450952}
+  - {fileID: -3794038730595213574}
+  - {fileID: 1377321106995198087}
+  - {fileID: -7760157970733730548}
+  - {fileID: -2184143617061524276}
+  - {fileID: 4213258814833000906}
+  - {fileID: -6494380889998871796}
+  - {fileID: -4094105882633151807}
+  - {fileID: 6782025777808900309}
+  - {fileID: -1548047308540338991}
+  - {fileID: 3668771386234228995}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -5981148173000428832}
+  StringsBanks:
+  - {fileID: -7974187371478809261}
+  cacheTime: 638156133308988631
+  cacheVersion: 131592
+--- !u!114 &839758751893998802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Oink
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Oink
+  Guid:
+    Data1: 685590915
+    Data2: 1075856117
+    Data3: -2062215261
+    Data4: 1274719904
+  Banks:
+  - {fileID: -2652590001858639111}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1097
+--- !u!114 &1070534010334979623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Die
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Die
+  Guid:
+    Data1: -827685561
+    Data2: 1161633574
+    Data3: 385525950
+    Data4: 1411224177
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1149
+--- !u!114 &1352611371529004553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -396,7 +1251,444 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &8514157902515603312
+--- !u!114 &1377321106995198087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Shoot
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Shoot
+  Guid:
+    Data1: -1511420205
+    Data2: 1084324751
+    Data3: 321221760
+    Data4: -1288580213
+  Banks:
+  - {fileID: 6530498524969943338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 574
+--- !u!114 &1754900633932091831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Catch
+  m_EditorClassIdentifier: 
+  Path: 
+  Guid:
+    Data1: 0
+    Data2: 0
+    Data3: 0
+    Data4: 0
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &2050096758235668550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Sword/Sword
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Sword/Sword
+  Guid:
+    Data1: -467979474
+    Data2: 1166287510
+    Data3: -844699499
+    Data4: -1876342362
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8310811007361492070}
+  - {fileID: 6516285566485101742}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1370
+--- !u!114 &2840748938134721671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Throw
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Throw
+  Guid:
+    Data1: 1481465604
+    Data2: 1262591233
+    Data3: 1582030241
+    Data4: -838355993
+  Banks:
+  - {fileID: -2652590001858639111}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 966
+--- !u!114 &3136592546319401879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Gas
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Gas
+  Guid:
+    Data1: 579355192
+    Data2: 1176949006
+    Data3: 795177645
+    Data4: -2042550250
+  Banks:
+  - {fileID: -4745015574752976183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 548
+--- !u!114 &3326896425322951952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Hit
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Hit
+  Guid:
+    Data1: 829627411
+    Data2: 1210883383
+    Data3: 1930547856
+    Data4: 43622347
+  Banks:
+  - {fileID: -4745015574752976183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 625
+--- !u!114 &3460396202755473406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Gas
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Gas
+  Guid:
+    Data1: 579355192
+    Data2: 1176949006
+    Data3: 795177645
+    Data4: -2042550250
+  Banks:
+  - {fileID: 6530498524969943338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 548
+--- !u!114 &3567959378230028313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/GEnemy.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/GEnemy.bank
+  Name: GEnemy
+  StudioPath: bank:/SFX/Enemy/GEnemy
+  lastModified: 638155663312727371
+  FileSizes:
+  - Name: Desktop
+    Value: 30624
+  Exists: 1
+--- !u!114 &3668771386234228995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Hit
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Hit
+  Guid:
+    Data1: 692955600
+    Data2: 1271137226
+    Data3: -331644506
+    Data4: 1839451985
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 260
+--- !u!114 &3712209513752869890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Fire
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Fire
+  Guid:
+    Data1: -750329459
+    Data2: 1147311420
+    Data3: -330979686
+    Data4: 496359187
+  Banks:
+  - {fileID: -1975568493038996643}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 4.8
+  Length: 200
+--- !u!114 &3885575335057969653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Die
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Die
+  Guid:
+    Data1: 625395942
+    Data2: 1245923673
+    Data3: -159146351
+    Data4: 1917202797
+  Banks:
+  - {fileID: -4745015574752976183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1123
+--- !u!114 &3896001524447373004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/BGM.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/BGM.bank
+  Name: BGM
+  StudioPath: bank:/BGM
+  lastModified: 638138858941671742
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
+--- !u!114 &4039838274839109906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Form
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Form
+  Guid:
+    Data1: -1377218978
+    Data2: 1248840083
+    Data3: 732510603
+    Data4: -715382918
+  Banks:
+  - {fileID: -1975568493038996643}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 6637513663793838556}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 967
+--- !u!114 &4159059629701645846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/FireMark
+  m_EditorClassIdentifier: 
+  Name: FireMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1299158568
+    data2: 2054997423
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4213258814833000906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Notch
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Notch
+  Guid:
+    Data1: -2115690445
+    Data2: 1220868127
+    Data3: 2027116449
+    Data4: 1952526453
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 207
+--- !u!114 &4540604534365834866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Oink
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Oink
+  Guid:
+    Data1: 685590915
+    Data2: 1075856117
+    Data3: -2062215261
+    Data4: 1274719904
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1097
+--- !u!114 &5180278857975630338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Boar.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Boar.bank
+  Name: Boar
+  StudioPath: bank:/SFX/Enemy/Boar
+  lastModified: 638156133308923475
+  FileSizes:
+  - Name: Desktop
+    Value: 170880
+  Exists: 1
+--- !u!114 &5394228300583950671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -420,3 +1712,399 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &5643622025838626605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Draw
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Draw
+  Guid:
+    Data1: -1369717577
+    Data2: 1129995541
+    Data3: -988279656
+    Data4: -1016289096
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 626
+--- !u!114 &6030592706807727613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/SPCharge
+  m_EditorClassIdentifier: 
+  Name: SPCharge
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 758330890
+    data2: 1341172951
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6129170739775591016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Footsteps
+  Guid:
+    Data1: -1389389791
+    Data2: 1148985340
+    Data3: 540100252
+    Data4: -1554965676
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 16
+  MaxDistance: 40
+  Length: 200
+--- !u!114 &6350104014160156055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Bow/WindMark
+  m_EditorClassIdentifier: 
+  Name: WindMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1996816440
+    data2: 3821101351
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6408542837847707050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Recover
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Recover
+  Guid:
+    Data1: 734078681
+    Data2: 1155644128
+    Data3: 1237947008
+    Data4: 1442791407
+  Banks:
+  - {fileID: -2652590001858639111}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2533
+--- !u!114 &6516285566485101742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sword/FireMark
+  m_EditorClassIdentifier: 
+  Name: FireMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1299158568
+    data2: 2054997423
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6530498524969943338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Fungi.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Fungi.bank
+  Name: Fungi
+  StudioPath: bank:/SFX/Enemy/Fungi
+  lastModified: 638156133308903472
+  FileSizes:
+  - Name: Desktop
+    Value: 71392
+  Exists: 1
+--- !u!114 &6530972275947360771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Boar/Recover
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Boar/Recover
+  Guid:
+    Data1: 734078681
+    Data2: 1155644128
+    Data3: 1237947008
+    Data4: 1442791407
+  Banks:
+  - {fileID: 5180278857975630338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2533
+--- !u!114 &6637513663793838556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Form/Astral
+  m_EditorClassIdentifier: 
+  Name: Astral
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3563381048
+    data2: 1285374394
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6782025777808900309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/WindBlast
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/WindBlast
+  Guid:
+    Data1: 1592697220
+    Data2: 1196234687
+    Data3: -557083253
+    Data4: -1792364261
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 583
+--- !u!114 &6815051651879252626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Bow/Notch
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Bow/Notch
+  Guid:
+    Data1: -2115690445
+    Data2: 1220868127
+    Data3: 2027116449
+    Data4: 1952526453
+  Banks:
+  - {fileID: -1975568493038996643}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 207
+--- !u!114 &7417798905915450952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Spook
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Spook
+  Guid:
+    Data1: 966990681
+    Data2: 1308462409
+    Data3: 2071688638
+    Data4: -1826410891
+  Banks:
+  - {fileID: 6530498524969943338}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 705
+--- !u!114 &8171624434805654353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/GEnemy.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/GEnemy.bank
+  Name: GEnemy
+  StudioPath: bank:/SFX/Enemy/GEnemy
+  lastModified: 638156133308923475
+  FileSizes:
+  - Name: Desktop
+    Value: 30624
+  Exists: 1
+--- !u!114 &8221081449114035163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Player.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Player.bank
+  Name: Player
+  StudioPath: bank:/SFX/Player
+  lastModified: 638156133308988631
+  FileSizes:
+  - Name: Desktop
+    Value: 597504
+  Exists: 1
+--- !u!114 &8514157902515603312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Arrow/WindMark
+  m_EditorClassIdentifier: 
+  Name: WindMark
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1996816440
+    data2: 3821101351
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &9167487859010060302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Footsteps
+  Guid:
+    Data1: -861215663
+    Data2: 1214108958
+    Data3: -324556149
+    Data4: 1942763737
+  Banks:
+  - {fileID: 8221081449114035163}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 550

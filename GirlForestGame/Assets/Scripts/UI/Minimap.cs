@@ -17,6 +17,8 @@ public class Minimap : MonoBehaviour
 
     Dictionary<Room, bool> visitedRooms;
 
+    [SerializeField] Sprite[] roomIcons;
+
     public static Minimap Instance { get; set; }
 
     private void Awake()
@@ -191,13 +193,15 @@ public class Minimap : MonoBehaviour
                     {
                         case RoomTypes.Fight:
 
-                            iconColor = defaultRoomColor;
+                            //iconColor = defaultRoomColor;
+                            icon.GetComponent<Image>().sprite = roomIcons[0];
 
                             break;
 
                         case RoomTypes.Totem:
 
-                            iconColor = totemRoomColor;
+                            //iconColor = totemRoomColor;
+                            icon.GetComponent<Image>().sprite = roomIcons[1];
 
                             break;
                     }
@@ -210,7 +214,8 @@ public class Minimap : MonoBehaviour
                 iconColor.a = 0.25f;
             }
 
-            icon.GetComponent<Image>().color = iconColor;
+            //icon.GetComponent<Image>().color = iconColor;
+            //icon.GetComponent<Image>().sprite = roomIcons[0];
         }
     }
 }
