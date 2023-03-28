@@ -3084,7 +3084,7 @@ MonoBehaviour:
   visualNodePrefab: {fileID: 6933593831192278680, guid: 38771b6056505a04ca23cdddb0aa4574, type: 3}
   endNodeDistance: 5
   numberOfNodeColumns: 8
-  blessingNodeChance: 0.25
+  blessingNodeChance: 0.74
   shopNodeChance: 0.25
   secondChildChance: 1.6
   lineRendererMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}

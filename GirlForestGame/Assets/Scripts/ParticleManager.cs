@@ -139,7 +139,7 @@ public class ParticleManager : MonoBehaviour
                 break;
         }
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main"))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main") && currentParticle.transform.parent != PlayerController.Instance.transform)
         {
             currentParticle.transform.parent = DungeonGenerator.Instance.GetCurrentRoom().transform;
         }

@@ -136,6 +136,34 @@ public class PlayerMarkings : MonoBehaviour
                         player.playerAttributes.Luck *= attributeMultipliers[spirit.markingLevel - 1];
 
                         break;
+
+                    //Base damage will decide which weapon to increase damage dynamically
+                    case Attributes.Damage:
+
+                        if (weapon == Weapons.Sword)
+                        {
+                            player.playerAttributes.SwordDamage *= attributeMultipliers[spirit.markingLevel - 1];
+                        }
+                        else if (weapon == Weapons.Bow)
+                        {
+                            player.playerAttributes.BowDamage *= attributeMultipliers[spirit.markingLevel - 1];
+                        }
+
+                        break;
+
+                    //Base cooldown will decide which weapon to decrease dynamically
+                    case Attributes.AttackCooldown:
+
+                        if (weapon == Weapons.Sword)
+                        {
+                            player.playerAttributes.SwordCooldown /= attributeMultipliers[spirit.markingLevel - 1];
+                        }
+                        else if (weapon == Weapons.Bow)
+                        {
+                            player.playerAttributes.BowCooldown /= attributeMultipliers[spirit.markingLevel - 1];
+                        }
+
+                        break;
                 }
             }
 
@@ -402,6 +430,18 @@ public class PlayerMarkings : MonoBehaviour
 
     IEnumerator ApplyBurn(List<EnemyData> enemies, Weapons weapon)
     {
+        foreach (EnemyData enemyData in enemies)
+        {
+            if (enemyData.FireParticleActive())
+            {
+                enemies.Remove(enemyData);
+
+                continue;
+            }
+
+            enemyData.ActivateFireParticle();
+        }
+
         for (int i = 0; i < numberOfBurnTicks; i++)
         {
             yield return new WaitForSeconds(burnTickDelay);
@@ -417,6 +457,11 @@ public class PlayerMarkings : MonoBehaviour
                     enemy.TakeDamage(baseBurnTickDamage * elementMultipliers[markings[3].markingLevel - 1]);
                 }
             }
+        }
+
+        foreach (EnemyData enemyData in enemies)
+        {
+            enemyData.DeactivateFireParticle();
         }
 
         yield return null;

@@ -52,6 +52,10 @@ public class EnemyData : MonoBehaviour
     {
         curHealth = maxHealth * statMultiplierPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1];
         isDead = false;
+
+        fireEffect.Stop();
+        windedEffect.Stop();
+        fearedEffect.Stop();
     }
 
     private void Start()
@@ -212,6 +216,36 @@ public class EnemyData : MonoBehaviour
         {
             actionCooldown -= Time.deltaTime;
         }
+    }
+
+    public void ActivateFireParticle()
+    {
+        fireEffect.Play();
+    }
+
+    public void DeactivateFireParticle()
+    {
+        fireEffect.Stop();
+    }
+
+    public void ActivateWindParticle()
+    {
+        windedEffect.Play();
+    }
+
+    public void DeactivateWindParticle()
+    {
+        windedEffect.Stop();
+    }
+
+    public bool FireParticleActive()
+    {
+        return fireEffect.isEmitting;
+    }
+
+    public bool WindedParticleActive()
+    {
+        return windedEffect.isEmitting;
     }
 
     private void OnDrawGizmos()

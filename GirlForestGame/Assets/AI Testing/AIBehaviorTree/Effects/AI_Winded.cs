@@ -7,7 +7,6 @@ public class AI_Winded : AI_BaseClass
     float duration;
     float startSpeed;
     float startAnimSpeed;
-    //float elaspedTime;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -20,6 +19,8 @@ public class AI_Winded : AI_BaseClass
 
         animator.speed = 1 / duration;
         agent.speed = 0;
+
+        enemyData.ActivateWindParticle();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -31,5 +32,7 @@ public class AI_Winded : AI_BaseClass
     {
         agent.speed = startSpeed;
         animator.speed = startAnimSpeed;
+
+        enemyData.DeactivateWindParticle();
     }
 }

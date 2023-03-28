@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Fox
   m_EditorClassIdentifier: 
   spiritName: Fox
-  buffedAttributes: 0500000001000000
+  buffedAttributes: 040000000a000000
   usedElement: 0

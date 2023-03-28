@@ -67,14 +67,9 @@ public class SG_Rock : MonoBehaviour
 
         if (isBigRock)
         {
-            print("We Big " + collision.gameObject.name);
-
             RockBurst();
         }
-        else
-        {
-            print("SMol Hit " + collision.gameObject.name);
-        }
+
 
         if (gameObject.layer == LayerMask.NameToLayer("EnemyLiving"))
         {

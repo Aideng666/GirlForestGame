@@ -122,24 +122,44 @@ public class Particle : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        switch (particleType)
+        else if (particleType == ParticleTypes.FireArrow)
         {
-            case ParticleTypes.FireArrow:
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius, colliderLayerMask);
 
-                if (other.gameObject.TryGetComponent(out EnemyData enemy))
+            foreach (Collider collision in collidersInRange)
+            {
+                if (collision.TryGetComponent(out EnemyData enemy))
                 {
+                    print("Hit Enemy With Fire");
+
                     List<EnemyData> enemiesHit = new List<EnemyData>();
 
                     enemiesHit.Add(enemy);
 
                     EventManager.Instance.InvokeOnBowHit(enemiesHit, true);
                 }
+            }
+        }
+    }
 
-                break;
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (particleType)
+        {
+            //case ParticleTypes.FireArrow:
+
+            //    if (other.gameObject.TryGetComponent(out EnemyData enemy))
+            //    {
+            //        print("Hit Enemy With Fire");
+
+            //        List<EnemyData> enemiesHit = new List<EnemyData>();
+
+            //        enemiesHit.Add(enemy);
+
+            //        EventManager.Instance.InvokeOnBowHit(enemiesHit, true);
+            //    }
+
+            //    break;
 
             case ParticleTypes.GasCloud:
 

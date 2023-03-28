@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Hawk
   m_EditorClassIdentifier: 
   spiritName: Hawk
-  buffedAttributes: 0200000003000000
+  buffedAttributes: 0100000007000000
   usedElement: 1
