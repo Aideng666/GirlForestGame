@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: SwordRangeUpTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 0
+        totemSprite: {fileID: 21300000, guid: 43ffec850ed8044428dfb73adb5e7943, type: 3}
         totemName: SwordRangeUp
+        totemDescription: Increased Sword Range
         initialBuffAmount: 0.2
         stackDampenAmount: 0.75

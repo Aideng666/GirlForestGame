@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: CritUpTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 0
+        totemSprite: {fileID: 21300000, guid: e85c50abaea834d4e84115417789c276, type: 3}
         totemName: CritUp
+        totemDescription: Increased Critical Chance
         initialBuffAmount: 0.01
         stackDampenAmount: 1

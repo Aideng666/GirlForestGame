@@ -21,6 +21,8 @@ MonoBehaviour:
       type: {class: SwordDmgUpTotem, ns: , asm: Assembly-CSharp}
       data:
         totemType: 0
+        totemSprite: {fileID: 21300000, guid: 6b34a36dd7b7bde46bab7a4ffe9866ea, type: 3}
         totemName: SwordDamageUp
+        totemDescription: Increased Sword Damage
         initialBuffAmount: 0.4
         stackDampenAmount: 0.5
