@@ -190,7 +190,7 @@ public class HUD : MonoBehaviour
         luckText.text = (player.playerAttributes.Luck).ToString();
     }
 
-    public void UpdateMarkingsPanel (Sprite markingSprite, int index)
+    public void UpdateMarkingsPanel(Sprite markingSprite, int index)
     {
         markingImages[index].sprite = markingSprite;
     }

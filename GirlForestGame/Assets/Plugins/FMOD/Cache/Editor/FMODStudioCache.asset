@@ -117,7 +117,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638156133308933478
+  lastModified: 638156156751633407
   FileSizes:
   - Name: Desktop
     Value: 2640
@@ -383,7 +383,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638140520175605787
+  lastModified: 638138860057596841
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -403,7 +403,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638156133308913473
+  lastModified: 638156156751613462
   FileSizes:
   - Name: Desktop
     Value: 2386
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   - {fileID: -5981148173000428832}
   StringsBanks:
   - {fileID: -7974187371478809261}
-  cacheTime: 638156133308988631
+  cacheTime: 638156156751773035
   cacheVersion: 131592
 --- !u!114 &839758751893998802
 MonoBehaviour:
@@ -1683,7 +1683,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Boar.bank
   Name: Boar
   StudioPath: bank:/SFX/Enemy/Boar
-  lastModified: 638156133308923475
+  lastModified: 638156156751623436
   FileSizes:
   - Name: Desktop
     Value: 170880
@@ -1880,7 +1880,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Fungi.bank
   Name: Fungi
   StudioPath: bank:/SFX/Enemy/Fungi
-  lastModified: 638156133308903472
+  lastModified: 638156156751583540
   FileSizes:
   - Name: Desktop
     Value: 71392
@@ -2032,7 +2032,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/GEnemy.bank
   Name: GEnemy
   StudioPath: bank:/SFX/Enemy/GEnemy
-  lastModified: 638156133308923475
+  lastModified: 638156156751623436
   FileSizes:
   - Name: Desktop
     Value: 30624
@@ -2052,7 +2052,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/SFX/Player
-  lastModified: 638156133308988631
+  lastModified: 638156156751773035
   FileSizes:
   - Name: Desktop
     Value: 597504

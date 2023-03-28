@@ -154,11 +154,11 @@ public class PlayerInventory : MonoBehaviour
             {
                 print($"Putting the level {spirit.markingLevel} {spirit.spiritName} {type.ToString()} on your Sword");
 
-                if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Attribute)
+                if (type == MarkingTypes.Attribute)
                 {
                     HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 0);
                 }
-                else if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Element)
+                else if (type == MarkingTypes.Element)
                 {
                     HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 1);
                 }
@@ -171,11 +171,11 @@ public class PlayerInventory : MonoBehaviour
             {
                 print($"Putting the {spirit.spiritName} {type.ToString()} on your Bow");
 
-                if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Attribute)
+                if (type == MarkingTypes.Attribute)
                 {
                     HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 2);
                 }
-                else if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Element)
+                else if (type == MarkingTypes.Element)
                 {
                     HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 3);
                 }
