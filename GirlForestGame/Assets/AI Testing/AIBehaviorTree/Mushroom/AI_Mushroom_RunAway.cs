@@ -14,7 +14,7 @@ public class AI_Mushroom_RunAway : AI_BaseClass
 
     [SerializeField] float safeDashDistance = 8;
     [SerializeField] float runAwayDuration = 1;
-    [HideInInspector] public FMOD.Studio.EventInstance Away= FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Away");
+    [HideInInspector] public FMOD.Studio.EventInstance Away;
 
     //float speedTemp = 0;
     //float clock = 0f;
@@ -23,6 +23,11 @@ public class AI_Mushroom_RunAway : AI_BaseClass
 
     Ray dashRay;
     bool dashStarted;
+
+    private void OnEnable()
+    {
+        Away = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Dash");
+    }
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

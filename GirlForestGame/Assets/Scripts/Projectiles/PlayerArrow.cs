@@ -13,19 +13,12 @@ public class PlayerArrow : MonoBehaviour
     float arrowChargePercentage;
     float chargedArrowDamage;
     bool movementStarted;
-    [HideInInspector] public FMOD.Studio.EventInstance StickSFX;
-    [HideInInspector] public FMOD.Studio.EventInstance FireSFX;
-    [HideInInspector] public FMOD.Studio.EventInstance WindSFX;
 
-    string windPath = "event:/Player/Bow/Wind", firePath = "event:/Player/Bow/Fire";
+
     private void Start()
     {
         livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
-
-        StickSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Notch");
-        FireSFX = FMODUnity.RuntimeManager.CreateInstance(firePath);
-        WindSFX = FMODUnity.RuntimeManager.CreateInstance(windPath);
 
         player = PlayerController.Instance;
 

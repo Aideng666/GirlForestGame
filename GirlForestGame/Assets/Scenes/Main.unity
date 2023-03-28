@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: b190eb5b21d442443a52789f4ae30dfd, type: 2}
   m_LightingSettings: {fileID: 864911921}
 --- !u!196 &4
 NavMeshSettings:
@@ -13081,6 +13081,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followOffset: 1
   cameraHeight: 1
+--- !u!1 &1804216927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1804216929}
+  - component: {fileID: 1804216928}
+  - component: {fileID: 1804216931}
+  - component: {fileID: 1804216930}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1804216928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804216927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ce73aa73e58e042954c1afdb0d9869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Roaming
+--- !u!4 &1804216929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804216927}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.123724, y: 6, z: -6.123724}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1804216930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804216927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451c91c47d3de7c41972146b9d19e1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VCAName: SFX
+  vcaVolume: 0
+--- !u!114 &1804216931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804216927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451c91c47d3de7c41972146b9d19e1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VCAName: Music
+  vcaVolume: 0
 --- !u!1001 &1808917299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16424,7 +16499,7 @@ PrefabInstance:
       objectReference: {fileID: 388087786}
     - target: {fileID: 3499881327916099185, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 192
+      value: 195
       objectReference: {fileID: 0}
     - target: {fileID: 3856917944956632236, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Mesh
@@ -16604,7 +16679,7 @@ PrefabInstance:
       objectReference: {fileID: 367139818}
     - target: {fileID: 7603293084556601176, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 1717
+      value: 1720
       objectReference: {fileID: 0}
     - target: {fileID: 7983642040164700049, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_Mesh
@@ -16612,7 +16687,7 @@ PrefabInstance:
       objectReference: {fileID: 1714926436}
     - target: {fileID: 7983642040164700049, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: m_VersionIndex
-      value: 524
+      value: 527
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2453708176110309224, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}

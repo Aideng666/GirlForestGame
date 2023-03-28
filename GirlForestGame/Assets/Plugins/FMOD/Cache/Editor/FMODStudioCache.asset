@@ -117,10 +117,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638156156751633407
+  lastModified: 638156285907908166
   FileSizes:
   - Name: Desktop
-    Value: 2640
+    Value: 2866
   Exists: 1
 --- !u!114 &-7760157970733730548
 MonoBehaviour:
@@ -143,12 +143,39 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 1123
+--- !u!114 &-7640217823767225453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Dash
+  Guid:
+    Data1: 1751057135
+    Data2: 1163849908
+    Data3: -225139835
+    Data4: -1557313680
+  Banks:
+  - {fileID: 6530498524969943338}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 534
 --- !u!114 &-7420331318779095469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +362,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -383,10 +410,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638138860057596841
+  lastModified: 638156285907978167
   FileSizes:
   - Name: Desktop
-    Value: 494
+    Value: 4091552
   Exists: 1
 --- !u!114 &-5981148173000428832
 MonoBehaviour:
@@ -403,10 +430,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638156156751613462
+  lastModified: 638156285907888162
   FileSizes:
   - Name: Desktop
-    Value: 2386
+    Value: 2782
   Exists: 1
 --- !u!114 &-5860055457672869038
 MonoBehaviour:
@@ -604,7 +631,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -760,33 +787,6 @@ MonoBehaviour:
   MinDistance: 9.8
   MaxDistance: 30
   Length: 100
---- !u!114 &-3794038730595213574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Fungi/Dash
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Fungi/Dash
-  Guid:
-    Data1: -790926678
-    Data2: 1110248976
-    Data3: -1879602257
-    Data4: 831896579
-  Banks:
-  - {fileID: 6530498524969943338}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 548
 --- !u!114 &-3778030443273027219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,6 +1093,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-817476811860789156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Roaming
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Roaming
+  Guid:
+    Data1: -1409276016
+    Data2: 1321312692
+    Data3: 1348842670
+    Data4: 1097433449
+  Banks:
+  - {fileID: -6035763326982330942}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 148062
 --- !u!114 &-655154347466030265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1156,8 +1183,6 @@ MonoBehaviour:
   - {fileID: -6288300730446657277}
   - {fileID: 3460396202755473406}
   - {fileID: 7417798905915450952}
-  - {fileID: -3794038730595213574}
-  - {fileID: 1377321106995198087}
   - {fileID: -7760157970733730548}
   - {fileID: -2184143617061524276}
   - {fileID: 4213258814833000906}
@@ -1166,12 +1191,16 @@ MonoBehaviour:
   - {fileID: 6782025777808900309}
   - {fileID: -1548047308540338991}
   - {fileID: 3668771386234228995}
+  - {fileID: 8568891054058330547}
+  - {fileID: -7640217823767225453}
+  - {fileID: -817476811860789156}
+  - {fileID: 5250225957314766716}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5981148173000428832}
   StringsBanks:
   - {fileID: -7974187371478809261}
-  cacheTime: 638156156751773035
+  cacheTime: 638156285907978167
   cacheVersion: 131592
 --- !u!114 &839758751893998802
 MonoBehaviour:
@@ -1251,33 +1280,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &1377321106995198087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Fungi/Shoot
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Fungi/Shoot
-  Guid:
-    Data1: -1511420205
-    Data2: 1084324751
-    Data3: 321221760
-    Data4: -1288580213
-  Banks:
-  - {fileID: 6530498524969943338}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 574
 --- !u!114 &1754900633932091831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1435,12 +1437,12 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 548
+  Length: 470
 --- !u!114 &3567959378230028313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1683,11 +1685,38 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Boar.bank
   Name: Boar
   StudioPath: bank:/SFX/Enemy/Boar
-  lastModified: 638156156751623436
+  lastModified: 638156285907908166
   FileSizes:
   - Name: Desktop
     Value: 170880
   Exists: 1
+--- !u!114 &5250225957314766716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Menu
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Menu
+  Guid:
+    Data1: -1309007954
+    Data2: 1289496850
+    Data3: 1998991545
+    Data4: 102612150
+  Banks:
+  - {fileID: -6035763326982330942}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 190824
 --- !u!114 &5394228300583950671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1880,10 +1909,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Fungi.bank
   Name: Fungi
   StudioPath: bank:/SFX/Enemy/Fungi
-  lastModified: 638156156751583540
+  lastModified: 638156285907908166
   FileSizes:
   - Name: Desktop
-    Value: 71392
+    Value: 69536
   Exists: 1
 --- !u!114 &6530972275947360771
 MonoBehaviour:
@@ -2011,7 +2040,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -2032,7 +2061,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/GEnemy.bank
   Name: GEnemy
   StudioPath: bank:/SFX/Enemy/GEnemy
-  lastModified: 638156156751623436
+  lastModified: 638156285271604131
   FileSizes:
   - Name: Desktop
     Value: 30624
@@ -2052,10 +2081,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/SFX/Player
-  lastModified: 638156156751773035
+  lastModified: 638156285907958163
   FileSizes:
   - Name: Desktop
-    Value: 597504
+    Value: 598976
   Exists: 1
 --- !u!114 &8514157902515603312
 MonoBehaviour:
@@ -2081,6 +2110,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &8568891054058330547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Fungi/Shoot
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Fungi/Shoot
+  Guid:
+    Data1: -1511420205
+    Data2: 1084324751
+    Data3: 321221760
+    Data4: -1288580213
+  Banks:
+  - {fileID: 6530498524969943338}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 559
 --- !u!114 &9167487859010060302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2107,4 +2163,4 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 550
+  Length: 200

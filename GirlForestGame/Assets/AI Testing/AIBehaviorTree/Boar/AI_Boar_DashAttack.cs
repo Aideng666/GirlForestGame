@@ -36,7 +36,6 @@ public class AI_Boar_DashAttack : AI_BaseClass
         attackTimer = 0;
         agent.speed = 0;
         OinkSFX.start();
-        OinkSFX.release();
         ChargeSFX.start();
         attackCharged = false;
     }
@@ -47,7 +46,7 @@ public class AI_Boar_DashAttack : AI_BaseClass
         
         if (dashTimer >= duration)
         {
-            ChargeSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            ChargeSFX.keyOff();
             animator.SetTrigger(triggerParameter);
         }
 
@@ -93,7 +92,7 @@ public class AI_Boar_DashAttack : AI_BaseClass
     private void OnDestroy()
     {
         OinkSFX.release();
-        ChargeSFX.keyOff();
+        ChargeSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ChargeSFX.release();
     }
 }
