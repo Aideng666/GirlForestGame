@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MapNode : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class MapNode : MonoBehaviour
     int directionFromParent;
     bool isSelectable;
     bool selected;
+
+    [SerializeField] Sprite[] roomSprites;
+    [SerializeField] Image roomImage;
 
     public bool Selectable { get { return isSelectable; } set { isSelectable = value; } }
 
@@ -101,13 +105,14 @@ public class MapNode : MonoBehaviour
 
         if (type == NodeTypes.Shop)
         {
-            GetComponent<MeshRenderer>().material.color = Color.yellow;
+            //GetComponent<MeshRenderer>().material.color = Color.yellow;
+            roomImage.sprite = roomSprites[0];
         }
         else if( type == NodeTypes.Marking)
         {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
+            //GetComponent<MeshRenderer>().material.color = Color.blue;
+            roomImage.sprite = roomSprites[1];
         }
-
     }
 
     public NodeTypes GetNodeType()

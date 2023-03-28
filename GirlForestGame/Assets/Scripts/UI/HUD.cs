@@ -19,6 +19,7 @@ public class HUD : MonoBehaviour
 
     [Header("Attribute Panel")]
     [SerializeField] GameObject attributePanel;
+    [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI speedText;
     [SerializeField] TextMeshProUGUI swdDmgText;
     [SerializeField] TextMeshProUGUI bowDmgText;
@@ -36,6 +37,18 @@ public class HUD : MonoBehaviour
     [SerializeField] Image[] images = new Image[4]; // 0 = SwordAttribute | 1 = SwordElement | 2 = BowAttribute | 3 = BowElement
     bool markingsPanelActive = true;
 
+    [Header("Totems Panel")]
+    [SerializeField] Image totemImage;
+    [SerializeField] Sprite[] totemSprites = new Sprite[20];
+    [SerializeField] TextMeshProUGUI totemName;
+    [SerializeField] TextMeshProUGUI totemDescription;
+
+    [Header("Player Stuff")]
+    [SerializeField] TextMeshProUGUI coinText;
+    [SerializeField] Image planeImage;
+    [SerializeField] Sprite terrestrialSprite;
+    [SerializeField] Sprite astralSprite;
+
     PlayerController player;
 
     Tween attributePanelTween = null;
@@ -49,6 +62,8 @@ public class HUD : MonoBehaviour
         currentHeartImages = startingHearts;
 
         attributePanelActive = false;
+
+        planeImage.sprite = terrestrialSprite;
     }
 
     private void OnEnable()
@@ -73,6 +88,19 @@ public class HUD : MonoBehaviour
         {
             ToggleMarkingsPanel();
         }
+
+        // Displays player's current money
+        coinText.text = player.playerInventory.GetMoneyAmount().ToString();
+
+        // Displays the player's current plane they are in
+        if (player.playerCombat.Form == Planes.Terrestrial)
+        {
+            planeImage.sprite = terrestrialSprite;
+        }
+        else if (player.playerCombat.Form == Planes.Astral)
+        {
+            planeImage.sprite = astralSprite;
+        }      
     }
 
     public void ToggleHUD(bool hudOn)
@@ -142,16 +170,17 @@ public class HUD : MonoBehaviour
 
     void UpdateAttributes()
     {
-        speedText.text = $"SPD: {player.playerAttributes.Speed}";
-        swdDmgText.text = $"SWD DMG: {player.playerAttributes.SwordDamage}";
-        bowDmgText.text = $"BOW DMG: {player.playerAttributes.BowDamage}";
-        swdCdnText.text = $"SWD CDN: {player.playerAttributes.SwordCooldown}";
-        bowCdnText.text = $"Bow CDN: {player.playerAttributes.BowCooldown}";
-        swdRangeText.text = $"SWD RANGE: {player.playerAttributes.SwordRange}";
-        projSpdText.text = $"PROJ SPD: {player.playerAttributes.ProjectileSpeed}";
-        critChanceText.text = $"CRIT CHANCE: {player.playerAttributes.CritChance}";
-        bowChargeSpdText.text = $"BOW CHARGE TIME: {player.playerAttributes.BowChargeTime}";
-        luckText.text = $"LUCK: {player.playerAttributes.Luck}";
+        healthText.text = (player.playerAttributes.MaxHealth).ToString();
+        speedText.text = (player.playerAttributes.Speed).ToString();
+        swdDmgText.text = (player.playerAttributes.SwordDamage).ToString();
+        bowDmgText.text = (player.playerAttributes.BowDamage).ToString();
+        swdCdnText.text = (player.playerAttributes.SwordCooldown).ToString();
+        bowCdnText.text = (player.playerAttributes.BowCooldown).ToString();
+        swdRangeText.text = (player.playerAttributes.SwordRange).ToString();
+        projSpdText.text = (player.playerAttributes.ProjectileSpeed).ToString();
+        critChanceText.text = (player.playerAttributes.CritChance).ToString();
+        bowChargeSpdText.text = (player.playerAttributes.BowChargeTime).ToString();
+        luckText.text = (player.playerAttributes.Luck).ToString();
     }
 
     void UpdateMarkings()
@@ -161,6 +190,8 @@ public class HUD : MonoBehaviour
 
     void ToggleAttributePanel()
     {
+        UpdateAttributes();
+
         if (!attributePanelActive && (attributePanelTween == null || !attributePanelTween.IsActive()))
         {
             attributePanelTween = attributePanel.transform.DOMove(attributePanel.transform.position +
@@ -171,7 +202,7 @@ public class HUD : MonoBehaviour
             return;
         }
 
-        UpdateAttributes();
+        //UpdateAttributes();
 
         if (attributePanelTween == null || !attributePanelTween.IsActive())
         {

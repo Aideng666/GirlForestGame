@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu]
 public class TotemObject : ScriptableObject
@@ -38,7 +39,9 @@ public class TotemObject : ScriptableObject
 public class Totem
 {
     public TotemTypes totemType;
+    public Sprite totemSprite;
     public string totemName;
+    public string totemDescription;
     public float initialBuffAmount;
     public float stackDampenAmount;
     protected PlayerController player;

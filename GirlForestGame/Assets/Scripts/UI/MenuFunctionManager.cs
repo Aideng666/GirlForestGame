@@ -1,5 +1,4 @@
 using UnityEngine;
-using Cinemachine;
 
 public class MenuFunctionManager : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class MenuFunctionManager : MonoBehaviour
     [SerializeField] GameObject quitButton;
     [SerializeField] Animator settingsButtonAnimator;
     [SerializeField] GameObject settingsUIPanel;
+    [SerializeField] GameObject settingsInfoPanels;
 
     bool moveCam = false;
 
@@ -62,17 +62,23 @@ public class MenuFunctionManager : MonoBehaviour
         {
             settingsButtonAnimator.SetBool("hasClickedSettings", false);
             settingsUIPanel.SetActive(false);
+            settingsInfoPanels.SetActive(false);
         }
         else
         {
             settingsButtonAnimator.SetBool("hasClickedSettings", true);
             settingsUIPanel.SetActive(true);
-
+            settingsInfoPanels.SetActive(true);
         }
     }
 
     public void Play()
     {
         LoadingScreen.Instance.LoadScene("Main");
+    }
+
+    public void Tutorial()
+    {
+        LoadingScreen.Instance.LoadScene("Tutorial");
     }
 }
