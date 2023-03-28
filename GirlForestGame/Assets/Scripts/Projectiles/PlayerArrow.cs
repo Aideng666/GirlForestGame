@@ -97,6 +97,7 @@ public class PlayerArrow : MonoBehaviour
                     else
                     {
                         transform.LookAt(target.transform);
+                        transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
                         transform.rotation = transform.rotation * Quaternion.AngleAxis(-45, Vector3.right);
                         transform.DOJump(new Vector3(target.transform.position.x, 0, target.transform.position.z), 5, 1, 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
                         transform.DORotateQuaternion(transform.rotation * Quaternion.AngleAxis(135, Vector3.right), 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
@@ -115,6 +116,8 @@ public class PlayerArrow : MonoBehaviour
                     {
                         transform.LookAt(target.transform);
                         GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+
+                        transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
                     }
 
                     break;
