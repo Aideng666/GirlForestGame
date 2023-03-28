@@ -22,7 +22,7 @@ MonoBehaviour:
       data:
         totemType: 1
         totemSprite: {fileID: 21300000, guid: 8c6793f7fbb01b04ca5678743398e077, type: 3}
-        totemName: ExtraLife
+        totemName: Extra Life
         totemDescription: Revive upon death with half a heart
         initialBuffAmount: 1
         stackDampenAmount: 1

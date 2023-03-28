@@ -22,7 +22,7 @@ MonoBehaviour:
       data:
         totemType: 0
         totemSprite: {fileID: 21300000, guid: e7b14c21ade1b714b98c57b6a7901927, type: 3}
-        totemName: SwordAttackSpeedUp
+        totemName: Sword Attack Speed Up
         totemDescription: Increased Sword Attack Speed
         initialBuffAmount: 0.33
         stackDampenAmount: 0.65
