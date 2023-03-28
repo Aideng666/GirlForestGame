@@ -152,7 +152,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5512418781491973167}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -215,6 +215,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupText: {fileID: 2365976615763547291}
   colliderDelay: 1
+  foxMarkingPrefab: {fileID: 4182992328432831241, guid: f9ef30296899a7543908164c5e6188f6, type: 3}
+  hawkMarkingPrefab: {fileID: 4182992328432831241, guid: f9ef30296899a7543908164c5e6188f6, type: 3}
+  isMarkingPair: 0
 --- !u!1 &6457684140744822540
 GameObject:
   m_ObjectHideFlags: 0
