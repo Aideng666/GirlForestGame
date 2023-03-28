@@ -72,13 +72,15 @@ public class PlayerArrow : MonoBehaviour
 
                     if (target == null)
                     {
-                        transform.forward = player.aimDirection;
+                        transform.forward = Quaternion.Euler(0, 90, 0) * player.aimDirection;
                         GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
                     }
                     else
                     {
                         transform.LookAt(target.transform);
                         GetComponent<Rigidbody>().velocity = transform.forward * player.playerAttributes.ProjectileSpeed;
+
+                        transform.forward = Quaternion.Euler(0, 90, 0) * transform.forward;
                     }
 
                     break;
@@ -87,7 +89,7 @@ public class PlayerArrow : MonoBehaviour
 
                     if (target == null)
                     {
-                        transform.forward = player.aimDirection;
+                        transform.forward = Quaternion.Euler(0, 90, 0) * player.aimDirection;
                         transform.rotation = transform.rotation * Quaternion.AngleAxis(-45, Vector3.right);
                         transform.DOJump(player.transform.position + (player.aimDirection * player.playerAttributes.SwordRange * 1.5f), 5, 1, 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
                         transform.DORotateQuaternion(transform.rotation * Quaternion.AngleAxis(135, Vector3.right), 1 - ((player.playerAttributes.ProjectileSpeed * 2) / 100));
@@ -106,7 +108,7 @@ public class PlayerArrow : MonoBehaviour
 
                     if (target == null)
                     {
-                        transform.forward = player.aimDirection;
+                        transform.forward = Quaternion.Euler(0, 90, 0) * player.aimDirection;
                         GetComponent<Rigidbody>().velocity = player.aimDirection * player.playerAttributes.ProjectileSpeed;
                     }
                     else
