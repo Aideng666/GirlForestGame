@@ -6,11 +6,15 @@ public class AI_MushroomGasAttack : StateMachineBehaviour
 {
     [SerializeField] GameObject gas;
     EnemyData mushroomData;
+    [HideInInspector] public FMOD.Studio.EventInstance spray = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Gas");
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //TODO: REMOVE INSTANTIATE AND USE OBJECT POOLING
         GameObject gasRef = Instantiate(gas, animator.transform.position, Quaternion.identity);
+
+        spray.start();
         //Add force to projectile and then let it drop
         gasRef.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward);
 

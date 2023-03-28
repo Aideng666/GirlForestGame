@@ -6,11 +6,16 @@ public class AI_Winded : AI_BaseClass
 {
     float duration;
     float elaspedTime;
+    [HideInInspector] public FMOD.Studio.EventInstance breathSFX;
 
+    private void OnEnable()
+    {
+        breathSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Recover");
+    }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-
+        breathSFX.start();
         duration = PlayerController.Instance.playerMarkings.GetWindedDuration();
         elaspedTime = 0;
 
@@ -23,6 +28,7 @@ public class AI_Winded : AI_BaseClass
 
         if (elaspedTime >= duration)
         {
+            breathSFX.keyOff();
             animator.SetTrigger("Done_Winded");
         }
 

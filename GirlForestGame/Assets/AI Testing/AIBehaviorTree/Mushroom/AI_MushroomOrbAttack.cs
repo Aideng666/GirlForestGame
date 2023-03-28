@@ -11,6 +11,9 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     [SerializeField] float timeBetweenShots = 0.3f;
     [SerializeField] GameObject orb;
     [SerializeField] float rotationSpeed = 0.4f;
+
+    [HideInInspector] public FMOD.Studio.EventInstance Shot = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Shoot");
+
     //EnemyData mushroomData;
     Animator animator;
     List<CoroutineHandle> handles;
@@ -35,10 +38,12 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         if (Random.Range(0, 2) == 0)
         {
             FanAttack();
+            Shot.start();
         }
         else
         {
             handles.Add(Timing.RunCoroutine(_ThreeInARow()));
+            Shot.start();
         }
     }
 

@@ -16,6 +16,9 @@ public class PlayerCombat : MonoBehaviour
 
     bool canAttack = true;
     bool iFramesActive = false;
+    [HideInInspector] public FMOD.Studio.EventInstance hitSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance formSFX;
+
 
     //Bow Stuff
     GameObject bowTargetEnemy;
@@ -34,9 +37,9 @@ public class PlayerCombat : MonoBehaviour
     GameObject swordTargetEnemy;
     List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
+    [HideInInspector] public FMOD.Studio.EventInstance SwordSFX;
 
     Planes currentForm = Planes.Terrestrial;
-    [HideInInspector] public FMOD.Studio.EventInstance SwordSFX;
     LayerMask livingLayer;
     LayerMask spiritLayer;
     LayerMask iFramesLayer;
@@ -65,6 +68,8 @@ public class PlayerCombat : MonoBehaviour
         ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Arrow");
         DrawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Draw");
         SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword/Sword");
+        hitSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Hit");
+        formSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Form");
 
         ArrowSFX.getParameterByName("SPCharge", out currentBowChargeTime);
 
@@ -146,18 +151,23 @@ public class PlayerCombat : MonoBehaviour
                 currentForm = Planes.Astral;
                 GetComponentInChildren<SkinnedMeshRenderer>().material = spiritFormMaterial;
                 gameObject.layer = spiritLayer;
+                formSFX.setParameterByName("Astral", 1);
+
             }
             else
             {
                 currentForm = Planes.Terrestrial;
                 GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
                 gameObject.layer = livingLayer;
+                formSFX.setParameterByName("Astral", 0);
+
             }
 
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
             {
                 player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.ApplyEffect();
             }
+            formSFX.start();
         }
     }
 
@@ -432,6 +442,8 @@ public class PlayerCombat : MonoBehaviour
             player.playerAttributes.Health -= 1;
 
             StartCoroutine(BeginIFrames());
+            hitSFX.start();
+            hitSFX.release();
         }
     }
 

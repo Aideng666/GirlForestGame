@@ -67,6 +67,7 @@ public class PlayerMarkings : MonoBehaviour
         //Updates the Attributes / Elements
         if (type == MarkingTypes.Attribute)
         {
+
             for (int i = 0; i < spirit.buffedAttributes.Count; i++)
             {
                 switch (spirit.buffedAttributes[i])

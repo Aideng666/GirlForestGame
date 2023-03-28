@@ -25,10 +25,28 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     bool hasThrownProjectile = false;
     float elaspedChargetime;
     int axeSelection;
+    [HideInInspector] public FMOD.Studio.EventInstance throwSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance catchSFX;
+    //[HideInInspector] public FMOD.Studio.EventInstance flyLSFX;
+    //[HideInInspector] public FMOD.Studio.EventInstance flyRSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
+    private void OnEnable()
+    {
+       throwSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Throw");
+       catchSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Catch");
+       //flyLSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Axe Fly");
+       //flyRSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Axe Fly");
+       signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+
+       //FMODUnity.RuntimeManager.AttachInstanceToGameObject(flyLSFX, leftAxe);
+       //FMODUnity.RuntimeManager.AttachInstanceToGameObject(flyRSFX, rightAxe);
+
+    }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(throwSFX, animator.gameObject.transform);
 
         if (elaspedChargetime >= attackChargeDelay && !hasThrownProjectile)
         {
@@ -36,13 +54,16 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
             {
                 //Using MEC to run the coroutine
                 Timing.RunCoroutine(LeftAxeThrow().CancelWith(animator.gameObject));
+
             }
             else if (axeSelection == 1)
             {
                 Timing.RunCoroutine(RightAxeThrow().CancelWith(animator.gameObject));
-            }
 
+            }
+            
             hasThrownProjectile = true;
+            throwSFX.start();
         }
 
 
@@ -77,10 +98,16 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         if (axeSelection == 0)
         {
             animator.transform.parent.GetComponentInChildren<EnemyUI>().IndicateAttack(Planes.Terrestrial, attackChargeDelay);
+            signalSFX.setParameterByName("Astral", 0);
+            signalSFX.start();
+
         }
         else if (axeSelection == 1)
         {
             animator.transform.parent.GetComponentInChildren<EnemyUI>().IndicateAttack(Planes.Astral, attackChargeDelay);
+            signalSFX.setParameterByName("Astral", 1);
+            signalSFX.start();
+
         }
         //MAKE A DELAY BEFORE THE ATTACK STARTS
         //This is to give the player a second to realise the attack is coming
@@ -93,7 +120,7 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         curve.GetAnchorPoints()[1].transform.position = PlayerController.Instance.transform.position + Vector3.up;
         curve.GetAnchorPoints()[2].transform.position = PlayerController.Instance.transform.position + Vector3.up;
         curve.GetAnchorPoints()[3].transform.position = leftAxeRestingPos;
-
+        //flyLSFX.start();
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             leftAxe.position = curve.GetPointAt(time / duration);
@@ -102,6 +129,8 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         }
 
         projectileHasReturned = true; //The projectile has returned and can now change states back to tracking if the player has moved too far away
+        //flyRSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //flyLSFX.release();
     }
 
     IEnumerator<float> RightAxeThrow()
@@ -111,6 +140,7 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         curve.GetAnchorPoints()[2].transform.position = PlayerController.Instance.transform.position + Vector3.up;
         curve.GetAnchorPoints()[3].transform.position = rightAxeRestingPos;
 
+        //flyRSFX.start();
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             rightAxe.position = curve.GetPointAt(time / duration);
@@ -118,6 +148,8 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         }
 
         projectileHasReturned = true; //The projectile has returned and can now change states back to tracking if the player has moved too far away
+        //flyRSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //flyRSFX.release();
     }
 
 
@@ -144,4 +176,8 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+    private void OnDestroy()
+    {
+        throwSFX.release();
+    }
 }

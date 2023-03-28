@@ -12,11 +12,19 @@ public class PlayerArrow : MonoBehaviour
     float arrowChargePercentage;
     float chargedArrowDamage;
     bool movementStarted;
+    [HideInInspector] public FMOD.Studio.EventInstance StickSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance FireSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance WindSFX;
 
+    string windPath = "event:/Player/Bow/Wind", firePath = "event:/Player/Bow/Fire";
     private void Start()
     {
         livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
+
+        StickSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Notch");
+        FireSFX = FMODUnity.RuntimeManager.CreateInstance(firePath);
+        WindSFX = FMODUnity.RuntimeManager.CreateInstance(windPath);
 
         player = PlayerController.Instance;
 
@@ -151,7 +159,8 @@ public class PlayerArrow : MonoBehaviour
                 enemy.ApplyKnockback(2, transform.forward);
                 enemy.TakeDamage(player.playerAttributes.BowDamage + chargedArrowDamage);
             }
-
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(StickSFX, transform, GetComponent<Rigidbody>());
+            StickSFX.start();
             Destroy(gameObject);
         }
 
@@ -159,14 +168,23 @@ public class PlayerArrow : MonoBehaviour
         if (_element == Elements.Fire)
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.FireArrow, new Vector3(transform.position.x, 0, transform.position.z), arrowChargePercentage);
+            //FMODUnity.RuntimeManager.AttachInstanceToGameObject(FireSFX, transform);
+            //FireSFX.start();
+            //Debug.Log("firesounded");
 
             Destroy(gameObject);
+
         }
         else if (_element == Elements.Wind)
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.WindArrow, new Vector3(transform.position.x, 1, transform.position.z), arrowChargePercentage);
+            //FMODUnity.RuntimeManager.AttachInstanceToGameObject(WindSFX, transform);
+            //WindSFX.start();
+            //Debug.Log("windsounded");
 
             Destroy(gameObject);
+
         }
     }
+
 }

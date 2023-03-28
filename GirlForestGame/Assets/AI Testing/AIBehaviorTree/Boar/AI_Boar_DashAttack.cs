@@ -16,15 +16,27 @@ public class AI_Boar_DashAttack : AI_BaseClass
     float timeBetweenEachAttack = 0.33f;
     float totalChargeTime = 1;
 
+    [HideInInspector] public FMOD.Studio.EventInstance ChargeSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance OinkSFX;  
+
+    private void OnEnable()
+    {
+        ChargeSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Dash");
+        OinkSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Oink");
+    }
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(OinkSFX, animator.gameObject.transform);
 
         dashTimer = 0;
         attackTimer = 0;
         agent.speed = 0;
-
+        OinkSFX.start();
+        OinkSFX.release();
+        ChargeSFX.start();
         attackCharged = false;
     }
 
@@ -36,16 +48,21 @@ public class AI_Boar_DashAttack : AI_BaseClass
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(ChargeSFX, animator.gameObject.transform);
+
         if (dashTimer >= duration)
         {
+            //ChargeSFX.keyOff();
+            ChargeSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             animator.SetTrigger(triggerParameter);
+            
         }
 
         if (attackCharged)
         {
             agent.speed = animator.GetComponentInParent<EnemyData>().enemyMaxSpeed;
             agent.SetDestination(PlayerController.Instance.transform.position);
-            
+
             //Change this collision part into a function when we get animations
             //Also swap between Terrestial and Astral
             if (attackTimer >= timeBetweenEachAttack)
@@ -79,5 +96,11 @@ public class AI_Boar_DashAttack : AI_BaseClass
 
             chargeTimer += Time.deltaTime;
         }
+    }
+    private void OnDestroy()
+    {
+        OinkSFX.release();
+        ChargeSFX.keyOff();
+        ChargeSFX.release();
     }
 }

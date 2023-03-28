@@ -12,6 +12,7 @@ public class AI_Mushroom_RunAway : AI_BaseClass
 
     float speedTemp = 0;
     float clock = 0f;
+    [HideInInspector] public FMOD.Studio.EventInstance Away= FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Away");
 
     Vector3 destination;
 
@@ -60,6 +61,7 @@ public class AI_Mushroom_RunAway : AI_BaseClass
         //Put a timer (wait for like 2 seconds and then go into the next state)
         if (clock >= timeToChangeStates) 
         {
+            Away.start();
             animator.SetTrigger("Has_RanAway");
         }
         Debug.Log(clock);

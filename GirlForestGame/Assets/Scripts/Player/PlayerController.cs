@@ -19,9 +19,11 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerInventory playerInventory;
     [HideInInspector] public PlayerCombat playerCombat;
 
+    [HideInInspector] FMOD.Studio.EventInstance FootstepSFX;
+
     //EventManager eventManager;
     //List<Totem> totems = new List<Totem>();
-    
+
 
 
     bool deathStarted;
@@ -32,8 +34,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        FootstepSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Footsteps");
+
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -165,7 +169,9 @@ public class PlayerController : MonoBehaviour
 
             transform.forward = moveDir.normalized;
 
+
         }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         body.velocity = playerAttributes.Speed * moveDir;
@@ -231,8 +237,7 @@ public class PlayerController : MonoBehaviour
             case "Enemy":
 
                 playerCombat.TakeDamage();
-                playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
-
+                playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
                 break;
         }
     }

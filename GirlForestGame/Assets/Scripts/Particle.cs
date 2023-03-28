@@ -12,14 +12,38 @@ public class Particle : MonoBehaviour
     LayerMask spiritLayer;
     LayerMask defaultLayer;
 
+    [HideInInspector] public FMOD.Studio.EventInstance FireSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance WindSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance WindBlastSFX;
+
     // Start is called before the first frame update
     void Start()
     {
         livingLayer = LayerMask.NameToLayer("EnemyLiving");
         spiritLayer = LayerMask.NameToLayer("EnemySpirit");
         defaultLayer = LayerMask.NameToLayer("Default");
+
+        FireSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Fire");
+        WindSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Wind");
+        WindBlastSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/WindBlast");
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(FireSFX, transform);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(WindSFX, transform);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(WindBlastSFX, transform);
+
         particle = GetComponent<ParticleSystem>();
+        Debug.Log(particleType);
+        if (particleType == ParticleTypes.WindArrow)
+        {
+            WindSFX.start();
+            Debug.Log("windsounded");
+        }
+        else if (particleType == ParticleTypes.FireArrow)
+        {
+            FireSFX.start();
+            Debug.Log("firesounded");
+        }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -41,9 +65,19 @@ public class Particle : MonoBehaviour
 
         if (!particle.isPlaying)
         {
+            //FireSFX.keyOff();
+            FireSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            Debug.Log("fireOFF");
+            FireSFX.release();
+            //WindBlastSFX.release();
+
             if (childParticle != ParticleTypes.None)
             {
                 ParticleManager.Instance.SpawnParticle(childParticle, transform.position);
+                WindSFX.keyOff();
+                WindSFX.release();
+                WindBlastSFX.start();
+                WindBlastSFX.release();
             }
 
             Destroy(gameObject);
@@ -65,6 +99,7 @@ public class Particle : MonoBehaviour
         }
         else if (particleType == ParticleTypes.WindArrow2)
         {
+            
             Collider[] collidersInRange = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius, colliderLayerMask);
 
             foreach (Collider collision in collidersInRange)
@@ -90,7 +125,6 @@ public class Particle : MonoBehaviour
         switch (particleType)
         {
             case ParticleTypes.FireArrow:
-
                 if (other.gameObject.TryGetComponent(out EnemyData enemy))
                 {
                     List<EnemyData> enemiesHit = new List<EnemyData>();
@@ -102,5 +136,11 @@ public class Particle : MonoBehaviour
 
                 break;
         }
+    }
+    private void OnDestroy()
+    {
+        FireSFX.keyOff();
+        FireSFX.release();
+        WindBlastSFX.release();
     }
 }
