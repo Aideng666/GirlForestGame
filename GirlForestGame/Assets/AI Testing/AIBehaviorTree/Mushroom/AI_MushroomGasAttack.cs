@@ -12,7 +12,12 @@ public class AI_MushroomGasAttack : AI_BaseClass
     bool delayComplete;
     bool attackStarted;
 
-    [HideInInspector] public FMOD.Studio.EventInstance spray = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Gas");
+    [HideInInspector] public FMOD.Studio.EventInstance spray; 
+
+    private void OnEnable()
+    {
+        spray = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Gas");
+    }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

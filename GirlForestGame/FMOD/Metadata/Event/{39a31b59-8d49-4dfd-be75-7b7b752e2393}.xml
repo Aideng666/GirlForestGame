@@ -5,7 +5,7 @@
 			<value>Spook</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{8acf3e88-a3cd-4e57-ac5e-1fef6918865e}</destination>
@@ -130,11 +130,9 @@
 	<object class="MixerBusEffectChain" id="{15dd9aa0-8fc9-4f29-9764-2a3c39f6a412}">
 		<relationship name="effects">
 			<destination>{72b1e485-9482-4aa7-b22b-fc5ac71ca824}</destination>
-			<destination>{2751e4a6-deb2-4b47-b44c-b360d59758ca}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{a276df8b-dd30-4136-9a13-898eb07a2b16}" />
 	<object class="MixerBusFader" id="{02642994-48a0-4450-ab68-e80e8157940c}" />
 	<object class="MixerBusFader" id="{72b1e485-9482-4aa7-b22b-fc5ac71ca824}" />
-	<object class="SpatialiserEffect" id="{2751e4a6-deb2-4b47-b44c-b360d59758ca}" />
 </objects>

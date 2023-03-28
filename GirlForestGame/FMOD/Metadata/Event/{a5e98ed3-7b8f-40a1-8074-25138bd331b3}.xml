@@ -5,7 +5,7 @@
 			<value>Shoot</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{8acf3e88-a3cd-4e57-ac5e-1fef6918865e}</destination>
@@ -58,10 +58,10 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{ffcfccfa-b521-4e2e-8e7b-ec929bcde06f}">
 		<property name="maxVoices">
-			<value>4</value>
+			<value>7</value>
 		</property>
 		<property name="triggerCooldown">
-			<value>300</value>
+			<value>20</value>
 		</property>
 	</object>
 	<object class="MarkerTrack" id="{04aaef8a-0500-40d1-8858-423abcef0254}" />
@@ -97,7 +97,10 @@
 	<object class="MixerBusPanner" id="{f5694c63-adb1-4168-8d73-9426fe002bad}" />
 	<object class="SingleSound" id="{07b93e38-206d-4631-89c8-bbff5f8d40d6}">
 		<property name="length">
-			<value>0.57469387755102042</value>
+			<value>0.55990723562152134</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>0.040909090909090909</value>
 		</property>
 		<relationship name="fadeOutCurve">
 			<destination>{05d26a50-016d-4940-9b87-3d4d3082ed0e}</destination>
@@ -107,9 +110,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{bab29cd6-e4d8-4ed9-83fa-f7b2c1ea4326}">
-		<property name="volume">
-			<value>-10</value>
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -141,14 +141,13 @@
 	<object class="MixerBusEffectChain" id="{23b69586-8308-4a3e-8f98-11b43e3d691b}">
 		<relationship name="effects">
 			<destination>{72ed8a19-780e-4c3a-a231-db68ba0ba7aa}</destination>
-			<destination>{5a10f0e3-2328-4324-aab8-2b1055ffed3a}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{13c57e40-f646-4928-a521-dce9d3563508}" />
 	<object class="MixerBusFader" id="{261294ca-b03f-4d88-a6e1-52c7e133f392}" />
 	<object class="AutomationPoint" id="{3c5baa13-ca37-4b20-ada7-2779edae4196}">
 		<property name="position">
-			<value>0.27000000000000002</value>
+			<value>0.25521335807050094</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -159,12 +158,11 @@
 	</object>
 	<object class="AutomationPoint" id="{68d0b320-4af4-4c3e-b5b0-a0661e9a0309}">
 		<property name="position">
-			<value>0.57469387755102042</value>
+			<value>0.55990723562152134</value>
 		</property>
 		<property name="value">
 			<value>0</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{72ed8a19-780e-4c3a-a231-db68ba0ba7aa}" />
-	<object class="SpatialiserEffect" id="{5a10f0e3-2328-4324-aab8-2b1055ffed3a}" />
 </objects>
