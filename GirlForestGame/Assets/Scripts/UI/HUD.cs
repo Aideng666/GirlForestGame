@@ -34,7 +34,7 @@ public class HUD : MonoBehaviour
 
     [Header("Markings Panel")]
     [SerializeField] GameObject markingsPanel;
-    [SerializeField] Image[] images = new Image[4]; // 0 = SwordAttribute | 1 = SwordElement | 2 = BowAttribute | 3 = BowElement
+    [SerializeField] Image[] markingImages = new Image[4]; // 0 = Sword Attribute | 1 = Bow Attribute | 2 = Sword Element | 3 = Bow Element
     bool markingsPanelActive = true;
 
     [Header("Totems Panel")]
@@ -190,9 +190,9 @@ public class HUD : MonoBehaviour
         luckText.text = (player.playerAttributes.Luck).ToString();
     }
 
-    void UpdateMarkings()
+    public void UpdateMarkingsPanel (Sprite markingSprite, int index)
     {
-
+        markingImages[index].sprite = markingSprite;
     }
 
     public void UpdateTotemHUD(Sprite totemSprite, string totemName, string totemDesc)
@@ -233,6 +233,8 @@ public class HUD : MonoBehaviour
 
     void ToggleMarkingsPanel()
     {
+        //UpdateMarkings();
+
         if (!markingsPanelActive /*&& (markingsPanelTween == null || !markingsPanelTween.IsActive())*/)
         {
             markingsPanel.transform.DOMove(markingsPanel.transform.position +
@@ -242,8 +244,6 @@ public class HUD : MonoBehaviour
 
             return;
         }
-
-        UpdateMarkings();
 
         //if (markingsPanelTween == null || !markingsPanelTween.IsActive())
         //{
