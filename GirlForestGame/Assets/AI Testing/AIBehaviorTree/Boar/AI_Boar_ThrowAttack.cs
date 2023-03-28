@@ -35,6 +35,23 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     bool hasThrownProjectile = false;
     float elaspedChargetime;
     int axeSelection;
+    [HideInInspector] public FMOD.Studio.EventInstance throwSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance catchSFX;
+    //[HideInInspector] public FMOD.Studio.EventInstance flyLSFX;
+    //[HideInInspector] public FMOD.Studio.EventInstance flyRSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
+    private void OnEnable()
+    {
+       throwSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Throw");
+       catchSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Catch");
+       //flyLSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Axe Fly");
+       //flyRSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Axe Fly");
+       signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+
+       //FMODUnity.RuntimeManager.AttachInstanceToGameObject(flyLSFX, leftAxe);
+       //FMODUnity.RuntimeManager.AttachInstanceToGameObject(flyRSFX, rightAxe);
+
+    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -65,16 +82,22 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
         if (axeSelection == 0)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeDelay);
+            signalSFX.setParameterByName("Astral", 0);
+            signalSFX.start();
+            
         }
         else if (axeSelection == 1)
         {
             enemyUI.IndicateAttack(Planes.Astral, attackChargeDelay);
+            signalSFX.setParameterByName("Astral", 1);
+            signalSFX.start();
         }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(throwSFX, animator.gameObject.transform);
 
         if (elaspedChargetime >= attackChargeDelay && !hasThrownProjectile)
         {
@@ -93,9 +116,10 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
                 rightTrail.emitting = true;
                 leftAxeCollider.enabled = false;
             }
-
+            
             hasThrownProjectile = true;
             enemyData.IsAttacking = true;
+            throwSFX.start();
         }
 
 
@@ -125,6 +149,7 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
 
         leftAxe.rotation = Quaternion.Euler(90, 0, 0);
 
+            
         for (float time = 0; time < duration; time += Time.deltaTime)
         {
             leftAxe.position = curve.GetPointAt(time / duration);

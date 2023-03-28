@@ -13,6 +13,7 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     [SerializeField] float attackChargeTime = 1;
 
     List<CoroutineHandle> handles;
+    [HideInInspector] public FMOD.Studio.EventInstance Shot = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Shoot");
     Animator animator;
 
     int randomAttackChoice;
@@ -44,6 +45,7 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         if (randomOrbChoice == 0)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeTime);
+            
         }
         else if (randomOrbChoice == 1)
         {
@@ -72,6 +74,7 @@ public class AI_MushroomOrbAttack : AI_BaseClass
 
     void FanAttack() 
     {
+        Shot.start();
         FireOrb((player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, 15, 0) * (player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, -15, 0) * (player.transform.position - agent.transform.position).normalized);
@@ -86,6 +89,8 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         for (int i = 0; i < 5; i++)
         {
             FireOrb((player.transform.position - agent.transform.position).normalized);
+            
+            Shot.start();
 
             yield return Timing.WaitForSeconds(timeBetweenShots);
         }

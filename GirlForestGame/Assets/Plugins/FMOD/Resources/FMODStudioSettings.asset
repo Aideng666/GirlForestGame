@@ -587,6 +587,9 @@ MonoBehaviour:
   - Master
   Banks:
   - BGM
+  - Boar
+  - Fungi
+  - GEnemy
   - Player
   BanksToLoad: []
   LiveUpdatePort: 9264

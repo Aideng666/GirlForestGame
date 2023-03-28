@@ -2,10 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{bf3f4a66-eacf-4b9f-a25a-3a942d8210fe}">
 		<property name="assetPath">
-			<value>Wind hold.mp3</value>
-		</property>
-		<property name="isStreaming">
-			<value>true</value>
+			<value>Player/Bow/Wind hold.mp3</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
