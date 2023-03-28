@@ -23,6 +23,6 @@ MonoBehaviour:
         totemType: 0
         totemSprite: {fileID: 21300000, guid: ee83dee9e649fa44d8575a2bdcc12153, type: 3}
         totemName: Bow Charge Spd Up
-        totemDescription: Time to charge power shot decreased
+        totemDescription: Power shot charge time decreased
         initialBuffAmount: 0.33
         stackDampenAmount: 0.65
