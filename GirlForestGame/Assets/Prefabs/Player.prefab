@@ -3154,8 +3154,8 @@ MonoBehaviour:
   defaultSpeed: 15
   defaultSwordDamage: 5
   defaultBowDamage: 5
-  defaultSwordCooldown: 0.3
-  defaultBowCooldown: 0.5
+  defaultSwordCooldown: 0.4
+  defaultBowCooldown: 0.25
   defaultSwordRange: 5
   defaultProjectileSpeed: 20
   defaultCritChance: 0.05
@@ -3264,7 +3264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pControl: {fileID: 5982676203613863553}
-  paceSpeed: 1
 --- !u!114 &-5953815767974619553
 MonoBehaviour:
   m_ObjectHideFlags: 0

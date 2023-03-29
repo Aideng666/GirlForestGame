@@ -19,7 +19,7 @@ public class AI_Boar_Wander : AI_BaseClass
 
         leftAxe = animator.transform.GetChild(0);
         rightAxe = animator.transform.GetChild(1);
-        agent.speed = 2;
+        agent.speed = 4;
 
         //if (leftAxe.position != agent.transform.position + (agent.transform.forward + (-agent.transform.right)).normalized)
         //{

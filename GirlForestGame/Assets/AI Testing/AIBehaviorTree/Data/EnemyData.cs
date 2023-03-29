@@ -18,7 +18,7 @@ public class EnemyData : MonoBehaviour
     //Cooldown between each attack from the condition
     public float actionCooldown = 0f;
 
-    public float enemyMaxSpeed { get; private set; } = 5;
+    public float enemyMaxSpeed { get; private set; } = 7;
     [SerializeField] protected Planes form;
     [SerializeField] float defaultCoinDropChance = 0.25f;
     [SerializeField] float defaultHealthDropChance = 0.05f;
