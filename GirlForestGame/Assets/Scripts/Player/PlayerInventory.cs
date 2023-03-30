@@ -74,12 +74,12 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (markings[0] != null)
                 {
-                    player.playerMarkings.RemoveMarking(markings[0], type, weapon);
-
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z) , Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, markings[0].markingLevel);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(markings[0], type, markings[0].markingLevel);
+
+                    player.playerMarkings.RemoveMarking(markings[0], type, weapon);
                 }
 
                 markings[0] = spirit;
@@ -88,12 +88,12 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (markings[1] != null)
                 {
-                    player.playerMarkings.RemoveMarking(markings[1], type, weapon);
-
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, markings[1].markingLevel);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(markings[1], type, markings[1].markingLevel);
+
+                    player.playerMarkings.RemoveMarking(markings[1], type, weapon);
                 }
 
                 markings[1] = spirit;
@@ -105,12 +105,12 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (markings[2] != null)
                 {
-                    player.playerMarkings.RemoveMarking(markings[2], type, weapon);
-
                     GameObject markingPickup = Instantiate(markingPrefab, new Vector3(transform.position.x, markingPrefab.transform.position.y, transform.position.z), Quaternion.identity, DungeonGenerator.Instance.GetCurrentRoom().transform);
 
                     markingPickup.transform.DOJump(markingPickup.transform.position + new Vector3(randomXDir, 0, randomZDir).normalized * randomDistance, 1, 2, 1f).SetEase(Ease.Linear);
-                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(spirit, type, markings[2].markingLevel);
+                    markingPickup.GetComponent<MarkingPickup>().ChooseMarking(markings[2], type, markings[2].markingLevel);
+
+                    player.playerMarkings.RemoveMarking(markings[2], type, weapon);
                 }
 
                 markings[2] = spirit;
@@ -154,11 +154,11 @@ public class PlayerInventory : MonoBehaviour
             {
                 print($"Putting the level {spirit.markingLevel} {spirit.spiritName} {type.ToString()} on your Sword");
 
-                if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Attribute)
+                if (type == MarkingTypes.Attribute)
                 {
                     HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 0);
                 }
-                else if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Element)
+                else if (type == MarkingTypes.Element)
                 {
                     HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 1);
                 }
@@ -171,11 +171,11 @@ public class PlayerInventory : MonoBehaviour
             {
                 print($"Putting the {spirit.spiritName} {type.ToString()} on your Bow");
 
-                if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Attribute)
+                if (type == MarkingTypes.Attribute)
                 {
                     HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 2);
                 }
-                else if (spirit.spiritName == "Fox" || spirit.spiritName == "Hawk" && type == MarkingTypes.Element)
+                else if (type == MarkingTypes.Element)
                 {
                     HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 3);
                 }

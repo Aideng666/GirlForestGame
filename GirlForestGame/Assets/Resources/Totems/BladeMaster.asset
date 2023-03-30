@@ -23,6 +23,6 @@ MonoBehaviour:
         totemType: 1
         totemSprite: {fileID: 21300000, guid: d4552bae1a614e14cb2b97d8cacdaf2e, type: 3}
         totemName: Blade Master
-        totemDescription: Sword combo does extra damage on the final hit
+        totemDescription: Sword combo does extra damage
         initialBuffAmount: 0.25
         stackDampenAmount: 0.5
