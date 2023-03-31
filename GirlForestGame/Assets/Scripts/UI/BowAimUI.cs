@@ -60,7 +60,7 @@ public class BowAimUI : MonoBehaviour
         if (timer <= PlayerController.Instance.playerAttributes.BowChargeTime) 
         {
             generator.stemLength = Mathf.Clamp(generator.stemLength + (Time.deltaTime * (maxLengthOfArrow - PlayerController.Instance.playerAttributes.BowChargeTime)), defaultLength, maxLengthOfArrow);
-            Debug.Log(timer);
+            //Debug.Log(timer);
         }
         timer += Time.deltaTime;
         if (delayDone)
