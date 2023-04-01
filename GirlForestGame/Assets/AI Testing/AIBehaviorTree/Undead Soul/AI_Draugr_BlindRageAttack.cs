@@ -20,6 +20,16 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
 
     int colliderLayerMask;
 
+    [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance clawSFX;
+
+    private void OnEnable()
+    {
+        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+        clawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Draugr/Claw");
+
+
+    }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
@@ -39,10 +49,14 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
         if (planeSelection == (int)Planes.Terrestrial)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, totalChargeTime);
+            signalSFX.setParameterByName("Astral", 0);
+            signalSFX.start();
         }
         else if (planeSelection == (int)Planes.Astral)
         {
             enemyUI.IndicateAttack(Planes.Astral, totalChargeTime);
+            signalSFX.setParameterByName("Astral", 1);
+            signalSFX.start();
         }
 
         //Creates the correct layer mask for the colliders to hit the proper enemies at any given time
@@ -64,9 +78,12 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(clawSFX, agent.transform);
+
         if (elaspedAttackTime >= duration)
         {
             animator.SetTrigger("AttackComplete");
+            clawSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
 
         if (attackCharged)
@@ -86,7 +103,7 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
                         }
                     }
                 }
-
+                clawSFX.start();
                 attackTimer = 0;
             }
 
@@ -103,5 +120,11 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
         }
 
         elaspedAttackTime += Time.deltaTime;
+    }
+
+    private void OnDestroy()
+    {
+        signalSFX.release();
+        clawSFX.release();
     }
 }

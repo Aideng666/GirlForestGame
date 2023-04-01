@@ -17,10 +17,14 @@ public class AI_MushroomGasAttack : AI_BaseClass
     private void OnEnable()
     {
         spray = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Gas");
+
+
     }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(spray, agent.transform);
+
         base.OnStateEnter(animator, stateInfo, layerIndex);
         spray.start();
 
@@ -49,5 +53,10 @@ public class AI_MushroomGasAttack : AI_BaseClass
         }
 
         elaspedDelayTime += Time.deltaTime;
+    }
+
+    private void OnDestroy()
+    {
+        spray.release();
     }
 }

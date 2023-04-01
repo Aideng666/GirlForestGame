@@ -27,6 +27,7 @@ public class AI_Mushroom_RunAway : AI_BaseClass
     private void OnEnable()
     {
         Away = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Dash");
+
     }
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -52,6 +53,7 @@ public class AI_Mushroom_RunAway : AI_BaseClass
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         RaycastHit hit;
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(Away, agent.transform);
 
         if (Physics.Raycast(dashRay, out hit, safeDashDistance))
         {
@@ -106,4 +108,9 @@ public class AI_Mushroom_RunAway : AI_BaseClass
     //    //    //do speed change
     //    //}
     //}
+
+    private void OnDestroy()
+    {
+        Away.release();
+    }
 }

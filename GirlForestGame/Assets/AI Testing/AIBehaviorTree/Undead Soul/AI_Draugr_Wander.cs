@@ -13,6 +13,13 @@ public class AI_Draugr_Wander : AI_BaseClass
 
     Ray moveRay;
 
+    [HideInInspector] public FMOD.Studio.EventInstance blinkSFX;
+
+    private void OnEnable()
+    {
+        blinkSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Draugr/Blink");
+
+    }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
@@ -59,7 +66,7 @@ public class AI_Draugr_Wander : AI_BaseClass
     void Teleport()
     {
         ParticleManager.Instance.SpawnParticle(ParticleTypes.Teleport, agent.transform.position);
-
+        blinkSFX.start();
         agent.transform.position += moveRay.direction * teleportDistance;
     }
 }
