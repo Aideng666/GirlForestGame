@@ -7,6 +7,8 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] GameObject arrowPrefab;
     [SerializeField] GameObject bowAimCanvas;
+    [SerializeField] ParticleSystem swordSlashLR;
+    [SerializeField] ParticleSystem swordSlashRL;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
     [SerializeField] Shader iFrameShader;
@@ -180,6 +182,24 @@ public class PlayerCombat : MonoBehaviour
             }
             formSFX.start();
         }
+
+        //Sets the radius of the sword slashes
+        if (swordSlashLR.gameObject.activeSelf) 
+        {
+            var particleShape = swordSlashLR.shape;
+
+            particleShape.radius = player.playerAttributes.SwordRange / 2;
+
+            //swordSlashLR.GetComponent<SphereCollider>().radius = particleShape.radius;
+        }
+        if (swordSlashRL.gameObject.activeSelf)
+        {
+            var particleShape = swordSlashRL.shape;
+
+            particleShape.radius = player.playerAttributes.SwordRange / 2;
+
+            //swordSlashRL.GetComponent<SphereCollider>().radius = particleShape.radius;
+        }
     }
 
     public void ApplyKnockback(Vector3 direction, float power)
@@ -281,9 +301,12 @@ public class PlayerCombat : MonoBehaviour
     //    yield return null;
     //}
 
-    IEnumerator CompleteAttackMovement(float duration)
+    IEnumerator CompleteAttack(float duration)
     {
         yield return new WaitForSeconds(duration);
+
+        swordSlashLR.gameObject.SetActive(false);
+        swordSlashRL.gameObject.SetActive(false);
 
         isAttacking = false;
     }
@@ -292,6 +315,10 @@ public class PlayerCombat : MonoBehaviour
     {
         isAttacking = true;
         body.velocity = Vector3.zero;
+        canAttack = false;
+
+        StartCoroutine(CompleteAttack(player.playerAttributes.SwordCooldown / 1.5f));
+        ActivateSwordHitbox();
 
         //Chooses which animation to play based on which attack number they are in the current combo
         switch (currentAttackNum)
@@ -299,27 +326,33 @@ public class PlayerCombat : MonoBehaviour
             case 1:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack1");
+                swordSlashLR.gameObject.SetActive(true);
                 SwordSFX.start();
+
+                SetCanAttack(true, player.playerAttributes.SwordCooldown / 1.5f);
                 break;
 
             case 2:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack2");
+                swordSlashRL.gameObject.SetActive(true);
                 SwordSFX.keyOff();
+
+                SetCanAttack(true, player.playerAttributes.SwordCooldown / 1.5f);
                 break;
 
             case 3:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack3");
+                swordSlashRL.gameObject.SetActive(true);
                 SwordSFX.keyOff();
+
+                player.playerCombat.SetCanAttack(false, 0);
+                SetCanAttack(true, player.playerAttributes.SwordCooldown);
                 break;
         }
 
         ////////////////////////////////////////////////////////////////////
-        canAttack = false;
-
-        StartCoroutine(CompleteAttackMovement(player.playerAttributes.SwordCooldown / 1.5f));
-        ActivateSwordHitbox();
     }
 
     //Initializes the drawing of the bow
@@ -332,6 +365,8 @@ public class PlayerCombat : MonoBehaviour
             canAttack = false;
             isDrawingBow = true;
             DrawSFX.start();
+
+            currentAttackNum = 1;
         }
     }
 
@@ -551,21 +586,21 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void SetCanAttack(bool value, bool applyCooldown, Weapons weaponChoice = Weapons.None)
+    public void SetCanAttack(bool value, float cooldown/*, Weapons weaponChoice = Weapons.None*/)
     {
         if (value)
         {
-            if (applyCooldown)
+            if (cooldown > 0)
             {
-                if (weaponChoice == Weapons.Sword)
-                {
-                    StartCoroutine(BeginAttackCooldown(player.playerAttributes.SwordCooldown));
-                }
+                //if (weaponChoice == Weapons.Sword)
+                //{
+                    StartCoroutine(BeginAttackCooldown(cooldown));
+                //}
 
-                if (weaponChoice == Weapons.Bow)
-                {
-                    StartCoroutine(BeginAttackCooldown(player.playerAttributes.BowCooldown));
-                }
+                //if (weaponChoice == Weapons.Bow)
+                //{
+                //    StartCoroutine(BeginAttackCooldown(cooldown));
+                //}
 
                 return;
             }
