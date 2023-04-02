@@ -223,72 +223,76 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            if (swordTargetEnemy != null && Vector3.Distance(swordTargetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange / 3)
-            {
-                float targetAngle = Mathf.Atan2((swordTargetEnemy.transform.position - transform.position).normalized.x, (swordTargetEnemy.transform.position - transform.position).normalized.z) * Mathf.Rad2Deg;
+            //float targetAngle = 0;
 
-                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            //if (swordTargetEnemy != null && Vector3.Distance(swordTargetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange / 3)
+            //{
+            //    targetAngle = Mathf.Atan2((swordTargetEnemy.transform.position - transform.position).normalized.x, (swordTargetEnemy.transform.position - transform.position).normalized.z) * Mathf.Rad2Deg;
 
-                SwordAttack();
+            //    transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            //}
+            //else if (swordTargetEnemy == null) 
+            //{
+            //}
 
-                return;
-            }
+            transform.forward = player.aimDirection;
+            SwordAttack();
 
-            StartCoroutine(MoveTowardsAttack(0.25f, swordTargetEnemy));
+            //StartCoroutine(MoveTowardsAttack(0.25f, swordTargetEnemy));
+            //isAttacking = true;
 
-            canAttack = false;
+            //canAttack = false;
         }
     }
 
-    IEnumerator MoveTowardsAttack(float duration, GameObject target = null)
-    {
-        isAttacking = true;
+    //IEnumerator MoveTowardsAttack(float duration, GameObject target = null)
+    //{
+    //    isAttacking = true;
 
-        StartCoroutine(CompleteAttackMovement(duration));
+    //    StartCoroutine(CompleteAttackMovement(duration));
 
-        //Uses lerp to give the player a small dash forward towards their attack
-        float elaspedTime = 0;
-        Vector3 endVelo = Vector3.zero;
-        Vector3 startVelo = Vector3.zero;
+    //    //Uses lerp to give the player a small dash forward towards their attack
+    //    float elaspedTime = 0;
+    //    Vector3 endVelo = Vector3.zero;
+    //    Vector3 startVelo = Vector3.zero;
 
-        if (swordTargetEnemy == null)
-        {
-            startVelo = player.playerAttributes.Speed * player.aimDirection;
-        }
-        else
-        {
-            startVelo = player.playerAttributes.Speed * (swordTargetEnemy.transform.position - transform.position).normalized;
-        }
+    //    if (swordTargetEnemy == null)
+    //    {
+    //        startVelo = player.playerAttributes.Speed * player.aimDirection;
+    //    }
+    //    else
+    //    {
+    //        startVelo = player.playerAttributes.Speed * (swordTargetEnemy.transform.position - transform.position).normalized;
+    //    }
 
-        float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
+    //    float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+    //    transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
 
-        while (elaspedTime < duration)
-        {
-            body.velocity = Vector3.Lerp(startVelo, endVelo, elaspedTime / duration);
+    //    while (elaspedTime < duration)
+    //    {
+    //        body.velocity = Vector3.Lerp(startVelo, endVelo, elaspedTime / duration);
 
-            elaspedTime += Time.deltaTime;
+    //        elaspedTime += Time.deltaTime;
 
-            yield return null;
-        }
+    //        yield return null;
+    //    }
 
-        yield return null;
-    }
+    //    yield return null;
+    //}
 
     IEnumerator CompleteAttackMovement(float duration)
     {
-        yield return new WaitForSeconds(duration * 0.25f);
-
-        SwordAttack();
-
-        yield return new WaitForSeconds(duration * 0.75f);
+        yield return new WaitForSeconds(duration);
 
         isAttacking = false;
     }
 
     public void SwordAttack()
     {
+        isAttacking = true;
+        body.velocity = Vector3.zero;
+
         //Chooses which animation to play based on which attack number they are in the current combo
         switch (currentAttackNum)
         {
@@ -314,6 +318,7 @@ public class PlayerCombat : MonoBehaviour
         ////////////////////////////////////////////////////////////////////
         canAttack = false;
 
+        StartCoroutine(CompleteAttackMovement(player.playerAttributes.SwordCooldown / 1.5f));
         ActivateSwordHitbox();
     }
 
@@ -586,7 +591,6 @@ public class PlayerCombat : MonoBehaviour
         ArrowSFX.release();
         DrawSFX.release();
     }
-
 }
 
 public enum Planes

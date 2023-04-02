@@ -3154,7 +3154,7 @@ MonoBehaviour:
   defaultSpeed: 15
   defaultSwordDamage: 5
   defaultBowDamage: 5
-  defaultSwordCooldown: 0.4
+  defaultSwordCooldown: 0.5
   defaultBowCooldown: 0.25
   defaultSwordRange: 5
   defaultProjectileSpeed: 20
