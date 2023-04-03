@@ -151,8 +151,6 @@ public class EnemyData : MonoBehaviour
 
         dmgNumber.transform.DOBlendableMoveBy(new Vector3(UnityEngine.Random.Range(0f, 1f), 1.5f, UnityEngine.Random.Range(0f, 1f)), 1f).SetEase(Ease.OutSine);
 
-        //StartCoroutine(TurnOffDamageNumber(dmgNumber, 0.9f));
-
         if (!isDead)
         {
             //For Mushroom Spirit activation if it gets hit before the enemy gets close
@@ -175,13 +173,6 @@ public class EnemyData : MonoBehaviour
             StartCoroutine(ApplyDamageShader());
         }
     }
-
-    //IEnumerator TurnOffDamageNumber(GameObject number, float duration)
-    //{
-    //    yield return new WaitForSeconds(duration);
-
-    //    EnemyPool.Instance.AddNumberToPool(number);
-    //}
 
     IEnumerator ApplyDamageShader()
     {

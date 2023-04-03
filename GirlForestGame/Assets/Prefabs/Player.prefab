@@ -3155,7 +3155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultHealth: 6
   maximumHealth: 12
-  defaultSpeed: 15
+  defaultSpeed: 10
   defaultSwordDamage: 5
   defaultBowDamage: 5
   defaultSwordCooldown: 0.5
