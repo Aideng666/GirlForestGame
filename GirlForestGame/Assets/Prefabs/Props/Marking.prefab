@@ -216,7 +216,7 @@ MonoBehaviour:
   popupText: {fileID: 2365976615763547291}
   colliderDelay: 1
   foxMarkingPrefab: {fileID: 4182992328432831241, guid: f9ef30296899a7543908164c5e6188f6, type: 3}
-  hawkMarkingPrefab: {fileID: 2333215291075920052, guid: c247a73362e1e5a4681b2d39bf7452eb, type: 3}
+  hawkMarkingPrefab: {fileID: 7627642231999576249, guid: f6df1613ad0e34846a3910f5854a0884, type: 3}
   isMarkingPair: 0
 --- !u!1 &6457684140744822540
 GameObject:

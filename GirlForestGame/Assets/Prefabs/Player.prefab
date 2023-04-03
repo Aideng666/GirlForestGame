@@ -3155,7 +3155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultHealth: 6
   maximumHealth: 12
-  defaultSpeed: 10
+  defaultSpeed: 13
   defaultSwordDamage: 5
   defaultBowDamage: 5
   defaultSwordCooldown: 0.5
@@ -3182,9 +3182,9 @@ MonoBehaviour:
   burnTickDelay: 1
   baseWindedDuration: 2
   attributeMultipliers:
-  - 1.33
-  - 1.66
-  - 1.99
+  - 1.2
+  - 1.5
+  - 1.8
   elementMultipliers:
   - 1
   - 2
