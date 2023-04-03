@@ -79,7 +79,9 @@ public class Particle : MonoBehaviour
 
             if (particleType == ParticleTypes.FearfulAura
                 || particleType == ParticleTypes.SwordSlashLR
-                || particleType == ParticleTypes.SwordSlashRL)
+                || particleType == ParticleTypes.SwordSlashRL
+                || particleType == ParticleTypes.BowCharge
+                || particleType == ParticleTypes.BowCharge2)
             {
                 gameObject.SetActive(false);
 

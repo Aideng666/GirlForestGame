@@ -9,6 +9,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] GameObject bowAimCanvas;
     [SerializeField] ParticleSystem swordSlashLR;
     [SerializeField] ParticleSystem swordSlashRL;
+    [SerializeField] ParticleSystem bowChargeParticle;
+    [SerializeField] ParticleSystem bowChargeCompleteParticle;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
     [SerializeField] Shader iFrameShader;
@@ -28,6 +30,8 @@ public class PlayerCombat : MonoBehaviour
     List<EnemyData> bowTargetsInView = new List<EnemyData>();
     bool bowDrawn;
     bool bowCharging;
+    bool chargeParticlePlayed;
+    bool chargeCompleteParticlePlayed;
     bool isDrawingBow;
     bool quickfirePerformed;
     float currentBowChargeTime = 0;
@@ -94,12 +98,32 @@ public class PlayerCombat : MonoBehaviour
             if (body.velocity == Vector3.zero)
             {
                 bowCharging = true;
+
+                print(bowChargeParticle.gameObject.activeSelf);
+                if (!bowChargeParticle.gameObject.activeSelf && !chargeParticlePlayed)
+                {
+                    bowChargeParticle.gameObject.SetActive(true);
+
+                    bowChargeParticle.Stop();
+
+                    var main = bowChargeParticle.main;
+                    main.duration = player.playerAttributes.BowChargeTime - bowChargeParticle.main.startLifetime.constant;
+
+                    bowChargeParticle.Play();
+
+                    chargeParticlePlayed = true;
+
+                    print(main.duration);
+                }
             }
             else
             {
                 bowCharging = false;
                 currentBowChargeTime = 0;
-                currentBowChargeTime = 0;
+
+                bowChargeParticle.gameObject.SetActive(false);
+                chargeParticlePlayed = false;
+                chargeCompleteParticlePlayed = false;
             }
 
             //Charges the bow when standing still
@@ -111,7 +135,15 @@ public class PlayerCombat : MonoBehaviour
 
                     currentBowChargeTime = Mathf.Clamp(currentBowChargeTime, 0, player.playerAttributes.BowChargeTime);
                     ArrowSFX.setParameterByName("SPCharge", currentBowChargeTime);
+                }
+                else if (!chargeCompleteParticlePlayed)
+                {
+                    if (!bowChargeCompleteParticle.gameObject.activeSelf)
+                    {
+                        bowChargeCompleteParticle.gameObject.SetActive(true);
 
+                        chargeCompleteParticlePlayed = true;
+                    }
                 }
             }
 
@@ -121,6 +153,11 @@ public class PlayerCombat : MonoBehaviour
                 GetComponentInChildren<Animator>().SetTrigger("ReleaseArrow");
 
                 bowDrawn = false;
+                chargeParticlePlayed = false;
+                chargeCompleteParticlePlayed = false;
+
+                bowChargeParticle.gameObject.SetActive(false);
+                bowChargeCompleteParticle.gameObject.SetActive(false);
 
                 bowAimCanvas.SetActive(false);
 

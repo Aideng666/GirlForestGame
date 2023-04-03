@@ -3118,6 +3118,8 @@ Transform:
   - {fileID: 5691821877775187208}
   - {fileID: 6075946526382106705}
   - {fileID: 6690669840521788778}
+  - {fileID: 240987160195067763}
+  - {fileID: 6804850286697904405}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3221,6 +3223,8 @@ MonoBehaviour:
   bowAimCanvas: {fileID: 0}
   swordSlashLR: {fileID: 6075946526382106704}
   swordSlashRL: {fileID: 6690669840521788779}
+  bowChargeParticle: {fileID: 2861103870856074283, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+  bowChargeCompleteParticle: {fileID: 7958000674278776134, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
   livingFormMaterial: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
   spiritFormMaterial: {fileID: 2100000, guid: 905ff118dee948847a51283f6b488e8d, type: 2}
   iFrameShader: {fileID: -6465566751694194690, guid: c0315526e57ecfb46a467659e162bc9a, type: 3}
@@ -4185,6 +4189,138 @@ Transform:
   m_Father: {fileID: 5982676203613863567}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1325766545186254755
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5982676203613863567}
+    m_Modifications:
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512238239510037902, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+      propertyPath: m_Name
+      value: BowCharge2Particle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+--- !u!4 &6804850286697904405 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5479120351969121974, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+  m_PrefabInstance: {fileID: 1325766545186254755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2660649107844266841
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5982676203613863567}
+    m_Modifications:
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074283, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074283, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: InitialModule.startSizeZ.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074285, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+      propertyPath: m_Name
+      value: Bow Charge Particle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+--- !u!4 &240987160195067763 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2861103870856074282, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
+  m_PrefabInstance: {fileID: 2660649107844266841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3690288389980190589
 PrefabInstance:
   m_ObjectHideFlags: 0
