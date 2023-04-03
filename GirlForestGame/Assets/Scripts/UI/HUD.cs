@@ -192,11 +192,15 @@ public class HUD : MonoBehaviour
 
     public void UpdateMarkingsPanel(Sprite markingSprite, int index)
     {
+        UpdateAttributes();
+
         markingImages[index].sprite = markingSprite;
     }
 
     public void UpdateTotemHUD(Sprite totemSprite, string totemName, string totemDesc)
     {
+        UpdateAttributes();
+
         Sequence sequence = DOTween.Sequence();
 
         totemImage.sprite = totemSprite;
