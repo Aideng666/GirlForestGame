@@ -253,16 +253,19 @@ public class NodeMapManager : MonoBehaviour
 
     void SetHighlighted(MapNode node)
     {
-        highlightedNode = node;
-        node.transform.localScale = node.defaultSize * 2;
-
-        for (int i = 0; i < MapGenerator.Instance.Nodes.Count; i++)
+        if (node.Selectable)
         {
-            MapNode currentNode = MapGenerator.Instance.Nodes[i].GetComponent<MapNode>();
+            highlightedNode = node;
+            node.transform.localScale = node.defaultSize * 2;
 
-            if (node != currentNode)
+            for (int i = 0; i < MapGenerator.Instance.Nodes.Count; i++)
             {
-                currentNode.transform.localScale = currentNode.defaultSize;
+                MapNode currentNode = MapGenerator.Instance.Nodes[i].GetComponent<MapNode>();
+
+                if (node != currentNode)
+                {
+                    currentNode.transform.localScale = currentNode.defaultSize;
+                }
             }
         }
     }
