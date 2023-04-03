@@ -107,7 +107,9 @@ public class HUD : MonoBehaviour
         else if (player.playerCombat.Form == Planes.Astral)
         {
             planeImage.sprite = astralSprite;
-        }      
+        }
+
+        UpdateAttributes();
     }
 
     public void ToggleHUD(bool hudOn)
@@ -192,15 +194,11 @@ public class HUD : MonoBehaviour
 
     public void UpdateMarkingsPanel(Sprite markingSprite, int index)
     {
-        UpdateAttributes();
-
         markingImages[index].sprite = markingSprite;
     }
 
     public void UpdateTotemHUD(Sprite totemSprite, string totemName, string totemDesc)
     {
-        UpdateAttributes();
-
         Sequence sequence = DOTween.Sequence();
 
         totemImage.sprite = totemSprite;
@@ -212,8 +210,6 @@ public class HUD : MonoBehaviour
 
     void ToggleAttributePanel()
     {
-        UpdateAttributes();
-
         if (!attributePanelActive /*&& (attributePanelTween == null || !attributePanelTween.IsActive())*/)
         {
             /*attributePanelTween = */attributePanel.transform.DOMove(attributePanel.transform.position +

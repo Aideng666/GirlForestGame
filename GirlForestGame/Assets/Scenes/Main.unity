@@ -1876,6 +1876,7 @@ MonoBehaviour:
   mushroomPrefab: {fileID: 700446156201332264, guid: a2255e9f0a3630840be6a4ed00ea066d, type: 3}
   draugrPrefab: {fileID: 3472284349790607284, guid: e015bde69fb0bf44cbe025ccc15f3021, type: 3}
   stoneGolemPrefab: {fileID: 700446156201332264, guid: 0d5314412039cca449fbfd5368b2ae1a, type: 3}
+  dmgNumbersPrefab: {fileID: 7321655420658636318, guid: 6c7be3949705fea4d812f16330053e89, type: 3}
 --- !u!4 &171005279
 Transform:
   m_ObjectHideFlags: 0

@@ -27,7 +27,5 @@ public class FinalAttackTransitionBehaviour : StateMachineBehaviour
         player.playerCombat.SetCurrentAttackNum(1);
 
         animator.ResetTrigger("Attack3");
-
-        Debug.Log("Reached Final Transition");
     }
 }

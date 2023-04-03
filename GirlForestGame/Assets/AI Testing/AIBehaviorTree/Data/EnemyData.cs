@@ -1,5 +1,9 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -101,8 +105,8 @@ public class EnemyData : MonoBehaviour
         player.playerCombat.RemoveBowTarget(this);
         EnemyPool.Instance.AddEnemyToPool(enemyType, gameObject);
 
-        float coinRoll = Random.Range(0f, 1f);
-        float heartRoll = Random.Range(0f, 1f);
+        float coinRoll = UnityEngine.Random.Range(0f, 1f);
+        float heartRoll = UnityEngine.Random.Range(0f, 1f);
 
         if (coinRoll < defaultCoinDropChance + player.playerAttributes.Luck)
         {
@@ -116,7 +120,7 @@ public class EnemyData : MonoBehaviour
 
         if (heartRoll < defaultHealthDropChance + (player.playerAttributes.Luck / 2))
         {
-            int heartToDrop = Random.Range(0, 2);
+            int heartToDrop = UnityEngine.Random.Range(0, 2);
 
             if (heartToDrop == 0)
             {
@@ -141,6 +145,14 @@ public class EnemyData : MonoBehaviour
     /// </summary>
     public void TakeDamage(float damageAmount) //Take Damage applies damage and gives knockback based on the damage, unless false
     {
+        double rounded = Convert.ToDouble(Convert.ToInt32(damageAmount * 10)) / 10;
+
+        GameObject dmgNumber = EnemyPool.Instance.GetDmgNumberFromPool(new Vector3(transform.position.x, 1.5f, transform.position.z), rounded.ToString());
+
+        dmgNumber.transform.DOBlendableMoveBy(new Vector3(UnityEngine.Random.Range(0f, 1f), 1.5f, UnityEngine.Random.Range(0f, 1f)), 1f).SetEase(Ease.OutSine);
+
+        //StartCoroutine(TurnOffDamageNumber(dmgNumber, 0.9f));
+
         if (!isDead)
         {
             //For Mushroom Spirit activation if it gets hit before the enemy gets close
@@ -153,6 +165,8 @@ public class EnemyData : MonoBehaviour
 
             if (curHealth <= 0)
             {
+                EnemyPool.Instance.AddNumberToPool(dmgNumber);
+
                 EnemyDeath();
 
                 return;
@@ -161,6 +175,13 @@ public class EnemyData : MonoBehaviour
             StartCoroutine(ApplyDamageShader());
         }
     }
+
+    //IEnumerator TurnOffDamageNumber(GameObject number, float duration)
+    //{
+    //    yield return new WaitForSeconds(duration);
+
+    //    EnemyPool.Instance.AddNumberToPool(number);
+    //}
 
     IEnumerator ApplyDamageShader()
     {
