@@ -11,6 +11,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] ParticleSystem swordSlashRL;
     [SerializeField] ParticleSystem bowChargeParticle;
     [SerializeField] ParticleSystem bowChargeCompleteParticle;
+    [SerializeField] GameObject bowAimArrowUI;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
     [SerializeField] Shader iFrameShader;
@@ -69,7 +70,7 @@ public class PlayerCombat : MonoBehaviour
         iFramesLayer = LayerMask.NameToLayer("IFrames");
         defaultLayer = LayerMask.NameToLayer("Default");
 
-        bowAimCanvas.SetActive(false);
+        bowAimArrowUI.SetActive(false);
 
         player = PlayerController.Instance;
         body = GetComponent<Rigidbody>();
@@ -96,7 +97,7 @@ public class PlayerCombat : MonoBehaviour
         //Detects the release of the arrow once the bow is completely drawn back
         if (bowDrawn)
         {
-            bowAimCanvas.SetActive(true);
+            bowAimArrowUI.SetActive(true);
             if (body.velocity == Vector3.zero)
             {
                 bowCharging = true;
@@ -162,6 +163,7 @@ public class PlayerCombat : MonoBehaviour
                 bowChargeCompleteParticle.gameObject.SetActive(false);
 
                 bowAimCanvas.SetActive(false);
+                bowAimArrowUI.SetActive(false);
 
                 if (quickfirePerformed)
                 {
@@ -403,6 +405,7 @@ public class PlayerCombat : MonoBehaviour
 
             canAttack = false;
             isDrawingBow = true;
+            bowAimArrowUI.SetActive(true);
             DrawSFX.start();
 
             currentAttackNum = 1;
