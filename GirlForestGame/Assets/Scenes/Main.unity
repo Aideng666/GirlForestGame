@@ -1183,7 +1183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 426680050264984925, guid: 167403bfb992f9048904a99d5fb9d225, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 426680050264984925, guid: 167403bfb992f9048904a99d5fb9d225, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1191,7 +1191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 426680050264984925, guid: 167403bfb992f9048904a99d5fb9d225, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 426680050264984925, guid: 167403bfb992f9048904a99d5fb9d225, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1231,11 +1231,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 426680050264984925, guid: 167403bfb992f9048904a99d5fb9d225, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 426680050264984925, guid: 167403bfb992f9048904a99d5fb9d225, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 426680050264984925, guid: 167403bfb992f9048904a99d5fb9d225, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4753,7 +4753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &455256263
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20681,7 +20681,6 @@ PrefabInstance:
       propertyPath: bowAimArrowUI
       value: 
       objectReference: {fileID: 874768133}
-      objectReference: {fileID: 1062661130}
     - target: {fileID: 2345695844193929904, guid: 1da9e1836e4933240b83561ee7a11af8, type: 3}
       propertyPath: bowChargeParticle
       value: 
