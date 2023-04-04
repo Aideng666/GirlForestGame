@@ -219,5 +219,7 @@ public class Particle : MonoBehaviour
         FireSFX.keyOff();
         FireSFX.release();
         WindBlastSFX.release();
+        WindSFX.release();
+        WindSFX.keyOff();
     }
 }

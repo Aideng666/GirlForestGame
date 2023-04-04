@@ -5,7 +5,7 @@
 			<value>Shoot</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{8acf3e88-a3cd-4e57-ac5e-1fef6918865e}</destination>
@@ -61,7 +61,7 @@
 			<value>7</value>
 		</property>
 		<property name="triggerCooldown">
-			<value>20</value>
+			<value>60</value>
 		</property>
 	</object>
 	<object class="MarkerTrack" id="{04aaef8a-0500-40d1-8858-423abcef0254}" />
@@ -126,6 +126,7 @@
 	<object class="MixerBusEffectChain" id="{65f1358e-fa00-4fda-9601-cdf01fef6c35}">
 		<relationship name="effects">
 			<destination>{261294ca-b03f-4d88-a6e1-52c7e133f392}</destination>
+			<destination>{bb2c2d8a-bb12-4a3c-a72d-52790fd63f6b}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{9887e68c-2eaa-4f97-8725-76eba92a4016}" />
@@ -145,6 +146,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{13c57e40-f646-4928-a521-dce9d3563508}" />
 	<object class="MixerBusFader" id="{261294ca-b03f-4d88-a6e1-52c7e133f392}" />
+	<object class="SpatialiserEffect" id="{bb2c2d8a-bb12-4a3c-a72d-52790fd63f6b}">
+		<property name="minimumDistance">
+			<value>6.95000029</value>
+		</property>
+		<property name="maximumDistance">
+			<value>50</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{3c5baa13-ca37-4b20-ada7-2779edae4196}">
 		<property name="position">
 			<value>0.25521335807050094</value>

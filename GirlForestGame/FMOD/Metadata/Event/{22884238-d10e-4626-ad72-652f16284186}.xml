@@ -5,7 +5,7 @@
 			<value>Gas</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{8acf3e88-a3cd-4e57-ac5e-1fef6918865e}</destination>
@@ -132,6 +132,7 @@
 	<object class="MixerBusEffectChain" id="{e1dab1b2-4b36-46aa-89e4-1bbd0c494540}">
 		<relationship name="effects">
 			<destination>{6b984525-8a96-46d4-8ad4-c9083b996738}</destination>
+			<destination>{24cfed1d-7b27-457b-afc7-74c538619151}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1deb0368-9a6f-4e2c-b41d-281834fad128}" />
@@ -159,6 +160,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{d1136a72-819f-4fa4-bdfa-906adc7d783a}" />
 	<object class="MixerBusFader" id="{6b984525-8a96-46d4-8ad4-c9083b996738}" />
+	<object class="SpatialiserEffect" id="{24cfed1d-7b27-457b-afc7-74c538619151}">
+		<property name="minimumDistance">
+			<value>5.30000019</value>
+		</property>
+		<property name="maximumDistance">
+			<value>70</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{f82ea10c-7a8a-470f-8a7b-246491b770e0}">
 		<property name="position">
 			<value>0</value>

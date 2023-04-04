@@ -37,19 +37,14 @@ public class AI_Boar_ThrowAttack : AI_BaseClass
     int axeSelection;
     [HideInInspector] public FMOD.Studio.EventInstance throwSFX;
     [HideInInspector] public FMOD.Studio.EventInstance catchSFX;
-    //[HideInInspector] public FMOD.Studio.EventInstance flyLSFX;
-    //[HideInInspector] public FMOD.Studio.EventInstance flyRSFX;
+
     [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
     private void OnEnable()
     {
        throwSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Throw");
        catchSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Catch");
-       //flyLSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Axe Fly");
-       //flyRSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Axe Fly");
-       signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
 
-       //FMODUnity.RuntimeManager.AttachInstanceToGameObject(flyLSFX, leftAxe);
-       //FMODUnity.RuntimeManager.AttachInstanceToGameObject(flyRSFX, rightAxe);
+       signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
 
     }
 
