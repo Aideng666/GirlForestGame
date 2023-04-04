@@ -30,7 +30,7 @@ public class EnemyData : MonoBehaviour
 
     [SerializeField] ParticleSystem fireEffect;
     [SerializeField] ParticleSystem windedEffect;
-    [SerializeField] ParticleSystem fearedEffect;
+    //[SerializeField] ParticleSystem fearedEffect;
     
     float damageShaderDuration = 0.4f;
     bool damageShaderApplied = false;
@@ -54,12 +54,19 @@ public class EnemyData : MonoBehaviour
 
     private void OnEnable()
     {
-        curHealth = maxHealth * statMultiplierPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1];
+        if (NodeMapManager.Instance != null)
+        {
+            curHealth = maxHealth * statMultiplierPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1];
+        }
+        else
+        {
+            curHealth = maxHealth;
+        }
         isDead = false;
 
         fireEffect.Stop();
         windedEffect.Stop();
-        fearedEffect.Stop();
+        //fearedEffect.Stop();
     }
 
     private void Start()

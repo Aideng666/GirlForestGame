@@ -8,6 +8,7 @@ public class NodeMapManager : MonoBehaviour
     [SerializeField] Camera dungeonCam;
     [SerializeField] Camera mapCam;
     [SerializeField] GameObject gameHUD;
+    [SerializeField] Minimap minimap;
     [SerializeField] int totalMapCycles = 3;
 
     Vector3 mapCamStartPos = new Vector3(0, -70, 12);
@@ -38,6 +39,22 @@ public class NodeMapManager : MonoBehaviour
     {
         mapCam.enabled = true;
         dungeonCam.enabled = false;
+        mapUpdated = false;
+        currentLevel = 0;
+        currentCycle = 1;
+        mapActive = true;
+
+        gameHUD.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        mapCam.enabled = true;
+        dungeonCam.enabled = false;
+        mapUpdated = false;
+        currentLevel = 0;
+        currentCycle = 1;
+        mapActive = true;
 
         gameHUD.SetActive(false);
     }
@@ -178,12 +195,12 @@ public class NodeMapManager : MonoBehaviour
                                 closestParent = entry;
                             }
                         }
-
                         SetHighlighted(closestParent);
                     }
                 }
             }
 
+            //Highlights if mouse control is active
             if (PlayerController.Instance.MouseControlActive())
             {
                 Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -191,7 +208,6 @@ public class NodeMapManager : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, 100))
                 {
-
                     if (hit.collider.gameObject.TryGetComponent(out MapNode node))
                     {
                         SetHighlighted(node);
@@ -253,6 +269,8 @@ public class NodeMapManager : MonoBehaviour
 
     void SetHighlighted(MapNode node)
     {
+        print("Node Highlighted " + node.name);
+
         if (node.Selectable)
         {
             highlightedNode = node;
@@ -274,7 +292,7 @@ public class NodeMapManager : MonoBehaviour
     {
         if (!nextLevelSet)
         {
-            Minimap.Instance.ResetMap();
+            minimap.ResetMap();
 
             if (currentLevel == MapGenerator.Instance.GetEndNodeDistance() && currentCycle >= totalMapCycles)
             {
@@ -329,11 +347,10 @@ public class NodeMapManager : MonoBehaviour
 
     IEnumerator WinGame()
     {
-        print("You Win!");
-
         yield return new WaitForSeconds(1);
 
-        LoadingScreen.Instance.LoadScene("SplashScreen");
+        UIManager.Instance.ToggleWinScreen();
+        //LoadingScreen.Instance.LoadScene("SplashScreen");
     }
 
     public void SetPreviousNode(MapNode node)

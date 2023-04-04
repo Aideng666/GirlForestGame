@@ -19,24 +19,12 @@ public class Minimap : MonoBehaviour
 
     [SerializeField] Sprite[] roomIcons;
 
-    public static Minimap Instance { get; set; }
+    //public static Minimap Instance { get; set; }
 
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //}
 
     public void ResetMap()
     {

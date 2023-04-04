@@ -73,6 +73,8 @@ public class PlayerCombat : MonoBehaviour
 
         player = PlayerController.Instance;
         body = GetComponent<Rigidbody>();
+
+        Form = Planes.Terrestrial;
     }
 
     private void Awake()
