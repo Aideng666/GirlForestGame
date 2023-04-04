@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] int totalRooms = 15;
     [SerializeField] int rareRoomChance = 5;
     [SerializeField] GameObject roomPrefab;
+    [SerializeField] Minimap minimap;
 
     List<Room> rooms = new List<Room>();
     List<Vector2> roomSpots = new List<Vector2>();
@@ -88,10 +90,10 @@ public class DungeonGenerator : MonoBehaviour
 
         RespawnRoomModel(RoomTypes.Totem);
 
-        if (Random.Range(1, 101) <= rareRoomChance + (PlayerController.Instance.playerAttributes.Luck * 100))
-        {
-            RespawnRoomModel(RoomTypes.Rare);
-        }
+        //if (Random.Range(1, 101) <= rareRoomChance + (PlayerController.Instance.playerAttributes.Luck * 100))
+        //{
+            //RespawnRoomModel(RoomTypes.Rare);
+        //}
 
         //Turns off the exits for parts of the rooms that have no connections
         for (int i = 0; i < rooms.Count; i++)
@@ -99,8 +101,11 @@ public class DungeonGenerator : MonoBehaviour
             rooms[i].UpdateVisualExits();
         }
 
-        Minimap.Instance.ResetMap();
-        Minimap.Instance.VisitRoom(currentRoom, Directions.None);
+        //if (Minimap.Instance != null)
+        //{
+            minimap.ResetMap();
+            minimap.VisitRoom(currentRoom, Directions.None);
+        //}
     }
 
     void SpawnRoom(Room originRoom = null, Directions directionFromOrigin = Directions.None, string roomModelFolderName = "Rooms")

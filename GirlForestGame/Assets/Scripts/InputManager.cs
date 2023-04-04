@@ -54,8 +54,8 @@ public class InputManager : MonoBehaviour
         bowAttackAction = playerInput.actions["BowAttack"];
         completeRoomAction = playerInput.actions["CompleteRoom"];
         changeFormAction = playerInput.actions["ChangeForm"];
-        selectSwordAction = playerInput.actions["SelectSword"];
-        selectBowAction = playerInput.actions["SelectBow"];
+        selectSwordAction = playerInput.actions["AttachToSword"];
+        selectBowAction = playerInput.actions["AttachToBow"];
         mapScrollAction = playerInput.actions["MapScroll"];
         regenMapAction = playerInput.actions["RegenerateMap"];
         swapActionMapAction = playerInput.actions["SwapActionMap"];

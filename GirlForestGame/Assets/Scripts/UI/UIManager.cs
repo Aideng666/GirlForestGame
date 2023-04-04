@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] RoomTransition fadePanel;
     [SerializeField] GameObject controlsPanel;
+    [SerializeField] GameObject deathPanel;
+    [SerializeField] GameObject winPanel;
     [SerializeField] InputActionAsset inputActions;
 
     public static UIManager Instance { get; set; }
@@ -44,5 +46,23 @@ public class UIManager : MonoBehaviour
         }
 
         PlayerPrefs.DeleteKey("rebinds");
+    }
+
+    public void ToggleDeathScreen()
+    {
+        deathPanel.SetActive(true);
+    }
+
+    public void ToggleWinScreen()
+    {
+        winPanel.SetActive(true);
+    }
+
+    public void LoadScene(string name)
+    {
+        deathPanel.SetActive(false);
+        winPanel.SetActive(false);
+
+        LoadingScreen.Instance.LoadScene(name);
     }
 }
