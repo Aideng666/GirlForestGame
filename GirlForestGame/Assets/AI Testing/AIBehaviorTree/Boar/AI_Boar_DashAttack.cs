@@ -67,7 +67,6 @@ public class AI_Boar_DashAttack : AI_BaseClass
                     {
                         if (hit.TryGetComponent(out PlayerCombat playerHit))
                         {
-                            //player.playerCombat.ApplyKnockback(agent.transform.forward, 5);
                             playerHit.TakeDamage();
                         }
                     }

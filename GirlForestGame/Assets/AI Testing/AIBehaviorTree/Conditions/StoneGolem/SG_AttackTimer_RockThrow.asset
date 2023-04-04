@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edafd8dd0b0ef644a9ddf3a1d68b6c4d, type: 3}
   m_Name: SG_AttackTimer_RockThrow
   m_EditorClassIdentifier: 
-  attackTime: 5
+  attackTime: 3
   boolParameter: Can_Attack

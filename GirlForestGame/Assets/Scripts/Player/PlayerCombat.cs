@@ -7,6 +7,10 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] GameObject arrowPrefab;
     [SerializeField] GameObject bowAimCanvas;
+    [SerializeField] ParticleSystem swordSlashLR;
+    [SerializeField] ParticleSystem swordSlashRL;
+    [SerializeField] ParticleSystem bowChargeParticle;
+    [SerializeField] ParticleSystem bowChargeCompleteParticle;
     [SerializeField] Material livingFormMaterial;
     [SerializeField] Material spiritFormMaterial;
     [SerializeField] Shader iFrameShader;
@@ -26,6 +30,8 @@ public class PlayerCombat : MonoBehaviour
     List<EnemyData> bowTargetsInView = new List<EnemyData>();
     bool bowDrawn;
     bool bowCharging;
+    bool chargeParticlePlayed;
+    bool chargeCompleteParticlePlayed;
     bool isDrawingBow;
     bool quickfirePerformed;
     float currentBowChargeTime = 0;
@@ -67,6 +73,8 @@ public class PlayerCombat : MonoBehaviour
 
         player = PlayerController.Instance;
         body = GetComponent<Rigidbody>();
+
+        Form = Planes.Terrestrial;
     }
 
     private void Awake()
@@ -92,12 +100,32 @@ public class PlayerCombat : MonoBehaviour
             if (body.velocity == Vector3.zero)
             {
                 bowCharging = true;
+
+                print(bowChargeParticle.gameObject.activeSelf);
+                if (!bowChargeParticle.gameObject.activeSelf && !chargeParticlePlayed)
+                {
+                    bowChargeParticle.gameObject.SetActive(true);
+
+                    bowChargeParticle.Stop();
+
+                    var main = bowChargeParticle.main;
+                    main.duration = player.playerAttributes.BowChargeTime - bowChargeParticle.main.startLifetime.constant;
+
+                    bowChargeParticle.Play();
+
+                    chargeParticlePlayed = true;
+
+                    print(main.duration);
+                }
             }
             else
             {
                 bowCharging = false;
                 currentBowChargeTime = 0;
-                currentBowChargeTime = 0;
+
+                bowChargeParticle.gameObject.SetActive(false);
+                chargeParticlePlayed = false;
+                chargeCompleteParticlePlayed = false;
             }
 
             //Charges the bow when standing still
@@ -109,7 +137,15 @@ public class PlayerCombat : MonoBehaviour
 
                     currentBowChargeTime = Mathf.Clamp(currentBowChargeTime, 0, player.playerAttributes.BowChargeTime);
                     ArrowSFX.setParameterByName("SPCharge", currentBowChargeTime);
+                }
+                else if (!chargeCompleteParticlePlayed)
+                {
+                    if (!bowChargeCompleteParticle.gameObject.activeSelf)
+                    {
+                        bowChargeCompleteParticle.gameObject.SetActive(true);
 
+                        chargeCompleteParticlePlayed = true;
+                    }
                 }
             }
 
@@ -119,6 +155,11 @@ public class PlayerCombat : MonoBehaviour
                 GetComponentInChildren<Animator>().SetTrigger("ReleaseArrow");
 
                 bowDrawn = false;
+                chargeParticlePlayed = false;
+                chargeCompleteParticlePlayed = false;
+
+                bowChargeParticle.gameObject.SetActive(false);
+                bowChargeCompleteParticle.gameObject.SetActive(false);
 
                 bowAimCanvas.SetActive(false);
 
@@ -180,6 +221,24 @@ public class PlayerCombat : MonoBehaviour
             }
             formSFX.start();
         }
+
+        //Sets the radius of the sword slashes
+        if (swordSlashLR.gameObject.activeSelf) 
+        {
+            var particleShape = swordSlashLR.shape;
+
+            particleShape.radius = player.playerAttributes.SwordRange / 2;
+
+            //swordSlashLR.GetComponent<SphereCollider>().radius = particleShape.radius;
+        }
+        if (swordSlashRL.gameObject.activeSelf)
+        {
+            var particleShape = swordSlashRL.shape;
+
+            particleShape.radius = player.playerAttributes.SwordRange / 2;
+
+            //swordSlashRL.GetComponent<SphereCollider>().radius = particleShape.radius;
+        }
     }
 
     public void ApplyKnockback(Vector3 direction, float power)
@@ -223,98 +282,116 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canAttack)
         {
-            if (swordTargetEnemy != null && Vector3.Distance(swordTargetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange / 3)
-            {
-                float targetAngle = Mathf.Atan2((swordTargetEnemy.transform.position - transform.position).normalized.x, (swordTargetEnemy.transform.position - transform.position).normalized.z) * Mathf.Rad2Deg;
+            //float targetAngle = 0;
 
-                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            //if (swordTargetEnemy != null && Vector3.Distance(swordTargetEnemy.transform.position, transform.position) <= player.playerAttributes.SwordRange / 3)
+            //{
+            //    targetAngle = Mathf.Atan2((swordTargetEnemy.transform.position - transform.position).normalized.x, (swordTargetEnemy.transform.position - transform.position).normalized.z) * Mathf.Rad2Deg;
 
-                SwordAttack();
+            //    transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            //}
+            //else if (swordTargetEnemy == null) 
+            //{
+            //}
 
-                return;
-            }
+            transform.forward = player.aimDirection;
+            SwordAttack();
 
-            StartCoroutine(MoveTowardsAttack(0.25f, swordTargetEnemy));
+            //StartCoroutine(MoveTowardsAttack(0.25f, swordTargetEnemy));
+            //isAttacking = true;
 
-            canAttack = false;
+            //canAttack = false;
         }
     }
 
-    IEnumerator MoveTowardsAttack(float duration, GameObject target = null)
+    //IEnumerator MoveTowardsAttack(float duration, GameObject target = null)
+    //{
+    //    isAttacking = true;
+
+    //    StartCoroutine(CompleteAttackMovement(duration));
+
+    //    //Uses lerp to give the player a small dash forward towards their attack
+    //    float elaspedTime = 0;
+    //    Vector3 endVelo = Vector3.zero;
+    //    Vector3 startVelo = Vector3.zero;
+
+    //    if (swordTargetEnemy == null)
+    //    {
+    //        startVelo = player.playerAttributes.Speed * player.aimDirection;
+    //    }
+    //    else
+    //    {
+    //        startVelo = player.playerAttributes.Speed * (swordTargetEnemy.transform.position - transform.position).normalized;
+    //    }
+
+    //    float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
+
+    //    transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+    //    while (elaspedTime < duration)
+    //    {
+    //        body.velocity = Vector3.Lerp(startVelo, endVelo, elaspedTime / duration);
+
+    //        elaspedTime += Time.deltaTime;
+
+    //        yield return null;
+    //    }
+
+    //    yield return null;
+    //}
+
+    IEnumerator CompleteAttack(float duration)
     {
-        isAttacking = true;
+        yield return new WaitForSeconds(duration);
 
-        StartCoroutine(CompleteAttackMovement(duration));
-
-        //Uses lerp to give the player a small dash forward towards their attack
-        float elaspedTime = 0;
-        Vector3 endVelo = Vector3.zero;
-        Vector3 startVelo = Vector3.zero;
-
-        if (swordTargetEnemy == null)
-        {
-            startVelo = player.playerAttributes.Speed * player.aimDirection;
-        }
-        else
-        {
-            startVelo = player.playerAttributes.Speed * (swordTargetEnemy.transform.position - transform.position).normalized;
-        }
-
-        float targetAngle = Mathf.Atan2(startVelo.x, startVelo.z) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-
-        while (elaspedTime < duration)
-        {
-            body.velocity = Vector3.Lerp(startVelo, endVelo, elaspedTime / duration);
-
-            elaspedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        yield return null;
-    }
-
-    IEnumerator CompleteAttackMovement(float duration)
-    {
-        yield return new WaitForSeconds(duration * 0.25f);
-
-        SwordAttack();
-
-        yield return new WaitForSeconds(duration * 0.75f);
+        swordSlashLR.gameObject.SetActive(false);
+        swordSlashRL.gameObject.SetActive(false);
 
         isAttacking = false;
     }
 
     public void SwordAttack()
     {
+        isAttacking = true;
+        body.velocity = Vector3.zero;
+        canAttack = false;
+
+        StartCoroutine(CompleteAttack(player.playerAttributes.SwordCooldown / 1.5f));
+        ActivateSwordHitbox();
+
         //Chooses which animation to play based on which attack number they are in the current combo
         switch (currentAttackNum)
         {
             case 1:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack1");
+                swordSlashLR.gameObject.SetActive(true);
                 SwordSFX.start();
+
+                SetCanAttack(true, player.playerAttributes.SwordCooldown / 1.5f);
                 break;
 
             case 2:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack2");
+                swordSlashRL.gameObject.SetActive(true);
                 SwordSFX.keyOff();
+
+                SetCanAttack(true, player.playerAttributes.SwordCooldown / 1.5f);
                 break;
 
             case 3:
 
                 GetComponentInChildren<Animator>().SetTrigger("Attack3");
+                swordSlashRL.gameObject.SetActive(true);
                 SwordSFX.keyOff();
+
+                player.playerCombat.SetCanAttack(false, 0);
+                SetCanAttack(true, player.playerAttributes.SwordCooldown);
                 break;
         }
 
         ////////////////////////////////////////////////////////////////////
-        canAttack = false;
-
-        ActivateSwordHitbox();
     }
 
     //Initializes the drawing of the bow
@@ -327,6 +404,8 @@ public class PlayerCombat : MonoBehaviour
             canAttack = false;
             isDrawingBow = true;
             DrawSFX.start();
+
+            currentAttackNum = 1;
         }
     }
 
@@ -546,21 +625,21 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void SetCanAttack(bool value, bool applyCooldown, Weapons weaponChoice = Weapons.None)
+    public void SetCanAttack(bool value, float cooldown/*, Weapons weaponChoice = Weapons.None*/)
     {
         if (value)
         {
-            if (applyCooldown)
+            if (cooldown > 0)
             {
-                if (weaponChoice == Weapons.Sword)
-                {
-                    StartCoroutine(BeginAttackCooldown(player.playerAttributes.SwordCooldown));
-                }
+                //if (weaponChoice == Weapons.Sword)
+                //{
+                    StartCoroutine(BeginAttackCooldown(cooldown));
+                //}
 
-                if (weaponChoice == Weapons.Bow)
-                {
-                    StartCoroutine(BeginAttackCooldown(player.playerAttributes.BowCooldown));
-                }
+                //if (weaponChoice == Weapons.Bow)
+                //{
+                //    StartCoroutine(BeginAttackCooldown(cooldown));
+                //}
 
                 return;
             }
@@ -586,7 +665,6 @@ public class PlayerCombat : MonoBehaviour
         ArrowSFX.release();
         DrawSFX.release();
     }
-
 }
 
 public enum Planes

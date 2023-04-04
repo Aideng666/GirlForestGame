@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyPool : MonoBehaviour
@@ -9,13 +10,18 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] GameObject draugrPrefab;
     [SerializeField] GameObject stoneGolemPrefab;
 
+    //For Damage Numbers UI
+    [SerializeField] GameObject dmgNumbersPrefab;
+
     public Queue<GameObject> availableBoars { get; private set; } = new Queue<GameObject>();
     public Queue<GameObject> availableMushrooms { get; private set; } = new Queue<GameObject>();
     public Queue<GameObject> availableDraugrs { get; private set; } = new Queue<GameObject>();
     public Queue<GameObject> availableGolems { get; private set; } = new Queue<GameObject>();
+    public Queue<GameObject> availableNumbers { get; private set; } = new Queue<GameObject>();
 
     float enemySpawnWallOffset = 5;
     int numEachEnemy = 5;
+    int amountOfDmgNumbers = 10;
 
     public static EnemyPool Instance { get; private set; }
 
@@ -109,6 +115,32 @@ public class EnemyPool : MonoBehaviour
         return instance;
     }
 
+    public GameObject GetDmgNumberFromPool(Vector3 position, string text)
+    {
+        if (availableNumbers.Count == 0)
+        {
+            CreateNumberPool();
+        }
+
+        GameObject instance = availableNumbers.Dequeue();
+        instance.transform.position = position;
+        instance.SetActive(true);
+
+        instance.GetComponentInChildren<TextMeshProUGUI>().text = text;
+
+        return instance;
+    }
+
+    public void CreateNumberPool()
+    {
+        for (int i = 0; i < amountOfDmgNumbers; i++)
+        {
+            GameObject instanceToAdd = Instantiate(dmgNumbersPrefab);
+            instanceToAdd.transform.SetParent(transform);
+            AddNumberToPool(instanceToAdd);
+        }
+    }
+
     private void CreatePools()
     {
         for (int i = 0; i < numEachEnemy; ++i)
@@ -172,6 +204,12 @@ public class EnemyPool : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void AddNumberToPool(GameObject instance)
+    {
+        instance.SetActive(false);
+        availableNumbers.Enqueue(instance);
     }
 }
 
