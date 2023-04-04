@@ -11,7 +11,7 @@ public class Room : MonoBehaviour
     //[SerializeField] GameObject heartPrefab;
     //[SerializeField] GameObject coinPrefab; 
 
-    Room[] connectedRooms = new Room[4]; //0,1,2,3 = North, South, East, West respectively
+    public Room[] connectedRooms = new Room[4]; //0,1,2,3 = North, South, East, West respectively
     Room originRoom; //The room that this room was originally attached to
 
     RoomObject[] possibleRooms; // List of all of the possible room models for the room to pick

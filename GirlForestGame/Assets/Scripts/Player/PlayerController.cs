@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     //Movement
     [SerializeField] GameObject aimColliders;
+    [SerializeField] Minimap minimap;
     [SerializeField] bool controlWithMouse;
     Rigidbody body;
     Vector3 moveDir;
@@ -178,7 +179,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        LoadingScreen.Instance.LoadScene("SplashScreen");
+        UIManager.Instance.ToggleDeathScreen();
     }
 
     public bool MouseControlActive()
@@ -216,7 +217,7 @@ public class PlayerController : MonoBehaviour
             case "Enemy":
 
                 playerCombat.TakeDamage();
-                playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
+                //playerCombat.ApplyKnockback((transform.position - collision.gameObject.transform.position), 2);
                 break;
 
             case "EnemyProjectile":
@@ -224,7 +225,7 @@ public class PlayerController : MonoBehaviour
                 if (collision.gameObject.GetComponentInParent<EnemyData>() == null || collision.gameObject.GetComponentInParent<EnemyData>().IsAttacking)
                 {
                     playerCombat.TakeDamage();
-                    playerCombat.ApplyKnockback((transform.position - collision.gameObject.gameObject.transform.position), 2);
+                    //playerCombat.ApplyKnockback((transform.position - collision.gameObject.gameObject.transform.position), 2);
                 }
 
                 break;
@@ -289,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
         transform.position = updatedPlayerPos;
 
-        Minimap.Instance.VisitRoom(room, dirOfPrevRoom);
+        minimap.VisitRoom(room, dirOfPrevRoom);
 
         yield return null;
 

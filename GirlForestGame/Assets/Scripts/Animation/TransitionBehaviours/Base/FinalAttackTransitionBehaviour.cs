@@ -20,9 +20,9 @@ public class FinalAttackTransitionBehaviour : StateMachineBehaviour
             player.playerInventory.GetTotemFromList(typeof(BladeMasterTotem)).Totem.RemoveEffect();
         }
 
-        player.playerCombat.SetCanAttack(false, false);
+        //player.playerCombat.SetCanAttack(false, 0);
 
-        player.playerCombat.SetCanAttack(true, true, Weapons.Sword);
+        //player.playerCombat.SetCanAttack(true, PlayerController.Instance.playerAttributes.SwordCooldown);
 
         player.playerCombat.SetCurrentAttackNum(1);
 

@@ -31,7 +31,6 @@ public class Particle : MonoBehaviour
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(WindBlastSFX, transform);
 
         particle = GetComponent<ParticleSystem>();
-        Debug.Log(particleType);
         if (particleType == ParticleTypes.WindArrow)
         {
             WindSFX.start();
@@ -78,7 +77,11 @@ public class Particle : MonoBehaviour
                 WindBlastSFX.release();
             }
 
-            if (particleType == ParticleTypes.FearfulAura)
+            if (particleType == ParticleTypes.FearfulAura
+                || particleType == ParticleTypes.SwordSlashLR
+                || particleType == ParticleTypes.SwordSlashRL
+                || particleType == ParticleTypes.BowCharge
+                || particleType == ParticleTypes.BowCharge2)
             {
                 gameObject.SetActive(false);
 
@@ -216,5 +219,7 @@ public class Particle : MonoBehaviour
         FireSFX.keyOff();
         FireSFX.release();
         WindBlastSFX.release();
+        WindSFX.release();
+        WindSFX.keyOff();
     }
 }

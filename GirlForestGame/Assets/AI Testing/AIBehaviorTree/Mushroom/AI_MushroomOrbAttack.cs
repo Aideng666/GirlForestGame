@@ -27,6 +27,7 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     {
         shotSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Shoot");
         signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -66,6 +67,7 @@ public class AI_MushroomOrbAttack : AI_BaseClass
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         if (elaspedChargeTime >= attackChargeTime && !attackFired)
         {
             if (randomAttackChoice == 0)
@@ -85,6 +87,8 @@ public class AI_MushroomOrbAttack : AI_BaseClass
 
     void FanAttack() 
     {
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(shotSFX, agent.transform);
+
         shotSFX.start();
         Debug.Log("Fanfire");
         FireOrb((player.transform.position - agent.transform.position).normalized);
@@ -98,6 +102,8 @@ public class AI_MushroomOrbAttack : AI_BaseClass
 
     IEnumerator<float> _FiveInARow() 
     {
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(shotSFX, agent.transform);
+
         for (int i = 0; i < 5; i++)
         {
             FireOrb((player.transform.position - agent.transform.position).normalized);

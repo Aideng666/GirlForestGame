@@ -5,7 +5,7 @@
 			<value>Spook</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{8acf3e88-a3cd-4e57-ac5e-1fef6918865e}</destination>
@@ -123,6 +123,7 @@
 	<object class="MixerBusEffectChain" id="{62f5ad20-982f-483f-94c4-bd25b5bc9b07}">
 		<relationship name="effects">
 			<destination>{02642994-48a0-4450-ab68-e80e8157940c}</destination>
+			<destination>{4a5c3d8a-2b7e-4b5c-a9e3-508e4e4773e3}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{fcf5ae0c-62a1-4287-abe7-eefa7a24460e}" />
@@ -134,5 +135,16 @@
 	</object>
 	<object class="MixerBusPanner" id="{a276df8b-dd30-4136-9a13-898eb07a2b16}" />
 	<object class="MixerBusFader" id="{02642994-48a0-4450-ab68-e80e8157940c}" />
+	<object class="SpatialiserEffect" id="{4a5c3d8a-2b7e-4b5c-a9e3-508e4e4773e3}">
+		<property name="minimumDistance">
+			<value>21</value>
+		</property>
+		<property name="maximumDistance">
+			<value>200</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{72b1e485-9482-4aa7-b22b-fc5ac71ca824}" />
 </objects>

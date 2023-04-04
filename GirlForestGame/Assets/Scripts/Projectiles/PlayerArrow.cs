@@ -20,9 +20,16 @@ public class PlayerArrow : MonoBehaviour
         livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
 
-        player = PlayerController.Instance;
+        if (PlayerController.Instance != null)
+        {
+            player = PlayerController.Instance;
 
-        SetPlane(player.playerCombat.Form);
+            if (player.playerCombat != null)
+            {
+                SetPlane(player.playerCombat.Form);
+            }
+        }
+
         movementStarted = false;
     }
 
@@ -31,9 +38,16 @@ public class PlayerArrow : MonoBehaviour
         livingLayer.value = LayerMask.NameToLayer("PlayerLiving");
         spiritLayer.value = LayerMask.NameToLayer("PlayerSpirit");
 
-        player = PlayerController.Instance;
+        if (PlayerController.Instance != null)
+        {
+            player = PlayerController.Instance;
 
-        SetPlane(player.playerCombat.Form);
+            if (player.playerCombat != null)
+            {
+                SetPlane(player.playerCombat.Form);
+            }
+        }
+
         movementStarted = false;
     }
 

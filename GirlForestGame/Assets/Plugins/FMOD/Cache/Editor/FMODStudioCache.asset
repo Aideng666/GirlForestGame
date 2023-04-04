@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9044934095491454740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Battle
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Battle
+  Guid:
+    Data1: -2034540051
+    Data2: 1180046904
+    Data3: -1797083731
+    Data4: -1890805137
+  Banks:
+  - {fileID: -6035763326982330942}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 148062
 --- !u!114 &-8508543116381335104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,10 +144,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638156294719094929
+  lastModified: 638162229966354610
   FileSizes:
   - Name: Desktop
-    Value: 2866
+    Value: 3280
   Exists: 1
 --- !u!114 &-7760157970733730548
 MonoBehaviour:
@@ -170,7 +197,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -410,10 +437,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638156294719453332
+  lastModified: 638162229966530589
   FileSizes:
   - Name: Desktop
-    Value: 4091552
+    Value: 4092672
   Exists: 1
 --- !u!114 &-5981148173000428832
 MonoBehaviour:
@@ -430,7 +457,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638156294719094929
+  lastModified: 638162229966314603
   FileSizes:
   - Name: Desktop
     Value: 2782
@@ -1195,12 +1222,13 @@ MonoBehaviour:
   - {fileID: -7640217823767225453}
   - {fileID: -817476811860789156}
   - {fileID: 5250225957314766716}
+  - {fileID: -9044934095491454740}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5981148173000428832}
   StringsBanks:
   - {fileID: -7974187371478809261}
-  cacheTime: 638156294719453332
+  cacheTime: 638162229966530589
   cacheVersion: 131592
 --- !u!114 &839758751893998802
 MonoBehaviour:
@@ -1437,7 +1465,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -1685,7 +1713,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Boar.bank
   Name: Boar
   StudioPath: bank:/SFX/Enemy/Boar
-  lastModified: 638156294719094929
+  lastModified: 638160628999018249
   FileSizes:
   - Name: Desktop
     Value: 170880
@@ -1909,10 +1937,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Fungi.bank
   Name: Fungi
   StudioPath: bank:/SFX/Enemy/Fungi
-  lastModified: 638156294719094929
+  lastModified: 638162229966354610
   FileSizes:
   - Name: Desktop
-    Value: 69536
+    Value: 70656
   Exists: 1
 --- !u!114 &6530972275947360771
 MonoBehaviour:
@@ -2040,7 +2068,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -2061,7 +2089,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/GEnemy.bank
   Name: GEnemy
   StudioPath: bank:/SFX/Enemy/GEnemy
-  lastModified: 638156156751623436
+  lastModified: 638160628998988245
   FileSizes:
   - Name: Desktop
     Value: 30624
@@ -2081,7 +2109,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/SFX/Player
-  lastModified: 638156294719094929
+  lastModified: 638162229966389676
   FileSizes:
   - Name: Desktop
     Value: 598976
@@ -2131,7 +2159,7 @@ MonoBehaviour:
   Banks:
   - {fileID: 6530498524969943338}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1

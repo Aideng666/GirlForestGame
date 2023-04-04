@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AnimationEvents : MonoBehaviour
 {
-    bool canPressStartButton = false;
+    bool canPressStartButton = true;
     bool showMainMenuUI = false;
     
     public void CanPressStart()
