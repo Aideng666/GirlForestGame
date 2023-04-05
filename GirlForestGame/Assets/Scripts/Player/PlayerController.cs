@@ -291,6 +291,11 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(UIManager.Instance.GetFadePanel().GetTransitionTime() / 2);
 
+        foreach (ParticleSystem particle in DungeonGenerator.Instance.GetCurrentRoom().GetComponentsInChildren<ParticleSystem>()) 
+        {
+            Destroy(particle.gameObject);
+        }
+
         DungeonGenerator.Instance.SetCurrentRoom(room);
 
         transform.position = updatedPlayerPos;

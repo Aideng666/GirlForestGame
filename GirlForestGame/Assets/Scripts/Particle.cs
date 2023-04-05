@@ -34,12 +34,10 @@ public class Particle : MonoBehaviour
         if (particleType == ParticleTypes.WindArrow)
         {
             WindSFX.start();
-            Debug.Log("windsounded");
         }
         else if (particleType == ParticleTypes.FireArrow)
         {
             FireSFX.start();
-            Debug.Log("firesounded");
         }
     }
 
