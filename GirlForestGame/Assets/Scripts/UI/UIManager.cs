@@ -10,7 +10,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject deathPanel;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject inventoryPanel;
+    [SerializeField] GameObject[] pauseMenuButtons;
     [SerializeField] InputActionAsset inputActions;
+
+    int selectedPauseButtonIndex = 0;
 
     public bool inventoryOpen { get; private set; }
     public bool isPaused { get; private set; }
@@ -43,6 +46,7 @@ public class UIManager : MonoBehaviour
 
             if (pausePanel.activeInHierarchy)
             {
+                selectedPauseButtonIndex = 0;
                 //sfxBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
                 isPaused = true;
             }
@@ -54,6 +58,66 @@ public class UIManager : MonoBehaviour
 
         if (isPaused)
         {
+            print("Paused");
+            if (InputManager.Instance.MoveSelection().y > 0)
+            {
+                print("UP");
+                selectedPauseButtonIndex--;
+
+                if (selectedPauseButtonIndex < 0)
+                {
+                    selectedPauseButtonIndex = 0;
+                }
+            }
+            //DPAD DOWN
+            else if (InputManager.Instance.MoveSelection().y < 0)
+            {
+                print("DOWN");
+                selectedPauseButtonIndex++;
+
+                if (selectedPauseButtonIndex >= pauseMenuButtons.Length)
+                {
+                    selectedPauseButtonIndex = pauseMenuButtons.Length - 1;
+                }
+            }
+
+            for (int i = 0; i < pauseMenuButtons.Length; i++)
+            {
+                if (i == selectedPauseButtonIndex)
+                {
+                    pauseMenuButtons[i].GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                }
+                else
+                {
+                    pauseMenuButtons[i].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                }
+            }
+
+            if (InputManager.Instance.Proceed())
+            {
+                switch (selectedPauseButtonIndex)
+                {
+                    case 0:
+
+                        pausePanel.SetActive(false);
+
+                        isPaused = false;
+
+                        break;
+
+                    case 1:
+
+
+
+                        break;
+
+                    case 2:
+
+
+                        break;
+                }
+            }
+
             Time.timeScale = 0;
         }
         else

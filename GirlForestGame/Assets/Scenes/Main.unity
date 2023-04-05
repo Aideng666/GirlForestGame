@@ -7644,6 +7644,10 @@ MonoBehaviour:
   deathPanel: {fileID: 470174502}
   winPanel: {fileID: 166017647}
   inventoryPanel: {fileID: 455256262}
+  pauseMenuButtons:
+  - {fileID: 165176665}
+  - {fileID: 639362479}
+  - {fileID: 1945033630}
   inputActions: {fileID: -944628639613478452, guid: dc3b3eddba13a254dbf8d9e8d76f6b2c, type: 3}
 --- !u!114 &645852006
 MonoBehaviour:
