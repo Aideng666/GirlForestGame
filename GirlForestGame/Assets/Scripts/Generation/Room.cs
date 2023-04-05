@@ -18,6 +18,9 @@ public class Room : MonoBehaviour
     RoomModel spawnedModel; // the selected model for the room that was spawned, used to access the doors
     RoomObject selectedRoom;
 
+    [HideInInspector] public FMOD.Studio.EventInstance RoamingBGM;
+    [HideInInspector] public FMOD.Studio.EventInstance BattleBGM;
+
     RoomTypes currentType = RoomTypes.Fight;
 
     bool roomCompleted = false; //Has the player defeated all the enemies within this room
@@ -42,6 +45,8 @@ public class Room : MonoBehaviour
             //If this is a regular fighting room
             if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
             {
+                RoamingBGM.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                BattleBGM.start();
                 //Num of enemies in a room
                 for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 1); i++)
                 {
@@ -128,6 +133,9 @@ public class Room : MonoBehaviour
     {
         enemyCountRangesPerLevel = new Vector2[3] { new Vector2(3, 4), new Vector2(3, 5) , new Vector2(4, 6) };
         totemChancePerLevel = new float[3] { 0.2f, 0.4f, 0.6f };
+        RoamingBGM = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Roaming");
+        BattleBGM = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Battle");
+
     }
 
     // Update is called once per frame
@@ -135,6 +143,7 @@ public class Room : MonoBehaviour
     {
         if (roomCompleted)
         {
+            BattleBGM.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             //Opens all doors that have connected rooms
             for (int i = 0; i < connectedRooms.Length; i++)
             {

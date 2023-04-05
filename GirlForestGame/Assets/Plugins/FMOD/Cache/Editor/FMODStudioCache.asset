@@ -26,7 +26,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 148062
+  Length: 117900
 --- !u!114 &-8718271145258326157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638159086951703660
+  lastModified: 638162503760287389
   FileSizes:
   - Name: Desktop
     Value: 3280
@@ -272,10 +272,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Draugr.bank
   Name: Draugr
   StudioPath: bank:/SFX/Enemy/Draugr
-  lastModified: 638159086953399657
+  lastModified: 638162503761819234
   FileSizes:
   - Name: Desktop
-    Value: 477824
+    Value: 465568
   Exists: 1
 --- !u!114 &-7640217823767225453
 MonoBehaviour:
@@ -565,10 +565,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638159086951570715
+  lastModified: 638162503760147755
   FileSizes:
   - Name: Desktop
-    Value: 4092672
+    Value: 5954752
   Exists: 1
 --- !u!114 &-5981148173000428832
 MonoBehaviour:
@@ -585,7 +585,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638159086951653788
+  lastModified: 638162503760227658
   FileSizes:
   - Name: Desktop
     Value: 2782
@@ -1270,11 +1270,11 @@ MonoBehaviour:
   - {fileID: -6035763326982330942}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 148062
+  Length: 146076
 --- !u!114 &-737616764389593230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   - {fileID: -5981148173000428832}
   StringsBanks:
   - {fileID: -7974187371478809261}
-  cacheTime: 638159086954650582
+  cacheTime: 638162503762865259
   cacheVersion: 131592
 --- !u!114 &839758751893998802
 MonoBehaviour:
@@ -1751,10 +1751,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Golem.bank
   Name: Golem
   StudioPath: bank:/SFX/Enemy/Golem
-  lastModified: 638159086954650582
+  lastModified: 638162503762865259
   FileSizes:
   - Name: Desktop
-    Value: 145280
+    Value: 118400
   Exists: 1
 --- !u!114 &3885575335057969653
 MonoBehaviour:
@@ -1924,7 +1924,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Boar.bank
   Name: Boar
   StudioPath: bank:/SFX/Enemy/Boar
-  lastModified: 638159086952990215
+  lastModified: 638162503761430284
   FileSizes:
   - Name: Desktop
     Value: 170880
@@ -1951,7 +1951,7 @@ MonoBehaviour:
   - {fileID: -6035763326982330942}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -2148,7 +2148,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Fungi.bank
   Name: Fungi
   StudioPath: bank:/SFX/Enemy/Fungi
-  lastModified: 638159086953868411
+  lastModified: 638162503762218166
   FileSizes:
   - Name: Desktop
     Value: 70656
@@ -2280,11 +2280,11 @@ MonoBehaviour:
   - {fileID: 3846471384040749294}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 500
+  Length: 450
 --- !u!114 &7417798905915450952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2327,7 +2327,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/GEnemy.bank
   Name: GEnemy
   StudioPath: bank:/SFX/Enemy/GEnemy
-  lastModified: 638159086954177596
+  lastModified: 638162503762496531
   FileSizes:
   - Name: Desktop
     Value: 30624
@@ -2347,7 +2347,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/SFX/Player
-  lastModified: 638159086952541419
+  lastModified: 638162503761041317
   FileSizes:
   - Name: Desktop
     Value: 598976
