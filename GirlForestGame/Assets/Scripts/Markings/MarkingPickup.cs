@@ -10,8 +10,8 @@ public class MarkingPickup : InteractableObject
     [SerializeField] GameObject hawkMarkingPrefab;
     [SerializeField] bool isMarkingPair; // If it is a pair, only one out of the two markings can be picked up in a room, if not, they will not dissapear after taking one marking in a room
 
-    Spirit chosenSpirit = null;
-    MarkingTypes chosenType = MarkingTypes.None;
+    public Spirit chosenSpirit { get; private set; } = null;
+    public MarkingTypes chosenType { get; private set; } = MarkingTypes.None;
     int markingLevel;
     float timeElasped;
 
@@ -132,6 +132,9 @@ public class MarkingPickup : InteractableObject
             {
                 gameObject.SetActive(false);
             }
+
+            PlayerController.Instance.GetComponentInChildren<InteractRing>().ResetInteractablesInRange();
+            //HUD.Instance.HighlightMarkingIcons(null);
         }
     }
 

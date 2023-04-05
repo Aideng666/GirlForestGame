@@ -6,15 +6,18 @@ using UnityEngine.InputSystem;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] RoomTransition fadePanel;
-    [SerializeField] GameObject controlsPanel;
+    [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject deathPanel;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject inventoryPanel;
     [SerializeField] InputActionAsset inputActions;
 
     public bool inventoryOpen { get; private set; }
+    public bool isPaused { get; private set; }
 
     public static UIManager Instance { get; set; }
+
+    FMOD.Studio.Bus sfxBus;
 
     private void Awake()
     {
@@ -24,8 +27,11 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controlsPanel.SetActive(false);
+        pausePanel.SetActive(false);
         inventoryOpen = false;
+        isPaused = false;
+
+        sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
     }
 
     // Update is called once per frame
@@ -33,8 +39,28 @@ public class UIManager : MonoBehaviour
     {
         if (InputManager.Instance.Pause())
         {
-            controlsPanel.SetActive(!controlsPanel.activeInHierarchy);
+            pausePanel.SetActive(!pausePanel.activeInHierarchy);
+
+            if (pausePanel.activeInHierarchy)
+            {
+                //sfxBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                isPaused = true;
+            }
+            else
+            {
+                isPaused = false;
+            }
         }
+
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
 
         if (inventoryOpen)
         {
@@ -63,12 +89,20 @@ public class UIManager : MonoBehaviour
 
     public void ToggleDeathScreen()
     {
+        sfxBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         deathPanel.SetActive(true);
+
+        isPaused = true;
     }
 
     public void ToggleWinScreen()
     {
+        sfxBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         winPanel.SetActive(true);
+
+        isPaused = true;
     }
 
     public void ToggleInventory()
@@ -89,6 +123,7 @@ public class UIManager : MonoBehaviour
     {
         deathPanel.SetActive(false);
         winPanel.SetActive(false);
+        isPaused = false;
 
         LoadingScreen.Instance.LoadScene(name);
     }

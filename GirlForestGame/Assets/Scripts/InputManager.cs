@@ -82,6 +82,11 @@ public class InputManager : MonoBehaviour
         openInventoryAction.started -= ToggleInventory;
     }
 
+    private void OnDestroy()
+    {
+        openInventoryAction.started -= ToggleInventory;
+    }
+
     public void SwapActionMap(string mapName)
     {
         if (mapName == "Player")
