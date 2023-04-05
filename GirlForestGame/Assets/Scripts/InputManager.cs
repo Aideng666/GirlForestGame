@@ -37,7 +37,14 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; set; }
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
 
         //controls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
@@ -54,8 +61,8 @@ public class InputManager : MonoBehaviour
         bowAttackAction = playerInput.actions["BowAttack"];
         completeRoomAction = playerInput.actions["CompleteRoom"];
         changeFormAction = playerInput.actions["ChangeForm"];
-        selectSwordAction = playerInput.actions["SelectSword"];
-        selectBowAction = playerInput.actions["SelectBow"];
+        selectSwordAction = playerInput.actions["AttachToSword"];
+        selectBowAction = playerInput.actions["AttachToBow"];
         mapScrollAction = playerInput.actions["MapScroll"];
         regenMapAction = playerInput.actions["RegenerateMap"];
         swapActionMapAction = playerInput.actions["SwapActionMap"];
@@ -283,7 +290,8 @@ public class InputManager : MonoBehaviour
 
     void ToggleInventory(InputAction.CallbackContext ctx)
     {
-        PlayerController.Instance.playerInventory.ToggleInventory();
+        //PlayerController.Instance.playerInventory.ToggleInventory();
+        UIManager.Instance.ToggleInventory();
     }
 
     public bool Proceed()

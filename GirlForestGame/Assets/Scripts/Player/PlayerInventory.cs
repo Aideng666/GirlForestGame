@@ -4,10 +4,13 @@ using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Plugins.Core.PathCore;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] GameObject markingPrefab;
+    [SerializeField] GameObject totemIconPrefab;
+    [SerializeField] Transform totemIconParent;
     [SerializeField] int startingMoney;
 
     //0 = Sword Attribute
@@ -131,6 +134,7 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
+        InventoryUI.Instance.UpdateMarkingIcon(spirit, weapon, type);
         player.playerMarkings.UpdateMarking(spirit, type, weapon);
     }
 
@@ -207,6 +211,11 @@ public class PlayerInventory : MonoBehaviour
             if (totemDictionary[totemType] == 1)
             {
                 totems.Add(totem);
+
+                //Create a new icon in the inventory
+                GameObject icon = Instantiate(totemIconPrefab, totemIconParent);
+                icon.GetComponent<Image>().sprite = totem.Totem.totemSprite;
+                InventoryUI.Instance.AddTotemIcon(icon, totem);
             }
         }
 
@@ -278,24 +287,24 @@ public class PlayerInventory : MonoBehaviour
 
 
 
-    public void ToggleInventory()
-    {
-        inventoryOpen = !inventoryOpen;
+    //public void ToggleInventory()
+    //{
+    //    inventoryOpen = !inventoryOpen;
 
-        //if (inventoryOpen)
-        //{
-        //print($"Sword Attribute: {markings[0]?.spiritName}");
-        //print($"Sword Element: {markings[1]?.spiritName}");
-        //print($"Bow Attribute: {markings[2]?.spiritName}");
-        //print($"Bow Element: {markings[3]?.spiritName}");
-        //print("Totems:");
+    //    //if (inventoryOpen)
+    //    //{
+    //    //print($"Sword Attribute: {markings[0]?.spiritName}");
+    //    //print($"Sword Element: {markings[1]?.spiritName}");
+    //    //print($"Bow Attribute: {markings[2]?.spiritName}");
+    //    //print($"Bow Element: {markings[3]?.spiritName}");
+    //    //print("Totems:");
 
-        foreach (TotemObject totem in totems)
-        {
-            print($"{totem.Totem.totemName}");
-        }
-        //}
-    }
+    //    foreach (TotemObject totem in totems)
+    //    {
+    //        print($"{totem.Totem.totemName}");
+    //    }
+    //    //}
+    //}
 
     public Spirit[] GetMarkings()
     {

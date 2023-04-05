@@ -26,34 +26,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 117900
---- !u!114 &-8718271145258326157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Draugr/Blink
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Draugr/Blink
-  Guid:
-    Data1: -689449691
-    Data2: 1311390472
-    Data3: 2092406715
-    Data4: 1772604323
-  Banks:
-  - {fileID: -7671220070135592160}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 705
+  Length: 148062
 --- !u!114 &-8508543116381335104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,60 +54,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 830
---- !u!114 &-8433323251916841641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Draugr/Claw
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Draugr/Claw
-  Guid:
-    Data1: 1383776198
-    Data2: 1171706820
-    Data3: -1856316739
-    Data4: 1475531194
-  Banks:
-  - {fileID: -7671220070135592160}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 330
---- !u!114 &-8426741489753866462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Golem/Throw
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Golem/Throw
-  Guid:
-    Data1: 189920808
-    Data2: 1100288493
-    Data3: -1744683591
-    Data4: -2136286775
-  Banks:
-  - {fileID: 3846471384040749294}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1317
 --- !u!114 &-8362680404091656613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +144,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638162503760287389
+  lastModified: 638162229966354610
   FileSizes:
   - Name: Desktop
     Value: 3280
@@ -257,26 +176,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1123
---- !u!114 &-7671220070135592160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Draugr.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/Draugr.bank
-  Name: Draugr
-  StudioPath: bank:/SFX/Enemy/Draugr
-  lastModified: 638162503761819234
-  FileSizes:
-  - Name: Desktop
-    Value: 465568
-  Exists: 1
 --- !u!114 &-7640217823767225453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,33 +230,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 548
---- !u!114 &-7283117920429202649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Draugr/Teleport
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Draugr/Teleport
-  Guid:
-    Data1: 1885646833
-    Data2: 1098120657
-    Data3: 1349138607
-    Data4: 1867031171
-  Banks:
-  - {fileID: -7671220070135592160}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2000
 --- !u!114 &-7228127835910048799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,10 +437,10 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638162503760147755
+  lastModified: 638162229966530589
   FileSizes:
   - Name: Desktop
-    Value: 5954752
+    Value: 4092672
   Exists: 1
 --- !u!114 &-5981148173000428832
 MonoBehaviour:
@@ -585,7 +457,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638162503760227658
+  lastModified: 638162229966314603
   FileSizes:
   - Name: Desktop
     Value: 2782
@@ -1270,38 +1142,11 @@ MonoBehaviour:
   - {fileID: -6035763326982330942}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 146076
---- !u!114 &-737616764389593230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Draugr/Prepare
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Draugr/Prepare
-  Guid:
-    Data1: 1428392877
-    Data2: 1097669866
-    Data3: -676814160
-    Data4: -893798712
-  Banks:
-  - {fileID: -7671220070135592160}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1000
+  Length: 148062
 --- !u!114 &-655154347466030265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,33 +1171,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-458924025164856693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Golem/Crash
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Golem/Crash
-  Guid:
-    Data1: -1034505769
-    Data2: 1198881006
-    Data3: 1103262130
-    Data4: -2125140727
-  Banks:
-  - {fileID: 3846471384040749294}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1149
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,8 +1191,6 @@ MonoBehaviour:
   - {fileID: 5180278857975630338}
   - {fileID: 6530498524969943338}
   - {fileID: 8171624434805654353}
-  - {fileID: -7671220070135592160}
-  - {fileID: 3846471384040749294}
   EditorEvents:
   - {fileID: 2050096758235668550}
   - {fileID: 9167487859010060302}
@@ -1407,19 +1223,12 @@ MonoBehaviour:
   - {fileID: -817476811860789156}
   - {fileID: 5250225957314766716}
   - {fileID: -9044934095491454740}
-  - {fileID: -8718271145258326157}
-  - {fileID: -737616764389593230}
-  - {fileID: -8433323251916841641}
-  - {fileID: -7283117920429202649}
-  - {fileID: -8426741489753866462}
-  - {fileID: 7103218486033114017}
-  - {fileID: -458924025164856693}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5981148173000428832}
   StringsBanks:
   - {fileID: -7974187371478809261}
-  cacheTime: 638162503762865259
+  cacheTime: 638162229966530589
   cacheVersion: 131592
 --- !u!114 &839758751893998802
 MonoBehaviour:
@@ -1736,26 +1545,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 4.8
   Length: 200
---- !u!114 &3846471384040749294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Golem.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD/Build/Desktop/Golem.bank
-  Name: Golem
-  StudioPath: bank:/SFX/Enemy/Golem
-  lastModified: 638162503762865259
-  FileSizes:
-  - Name: Desktop
-    Value: 118400
-  Exists: 1
 --- !u!114 &3885575335057969653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,7 +1713,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Boar.bank
   Name: Boar
   StudioPath: bank:/SFX/Enemy/Boar
-  lastModified: 638162503761430284
+  lastModified: 638160628999018249
   FileSizes:
   - Name: Desktop
     Value: 170880
@@ -1951,7 +1740,7 @@ MonoBehaviour:
   - {fileID: -6035763326982330942}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -2148,7 +1937,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Fungi.bank
   Name: Fungi
   StudioPath: bank:/SFX/Enemy/Fungi
-  lastModified: 638162503762218166
+  lastModified: 638162229966354610
   FileSizes:
   - Name: Desktop
     Value: 70656
@@ -2258,33 +2047,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 207
---- !u!114 &7103218486033114017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Enemy/Golem/Stomp
-  m_EditorClassIdentifier: 
-  Path: event:/Enemy/Golem/Stomp
-  Guid:
-    Data1: -826672982
-    Data2: 1185536780
-    Data3: -544409982
-    Data4: -840836548
-  Banks:
-  - {fileID: 3846471384040749294}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 450
 --- !u!114 &7417798905915450952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2327,7 +2089,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/GEnemy.bank
   Name: GEnemy
   StudioPath: bank:/SFX/Enemy/GEnemy
-  lastModified: 638162503762496531
+  lastModified: 638160628998988245
   FileSizes:
   - Name: Desktop
     Value: 30624
@@ -2347,7 +2109,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/SFX/Player
-  lastModified: 638162503761041317
+  lastModified: 638162229966389676
   FileSizes:
   - Name: Desktop
     Value: 598976

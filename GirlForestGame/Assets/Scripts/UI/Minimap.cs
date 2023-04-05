@@ -19,24 +19,12 @@ public class Minimap : MonoBehaviour
 
     [SerializeField] Sprite[] roomIcons;
 
-    public static Minimap Instance { get; set; }
+    //public static Minimap Instance { get; set; }
 
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //}
 
     public void ResetMap()
     {
@@ -177,6 +165,52 @@ public class Minimap : MonoBehaviour
                     mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.down * pathwaySpacing.y) + (Vector3.left * pathwaySpacing.x);
 
                     break;
+            }
+            //adding nodes so that the minimaps shows the connected rooms
+            for (int i = 0; i < 4; i++)
+            {
+                if (visitedRoom.connectedRooms[i] == null)
+                {
+                    continue;
+                }
+                switch ((Directions)i)
+                {
+                    case Directions.North:
+
+                        mapPathways.Add(Instantiate(pathIconPrefab, this.transform));
+
+                        mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 45);
+                        mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.up * pathwaySpacing.y) + (Vector3.left * pathwaySpacing.x);
+
+                        break;
+
+                    case Directions.South:
+
+                        mapPathways.Add(Instantiate(pathIconPrefab, this.transform));
+
+                        mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 45);
+                        mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.down * pathwaySpacing.y) + (Vector3.right * pathwaySpacing.x);
+
+                        break;
+
+                    case Directions.East:
+
+                        mapPathways.Add(Instantiate(pathIconPrefab, this.transform));
+
+                        mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -45);
+                        mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.up * pathwaySpacing.y) + (Vector3.right * pathwaySpacing.x);
+
+                        break;
+
+                    case Directions.West:
+
+                        mapPathways.Add(Instantiate(pathIconPrefab, this.transform));
+
+                        mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -45);
+                        mapPathways[mapPathways.Count - 1].GetComponent<RectTransform>().position += (Vector3.down * pathwaySpacing.y) + (Vector3.left * pathwaySpacing.x);
+
+                        break;
+                }
             }
         }
 

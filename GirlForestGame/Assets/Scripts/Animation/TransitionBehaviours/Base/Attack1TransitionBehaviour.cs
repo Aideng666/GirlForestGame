@@ -14,7 +14,7 @@ public class Attack1TransitionBehaviour : StateMachineBehaviour
             player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
         }
 
-        player.playerCombat.SetCanAttack(true, false, Weapons.Sword);
+        //player.playerCombat.SetCanAttack(true, false, Weapons.Sword);
 
         player.playerCombat.SetCurrentAttackNum(2);
     }
@@ -25,6 +25,11 @@ public class Attack1TransitionBehaviour : StateMachineBehaviour
         if (InputManager.Instance.SwordAttack())
         {
             PlayerController.Instance.playerCombat.InitSwordAttack();
+        }
+
+        if (InputManager.Instance.ShootBow())
+        {
+            PlayerController.Instance.playerCombat.BowAttack();
         }
     }
 }

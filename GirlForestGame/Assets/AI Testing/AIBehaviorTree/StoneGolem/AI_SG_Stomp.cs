@@ -95,7 +95,7 @@ public class AI_SG_Stomp : AI_BaseClass
                 if (collider.gameObject.CompareTag("Player"))
                 {
                     player.playerCombat.TakeDamage();
-                    player.playerCombat.ApplyKnockback((player.transform.position - agent.transform.position).normalized, 4);
+                    //player.playerCombat.ApplyKnockback((player.transform.position - agent.transform.position).normalized, 4);
                 }
             }
         }
@@ -113,7 +113,7 @@ public class AI_SG_Stomp : AI_BaseClass
                 if (collider.gameObject.CompareTag("Player"))
                 {
                     player.playerCombat.TakeDamage();
-                    player.playerCombat.ApplyKnockback((player.transform.position - agent.transform.position).normalized, 4);
+                    //player.playerCombat.ApplyKnockback((player.transform.position - agent.transform.position).normalized, 4);
                 }
             }
         }
