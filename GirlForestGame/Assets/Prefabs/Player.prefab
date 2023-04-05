@@ -3075,7 +3075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5fd1ca1bfbcce4fbab2ba8803cab1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 5505800663688788820}
+  maxLengthOfArrow: 10
 --- !u!1 &5982676203613863563
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,6 +3136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimColliders: {fileID: 8985858459354596363}
+  minimap: {fileID: 0}
   controlWithMouse: 0
   playerAttributes: {fileID: 0}
   playerMarkings: {fileID: 0}
@@ -3206,6 +3207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   markingPrefab: {fileID: 5512418781491973167, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}
+  totemIconPrefab: {fileID: 426680050264984924, guid: 167403bfb992f9048904a99d5fb9d225, type: 3}
+  totemIconParent: {fileID: 0}
   startingMoney: 0
 --- !u!114 &2345695844193929904
 MonoBehaviour:
@@ -3225,6 +3228,7 @@ MonoBehaviour:
   swordSlashRL: {fileID: 6690669840521788779}
   bowChargeParticle: {fileID: 2861103870856074283, guid: d0cb99abad94f3a42870eaf3cf5e643e, type: 3}
   bowChargeCompleteParticle: {fileID: 7958000674278776134, guid: d0f814b7c730586479756ee44b32a5f3, type: 3}
+  bowAimArrowUI: {fileID: 0}
   livingFormMaterial: {fileID: 2100000, guid: ebec6f2c431f59e4692e8b40a2359ef1, type: 2}
   spiritFormMaterial: {fileID: 2100000, guid: 905ff118dee948847a51283f6b488e8d, type: 2}
   iFrameShader: {fileID: -6465566751694194690, guid: c0315526e57ecfb46a467659e162bc9a, type: 3}

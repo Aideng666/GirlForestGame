@@ -283,7 +283,8 @@ public class InputManager : MonoBehaviour
 
     void ToggleInventory(InputAction.CallbackContext ctx)
     {
-        PlayerController.Instance.playerInventory.ToggleInventory();
+        //PlayerController.Instance.playerInventory.ToggleInventory();
+        UIManager.Instance.ToggleInventory();
     }
 
     public bool Proceed()
