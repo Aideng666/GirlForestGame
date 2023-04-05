@@ -202,7 +202,6 @@ public class HUD : MonoBehaviour
     {
         if (markingPickup == null)
         {
-            print("Resetting Scale");
             markingImages[0].transform.parent.localScale = Vector3.one;
             markingImages[1].transform.parent.localScale = Vector3.one;
             markingImages[2].transform.parent.localScale = Vector3.one;
@@ -210,7 +209,6 @@ public class HUD : MonoBehaviour
         }
         else if (markingPickup.chosenType == MarkingTypes.Attribute)
         {
-            print("Found Att");
             markingImages[0].transform.parent.localScale = Vector3.one * 1.3f;
             markingImages[1].transform.parent.localScale = Vector3.one;
             markingImages[2].transform.parent.localScale = Vector3.one * 1.3f;
@@ -218,7 +216,6 @@ public class HUD : MonoBehaviour
         }
         else if (markingPickup.chosenType == MarkingTypes.Element)
         {
-            print("Found Ele");
             markingImages[0].transform.parent.localScale = Vector3.one;
             markingImages[1].transform.parent.localScale = Vector3.one * 1.3f;
             markingImages[2].transform.parent.localScale = Vector3.one;

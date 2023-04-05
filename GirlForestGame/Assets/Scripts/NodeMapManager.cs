@@ -269,8 +269,6 @@ public class NodeMapManager : MonoBehaviour
 
     void SetHighlighted(MapNode node)
     {
-        print("Node Highlighted " + node.name);
-
         if (node.Selectable)
         {
             highlightedNode = node;

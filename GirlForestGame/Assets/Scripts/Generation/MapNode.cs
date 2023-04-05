@@ -42,28 +42,36 @@ public class MapNode : MonoBehaviour
 
     private void Update()
     {
-        //if (isSelectable)
-        //{
-        //    Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        //    RaycastHit hit;
+        if (!isSelectable)
+        {
+            switch (nodeType)
+            {
+                case NodeTypes.Default:
+                    roomImage.sprite = roomSprites[5];
+                    break;
+                case NodeTypes.Marking:
+                    roomImage.sprite = roomSprites[4];
+                    break;
+                case NodeTypes.Shop:
+                    roomImage.sprite = roomSprites[3];
+                    break;
+            }
 
-        //    if (Physics.Raycast(ray, out hit, 100))
-        //    {
-        //        if (hit.collider.gameObject == this.gameObject)
-        //        {
-        //            SetSelected(true);
-        //        }
-        //        else
-        //        {
-        //            SetSelected(false);
-        //        }
-        //    }
-        //}
+            return;
+        }
 
-        //if (selected && InputManager.Instance.SelectNode())
-        //{
-        //    NodeMapManager.Instance.SetActiveNode(this);
-        //}
+        switch (nodeType)
+        {
+            case NodeTypes.Default:
+                roomImage.sprite = roomSprites[2];
+                break;
+            case NodeTypes.Marking:
+                roomImage.sprite = roomSprites[1];
+                break;
+            case NodeTypes.Shop:
+                roomImage.sprite = roomSprites[0];
+                break;
+        }
     }
 
     public void SetNode(MapNode parent, NodeTypes type, int column, int dirFromParent = 2 /*0 = left child | 1 = right child*/)
@@ -110,16 +118,16 @@ public class MapNode : MonoBehaviour
     {
         nodeType = type;
 
-        if (type == NodeTypes.Shop)
-        {
-            //GetComponent<MeshRenderer>().material.color = Color.yellow;
-            roomImage.sprite = roomSprites[0];
-        }
-        else if( type == NodeTypes.Marking)
-        {
-            //GetComponent<MeshRenderer>().material.color = Color.blue;
-            roomImage.sprite = roomSprites[1];
-        }
+        //if (type == NodeTypes.Shop)
+        //{
+        //    //GetComponent<MeshRenderer>().material.color = Color.yellow;
+        //    roomImage.sprite = roomSprites[0];
+        //}
+        //else if( type == NodeTypes.Marking)
+        //{
+        //    //GetComponent<MeshRenderer>().material.color = Color.blue;
+        //    roomImage.sprite = roomSprites[1];
+        //}
     }
 
     public NodeTypes GetNodeType()

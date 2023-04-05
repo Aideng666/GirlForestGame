@@ -54,7 +54,10 @@ public class InteractRing : MonoBehaviour
         }
         else
         {
-            HUD.Instance.HighlightMarkingIcons(null);
+            if (HUD.Instance != null)
+            {
+                HUD.Instance.HighlightMarkingIcons(null);
+            }
         }
     }
 
