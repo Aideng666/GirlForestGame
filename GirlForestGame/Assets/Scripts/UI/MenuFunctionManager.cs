@@ -99,7 +99,7 @@ public class MenuFunctionManager : MonoBehaviour
                 if (i == selectedButtonIndex)
                 {
                     //menuButtons[selectedButtonIndex].transform.localScale = Vector3.one * 1.9f;
-                    menuButtons[i].GetComponent<RectTransform>().localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                    menuButtons[i].GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
                 else
                 {
@@ -205,6 +205,9 @@ public class MenuFunctionManager : MonoBehaviour
             settingsButtonAnimator.SetBool("hasClickedSettings", false);
             settingsUIPanel.SetActive(false);
             settingsInfoPanels.SetActive(false);
+            audioPanel.SetActive(false);
+            controlsPanel.SetActive(false);
+            creditsPanel.SetActive(false);
             selectedButtonIndex = 1;
         }
         else
