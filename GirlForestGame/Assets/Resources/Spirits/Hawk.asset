@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b1c5fefb1ff5c4180a24aa5d9006a5, type: 3}
   m_Name: Hawk
   m_EditorClassIdentifier: 
-  spiritName: Hawk
+  spiritName: Zephyr
   spiritAttributeSprite: {fileID: 21300000, guid: 4e9108db29aa43e468755864a30140d2, type: 3}
   spiritElementSprite: {fileID: 21300000, guid: 9221f6b8961a8ee468b28e261a8483ab, type: 3}
   buffedAttributes: 0100000007000000
