@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
         if (!playerCombat.isKnockbackApplied)
         {
-            if (!playerCombat.isAttacking)
+            if (!playerCombat.isAttacking && !UIManager.Instance.inventoryOpen)
             {
                 Move();
 

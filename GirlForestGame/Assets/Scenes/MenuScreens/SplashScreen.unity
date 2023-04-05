@@ -3935,9 +3935,9 @@ GameObject:
   - component: {fileID: 859405465}
   - component: {fileID: 859405464}
   - component: {fileID: 859405463}
-  - component: {fileID: 859405468}
-  - component: {fileID: 859405467}
   - component: {fileID: 859405469}
+  - component: {fileID: 859405471}
+  - component: {fileID: 859405470}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -4028,7 +4028,37 @@ RectTransform:
   m_AnchoredPosition: {x: 924.15, y: 5.43}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &859405467
+--- !u!114 &859405469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859405462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32ef17097fd3164399b9247bbfd2d70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splashUIPanel: {fileID: 447776822}
+  mainMenuUIPanel: {fileID: 803082669}
+  animEventsObj: {fileID: 447776827}
+  cineCamAnimator: {fileID: 105572417}
+  camEventObj: {fileID: 105572418}
+  playButton: {fileID: 295994114}
+  settingsButton: {fileID: 1917556878}
+  tutorialButton: {fileID: 756355355}
+  quitButton: {fileID: 57708940}
+  audioButton: {fileID: 673969459}
+  controlsButton: {fileID: 1026659299}
+  creditsButton: {fileID: 1566556484}
+  audioPanel: {fileID: 1466157089}
+  controlsPanel: {fileID: 230408588}
+  creditsPanel: {fileID: 2123247505}
+  settingsButtonAnimator: {fileID: 803082673}
+  settingsUIPanel: {fileID: 1296545280}
+  settingsInfoPanels: {fileID: 244309939}
+--- !u!114 &859405470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4041,24 +4071,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openInventoryAction:
-    m_Name: Open Inventory
+    m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 018265c9-3b4b-4eb0-97e4-8e0e75710ad8
+    m_Id: 
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
   pauseAction:
-    m_Name: Pause
+    m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 152dff41-3c57-4081-ac31-ff2ccb4df6cc
+    m_Id: 
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
---- !u!114 &859405468
+--- !u!114 &859405471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4088,28 +4118,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &859405469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859405462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c32ef17097fd3164399b9247bbfd2d70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  splashUIPanel: {fileID: 447776822}
-  mainMenuUIPanel: {fileID: 803082669}
-  animEventsObj: {fileID: 447776827}
-  cineCamAnimator: {fileID: 105572417}
-  camEventObj: {fileID: 105572418}
-  playButton: {fileID: 295994114}
-  quitButton: {fileID: 57708940}
-  settingsButtonAnimator: {fileID: 803082673}
-  settingsUIPanel: {fileID: 1296545280}
-  settingsInfoPanels: {fileID: 244309939}
 --- !u!1 &878013191
 GameObject:
   m_ObjectHideFlags: 0
