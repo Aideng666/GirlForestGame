@@ -37,7 +37,14 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; set; }
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
 
         //controls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
@@ -283,7 +290,8 @@ public class InputManager : MonoBehaviour
 
     void ToggleInventory(InputAction.CallbackContext ctx)
     {
-        PlayerController.Instance.playerInventory.ToggleInventory();
+        //PlayerController.Instance.playerInventory.ToggleInventory();
+        UIManager.Instance.ToggleInventory();
     }
 
     public bool Proceed()
