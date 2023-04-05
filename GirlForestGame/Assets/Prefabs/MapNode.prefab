@@ -291,4 +291,8 @@ MonoBehaviour:
   roomSprites:
   - {fileID: 21300000, guid: 7c18b80251796a2448f4bb010e6c59b2, type: 3}
   - {fileID: 21300000, guid: e1002d8143fa1d649a072849ace5f68f, type: 3}
+  - {fileID: 21300000, guid: 44db710e5efb9494c907af26e9fe123c, type: 3}
+  - {fileID: 21300000, guid: 152ddb8dc50a9cd4a8c967a41f8e355f, type: 3}
+  - {fileID: 21300000, guid: e250966acd9af344aaacf21739fcc1c2, type: 3}
+  - {fileID: 21300000, guid: f6045f43e0ba60047b339441e35358ac, type: 3}
   roomImage: {fileID: 2458457084258223391}
