@@ -16,14 +16,12 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI markingDescription;
     [SerializeField] Image inventoryCursor;
 
-    //List<GameObject> totemIcons = new List<GameObject>();
     Dictionary<GameObject, TotemObject> totemIcons = new Dictionary<GameObject, TotemObject>();
-    //Dictionary<GameObject, Spirit> markingIcons = new Dictionary<GameObject, Spirit>();
     List<GameObject> iconList = new List<GameObject>();
 
     GameObject selectedIcon = null;
 
-    float cursorMoveSpeed = 750f;
+    float cursorMoveSpeed = 1000f;
 
     public static InventoryUI Instance { get; private set; }
 

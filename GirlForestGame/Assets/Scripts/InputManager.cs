@@ -37,7 +37,14 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; set; }
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
 
         //controls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
