@@ -9,7 +9,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject controlsPanel;
     [SerializeField] GameObject deathPanel;
     [SerializeField] GameObject winPanel;
+    [SerializeField] GameObject inventoryPanel;
     [SerializeField] InputActionAsset inputActions;
+
+    public bool inventoryOpen { get; private set; }
 
     public static UIManager Instance { get; set; }
 
@@ -22,6 +25,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         controlsPanel.SetActive(false);
+        inventoryOpen = false;
     }
 
     // Update is called once per frame
@@ -30,6 +34,15 @@ public class UIManager : MonoBehaviour
         if (InputManager.Instance.Pause())
         {
             controlsPanel.SetActive(!controlsPanel.activeInHierarchy);
+        }
+
+        if (inventoryOpen)
+        {
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.visible = true;
         }
     }
 
@@ -56,6 +69,20 @@ public class UIManager : MonoBehaviour
     public void ToggleWinScreen()
     {
         winPanel.SetActive(true);
+    }
+
+    public void ToggleInventory()
+    {
+        inventoryPanel.SetActive(!inventoryPanel.activeInHierarchy);
+
+        if (inventoryPanel.activeInHierarchy) 
+        {
+            inventoryOpen = true;
+        }
+        else
+        {
+            inventoryOpen = false;
+        }
     }
 
     public void LoadScene(string name)

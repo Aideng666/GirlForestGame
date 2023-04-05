@@ -7,14 +7,17 @@ public class IdleTransitionBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (InputManager.Instance.SwordAttack())
+        if (!UIManager.Instance.inventoryOpen)
         {
-            PlayerController.Instance.playerCombat.InitSwordAttack();
-        }
+            if (InputManager.Instance.SwordAttack())
+            {
+                PlayerController.Instance.playerCombat.InitSwordAttack();
+            }
 
-        if (InputManager.Instance.ShootBow())
-        {
-            PlayerController.Instance.playerCombat.BowAttack();
+            if (InputManager.Instance.ShootBow())
+            {
+                PlayerController.Instance.playerCombat.BowAttack();
+            }
         }
     }
 }
