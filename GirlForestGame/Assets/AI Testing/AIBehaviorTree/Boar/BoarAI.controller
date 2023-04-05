@@ -319,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditions: []
   triggerParameter: Dash_Attack_Completed
-  duration: 3
+  duration: 2
   attackRange: 1.5
 --- !u!1101 &-443153207160643215
 AnimatorStateTransition:

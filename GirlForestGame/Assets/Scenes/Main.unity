@@ -7120,7 +7120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 1771370756}
-  controlsPanel: {fileID: 523011000}
+  pausePanel: {fileID: 523011000}
   deathPanel: {fileID: 470174502}
   winPanel: {fileID: 166017647}
   inventoryPanel: {fileID: 455256262}

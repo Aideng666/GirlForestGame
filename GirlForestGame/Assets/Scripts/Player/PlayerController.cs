@@ -48,6 +48,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (UIManager.Instance.isPaused)
+        {
+            return;
+        }
+
         //Checks for player death
         if (playerAttributes.Health <= 0)
         {
