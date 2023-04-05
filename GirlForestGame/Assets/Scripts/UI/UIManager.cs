@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +14,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject inventoryPanel;
     [SerializeField] GameObject[] pauseMenuButtons;
     [SerializeField] InputActionAsset inputActions;
+
+    [Header("MarkingPanel")]
+    [SerializeField] GameObject markingPickupPanel;
+    [SerializeField] GameObject bowPanel;
+    [SerializeField] GameObject swordPanel;
+    [SerializeField] Image bowImage;
+    [SerializeField] Image swordImage;
+    [SerializeField] TextMeshProUGUI bowDescription;
+    [SerializeField] TextMeshProUGUI swordDescription;
+
 
     int selectedPauseButtonIndex = 0;
 
@@ -58,10 +70,8 @@ public class UIManager : MonoBehaviour
 
         if (isPaused)
         {
-            print("Paused");
             if (InputManager.Instance.MoveSelection().y > 0)
             {
-                print("UP");
                 selectedPauseButtonIndex--;
 
                 if (selectedPauseButtonIndex < 0)
@@ -72,7 +82,6 @@ public class UIManager : MonoBehaviour
             //DPAD DOWN
             else if (InputManager.Instance.MoveSelection().y < 0)
             {
-                print("DOWN");
                 selectedPauseButtonIndex++;
 
                 if (selectedPauseButtonIndex >= pauseMenuButtons.Length)
@@ -180,6 +189,25 @@ public class UIManager : MonoBehaviour
         else
         {
             inventoryOpen = false;
+        }
+    }
+
+    public void ToggleMarkingPickupPanel(bool active, Spirit spirit, MarkingTypes type)
+    {
+        markingPickupPanel.SetActive(active);
+        inventoryOpen = active;
+
+        if (active)
+        {
+            //UPDATE the description of the sword and bow here based on the spirit
+            if (type == MarkingTypes.Attribute)
+            {
+
+            }
+            else if (type == MarkingTypes.Element)
+            {
+
+            }
         }
     }
 

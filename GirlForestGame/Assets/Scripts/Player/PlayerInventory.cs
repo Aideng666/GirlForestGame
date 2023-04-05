@@ -67,6 +67,8 @@ public class PlayerInventory : MonoBehaviour
 
     public void EquipMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
     {
+        UIManager.Instance.ToggleMarkingPickupPanel(false, null, MarkingTypes.None);
+
         float randomXDir = Random.Range(-1f, 1f);
         float randomZDir = Random.Range(-1f, 1f);
         float randomDistance = Random.Range(2f, 5f);
