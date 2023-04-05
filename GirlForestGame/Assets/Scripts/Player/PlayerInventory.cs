@@ -160,11 +160,11 @@ public class PlayerInventory : MonoBehaviour
 
                 if (type == MarkingTypes.Attribute)
                 {
-                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 0);
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 0, spirit.markingLevel);
                 }
                 else if (type == MarkingTypes.Element)
                 {
-                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 1);
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 1, spirit.markingLevel);
                 }
 
                 EquipMarking(spirit, type, Weapons.Sword);
@@ -177,11 +177,11 @@ public class PlayerInventory : MonoBehaviour
 
                 if (type == MarkingTypes.Attribute)
                 {
-                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 2);
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 2, spirit.markingLevel);
                 }
                 else if (type == MarkingTypes.Element)
                 {
-                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 3);
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 3, spirit.markingLevel);
                 }
 
                 EquipMarking(spirit, type, Weapons.Bow);

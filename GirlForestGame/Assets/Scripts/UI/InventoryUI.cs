@@ -32,6 +32,11 @@ public class InventoryUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+        }
+
         for(int i = 0; i < markingIconsList.Count; i++ ) 
         {
             iconList.Add(markingIconsList[i]);
@@ -113,10 +118,12 @@ public class InventoryUI : MonoBehaviour
             if (type == MarkingTypes.Attribute)
             {
                 markingIconsList[0].GetComponent<Image>().sprite = spirit.spiritAttributeSprite;
+                markingIconsList[0].GetComponentInChildren<TextMeshProUGUI>().text = spirit.markingLevel.ToString();
             }
             else if (type == MarkingTypes.Element)
             {
                 markingIconsList[1].GetComponent<Image>().sprite = spirit.spiritElementSprite;
+                markingIconsList[1].GetComponentInChildren<TextMeshProUGUI>().text = spirit.markingLevel.ToString();
             }
         }
         else if (weapon == Weapons.Bow)
@@ -124,10 +131,12 @@ public class InventoryUI : MonoBehaviour
             if (type == MarkingTypes.Attribute)
             {
                 markingIconsList[2].GetComponent<Image>().sprite = spirit.spiritAttributeSprite;
+                markingIconsList[2].GetComponentInChildren<TextMeshProUGUI>().text = spirit.markingLevel.ToString();
             }
             else if (type == MarkingTypes.Element)
             {
                 markingIconsList[3].GetComponent<Image>().sprite = spirit.spiritElementSprite;
+                markingIconsList[3].GetComponentInChildren<TextMeshProUGUI>().text = spirit.markingLevel.ToString();
             }
         }
     }

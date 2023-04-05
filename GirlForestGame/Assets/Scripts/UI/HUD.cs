@@ -51,8 +51,8 @@ public class HUD : MonoBehaviour
 
     PlayerController player;
 
-    //Tween attributePanelTween = null;
-    //Tween markingsPanelTween = null;
+    Tween attributePanelTween = null;
+    Tween markingsPanelTween = null;
 
     public static HUD Instance { get; private set; }
 
@@ -192,9 +192,38 @@ public class HUD : MonoBehaviour
         luckText.text = (player.playerAttributes.Luck).ToString();
     }
 
-    public void UpdateMarkingsPanel(Sprite markingSprite, int index)
+    public void UpdateMarkingsPanel(Sprite markingSprite, int index, int lvl)
     {
         markingImages[index].sprite = markingSprite;
+        markingImages[index].transform.parent.GetComponentInChildren<TextMeshProUGUI>().text = lvl.ToString();
+    }
+
+    public void HighlightMarkingIcons(MarkingPickup markingPickup)
+    {
+        if (markingPickup == null)
+        {
+            print("Resetting Scale");
+            markingImages[0].transform.parent.localScale = Vector3.one;
+            markingImages[1].transform.parent.localScale = Vector3.one;
+            markingImages[2].transform.parent.localScale = Vector3.one;
+            markingImages[3].transform.parent.localScale = Vector3.one;
+        }
+        else if (markingPickup.chosenType == MarkingTypes.Attribute)
+        {
+            print("Found Att");
+            markingImages[0].transform.parent.localScale = Vector3.one * 1.3f;
+            markingImages[1].transform.parent.localScale = Vector3.one;
+            markingImages[2].transform.parent.localScale = Vector3.one * 1.3f;
+            markingImages[3].transform.parent.localScale = Vector3.one;
+        }
+        else if (markingPickup.chosenType == MarkingTypes.Element)
+        {
+            print("Found Ele");
+            markingImages[0].transform.parent.localScale = Vector3.one;
+            markingImages[1].transform.parent.localScale = Vector3.one * 1.3f;
+            markingImages[2].transform.parent.localScale = Vector3.one;
+            markingImages[3].transform.parent.localScale = Vector3.one * 1.3f;
+        }
     }
 
     public void UpdateTotemHUD(Sprite totemSprite, string totemName, string totemDesc)
@@ -205,14 +234,14 @@ public class HUD : MonoBehaviour
         this.totemName.text = totemName;
         totemDescription.text = totemDesc;
 
-        sequence.Append(totemPanel.transform.DOScale(1f, 0.8f)).AppendInterval(2f).Append(totemPanel.transform.DOScale(0f, 0.8f)); 
+        sequence.Append(totemPanel.transform.DOScale(1f, 0.8f)).AppendInterval(3f).Append(totemPanel.transform.DOScale(0f, 0.8f)); 
     }
 
     void ToggleAttributePanel()
     {
-        if (!attributePanelActive /*&& (attributePanelTween == null || !attributePanelTween.IsActive())*/)
+        if (!attributePanelActive && (attributePanelTween == null || !attributePanelTween.IsActive()))
         {
-            /*attributePanelTween = */attributePanel.transform.DOMove(attributePanel.transform.position +
+            attributePanelTween = attributePanel.transform.DOMove(attributePanel.transform.position +
                 (Vector3.right * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             attributePanelActive = !attributePanelActive;
@@ -222,35 +251,35 @@ public class HUD : MonoBehaviour
 
         //UpdateAttributes();
 
-        //if (attributePanelTween == null || !attributePanelTween.IsActive())
-        //{
-            /*attributePanelTween = */attributePanel.transform.DOMove(attributePanel.transform.position +
+        if (attributePanelTween == null || !attributePanelTween.IsActive())
+        {
+            attributePanelTween = attributePanel.transform.DOMove(attributePanel.transform.position +
                 (Vector3.left * (attributePanel.GetComponent<RectTransform>().rect.width - attributePanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             attributePanelActive = !attributePanelActive;
-        //}
+        }
     }
 
     void ToggleMarkingsPanel()
     {
         //UpdateMarkings();
 
-        if (!markingsPanelActive /*&& (markingsPanelTween == null || !markingsPanelTween.IsActive())*/)
+        if (!markingsPanelActive && (markingsPanelTween == null || !markingsPanelTween.IsActive()))
         {
-            markingsPanel.transform.DOMove(markingsPanel.transform.position +
-                (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+            markingsPanelTween = markingsPanel.transform.DOMove(markingsPanel.transform.position +
+                (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             markingsPanelActive = !markingsPanelActive;
 
             return;
         }
 
-        //if (markingsPanelTween == null || !markingsPanelTween.IsActive())
-        //{
-            markingsPanel.transform.DOMove(markingsPanel.transform.position +
-                (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+        if (markingsPanelTween == null || !markingsPanelTween.IsActive())
+        {
+            markingsPanelTween = markingsPanel.transform.DOMove(markingsPanel.transform.position +
+                (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             markingsPanelActive = !markingsPanelActive;
-        //}
+        }
     }
 }

@@ -9,20 +9,13 @@ public class AI_SG_Throw : AI_BaseClass
     [SerializeField] float attackChargeTime = 1;
 
     float elaspedChargeTime;
-    bool chargeComplete;
     bool attackFired;
     int randomPlaneChoice;
 
     [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
     [HideInInspector] public FMOD.Studio.EventInstance throwSFX;
 
-
-    //Transform projectile;
-    //Vector3 defaultLocation;
-    //[SerializeField] float  heightOfShot = 1f;
-    //[SerializeField] float duration = 1f;
     [SerializeField] string stateChangeTrigger = "Projectile_Complete";
-    //[SerializeField] GameObject target;
 
     private void OnEnable()
     {
@@ -57,15 +50,6 @@ public class AI_SG_Throw : AI_BaseClass
             signalSFX.setParameterByName("Astral", 1);
             signalSFX.start();
         }
-
-        //GameObject temp = Instantiate(target, player.transform.position, Quaternion.identity);
-
-        //Getting the projectile child 
-        //projectile = animator.transform.GetChild(0);
-        //defaultLocation = projectile.position;
-
-        //projectile.DOJump(PlayerController.Instance.transform.position, heightOfShot, 1, duration).OnComplete(
-        //() => { animator.SetTrigger(stateChangeTrigger); projectile.position = defaultLocation; Destroy(temp); /*aoeTrigger.GetComponent<SphereCollider>().enabled = true;*/ });
     }
 
 
