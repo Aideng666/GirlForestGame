@@ -205,6 +205,9 @@ public class MenuFunctionManager : MonoBehaviour
             settingsButtonAnimator.SetBool("hasClickedSettings", false);
             settingsUIPanel.SetActive(false);
             settingsInfoPanels.SetActive(false);
+            audioPanel.SetActive(false);
+            controlsPanel.SetActive(false);
+            creditsPanel.SetActive(false);
             selectedButtonIndex = 1;
         }
         else
