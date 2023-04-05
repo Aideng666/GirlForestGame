@@ -14,10 +14,13 @@ public class Minimap : MonoBehaviour
 
     List<GameObject> mapIcons = new List<GameObject>();
     List<GameObject> mapPathways = new List<GameObject>();
+    List<Sprite> mapIconSprites = new List<Sprite>();
 
     Dictionary<Room, bool> visitedRooms;
 
     [SerializeField] Sprite[] roomIcons;
+
+    bool mapUpdated = false;
 
     //public static Minimap Instance { get; set; }
 
@@ -40,6 +43,11 @@ public class Minimap : MonoBehaviour
             Destroy(icon);
         }
 
+        foreach (Sprite icon in mapIconSprites)
+        {
+            Destroy(icon);
+        }
+
         foreach (GameObject icon in mapPathways)
         {
             Destroy(icon);
@@ -47,6 +55,7 @@ public class Minimap : MonoBehaviour
 
         mapIcons.Clear();
         mapPathways.Clear();
+        mapIconSprites.Clear();
     }
 
     public void VisitRoom(Room visitedRoom, Directions directionOfPreviousRoom)
@@ -217,7 +226,7 @@ public class Minimap : MonoBehaviour
         //Updates the color of the icons based on if they are in the room and what type of room it is
         foreach (GameObject icon in mapIcons)
         {
-            Color iconColor = icon.GetComponent<Image>().color;
+            //Color iconColor = icon.GetComponent<Image>().color;
 
             if (icon.GetComponent<RectTransform>().localPosition == Vector3.zero)
             {
@@ -229,6 +238,7 @@ public class Minimap : MonoBehaviour
 
                             //iconColor = defaultRoomColor;
                             icon.GetComponent<Image>().sprite = roomIcons[0];
+                            mapIconSprites.Add(roomIcons[0]);
 
                             break;
 
@@ -236,16 +246,67 @@ public class Minimap : MonoBehaviour
 
                             //iconColor = totemRoomColor;
                             icon.GetComponent<Image>().sprite = roomIcons[1];
+                            mapIconSprites.Add(roomIcons[1]);
+
+                            break;
+
+                        case RoomTypes.End:
+
+                            if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Marking)
+                            {
+                                icon.GetComponent<Image>().sprite = roomIcons[2];
+                                mapIconSprites.Add(roomIcons[2]);
+                            }
+                            else if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Shop)
+                            {
+                                icon.GetComponent<Image>().sprite = roomIcons[3];
+                                mapIconSprites.Add(roomIcons[3]);
+                            }
 
                             break;
                     }
                 }
-
-                iconColor.a = 1;
+                else
+                {
+                    //Sets the icon to be active and not greyed out
+                    if (icon.GetComponent<Image>().sprite == roomIcons[4])
+                    {
+                        icon.GetComponent<Image>().sprite = roomIcons[0];
+                    }
+                    if (icon.GetComponent<Image>().sprite == roomIcons[5])
+                    {
+                        icon.GetComponent<Image>().sprite = roomIcons[1];
+                    }
+                    if (icon.GetComponent<Image>().sprite == roomIcons[6])
+                    {
+                        icon.GetComponent<Image>().sprite = roomIcons[2];
+                    }
+                    if (icon.GetComponent<Image>().sprite == roomIcons[7])
+                    {
+                        icon.GetComponent<Image>().sprite = roomIcons[3];
+                    }
+                }
+                //iconColor.a = 1;
             }
             else
             {
-                iconColor.a = 0.25f;
+                //iconColor.a = 0.25f;
+                if (icon.GetComponent<Image>().sprite == roomIcons[0])
+                {
+                    icon.GetComponent<Image>().sprite = roomIcons[4];
+                }
+                if (icon.GetComponent<Image>().sprite == roomIcons[1])
+                {
+                    icon.GetComponent<Image>().sprite = roomIcons[5];
+                }
+                if (icon.GetComponent<Image>().sprite == roomIcons[2])
+                {
+                    icon.GetComponent<Image>().sprite = roomIcons[6];
+                }
+                if (icon.GetComponent<Image>().sprite == roomIcons[3])
+                {
+                    icon.GetComponent<Image>().sprite = roomIcons[7];
+                }
             }
 
             //icon.GetComponent<Image>().color = iconColor;
