@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Marking
   m_EditorClassIdentifier: 
   itemType: 3
-  value: 50
+  value: 20
   item: {fileID: 5512418781491973167, guid: 6849a4957dd05c14887364d6c110bc49, type: 3}

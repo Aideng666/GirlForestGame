@@ -192,9 +192,38 @@ public class HUD : MonoBehaviour
         luckText.text = (player.playerAttributes.Luck).ToString();
     }
 
-    public void UpdateMarkingsPanel(Sprite markingSprite, int index)
+    public void UpdateMarkingsPanel(Sprite markingSprite, int index, int lvl)
     {
         markingImages[index].sprite = markingSprite;
+        markingImages[index].transform.parent.GetComponentInChildren<TextMeshProUGUI>().text = lvl.ToString();
+    }
+
+    public void HighlightMarkingIcons(MarkingPickup markingPickup)
+    {
+        if (markingPickup == null)
+        {
+            print("Resetting Scale");
+            markingImages[0].transform.parent.localScale = Vector3.one;
+            markingImages[1].transform.parent.localScale = Vector3.one;
+            markingImages[2].transform.parent.localScale = Vector3.one;
+            markingImages[3].transform.parent.localScale = Vector3.one;
+        }
+        else if (markingPickup.chosenType == MarkingTypes.Attribute)
+        {
+            print("Found Att");
+            markingImages[0].transform.parent.localScale = Vector3.one * 1.3f;
+            markingImages[1].transform.parent.localScale = Vector3.one;
+            markingImages[2].transform.parent.localScale = Vector3.one * 1.3f;
+            markingImages[3].transform.parent.localScale = Vector3.one;
+        }
+        else if (markingPickup.chosenType == MarkingTypes.Element)
+        {
+            print("Found Ele");
+            markingImages[0].transform.parent.localScale = Vector3.one;
+            markingImages[1].transform.parent.localScale = Vector3.one * 1.3f;
+            markingImages[2].transform.parent.localScale = Vector3.one;
+            markingImages[3].transform.parent.localScale = Vector3.one * 1.3f;
+        }
     }
 
     public void UpdateTotemHUD(Sprite totemSprite, string totemName, string totemDesc)
@@ -237,7 +266,7 @@ public class HUD : MonoBehaviour
 
         if (!markingsPanelActive && (markingsPanelTween == null || !markingsPanelTween.IsActive()))
         {
-            markingsPanel.transform.DOMove(markingsPanel.transform.position +
+            markingsPanelTween = markingsPanel.transform.DOMove(markingsPanel.transform.position +
                 (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             markingsPanelActive = !markingsPanelActive;
@@ -247,7 +276,7 @@ public class HUD : MonoBehaviour
 
         if (markingsPanelTween == null || !markingsPanelTween.IsActive())
         {
-            markingsPanel.transform.DOMove(markingsPanel.transform.position +
+            markingsPanelTween = markingsPanel.transform.DOMove(markingsPanel.transform.position +
                 (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             markingsPanelActive = !markingsPanelActive;
