@@ -52,9 +52,12 @@ public class InteractRing : MonoBehaviour
         {
             HUD.Instance.HighlightMarkingIcons(markingPickup);
         }
-        else
+        else if(HUD.Instance != null)
         {
-            HUD.Instance.HighlightMarkingIcons(null);
+            if (HUD.Instance != null)
+            {
+                HUD.Instance.HighlightMarkingIcons(null);
+            }
         }
     }
 

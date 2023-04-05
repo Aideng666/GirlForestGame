@@ -149,14 +149,11 @@ public class PlayerInventory : MonoBehaviour
         IsChoosingWeapon = true;
 
         bool weaponSelected = false;
-        print("Select Sword: Left D-Pad or 1");
-        print("Select Bow: Right D-Pad or 2");
 
         while (!weaponSelected)
         {
             if (InputManager.Instance.SelectSword())
             {
-                print($"Putting the level {spirit.markingLevel} {spirit.spiritName} {type.ToString()} on your Sword");
 
                 if (type == MarkingTypes.Attribute)
                 {
@@ -173,7 +170,6 @@ public class PlayerInventory : MonoBehaviour
             }
             if (InputManager.Instance.SelectBow())
             {
-                print($"Putting the {spirit.spiritName} {type.ToString()} on your Bow");
 
                 if (type == MarkingTypes.Attribute)
                 {
