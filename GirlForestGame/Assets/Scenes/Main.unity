@@ -10948,6 +10948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Agaric
       objectReference: {fileID: 0}
+    - target: {fileID: 6957754328215898013, guid: 463f348ff37151448b9add1627dd0e31, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7765674834055306535, guid: 463f348ff37151448b9add1627dd0e31, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -11004,6 +11008,10 @@ PrefabInstance:
     - target: {fileID: 3742448917039627452, guid: b64fc27ba2bc20c439e25f342c8cb36e, type: 3}
       propertyPath: m_Name
       value: Agaric.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742448917039627452, guid: b64fc27ba2bc20c439e25f342c8cb36e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4081397997039085062, guid: b64fc27ba2bc20c439e25f342c8cb36e, type: 3}
       propertyPath: m_RootOrder
@@ -11105,6 +11113,10 @@ PrefabInstance:
     - target: {fileID: 6458397408686282852, guid: 357c1b44aecd5db4690589ccb840de8c, type: 3}
       propertyPath: m_Name
       value: Agaric.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 6458397408686282852, guid: 357c1b44aecd5db4690589ccb840de8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 357c1b44aecd5db4690589ccb840de8c, type: 3}

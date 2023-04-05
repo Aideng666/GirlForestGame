@@ -82,7 +82,7 @@ public class Room : MonoBehaviour
                     {
                         int directionOfExit = (int)DungeonGenerator.Instance.ReverseDirection((Directions)i);
 
-                        CreateExit(directionOfExit);
+                        //CreateExit(directionOfExit);
 
                         //spawnedModel.doors[directionOfExit].transform.parent.GetComponentInChildren<RoomExit>().tag = "FloorExit";
                         spawnedModel.exits[directionOfExit].SetActive(true);
@@ -116,10 +116,10 @@ public class Room : MonoBehaviour
         spawnedModel = roomModel.GetComponent<RoomModel>();
     }
 
-    public void CreateExit(int direction)
-    {
-        spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
-    }
+    //public void CreateExit(int direction)
+    //{
+    //    spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
+    //}
 
     public void UpdateVisualExits()
     {
@@ -155,7 +155,7 @@ public class Room : MonoBehaviour
 
         connectedRooms[directionIndex] = roomToAttach;
 
-        CreateExit(directionIndex);
+        //CreateExit(directionIndex);
     }
 
     public Room[] GetConnectedRooms()
