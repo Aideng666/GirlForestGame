@@ -238,7 +238,7 @@ public class HUD : MonoBehaviour
         if (!markingsPanelActive && (markingsPanelTween == null || !markingsPanelTween.IsActive()))
         {
             markingsPanel.transform.DOMove(markingsPanel.transform.position +
-                (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+                (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             markingsPanelActive = !markingsPanelActive;
 
@@ -248,7 +248,7 @@ public class HUD : MonoBehaviour
         if (markingsPanelTween == null || !markingsPanelTween.IsActive())
         {
             markingsPanel.transform.DOMove(markingsPanel.transform.position +
-                (Vector3.right * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
+                (Vector3.left * (markingsPanel.GetComponent<RectTransform>().rect.width - markingsPanel.GetComponent<RectTransform>().rect.width * hiddenPanelVisibilityPercentage)), 0.5f);
 
             markingsPanelActive = !markingsPanelActive;
         }
