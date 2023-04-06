@@ -182,17 +182,17 @@ public class HUD : MonoBehaviour
 
     void UpdateAttributes()
     {
-        healthText.text = (player.playerAttributes.MaxHealth).ToString();
-        speedText.text = (player.playerAttributes.Speed).ToString();
-        swdDmgText.text = (player.playerAttributes.SwordDamage).ToString();
-        bowDmgText.text = (player.playerAttributes.BowDamage).ToString();
-        swdCdnText.text = (player.playerAttributes.SwordCooldown).ToString();
-        bowCdnText.text = (player.playerAttributes.BowCooldown).ToString();
-        swdRangeText.text = (player.playerAttributes.SwordRange).ToString();
-        projSpdText.text = (player.playerAttributes.ProjectileSpeed).ToString();
-        critChanceText.text = (player.playerAttributes.CritChance).ToString();
-        bowChargeSpdText.text = (player.playerAttributes.BowChargeTime).ToString();
-        luckText.text = (player.playerAttributes.Luck).ToString();
+        healthText.text = (player.playerAttributes.MaxHealth).ToString("0");
+        speedText.text = (player.playerAttributes.Speed).ToString("0");
+        swdDmgText.text = (player.playerAttributes.SwordDamage).ToString("0");
+        bowDmgText.text = (player.playerAttributes.BowDamage).ToString("0");
+        swdCdnText.text = (player.playerAttributes.SwordCooldown).ToString("0");
+        bowCdnText.text = (player.playerAttributes.BowCooldown).ToString("0");
+        swdRangeText.text = (player.playerAttributes.SwordRange).ToString("0");
+        projSpdText.text = (player.playerAttributes.ProjectileSpeed).ToString("0");
+        critChanceText.text = (player.playerAttributes.CritChance).ToString("0");
+        bowChargeSpdText.text = (player.playerAttributes.BowChargeTime).ToString("0");
+        luckText.text = ((player.playerAttributes.Luck) * 100).ToString();
     }
 
     public void UpdateMarkingsPanel(Sprite markingSprite, int index, int lvl)

@@ -62,7 +62,7 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{f14318e6-33ef-4797-a5cb-c924287c29ce}">
 		<property name="maxVoices">
-			<value>5</value>
+			<value>4</value>
 		</property>
 		<property name="triggerCooldown">
 			<value>520</value>
@@ -369,7 +369,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-5</value>
+			<value>0</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{6bc998de-66e8-4e77-8d83-ee3b7dee7284}">
@@ -377,7 +377,7 @@
 			<value>0.99343185550082103</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-53.3333321</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{1ea79a2f-09e7-4bbd-81e9-554c540d0168}">
@@ -385,7 +385,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-66.6666641</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{b62b1918-f050-4e7e-88d9-a0ea239daac2}">
@@ -393,7 +393,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>-5</value>
+			<value>-3</value>
 		</property>
 	</object>
 </objects>
