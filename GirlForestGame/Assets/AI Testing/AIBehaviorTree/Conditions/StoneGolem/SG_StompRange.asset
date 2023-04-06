@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SG_StompRange
   m_EditorClassIdentifier: 
   minRange: 0
-  maxRange: 3
+  maxRange: 4
   Condition_Parameter: Close_To_Player
