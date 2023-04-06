@@ -9904,6 +9904,8 @@ MonoBehaviour:
   swordImage: {fileID: 2145086267}
   bowDescription: {fileID: 1442943533}
   swordDescription: {fileID: 523492314}
+  bowName: {fileID: 269391439}
+  swordName: {fileID: 1365927425}
 --- !u!114 &645852006
 MonoBehaviour:
   m_ObjectHideFlags: 0
