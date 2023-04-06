@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45fca93215b5fb4fb04d9cbe18a2878, type: 3}
   m_Name: MarkingRoom1
   m_EditorClassIdentifier: 
-  model: {fileID: 555592096212597669, guid: 2ac3c5f44bd515846bb481c850bad591, type: 3}
-  northCamBoundary: 0
-  southCamBoundary: 0
-  eastCamBoundary: 0
-  westCamBoundary: 0
+  model: {fileID: 300422463117220495, guid: 43af6e441cd02c84c93763e9752cd525, type: 3}
+  northCamBoundary: 14.299999
+  southCamBoundary: -14.300003
+  eastCamBoundary: 14.300003
+  westCamBoundary: -14.300003

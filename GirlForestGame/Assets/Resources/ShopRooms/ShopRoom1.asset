@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45fca93215b5fb4fb04d9cbe18a2878, type: 3}
   m_Name: ShopRoom1
   m_EditorClassIdentifier: 
-  model: {fileID: 8005617000629691291, guid: e71224f47b035094cbab48da7c79a1bc, type: 3}
+  model: {fileID: 678371495485417249, guid: 27c25fb30eaa0e94e9feb0027a74f213, type: 3}
   northCamBoundary: 10.865704
   southCamBoundary: -10.865709
   eastCamBoundary: 10.865709

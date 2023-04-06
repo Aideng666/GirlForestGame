@@ -31,6 +31,7 @@ TagManager:
   - Post Processing
   - IFrames
   - PassiveCollider
+  - IgnoreNavMesh
   - 
   - 
   - 

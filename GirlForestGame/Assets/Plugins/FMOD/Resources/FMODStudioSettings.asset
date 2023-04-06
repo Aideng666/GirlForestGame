@@ -588,12 +588,9 @@ MonoBehaviour:
   Banks:
   - BGM
   - Boar
-  - Draugr
   - Fungi
   - GEnemy
-  - Golem
   - Player
-  - UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
