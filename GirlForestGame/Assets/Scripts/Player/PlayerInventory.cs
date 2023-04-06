@@ -64,7 +64,6 @@ public class PlayerInventory : MonoBehaviour
         if (player.playerInventory.totemDictionary[typeof(FearfulAuraTotem)] > 0)
         {
             player.playerInventory.GetTotemFromList(typeof(FearfulAuraTotem)).Totem.ApplyEffect();
-            fearSFX.start();
         }
 
         if (player.playerInventory.totemDictionary[typeof(TerrestrialShieldTotem)] > 0)

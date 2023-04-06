@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI swordDescription;
     [SerializeField] TextMeshProUGUI bowName;
     [SerializeField] TextMeshProUGUI swordName;
+    FMOD.Studio.EventInstance eventInstance;
 
 
     int selectedPauseButtonIndex = 0;
@@ -48,7 +49,7 @@ public class UIManager : MonoBehaviour
         inventoryOpen = false;
         isPaused = false;
 
-        sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
+        sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/");
     }
 
     // Update is called once per frame
@@ -63,11 +64,14 @@ public class UIManager : MonoBehaviour
                 selectedPauseButtonIndex = 0;
                 //sfxBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
                 isPaused = true;
+                eventInstance.setPaused(true);
             }
             else
             {
+                eventInstance.setPaused(false);
                 isPaused = false;
             }
+
         }
 
         if (isPaused)

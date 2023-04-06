@@ -50,11 +50,6 @@ public class Room : MonoBehaviour
             {
 
                 battleBGM.setParameterByName("Combat", 1);
-
-                battleBGM.getParameterByName("Combat", out combatValue);
-                Debug.Log("batGM start");
-                Debug.Log("enable: " + combatValue);
-
                 //Num of enemies in a room
                 for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 1); i++)
                 {
@@ -224,7 +219,6 @@ public class Room : MonoBehaviour
                 
             }
             battleBGM.setParameterByName("Combat", 0);
-            Debug.Log("Roam Start");
             roomCompleted = true;
         }
     }
