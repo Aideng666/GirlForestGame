@@ -39,6 +39,7 @@ public class PlayerCombat : MonoBehaviour
 
     [HideInInspector] public FMOD.Studio.EventInstance BowSFX;
     [HideInInspector] public FMOD.Studio.EventInstance ArrowSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance dingSFX;
     private FMOD.Studio.EventInstance DrawSFX;
 
     //Sword Stuff
@@ -88,6 +89,7 @@ public class PlayerCombat : MonoBehaviour
         hitSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Hit");
         formSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Form");
         barrierSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Pulse");
+        dingSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Charged");
 
         ArrowSFX.getParameterByName("SPCharge", out currentBowChargeTime);
 
@@ -146,7 +148,7 @@ public class PlayerCombat : MonoBehaviour
                     if (!bowChargeCompleteParticle.gameObject.activeSelf)
                     {
                         bowChargeCompleteParticle.gameObject.SetActive(true);
-
+                        dingSFX.start();
                         chargeCompleteParticlePlayed = true;
                     }
                 }
@@ -670,7 +672,7 @@ public class PlayerCombat : MonoBehaviour
         ArrowSFX.release();
         DrawSFX.release();
         hitSFX.release();
-
+        dingSFX.release();
     }
 }
 

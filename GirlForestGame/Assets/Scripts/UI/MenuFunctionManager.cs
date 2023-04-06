@@ -9,7 +9,6 @@ public class MenuFunctionManager : MonoBehaviour
     [SerializeField] AnimationEvents camEventObj;
     [SerializeField] GameObject playButton;
     [SerializeField] GameObject settingsButton;
-    [SerializeField] GameObject tutorialButton;
     [SerializeField] GameObject quitButton;
     [SerializeField] GameObject audioButton;
     [SerializeField] GameObject controlsButton;
@@ -31,7 +30,7 @@ public class MenuFunctionManager : MonoBehaviour
     private void Start()
     {
         mainMenuUIPanel.SetActive(false);
-        menuButtons = new GameObject[] { playButton, settingsButton, tutorialButton, quitButton };
+        menuButtons = new GameObject[] { playButton, settingsButton, quitButton };
         selectedButtonIndex = 0;
     }
 
@@ -70,7 +69,7 @@ public class MenuFunctionManager : MonoBehaviour
             }
             else
             {
-                menuButtons = new GameObject[4] { playButton, settingsButton, tutorialButton, quitButton };
+                menuButtons = new GameObject[3] { playButton, settingsButton, quitButton };
             }
 
             //DPAD UP
@@ -144,10 +143,10 @@ public class MenuFunctionManager : MonoBehaviour
                         {
                             ControlsPanel();
                         }
-                        else
-                        {
-                            Tutorial();
-                        }
+                        //else
+                        //{
+                        //    Tutorial();
+                        //}
 
                         break;
 
@@ -224,8 +223,8 @@ public class MenuFunctionManager : MonoBehaviour
         LoadingScreen.Instance.LoadScene("Main");
     }
 
-    public void Tutorial()
-    {
-        LoadingScreen.Instance.LoadScene("Tutorial");
-    }
+    //public void Tutorial()
+    //{
+    //    LoadingScreen.Instance.LoadScene("Tutorial");
+    //}
 }
