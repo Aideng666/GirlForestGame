@@ -2226,7 +2226,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/GEnemy.bank
   Name: GEnemy
   StudioPath: bank:/SFX/Enemy/GEnemy
-  lastModified: 638163275514306578
+  lastModified: 638156156751623436
   FileSizes:
   - Name: Desktop
     Value: 30624

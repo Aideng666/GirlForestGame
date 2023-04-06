@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2224,7 +2224,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &356765777
 GameObject:
@@ -3294,7 +3294,7 @@ RectTransform:
   - {fileID: 1903281493}
   - {fileID: 356765778}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3314,8 +3314,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 1903281494}
-  controlsPanel: {fileID: 0}
+  pausePanel: {fileID: 0}
+  deathPanel: {fileID: 0}
+  winPanel: {fileID: 0}
+  inventoryPanel: {fileID: 0}
+  pauseMenuButtons: []
   inputActions: {fileID: -944628639613478452, guid: dc3b3eddba13a254dbf8d9e8d76f6b2c, type: 3}
+  markingPickupPanel: {fileID: 0}
+  bowPanel: {fileID: 0}
+  swordPanel: {fileID: 0}
+  bowImage: {fileID: 0}
+  swordImage: {fileID: 0}
+  bowDescription: {fileID: 0}
+  swordDescription: {fileID: 0}
 --- !u!43 &711313475
 Mesh:
   m_ObjectHideFlags: 0
@@ -4346,6 +4357,7 @@ MonoBehaviour:
   mushroomPrefab: {fileID: 700446156201332264, guid: a2255e9f0a3630840be6a4ed00ea066d, type: 3}
   draugrPrefab: {fileID: 3472284349790607284, guid: e015bde69fb0bf44cbe025ccc15f3021, type: 3}
   stoneGolemPrefab: {fileID: 0}
+  dmgNumbersPrefab: {fileID: 0}
 --- !u!4 &899270707
 Transform:
   m_ObjectHideFlags: 0
@@ -4359,7 +4371,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &909985622
 Mesh:
@@ -4723,7 +4735,7 @@ RectTransform:
   m_Children:
   - {fileID: 974769006}
   m_Father: {fileID: 1213085027}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4854,7 +4866,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &944912961
 MonoBehaviour:
@@ -7258,7 +7270,7 @@ Transform:
   - {fileID: 775725442}
   - {fileID: 304165595}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1339222383
 Mesh:
@@ -9580,7 +9592,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1653576051
 MonoBehaviour:
@@ -9696,6 +9708,8 @@ MonoBehaviour:
   fearfulAura: {fileID: 8554893605923400095, guid: 97d9b294669ed3a478c8804c93dd078c, type: 3}
   teleport: {fileID: 3646500379217239845, guid: 25bb794ebe317f545a336b4de54fae05, type: 3}
   teleportAttack: {fileID: 4458051954683402213, guid: d3b170d894c98ac439b97cbdc4b26d83, type: 3}
+  shieldCrumble: {fileID: 0}
+  golemStomp: {fileID: 0}
 --- !u!43 &1658488194
 Mesh:
   m_ObjectHideFlags: 0
@@ -10565,7 +10579,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -12281,8 +12296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb38a04c756f73c4ab40407184c001d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  astralOrbPrefab: {fileID: 3458991263078247709, guid: c5d927ee96a4c794fa61dbabe57770d3, type: 3}
-  terrestrialOrbPrefab: {fileID: 3458991263078247709, guid: e4673e93fa589434b9c4ad1bf877f42c, type: 3}
+  astralMushroomOrbPrefab: {fileID: 0}
+  terrestrialMushroomOrbPrefab: {fileID: 0}
+  astralGolemRock: {fileID: 0}
+  terrestrialGolemRock: {fileID: 0}
+  playerArrow: {fileID: 0}
 --- !u!4 &1987383115
 Transform:
   m_ObjectHideFlags: 0
@@ -12296,7 +12314,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &2130657755
 Mesh:
