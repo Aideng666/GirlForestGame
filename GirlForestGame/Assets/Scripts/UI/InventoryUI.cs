@@ -78,26 +78,26 @@ public class InventoryUI : MonoBehaviour
             if (selectedIcon.GetComponent<Image>().sprite == markingIconsList[0].GetComponent<Image>().sprite)
             {
                 markingDescriptionImage.sprite = markingIconsList[0].GetComponent<Image>().sprite;
-                //markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[0].spiritAttributeName;
-                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[0].spiritAttributeDesc;
+                markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[0].spiritAttributeName;
+                markingDescription.text = PlayerController.Instance.playerMarkings.markings[0].spiritAttributeDesc;
             }
             else if (selectedIcon.GetComponent<Image>().sprite == markingIconsList[1].GetComponent<Image>().sprite)
             {
                 markingDescriptionImage.sprite = markingIconsList[1].GetComponent<Image>().sprite;
-                //markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[1].spiritElementSwordName;
-                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[1].spiritElementSwordDesc;
+                markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[1].spiritElementSwordName;
+                markingDescription.text = PlayerController.Instance.playerMarkings.markings[1].spiritElementSwordDesc;
             }
             else if (selectedIcon.GetComponent<Image>().sprite == markingIconsList[2].GetComponent<Image>().sprite)
             {
                 markingDescriptionImage.sprite = markingIconsList[2].GetComponent<Image>().sprite;
-                //markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[2].spiritAttributeName;
-                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[2].spiritAttributeDesc;
+                markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[2].spiritAttributeName;
+                markingDescription.text = PlayerController.Instance.playerMarkings.markings[2].spiritAttributeDesc;
             }
             else if (selectedIcon.GetComponent<Image>().sprite == markingIconsList[3].GetComponent<Image>().sprite)
             {
                 markingDescriptionImage.sprite = markingIconsList[3].GetComponent<Image>().sprite;
-                //markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[3].spiritElementBowName;
-                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[3].spiritElementBowDesc;
+                markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[3].spiritElementBowName;
+                markingDescription.text = PlayerController.Instance.playerMarkings.markings[3].spiritElementBowDesc;
             }
             else
             {
