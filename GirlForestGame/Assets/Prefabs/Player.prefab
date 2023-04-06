@@ -4301,6 +4301,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5982676203613863567}
     m_Modifications:
+    - target: {fileID: 3588150027151578585, guid: add854b74475f8f45825175f3b01b7fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 5479120351969121974, guid: add854b74475f8f45825175f3b01b7fc, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -4412,6 +4416,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2861103870856074284, guid: fa5c87dd089ebb8429f2874885fd5830, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 2861103870856074285, guid: fa5c87dd089ebb8429f2874885fd5830, type: 3}
       propertyPath: m_Name
       value: Bow Charge Particle
@@ -5423,6 +5431,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5982676203613863567}
     m_Modifications:
+    - target: {fileID: 7450238638450958122, guid: 88be472ae0534f546a50cafecc66113b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 7450238638450958123, guid: 88be472ae0534f546a50cafecc66113b, type: 3}
       propertyPath: m_Name
       value: Sword Slash Particle R-L
@@ -5490,6 +5502,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5982676203613863567}
     m_Modifications:
+    - target: {fileID: 7450238638450958122, guid: a2ab6cb63c54fe84ebff794356a463b9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 7450238638450958123, guid: a2ab6cb63c54fe84ebff794356a463b9, type: 3}
       propertyPath: m_Name
       value: Sword Slash Particle L-R
