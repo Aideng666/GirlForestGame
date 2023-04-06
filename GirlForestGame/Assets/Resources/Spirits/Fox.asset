@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b1c5fefb1ff5c4180a24aa5d9006a5, type: 3}
   m_Name: Fox
   m_EditorClassIdentifier: 
-  spiritName: Kindle
+  spiritName: Fox
   spiritAttributeSprite: {fileID: 21300000, guid: 6c8b15df09f57b94fbf1cd9acfc0a60d, type: 3}
   spiritElementSprite: {fileID: 21300000, guid: 69a75fd98ba636446a571291ada5e1df, type: 3}
   buffedAttributes: 040000000a000000
   usedElement: 0
+  spiritMarkingName: Kindle
+  spiritAttributeName: Marking of Fire
+  spiritAttributeDesc: Grants the Marking of Fire which bestows increased Attack
+    and Critical Chance
+  spiritElementBowName: Rain of Fire
+  spiritElementBowDesc: Lobs an arrow into the air and creates a pool of fire on
+    the ground upon landing
+  spiritElementSwordName: Ignite
+  spiritElementSwordDesc: Small chance to burn enemies on hit
