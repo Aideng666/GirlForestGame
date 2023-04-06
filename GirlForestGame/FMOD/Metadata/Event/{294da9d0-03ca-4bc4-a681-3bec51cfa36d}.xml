@@ -56,7 +56,14 @@
 			<destination>{642eaefb-72e4-4f90-a2e4-a9547bb90317}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{3e4041c0-432d-4188-a1e8-3080467e1b0a}" />
+	<object class="EventAutomatableProperties" id="{3e4041c0-432d-4188-a1e8-3080467e1b0a}">
+		<property name="maxVoices">
+			<value>5</value>
+		</property>
+		<property name="triggerCooldown">
+			<value>200</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{98652092-1300-425c-b027-c51789063ceb}" />
 	<object class="GroupTrack" id="{94887578-c508-4ba4-88e8-6e0e0dd6b83e}">
 		<relationship name="modules">
@@ -89,8 +96,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{e79ba621-29cf-4eef-ab80-58a03a736237}" />
 	<object class="SingleSound" id="{bb46d7b8-4afc-46b9-9017-04d1748b6d5d}">
+		<property name="isAsync">
+			<value>true</value>
+		</property>
+		<property name="isCutoff">
+			<value>true</value>
+		</property>
 		<property name="length">
-			<value>0.26000000000000001</value>
+			<value>0.30399999999999999</value>
 		</property>
 		<property name="timelockedOffset">
 			<value>0.095000000000000001</value>

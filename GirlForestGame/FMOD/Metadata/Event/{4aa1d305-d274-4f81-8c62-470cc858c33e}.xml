@@ -59,7 +59,7 @@
 	</object>
 	<object class="EventAutomatableProperties" id="{5273728c-5f75-4ed3-9e0f-26f945a27280}">
 		<property name="maxVoices">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<property name="voiceStealing">
 			<value>4</value>
@@ -237,6 +237,9 @@
 	<object class="SpatialiserEffect" id="{348c5063-4e5a-49c4-9a3a-5de531005959}">
 		<property name="minimumDistance">
 			<value>3</value>
+		</property>
+		<property name="maximumDistance">
+			<value>30</value>
 		</property>
 		<property name="overrideRange">
 			<value>true</value>

@@ -145,7 +145,11 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
+<<<<<<< HEAD
   lastModified: 638163441515780176
+=======
+  lastModified: 638163439959739308
+>>>>>>> NewgroundSound
   FileSizes:
   - Name: Desktop
     Value: 3828
@@ -177,6 +181,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1123
+--- !u!114 &-7670195467268871706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Shop
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Shop
+  Guid:
+    Data1: -212516767
+    Data2: 1084259305
+    Data3: 958540703
+    Data4: 1586199897
+  Banks:
+  - {fileID: -4973719386407184309}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1044
 --- !u!114 &-7640217823767225453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +262,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 548
+--- !u!114 &-7306275861941555876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Golem/Stomp
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Golem/Stomp
+  Guid:
+    Data1: -826672982
+    Data2: 1185536780
+    Data3: -544409982
+    Data4: -840836548
+  Banks:
+  - {fileID: 7136901850373504359}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 450
 --- !u!114 &-7228127835910048799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,7 +496,11 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
+<<<<<<< HEAD
   lastModified: 638163441517450447
+=======
+  lastModified: 638163439959579728
+>>>>>>> NewgroundSound
   FileSizes:
   - Name: Desktop
     Value: 5819616
@@ -458,7 +520,11 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
+<<<<<<< HEAD
   lastModified: 638163441515780176
+=======
+  lastModified: 638163439959669494
+>>>>>>> NewgroundSound
   FileSizes:
   - Name: Desktop
     Value: 3220
@@ -618,6 +684,26 @@ MonoBehaviour:
   - Name: Desktop
     Value: 2386
   Exists: 1
+--- !u!114 &-4973719386407184309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/UI.bank
+  Name: UI
+  StudioPath: bank:/SFX/UI
+  lastModified: 638163439961451225
+  FileSizes:
+  - Name: Desktop
+    Value: 231680
+  Exists: 1
 --- !u!114 &-4931836988857911096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,6 +798,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 71392
   Exists: 1
+--- !u!114 &-4694598330106075658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Draugr/Teleport
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Draugr/Teleport
+  Guid:
+    Data1: 1885646833
+    Data2: 1098120657
+    Data3: 1349138607
+    Data4: 1867031171
+  Banks:
+  - {fileID: -1846618219991161162}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-4661120457830928453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,6 +852,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 470
+--- !u!114 &-4453379710288467335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Golem/Throw
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Golem/Throw
+  Guid:
+    Data1: 189920808
+    Data2: 1100288493
+    Data3: -1744683591
+    Data4: -2136286775
+  Banks:
+  - {fileID: 7136901850373504359}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1317
 --- !u!114 &-4279878361226981206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,6 +1009,33 @@ MonoBehaviour:
   MinDistance: 9.8
   MaxDistance: 30
   Length: 100
+--- !u!114 &-4020722010374582792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Die
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Die
+  Guid:
+    Data1: 1370890432
+    Data2: 1336176163
+    Data3: 1736892593
+    Data4: -1293326862
+  Banks:
+  - {fileID: -4973719386407184309}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5433
 --- !u!114 &-3778030443273027219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,6 +1087,33 @@ MonoBehaviour:
   MinDistance: 16
   MaxDistance: 40
   Length: 200
+--- !u!114 &-2673113069967958275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Click
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Click
+  Guid:
+    Data1: 758391822
+    Data2: 1157500319
+    Data3: 859036575
+    Data4: -80670925
+  Banks:
+  - {fileID: -4973719386407184309}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 130
 --- !u!114 &-2652590001858639111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,6 +1134,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 170880
   Exists: 1
+--- !u!114 &-2631211098304408195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Win
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Win
+  Guid:
+    Data1: 1525960109
+    Data2: 1322756971
+    Data3: -737869415
+    Data4: 14878639
+  Banks:
+  - {fileID: -4973719386407184309}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8542
 --- !u!114 &-2407580750354182175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,6 +1372,53 @@ MonoBehaviour:
   - Name: Desktop
     Value: 597504
   Exists: 1
+--- !u!114 &-1846618219991161162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Draugr.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Draugr.bank
+  Name: Draugr
+  StudioPath: bank:/SFX/Enemy/Draugr
+  lastModified: 638163439962590549
+  FileSizes:
+  - Name: Desktop
+    Value: 465952
+  Exists: 1
+--- !u!114 &-1778187132546638454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Obtain
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Obtain
+  Guid:
+    Data1: 547754247
+    Data2: 1154845183
+    Data3: -698901838
+    Data4: 673245981
+  Banks:
+  - {fileID: -4973719386407184309}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2200
 --- !u!114 &-1548047308540338991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,6 +1565,9 @@ MonoBehaviour:
   - {fileID: 5180278857975630338}
   - {fileID: 6530498524969943338}
   - {fileID: 8171624434805654353}
+  - {fileID: -1846618219991161162}
+  - {fileID: 7136901850373504359}
+  - {fileID: -4973719386407184309}
   EditorEvents:
   - {fileID: 2050096758235668550}
   - {fileID: 9167487859010060302}
@@ -1333,12 +1604,28 @@ MonoBehaviour:
   - {fileID: -2158608836198110873}
   - {fileID: -5042671944774742945}
   - {fileID: 5119283563671081535}
+  - {fileID: 2090209163521321467}
+  - {fileID: 6762108802143296901}
+  - {fileID: 3480322721646517636}
+  - {fileID: -4694598330106075658}
+  - {fileID: -4453379710288467335}
+  - {fileID: -7306275861941555876}
+  - {fileID: 6682398221696924650}
+  - {fileID: -1778187132546638454}
+  - {fileID: -2673113069967958275}
+  - {fileID: -7670195467268871706}
+  - {fileID: -2631211098304408195}
+  - {fileID: -4020722010374582792}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5981148173000428832}
   StringsBanks:
   - {fileID: -7974187371478809261}
+<<<<<<< HEAD
   cacheTime: 638163441517450447
+=======
+  cacheTime: 638163439963976843
+>>>>>>> NewgroundSound
   cacheVersion: 131592
 --- !u!114 &839758751893998802
 MonoBehaviour:
@@ -1473,6 +1760,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1370
+--- !u!114 &2090209163521321467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Draugr/Blink
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Draugr/Blink
+  Guid:
+    Data1: -689449691
+    Data2: 1311390472
+    Data3: 2092406715
+    Data4: 1772604323
+  Banks:
+  - {fileID: -1846618219991161162}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 705
 --- !u!114 &2840748938134721671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1581,6 +1895,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 470
+--- !u!114 &3480322721646517636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Draugr/Claw
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Draugr/Claw
+  Guid:
+    Data1: 1383776198
+    Data2: 1171706820
+    Data3: -1856316739
+    Data4: 1475531194
+  Banks:
+  - {fileID: -1846618219991161162}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 330
 --- !u!114 &3567959378230028313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1627,7 +1968,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 260
+  Length: 304
 --- !u!114 &3712209513752869890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,7 +2191,11 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Boar.bank
   Name: Boar
   StudioPath: bank:/SFX/Enemy/Boar
+<<<<<<< HEAD
   lastModified: 638163441515800114
+=======
+  lastModified: 638163439962012030
+>>>>>>> NewgroundSound
   FileSizes:
   - Name: Desktop
     Value: 171264
@@ -2074,7 +2419,11 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Fungi.bank
   Name: Fungi
   StudioPath: bank:/SFX/Enemy/Fungi
+<<<<<<< HEAD
   lastModified: 638163441515770203
+=======
+  lastModified: 638163439963159020
+>>>>>>> NewgroundSound
   FileSizes:
   - Name: Desktop
     Value: 70848
@@ -2130,6 +2479,60 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &6682398221696924650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Golem/Crash
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Golem/Crash
+  Guid:
+    Data1: -1034505769
+    Data2: 1198881006
+    Data3: 1103262130
+    Data4: -2125140727
+  Banks:
+  - {fileID: 7136901850373504359}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1149
+--- !u!114 &6762108802143296901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemy/Draugr/Prepare
+  m_EditorClassIdentifier: 
+  Path: event:/Enemy/Draugr/Prepare
+  Guid:
+    Data1: 1428392877
+    Data2: 1097669866
+    Data3: -676814160
+    Data4: -893798712
+  Banks:
+  - {fileID: -1846618219991161162}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &6782025777808900309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2184,6 +2587,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 207
+--- !u!114 &7136901850373504359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Golem.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Build/Desktop/Golem.bank
+  Name: Golem
+  StudioPath: bank:/SFX/Enemy/Golem
+  lastModified: 638163439963976843
+  FileSizes:
+  - Name: Desktop
+    Value: 71328
+  Exists: 1
 --- !u!114 &7417798905915450952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2226,7 +2649,7 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/GEnemy.bank
   Name: GEnemy
   StudioPath: bank:/SFX/Enemy/GEnemy
-  lastModified: 638156156751623436
+  lastModified: 638163439963498116
   FileSizes:
   - Name: Desktop
     Value: 30624
@@ -2246,10 +2669,14 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/SFX/Player
+<<<<<<< HEAD
   lastModified: 638163441515890156
+=======
+  lastModified: 638163439961021327
+>>>>>>> NewgroundSound
   FileSizes:
   - Name: Desktop
-    Value: 730752
+    Value: 730368
   Exists: 1
 --- !u!114 &8514157902515603312
 MonoBehaviour:
