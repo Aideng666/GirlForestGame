@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScreens/RCP Logo Screen.unity
     guid: cc0d4e1957cdd8441b78acae0cc135ce
   - enabled: 1
+    path: Assets/Scenes/MenuScreens/FMOD Scene.unity
+    guid: 0ad367e3466eb594682d9c356e83290f
+  - enabled: 1
     path: Assets/Scenes/MenuScreens/SplashScreen.unity
     guid: 288a67ffcf4167c4abe99edf6baf1680
   - enabled: 1
