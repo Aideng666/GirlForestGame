@@ -21,16 +21,21 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerInventory playerInventory;
     [HideInInspector] public PlayerCombat playerCombat;
 
-    [HideInInspector] FMOD.Studio.EventInstance FootstepSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance deadSFX;
+    FMOD.Studio.Bus EnemyBus;
+
     bool deathStarted;
     bool roomTransitionStarted;
 
     public static PlayerController Instance { get; set; }
+    private void OnEnable()
+    {
+        deadSFX = FMODUnity.RuntimeManager.CreateInstance("event:/UI/Die");
 
+    }
     private void Awake()
     {
         Instance = this;
-        FootstepSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Footsteps");
 
     }
 
@@ -43,6 +48,8 @@ public class PlayerController : MonoBehaviour
         playerMarkings = GetComponent<PlayerMarkings>();
         playerInventory = GetComponent<PlayerInventory>();
         playerCombat = GetComponent<PlayerCombat>();
+
+        EnemyBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX/Enemy");
     }
 
     // Update is called once per frame
@@ -180,6 +187,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         UIManager.Instance.ToggleDeathScreen();
+
+        deadSFX.start();
     }
 
     public bool MouseControlActive()
@@ -296,6 +305,9 @@ public class PlayerController : MonoBehaviour
 
         roomTransitionStarted = false;
     }
-
+    private void OnDestroy()
+    {
+        deadSFX.release();
+    }
 }
 

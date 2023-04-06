@@ -90,7 +90,6 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(shotSFX, agent.transform);
 
         shotSFX.start();
-        Debug.Log("Fanfire");
         FireOrb((player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, 15, 0) * (player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, -15, 0) * (player.transform.position - agent.transform.position).normalized);
@@ -109,7 +108,6 @@ public class AI_MushroomOrbAttack : AI_BaseClass
             FireOrb((player.transform.position - agent.transform.position).normalized);
             
             shotSFX.start();
-            Debug.Log("Boop: "+i);
 
 
             yield return Timing.WaitForSeconds(timeBetweenShots);

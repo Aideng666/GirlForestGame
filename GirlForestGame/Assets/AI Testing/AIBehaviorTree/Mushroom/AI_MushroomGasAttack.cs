@@ -23,11 +23,10 @@ public class AI_MushroomGasAttack : AI_BaseClass
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(spray, agent.transform);
 
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        spray.start();
 
+      
         elaspedDelayTime = 0;
 
         delayComplete = false;
@@ -37,6 +36,8 @@ public class AI_MushroomGasAttack : AI_BaseClass
    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(spray, agent.transform);
+
         if (elaspedDelayTime >= delayBeforeAttack)
         {
             delayComplete = true;
@@ -48,7 +49,7 @@ public class AI_MushroomGasAttack : AI_BaseClass
             ParticleManager.Instance.SpawnParticle(ParticleTypes.GasCloud, agent.transform.position);
 
             animator.SetTrigger("Has_Fired");
-
+            spray.start();
             attackStarted = true;
         }
 

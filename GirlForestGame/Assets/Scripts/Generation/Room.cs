@@ -33,15 +33,28 @@ public class Room : MonoBehaviour
 
     public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
 
+    private FMOD.Studio.PLAYBACK_STATE roamState;
+   // [HideInInspector] public FMOD.Studio.EventInstance roamingBGM;
+    [HideInInspector] public FMOD.Studio.EventInstance battleBGM;
+    float combatValue;
+
     private void OnEnable()
     {
         waveNum = 0;
-
+        //roamingBGM = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Roaming");
+        battleBGM = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Battle");
         if (!roomCompleted)
         {
             //If this is a regular fighting room
             if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
             {
+
+                battleBGM.setParameterByName("Combat", 1);
+
+                battleBGM.getParameterByName("Combat", out combatValue);
+                Debug.Log("batGM start");
+                Debug.Log("enable: " + combatValue);
+
                 //Num of enemies in a room
                 for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 1); i++)
                 {
@@ -74,12 +87,17 @@ public class Room : MonoBehaviour
                             break;
                     }
                 }
+                
+
             }
             //If this is the final room in a floor
             else if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.End)
             {
+                battleBGM.setParameterByName("Combat", 1);
+
                 if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default)
                 {
+
                     //Num of enemies for final room
                     for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x + 2, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 3); i++)
                     {
@@ -120,7 +138,8 @@ public class Room : MonoBehaviour
                     SpawnNextWave();
                 }
             }
-        }
+        }       
+        
     }
 
     // Start is called before the first frame update
@@ -128,13 +147,19 @@ public class Room : MonoBehaviour
     {
         enemyCountRangesPerLevel = new Vector2[3] { new Vector2(3, 4), new Vector2(3, 5) , new Vector2(4, 6) };
         totemChancePerLevel = new float[3] { 0.2f, 0.4f, 0.6f };
+        battleBGM.start();
+        //battleBGM.setParameterByName("Combat",0);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        battleBGM.getParameterByName("Combat", out combatValue);
+        Debug.Log("State: "+combatValue);
         if (roomCompleted)
         {
+                       
             //Opens all doors that have connected rooms
             for (int i = 0; i < connectedRooms.Length; i++)
             {
@@ -156,7 +181,7 @@ public class Room : MonoBehaviour
                     }
                 }
             }
-
+            
             //Give totem reward on completion of a regular floor
             if (currentType == RoomTypes.End && DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default && !rewardReceived)
             {
@@ -195,9 +220,10 @@ public class Room : MonoBehaviour
             }
             else if (waveNum == totalWavesInBossFight)
             {
-
+                
             }
-
+            battleBGM.setParameterByName("Combat", 0);
+            Debug.Log("Roam Start");
             roomCompleted = true;
         }
     }
@@ -361,7 +387,11 @@ public class Room : MonoBehaviour
     {
         return currentType;
     }
-
+    private void OnDestroy()
+    {
+       // roamingBGM.release();
+        battleBGM.release();
+    }
 }
 
 public enum RoomTypes
