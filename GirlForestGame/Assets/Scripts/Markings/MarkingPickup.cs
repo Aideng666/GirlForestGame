@@ -119,6 +119,7 @@ public class MarkingPickup : InteractableObject
     {
         if (!PlayerController.Instance.playerInventory.IsChoosingWeapon)
         {
+            UIManager.Instance.ToggleMarkingPickupPanel(true, chosenSpirit, chosenType);
             PlayerController.Instance.playerInventory.StartWeaponSelection(chosenSpirit, chosenType);
 
             if (isMarkingPair)
