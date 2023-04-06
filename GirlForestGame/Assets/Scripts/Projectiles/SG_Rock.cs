@@ -12,8 +12,6 @@ public class SG_Rock : MonoBehaviour
     void Start()
     {
         crashSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Golem/Crash");
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(crashSFX, transform);
-
     }
 
     private void OnDisable()
@@ -36,6 +34,7 @@ public class SG_Rock : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(crashSFX, collision.transform);
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("PassiveCollider"))
         {
@@ -44,9 +43,10 @@ public class SG_Rock : MonoBehaviour
 
         if (isBigRock)
         {
-            crashSFX.start();
             RockBurst();
+            //Debug.Log("bigrockboom");
         }
+        crashSFX.start();
 
 
         if (gameObject.layer == LayerMask.NameToLayer("EnemyLiving"))
@@ -57,6 +57,8 @@ public class SG_Rock : MonoBehaviour
         {
             ProjectilePool.Instance.AddProjectileToPool(Planes.Astral, gameObject, EnemyTypes.StoneGolem);
         }
+
+
     }
 
     void RockBurst()
