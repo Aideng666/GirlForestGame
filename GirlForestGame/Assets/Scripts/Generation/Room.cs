@@ -133,6 +133,7 @@ public class Room : MonoBehaviour
                 }
                 if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Boss)
                 {
+
                     waveNum = 0;
 
                     SpawnNextWave();
@@ -287,16 +288,16 @@ public class Room : MonoBehaviour
         spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
     }
 
-    public void UpdateVisualExits()
-    {
-        for (int i = 0; i < connectedRooms.Length; i++)
-        {
-            if (connectedRooms[i] == null)
-            {
-                spawnedModel.exits[i].SetActive(false);
-            }
-        }
-    }
+    //public void UpdateVisualExits()
+    //{
+    //    for (int i = 0; i < connectedRooms.Length; i++)
+    //    {
+    //        if (connectedRooms[i] == null)
+    //        {
+    //            spawnedModel.exits[i].SetActive(false);
+    //        }
+    //    }
+    //}
 
     //Creates a new room that attaches to the current room on one of its sides
     //Used during dungeon generation

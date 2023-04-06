@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Heart
   m_EditorClassIdentifier: 
   itemType: 2
-  value: 10
+  value: 6
   item: {fileID: 1070003549920668578, guid: b98bc7e3befcc06498608798747bed30, type: 3}

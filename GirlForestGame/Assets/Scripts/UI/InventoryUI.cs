@@ -32,6 +32,11 @@ public class InventoryUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+        }
+
         for(int i = 0; i < markingIconsList.Count; i++ ) 
         {
             iconList.Add(markingIconsList[i]);
@@ -73,23 +78,26 @@ public class InventoryUI : MonoBehaviour
             if (selectedIcon.GetComponent<Image>().sprite == markingIconsList[0].GetComponent<Image>().sprite)
             {
                 markingDescriptionImage.sprite = markingIconsList[0].GetComponent<Image>().sprite;
-                markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[0].spiritName;
-                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[0];
+                //markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[0].spiritAttributeName;
+                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[0].spiritAttributeDesc;
             }
             else if (selectedIcon.GetComponent<Image>().sprite == markingIconsList[1].GetComponent<Image>().sprite)
             {
                 markingDescriptionImage.sprite = markingIconsList[1].GetComponent<Image>().sprite;
-                markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[1].spiritName;
+                //markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[1].spiritElementSwordName;
+                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[1].spiritElementSwordDesc;
             }
             else if (selectedIcon.GetComponent<Image>().sprite == markingIconsList[2].GetComponent<Image>().sprite)
             {
                 markingDescriptionImage.sprite = markingIconsList[2].GetComponent<Image>().sprite;
-                markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[2].spiritName;
+                //markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[2].spiritAttributeName;
+                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[2].spiritAttributeDesc;
             }
             else if (selectedIcon.GetComponent<Image>().sprite == markingIconsList[3].GetComponent<Image>().sprite)
             {
                 markingDescriptionImage.sprite = markingIconsList[3].GetComponent<Image>().sprite;
-                markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[3].spiritName;
+                //markingDescriptionName.text = PlayerController.Instance.playerMarkings.markings[3].spiritElementBowName;
+                //markingDescription.text = PlayerController.Instance.playerMarkings.markings[3].spiritElementBowDesc;
             }
             else
             {
@@ -113,10 +121,12 @@ public class InventoryUI : MonoBehaviour
             if (type == MarkingTypes.Attribute)
             {
                 markingIconsList[0].GetComponent<Image>().sprite = spirit.spiritAttributeSprite;
+                markingIconsList[0].GetComponentInChildren<TextMeshProUGUI>().text = spirit.markingLevel.ToString();
             }
             else if (type == MarkingTypes.Element)
             {
                 markingIconsList[1].GetComponent<Image>().sprite = spirit.spiritElementSprite;
+                markingIconsList[1].GetComponentInChildren<TextMeshProUGUI>().text = spirit.markingLevel.ToString();
             }
         }
         else if (weapon == Weapons.Bow)
@@ -124,10 +134,12 @@ public class InventoryUI : MonoBehaviour
             if (type == MarkingTypes.Attribute)
             {
                 markingIconsList[2].GetComponent<Image>().sprite = spirit.spiritAttributeSprite;
+                markingIconsList[2].GetComponentInChildren<TextMeshProUGUI>().text = spirit.markingLevel.ToString();
             }
             else if (type == MarkingTypes.Element)
             {
                 markingIconsList[3].GetComponent<Image>().sprite = spirit.spiritElementSprite;
+                markingIconsList[3].GetComponentInChildren<TextMeshProUGUI>().text = spirit.markingLevel.ToString();
             }
         }
     }

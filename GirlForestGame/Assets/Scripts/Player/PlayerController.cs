@@ -55,6 +55,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (UIManager.Instance.isPaused)
+        {
+            return;
+        }
+
         //Checks for player death
         if (playerAttributes.Health <= 0)
         {
@@ -294,6 +299,11 @@ public class PlayerController : MonoBehaviour
         roomTransitionStarted = true;
 
         yield return new WaitForSeconds(UIManager.Instance.GetFadePanel().GetTransitionTime() / 2);
+
+        foreach (ParticleSystem particle in DungeonGenerator.Instance.GetCurrentRoom().GetComponentsInChildren<ParticleSystem>()) 
+        {
+            Destroy(particle.gameObject);
+        }
 
         DungeonGenerator.Instance.SetCurrentRoom(room);
 

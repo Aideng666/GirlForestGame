@@ -115,7 +115,6 @@ MonoBehaviour:
   damageTakenMat: {fileID: 2100000, guid: 13a1cd0a470561242a8b2f910e59ee2c, type: 2}
   fireEffect: {fileID: 2428099973942965387}
   windedEffect: {fileID: 8076105910040886696}
-  fearedEffect: {fileID: 0}
 --- !u!33 &700446156201332267
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -26,9 +26,9 @@ public class InputManager : MonoBehaviour
     InputAction regenMapAction;
     InputAction swapActionMapAction;
     InputAction selectNodeAction;
-    InputAction moveSelectionAction;
 
     //Global Controls
+    InputAction moveSelectionAction;
     [HideInInspector] public InputAction openInventoryAction;
     [HideInInspector] public InputAction pauseAction; 
 
@@ -78,6 +78,11 @@ public class InputManager : MonoBehaviour
     }
 
     private void OnDisable()
+    {
+        openInventoryAction.started -= ToggleInventory;
+    }
+
+    private void OnDestroy()
     {
         openInventoryAction.started -= ToggleInventory;
     }
@@ -155,7 +160,7 @@ public class InputManager : MonoBehaviour
 
     public Vector2 MoveSelection()
     {
-        if (playerInput.actions.FindActionMap("NodeMap").enabled && moveSelectionAction.triggered)
+        if (moveSelectionAction.triggered)
         {
             return moveSelectionAction.ReadValue<Vector2>();
         }

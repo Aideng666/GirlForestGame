@@ -47,6 +47,18 @@ public class InteractRing : MonoBehaviour
         {
             selectedObject = null;
         }
+
+        if (selectedObject != null && selectedObject.TryGetComponent(out MarkingPickup markingPickup))
+        {
+            HUD.Instance.HighlightMarkingIcons(markingPickup);
+        }
+        else if(HUD.Instance != null)
+        {
+            if (HUD.Instance != null)
+            {
+                HUD.Instance.HighlightMarkingIcons(null);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -72,9 +84,9 @@ public class InteractRing : MonoBehaviour
         }
     }
 
-    public void SetSelectedObject(GameObject selected)
+    public void ResetSelectedObject()
     {
-        selectedObject = selected;
+        selectedObject = null;
     }
 
     public void ResetInteractablesInRange()

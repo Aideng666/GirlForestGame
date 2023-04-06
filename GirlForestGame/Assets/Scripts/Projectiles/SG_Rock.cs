@@ -32,34 +32,6 @@ public class SG_Rock : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.layer == LayerMask.NameToLayer("PassiveCollider"))
-    //    {
-    //        return;
-    //    }
-
-    //    if (isBigRock)
-    //    {
-    //        print("We Big " + other.name);
-
-    //        RockBurst();
-    //    }
-    //    else
-    //    {
-    //        print("SMol Hit " + other.name);
-    //    }
-
-    //    if (gameObject.layer == LayerMask.NameToLayer("EnemyLiving"))
-    //    {
-    //        ProjectilePool.Instance.AddProjectileToPool(Planes.Terrestrial, gameObject, EnemyTypes.StoneGolem);
-    //    }
-    //    else if (gameObject.layer == LayerMask.NameToLayer("EnemySpirit"))
-    //    {
-    //        ProjectilePool.Instance.AddProjectileToPool(Planes.Astral, gameObject, EnemyTypes.StoneGolem);
-    //    }
-    //}
-
     private void OnCollisionEnter(Collision collision)
     {
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(crashSFX, collision.transform);
@@ -96,37 +68,69 @@ public class SG_Rock : MonoBehaviour
         {
             GameObject rock1 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, transform.position + Vector3.up, EnemyTypes.StoneGolem);
             rock1.transform.localScale /= 2;
-            rock1.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.forward * 3) * 2, ForceMode.VelocityChange);
+            rock1.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.forward * 2).normalized * 7, ForceMode.VelocityChange);
 
             GameObject rock2 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, transform.position + Vector3.up, EnemyTypes.StoneGolem);
             rock2.transform.localScale /= 2;
-            rock2.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.back * 2) * 3, ForceMode.VelocityChange);
+            rock2.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.back * 2).normalized * 7, ForceMode.VelocityChange);
 
             GameObject rock3 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, transform.position + Vector3.up, EnemyTypes.StoneGolem);
             rock3.transform.localScale /= 2;
-            rock3.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.left * 2) * 3, ForceMode.VelocityChange);
+            rock3.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.left * 2).normalized * 7, ForceMode.VelocityChange);
 
             GameObject rock4 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, transform.position + Vector3.up, EnemyTypes.StoneGolem);
             rock4.transform.localScale /= 2;
-            rock4.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.right * 2) * 3, ForceMode.VelocityChange);
+            rock4.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.right * 2).normalized * 7, ForceMode.VelocityChange);
+
+            GameObject rock5 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, transform.position + Vector3.up, EnemyTypes.StoneGolem);
+            rock5.transform.localScale /= 2;
+            rock5.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.forward * 2) + (Vector3.left * 2)).normalized * 7, ForceMode.VelocityChange);
+
+            GameObject rock6 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, transform.position + Vector3.up, EnemyTypes.StoneGolem);
+            rock6.transform.localScale /= 2;
+            rock6.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.forward * 2) + (Vector3.right * 2)).normalized * 7, ForceMode.VelocityChange);
+
+            GameObject rock7 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, transform.position + Vector3.up, EnemyTypes.StoneGolem);
+            rock7.transform.localScale /= 2;
+            rock7.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.back * 2) + (Vector3.left * 2)).normalized * 7, ForceMode.VelocityChange);
+
+            GameObject rock8 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, transform.position + Vector3.up, EnemyTypes.StoneGolem);
+            rock8.transform.localScale /= 2;
+            rock8.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.back * 2) + (Vector3.right * 2)).normalized * 7, ForceMode.VelocityChange);
         }
         else if (gameObject.layer == LayerMask.NameToLayer("EnemySpirit"))
         {
             GameObject rock1 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, transform.position + Vector3.up, EnemyTypes.StoneGolem);
             rock1.transform.localScale /= 2;
-            rock1.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.forward * 2) * 3, ForceMode.VelocityChange);
+            rock1.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.forward * 2).normalized * 7, ForceMode.VelocityChange);
 
             GameObject rock2 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, transform.position + Vector3.up, EnemyTypes.StoneGolem);
             rock2.transform.localScale /= 2;
-            rock2.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.back * 2) * 3, ForceMode.VelocityChange);
+            rock2.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.back * 2).normalized * 7, ForceMode.VelocityChange);
 
             GameObject rock3 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, transform.position + Vector3.up, EnemyTypes.StoneGolem);
             rock3.transform.localScale /= 2;
-            rock3.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.left * 2) * 3, ForceMode.VelocityChange);
+            rock3.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.left * 2).normalized * 7, ForceMode.VelocityChange);
 
             GameObject rock4 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, transform.position + Vector3.up, EnemyTypes.StoneGolem);
             rock4.transform.localScale /= 2;
-            rock4.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.right * 2) * 3, ForceMode.VelocityChange);
+            rock4.GetComponent<Rigidbody>().AddForce((Vector3.up + Vector3.right * 2).normalized * 7, ForceMode.VelocityChange);
+
+            GameObject rock5 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, transform.position + Vector3.up, EnemyTypes.StoneGolem);
+            rock5.transform.localScale /= 2;
+            rock5.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.forward * 2) + (Vector3.left * 2)).normalized * 7, ForceMode.VelocityChange);
+
+            GameObject rock6 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, transform.position + Vector3.up, EnemyTypes.StoneGolem);
+            rock6.transform.localScale /= 2;
+            rock6.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.forward * 2) + (Vector3.right * 2)).normalized * 7, ForceMode.VelocityChange);
+
+            GameObject rock7 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, transform.position + Vector3.up, EnemyTypes.StoneGolem);
+            rock7.transform.localScale /= 2;
+            rock7.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.back * 2) + (Vector3.left * 2)).normalized * 7, ForceMode.VelocityChange);
+
+            GameObject rock8 = ProjectilePool.Instance.GetProjectileFromPool(Planes.Terrestrial, transform.position + Vector3.up, EnemyTypes.StoneGolem);
+            rock8.transform.localScale /= 2;
+            rock8.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.back * 2) + (Vector3.right * 2)).normalized * 7, ForceMode.VelocityChange);
         }
     }
     private void OnDestroy()

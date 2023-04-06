@@ -75,6 +75,8 @@ public class PlayerInventory : MonoBehaviour
 
     public void EquipMarking(Spirit spirit, MarkingTypes type, Weapons weapon)
     {
+        UIManager.Instance.ToggleMarkingPickupPanel(false, null, MarkingTypes.None);
+
         float randomXDir = Random.Range(-1f, 1f);
         float randomZDir = Random.Range(-1f, 1f);
         float randomDistance = Random.Range(2f, 5f);
@@ -157,22 +159,19 @@ public class PlayerInventory : MonoBehaviour
         IsChoosingWeapon = true;
 
         bool weaponSelected = false;
-        print("Select Sword: Left D-Pad or 1");
-        print("Select Bow: Right D-Pad or 2");
 
         while (!weaponSelected)
         {
             if (InputManager.Instance.SelectSword())
             {
-                print($"Putting the level {spirit.markingLevel} {spirit.spiritName} {type.ToString()} on your Sword");
 
                 if (type == MarkingTypes.Attribute)
                 {
-                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 0);
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 0, spirit.markingLevel);
                 }
                 else if (type == MarkingTypes.Element)
                 {
-                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 1);
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 1, spirit.markingLevel);
                 }
 
                 EquipMarking(spirit, type, Weapons.Sword);
@@ -181,15 +180,14 @@ public class PlayerInventory : MonoBehaviour
             }
             if (InputManager.Instance.SelectBow())
             {
-                print($"Putting the {spirit.spiritName} {type.ToString()} on your Bow");
 
                 if (type == MarkingTypes.Attribute)
                 {
-                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 2);
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritAttributeSprite, 2, spirit.markingLevel);
                 }
                 else if (type == MarkingTypes.Element)
                 {
-                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 3);
+                    HUD.Instance.UpdateMarkingsPanel(spirit.spiritElementSprite, 3, spirit.markingLevel);
                 }
 
                 EquipMarking(spirit, type, Weapons.Bow);

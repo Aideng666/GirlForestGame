@@ -96,10 +96,10 @@ public class DungeonGenerator : MonoBehaviour
         //}
 
         //Turns off the exits for parts of the rooms that have no connections
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            rooms[i].UpdateVisualExits();
-        }
+        //for (int i = 0; i < rooms.Count; i++)
+        //{
+        //    rooms[i].UpdateVisualExits();
+        //}
 
         //if (Minimap.Instance != null)
         //{
