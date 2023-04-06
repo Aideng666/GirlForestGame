@@ -5096,7 +5096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   halfHeartPrefab: {fileID: 7982345155227785169, guid: 6d09e763d8676e648b97bfb33da4f6df, type: 3}
   heartPrefab: {fileID: 5860624612937657349, guid: b98bc7e3befcc06498608798747bed30, type: 3}
-  coinPrefab: {fileID: 3782068503022363083, guid: cccb0b59f96935749b2d8111eae48fcc, type: 3}
+  coinPrefab: {fileID: 5626852596376682743, guid: cccb0b59f96935749b2d8111eae48fcc, type: 3}
 --- !u!4 &462925828
 Transform:
   m_ObjectHideFlags: 0
