@@ -17,3 +17,12 @@ MonoBehaviour:
   spiritElementSprite: {fileID: 21300000, guid: 69a75fd98ba636446a571291ada5e1df, type: 3}
   buffedAttributes: 040000000a000000
   usedElement: 0
+  spiritMarkingName: Kindle
+  spiritAttributeName: Marking of Fire
+  spiritAttributeDesc: Grants the Marking of Fire which bestows increased Attack
+    and Critical Chance
+  spiritElementBowName: Rain of Fire
+  spiritElementBowDesc: Lobs an arrow into the air and creates a pool of fire on
+    the ground upon landing
+  spiritElementSwordName: Ignite
+  spiritElementSwordDesc: Small chance to burn enemies on hit
