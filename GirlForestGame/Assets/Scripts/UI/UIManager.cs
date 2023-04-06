@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,7 +12,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject deathPanel;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject inventoryPanel;
+    [SerializeField] GameObject[] pauseMenuButtons;
     [SerializeField] InputActionAsset inputActions;
+
+    [Header("MarkingPanel")]
+    [SerializeField] GameObject markingPickupPanel;
+    [SerializeField] GameObject bowPanel;
+    [SerializeField] GameObject swordPanel;
+    [SerializeField] Image bowImage;
+    [SerializeField] Image swordImage;
+    [SerializeField] TextMeshProUGUI bowDescription;
+    [SerializeField] TextMeshProUGUI swordDescription;
+
+
+    int selectedPauseButtonIndex = 0;
 
     public bool inventoryOpen { get; private set; }
     public bool isPaused { get; private set; }
@@ -43,6 +58,7 @@ public class UIManager : MonoBehaviour
 
             if (pausePanel.activeInHierarchy)
             {
+                selectedPauseButtonIndex = 0;
                 //sfxBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
                 isPaused = true;
             }
@@ -54,6 +70,63 @@ public class UIManager : MonoBehaviour
 
         if (isPaused)
         {
+            if (InputManager.Instance.MoveSelection().y > 0)
+            {
+                selectedPauseButtonIndex--;
+
+                if (selectedPauseButtonIndex < 0)
+                {
+                    selectedPauseButtonIndex = 0;
+                }
+            }
+            //DPAD DOWN
+            else if (InputManager.Instance.MoveSelection().y < 0)
+            {
+                selectedPauseButtonIndex++;
+
+                if (selectedPauseButtonIndex >= pauseMenuButtons.Length)
+                {
+                    selectedPauseButtonIndex = pauseMenuButtons.Length - 1;
+                }
+            }
+
+            for (int i = 0; i < pauseMenuButtons.Length; i++)
+            {
+                if (i == selectedPauseButtonIndex)
+                {
+                    pauseMenuButtons[i].GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                }
+                else
+                {
+                    pauseMenuButtons[i].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                }
+            }
+
+            if (InputManager.Instance.Proceed())
+            {
+                switch (selectedPauseButtonIndex)
+                {
+                    case 0:
+
+                        pausePanel.SetActive(false);
+
+                        isPaused = false;
+
+                        break;
+
+                    case 1:
+
+
+
+                        break;
+
+                    case 2:
+
+
+                        break;
+                }
+            }
+
             Time.timeScale = 0;
         }
         else
@@ -116,6 +189,25 @@ public class UIManager : MonoBehaviour
         else
         {
             inventoryOpen = false;
+        }
+    }
+
+    public void ToggleMarkingPickupPanel(bool active, Spirit spirit, MarkingTypes type)
+    {
+        markingPickupPanel.SetActive(active);
+        inventoryOpen = active;
+
+        if (active)
+        {
+            //UPDATE the description of the sword and bow here based on the spirit
+            if (type == MarkingTypes.Attribute)
+            {
+
+            }
+            else if (type == MarkingTypes.Element)
+            {
+
+            }
         }
     }
 

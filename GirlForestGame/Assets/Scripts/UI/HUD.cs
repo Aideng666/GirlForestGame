@@ -86,14 +86,17 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputManager.Instance.OpenAttributes())
+        if (!PlayerController.Instance.playerInventory.IsChoosingWeapon)
         {
-            ToggleAttributePanel();
-        }
+            if (InputManager.Instance.OpenAttributes())
+            {
+                ToggleAttributePanel();
+            }
 
-        if (InputManager.Instance.OpenMarkings())
-        {
-            ToggleMarkingsPanel();
+            if (InputManager.Instance.OpenMarkings())
+            {
+                ToggleMarkingsPanel();
+            }
         }
 
         // Displays player's current money
