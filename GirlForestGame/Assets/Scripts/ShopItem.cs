@@ -12,6 +12,10 @@ public class ShopItem : InteractableObject
     TotemObject chosenTotem;
     int healthOption; // 0 = half heart | 1 = full heart
 
+
+    private void OnEnable()
+    {
+    }
     protected override void Start()
     {
         base.Start();
@@ -70,6 +74,7 @@ public class ShopItem : InteractableObject
     {
         if (PlayerController.Instance.playerInventory.GetMoneyAmount() >= itemInfo.value)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Shop");
             float randomXDir = Random.Range(-1f, 1f);
             float randomZDir = Random.Range(-1f, 1f);
             float randomDistance = Random.Range(1f, 3f);
@@ -116,6 +121,7 @@ public class ShopItem : InteractableObject
                 break;
         }
     }
+
 }
 
 public enum ShopItemTypes

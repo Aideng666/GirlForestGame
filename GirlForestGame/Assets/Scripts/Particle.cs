@@ -16,6 +16,10 @@ public class Particle : MonoBehaviour
     [HideInInspector] public FMOD.Studio.EventInstance WindSFX;
     [HideInInspector] public FMOD.Studio.EventInstance WindBlastSFX;
 
+    [HideInInspector] public FMOD.Studio.EventInstance fearSFX;
+
+    [HideInInspector] public FMOD.Studio.EventInstance barrierSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,8 @@ public class Particle : MonoBehaviour
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(FireSFX, transform);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(WindSFX, transform);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(WindBlastSFX, transform);
+        fearSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Fear");
+        barrierSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Pulse");
 
         particle = GetComponent<ParticleSystem>();
         if (particleType == ParticleTypes.WindArrow)
@@ -39,6 +45,15 @@ public class Particle : MonoBehaviour
         {
             FireSFX.start();
         }
+        //else if (particleType == ParticleTypes.FearfulAura)
+        //{
+        //    fearSFX.start();
+        //}
+        //else if (particleType == ParticleTypes.AstralBarrier)
+        //{
+        //    barrierSFX.start();
+        //}
+
     }
 
 
@@ -65,7 +80,7 @@ public class Particle : MonoBehaviour
         if (!particle.main.loop && !particle.isPlaying)
         {
             FireSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            FireSFX.release();
+            barrierSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             if (childParticle != ParticleTypes.None)
             {
                 ParticleManager.Instance.SpawnParticle(childParticle, transform.position);
@@ -219,5 +234,7 @@ public class Particle : MonoBehaviour
         WindBlastSFX.release();
         WindSFX.release();
         WindSFX.keyOff();
+        fearSFX.release();
+        barrierSFX.release();
     }
 }

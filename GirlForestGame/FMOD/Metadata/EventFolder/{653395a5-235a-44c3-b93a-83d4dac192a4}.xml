@@ -5,7 +5,7 @@
 			<value>Totem</value>
 		</property>
 		<relationship name="folder">
-			<destination>{8c8af3f1-a936-43e5-a6f0-4d543ecb6bc4}</destination>
+			<destination>{9396f32f-225a-4e70-b128-cfb3779cbfc9}</destination>
 		</relationship>
 	</object>
 </objects>

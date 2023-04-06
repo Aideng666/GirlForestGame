@@ -66,6 +66,7 @@ public class AI_Draugr_Wander : AI_BaseClass
     void Teleport()
     {
         ParticleManager.Instance.SpawnParticle(ParticleTypes.Teleport, agent.transform.position);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(blinkSFX, agent.transform);
         blinkSFX.start();
         agent.transform.position += moveRay.direction * teleportDistance;
     }

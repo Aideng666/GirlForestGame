@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class TerrestrialShieldObject : MonoBehaviour
 {
-    bool cooldownApplied = false;
+    [HideInInspector] public FMOD.Studio.EventInstance sBreakSFX;
 
+    bool cooldownApplied = false;
+    private void OnEnable()
+    {
+        sBreakSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Shieldbreak");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +30,7 @@ public class TerrestrialShieldObject : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyProjectile"))
         {
             ParticleManager.Instance.SpawnParticle(ParticleTypes.ShieldCrumble, transform.position);
+           // sBreakSFX.start();
             cooldownApplied = true;
             gameObject.SetActive(false);
         }
