@@ -22,15 +22,16 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Plant
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
   m_InvalidKeywords:
   - GEOM_TYPE_LEAF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2450
   stringTagMap:
-    RenderType: Opaque
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -114,7 +115,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 2.4
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _BaseLight: 0.35
     - _Blend: 0
     - _BumpScale: 1
