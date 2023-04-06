@@ -146,10 +146,14 @@ MonoBehaviour:
   Name: Master.strings
   StudioPath: bank:/Master.strings
 <<<<<<< HEAD
+<<<<<<< HEAD
   lastModified: 638163441515780176
 =======
   lastModified: 638163439959739308
 >>>>>>> NewgroundSound
+=======
+  lastModified: 638163407403856878
+>>>>>>> NewMain(ItsAMeJonathan)
   FileSizes:
   - Name: Desktop
     Value: 3828
@@ -497,10 +501,14 @@ MonoBehaviour:
   Name: BGM
   StudioPath: bank:/BGM
 <<<<<<< HEAD
+<<<<<<< HEAD
   lastModified: 638163441517450447
 =======
   lastModified: 638163439959579728
 >>>>>>> NewgroundSound
+=======
+  lastModified: 638163407403754627
+>>>>>>> NewMain(ItsAMeJonathan)
   FileSizes:
   - Name: Desktop
     Value: 5819616
@@ -521,10 +529,14 @@ MonoBehaviour:
   Name: Master
   StudioPath: bank:/Master
 <<<<<<< HEAD
+<<<<<<< HEAD
   lastModified: 638163441515780176
 =======
   lastModified: 638163439959669494
 >>>>>>> NewgroundSound
+=======
+  lastModified: 638163407403846855
+>>>>>>> NewMain(ItsAMeJonathan)
   FileSizes:
   - Name: Desktop
     Value: 3220
@@ -1622,10 +1634,14 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -7974187371478809261}
 <<<<<<< HEAD
+<<<<<<< HEAD
   cacheTime: 638163441517450447
 =======
   cacheTime: 638163439963976843
 >>>>>>> NewgroundSound
+=======
+  cacheTime: 638163407403942196
+>>>>>>> NewMain(ItsAMeJonathan)
   cacheVersion: 131592
 --- !u!114 &839758751893998802
 MonoBehaviour:
@@ -2192,10 +2208,14 @@ MonoBehaviour:
   Name: Boar
   StudioPath: bank:/SFX/Enemy/Boar
 <<<<<<< HEAD
+<<<<<<< HEAD
   lastModified: 638163441515800114
 =======
   lastModified: 638163439962012030
 >>>>>>> NewgroundSound
+=======
+  lastModified: 638163407403794515
+>>>>>>> NewMain(ItsAMeJonathan)
   FileSizes:
   - Name: Desktop
     Value: 171264
@@ -2420,10 +2440,14 @@ MonoBehaviour:
   Name: Fungi
   StudioPath: bank:/SFX/Enemy/Fungi
 <<<<<<< HEAD
+<<<<<<< HEAD
   lastModified: 638163441515770203
 =======
   lastModified: 638163439963159020
 >>>>>>> NewgroundSound
+=======
+  lastModified: 638163407403814460
+>>>>>>> NewMain(ItsAMeJonathan)
   FileSizes:
   - Name: Desktop
     Value: 70848
@@ -2649,7 +2673,11 @@ MonoBehaviour:
   Path: FMOD/Build/Desktop/GEnemy.bank
   Name: GEnemy
   StudioPath: bank:/SFX/Enemy/GEnemy
+<<<<<<< HEAD
   lastModified: 638163439963498116
+=======
+  lastModified: 638163407403824448
+>>>>>>> NewMain(ItsAMeJonathan)
   FileSizes:
   - Name: Desktop
     Value: 30624
@@ -2670,10 +2698,14 @@ MonoBehaviour:
   Name: Player
   StudioPath: bank:/SFX/Player
 <<<<<<< HEAD
+<<<<<<< HEAD
   lastModified: 638163441515890156
 =======
   lastModified: 638163439961021327
 >>>>>>> NewgroundSound
+=======
+  lastModified: 638163407403942196
+>>>>>>> NewMain(ItsAMeJonathan)
   FileSizes:
   - Name: Desktop
     Value: 730368
