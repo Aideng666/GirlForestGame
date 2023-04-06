@@ -46,6 +46,7 @@ public class PlayerCombat : MonoBehaviour
     List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
     [HideInInspector] public FMOD.Studio.EventInstance SwordSFX;
+    [HideInInspector] public FMOD.Studio.EventInstance barrierSFX;
 
     Planes currentForm = Planes.Terrestrial;
     LayerMask livingLayer;
@@ -86,6 +87,7 @@ public class PlayerCombat : MonoBehaviour
         SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword/Sword");
         hitSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Hit");
         formSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Form");
+        barrierSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Pulse");
 
         ArrowSFX.getParameterByName("SPCharge", out currentBowChargeTime);
 
@@ -209,7 +211,7 @@ public class PlayerCombat : MonoBehaviour
                 GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
                 gameObject.layer = livingLayer;
                 formSFX.setParameterByName("Astral", 0);
-
+               // barrierSFX.keyOff();
             }
 
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
@@ -220,6 +222,7 @@ public class PlayerCombat : MonoBehaviour
             if (player.playerInventory.totemDictionary[typeof(AstralBarrierTotem)] > 0)
             {
                 player.playerInventory.GetTotemFromList(typeof(AstralBarrierTotem)).Totem.ApplyEffect();
+                //barrierSFX.start();
             }
             formSFX.start();
         }
@@ -554,7 +557,6 @@ public class PlayerCombat : MonoBehaviour
 
             StartCoroutine(BeginIFrames());
             hitSFX.start();
-            hitSFX.release();
         }
     }
 
@@ -667,6 +669,8 @@ public class PlayerCombat : MonoBehaviour
         SwordSFX.release();
         ArrowSFX.release();
         DrawSFX.release();
+        hitSFX.release();
+
     }
 }
 

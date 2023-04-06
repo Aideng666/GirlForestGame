@@ -20,6 +20,8 @@ public class PlayerInventory : MonoBehaviour
     Spirit[] markings;
 
     List<TotemObject> totems;
+    [HideInInspector] public FMOD.Studio.EventInstance fearSFX;
+
     public Dictionary<System.Type, int> totemDictionary { get; private set; } // the int value shows how many of each totem the player has
 
     PlayerController player;
@@ -29,6 +31,11 @@ public class PlayerInventory : MonoBehaviour
 
     public bool IsChoosingWeapon { get; private set; }
 
+    private void OnEnable()
+    {
+        fearSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Fear");
+
+    }
     void Start()
     {
         markings = new Spirit[] { null, null, null, null };
@@ -57,6 +64,7 @@ public class PlayerInventory : MonoBehaviour
         if (player.playerInventory.totemDictionary[typeof(FearfulAuraTotem)] > 0)
         {
             player.playerInventory.GetTotemFromList(typeof(FearfulAuraTotem)).Totem.ApplyEffect();
+            fearSFX.start();
         }
 
         if (player.playerInventory.totemDictionary[typeof(TerrestrialShieldTotem)] > 0)
@@ -307,5 +315,10 @@ public class PlayerInventory : MonoBehaviour
     public Spirit[] GetMarkings()
     {
         return markings;
+    }
+
+    private void OnDestroy()
+    {
+        fearSFX.release();
     }
 }

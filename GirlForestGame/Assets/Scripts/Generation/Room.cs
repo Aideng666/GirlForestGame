@@ -31,112 +31,137 @@ public class Room : MonoBehaviour
     Vector2[] enemyCountRangesPerLevel = new Vector2[3] { new Vector2(3, 4), new Vector2(3, 5), new Vector2(4, 6) };
     float[] totemChancePerLevel;
 
-    public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
+    public int DistanceFromStart { get { return distanceFromStartRoom; } set { distanceFromStartRoom = value; } }
+
+    private FMOD.Studio.PLAYBACK_STATE roamState;
+   // [HideInInspector] public FMOD.Studio.EventInstance roamingBGM;
+    [HideInInspector] public FMOD.Studio.EventInstance battleBGM;
+    float combatValue;
 
-    private void OnEnable()
-    {
-        waveNum = 0;
-
-        if (!roomCompleted)
-        {
-            //If this is a regular fighting room
-            if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
-            {
-                //Num of enemies in a room
-                for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 1); i++)
-                {
-                    int randomEnemySelection = Random.Range(0, 4);
-
-                    switch (randomEnemySelection)
-                    {
-                        case 0:
-
-                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
-
-                            break;
-
-                        case 1:
-
-                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
-
-                            break;
-
-                        case 2:
-
-                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
-
-                            break;
-
-                        case 3:
-
-                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
-
-                            break;
-                    }
-                }
-            }
-            //If this is the final room in a floor
-            else if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.End)
-            {
-                if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default)
-                {
-                    //Num of enemies for final room
-                    for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x + 2, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 3); i++)
-                    {
-                        int randomEnemySelection = Random.Range(0, 4);
-
-                        switch (randomEnemySelection)
-                        {
-                            case 0:
-
-                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
-
-                                break;
-
-                            case 1:
-
-                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
-
-                                break;
-
-                            case 2:
-
-                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
-
-                                break;
-
-                            case 3:
-
-                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
-
-                                break;
-                        }
-                    }
-                }
-                if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Boss)
-                {
-
-                    waveNum = 0;
-
-                    SpawnNextWave();
-                }
-            }
-        }
+    private void OnEnable()
+    {
+        waveNum = 0;
+        //roamingBGM = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Roaming");
+        battleBGM = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Battle");
+        if (!roomCompleted)
+        {
+            //If this is a regular fighting room
+            if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.Fight)
+            {
+
+                battleBGM.setParameterByName("Combat", 1);
+
+                battleBGM.getParameterByName("Combat", out combatValue);
+                Debug.Log("batGM start");
+                Debug.Log("enable: " + combatValue);
+
+                //Num of enemies in a room
+                for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 1); i++)
+                {
+                    int randomEnemySelection = Random.Range(0, 4);
+
+                    switch (randomEnemySelection)
+                    {
+                        case 0:
+
+                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
+
+                            break;
+
+                        case 1:
+
+                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
+
+                            break;
+
+                        case 2:
+
+                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
+
+                            break;
+
+                        case 3:
+
+                            EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
+
+                            break;
+                    }
+                }
+                
+
+            }
+            //If this is the final room in a floor
+            else if (DungeonGenerator.Instance.GetCurrentRoom() == this && currentType == RoomTypes.End)
+            {
+                battleBGM.setParameterByName("Combat", 1);
+
+                if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default)
+                {
+
+                    //Num of enemies for final room
+                    for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x + 2, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 3); i++)
+                    {
+                        int randomEnemySelection = Random.Range(0, 4);
+
+                        switch (randomEnemySelection)
+                        {
+                            case 0:
+
+                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
+
+                                break;
+
+                            case 1:
+
+                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
+
+                                break;
+
+                            case 2:
+
+                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
+
+                                break;
+
+                            case 3:
+
+                                EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
+
+                                break;
+                        }
+                    }
+                }
+                if (DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Boss)
+                {
+
+                    waveNum = 0;
+
+                    SpawnNextWave();
+                }
+            }
+        }       
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
         enemyCountRangesPerLevel = new Vector2[3] { new Vector2(3, 4), new Vector2(3, 5) , new Vector2(4, 6) };
-        totemChancePerLevel = new float[3] { 0.2f, 0.4f, 0.6f };
+        totemChancePerLevel = new float[3] { 0.2f, 0.4f, 0.6f };
+        battleBGM.start();
+        //battleBGM.setParameterByName("Combat",0);
+
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {
+        battleBGM.getParameterByName("Combat", out combatValue);
+
         if (roomCompleted)
-        {
-            //Opens all doors that have connected rooms
+        {
+                       
+            //Opens all doors that have connected rooms
             for (int i = 0; i < connectedRooms.Length; i++)
             {
                 if (connectedRooms[i] != null)
@@ -147,7 +172,7 @@ public class Room : MonoBehaviour
                     {
                         int directionOfExit = (int)DungeonGenerator.Instance.ReverseDirection((Directions)i);
 
-                        CreateExit(directionOfExit);
+                        //CreateExit(directionOfExit);
 
                         //spawnedModel.doors[directionOfExit].transform.parent.GetComponentInChildren<RoomExit>().tag = "FloorExit";
                         spawnedModel.exits[directionOfExit].SetActive(true);
@@ -157,88 +182,89 @@ public class Room : MonoBehaviour
                     }
                 }
             }
-
+            
             //Give totem reward on completion of a regular floor
-            if (currentType == RoomTypes.End && DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default && !rewardReceived)
-            {
-                Instantiate(totemPrefab, totemPrefab.transform.position, Quaternion.identity, transform);
-
-                rewardReceived = true;
+            if (currentType == RoomTypes.End && DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Default && !rewardReceived)
+            {
+                Instantiate(totemPrefab, totemPrefab.transform.position, Quaternion.identity, transform);
+
+                rewardReceived = true;
             }
-            else if (currentType == RoomTypes.End && DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Boss && !rewardReceived)
-            {
-                Instantiate(totemPrefab, totemPrefab.transform.position + ((Vector3.forward + Vector3.left) * 5), Quaternion.identity, transform);
-                Instantiate(totemPrefab, totemPrefab.transform.position + ((Vector3.back + Vector3.right) * 5), Quaternion.identity, transform);
-                Instantiate(totemPrefab, totemPrefab.transform.position, Quaternion.identity, transform);
-
-                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5 + ((Vector3.forward + Vector3.left) * 5));
-                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5 + ((Vector3.back + Vector3.right) * 5));
-                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5);
-
-                for (int i = 0; i < 10; i++)
-                {
-                    PickupPool.Instance.GetCoinFromPool(totemPrefab.transform.position + new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f)));
-                }
-
-                rewardReceived = true;
+            else if (currentType == RoomTypes.End && DungeonGenerator.Instance.GetCurrentFloorType() == NodeTypes.Boss && !rewardReceived)
+            {
+                Instantiate(totemPrefab, totemPrefab.transform.position + ((Vector3.forward + Vector3.left) * 5), Quaternion.identity, transform);
+                Instantiate(totemPrefab, totemPrefab.transform.position + ((Vector3.back + Vector3.right) * 5), Quaternion.identity, transform);
+                Instantiate(totemPrefab, totemPrefab.transform.position, Quaternion.identity, transform);
+
+                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5 + ((Vector3.forward + Vector3.left) * 5));
+                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5 + ((Vector3.back + Vector3.right) * 5));
+                PickupPool.Instance.GetHeartFromPool(totemPrefab.transform.position + (Vector3.left + Vector3.back) * 5);
+
+                for (int i = 0; i < 10; i++)
+                {
+                    PickupPool.Instance.GetCoinFromPool(totemPrefab.transform.position + new Vector3(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f)));
+                }
+
+                rewardReceived = true;
             }
         }
-        else if (EnemyPool.Instance.availableBoars.Count % 5 == 0
-            && EnemyPool.Instance.availableMushrooms.Count % 5 == 0
-            && EnemyPool.Instance.availableDraugrs.Count % 5 == 0
-            && EnemyPool.Instance.availableGolems.Count % 5 == 0)
-        {
-            if (waveNum > 0 && waveNum < totalWavesInBossFight)
-            {
-                SpawnNextWave();
-
-                return;
-            }
-            else if (waveNum == totalWavesInBossFight)
-            {
-
-            }
-
-            roomCompleted = true;
+        else if (EnemyPool.Instance.availableBoars.Count % 5 == 0
+            && EnemyPool.Instance.availableMushrooms.Count % 5 == 0
+            && EnemyPool.Instance.availableDraugrs.Count % 5 == 0
+            && EnemyPool.Instance.availableGolems.Count % 5 == 0)
+        {
+            if (waveNum > 0 && waveNum < totalWavesInBossFight)
+            {
+                SpawnNextWave();
+
+                return;
+            }
+            else if (waveNum == totalWavesInBossFight)
+            {
+                
+            }
+            battleBGM.setParameterByName("Combat", 0);
+            Debug.Log("Roam Start");
+            roomCompleted = true;
         }
     }
 
     //Called for the boss fights for spawning multiple waves of enemies. This is to replace the actual boss fight.
-    void SpawnNextWave()
-    {
-        waveNum++;
-
-        for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x + 1, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 2); i++)
-        {
-            int randomEnemySelection = Random.Range(0, 4);
-
-            switch (randomEnemySelection)
-            {
-                case 0:
-
-                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
-
-                    break;
-
-                case 1:
-
-                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
-
-                    break;
-
-                case 2:
-
-                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
-
-                    break;
-
-                case 3:
-
-                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
-
-                    break;
-            }
-        }
+    void SpawnNextWave()
+    {
+        waveNum++;
+
+        for (int i = 0; i < Random.Range((int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].x + 1, (int)enemyCountRangesPerLevel[NodeMapManager.Instance.GetCurrentMapCycle() - 1].y + 2); i++)
+        {
+            int randomEnemySelection = Random.Range(0, 4);
+
+            switch (randomEnemySelection)
+            {
+                case 0:
+
+                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Boar);
+
+                    break;
+
+                case 1:
+
+                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.MushroomSpirit);
+
+                    break;
+
+                case 2:
+
+                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.Draugr);
+
+                    break;
+
+                case 3:
+
+                    EnemyPool.Instance.GetEnemyFromPool(EnemyTypes.StoneGolem);
+
+                    break;
+            }
+        }
     }
 
     //Selects one of the possible room models at random
@@ -257,20 +283,20 @@ public class Room : MonoBehaviour
         spawnedModel = roomModel.GetComponent<RoomModel>();
     }
 
-    public void CreateExit(int direction)
-    {
-        spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
-    }
-
-    //public void UpdateVisualExits()
+    //public void CreateExit(int direction)
     //{
-    //    for (int i = 0; i < connectedRooms.Length; i++)
-    //    {
-    //        if (connectedRooms[i] == null)
-    //        {
-    //            spawnedModel.exits[i].SetActive(false);
-    //        }
-    //    }
+    //    spawnedModel.doors[direction].transform.parent.GetComponent<MeshRenderer>().material = entranceMaterial;
+    //}
+
+    //public void UpdateVisualExits()
+    //{
+    //    for (int i = 0; i < connectedRooms.Length; i++)
+    //    {
+    //        if (connectedRooms[i] == null)
+    //        {
+    //            spawnedModel.exits[i].SetActive(false);
+    //        }
+    //    }
     //}
 
     //Creates a new room that attaches to the current room on one of its sides
@@ -296,7 +322,7 @@ public class Room : MonoBehaviour
 
         connectedRooms[directionIndex] = roomToAttach;
 
-        CreateExit(directionIndex);
+        //CreateExit(directionIndex);
     }
 
     public Room[] GetConnectedRooms()
@@ -314,42 +340,42 @@ public class Room : MonoBehaviour
         return spawnedModel;
     }
 
-    public RoomObject GetRoomObject()
-    {
-        return selectedRoom;
+    public RoomObject GetRoomObject()
+    {
+        return selectedRoom;
     }
 
     public void SetRoomType(RoomTypes type)
     {
         currentType = type;
 
-        switch (type)
+        switch (type)
         {
             case RoomTypes.Start:
 
                 roomCompleted = true;
 
-                break;
-
+                break;
+
             case RoomTypes.End:
 
-                switch (DungeonGenerator.Instance.GetCurrentFloorType())
-                {
-                    case NodeTypes.Marking:
-
-                        DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Marking, true);
-
-                        break;
-
-                    case NodeTypes.Shop:
-
-                        DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Shop, true);
-
-                        break;
+                switch (DungeonGenerator.Instance.GetCurrentFloorType())
+                {
+                    case NodeTypes.Marking:
+
+                        DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Marking, true);
+
+                        break;
+
+                    case NodeTypes.Shop:
+
+                        DungeonGenerator.Instance.RespawnRoomModel(RoomTypes.Shop, true);
+
+                        break;
                 }
 
-                break;
-
+                break;
+
             case RoomTypes.Totem:
 
                 roomCompleted = true;
@@ -358,11 +384,15 @@ public class Room : MonoBehaviour
         }
     }
 
-    public RoomTypes GetRoomType()
-    {
-        return currentType;
+    public RoomTypes GetRoomType()
+    {
+        return currentType;
     }
-
+    private void OnDestroy()
+    {
+       // roamingBGM.release();
+        battleBGM.release();
+    }
 }
 
 public enum RoomTypes
