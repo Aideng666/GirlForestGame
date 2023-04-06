@@ -17,3 +17,12 @@ MonoBehaviour:
   spiritElementSprite: {fileID: 21300000, guid: 9221f6b8961a8ee468b28e261a8483ab, type: 3}
   buffedAttributes: 0100000007000000
   usedElement: 1
+  spiritMarkingName: Zephyr
+  spiritAttributeName: Marking of WInd
+  spiritAttributeDesc: 'Grants the Marking of WInd which bestows increased Speed
+    and Attack Speed '
+  spiritElementBowName: Gale Wind
+  spiritElementBowDesc: Shoots an arrow that creates a vacuum of air pulling enemies
+    towards its center
+  spiritElementSwordName: Gust
+  spiritElementSwordDesc: Small chance to stun enemies on hit
