@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class ShopItem : InteractableObject
 {
+    [SerializeField] GameObject totemPrefab;
+    [SerializeField] GameObject heartPrefab;
+    [SerializeField] GameObject halfHeartPrefab;
     [SerializeField] ShopItemTypes itemType;
     ShopItemInfo itemInfo;
 
     TotemObject chosenTotem;
     int healthOption; // 0 = half heart | 1 = full heart
 
+    GameObject spawnedModel = null;
 
     private void OnEnable()
     {
@@ -26,7 +30,10 @@ public class ShopItem : InteractableObject
     // Update is called once per frame
     void Update()
     {
-        
+        if (spawnedModel != null)
+        {
+            spawnedModel.transform.Rotate(Vector3.up, 0.5f);
+        }
     }
 
     void ChooseItem()
@@ -52,6 +59,21 @@ public class ShopItem : InteractableObject
             }
 
             itemInfo = healthItems[Random.Range(0, 2)];
+
+            if (itemInfo.item == halfHeartPrefab)
+            {
+                spawnedModel = Instantiate(halfHeartPrefab, transform.position, Quaternion.identity, transform);
+            }
+            else if (itemInfo.item == heartPrefab)
+            {
+                spawnedModel = Instantiate(heartPrefab, transform.position, Quaternion.identity, transform);
+            }
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.SetLoops(99999999);
+
+            sequence.Append(spawnedModel.transform.DOMoveY(2.5f, 2).SetEase(Ease.InOutSine)).Append(spawnedModel.transform.DOMoveY(1, 2).SetEase(Ease.InOutSine));
         }
         else
         {
@@ -67,6 +89,14 @@ public class ShopItem : InteractableObject
         if (itemInfo.item.TryGetComponent(out TotemPickup totem))
         {
             chosenTotem = totem.GetRandomTotem();
+
+            spawnedModel = Instantiate(totemPrefab, transform.position + (Vector3.down * 0.5f), Quaternion.identity, transform);
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.SetLoops(99999999);
+
+            sequence.Append(spawnedModel.transform.DOMoveY(2, 2).SetEase(Ease.InOutSine)).Append(spawnedModel.transform.DOMoveY(0.5f, 2).SetEase(Ease.InOutSine));
         }
     }
 

@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image swordImage;
     [SerializeField] TextMeshProUGUI bowDescription;
     [SerializeField] TextMeshProUGUI swordDescription;
+    [SerializeField] TextMeshProUGUI bowName;
+    [SerializeField] TextMeshProUGUI swordName;
 
 
     int selectedPauseButtonIndex = 0;
@@ -199,14 +201,19 @@ public class UIManager : MonoBehaviour
 
         if (active)
         {
-            //UPDATE the description of the sword and bow here based on the spirit
             if (type == MarkingTypes.Attribute)
             {
-
+                swordDescription.text = spirit.spiritAttributeDesc;
+                bowDescription.text = spirit.spiritAttributeDesc;
+                swordName.text = spirit.spiritAttributeName;
+                bowName.text = spirit.spiritAttributeName;
             }
             else if (type == MarkingTypes.Element)
             {
-
+                swordDescription.text = spirit.spiritElementSwordDesc;
+                bowDescription.text = spirit.spiritElementBowDesc;
+                swordName.text = spirit.spiritElementSwordName;
+                bowName.text = spirit.spiritElementBowName;
             }
         }
     }

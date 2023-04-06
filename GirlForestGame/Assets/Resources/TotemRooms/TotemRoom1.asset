@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45fca93215b5fb4fb04d9cbe18a2878, type: 3}
   m_Name: TotemRoom1
   m_EditorClassIdentifier: 
-  model: {fileID: 8696891222964263858, guid: 4d3c3cffbdb83d649a918d8704707aeb, type: 3}
-  northCamBoundary: 6.5
-  southCamBoundary: -6.5
-  eastCamBoundary: 6.5
-  westCamBoundary: -6.5
+  model: {fileID: 2440708957670361266, guid: 3ab769dccca3dd142ac08937b86282ff, type: 3}
+  northCamBoundary: 14.299999
+  southCamBoundary: -14.300003
+  eastCamBoundary: 14.300003
+  westCamBoundary: -14.300003

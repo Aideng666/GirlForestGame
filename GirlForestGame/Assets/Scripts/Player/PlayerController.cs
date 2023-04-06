@@ -147,25 +147,27 @@ public class PlayerController : MonoBehaviour
             //transform.rotation = Quaternion.Euler(0f, aimAngle + 45, 0f);
         }
         else if (aimDir.magnitude < 0.1f && direction.magnitude <= 0.1f)
-
         {
-
             aimDirection = transform.forward;
-
         }
 
         if (moveDir != Vector3.zero)
-
         {
-
             transform.forward = moveDir.normalized;
-
-
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         body.velocity = playerAttributes.Speed * moveDir;
+
+        if (moveDir.magnitude >= 0.1f)
+        {
+            GetComponentInChildren<Animator>().SetBool("Walking", true);
+        }
+        else
+        {
+            GetComponentInChildren<Animator>().SetBool("Walking", false);
+        }
 
         //Starts the selection of the target enemy based on the direction the player is aiming
         playerCombat.SelectSwordTargetEnemy();
