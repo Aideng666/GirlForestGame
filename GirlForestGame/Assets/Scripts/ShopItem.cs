@@ -9,6 +9,9 @@ public class ShopItem : InteractableObject
     [SerializeField] GameObject totemPrefab;
     [SerializeField] GameObject heartPrefab;
     [SerializeField] GameObject halfHeartPrefab;
+    [SerializeField] GameObject totemDisplayPrefab;
+    [SerializeField] GameObject halfHeartDisplayPrefab;
+    [SerializeField] GameObject heartDisplayPrefab;
     [SerializeField] ShopItemTypes itemType;
     ShopItemInfo itemInfo;
 
@@ -16,6 +19,7 @@ public class ShopItem : InteractableObject
     int healthOption; // 0 = half heart | 1 = full heart
 
     GameObject spawnedModel = null;
+    BoxCollider spawnedModelCollider = null;
 
     private void OnEnable()
     {
@@ -62,18 +66,16 @@ public class ShopItem : InteractableObject
 
             if (itemInfo.item == halfHeartPrefab)
             {
-                spawnedModel = Instantiate(halfHeartPrefab, transform.position, Quaternion.identity, transform);
+                spawnedModel = Instantiate(halfHeartDisplayPrefab, transform.position + Vector3.down, Quaternion.identity, transform);
             }
             else if (itemInfo.item == heartPrefab)
             {
-                spawnedModel = Instantiate(heartPrefab, transform.position, Quaternion.identity, transform);
+                spawnedModel = Instantiate(heartDisplayPrefab, transform.position + Vector3.down, Quaternion.identity, transform);
             }
 
             Sequence sequence = DOTween.Sequence();
-
             sequence.SetLoops(99999999);
-
-            sequence.Append(spawnedModel.transform.DOMoveY(2.5f, 2).SetEase(Ease.InOutSine)).Append(spawnedModel.transform.DOMoveY(1, 2).SetEase(Ease.InOutSine));
+            sequence.Append(spawnedModel.transform.DOMoveY(2f, 2).SetEase(Ease.InOutSine)).Append(spawnedModel.transform.DOMoveY(1, 2).SetEase(Ease.InOutSine));
         }
         else
         {
@@ -90,13 +92,11 @@ public class ShopItem : InteractableObject
         {
             chosenTotem = totem.GetRandomTotem();
 
-            spawnedModel = Instantiate(totemPrefab, transform.position + (Vector3.down * 0.5f), Quaternion.identity, transform);
+            spawnedModel = Instantiate(totemDisplayPrefab, transform.position + Vector3.down, Quaternion.identity, transform);
 
             Sequence sequence = DOTween.Sequence();
-
             sequence.SetLoops(99999999);
-
-            sequence.Append(spawnedModel.transform.DOMoveY(2, 2).SetEase(Ease.InOutSine)).Append(spawnedModel.transform.DOMoveY(0.5f, 2).SetEase(Ease.InOutSine));
+            sequence.Append(spawnedModel.transform.DOMoveY(2, 2).SetEase(Ease.InOutSine)).Append(spawnedModel.transform.DOMoveY(1, 2).SetEase(Ease.InOutSine));
         }
     }
 
