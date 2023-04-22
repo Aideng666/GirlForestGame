@@ -1186,7 +1186,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-77002
+  m_Name: pb_Mesh-1822
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4194,6 +4194,10 @@ PrefabInstance:
       propertyPath: minimap
       value: 
       objectReference: {fileID: 1184842033}
+    - target: {fileID: 5982676203613863553, guid: 80493fe4d7a60694b91e9a3cbc4c0610, type: 3}
+      propertyPath: controlWithMouse
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5982676203613863563, guid: 80493fe4d7a60694b91e9a3cbc4c0610, type: 3}
       propertyPath: m_Name
       value: Player
@@ -8971,7 +8975,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-77056
+  m_Name: pb_Mesh-1876
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10557,7 +10561,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-76986
+  m_Name: pb_Mesh-1806
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
