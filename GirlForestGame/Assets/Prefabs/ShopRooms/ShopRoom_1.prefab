@@ -4271,6 +4271,9 @@ MonoBehaviour:
   totemPrefab: {fileID: 0}
   heartPrefab: {fileID: 0}
   halfHeartPrefab: {fileID: 0}
+  totemDisplayPrefab: {fileID: 0}
+  halfHeartDisplayPrefab: {fileID: 0}
+  heartDisplayPrefab: {fileID: 0}
   itemType: 2
 --- !u!1 &2666968726763534399
 GameObject:
@@ -4388,6 +4391,9 @@ MonoBehaviour:
   totemPrefab: {fileID: 0}
   heartPrefab: {fileID: 0}
   halfHeartPrefab: {fileID: 0}
+  totemDisplayPrefab: {fileID: 0}
+  halfHeartDisplayPrefab: {fileID: 0}
+  heartDisplayPrefab: {fileID: 0}
   itemType: 1
 --- !u!1 &2666968726792183701
 GameObject:
@@ -5112,6 +5118,9 @@ MonoBehaviour:
   totemPrefab: {fileID: 0}
   heartPrefab: {fileID: 0}
   halfHeartPrefab: {fileID: 0}
+  totemDisplayPrefab: {fileID: 0}
+  halfHeartDisplayPrefab: {fileID: 0}
+  heartDisplayPrefab: {fileID: 0}
   itemType: 2
 --- !u!1 &2666968727717809976
 GameObject:
@@ -5330,6 +5339,9 @@ MonoBehaviour:
   totemPrefab: {fileID: 0}
   heartPrefab: {fileID: 0}
   halfHeartPrefab: {fileID: 0}
+  totemDisplayPrefab: {fileID: 0}
+  halfHeartDisplayPrefab: {fileID: 0}
+  heartDisplayPrefab: {fileID: 0}
   itemType: 1
 --- !u!1 &2666968727784852808
 GameObject:
@@ -5582,6 +5594,9 @@ MonoBehaviour:
   totemPrefab: {fileID: 0}
   heartPrefab: {fileID: 0}
   halfHeartPrefab: {fileID: 0}
+  totemDisplayPrefab: {fileID: 0}
+  halfHeartDisplayPrefab: {fileID: 0}
+  heartDisplayPrefab: {fileID: 0}
   itemType: 1
 --- !u!1 &4484806856107884553
 GameObject:

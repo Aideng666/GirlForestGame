@@ -201,7 +201,7 @@ CapsuleCollider:
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: -1.01, z: 0}
 --- !u!114 &1774636483106263724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +218,9 @@ MonoBehaviour:
   totemPrefab: {fileID: 6850629361975643207, guid: 6f3af3b8c8eee3647a56635ef36465e4, type: 3}
   heartPrefab: {fileID: 7406706914261462363, guid: 6ca56ed1078101f4abef2cabd091254d, type: 3}
   halfHeartPrefab: {fileID: 5986890565905317949, guid: 05e597aa6c9acbc41bece70e49f937ed, type: 3}
+  totemDisplayPrefab: {fileID: 6850629361975643207, guid: 8c46d505b1db02244b98b27c0d189d33, type: 3}
+  halfHeartDisplayPrefab: {fileID: 5986890565905317949, guid: 02352c7d1a6047e40b052d7dd1befdf2, type: 3}
+  heartDisplayPrefab: {fileID: 7406706914261462363, guid: 036c2b6df184df147a7ffd10f4c9867e, type: 3}
   itemType: 0
 --- !u!1 &1774636483833562007
 GameObject:
