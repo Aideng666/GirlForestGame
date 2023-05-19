@@ -62,7 +62,6 @@ public class UIManager : MonoBehaviour
             if (pausePanel.activeInHierarchy)
             {
                 selectedPauseButtonIndex = 0;
-                //sfxBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
                 isPaused = true;
                 eventInstance.setPaused(true);
             }

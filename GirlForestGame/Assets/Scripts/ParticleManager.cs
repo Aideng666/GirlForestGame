@@ -21,12 +21,19 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] ParticleSystem shieldCrumble;
     [SerializeField] ParticleSystem golemStomp;
 
+    [HideInInspector] public FMOD.Studio.EventInstance fearSFX;
+
     ParticleSystem currentParticle;
 
     ShapeModule windParticleShape;
 
     public static ParticleManager Instance { get; set; }
 
+    private void OnEnable()
+    {
+       fearSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Fear");
+
+    }
     private void Awake()
     {
         Instance = this;
@@ -111,6 +118,8 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.FearfulAura:
 
                 currentParticle = Instantiate(fearfulAura, new Vector3(position.x, fearfulAura.transform.position.y, position.z), fearfulAura.gameObject.transform.rotation, PlayerController.Instance.transform);
+                //fearSFX.start();
+                //fearSFX.release();
 
                 break;
 
@@ -129,7 +138,7 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.ShieldCrumble:
 
                 currentParticle = Instantiate(shieldCrumble, new Vector3(position.x, shieldCrumble.transform.position.y, position.z), shieldCrumble.gameObject.transform.rotation);
-
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Totem/SBreak");
                 break;
 
             case ParticleTypes.GolemStomp:

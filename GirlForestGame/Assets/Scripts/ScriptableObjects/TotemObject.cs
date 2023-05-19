@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class TotemObject : ScriptableObject
 {
     [SerializeReference] public Totem Totem;
+    
 
     #region Menu Items
     [ContextMenu(nameof(HealthUp))] void HealthUp() { Totem = new HealthUpTotem(); }
@@ -413,6 +414,7 @@ public class FearfulAuraTotem : ConstantTotem
             {
                 fearParticle.SetActive(true);
             }
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Totem/Fear");
 
             elaspedTime = 0;
         }
@@ -443,6 +445,8 @@ public class TerrestrialShieldTotem : ConstantTotem
                 shield = shieldObject.GetComponent<TerrestrialShieldObject>();
 
                 shieldCreated = true;
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Totem/SRepair");
+
             }
 
             if (!shield.GetCooldownApplied())
