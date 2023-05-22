@@ -1,28 +1,28 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-//public class ConstantTotem : Totem
-//{
-//    // Start is called before the first frame update
-//    protected override void Start()
-//    {
-//        base.Start();
+public class ConstantTotem : Totem
+{
+    [HideInInspector]
+    public bool conditionMet;
 
-//        totemType = TotemTypes.Constant;
-//    }
+    public override void Init()
+    {
+        base.Init();
 
-//    // Update is called once per frame
-//    protected void Update()
-//    {
-//        if (totemInInventory)
-//        {
-//            ApplyEffect();
-//        }
-//    }
+        totemType = TotemTypes.Constant;
 
-//    public override void ApplyEffect()
-//    {
-//        base.ApplyEffect();
-//    }
-//}
+        conditionMet = false;
+    }
+
+    public override void ApplyEffect()
+    {
+        CheckCondition();
+    }
+
+    public virtual void CheckCondition()
+    {
+        conditionMet = false;
+    }
+}

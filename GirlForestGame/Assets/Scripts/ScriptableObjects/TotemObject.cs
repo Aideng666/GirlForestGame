@@ -35,120 +35,120 @@ public class TotemObject : ScriptableObject
 }
 
 #region BaseTotems
-[Serializable]
-public class Totem
-{
-    public TotemTypes totemType;
-    public Sprite totemSprite;
-    public string totemName;
-    public string totemDescription;
-    public float initialBuffAmount;
-    public float stackDampenAmount;
-    protected PlayerController player;
-    protected int currentStackAmount;
-    protected float previousAmountAdded;
-    public bool effectApplied { get; protected set; }
+//[Serializable]
+//public class Totem
+//{
+//    public TotemTypes totemType;
+//    public Sprite totemSprite;
+//    public string totemName;
+//    public string totemDescription;
+//    public float initialBuffAmount;
+//    public float stackDampenAmount;
+//    protected PlayerController player;
+//    protected int currentStackAmount;
+//    protected float previousAmountAdded;
+//    public bool effectApplied { get; protected set; }
 
-    public virtual void Init()
-    {
-        player = PlayerController.Instance;
-        effectApplied = false;
-    }
+//    public virtual void Init()
+//    {
+//        player = PlayerController.Instance;
+//        effectApplied = false;
+//    }
 
-    public virtual void ApplyEffect() { }
+//    public virtual void ApplyEffect() { }
 
-    public virtual void RemoveEffect() { }
+//    public virtual void RemoveEffect() { }
 
-    public TotemTypes GetTotemType()
-    {
-        return totemType;
-    }
+//    public TotemTypes GetTotemType()
+//    {
+//        return totemType;
+//    }
 
-    public float CalcBuffMultiplier(int stackAmount)
-    {
-        float multiplier = 0;
+//    public float CalcBuffMultiplier(int stackAmount)
+//    {
+//        float multiplier = 0;
 
-        if (stackDampenAmount > 0)
-        {
-            float amountToAdd = initialBuffAmount / stackDampenAmount;
+//        if (stackDampenAmount > 0)
+//        {
+//            float amountToAdd = initialBuffAmount / stackDampenAmount;
 
-            for (int i = 0; i < stackAmount; i++)
-            {
-                amountToAdd = amountToAdd * stackDampenAmount;
+//            for (int i = 0; i < stackAmount; i++)
+//            {
+//                amountToAdd = amountToAdd * stackDampenAmount;
 
-                multiplier += amountToAdd;
-            }
-        }
-        else
-        {
-            return 1;
-        }
+//                multiplier += amountToAdd;
+//            }
+//        }
+//        else
+//        {
+//            return 1;
+//        }
 
-        return multiplier;
-    }
-}
+//        return multiplier;
+//    }
+//}
 
-[Serializable]
-public class OnTriggerTotem : Totem
-{
-    public override void Init()
-    {
-        base.Init();
+//[Serializable]
+//public class OnTriggerTotem : Totem
+//{
+//    public override void Init()
+//    {
+//        base.Init();
 
-        totemType = TotemTypes.OnTrigger;
-    }
-}
+//        totemType = TotemTypes.OnTrigger;
+//    }
+//}
 
-[Serializable]
-public class ConstantTotem : Totem
-{
-    [HideInInspector]
-    public bool conditionMet;
+//[Serializable]
+//public class ConstantTotem : Totem
+//{
+//    [HideInInspector]
+//    public bool conditionMet;
 
-    public override void Init()
-    {
-        base.Init();
+//    public override void Init()
+//    {
+//        base.Init();
 
-        totemType = TotemTypes.Constant;
+//        totemType = TotemTypes.Constant;
 
-        conditionMet = false;
-    }
+//        conditionMet = false;
+//    }
 
-    public override void ApplyEffect()
-    {
-        CheckCondition();
-    }
+//    public override void ApplyEffect()
+//    {
+//        CheckCondition();
+//    }
 
-    public virtual void CheckCondition()
-    {
-        conditionMet = false;
-    }
-}
+//    public virtual void CheckCondition()
+//    {
+//        conditionMet = false;
+//    }
+//}
 
-[Serializable]
-public class OnPickupTotem : Totem
-{
-    public override void Init()
-    {
-        base.Init();
+//[Serializable]
+//public class OnPickupTotem : Totem
+//{
+//    public override void Init()
+//    {
+//        base.Init();
 
-        totemType = TotemTypes.OnPickup;
-    }
-}
+//        totemType = TotemTypes.OnPickup;
+//    }
+//}
 #endregion
 
-#region Permanent Totems
-[Serializable]
-public class HealthUpTotem : OnPickupTotem
-{
-    public override void ApplyEffect()
-    {
-        player.playerAttributes.MaxHealth += (int)initialBuffAmount;
-        player.playerAttributes.Health += (int)initialBuffAmount;
+#region On-Pickup Totems
+//[Serializable]
+//public class HealthUpTotem : OnPickupTotem
+//{
+//    public override void ApplyEffect()
+//    {
+//        player.playerAttributes.MaxHealth += (int)initialBuffAmount;
+//        player.playerAttributes.Health += (int)initialBuffAmount;
 
-        effectApplied = true;
-    }
-}
+//        effectApplied = true;
+//    }
+//}
 
 [Serializable]
 public class SwordDmgUpTotem : OnPickupTotem

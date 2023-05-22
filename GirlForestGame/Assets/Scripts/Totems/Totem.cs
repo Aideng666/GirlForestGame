@@ -2,36 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class Totem : MonoBehaviour
-//{
-//    protected TotemTypes totemType;
-//    protected PlayerController player;
-//    protected string totemName;
+public class Totem : MonoBehaviour
+{
+    [SerializeField] protected TotemTypes totemType;
+    [SerializeField] protected Sprite totemSprite;
+    [SerializeField] protected string totemName;
+    [SerializeField] protected string totemDescription;
+    [SerializeField] protected float initialBuffAmount;
+    [SerializeField] protected float stackDampenAmount;
+    protected PlayerController player;
+    protected int currentStackAmount;
+    protected float previousAmountAdded;
+    public bool effectApplied { get; protected set; }
 
-//    protected bool totemInInventory = false;
+    public virtual void Init()
+    {
+        player = PlayerController.Instance;
+        effectApplied = false;
+    }
 
-//    // Start is called before the first frame update
-//    protected virtual void Start()
-//    {
-//        player = PlayerController.Instance;
-//    }
+    public virtual void ApplyEffect() { }
 
-//    //// Update is called once per frame
-//    //protected virtual void Update()
-//    //{
+    public virtual void RemoveEffect() { }
 
-//    //}
+    public TotemTypes GetTotemType()
+    {
+        return totemType;
+    }
 
-//    public virtual void ApplyEffect()
-//    {
+    public float CalcBuffMultiplier(int stackAmount)
+    {
+        float multiplier = 0;
 
-//    }
+        if (stackDampenAmount > 0)
+        {
+            float amountToAdd = initialBuffAmount / stackDampenAmount;
 
-//    public TotemTypes GetTotemType()
-//    {
-//        return totemType;
-//    }
-//}
+            for (int i = 0; i < stackAmount; i++)
+            {
+                amountToAdd = amountToAdd * stackDampenAmount;
+
+                multiplier += amountToAdd;
+            }
+        }
+        else
+        {
+            return 1;
+        }
+
+        return multiplier;
+    }
+}
 
 //public enum TotemTypes
 //{
