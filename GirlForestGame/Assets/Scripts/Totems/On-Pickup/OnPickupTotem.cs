@@ -8,6 +8,6 @@ public class OnPickupTotem : Totem
     {
         base.Init();
 
-        totemType = TotemTypes.OnPickup;
+        //totemType = TotemTypes.OnPickup;
     }
 }

@@ -12,17 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb78f856477f6745949d66f753b55fe, type: 3}
   m_Name: SwordAtkSpdUp
   m_EditorClassIdentifier: 
-  Totem:
-    rid: 3358588547401515016
-  references:
-    version: 2
-    RefIds:
-    - rid: 3358588547401515016
-      type: {class: SwordAtkSpdUpTotem, ns: , asm: Assembly-CSharp}
-      data:
-        totemType: 0
-        totemSprite: {fileID: 21300000, guid: e7b14c21ade1b714b98c57b6a7901927, type: 3}
-        totemName: Sword Atk.Spd Up
-        totemDescription: Increased Sword Attack Speed
-        initialBuffAmount: 0.33
-        stackDampenAmount: 0.65
+  totemType: 0
+  totemSprite: {fileID: 21300000, guid: e7b14c21ade1b714b98c57b6a7901927, type: 3}
+  totemName: SwordAtkSpdUpTotem
+  totemDescription: Decrease Sword Attack Cooldown
+  initialBuffAmount: 0.33
+  stackDampenAmount: 0.65

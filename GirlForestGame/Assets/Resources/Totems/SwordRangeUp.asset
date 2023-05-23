@@ -12,17 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb78f856477f6745949d66f753b55fe, type: 3}
   m_Name: SwordRangeUp
   m_EditorClassIdentifier: 
-  Totem:
-    rid: 3358588547401515019
-  references:
-    version: 2
-    RefIds:
-    - rid: 3358588547401515019
-      type: {class: SwordRangeUpTotem, ns: , asm: Assembly-CSharp}
-      data:
-        totemType: 0
-        totemSprite: {fileID: 21300000, guid: 43ffec850ed8044428dfb73adb5e7943, type: 3}
-        totemName: Sword Range Up
-        totemDescription: Increased Sword Range
-        initialBuffAmount: 0.2
-        stackDampenAmount: 0.75
+  totemType: 0
+  totemSprite: {fileID: 21300000, guid: 43ffec850ed8044428dfb73adb5e7943, type: 3}
+  totemName: SwordRangeUpTotem
+  totemDescription: Increase Sword Range
+  initialBuffAmount: 0.2
+  stackDampenAmount: 0.75

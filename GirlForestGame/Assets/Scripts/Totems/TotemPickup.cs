@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class TotemPickup : MonoBehaviour
 
     float timeElasped;
 
-    TotemObject chosenTotem = null;
+    Totem chosenTotem = null;
 
     [HideInInspector] public FMOD.Studio.EventInstance obtainSFX;
 
@@ -33,6 +34,11 @@ public class TotemPickup : MonoBehaviour
 
     private void Update()
     {
+        if (chosenTotem == null)
+        {
+            ChooseTotem();
+        }
+
         if (gameObject.activeInHierarchy)
         {
             timeElasped += Time.deltaTime;
@@ -46,26 +52,46 @@ public class TotemPickup : MonoBehaviour
 
     void ChooseTotem()
     {
-        TotemObject[] possibleTotems = TypeHandler.GetAllInstances<TotemObject>("Totems");
-        int randomIndex = Random.Range(0, possibleTotems.Length);
+        Type[] possibleOnPickupTotems = AppDomain.CurrentDomain.GetAllDerivedTypes(typeof(OnPickupTotem));
+        Type[] possibleOnTriggerTotems = AppDomain.CurrentDomain.GetAllDerivedTypes(typeof(OnTriggerTotem));
+        Type[] possibleConstantTotems = AppDomain.CurrentDomain.GetAllDerivedTypes(typeof(ConstantTotem));
 
-        chosenTotem = possibleTotems[randomIndex];
+        List<Type> possibleTotems = new List<Type>();
 
-        chosenTotem.Totem.Init();
+        foreach (var totem in possibleOnPickupTotems)
+        {
+            possibleTotems.Add(totem);
+        }
+
+        foreach (var totem in possibleOnTriggerTotems)
+        {
+            possibleTotems.Add(totem);
+        }
+
+        foreach (var totem in possibleConstantTotems)
+        {
+            possibleTotems.Add(totem);
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, possibleTotems.Count);
+        Type chosenType = possibleTotems[randomIndex];
+
+        chosenTotem = (Totem)gameObject.AddComponent(chosenType);
+        chosenTotem.Init();
     }
 
-    public void ChooseTotem(TotemObject totem)
+    public void ChooseTotem(Totem totem)
     {
         chosenTotem = totem;
-        chosenTotem.Totem.Init();
+        chosenTotem.Init();
     }
 
-    public TotemObject GetRandomTotem()
+    public Totem GetRandomTotem()
     {
-        TotemObject[] possibleTotems = TypeHandler.GetAllInstances<TotemObject>("Totems");
-        int randomIndex = Random.Range(0, possibleTotems.Length);
+        Type[] possibleTotems = AppDomain.CurrentDomain.GetAllDerivedTypes(typeof(Totem));
+        int randomIndex = UnityEngine.Random.Range(0, possibleTotems.Length);
 
-        return possibleTotems[randomIndex];
+        return (Totem)Activator.CreateInstance(possibleTotems[randomIndex]);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -74,16 +100,17 @@ public class TotemPickup : MonoBehaviour
         {
             PlayerController.Instance.playerInventory.AddTotemToList(chosenTotem);
 
-            HUD.Instance.UpdateTotemHUD(chosenTotem.Totem.totemSprite, chosenTotem.Totem.totemName, chosenTotem.Totem.totemDescription);
+            HUD.Instance.UpdateTotemHUD(chosenTotem.totemObject.totemSprite, chosenTotem.totemObject.totemName, chosenTotem.totemObject.totemDescription);
 
             gameObject.SetActive(false);
 
             obtainSFX.start();
-            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
-            {
-                TutorialManager.Instance.TriggerTutorialSection(14, true);
-                TutorialManager.Instance.TriggerTutorialSection(21, true);
-            }
+
+            //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
+            //{
+            //    TutorialManager.Instance.TriggerTutorialSection(14, true);
+            //    TutorialManager.Instance.TriggerTutorialSection(21, true);
+            //}
         }
     }
     private void OnDestroy()

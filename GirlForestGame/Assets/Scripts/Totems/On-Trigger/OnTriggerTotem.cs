@@ -8,6 +8,6 @@ public class OnTriggerTotem : Totem
     {
         base.Init();
 
-        totemType = TotemTypes.OnTrigger;
+        //totemType = TotemTypes.OnTrigger;
     }
 }

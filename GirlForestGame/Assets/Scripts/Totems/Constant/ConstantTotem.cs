@@ -11,7 +11,7 @@ public class ConstantTotem : Totem
     {
         base.Init();
 
-        totemType = TotemTypes.Constant;
+        //totemObject.totemType = TotemTypes.Constant;
 
         conditionMet = false;
     }

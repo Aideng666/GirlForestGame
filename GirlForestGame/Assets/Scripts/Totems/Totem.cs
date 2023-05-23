@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Totem : MonoBehaviour
 {
-    [SerializeField] protected TotemTypes totemType;
-    [SerializeField] protected Sprite totemSprite;
-    [SerializeField] protected string totemName;
-    [SerializeField] protected string totemDescription;
-    [SerializeField] protected float initialBuffAmount;
-    [SerializeField] protected float stackDampenAmount;
+    //public TotemTypes totemType;
+    //public Sprite totemSprite;
+    //public string totemName;
+    //public string totemDescription;
+    //public float initialBuffAmount;
+    //public float stackDampenAmount;
+    [HideInInspector]
+    public TotemObject totemObject;
     protected PlayerController player;
     protected int currentStackAmount;
     protected float previousAmountAdded;
@@ -19,6 +21,18 @@ public class Totem : MonoBehaviour
     {
         player = PlayerController.Instance;
         effectApplied = false;
+
+        foreach (TotemObject totem in TypeHandler.GetAllInstances<TotemObject>("Totems"))
+        {
+            if (totem.totemName == GetType().ToString())
+            {
+                totemObject = totem;
+
+                print($"Totem Created: {totemObject.totemName}");
+
+                break;
+            }
+        }
     }
 
     public virtual void ApplyEffect() { }
@@ -27,20 +41,20 @@ public class Totem : MonoBehaviour
 
     public TotemTypes GetTotemType()
     {
-        return totemType;
+        return totemObject.totemType;
     }
 
     public float CalcBuffMultiplier(int stackAmount)
     {
         float multiplier = 0;
 
-        if (stackDampenAmount > 0)
+        if (totemObject.stackDampenAmount > 0)
         {
-            float amountToAdd = initialBuffAmount / stackDampenAmount;
+            float amountToAdd = totemObject.initialBuffAmount / totemObject.stackDampenAmount;
 
             for (int i = 0; i < stackAmount; i++)
             {
-                amountToAdd = amountToAdd * stackDampenAmount;
+                amountToAdd = amountToAdd * totemObject.stackDampenAmount;
 
                 multiplier += amountToAdd;
             }
@@ -54,10 +68,10 @@ public class Totem : MonoBehaviour
     }
 }
 
-//public enum TotemTypes
-//{
-//    Permanent,
-//    OnTrigger,
-//    Constant
-//}
+public enum TotemTypes
+{
+    OnPickup,
+    OnTrigger,
+    Constant
+}
 

@@ -105,7 +105,7 @@ public class EnemyData : MonoBehaviour
 
         if (player.playerInventory.totemDictionary[typeof(VampireBiteTotem)] > 0)
         {
-            player.playerInventory.GetTotemFromList(typeof(VampireBiteTotem)).Totem.ApplyEffect();
+            player.playerInventory.GetTotemFromList(typeof(VampireBiteTotem)).ApplyEffect();
         }
 
         player.playerCombat.RemoveSwordTarget(this);

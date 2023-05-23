@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 /*EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnPlayerDeath);*/
-                playerInventory.GetTotemFromList(typeof(ExtraLifeTotem)).Totem.ApplyEffect();
+                playerInventory.GetTotemFromList(typeof(ExtraLifeTotem)).ApplyEffect();
                 playerInventory.RemoveTotem(typeof(ExtraLifeTotem));
             }
         }
