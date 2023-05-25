@@ -6,6 +6,7 @@ using DG.Tweening;
 public class MenuFunctionManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> canvasList = new List<GameObject>();
+    [SerializeField] GameObject pressPlayPrompt;
 
     Tween fadeTween;
     public float startFadeTime = 1f;
@@ -19,7 +20,7 @@ public class MenuFunctionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+               
     }
 
     void Fade(CanvasGroup canvasGroup, float endValue, float duration, TweenCallback onEnd)
