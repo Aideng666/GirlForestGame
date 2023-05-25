@@ -1,230 +1,91 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MenuFunctionManager : MonoBehaviour
 {
-    [SerializeField] GameObject splashUIPanel;
-    [SerializeField] GameObject mainMenuUIPanel;
-    [SerializeField] AnimationEvents animEventsObj;
-    [SerializeField] Animator cineCamAnimator;
-    [SerializeField] AnimationEvents camEventObj;
-    [SerializeField] GameObject playButton;
-    [SerializeField] GameObject settingsButton;
-    [SerializeField] GameObject quitButton;
-    [SerializeField] GameObject audioButton;
-    [SerializeField] GameObject controlsButton;
-    [SerializeField] GameObject creditsButton;
-    [SerializeField] GameObject audioPanel;
-    [SerializeField] GameObject controlsPanel;
-    [SerializeField] GameObject creditsPanel;
-    [SerializeField] Animator settingsButtonAnimator;
-    [SerializeField] GameObject settingsUIPanel;
-    [SerializeField] GameObject settingsInfoPanels;
+    [SerializeField] List<GameObject> canvasList = new List<GameObject>();
 
-    bool moveCam = false;
+    Tween fadeTween;
+    public float startFadeTime = 1f;
 
-    bool hasClickedSettings = false;
-
-    GameObject[] menuButtons;
-    int selectedButtonIndex = 0;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        mainMenuUIPanel.SetActive(false);
-        menuButtons = new GameObject[] { playButton, settingsButton, quitButton };
-        selectedButtonIndex = 0;
+        StartCoroutine(FadeCanvas());
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Checks for the Press A to begin to appear
-        if (animEventsObj.GetCanPressStart())
+        
+    }
+
+    void Fade(CanvasGroup canvasGroup, float endValue, float duration, TweenCallback onEnd)
+    {
+        if (fadeTween != null)
         {
-            // If the Press A text shows, user can provide input
-            if (InputManager.Instance.Proceed())
-            {
-                // Clears the UI panel
-                splashUIPanel.SetActive(false);
-                // Allows camera to move
-                moveCam = true;
-            }
+            fadeTween.Kill(false);
         }
 
-        if (moveCam)
+        fadeTween = canvasGroup.DOFade(endValue, duration);
+        fadeTween.onComplete += onEnd;
+    }
+
+    public void FadeIn(CanvasGroup canvasGroup, float duration)
+    {
+        Fade(canvasGroup, 1f, duration, () =>
         {
-            cineCamAnimator.SetBool("canProceed", true);
-        }
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+        });
+    }
 
-        if (camEventObj.GetOnCamTranComplete())
+    public void FadeOut(CanvasGroup canvasGroup, float duration)
+    {
+        Fade(canvasGroup, 0f, duration, () =>
         {
-            mainMenuUIPanel.SetActive(true);
-        }
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        });
+    }
 
-        //Checks for controller input for menu
-        if (mainMenuUIPanel.activeSelf)
-        {
-            if (settingsUIPanel.activeSelf) 
-            {
-                menuButtons = new GameObject[4] { settingsButton, audioButton, controlsButton, creditsButton};
-            }
-            else
-            {
-                menuButtons = new GameObject[3] { playButton, settingsButton, quitButton };
-            }
-
-            //DPAD UP
-            if(InputManager.Instance.MoveSelection().y > 0)
-            {
-                selectedButtonIndex--;
-
-                if (selectedButtonIndex < 0)
-                {
-                    selectedButtonIndex = 0;
-                }
-            }
-            //DPAD DOWN
-            else if (InputManager.Instance.MoveSelection().y < 0)
-            {
-                selectedButtonIndex++;
-
-                if (selectedButtonIndex >= menuButtons.Length)
-                {
-                    selectedButtonIndex = menuButtons.Length - 1;
-                }
-            }
-
-            for (int i = 0; i < menuButtons.Length; i++)
-            {
-                if (i == selectedButtonIndex)
-                {
-                    //menuButtons[selectedButtonIndex].transform.localScale = Vector3.one * 1.9f;
-                    menuButtons[i].GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
-                }
-                else
-                {
-                    //menuButtons[selectedButtonIndex].transform.localScale = Vector3.one * 1.68f;
-                    menuButtons[i].GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-                }
-            }
-
-            if (InputManager.Instance.Proceed())
-            {
-                switch (selectedButtonIndex)
-                {
-                    case 0:
-
-                        if (settingsUIPanel.activeSelf)
-                        {
-                            Settings();
-                        }
-                        else
-                        {
-                            Play();
-                        }
-
-                        break;
-
-                    case 1:
-
-                        if (settingsUIPanel.activeSelf)
-                        {
-                            AudioPanel();
-                        }
-                        else
-                        {
-                            Settings();
-                        }
-
-                        break;
-
-                    case 2:
-
-                        if (settingsUIPanel.activeSelf)
-                        {
-                            ControlsPanel();
-                        }
-                        //else
-                        //{
-                        //    Tutorial();
-                        //}
-
-                        break;
-
-                    case 3:
-
-                        if (settingsUIPanel.activeSelf)
-                        {
-                            CreditsPanel();
-                        }
-                        else
-                        {
-                            QuitGame();
-                        }
-
-                        break;
-                }
-            }
-        }
+    private IEnumerator FadeCanvas()
+    {
+        // Wait 1 second
+        yield return new WaitForSeconds(1f);
+        // Fade in the logo screen canvas
+        FadeIn(canvasList[0].GetComponentInChildren<CanvasGroup>(), 1f);
+        // Wait
+        yield return new WaitForSeconds(2.5f);
+        // Fade out the logo screen canvas
+        FadeOut(canvasList[0].GetComponentInChildren<CanvasGroup>(), 1f);
+        // Wait
+        yield return new WaitForSeconds(2.5f);
+        // Turn off the logo screen canvas, turn on the FMOD canvas
+        canvasList[0].SetActive(false);
+        canvasList[1].SetActive(true);
+        yield return new WaitForSeconds(1f);
+        // Fade in FMOD logo canvas
+        FadeIn(canvasList[1].GetComponentInChildren<CanvasGroup>(), 1f);
+        // Wait
+        yield return new WaitForSeconds(2.5f);
+        // Fade out FMOD logo canvas
+        FadeOut(canvasList[1].GetComponentInChildren<CanvasGroup>(), 1f);
+        // Wait 1 second
+        yield return new WaitForSeconds(2.5f);
+        // Turns off FMOD canvas, turns on MainMenu canvas
+        canvasList[1].SetActive(false);
+        canvasList[2].SetActive(true);
+        // Wait
+        yield return new WaitForSeconds(1f);
+        // Fade out to MainMenu canvas
+        FadeOut(canvasList[2].GetComponentInChildren<CanvasGroup>(), 1f);
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
-
-
-    public void AudioPanel()
-    {
-        audioPanel.SetActive(!audioPanel.activeSelf);
-        controlsPanel.SetActive(false);
-        creditsPanel.SetActive(false);
-    }
-
-    public void ControlsPanel()
-    {
-        controlsPanel.SetActive(!controlsPanel.activeSelf);
-        audioPanel.SetActive(false);
-        creditsPanel.SetActive(false);
-    }
-
-    public void CreditsPanel()
-    {
-        creditsPanel.SetActive(!creditsPanel.activeSelf);
-        audioPanel.SetActive(false);
-        controlsPanel.SetActive(false);
-    }
-    
-
-    public void Settings()
-    {
-        hasClickedSettings = !hasClickedSettings;
-        
-        if (!hasClickedSettings)
-        {
-            settingsButtonAnimator.SetBool("hasClickedSettings", false);
-            settingsUIPanel.SetActive(false);
-            settingsInfoPanels.SetActive(false);
-            audioPanel.SetActive(false);
-            controlsPanel.SetActive(false);
-            creditsPanel.SetActive(false);
-            selectedButtonIndex = 1;
-        }
-        else
-        {
-            settingsButtonAnimator.SetBool("hasClickedSettings", true);
-            settingsUIPanel.SetActive(true);
-            settingsInfoPanels.SetActive(true);
-            selectedButtonIndex = 0;
-        }
-    }
-
-    public void Play()
-    {
-        LoadingScreen.Instance.LoadScene("Main");
-    }
-
-    //public void Tutorial()
-    //{
-    //    LoadingScreen.Instance.LoadScene("Tutorial");
-    //}
 }
