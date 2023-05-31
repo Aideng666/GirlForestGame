@@ -6,6 +6,7 @@ using DG.Tweening;
 public class MenuFunctionManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> canvasList = new List<GameObject>();
+    [SerializeField] List<GameObject> menuButtons = new List<GameObject>();
 
     Tween fadeTween;
     public float startFadeTime = 1f;
@@ -13,7 +14,7 @@ public class MenuFunctionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(FadeCanvas());
+        //StartCoroutine(FadeCanvas());
     }
 
     // Update is called once per frame
@@ -87,5 +88,13 @@ public class MenuFunctionManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ResetButtonScale()
+    {
+        foreach (GameObject button in menuButtons)
+        {
+            button.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
     }
 }
