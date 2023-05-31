@@ -497,6 +497,7 @@ GameObject:
   - component: {fileID: 178796557}
   - component: {fileID: 178796559}
   - component: {fileID: 178796558}
+  - component: {fileID: 178796560}
   m_Layer: 0
   m_Name: PressPlayPrompt
   m_TagString: Untagged
@@ -538,7 +539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -562,6 +563,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178796556}
   m_CullTransparentMesh: 1
+--- !u!95 &178796560
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178796556}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 01c9fc3a81c57bd4b8a9da61d4cb897d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &183364430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,7 +1657,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 46.6271, y: 26.2278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &608326836
 CanvasGroup:
@@ -1647,7 +1668,7 @@ CanvasGroup:
   m_GameObject: {fileID: 608326834}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &608326837
@@ -2821,7 +2842,6 @@ MonoBehaviour:
   - {fileID: 280327535}
   - {fileID: 916503729}
   - {fileID: 85942454}
-  pressPlayPrompt: {fileID: 178796556}
   startFadeTime: 1
 --- !u!4 &1578645056
 Transform:
