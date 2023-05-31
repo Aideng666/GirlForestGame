@@ -44,6 +44,7 @@ public static class TypeHandler
 
         return result.ToArray();
     }
+
     public static System.Type[] GetAllDerivedTypes<T>(this System.AppDomain aAppDomain)
     {
         return GetAllDerivedTypes(aAppDomain, typeof(T));

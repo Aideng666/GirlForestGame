@@ -12,17 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb78f856477f6745949d66f753b55fe, type: 3}
   m_Name: LuckUp
   m_EditorClassIdentifier: 
-  Totem:
-    rid: 3358588549324865537
-  references:
-    version: 2
-    RefIds:
-    - rid: 3358588549324865537
-      type: {class: LuckUpTotem, ns: , asm: Assembly-CSharp}
-      data:
-        totemType: 0
-        totemSprite: {fileID: 21300000, guid: a1b7d89fc3fc6fd4ca4cb450992acc5a, type: 3}
-        totemName: Rabbit's Foot
-        totemDescription: Increased chance to drop more money from enemies
-        initialBuffAmount: 0.01
-        stackDampenAmount: 1
+  totemType: 0
+  totemSprite: {fileID: 21300000, guid: 29166854b8b643f42bc113fc848ce9e4, type: 3}
+  totemName: LuckUpTotem
+  totemDescription: Increase Chance to drop coins and hearts on kill
+  initialBuffAmount: 0.02
+  stackDampenAmount: 1

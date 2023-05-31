@@ -15,7 +15,7 @@ public class BowTransitionBehaviour : StateMachineBehaviour
 
         if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
         {
-            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
+            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).RemoveEffect();
         }
     }
 }

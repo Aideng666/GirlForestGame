@@ -15,7 +15,7 @@ public class ShopItem : InteractableObject
     [SerializeField] ShopItemTypes itemType;
     ShopItemInfo itemInfo;
 
-    TotemObject chosenTotem;
+    Totem chosenTotem;
     int healthOption; // 0 = half heart | 1 = full heart
 
     GameObject spawnedModel = null;
@@ -140,7 +140,7 @@ public class ShopItem : InteractableObject
         {
             case ShopItemTypes.Totem:
 
-                popupText.text = $"{chosenTotem.Totem.totemName} - {itemInfo.value}";
+                popupText.text = $"{chosenTotem.totemObject.totemName} - {itemInfo.value}";
 
                 break;
 

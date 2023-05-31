@@ -194,9 +194,9 @@ public class PlayerCombat : MonoBehaviour
         //Detects Form Swapping
         if (InputManager.Instance.ChangeForm() && !iFramesActive)
         {
-            if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0 && player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.effectApplied)
+            if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0 && player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).effectApplied)
             {
-                player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
+                player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).RemoveEffect();
             }
 
             if (currentForm == Planes.Terrestrial)
@@ -218,12 +218,12 @@ public class PlayerCombat : MonoBehaviour
 
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
             {
-                player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.ApplyEffect();
+                player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).ApplyEffect();
             }
 
             if (player.playerInventory.totemDictionary[typeof(AstralBarrierTotem)] > 0)
             {
-                player.playerInventory.GetTotemFromList(typeof(AstralBarrierTotem)).Totem.ApplyEffect();
+                player.playerInventory.GetTotemFromList(typeof(AstralBarrierTotem)).ApplyEffect();
                 //barrierSFX.start();
             }
             formSFX.start();
@@ -477,7 +477,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (assassinTotemExists)
                 {
-                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem));
 
                     t.SetWeaponUsed(Weapons.Sword);
                 }
@@ -487,7 +487,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (assassinTotemExists)
                 {
-                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem));
 
                     t.RemoveEffect();
                 }

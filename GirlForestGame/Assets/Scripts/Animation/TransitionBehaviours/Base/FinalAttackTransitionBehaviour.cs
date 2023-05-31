@@ -12,12 +12,12 @@ public class FinalAttackTransitionBehaviour : StateMachineBehaviour
         //EventManager.Instance.InvokeTotemTrigger(TotemEvents.OnSwordSwing);
         if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
         {
-            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
+            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).RemoveEffect();
         }
 
         if (player.playerInventory.totemDictionary[typeof(BladeMasterTotem)] > 0)
         {
-            player.playerInventory.GetTotemFromList(typeof(BladeMasterTotem)).Totem.RemoveEffect();
+            player.playerInventory.GetTotemFromList(typeof(BladeMasterTotem)).RemoveEffect();
         }
 
         //player.playerCombat.SetCanAttack(false, 0);
