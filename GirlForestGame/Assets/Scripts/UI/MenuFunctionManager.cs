@@ -14,7 +14,7 @@ public class MenuFunctionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(FadeCanvas());
+        StartCoroutine(FadeCanvas());
     }
 
     // Update is called once per frame
