@@ -16,7 +16,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI markingDescription;
     [SerializeField] Image inventoryCursor;
 
-    Dictionary<GameObject, TotemObject> totemIcons = new Dictionary<GameObject, TotemObject>();
+    Dictionary<GameObject, Totem> totemIcons = new Dictionary<GameObject, Totem>();
     List<GameObject> iconList = new List<GameObject>();
 
     GameObject selectedIcon = null;
@@ -102,13 +102,13 @@ public class InventoryUI : MonoBehaviour
             else
             {
                 totemDescriptionImage.sprite = selectedIcon.GetComponent<Image>().sprite;
-                totemDescriptionName.text = totemIcons[selectedIcon].Totem.totemName;
-                totemDescription.text = totemIcons[selectedIcon].Totem.totemDescription;
+                totemDescriptionName.text = totemIcons[selectedIcon].totemObject.totemName;
+                totemDescription.text = totemIcons[selectedIcon].totemObject.totemDescription;
             }
         }
     }
 
-    public void AddTotemIcon(GameObject icon, TotemObject totem)
+    public void AddTotemIcon(GameObject icon, Totem totem)
     {
         totemIcons.Add(icon, totem);
         iconList.Add(icon);

@@ -11,7 +11,7 @@ public class Attack2TransitionBehaviour : StateMachineBehaviour
 
         if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
         {
-            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).Totem.RemoveEffect();
+            player.playerInventory.GetTotemFromList(typeof(PlaneSwapEmpowermentTotem)).RemoveEffect();
         }
 
         //player.playerCombat.SetCanAttack(true, false, Weapons.Sword);
@@ -39,7 +39,7 @@ public class Attack2TransitionBehaviour : StateMachineBehaviour
     {
         if (PlayerController.Instance.playerInventory.totemDictionary[typeof(BladeMasterTotem)] > 0)
         {
-            PlayerController.Instance.playerInventory.GetTotemFromList(typeof(BladeMasterTotem)).Totem.ApplyEffect();
+            PlayerController.Instance.playerInventory.GetTotemFromList(typeof(BladeMasterTotem)).ApplyEffect();
         }
     }
 }

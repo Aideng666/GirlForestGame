@@ -19,7 +19,7 @@ public class PlayerInventory : MonoBehaviour
     //3 = Bow Element
     Spirit[] markings;
 
-    List<TotemObject> totems;
+    List<Totem> totems;
     [HideInInspector] public FMOD.Studio.EventInstance fearSFX;
 
     public Dictionary<System.Type, int> totemDictionary { get; private set; } // the int value shows how many of each totem the player has
@@ -39,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         markings = new Spirit[] { null, null, null, null };
-        totems = new List<TotemObject>();
+        totems = new List<Totem>();
         totemDictionary = new Dictionary<System.Type, int>();
         moneyAmount =  startingMoney;
 
@@ -53,22 +53,14 @@ public class PlayerInventory : MonoBehaviour
 
     private void Update()
     {
-        //foreach (TotemObject totem in totems)
-        //{
-        //    if (totem.Totem.GetTotemType() == TotemTypes.Constant)
-        //    {
-        //        totem.Totem.ApplyEffect();
-        //    }
-        //}
-
         if (player.playerInventory.totemDictionary[typeof(FearfulAuraTotem)] > 0)
         {
-            player.playerInventory.GetTotemFromList(typeof(FearfulAuraTotem)).Totem.ApplyEffect();
+            player.playerInventory.GetTotemFromList(typeof(FearfulAuraTotem)).ApplyEffect();
         }
 
         if (player.playerInventory.totemDictionary[typeof(TerrestrialShieldTotem)] > 0)
         {
-            player.playerInventory.GetTotemFromList(typeof(TerrestrialShieldTotem)).Totem.ApplyEffect();
+            player.playerInventory.GetTotemFromList(typeof(TerrestrialShieldTotem)).ApplyEffect();
         }
     }
 
@@ -205,9 +197,9 @@ public class PlayerInventory : MonoBehaviour
         IsChoosingWeapon = false;
     }
 
-    public void AddTotemToList(TotemObject totem)
+    public void AddTotemToList(Totem totem)
     {
-        System.Type totemType = totem.Totem.GetType();
+        System.Type totemType = totem.GetType();
 
         if (totemDictionary.ContainsKey(totemType))
         {
@@ -219,18 +211,18 @@ public class PlayerInventory : MonoBehaviour
 
                 //Create a new icon in the inventory
                 GameObject icon = Instantiate(totemIconPrefab, totemIconParent);
-                icon.GetComponent<Image>().sprite = totem.Totem.totemSprite;
+                icon.GetComponent<Image>().sprite = totem.totemObject.totemSprite;
                 InventoryUI.Instance.AddTotemIcon(icon, totem);
             }
         }
 
-        if (totem.Totem.GetTotemType() == TotemTypes.OnPickup)
+        if (totem.GetTotemType() == TotemTypes.OnPickup)
         {
-            foreach (TotemObject t in totems)
+            foreach (Totem t in totems)
             {
-                if (t.Totem.totemName == totem.Totem.totemName)
+                if (t.totemObject.totemName == totem.totemObject.totemName)
                 {
-                    t.Totem.ApplyEffect();
+                    t.ApplyEffect();
                 }
             }
         }
@@ -242,9 +234,9 @@ public class PlayerInventory : MonoBehaviour
         {
             totemDictionary[totemType] = 0;
 
-            foreach (TotemObject t in totems)
+            foreach (Totem t in totems)
             {
-                if (t.Totem.GetType() == totemType)
+                if (t.totemObject.GetType() == totemType)
                 {
                     totems.Remove(t);
 
@@ -254,18 +246,18 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public List<TotemObject> GetTotemList()
+    public List<Totem> GetTotemList()
     {
         return totems;
     }
 
-    public TotemObject GetTotemFromList(System.Type totemType)
+    public Totem GetTotemFromList(System.Type totemType)
     {
         if (totemDictionary.ContainsKey(totemType))
         {
-            foreach (TotemObject t in totems)
+            foreach (Totem t in totems)
             {
-                if (t.Totem.GetType() == totemType)
+                if (t.GetType() == totemType)
                 {
                     return t;
                 }

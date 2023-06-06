@@ -162,7 +162,7 @@ public class PlayerArrow : MonoBehaviour
 
                 if (assassinTotemExists)
                 {
-                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem));
 
                     t.SetWeaponUsed(Weapons.Bow);
                 }
@@ -172,7 +172,7 @@ public class PlayerArrow : MonoBehaviour
 
                 if (assassinTotemExists)
                 {
-                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem)).Totem;
+                    t = (AssassinTotem)player.playerInventory.GetTotemFromList(typeof(AssassinTotem));
 
                     t.RemoveEffect();
                 }

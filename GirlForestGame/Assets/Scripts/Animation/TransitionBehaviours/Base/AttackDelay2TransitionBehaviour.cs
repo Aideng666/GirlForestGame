@@ -17,7 +17,7 @@ public class AttackDelay2TransitionBehaviour : StateMachineBehaviour
     {
         if (PlayerController.Instance.playerInventory.totemDictionary[typeof(BladeMasterTotem)] > 0)
         {
-            PlayerController.Instance.playerInventory.GetTotemFromList(typeof(BladeMasterTotem)).Totem.ApplyEffect();
+            PlayerController.Instance.playerInventory.GetTotemFromList(typeof(BladeMasterTotem)).ApplyEffect();
         }
     }
 }

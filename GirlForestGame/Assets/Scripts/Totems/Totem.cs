@@ -2,41 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class Totem : MonoBehaviour
-//{
-//    protected TotemTypes totemType;
-//    protected PlayerController player;
-//    protected string totemName;
+public class Totem : MonoBehaviour
+{
+    //public TotemTypes totemType;
+    //public Sprite totemSprite;
+    //public string totemName;
+    //public string totemDescription;
+    //public float initialBuffAmount;
+    //public float stackDampenAmount;
+    [HideInInspector]
+    public TotemObject totemObject;
+    protected PlayerController player;
+    protected int currentStackAmount;
+    protected float previousAmountAdded;
+    public bool effectApplied { get; protected set; }
 
-//    protected bool totemInInventory = false;
+    public virtual void Init()
+    {
+        player = PlayerController.Instance;
+        effectApplied = false;
 
-//    // Start is called before the first frame update
-//    protected virtual void Start()
-//    {
-//        player = PlayerController.Instance;
-//    }
+        foreach (TotemObject totem in TypeHandler.GetAllInstances<TotemObject>("Totems"))
+        {
+            if (totem.totemName == GetType().ToString())
+            {
+                totemObject = totem;
 
-//    //// Update is called once per frame
-//    //protected virtual void Update()
-//    //{
+                print($"Totem Created: {totemObject.totemName}");
 
-//    //}
+                break;
+            }
+        }
+    }
 
-//    public virtual void ApplyEffect()
-//    {
+    public virtual void ApplyEffect() { }
 
-//    }
+    public virtual void RemoveEffect() { }
 
-//    public TotemTypes GetTotemType()
-//    {
-//        return totemType;
-//    }
-//}
+    public TotemTypes GetTotemType()
+    {
+        return totemObject.totemType;
+    }
 
-//public enum TotemTypes
-//{
-//    Permanent,
-//    OnTrigger,
-//    Constant
-//}
+    public float CalcBuffMultiplier(int stackAmount)
+    {
+        float multiplier = 0;
+
+        if (totemObject.stackDampenAmount > 0)
+        {
+            float amountToAdd = totemObject.initialBuffAmount / totemObject.stackDampenAmount;
+
+            for (int i = 0; i < stackAmount; i++)
+            {
+                amountToAdd = amountToAdd * totemObject.stackDampenAmount;
+
+                multiplier += amountToAdd;
+            }
+        }
+        else
+        {
+            return 1;
+        }
+
+        return multiplier;
+    }
+}
+
+public enum TotemTypes
+{
+    OnPickup,
+    OnTrigger,
+    Constant
+}
 
