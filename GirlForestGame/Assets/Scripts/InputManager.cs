@@ -33,6 +33,7 @@ public class InputManager : MonoBehaviour
     [HideInInspector] public InputAction pauseAction; 
 
     InputAction proceedAction;
+    InputAction backAction;
 
     public static InputManager Instance { get; set; }
     private void Awake()
@@ -73,6 +74,7 @@ public class InputManager : MonoBehaviour
         openAttributesAction = playerInput.actions["OpenAttributes"];
         openMarkingsAction = playerInput.actions["OpenMarkings"];
         proceedAction = playerInput.actions["ProceedAction"];
+        backAction = playerInput.actions["Back"];
 
         openInventoryAction.started += ToggleInventory;
     }
@@ -302,5 +304,10 @@ public class InputManager : MonoBehaviour
     public bool Proceed()
     {
         return proceedAction.triggered;
+    }
+
+    public bool Back()
+    {
+        return backAction.triggered;
     }
 }
