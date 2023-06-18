@@ -39,15 +39,12 @@ public class PlayerCombat : MonoBehaviour
 
     [HideInInspector] public FMOD.Studio.EventInstance BowSFX;
     [HideInInspector] public FMOD.Studio.EventInstance ArrowSFX;
-    [HideInInspector] public FMOD.Studio.EventInstance dingSFX;
-    private FMOD.Studio.EventInstance DrawSFX;
 
     //Sword Stuff
     GameObject swordTargetEnemy;
     List<EnemyData> swordTargetsInView = new List<EnemyData>();
     int currentAttackNum = 1;
     [HideInInspector] public FMOD.Studio.EventInstance SwordSFX;
-    [HideInInspector] public FMOD.Studio.EventInstance barrierSFX;
 
     Planes currentForm = Planes.Terrestrial;
     LayerMask livingLayer;
@@ -84,12 +81,9 @@ public class PlayerCombat : MonoBehaviour
     {
         BowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Bow");
         ArrowSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Arrow");
-        DrawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Draw");
         SwordSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Sword/Sword");
         hitSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Hit");
         formSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Form");
-        barrierSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Pulse");
-        dingSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Charged");
 
         ArrowSFX.getParameterByName("SPCharge", out currentBowChargeTime);
 
@@ -148,7 +142,7 @@ public class PlayerCombat : MonoBehaviour
                     if (!bowChargeCompleteParticle.gameObject.activeSelf)
                     {
                         bowChargeCompleteParticle.gameObject.SetActive(true);
-                        dingSFX.start();
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Bow/Charged");
                         chargeCompleteParticlePlayed = true;
                     }
                 }
@@ -213,7 +207,6 @@ public class PlayerCombat : MonoBehaviour
                 GetComponentInChildren<SkinnedMeshRenderer>().material = livingFormMaterial;
                 gameObject.layer = livingLayer;
                 formSFX.setParameterByName("Astral", 0);
-               // barrierSFX.keyOff();
             }
 
             if (player.playerInventory.totemDictionary[typeof(PlaneSwapEmpowermentTotem)] > 0)
@@ -224,7 +217,6 @@ public class PlayerCombat : MonoBehaviour
             if (player.playerInventory.totemDictionary[typeof(AstralBarrierTotem)] > 0)
             {
                 player.playerInventory.GetTotemFromList(typeof(AstralBarrierTotem)).ApplyEffect();
-                //barrierSFX.start();
             }
             formSFX.start();
         }
@@ -411,7 +403,7 @@ public class PlayerCombat : MonoBehaviour
             canAttack = false;
             isDrawingBow = true;
             bowAimArrowUI.SetActive(true);
-            DrawSFX.start();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Bow/Draw");
 
             currentAttackNum = 1;
         }
@@ -670,9 +662,7 @@ public class PlayerCombat : MonoBehaviour
         BowSFX.release();
         SwordSFX.release();
         ArrowSFX.release();
-        DrawSFX.release();
         hitSFX.release();
-        dingSFX.release();
     }
 }
 

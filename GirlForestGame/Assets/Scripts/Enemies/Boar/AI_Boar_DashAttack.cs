@@ -18,32 +18,27 @@ public class AI_Boar_DashAttack : AI_BaseClass
     float totalChargeTime = 1;
 
     [HideInInspector] public FMOD.Studio.EventInstance ChargeSFX;
-    //[HideInInspector] public FMOD.Studio.EventInstance OinkSFX;  
-
-    private void OnEnable()
-    {
-        ChargeSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Dash");
-        //OinkSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Oink");
-    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(OinkSFX, animator.gameObject.transform);
+
+        ChargeSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Boar/Dash");
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(ChargeSFX, animator.gameObject.transform);
 
         dashTimer = 0;
         attackTimer = 0;
         agent.speed = 0;
-        //OinkSFX.start();
+
         ChargeSFX.start();
+
         attackCharged = false;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(ChargeSFX, animator.gameObject.transform);
+        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(ChargeSFX, animator.gameObject.transform);
 
         if (dashTimer >= duration)
         {
@@ -91,8 +86,8 @@ public class AI_Boar_DashAttack : AI_BaseClass
     }
     private void OnDestroy()
     {
-        //OinkSFX.release();
         ChargeSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ChargeSFX.release();
     }
+
 }

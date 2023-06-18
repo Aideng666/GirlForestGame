@@ -23,13 +23,7 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
     [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
     [HideInInspector] public FMOD.Studio.EventInstance clawSFX;
 
-    private void OnEnable()
-    {
-        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
-        clawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Draugr/Claw");
 
-
-    }
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
@@ -46,18 +40,20 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
 
         int planeSelection = Random.Range(0, 2);
 
+        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+
         if (planeSelection == (int)Planes.Terrestrial)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, totalChargeTime);
             signalSFX.setParameterByName("Astral", 0);
-            signalSFX.start();
         }
         else if (planeSelection == (int)Planes.Astral)
         {
             enemyUI.IndicateAttack(Planes.Astral, totalChargeTime);
             signalSFX.setParameterByName("Astral", 1);
-            signalSFX.start();
         }
+        signalSFX.start();
+
 
         //Creates the correct layer mask for the colliders to hit the proper enemies at any given time
         colliderLayerMask = (1 << defaultLayer);
@@ -78,6 +74,7 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
+        clawSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Draugr/Claw");
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(clawSFX, agent.transform);
 
         if (elaspedAttackTime >= duration)
@@ -122,9 +119,9 @@ public class AI_Draugr_BlindRageAttack : AI_BaseClass
         elaspedAttackTime += Time.deltaTime;
     }
 
-    private void OnDestroy()
-    {
-        signalSFX.release();
-        clawSFX.release();
-    }
+    //private void OnDestroy()
+    //{
+    //    signalSFX.release();
+    //    clawSFX.release();
+    //}
 }

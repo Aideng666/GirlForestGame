@@ -12,7 +12,6 @@ public class TotemPickup : MonoBehaviour
 
     Totem chosenTotem = null;
 
-    [HideInInspector] public FMOD.Studio.EventInstance obtainSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +27,6 @@ public class TotemPickup : MonoBehaviour
         GetComponent<Collider>().enabled = false;
 
         timeElasped = 0;
-        obtainSFX = FMODUnity.RuntimeManager.CreateInstance("event:/UI/Obtain");
 
     }
 
@@ -104,7 +102,7 @@ public class TotemPickup : MonoBehaviour
 
             gameObject.SetActive(false);
 
-            obtainSFX.start();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Obtain");
 
             //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Tutorial"))
             //{
@@ -113,8 +111,5 @@ public class TotemPickup : MonoBehaviour
             //}
         }
     }
-    private void OnDestroy()
-    {
-        obtainSFX.release();
-    }
+
 }

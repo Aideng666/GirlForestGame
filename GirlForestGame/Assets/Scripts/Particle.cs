@@ -14,11 +14,6 @@ public class Particle : MonoBehaviour
 
     [HideInInspector] public FMOD.Studio.EventInstance FireSFX;
     [HideInInspector] public FMOD.Studio.EventInstance WindSFX;
-    [HideInInspector] public FMOD.Studio.EventInstance WindBlastSFX;
-
-    [HideInInspector] public FMOD.Studio.EventInstance fearSFX;
-
-    [HideInInspector] public FMOD.Studio.EventInstance barrierSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +24,9 @@ public class Particle : MonoBehaviour
 
         FireSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Fire");
         WindSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/Wind");
-        WindBlastSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Bow/WindBlast");
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(FireSFX, transform);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(WindSFX, transform);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(WindBlastSFX, transform);
-        fearSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Fear");
-        barrierSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Player/Totem/Pulse");
+
 
         particle = GetComponent<ParticleSystem>();
         if (particleType == ParticleTypes.WindArrow)
@@ -80,14 +72,13 @@ public class Particle : MonoBehaviour
         if (!particle.main.loop && !particle.isPlaying)
         {
             FireSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            barrierSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             if (childParticle != ParticleTypes.None)
             {
                 ParticleManager.Instance.SpawnParticle(childParticle, transform.position);
                 WindSFX.keyOff();
                 WindSFX.release();
-                WindBlastSFX.start();
-                WindBlastSFX.release();
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Player/Bow/WindBlast",transform.gameObject);
+
             }
 
             if (particleType == ParticleTypes.FearfulAura
@@ -231,10 +222,7 @@ public class Particle : MonoBehaviour
     {
         FireSFX.keyOff();
         FireSFX.release();
-        WindBlastSFX.release();
         WindSFX.release();
         WindSFX.keyOff();
-        fearSFX.release();
-        barrierSFX.release();
     }
 }

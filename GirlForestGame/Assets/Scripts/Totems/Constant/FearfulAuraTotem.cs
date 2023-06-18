@@ -22,10 +22,13 @@ public class FearfulAuraTotem : ConstantTotem
             {
                 fearParticle.SetActive(true);
             }
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Totem/Fear");
 
             elaspedTime = 0;
         }
 
         elaspedTime += Time.deltaTime;
     }
+
+   
 }

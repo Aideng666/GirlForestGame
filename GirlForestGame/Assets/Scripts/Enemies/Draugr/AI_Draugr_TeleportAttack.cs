@@ -22,15 +22,7 @@ public class AI_Draugr_TeleportAttack : AI_BaseClass
 
     [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
     [HideInInspector] public FMOD.Studio.EventInstance prepareSFX;
-    [HideInInspector] public FMOD.Studio.EventInstance teleportSFX;
 
-    private void OnEnable()
-    {
-        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
-        teleportSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Draugr/Teleport");
-        prepareSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Draugr/Prepare");
-
-    }
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -47,18 +39,20 @@ public class AI_Draugr_TeleportAttack : AI_BaseClass
         //Selects which plane to attack in
         int planeSelection = Random.Range(0, 2);
 
+        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+
         if (planeSelection == (int)Planes.Terrestrial)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, totalChargeTime);
             signalSFX.setParameterByName("Astral", 0);
-            signalSFX.start();
+
         }
         else if (planeSelection == (int)Planes.Astral)
         {
             enemyUI.IndicateAttack(Planes.Astral, totalChargeTime);
             signalSFX.setParameterByName("Astral", 1);
-            signalSFX.start();
         }
+        signalSFX.start();
 
         //Creates the correct layer mask for the colliders to hit the proper enemies at any given time
         colliderLayerMask = (1 << defaultLayer);
@@ -76,6 +70,8 @@ public class AI_Draugr_TeleportAttack : AI_BaseClass
 
         attackIndicatorParticle = ParticleManager.Instance.SpawnParticle(ParticleTypes.TeleportAttack, player.transform.position);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(prepareSFX, attackIndicatorParticle.transform);
+        
+        prepareSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Draugr/Prepare");
         prepareSFX.start();
     }
 
@@ -106,9 +102,12 @@ public class AI_Draugr_TeleportAttack : AI_BaseClass
                     }
                 }
             }
-            FMODUnity.RuntimeManager.AttachInstanceToGameObject(teleportSFX, agent.transform);
             prepareSFX.keyOff();
-            teleportSFX.start();
+            //FMODUnity.RuntimeManager.AttachInstanceToGameObject(teleportSFX, agent.transform);
+            //teleportSFX.start();
+
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemy/Draugr/Teleport", agent.gameObject);
+
             animator.SetTrigger("AttackComplete");
         }
         else
@@ -129,12 +128,12 @@ public class AI_Draugr_TeleportAttack : AI_BaseClass
             chargeTimer += Time.deltaTime;
         }
     }
-    private void OnDestroy()
-    {
-        signalSFX.release();
-        teleportSFX.release();
-        teleportSFX.keyOff();
-        prepareSFX.keyOff();
-        prepareSFX.release();
-    }
+    //private void OnDestroy()
+    //{
+    //    signalSFX.release();
+    //    //teleportSFX.release();
+    //    //teleportSFX.keyOff();
+    //    //prepareSFX.keyOff();
+    //    //prepareSFX.release();
+    //}
 }

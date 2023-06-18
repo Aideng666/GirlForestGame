@@ -118,8 +118,7 @@ public class ParticleManager : MonoBehaviour
             case ParticleTypes.FearfulAura:
 
                 currentParticle = Instantiate(fearfulAura, new Vector3(position.x, fearfulAura.transform.position.y, position.z), fearfulAura.gameObject.transform.rotation, PlayerController.Instance.transform);
-                //fearSFX.start();
-                //fearSFX.release();
+
 
                 break;
 

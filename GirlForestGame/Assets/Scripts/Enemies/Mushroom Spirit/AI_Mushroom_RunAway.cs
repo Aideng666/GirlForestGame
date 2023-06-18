@@ -24,11 +24,6 @@ public class AI_Mushroom_RunAway : AI_BaseClass
     Ray dashRay;
     bool dashStarted;
 
-    private void OnEnable()
-    {
-        Away = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Dash");
-
-    }
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -70,7 +65,8 @@ public class AI_Mushroom_RunAway : AI_BaseClass
 
             dashStarted = true;
             
-            Away.start();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Enemy/Fungi/Dash");
+
         }
 
         agent.transform.LookAt(player.transform.position);
@@ -109,8 +105,8 @@ public class AI_Mushroom_RunAway : AI_BaseClass
     //    //}
     //}
 
-    private void OnDestroy()
-    {
-        Away.release();
-    }
+    //private void OnDestroy()
+    //{
+    //    Away.release();
+    //}
 }

@@ -16,17 +16,9 @@ public class AI_SG_Stomp : AI_BaseClass
     float elaspedTime;
     int stompCount;
 
-    [HideInInspector] public FMOD.Studio.EventInstance stompSFX;
     [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
 
-    private void OnEnable()
-    {
-        stompSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Golem/Stomp");
-        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
 
-
-
-    }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -41,19 +33,20 @@ public class AI_SG_Stomp : AI_BaseClass
         spiritLayer = LayerMask.NameToLayer("PlayerSpirit");
         defaultLayer = LayerMask.NameToLayer("Default");
 
+        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
         //Indicate Attack
         if (randomPlaneChoice == 0)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, attackIndicationTime);
             signalSFX.setParameterByName("Astral", 0);
-            signalSFX.start();
         }
         else if (randomPlaneChoice == 1)
         {
             enemyUI.IndicateAttack(Planes.Astral, attackIndicationTime);
             signalSFX.setParameterByName("Astral", 1);
-            signalSFX.start();
         }
+        signalSFX.start();
+
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -63,7 +56,6 @@ public class AI_SG_Stomp : AI_BaseClass
         if (stompCount >= 2)
         {
             animator.SetTrigger("Stomp_Complete");
-            stompSFX.keyOff();
         }
         else if (elaspedTime >= 0.5f)
         {
@@ -117,13 +109,15 @@ public class AI_SG_Stomp : AI_BaseClass
                 }
             }
         }
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(stompSFX, agent.transform);
-        stompSFX.start();
+
+
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemy/Golem/Stomp", agent.gameObject);
         stompCount++;
     }
 
     private void OnDestroy()
     {
-        stompSFX.release();
+
+        signalSFX.release();
     }
 }

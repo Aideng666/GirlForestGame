@@ -23,12 +23,6 @@ public class AI_MushroomOrbAttack : AI_BaseClass
     bool chargeComplete;
     bool attackFired;
 
-    private void OnEnable()
-    {
-        shotSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Fungi/Shoot");
-        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
-
-    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -49,20 +43,23 @@ public class AI_MushroomOrbAttack : AI_BaseClass
         elaspedChargeTime = 0;
         attackFired = false;
 
+        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+
         //Indicate Attack
         if (randomOrbChoice == 0)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeTime);
             signalSFX.setParameterByName("Astral", 0);
-            signalSFX.start();
 
         }
         else if (randomOrbChoice == 1)
         {
             enemyUI.IndicateAttack(Planes.Astral, attackChargeTime);
             signalSFX.setParameterByName("Astral", 1);
-            signalSFX.start();
         }
+
+        signalSFX.start();
+
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -87,9 +84,9 @@ public class AI_MushroomOrbAttack : AI_BaseClass
 
     void FanAttack() 
     {
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(shotSFX, agent.transform);
 
-        shotSFX.start();
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemy/Fungi/Shoot", agent.gameObject);
+
         FireOrb((player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, 15, 0) * (player.transform.position - agent.transform.position).normalized);
         FireOrb(Quaternion.Euler(0, -15, 0) * (player.transform.position - agent.transform.position).normalized);
@@ -101,14 +98,14 @@ public class AI_MushroomOrbAttack : AI_BaseClass
 
     IEnumerator<float> _FiveInARow() 
     {
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(shotSFX, agent.transform);
+
+        //FMODUnity.RuntimeManager.AttachInstanceToGameObject(shotSFX, agent.transform);
 
         for (int i = 0; i < 5; i++)
         {
             FireOrb((player.transform.position - agent.transform.position).normalized);
             
-            shotSFX.start();
-
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemy/Fungi/Shoot", agent.gameObject);
 
             yield return Timing.WaitForSeconds(timeBetweenShots);
         }

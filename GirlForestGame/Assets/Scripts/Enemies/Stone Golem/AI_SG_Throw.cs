@@ -13,16 +13,8 @@ public class AI_SG_Throw : AI_BaseClass
     int randomPlaneChoice;
 
     [HideInInspector] public FMOD.Studio.EventInstance signalSFX;
-    [HideInInspector] public FMOD.Studio.EventInstance throwSFX;
 
     [SerializeField] string stateChangeTrigger = "Projectile_Complete";
-
-    private void OnEnable()
-    {
-        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
-        throwSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Golem/Throw");
-
-    }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -37,19 +29,21 @@ public class AI_SG_Throw : AI_BaseClass
         attackFired = false;
         randomPlaneChoice = Random.Range(0, 2);
 
+        signalSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Signal");
+
         //Indicate Attack
         if (randomPlaneChoice == 0)
         {
             enemyUI.IndicateAttack(Planes.Terrestrial, attackChargeTime);
             signalSFX.setParameterByName("Astral", 0);
-            signalSFX.start();
         }
         else if (randomPlaneChoice == 1)
         {
             enemyUI.IndicateAttack(Planes.Astral, attackChargeTime);
             signalSFX.setParameterByName("Astral", 1);
-            signalSFX.start();
         }
+        signalSFX.start();
+
     }
 
 
@@ -80,14 +74,15 @@ public class AI_SG_Throw : AI_BaseClass
             rock = ProjectilePool.Instance.GetProjectileFromPool(Planes.Astral, agent.transform.position + Vector3.up, EnemyTypes.StoneGolem);
         }
         rock.transform.DOJump(player.transform.position, 5, 1, 1).SetEase(Ease.InCubic);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(throwSFX, agent.transform);
-        throwSFX.start();
+       
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemy/Golem/Throw", agent.gameObject);
+
+        
         animator.SetTrigger(stateChangeTrigger);
     }
 
     private void OnDestroy()
     {
-        throwSFX.release();
         signalSFX.release();
     }
 }

@@ -6,13 +6,13 @@ public class SG_Rock : MonoBehaviour
 {
     bool isBigRock;
 
-    [HideInInspector] public FMOD.Studio.EventInstance crashSFX;
+    //[HideInInspector] public FMOD.Studio.EventInstance crashSFX;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        crashSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Golem/Crash");
-    }
+    //void Start()
+    //{
+    //    crashSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemy/Golem/Crash");
+    //}
 
     private void OnDisable()
     {
@@ -34,8 +34,6 @@ public class SG_Rock : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(crashSFX, collision.transform);
-
         if (collision.gameObject.layer == LayerMask.NameToLayer("PassiveCollider"))
         {
             return;
@@ -44,10 +42,9 @@ public class SG_Rock : MonoBehaviour
         if (isBigRock)
         {
             RockBurst();
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Enemy/Golem/Crash", collision.transform.position);
             //Debug.Log("bigrockboom");
         }
-        crashSFX.start();
-
 
         if (gameObject.layer == LayerMask.NameToLayer("EnemyLiving"))
         {
@@ -133,8 +130,8 @@ public class SG_Rock : MonoBehaviour
             rock8.GetComponent<Rigidbody>().AddForce((Vector3.up + (Vector3.back * 2) + (Vector3.right * 2)).normalized * 7, ForceMode.VelocityChange);
         }
     }
-    private void OnDestroy()
-    {
-        crashSFX.release();
-    }
+    //private void OnDestroy()
+    //{
+    //    crashSFX.release();
+    //}
 }
